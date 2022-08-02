@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Exploratory Data Analysis | Stat 255: Statistics for Data Science Notes</title>
+  <meta name="description" content="Chapter 1 Exploratory Data Analysis | Stat 255: Statistics for Data Science Notes" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 Exploratory Data Analysis | Stat 255: Statistics for Data Science Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Exploratory Data Analysis | Stat 255: Statistics for Data Science Notes" />
+  
+  
+  
+
+<meta name="author" content="Andrew Sage - Lawrence University" />
+
+
+<meta name="date" content="2022-08-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="the-pool-of-tears.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">SHORT TITLE HERE</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#what-is-this-course"><i class="fa fa-check"></i><b>0.1</b> What is this course?</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#who-is-this-course-for"><i class="fa fa-check"></i><b>0.2</b> Who is this course for?</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Exploratory Data Analysis</a><ul>
+<li class="chapter" data-level="1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exploring-diamond-prices"><i class="fa fa-check"></i><b>1.1</b> Exploring Diamond Prices</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-data"><i class="fa fa-check"></i><b>1.1.1</b> The Data</a></li>
+<li class="chapter" data-level="1.1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#observations-and-variables"><i class="fa fa-check"></i><b>1.1.2</b> Observations and Variables</a></li>
+<li class="chapter" data-level="1.1.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exploring-the-data"><i class="fa fa-check"></i><b>1.1.3</b> Exploring the Data</a></li>
+<li class="chapter" data-level="1.1.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#boxplot-of-diamond-prices"><i class="fa fa-check"></i><b>1.1.4</b> Boxplot of Diamond Prices</a></li>
+<li class="chapter" data-level="1.1.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#histogram-of-carat-size-and-quality-of-cut"><i class="fa fa-check"></i><b>1.1.5</b> Histogram of carat size and quality of cut</a></li>
+<li class="chapter" data-level="1.1.6" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#average-carat-size-and-price-by-quality-of-cut"><i class="fa fa-check"></i><b>1.1.6</b> Average carat size and price by quality of cut</a></li>
+<li class="chapter" data-level="1.1.7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#scatterplot-of-carat-size-and-quality-of-cut"><i class="fa fa-check"></i><b>1.1.7</b> Scatterplot of carat size and quality of cut</a></li>
+<li class="chapter" data-level="1.1.8" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#thought-questions"><i class="fa fa-check"></i><b>1.1.8</b> Thought Questions</a></li>
+<li class="chapter" data-level="1.1.9" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#terminology"><i class="fa fa-check"></i><b>1.1.9</b> Terminology</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#working-with-data-in-r"><i class="fa fa-check"></i><b>1.2</b> Working With Data in R</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#loading-the-data"><i class="fa fa-check"></i><b>1.2.1</b> Loading the Data</a></li>
+<li class="chapter" data-level="1.2.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#previewing-the-data"><i class="fa fa-check"></i><b>1.2.2</b> Previewing the Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#adding-a-new-variable"><i class="fa fa-check"></i><b>1.2.3</b> Adding a New Variable</a></li>
+<li class="chapter" data-level="1.2.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#selecting-columns"><i class="fa fa-check"></i><b>1.2.4</b> Selecting Columns</a></li>
+<li class="chapter" data-level="1.2.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#filtering-by-row"><i class="fa fa-check"></i><b>1.2.5</b> Filtering by Row</a></li>
+<li class="chapter" data-level="1.2.6" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#histogram"><i class="fa fa-check"></i><b>1.2.6</b> Histogram</a></li>
+<li class="chapter" data-level="1.2.7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#density-plots"><i class="fa fa-check"></i><b>1.2.7</b> Density Plots</a></li>
+<li class="chapter" data-level="1.2.8" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#boxplot"><i class="fa fa-check"></i><b>1.2.8</b> Boxplot</a></li>
+<li class="chapter" data-level="1.2.9" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#violin-plot"><i class="fa fa-check"></i><b>1.2.9</b> Violin Plot</a></li>
+<li class="chapter" data-level="1.2.10" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#scatterplots"><i class="fa fa-check"></i><b>1.2.10</b> Scatterplots</a></li>
+<li class="chapter" data-level="1.2.11" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#bar-graphs"><i class="fa fa-check"></i><b>1.2.11</b> Bar Graphs</a></li>
+<li class="chapter" data-level="1.2.12" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#stacked-and-side-by-side-bar-graphs"><i class="fa fa-check"></i><b>1.2.12</b> Stacked and Side-by-Side Bar Graphs</a></li>
+<li class="chapter" data-level="1.2.13" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#correlation-plot"><i class="fa fa-check"></i><b>1.2.13</b> Correlation Plot</a></li>
+<li class="chapter" data-level="1.2.14" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#scatterplot-matrix"><i class="fa fa-check"></i><b>1.2.14</b> Scatterplot Matrix</a></li>
+<li class="chapter" data-level="1.2.15" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#summary-tables"><i class="fa fa-check"></i><b>1.2.15</b> Summary Tables</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="the-pool-of-tears.html"><a href="the-pool-of-tears.html"><i class="fa fa-check"></i><b>2</b> The pool of tears</a></li>
+<li class="chapter" data-level="3" data-path="a-caucus-race-and-a-long-tale.html"><a href="a-caucus-race-and-a-long-tale.html"><i class="fa fa-check"></i><b>3</b> A caucus-race and a long tale</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Stat 255: Statistics for Data Science Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exploratory-data-analysis" class="section level1 hasAnchor">
+<h1><span class="header-section-number">Chapter 1</span> Exploratory Data Analysis<a href="exploratory-data-analysis.html#exploratory-data-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="exploring-diamond-prices" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.1</span> Exploring Diamond Prices<a href="exploratory-data-analysis.html#exploring-diamond-prices" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="the-data" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.1.1</span> The Data<a href="exploratory-data-analysis.html#the-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We consider a dataset with prices (in $ US) and other information on 53,940 round cut diamonds. The first 6 rows are shown below.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="exploratory-data-analysis.html#cb1-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="exploratory-data-analysis.html#cb1-2"></a><span class="kw">data</span>(diamonds)</span>
+<span id="cb1-3"><a href="exploratory-data-analysis.html#cb1-3"></a><span class="kw">head</span>(diamonds)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 10
+##   carat cut       color clarity depth table price     x     y     z
+##   &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+## 2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+## 3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+## 4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
+## 5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+## 6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="exploratory-data-analysis.html#cb3-1"></a>diamonds<span class="op">$</span>cut &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="dt">x =</span> diamonds<span class="op">$</span>cut, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Fair&quot;</span>,</span>
+<span id="cb3-2"><a href="exploratory-data-analysis.html#cb3-2"></a>                                        <span class="st">&quot;Good&quot;</span>,</span>
+<span id="cb3-3"><a href="exploratory-data-analysis.html#cb3-3"></a>                                        <span class="st">&quot;Very Good&quot;</span>,</span>
+<span id="cb3-4"><a href="exploratory-data-analysis.html#cb3-4"></a>                                        <span class="st">&quot;Premium&quot;</span>,</span>
+<span id="cb3-5"><a href="exploratory-data-analysis.html#cb3-5"></a>                                        <span class="st">&quot;Ideal&quot;</span>), <span class="dt">ordered =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="observations-and-variables" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.1.2</span> Observations and Variables<a href="exploratory-data-analysis.html#observations-and-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We call the rows of the dataset <strong>observations</strong> and the columns <strong>variables</strong>. In this dataset, the observations are the diamonds, and the variables are their attributes.<br />
+The dataset incudes both:</p>
+<ul>
+<li><strong>categorical (or factor) variables:</strong> cut, color, clarity, and<br />
+</li>
+<li><strong>quantitative (or numeric) variables</strong>, depth, table, price, x, y, z</li>
+</ul>
+</div>
+<div id="exploring-the-data" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.1.3</span> Exploring the Data<a href="exploratory-data-analysis.html#exploring-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When encountering a new dataset, a good way to start is to create some graphs and tables that help us understand the nature of the data.</p>
+<p>For now, we’ll focus on factors related to the price of diamonds.</p>
+</div>
+<div id="boxplot-of-diamond-prices" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.1.4</span> Boxplot of Diamond Prices<a href="exploratory-data-analysis.html#boxplot-of-diamond-prices" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="exploratory-data-analysis.html#cb4-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>diamonds, <span class="kw">aes</span>(<span class="dt">x=</span>price, <span class="dt">y=</span>cut, <span class="dt">fill=</span>cut)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-2"><a href="exploratory-data-analysis.html#cb4-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.size=</span><span class="fl">0.01</span>, <span class="dt">outlier.alpha =</span> <span class="fl">0.1</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-3"><a href="exploratory-data-analysis.html#cb4-3"></a><span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun=</span>mean, <span class="dt">geom=</span><span class="st">&quot;point&quot;</span>, <span class="dt">shape=</span><span class="dv">4</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>, <span class="dt">size=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="histogram-of-carat-size-and-quality-of-cut" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.1.5</span> Histogram of carat size and quality of cut<a href="exploratory-data-analysis.html#histogram-of-carat-size-and-quality-of-cut" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Next, we examine a histogram, displaying price, cut, and carat size.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="exploratory-data-analysis.html#cb5-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>diamonds, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">fill=</span>cut)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="average-carat-size-and-price-by-quality-of-cut" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.1.6</span> Average carat size and price by quality of cut<a href="exploratory-data-analysis.html#average-carat-size-and-price-by-quality-of-cut" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="exploratory-data-analysis.html#cb6-1"></a>diamonds <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(cut) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">N=</span><span class="kw">n</span>(), </span>
+<span id="cb6-2"><a href="exploratory-data-analysis.html#cb6-2"></a>                                         <span class="dt">Avg_carat=</span><span class="kw">mean</span>(carat), </span>
+<span id="cb6-3"><a href="exploratory-data-analysis.html#cb6-3"></a>                                         <span class="dt">Avg_price=</span><span class="kw">mean</span>(price) )</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 4
+##   cut           N Avg_carat Avg_price
+##   &lt;ord&gt;     &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 Fair       1610     1.05      4359.
+## 2 Good       4906     0.849     3929.
+## 3 Very Good 12082     0.806     3982.
+## 4 Premium   13791     0.892     4584.
+## 5 Ideal     21551     0.703     3458.</code></pre>
+</div>
+<div id="scatterplot-of-carat-size-and-quality-of-cut" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.1.7</span> Scatterplot of carat size and quality of cut<a href="exploratory-data-analysis.html#scatterplot-of-carat-size-and-quality-of-cut" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Next, we use a scatterplot to visualize cut, price, and carat size.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="exploratory-data-analysis.html#cb8-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>diamonds, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price, <span class="dt">color=</span>cut)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="thought-questions" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.1.8</span> Thought Questions<a href="exploratory-data-analysis.html#thought-questions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><p>Consider only the first boxplot. What do we notice about the relationship between price and cut? Is this surprising?</p></li>
+<li><p>Consider also the histogram and table. How does this information help explain the surprising result noted in Question 1?</p></li>
+<li><p>Now consider all of the plots and the table. What should we conclude about the relationship between price and quality of cut? Are better cuts generally more expensive? less expensive? about the same? Does the relationship between price and cut seem to depend on carat size?</p></li>
+</ol>
+</div>
+<div id="terminology" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.1.9</span> Terminology<a href="exploratory-data-analysis.html#terminology" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The diamonds dataset is an example of two statistical concepts:</p>
+<p><strong>Simpson’s Paradox</strong> refers to a situation when an apparent relationship between two variables changes or reverses when additional variable(s) are considered.<br />
+Example: diamonds with higher quality of cut appear less expensive than lower quality cuts, until we account for carat size</p>
+<p>An <strong>interaction</strong> between two variables X and Y occurs when the relationship between X and a third variable Z depends on Y.<br />
+Example: the relationship between cut and price depends on carat size, so there is an interaction between cut and carat size.</p>
+</div>
+</div>
+<div id="working-with-data-in-r" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.2</span> Working With Data in R<a href="exploratory-data-analysis.html#working-with-data-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This section provides examples of how to read data into R, create graphics, and calculate summary statistics.</p>
+<p>We’ll work with data on movies released in Hollywood between 2012 and 2018.</p>
+<div id="loading-the-data" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.1</span> Loading the Data<a href="exploratory-data-analysis.html#loading-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We’ll begin by loading the <code>tidyverse</code> package, which can be used to create professional graphics, and wrangle (or manipulate) data into forms that are informative and easy to work with.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="exploratory-data-analysis.html#cb9-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<p>Next, we read in the data itself, from the website where it is stored.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="exploratory-data-analysis.html#cb10-1"></a>HollywoodMovies &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://www.lock5stat.com/datasets3e/HollywoodMovies.csv&quot;</span>)</span></code></pre></div>
+</div>
+<div id="previewing-the-data" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.2</span> Previewing the Data<a href="exploratory-data-analysis.html#previewing-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong><code>head()</code></strong></p>
+<p>The <code>head()</code> function displays the first 5 rows of the dataset.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="exploratory-data-analysis.html#cb11-1"></a><span class="kw">head</span>(HollywoodMovies)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 15
+##   Movie           LeadStudio RottenTomatoes AudienceScore Genre TheatersOpenWeek
+##   &lt;chr&gt;           &lt;chr&gt;               &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;
+## 1 2016: Obama&#39;s … Rocky Mou…             26            73 Docu…                1
+## 2 21 Jump Street  Sony Pict…             85            82 Come…             3121
+## 3 A Late Quartet  Entertain…             76            71 Drama                9
+## 4 A Royal Affair  Magnolia …             90            82 Drama                7
+## 5 Abraham Lincol… Twentieth…             35            51 Horr…             3108
+## 6 Act of Valor    Relativit…             27            72 Acti…             3039
+## # … with 9 more variables: OpeningWeekend &lt;dbl&gt;, BOAvgOpenWeekend &lt;dbl&gt;,
+## #   Budget &lt;dbl&gt;, DomesticGross &lt;dbl&gt;, WorldGross &lt;dbl&gt;, ForeignGross &lt;dbl&gt;,
+## #   Profitability &lt;dbl&gt;, OpenProfit &lt;dbl&gt;, Year &lt;dbl&gt;</code></pre>
+<p><strong><code>glimpse</code></strong></p>
+<p>The <code>glimpse()</code> command shows the number of observations (rows), and the number of variables, (columns). We also see the name of each variable and its type. Variable types include</p>
+<ul>
+<li><p>Categorical variables, which take on groups or categories, rather than numeric values. In R, these might be coded as logical <code>&lt;logi&gt;</code>, character <code>&lt;chr&gt;</code>, factor <code>&lt;fct&gt;</code> and ordered factor <code>&lt;ord&gt;</code>.</p></li>
+<li><p>Quantitative variables, which take on meaningful numeric values. These include numeric <code>&lt;num&gt;</code>, integer <code>&lt;int&gt;</code>, and double <code>&lt;dbl&gt;</code>.</p></li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="exploratory-data-analysis.html#cb13-1"></a><span class="kw">glimpse</span>(HollywoodMovies)</span></code></pre></div>
+<pre><code>## Rows: 1,295
+## Columns: 15
+## $ Movie            &lt;chr&gt; &quot;2016: Obama&#39;s America&quot;, &quot;21 Jump Street&quot;, &quot;A Late Qu…
+## $ LeadStudio       &lt;chr&gt; &quot;Rocky Mountain Pictures&quot;, &quot;Sony Pictures Releasing&quot;,…
+## $ RottenTomatoes   &lt;dbl&gt; 26, 85, 76, 90, 35, 27, 91, 56, 11, 44, 93, 63, 87, 9…
+## $ AudienceScore    &lt;dbl&gt; 73, 82, 71, 82, 51, 72, 62, 47, 47, 63, 82, 51, 63, 9…
+## $ Genre            &lt;chr&gt; &quot;Documentary&quot;, &quot;Comedy&quot;, &quot;Drama&quot;, &quot;Drama&quot;, &quot;Horror&quot;, …
+## $ TheatersOpenWeek &lt;dbl&gt; 1, 3121, 9, 7, 3108, 3039, 132, 245, 2539, 3192, 3, 1…
+## $ OpeningWeekend   &lt;dbl&gt; 0.03, 36.30, 0.08, 0.04, 16.31, 24.48, 1.14, 0.70, 11…
+## $ BOAvgOpenWeekend &lt;dbl&gt; 30000, 11631, 8889, 5714, 5248, 8055, 8636, 2857, 449…
+## $ Budget           &lt;dbl&gt; 3.0, 42.0, NA, NA, 68.0, 12.0, NA, 7.5, 35.0, 50.0, 1…
+## $ DomesticGross    &lt;dbl&gt; 33.35, 138.45, 1.56, 1.55, 37.52, 70.01, 1.99, 3.01, …
+## $ WorldGross       &lt;dbl&gt; 33.35, 202.81, 6.30, 7.60, 137.49, 82.50, 3.59, 8.54,…
+## $ ForeignGross     &lt;dbl&gt; 0.00, 64.36, 4.74, 6.05, 99.97, 12.49, 1.60, 5.53, 9.…
+## $ Profitability    &lt;dbl&gt; 1334.00, 482.88, NA, NA, 202.19, 687.50, NA, 113.87, …
+## $ OpenProfit       &lt;dbl&gt; 1.20, 86.43, NA, NA, 23.99, 204.00, NA, 9.33, 32.57, …
+## $ Year             &lt;dbl&gt; 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2012,…</code></pre>
+<p>There are 1,295 movies in the dataset, and 15 variables for each film.</p>
+<p><strong><code>summary</code></strong></p>
+<p><code>summary</code> displays the mean, minimum, first quartile, median, third quartile, and maximum for each numeric variable.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="exploratory-data-analysis.html#cb15-1"></a><span class="kw">summary</span>(HollywoodMovies)</span></code></pre></div>
+<pre><code>##     Movie            LeadStudio        RottenTomatoes  AudienceScore  
+##  Length:1295        Length:1295        Min.   : 0.00   Min.   :10.00  
+##  Class :character   Class :character   1st Qu.:33.00   1st Qu.:49.00  
+##  Mode  :character   Mode  :character   Median :61.00   Median :64.00  
+##                                        Mean   :57.58   Mean   :62.18  
+##                                        3rd Qu.:84.00   3rd Qu.:77.00  
+##                                        Max.   :99.00   Max.   :99.00  
+##                                        NA&#39;s   :6                      
+##     Genre           TheatersOpenWeek OpeningWeekend    BOAvgOpenWeekend
+##  Length:1295        Min.   :   1.0   Min.   :  0.020   Min.   :   204  
+##  Class :character   1st Qu.: 152.5   1st Qu.:  0.845   1st Qu.:  3482  
+##  Mode  :character   Median :2459.0   Median :  7.600   Median :  6586  
+##                     Mean   :2008.0   Mean   : 17.541   Mean   : 13400  
+##                     3rd Qu.:3213.5   3rd Qu.: 20.810   3rd Qu.: 14534  
+##                     Max.   :4529.0   Max.   :257.700   Max.   :240000  
+##                                                                        
+##      Budget       DomesticGross      WorldGross       ForeignGross    
+##  Min.   :  0.90   Min.   :  1.02   Min.   :   0.74   Min.   :  -0.76  
+##  1st Qu.: 12.00   1st Qu.:  6.40   1st Qu.:  13.09   1st Qu.:   3.91  
+##  Median : 30.00   Median : 26.46   Median :  50.37   Median :  21.58  
+##  Mean   : 51.38   Mean   : 58.16   Mean   : 147.01   Mean   :  88.84  
+##  3rd Qu.: 65.00   3rd Qu.: 66.44   3rd Qu.: 160.38   3rd Qu.:  89.75  
+##  Max.   :365.00   Max.   :936.66   Max.   :2068.22   Max.   :1369.54  
+##  NA&#39;s   :239                                                          
+##  Profitability       OpenProfit           Year     
+##  Min.   :    2.3   Min.   :   0.05   Min.   :2012  
+##  1st Qu.:  139.1   1st Qu.:  12.87   1st Qu.:2013  
+##  Median :  268.9   Median :  31.77   Median :2015  
+##  Mean   :  435.7   Mean   :  64.50   Mean   :2015  
+##  3rd Qu.:  483.0   3rd Qu.:  62.59   3rd Qu.:2017  
+##  Max.   :10176.0   Max.   :3373.00   Max.   :2018  
+##  NA&#39;s   :239       NA&#39;s   :239</code></pre>
+<p>Notice that 239 films have missing information on some of the variables, recorded as NA’s.</p>
+</div>
+<div id="adding-a-new-variable" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.3</span> Adding a New Variable<a href="exploratory-data-analysis.html#adding-a-new-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can use the <code>mutate()</code> function to create a new variable based on variables already in the dataset.</p>
+<p>In the data description, the variable <code>Profitability</code> is defined as <em>WorldGross as a percentage of Budget</em>. Thus, films for which <code>Profitability</code> exceeds 100 were profitable.</p>
+<p>We create a variable to tell whether or not a film was profitable. Note that in R, a variable defined as a condition, such as <code>Profitability&gt;100</code> will return values of either <code>TRUE</code> or <code>FALSE</code>.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="exploratory-data-analysis.html#cb17-1"></a>HollywoodMovies &lt;-<span class="st"> </span>HollywoodMovies <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Profitable =</span> Profitability <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="exploratory-data-analysis.html#cb18-1"></a><span class="kw">summary</span>(HollywoodMovies<span class="op">$</span>Profitable)</span></code></pre></div>
+<pre><code>##    Mode   FALSE    TRUE    NA&#39;s 
+## logical     170     886     239</code></pre>
+</div>
+<div id="selecting-columns" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.4</span> Selecting Columns<a href="exploratory-data-analysis.html#selecting-columns" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If the dataset contains a large number of variables, narrow down to the ones you are interested in working with. This can be done with the <code>select()</code> command. If there are not very many variables to begin with, or you are interested in all of them, then you may skip this step.</p>
+<p>Let’s narrow the dataset down to the variables <code>Movie</code>, <code>RottenTomatoes</code>, <code>AudienceScore</code>, <code>Genre</code>, <code>WorldGross</code>, <code>Budget</code>, “Profitable”, and <code>Year</code>.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="exploratory-data-analysis.html#cb20-1"></a>MoviesSubset &lt;-<span class="st"> </span>HollywoodMovies <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Movie, RottenTomatoes, AudienceScore, </span>
+<span id="cb20-2"><a href="exploratory-data-analysis.html#cb20-2"></a>                                           Genre, WorldGross, Budget, Profitable, </span>
+<span id="cb20-3"><a href="exploratory-data-analysis.html#cb20-3"></a>                                           Year)</span></code></pre></div>
+</div>
+<div id="filtering-by-row" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.5</span> Filtering by Row<a href="exploratory-data-analysis.html#filtering-by-row" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>filter()</code> command narrows a dataset down to rows that meet specified conditions.</p>
+<p><strong>Filtering by a Categorical Variable</strong></p>
+<p>Let’s filter the data to only include action movies, comedies, dramas, and horror movies.</p>
+<p>We’ll also keep only those films whose budget was listed, excluding the 239 NA’s. The command <code>!is.na()</code> returns only values that are not NA’s.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="exploratory-data-analysis.html#cb21-1"></a>MoviesSubset1 &lt;-<span class="st"> </span>MoviesSubset <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb21-2"><a href="exploratory-data-analysis.html#cb21-2"></a><span class="st">  </span><span class="kw">filter</span>(Genre <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Action&quot;</span>, <span class="st">&quot;Comedy&quot;</span>, <span class="st">&quot;Drama&quot;</span>, <span class="st">&quot;Horror&quot;</span>)) <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Budget))</span></code></pre></div>
+<p>In R, the <code>!</code> operator means “not”.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="exploratory-data-analysis.html#cb22-1"></a><span class="kw">glimpse</span>(MoviesSubset1)</span></code></pre></div>
+<pre><code>## Rows: 679
+## Columns: 8
+## $ Movie          &lt;chr&gt; &quot;21 Jump Street&quot;, &quot;Abraham Lincoln: Vampire Hunter&quot;, &quot;A…
+## $ RottenTomatoes &lt;dbl&gt; 85, 35, 27, 56, 44, 93, 63, 86, 34, 86, 74, 41, 71, 32,…
+## $ AudienceScore  &lt;dbl&gt; 82, 51, 72, 47, 63, 82, 51, 86, 55, 76, 64, 35, 62, 70,…
+## $ Genre          &lt;chr&gt; &quot;Comedy&quot;, &quot;Horror&quot;, &quot;Action&quot;, &quot;Drama&quot;, &quot;Comedy&quot;, &quot;Drama…
+## $ WorldGross     &lt;dbl&gt; 202.81, 137.49, 82.50, 8.54, 236.80, 36.79, 71.00, 36.7…
+## $ Budget         &lt;dbl&gt; 42.0, 68.0, 12.0, 7.5, 50.0, 10.0, 49.0, 4.6, 220.0, 1.…
+## $ Profitable     &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, T…
+## $ Year           &lt;dbl&gt; 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2…</code></pre>
+<p><strong>Filtering by a Quantitative Variable</strong></p>
+<p>Let’s filter the data to only include films whose world gross exceeds 100 million dollars.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="exploratory-data-analysis.html#cb24-1"></a>MoviesSubset2 &lt;-<span class="st"> </span>MoviesSubset <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(WorldGross <span class="op">&gt;</span><span class="dv">100</span>)</span></code></pre></div>
+<p>Now, let’s preview the data again.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="exploratory-data-analysis.html#cb25-1"></a><span class="kw">glimpse</span>(MoviesSubset2)</span></code></pre></div>
+<pre><code>## Rows: 444
+## Columns: 8
+## $ Movie          &lt;chr&gt; &quot;21 Jump Street&quot;, &quot;Abraham Lincoln: Vampire Hunter&quot;, &quot;A…
+## $ RottenTomatoes &lt;dbl&gt; 85, 35, 44, 96, 34, 78, 85, 66, 38, 88, 78, 17, 74, 45,…
+## $ AudienceScore  &lt;dbl&gt; 82, 51, 63, 90, 55, 76, 71, 67, 46, 92, 75, 32, 56, 72,…
+## $ Genre          &lt;chr&gt; &quot;Comedy&quot;, &quot;Horror&quot;, &quot;Comedy&quot;, &quot;Thriller&quot;, &quot;Action&quot;, &quot;Ad…
+## $ WorldGross     &lt;dbl&gt; 202.81, 137.49, 236.80, 227.14, 313.48, 554.61, 123.68,…
+## $ Budget         &lt;dbl&gt; 42.0, 68.0, 50.0, 45.0, 220.0, 185.0, 12.0, 102.0, 150.…
+## $ Profitable     &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, T…
+## $ Year           &lt;dbl&gt; 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2…</code></pre>
+<p>We’ll use MoviesSubset1 from this point forward.</p>
+</div>
+<div id="histogram" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.6</span> Histogram<a href="exploratory-data-analysis.html#histogram" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Next, we’ll create graphics to help us visualize the distributions and relationships between variables. We’ll use the <code>ggplot()</code> function, which is part of the <code>tidyverse</code> package.</p>
+<p>Histograms are useful for displaying the distribution of a single quantitative variable</p>
+<p><strong>General Template for Histogram</strong></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="exploratory-data-analysis.html#cb27-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>DatasetName, <span class="kw">aes</span>(<span class="dt">x=</span>VariableName)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb27-2"><a href="exploratory-data-analysis.html#cb27-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">fill=</span><span class="st">&quot;colorchoice&quot;</span>, <span class="dt">color=</span><span class="st">&quot;colorchoice&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb27-3"><a href="exploratory-data-analysis.html#cb27-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="op">+</span></span>
+<span id="cb27-4"><a href="exploratory-data-analysis.html#cb27-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;x-axis label&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb27-5"><a href="exploratory-data-analysis.html#cb27-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;y-axis label&quot;</span>)</span></code></pre></div>
+<p><strong>Histogram of Audience Scores</strong></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="exploratory-data-analysis.html#cb28-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>MoviesSubset1, <span class="kw">aes</span>(<span class="dt">x=</span>AudienceScore)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb28-2"><a href="exploratory-data-analysis.html#cb28-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>, <span class="dt">color=</span><span class="st">&quot;white&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb28-3"><a href="exploratory-data-analysis.html#cb28-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Distribution of Audience Scores&quot;</span>) <span class="op">+</span></span>
+<span id="cb28-4"><a href="exploratory-data-analysis.html#cb28-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Audience Score&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb28-5"><a href="exploratory-data-analysis.html#cb28-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+</div>
+<div id="density-plots" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.7</span> Density Plots<a href="exploratory-data-analysis.html#density-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Density plots show the distribution for a quantitative variable like audience score. Scores can be compared across categories, like genre.</p>
+<p><strong>General Template for Density Plot</strong></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="exploratory-data-analysis.html#cb29-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>DatasetName, <span class="kw">aes</span>(<span class="dt">x=</span>QuantitativeVariable,</span>
+<span id="cb29-2"><a href="exploratory-data-analysis.html#cb29-2"></a>                             <span class="dt">color=</span>CategoricalVariable, <span class="dt">fill=</span>CategoricalVariable)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb29-3"><a href="exploratory-data-analysis.html#cb29-3"></a><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb29-4"><a href="exploratory-data-analysis.html#cb29-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="op">+</span></span>
+<span id="cb29-5"><a href="exploratory-data-analysis.html#cb29-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Axis Label&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb29-6"><a href="exploratory-data-analysis.html#cb29-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) </span></code></pre></div>
+<p><code>alpha</code>, ranging from 0 to 1 dictates transparency.</p>
+<p><strong>Density Plot of Audience Scores</strong></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="exploratory-data-analysis.html#cb30-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>MoviesSubset1, <span class="kw">aes</span>(<span class="dt">x=</span>AudienceScore, <span class="dt">color=</span>Genre, <span class="dt">fill=</span>Genre)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb30-2"><a href="exploratory-data-analysis.html#cb30-2"></a><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb30-3"><a href="exploratory-data-analysis.html#cb30-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Distribution of Audience Scores&quot;</span>) <span class="op">+</span></span>
+<span id="cb30-4"><a href="exploratory-data-analysis.html#cb30-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Audience Score&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb30-5"><a href="exploratory-data-analysis.html#cb30-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) </span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+</div>
+<div id="boxplot" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.8</span> Boxplot<a href="exploratory-data-analysis.html#boxplot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Boxplots can be used to compare a quantitative variable with a categorical variable</p>
+<p><strong>General Template for Boxplot</strong></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="exploratory-data-analysis.html#cb31-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>DatasetName, <span class="kw">aes</span>(<span class="dt">x=</span>CategoricalVariable, </span>
+<span id="cb31-2"><a href="exploratory-data-analysis.html#cb31-2"></a>                             <span class="dt">y=</span>QuantitativeVariable)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb31-3"><a href="exploratory-data-analysis.html#cb31-3"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb31-4"><a href="exploratory-data-analysis.html#cb31-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb31-5"><a href="exploratory-data-analysis.html#cb31-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Variable Name&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Variable Name&quot;</span>) </span></code></pre></div>
+<p>You can make the plot horizontal by adding <code>+ coordflip()</code>. You can turn the axis text vertical by adding <code>theme(axis.text.x = element_text(angle = 90))</code>.</p>
+<p><strong>Boxplot Comparing Scores for Genres</strong></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="exploratory-data-analysis.html#cb32-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>MoviesSubset1, <span class="kw">aes</span>(<span class="dt">x=</span>Genre, <span class="dt">y=</span>AudienceScore)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb32-2"><a href="exploratory-data-analysis.html#cb32-2"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Audience Score by Genre&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb32-3"><a href="exploratory-data-analysis.html#cb32-3"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Genre&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Audience Score&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb32-4"><a href="exploratory-data-analysis.html#cb32-4"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>))</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+</div>
+<div id="violin-plot" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.9</span> Violin Plot<a href="exploratory-data-analysis.html#violin-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Violin plots are an alternative to boxplots. The width of the violin tells us the density of observations in a given range.</p>
+<p><strong>General Template for Violin Plot</strong></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="exploratory-data-analysis.html#cb33-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>DatasetName, <span class="kw">aes</span>(<span class="dt">x=</span>CategoricalVariable, <span class="dt">y=</span>QuantitativeVariable, </span>
+<span id="cb33-2"><a href="exploratory-data-analysis.html#cb33-2"></a>                             <span class="dt">fill=</span>CategoricalVariable)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb33-3"><a href="exploratory-data-analysis.html#cb33-3"></a><span class="st">  </span><span class="kw">geom_violin</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb33-4"><a href="exploratory-data-analysis.html#cb33-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb33-5"><a href="exploratory-data-analysis.html#cb33-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Variable Name&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Variable Name&quot;</span>) </span></code></pre></div>
+<p><strong>Violin Plot Comparing Scores for Genres</strong></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="exploratory-data-analysis.html#cb34-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>MoviesSubset1, <span class="kw">aes</span>(<span class="dt">x=</span>Genre, <span class="dt">y=</span>AudienceScore, <span class="dt">fill=</span>Genre)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb34-2"><a href="exploratory-data-analysis.html#cb34-2"></a><span class="st">  </span><span class="kw">geom_violin</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb34-3"><a href="exploratory-data-analysis.html#cb34-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Audience Score by Genre&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb34-4"><a href="exploratory-data-analysis.html#cb34-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Genre&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Audience Score&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb34-5"><a href="exploratory-data-analysis.html#cb34-5"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>))</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p>We can view the boxplot and violin plot together.</p>
+</div>
+<div id="scatterplots" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.10</span> Scatterplots<a href="exploratory-data-analysis.html#scatterplots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Scatterplots are used to visualize the relationship between two quantitative variables.</p>
+<p><strong>Scatterplot Template</strong></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="exploratory-data-analysis.html#cb35-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>DatasetName, <span class="kw">aes</span>(<span class="dt">x=</span>CategoricalVariable, <span class="dt">y=</span>QuantitativeVariable)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb35-2"><a href="exploratory-data-analysis.html#cb35-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb35-3"><a href="exploratory-data-analysis.html#cb35-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb35-4"><a href="exploratory-data-analysis.html#cb35-4"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Axis Label&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb35-5"><a href="exploratory-data-analysis.html#cb35-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Axis Label&quot;</span>)</span></code></pre></div>
+<p><strong>Scatterplot Comparing Audience Score and Rotten Tomatoes Score</strong></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="exploratory-data-analysis.html#cb36-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>MoviesSubset1, <span class="kw">aes</span>(<span class="dt">x=</span>RottenTomatoes, <span class="dt">y=</span>AudienceScore)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb36-2"><a href="exploratory-data-analysis.html#cb36-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb36-3"><a href="exploratory-data-analysis.html#cb36-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Audience and Critics Ratings&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb36-4"><a href="exploratory-data-analysis.html#cb36-4"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Audience Rating&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb36-5"><a href="exploratory-data-analysis.html#cb36-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Critics&#39; Rating&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p>We see that there is an upward trend, indicating a positive association between critics scores (RottenTomatoes), and audience scores. However, there is a lot of variability, and the relationship is moderately strong at best.</p>
+<p>We can also add color, size, and shape to the scatterplot to display information about other variables.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="exploratory-data-analysis.html#cb37-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>MoviesSubset1, </span>
+<span id="cb37-2"><a href="exploratory-data-analysis.html#cb37-2"></a>       <span class="kw">aes</span>(<span class="dt">x=</span>RottenTomatoes, <span class="dt">y=</span>AudienceScore, <span class="dt">color=</span>Genre, <span class="dt">size=</span>WorldGross)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb37-3"><a href="exploratory-data-analysis.html#cb37-3"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb37-4"><a href="exploratory-data-analysis.html#cb37-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Audience and Critics Ratings&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb37-5"><a href="exploratory-data-analysis.html#cb37-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Audience Rating&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb37-6"><a href="exploratory-data-analysis.html#cb37-6"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Critics&#39; Rating&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p>We can add labels for points meeting certain conditions, using <code>geom_text()</code>. This should be done carefully, to avoid overlap.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="exploratory-data-analysis.html#cb38-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>MoviesSubset1, </span>
+<span id="cb38-2"><a href="exploratory-data-analysis.html#cb38-2"></a>       <span class="kw">aes</span>(<span class="dt">x=</span>RottenTomatoes, <span class="dt">y=</span>AudienceScore, <span class="dt">color=</span>Genre, <span class="dt">size=</span>WorldGross)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb38-3"><a href="exploratory-data-analysis.html#cb38-3"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb38-4"><a href="exploratory-data-analysis.html#cb38-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Audience and Critics Ratings&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb38-5"><a href="exploratory-data-analysis.html#cb38-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Audience Rating&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Critics&#39; Rating&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb38-6"><a href="exploratory-data-analysis.html#cb38-6"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data =</span> MoviesSubset1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(WorldGross <span class="op">&gt;</span><span class="dv">800</span>), <span class="kw">aes</span>(<span class="dt">label =</span> Movie), </span>
+<span id="cb38-7"><a href="exploratory-data-analysis.html#cb38-7"></a>            <span class="dt">color=</span><span class="st">&quot;black&quot;</span>, <span class="dt">check_overlap =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+</div>
+<div id="bar-graphs" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.11</span> Bar Graphs<a href="exploratory-data-analysis.html#bar-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Bar graphs can be used to visualize one or more categorical variables</p>
+<p><strong>Bar Graph Template</strong></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="exploratory-data-analysis.html#cb39-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>DatasetName, <span class="kw">aes</span>(<span class="dt">x=</span>CategoricalVariable)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb39-2"><a href="exploratory-data-analysis.html#cb39-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">fill=</span><span class="st">&quot;colorchoice&quot;</span>,<span class="dt">color=</span><span class="st">&quot;colorchoice&quot;</span>)  <span class="op">+</span><span class="st"> </span></span>
+<span id="cb39-3"><a href="exploratory-data-analysis.html#cb39-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb39-4"><a href="exploratory-data-analysis.html#cb39-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Variable Name&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb39-5"><a href="exploratory-data-analysis.html#cb39-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) </span></code></pre></div>
+<p><strong>Bar Graph by Genre</strong></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="exploratory-data-analysis.html#cb40-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>MoviesSubset1, <span class="kw">aes</span>(<span class="dt">x=</span>Genre)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb40-2"><a href="exploratory-data-analysis.html#cb40-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>,<span class="dt">color=</span><span class="st">&quot;white&quot;</span>)  <span class="op">+</span><span class="st"> </span></span>
+<span id="cb40-3"><a href="exploratory-data-analysis.html#cb40-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Number of Films by Genre&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb40-4"><a href="exploratory-data-analysis.html#cb40-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Genre&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb40-5"><a href="exploratory-data-analysis.html#cb40-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Number of Films&quot;</span>) <span class="op">+</span><span class="st">   </span></span>
+<span id="cb40-6"><a href="exploratory-data-analysis.html#cb40-6"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>))</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+</div>
+<div id="stacked-and-side-by-side-bar-graphs" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.12</span> Stacked and Side-by-Side Bar Graphs<a href="exploratory-data-analysis.html#stacked-and-side-by-side-bar-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Stacked Bar Graph Template</strong></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="exploratory-data-analysis.html#cb41-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> DatasetName, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> CategoricalVariable1, </span>
+<span id="cb41-2"><a href="exploratory-data-analysis.html#cb41-2"></a>                                         <span class="dt">fill =</span> CategoricalVariable2)) <span class="op">+</span></span>
+<span id="cb41-3"><a href="exploratory-data-analysis.html#cb41-3"></a><span class="st">    </span><span class="kw">stat_count</span>(<span class="dt">position=</span><span class="st">&quot;fill&quot;</span>)  <span class="op">+</span></span>
+<span id="cb41-4"><a href="exploratory-data-analysis.html#cb41-4"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb41-5"><a href="exploratory-data-analysis.html#cb41-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Variable 1&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb41-6"><a href="exploratory-data-analysis.html#cb41-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Proportion of Variable 2&quot;</span>) <span class="op">+</span><span class="st">   </span></span>
+<span id="cb41-7"><a href="exploratory-data-analysis.html#cb41-7"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) </span></code></pre></div>
+<p><strong>Stacked Bar Graph Example</strong></p>
+<p>The <code>stat_count(position="fill")</code> command creates a stacked bar graph, comparing two categorical variables. Let’s explore whether certain genres are more profitable than others, using the profitability variable.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="exploratory-data-analysis.html#cb42-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> MoviesSubset1, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> Genre, <span class="dt">fill =</span> Profitable)) <span class="op">+</span></span>
+<span id="cb42-2"><a href="exploratory-data-analysis.html#cb42-2"></a><span class="st">    </span><span class="kw">stat_count</span>(<span class="dt">position=</span><span class="st">&quot;fill&quot;</span>)  <span class="op">+</span></span>
+<span id="cb42-3"><a href="exploratory-data-analysis.html#cb42-3"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Profitability by Genre&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb42-4"><a href="exploratory-data-analysis.html#cb42-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Genre&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb42-5"><a href="exploratory-data-analysis.html#cb42-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Proportion Profitable&quot;</span>) <span class="op">+</span><span class="st">   </span></span>
+<span id="cb42-6"><a href="exploratory-data-analysis.html#cb42-6"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) </span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p><strong>Side-by-side Bar Graph Template</strong></p>
+<p>We can create a side-by-side bar graph, using <code>position=dodge</code>.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="exploratory-data-analysis.html#cb43-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> DatasetName, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> CategoricalVariable1, </span>
+<span id="cb43-2"><a href="exploratory-data-analysis.html#cb43-2"></a>                                         <span class="dt">fill =</span> CategoricalVariable2)) <span class="op">+</span></span>
+<span id="cb43-3"><a href="exploratory-data-analysis.html#cb43-3"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></span>
+<span id="cb43-4"><a href="exploratory-data-analysis.html#cb43-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb43-5"><a href="exploratory-data-analysis.html#cb43-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Genre&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb43-6"><a href="exploratory-data-analysis.html#cb43-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) </span></code></pre></div>
+<p><strong>Side-by-side Bar Graph Example</strong></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="exploratory-data-analysis.html#cb44-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> MoviesSubset1, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> Genre, <span class="dt">fill =</span> Profitable)) <span class="op">+</span></span>
+<span id="cb44-2"><a href="exploratory-data-analysis.html#cb44-2"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></span>
+<span id="cb44-3"><a href="exploratory-data-analysis.html#cb44-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Number of Films by Genre&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb44-4"><a href="exploratory-data-analysis.html#cb44-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Genre&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb44-5"><a href="exploratory-data-analysis.html#cb44-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Number of Films&quot;</span>) <span class="op">+</span><span class="st">   </span></span>
+<span id="cb44-6"><a href="exploratory-data-analysis.html#cb44-6"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) </span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+</div>
+<div id="correlation-plot" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.13</span> Correlation Plot<a href="exploratory-data-analysis.html#correlation-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Correlation plots can be used to visualize relationships between quantitative variables. These can be helpful when we proceed to modeling. Explanatory variables that are highly correlated with the response are often strong predictors that should be included in a model. However, including two explanatory variables that are highly correlated with one another can create interpretation problems.</p>
+<p>The <code>cor()</code> function calculates correlations between quantitative variables. We’ll use <code>select_if</code> to select only numeric variables. The `use=“complete.obs” command tells R to ignore observations with missing data.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="exploratory-data-analysis.html#cb45-1"></a><span class="kw">cor</span>(<span class="kw">select_if</span>(HollywoodMovies, is.numeric), <span class="dt">use=</span><span class="st">&quot;complete.obs&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##                  RottenTomatoes AudienceScore TheatersOpenWeek OpeningWeekend
+## RottenTomatoes             1.00          0.71            -0.27           0.14
+## AudienceScore              0.71          1.00            -0.21           0.20
+## TheatersOpenWeek          -0.27         -0.21             1.00           0.59
+## OpeningWeekend             0.14          0.20             0.59           1.00
+## BOAvgOpenWeekend           0.40          0.35            -0.37           0.13
+## Budget                     0.06          0.13             0.59           0.72
+## DomesticGross              0.24          0.31             0.51           0.93
+## WorldGross                 0.20          0.28             0.52           0.90
+## ForeignGross               0.17          0.25             0.49           0.84
+## Profitability              0.08          0.08             0.04           0.15
+## OpenProfit                -0.10         -0.11             0.13           0.12
+## Year                       0.04         -0.05             0.08           0.04
+##                  BOAvgOpenWeekend Budget DomesticGross WorldGross ForeignGross
+## RottenTomatoes               0.40   0.06          0.24       0.20         0.17
+## AudienceScore                0.35   0.13          0.31       0.28         0.25
+## TheatersOpenWeek            -0.37   0.59          0.51       0.52         0.49
+## OpeningWeekend               0.13   0.72          0.93       0.90         0.84
+## BOAvgOpenWeekend             1.00   0.08          0.27       0.25         0.22
+## Budget                       0.08   1.00          0.70       0.78         0.79
+## DomesticGross                0.27   0.70          1.00       0.94         0.86
+## WorldGross                   0.25   0.78          0.94       1.00         0.98
+## ForeignGross                 0.22   0.79          0.86       0.98         1.00
+## Profitability                0.14  -0.12          0.17       0.15         0.13
+## OpenProfit                  -0.07  -0.14          0.07       0.02        -0.01
+## Year                        -0.04   0.01          0.03       0.04         0.04
+##                  Profitability OpenProfit  Year
+## RottenTomatoes            0.08      -0.10  0.04
+## AudienceScore             0.08      -0.11 -0.05
+## TheatersOpenWeek          0.04       0.13  0.08
+## OpeningWeekend            0.15       0.12  0.04
+## BOAvgOpenWeekend          0.14      -0.07 -0.04
+## Budget                   -0.12      -0.14  0.01
+## DomesticGross             0.17       0.07  0.03
+## WorldGross                0.15       0.02  0.04
+## ForeignGross              0.13      -0.01  0.04
+## Profitability             1.00       0.84 -0.01
+## OpenProfit                0.84       1.00 -0.03
+## Year                     -0.01      -0.03  1.00</code></pre>
+<p>The <code>corrplot()</code> function in the <code>corrplot()</code> package provides a visualization of the correlations. Larger, thicker circles indicate stronger correlations.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="exploratory-data-analysis.html#cb47-1"></a><span class="kw">library</span>(corrplot)</span>
+<span id="cb47-2"><a href="exploratory-data-analysis.html#cb47-2"></a>Corr &lt;-<span class="st"> </span><span class="kw">cor</span>(<span class="kw">select_if</span>(HollywoodMovies, is.numeric), <span class="dt">use=</span><span class="st">&quot;complete.obs&quot;</span>)</span>
+<span id="cb47-3"><a href="exploratory-data-analysis.html#cb47-3"></a><span class="kw">corrplot</span>(Corr)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-40-1.png" width="1152" /></p>
+<p>We can also display a numeric version of the correlations by setting <code>method="number"</code>.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="exploratory-data-analysis.html#cb48-1"></a>Corr &lt;-<span class="st"> </span><span class="kw">cor</span>(<span class="kw">select_if</span>(HollywoodMovies, is.numeric), <span class="dt">use=</span><span class="st">&quot;complete.obs&quot;</span>)</span>
+<span id="cb48-2"><a href="exploratory-data-analysis.html#cb48-2"></a><span class="kw">corrplot</span>(Corr, <span class="dt">method=</span><span class="st">&quot;number&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-41-1.png" width="1152" /></p>
+</div>
+<div id="scatterplot-matrix" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.14</span> Scatterplot Matrix<a href="exploratory-data-analysis.html#scatterplot-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A scatterplot matrix is a grid of plots. It can be created using the <code>ggpairs()</code> function in the <code>GGally</code> package.</p>
+<p>The scatterplot matrix shows us:</p>
+<ol style="list-style-type: decimal">
+<li>Along the diagonal are density plots for quantitative variables, or bar graphs for categorical variables, showing the distribution of each variable.<br />
+</li>
+<li>Under the diagonal are plots showing the relationships between the variables in the corresponding row and column. Scatterplots are used when both variables are quantitative, bar graphs are used when both variables are categorical, and boxplots are used when one variable is categorical, and the other is quantitative.<br />
+</li>
+<li>Above the diagonal are correlations between quantitative variables.</li>
+</ol>
+<p>We need to remove the column with the movie names. This is done using <code>select</code>.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="exploratory-data-analysis.html#cb49-1"></a><span class="kw">library</span>(GGally)</span>
+<span id="cb49-2"><a href="exploratory-data-analysis.html#cb49-2"></a><span class="kw">ggpairs</span>(MoviesSubset1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>Movie))</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-42-1.png" width="1152" /></p>
+<p>The scatterplot matrix is useful for helping us notice key trends in our data. However, the plot can hard to read as it is quite dense, especially when there are a large number of variables. These can help us look for trends from a distance, but we should then focus in on more specific plots.</p>
+</div>
+<div id="summary-tables" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.15</span> Summary Tables<a href="exploratory-data-analysis.html#summary-tables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong><code>group_by()</code> and <code>summarize()</code></strong></p>
+<p>The <code>group_by()</code> and <code>summarize()</code> commands are useful for breaking categorical variables down by category. For example, let’s calculate number of films in each genre, and the mean, median, and standard deviation in film <code>WorldGross</code> by genre.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="exploratory-data-analysis.html#cb50-1"></a>MoviesSubset1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Genre) <span class="op">%&gt;%</span></span>
+<span id="cb50-2"><a href="exploratory-data-analysis.html#cb50-2"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">N =</span> <span class="kw">n</span>(), </span>
+<span id="cb50-3"><a href="exploratory-data-analysis.html#cb50-3"></a>            <span class="dt">Mean_Gross =</span> <span class="kw">mean</span>(WorldGross, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), </span>
+<span id="cb50-4"><a href="exploratory-data-analysis.html#cb50-4"></a>            <span class="dt">Median_Gross =</span> <span class="kw">median</span>(WorldGross, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), </span>
+<span id="cb50-5"><a href="exploratory-data-analysis.html#cb50-5"></a>            <span class="dt">StDev_Gross =</span> <span class="kw">sd</span>(WorldGross, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb50-6"><a href="exploratory-data-analysis.html#cb50-6"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(Mean_Gross))</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 5
+##   Genre      N Mean_Gross Median_Gross StDev_Gross
+##   &lt;chr&gt;  &lt;int&gt;      &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;
+## 1 Action   162      371.         222.        393. 
+## 2 Horror    78      103.          79.6       113. 
+## 3 Comedy   160       85.1         65.0        77.0
+## 4 Drama    279       76.4         34.7       119.</code></pre>
+<p>Notes:<br />
+1. The <code>n()</code> command calculates the number of observations in a category.<br />
+2. The <code>na.rm=TRUE</code> command removes missing values, so that summary statistics can be calculated.<br />
+3. <code>arrange(desc(Mean_Gross))</code> arranges the table in descending order of Mean_Gross. To arrange in ascending order, use <code>arrange(Mean_Gross)</code>.</p>
+<p>The <code>kable()</code> function in the <code>knitr()</code> package creates tables with professional appearance.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="exploratory-data-analysis.html#cb52-1"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb52-2"><a href="exploratory-data-analysis.html#cb52-2"></a>MoviesTable &lt;-<span class="st"> </span>MoviesSubset1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Genre) <span class="op">%&gt;%</span></span>
+<span id="cb52-3"><a href="exploratory-data-analysis.html#cb52-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">N =</span> <span class="kw">n</span>(), </span>
+<span id="cb52-4"><a href="exploratory-data-analysis.html#cb52-4"></a>            <span class="dt">Mean_Gross =</span> <span class="kw">mean</span>(WorldGross, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), </span>
+<span id="cb52-5"><a href="exploratory-data-analysis.html#cb52-5"></a>            <span class="dt">Median_Gross =</span> <span class="kw">median</span>(WorldGross, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), </span>
+<span id="cb52-6"><a href="exploratory-data-analysis.html#cb52-6"></a>            <span class="dt">StDev_Gross =</span> <span class="kw">sd</span>(WorldGross, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb52-7"><a href="exploratory-data-analysis.html#cb52-7"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(Mean_Gross))</span>
+<span id="cb52-8"><a href="exploratory-data-analysis.html#cb52-8"></a><span class="kw">kable</span>(MoviesTable)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Genre</th>
+<th align="right">N</th>
+<th align="right">Mean_Gross</th>
+<th align="right">Median_Gross</th>
+<th align="right">StDev_Gross</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Action</td>
+<td align="right">162</td>
+<td align="right">370.85648</td>
+<td align="right">221.59</td>
+<td align="right">393.01213</td>
+</tr>
+<tr class="even">
+<td align="left">Horror</td>
+<td align="right">78</td>
+<td align="right">102.55423</td>
+<td align="right">79.63</td>
+<td align="right">113.14402</td>
+</tr>
+<tr class="odd">
+<td align="left">Comedy</td>
+<td align="right">160</td>
+<td align="right">85.14469</td>
+<td align="right">64.99</td>
+<td align="right">77.00407</td>
+</tr>
+<tr class="even">
+<td align="left">Drama</td>
+<td align="right">279</td>
+<td align="right">76.42573</td>
+<td align="right">34.72</td>
+<td align="right">119.08083</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-pool-of-tears.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/Stat255-LU/Notes/edit/master/01-Exploratory_Data_Analysis.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/Stat255-LU/Notes/blob/master/01-Exploratory_Data_Analysis.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

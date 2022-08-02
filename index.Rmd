@@ -1,9 +1,42 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAME HERE"
+title: "Stat 255: Statistics for Data Science Notes"
+author: "Andrew Sage - Lawrence University"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
-# Down the rabbit-hole
+# Preface  {-}
+
+These notes serve as the primary textual resource for Stat 255: Statistics for Data Science at Lawrence University.   
+
+## What is this course? 
+
+Stat 255 provides an introduction to essential statistical tasks including modeling, inference, prediction, and computation. The course employs a modern approach, intended to equip students with skills needed for working with today's complex data. Traditional concepts, like interval estimation, and hypothesis testing, are introduced through the lens of multivariate models and simulation. Data computation in R plays a central role throughout the course. 
+
+The course's learning overarching outcomes are:   
+
+1. Visualize and wrangle data using statistical software R.    
+2. Build and assess multivariate models to predict future outcomes.    
+3. Quantify uncertainty associated with estimates and predictions.    
+4. Explain the assumptions associated with statistical models, and evalate whether these assumptions are reasonably satisfied in context.   
+5. Write reproducible analyses, using statistical software.    
+6. Work with data in an ethical and responsible manner.    
+
+More specific learning tasks, related to these outcomes are provided in each chapter.   
+
+## Who is this course for? 
+
+This course is intended for students who are interested in learning statistical modeling and data computation skills that might prove useful in further courses, research, or career. 
+
+Stat 255 can serve as either: 
+
+1. a first course in statistics for students with a strong quantitative background, typically including calculus.   
+
+2. a second course in statistics, building on introductory topics taught in courses like Lawrence's Stat 107: Principles of Statistics, or AP Statistics.    
+
+At Lawrence, this course is required for the Statistics Track of the Mathematics Major, the Economics and Mathematics-Economics Majors, and the Statistics and Data Science Minor.  
+
+The prerequisite for the course is either 1) a prior college-level course in statistics (i.e. STAT 107, BIOL 170 or 280, ANTH 207, AP Stats) OR 2) Calculus. (Math 140, AP Calculus, or equivalent).   
+
+The course does not assume any prior knowledge of statistics, but does move more rapidly than a typical introductory statistics course. Students engage rigorously in statistical thinking and computation, intended to equip them with essential skills for further study in statistics and data science.   
 
