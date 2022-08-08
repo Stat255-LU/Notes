@@ -1,0 +1,1294 @@
+# Hypothesis Testing via Permutation
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=TRUE)
+library(ggformula)
+library(moderndive)
+library(gridExtra)
+library(skimr)
+library(Bolstad)
+library(GGally)
+library(Lock5Data)
+library(knitr)
+library(caret)
+library(MASS)
+library(tidyverse)
+options(scipen=999)
+set.seed(07302020)
+```
+
+
+
+## Test for Difference in Means
+
+### Mercury Levels in Florida Lakes
+
+A 2004 study by Lange, T., Royals, H. and Connor, L. examined Mercury accumulation in large-mouth bass, taken from a sample of 53 Florida Lakes. If Mercury accumulation exceeds 0.5 ppm, then there are environmental concerns. In fact, the legal safety limit in Canada is 0.5 ppm, although it is 1 ppm in the United States.
+
+```{r Bass, echo=FALSE, out.width = '50%', fig.cap="https://www.maine.gov/ifw/fish-wildlife/fisheries/species-information/largemouth-bass.html"}
+knitr::include_graphics("Bass.png")
+```
+
+### Florida Lakes Dataset
+
+```{r}
+data("FloridaLakes")
+glimpse(FloridaLakes)
+```
+
+We are interested in whether mercury levels are higher or lower, on average, in Northern Florida compared to Southern Florida. 
+
+We'll divide the state along route 50, which runs East-West, passing through Northern Orlando.  
+
+```{r, echo=FALSE, out.width = '30%', fig.cap="from Google Maps"}
+knitr::include_graphics("Florida.png")
+```
+
+We add a variable indicating whether each lake lies in the northern or southern part of the state.   
+
+```{r}
+library(Lock5Data)
+data(FloridaLakes)
+#Location relative to rt. 50
+FloridaLakes$Location <- as.factor(c("S","S","N","S","S","N","N","N","N","N","N","S","N","S","N","N","N","N","S","S","N","S","N","S","N","S","N","S","N","N","N","N","N","N","S","N","N","S","S","N","N","N","N","S","N","S","S","S","S","N","N","N","N"))
+print.data.frame(data.frame(FloridaLakes%>% select(Lake, Location, AvgMercury)), row.names = FALSE)
+```
+
+
+
+
+### Comparing Northern and Southern Lakes
+
+We are interested in investigating whether average mercury levels are higher in either Northern Florida or Southern Florida than the other.  
+
+```{r}
+LakesBP <- ggplot(data=FloridaLakes, aes(x=Location, y=AvgMercury, fill=Location)) + 
+  geom_boxplot() +   geom_jitter() + ggtitle("Mercury Levels in Florida Lakes") + 
+  xlab("Location") + ylab("Mercury Level") + theme(axis.text.x = element_text(angle = 90)) + ylim(c(0, 1.5)) + coord_flip() 
+LakesBP
+```
+
+```{r}
+LakesTable <- FloridaLakes %>% group_by(Location) %>% summarize(MeanHg=mean(AvgMercury), StDevHg=sd(AvgMercury),  N=n())
+kable(LakesTable)
+```
+
+
+
+### Model for Northern and Southern Lakes 
+
+$\widehat{\text{Hg}} = b_0 +b_1\text{I}_{\text{South}}$
+
+
+* $b_0$ represents the mean mercury level for lakes in North Florida, and    
+* $b_1$ represents the mean difference in mercury level for lakes in South Florida, compared to North Florida    
+
+### Model for Lakes R Output
+
+```{r}
+Lakes_M <- lm(data=FloridaLakes, AvgMercury ~ Location)
+summary(Lakes_M)
+```
+
+### Interpreting Lakes Regression Output
+
+$\widehat{\text{Hg}} = `r Lakes_M$coef[1]` +`r Lakes_M$coef[2]`\text{I}_{\text{South}}$
+
+* $b_1 = 0.27915= 0.6965 - 0.4245$ is equal to the difference in mean mercury levels between Northern and Southern lakes. (We've already seen that for categorical variables, the least-squares estimate is the mean, so this makes sense.)  
+
+* We can use $b_1$ to assess the size of the difference in mean mercury concentration levels. 
+
+* Since the lakes we observed are only a sample of all lakes, we cannot assume the difference in mercury concentrations is exactly 0.4245 for all Northern vs Southern Florida lakes. 
+
+### Evidence of Difference? 
+
+* Do these results provide evidence that among all Florida lakes, the mean mercury level is higher in the South than in the North?    
+
+Possible Explanations:   
+1. There really is a difference in average mercury level between lakes in Northern and Southern Florida.    
+2. There really is no difference in average mercury levels between lakes in Northern and Southern Florida, and we just happened, by chance, to select more lakes with higher mercury concentrations in Southern Florida.  
+
+**Question:** Which of these explanations do you think is more reasonable?   
+
+
+
+### Permutation Test
+
+**Key Question:**
+
+* How likely is it that we would have observed a difference in means (i.e. a value of $b_1$) as extreme as 0.6965-0.4245 = 0.27195 ppm, merely by chance, if there is really no relationship between location and mercury level?  
+
+We can answer the key question using a procedure known as a **permutation test**. In a permutation test, we randomly permute our data to simulate a situation where there is no relationship between our explanatory and response variable. We observe whether it is plausible to observe values of a statistic (in this case the difference in means) as extreme or more extreme than what we saw in the actual data.    
+
+We'll simulate situations where there is no relationship between location and mercury level, and see how often we observe a difference in means ($b_1$) as extreme as 0.27195.  
+
+**Procedure:**
+
+1. Randomly shuffle the locations of the lakes, so that any relationship between location and mercury level is due only to chance.  
+
+2. Calculate the difference in mean mercury levels (i.e. value of $b_1$) in "Northern" and "Southern" lakes, using the shuffled data.  
+
+3. Repeat steps 1 and 2 many (say 10,000) times, recording the difference in means (i.e. value of $b_1$) each time.      
+4. Analyze the distribution of mean differences, simulated under the assumption that there is no relationship between location and mercury level. Look whether the actual difference we observed is consistent with the simulation results.   
+
+### Applet for Permutation Tests
+
+An [Art of Stat Web App](https://istats.shinyapps.io/PermDist_2samples/) performs the steps listed above. 
+
+Follow these steps to perform the simulation.  
+1. Open the app.  
+2. Under "Enter Data", Choose "Provide Own".   
+3. For "Response Variable", type in "Mercury Concentration."     
+4. For "Group 1 Label", enter "North", and for "Group 2 Label", enter "South".   
+5. Copy/paste the following values into the "Group 1 Data" box. These are the mercury concentrations in the lakes in North Florida.   
+```{r}
+NLakesHg <- as.data.frame(FloridaLakes %>% filter(Location=="N"))$AvgMercury
+kable(NLakesHg, fill = getOption("width"))
+```
+
+5. Copy/paste the following values into the "Group 2 Data" box. These are the mercury concentrations in the lakes in North Florida.   
+```{r}
+NLakesHg <- as.data.frame(FloridaLakes %>% filter(Location=="S"))$AvgMercury
+kable(NLakesHg, fill = getOption("width"))
+```
+
+6. For the question: "Select how many permutations you want to generate:" Choose 1. 
+
+7. Click "Generate"
+
+8. The app will randomly assign the lakes to groups, with sizes matching the original data, and calculate the mean for each group. Observe means in the "Permuted Sample" and the difference in means. Is the difference as extreme as we observed in the actual data?  
+
+STOP HERE UNTIL FURTHER INSTRUCTED.   
+
+9. Now generate 5 more permutations. Did you get any differences in means as extreme as we observed in the original data? What does this tell us about the likelihood of observing a difference in means as extreme as 0.27 by chance?    
+
+STOP HERE UNTIL FURTHER INSTRUCTED.   
+
+10. Now generate 10,000 permutations. How often do you get a difference as extreme as we observed in the original data? What does this tell us about the likelihood of observing a difference in means as extreme as 0.27 by chance?    
+
+
+### Five Permutations in R
+
+We'll use R to perform permutation tests in the same manner as is done in the Art of Stat App.    
+
+**First Permutation**
+
+Recall these groups were randomly assigned, so the only differences in averages are due to random chance.   
+
+
+```{r}
+ShuffledLakes <- FloridaLakes    ## create copy of dataset
+ShuffledLakes$Location <- ShuffledLakes$Location[sample(1:nrow(ShuffledLakes))] 
+```
+
+```{r}
+Shuffle1df <- data.frame(FloridaLakes$Lake, FloridaLakes$Location, FloridaLakes$AvgMercury, ShuffledLakes$Location)
+names(Shuffle1df) <- c("Lake", "Location", "AvgMercury", "Shuffled Location")
+kable(head(Shuffle1df))
+```
+
+```{r}
+LakesPerm <- ggplot(data=Shuffle1df, aes(x=`Shuffled Location`, y=AvgMercury, fill=`Shuffled Location`)) + 
+  geom_boxplot() +   geom_jitter() + ggtitle("Mercury Levels in Florida Lakes") + 
+  xlab("Location") + ylab("Mercury Level") + theme(axis.text.x = element_text(angle = 90)) + ylim(c(0, 1.5)) + coord_flip()
+LakesPerm
+```
+
+```{r}
+LakesPermTable <- Shuffle1df %>% group_by(`Shuffled Location`) %>% summarize(MeanHg=mean(AvgMercury), StDevHg=sd(AvgMercury),  N=n())
+kable(LakesPermTable)
+```
+
+
+**Second Permutation**
+
+```{r}
+ShuffledLakes <- FloridaLakes    ## create copy of dataset
+ShuffledLakes$Location <- ShuffledLakes$Location[sample(1:nrow(ShuffledLakes))] 
+kable(head(Shuffle1df))
+```
+
+```{r}
+Shuffle1df <- data.frame(FloridaLakes$Lake, FloridaLakes$Location, FloridaLakes$AvgMercury, ShuffledLakes$Location)
+names(Shuffle1df) <- c("Lake", "Location", "AvgMercury", "Shuffled Location")
+```
+
+
+```{r}
+LakesPerm <- ggplot(data=Shuffle1df, aes(x=`Shuffled Location`, y=AvgMercury, fill=`Shuffled Location`)) + 
+  geom_boxplot() +   geom_jitter() + ggtitle("Mercury Levels in Florida Lakes") + 
+  xlab("Location") + ylab("Mercury Level") + theme(axis.text.x = element_text(angle = 90)) + ylim(c(0, 1.5)) + coord_flip()
+LakesPerm
+```
+
+```{r}
+LakesPermTable <- Shuffle1df %>% group_by(`Shuffled Location`) %>% summarize(MeanHg=mean(AvgMercury), StDevHg=sd(AvgMercury),  N=n())
+kable(LakesPermTable)
+```
+
+**Third Permutation**
+
+
+
+
+```{r}
+ShuffledLakes <- FloridaLakes    ## create copy of dataset
+ShuffledLakes$Location <- ShuffledLakes$Location[sample(1:nrow(ShuffledLakes))] 
+kable(head(Shuffle1df))
+```
+
+```{r}
+Shuffle1df <- data.frame(FloridaLakes$Lake, FloridaLakes$Location, FloridaLakes$AvgMercury, ShuffledLakes$Location)
+names(Shuffle1df) <- c("Lake", "Location", "AvgMercury", "Shuffled Location")
+```
+
+
+
+```{r}
+LakesPerm <- ggplot(data=Shuffle1df, aes(x=`Shuffled Location`, y=AvgMercury, fill=`Shuffled Location`)) + 
+  geom_boxplot() +   geom_jitter() + ggtitle("Mercury Levels in Florida Lakes") + 
+  xlab("Location") + ylab("Mercury Level") + theme(axis.text.x = element_text(angle = 90)) + ylim(c(0, 1.5)) + coord_flip()
+LakesPerm
+```
+
+```{r}
+LakesPermTable <- Shuffle1df %>% group_by(`Shuffled Location`) %>% summarize(MeanHg=mean(AvgMercury), StDevHg=sd(AvgMercury),  N=n())
+kable(LakesPermTable)
+```
+
+
+**Fourth Permutation**
+
+```{r}
+ShuffledLakes <- FloridaLakes    ## create copy of dataset
+ShuffledLakes$Location <- ShuffledLakes$Location[sample(1:nrow(ShuffledLakes))] 
+kable(head(Shuffle1df))
+```
+
+```{r}
+Shuffle1df <- data.frame(FloridaLakes$Lake, FloridaLakes$Location, FloridaLakes$AvgMercury, ShuffledLakes$Location)
+names(Shuffle1df) <- c("Lake", "Location", "AvgMercury", "Shuffled Location")
+```
+
+```{r}
+LakesPerm <- ggplot(data=Shuffle1df, aes(x=`Shuffled Location`, y=AvgMercury, fill=`Shuffled Location`)) + 
+  geom_boxplot() +   geom_jitter() + ggtitle("Mercury Levels in Florida Lakes") + 
+  xlab("Location") + ylab("Mercury Level") + theme(axis.text.x = element_text(angle = 90)) + ylim(c(0, 1.5)) + coord_flip()
+LakesPerm
+```
+
+```{r}
+LakesPermTable <- Shuffle1df %>% group_by(`Shuffled Location`) %>% summarize(MeanHg=mean(AvgMercury), StDevHg=sd(AvgMercury),  N=n())
+kable(LakesPermTable)
+```
+
+
+**Fifth Permutation**
+
+```{r}
+ShuffledLakes <- FloridaLakes    ## create copy of dataset
+ShuffledLakes$Location <- ShuffledLakes$Location[sample(1:nrow(ShuffledLakes))] 
+kable(head(Shuffle1df))
+```
+
+```{r}
+Shuffle1df <- data.frame(FloridaLakes$Lake, FloridaLakes$Location, FloridaLakes$AvgMercury, ShuffledLakes$Location)
+names(Shuffle1df) <- c("Lake", "Location", "AvgMercury", "Shuffled Location")
+```
+
+```{r}
+LakesPerm <- ggplot(data=Shuffle1df, aes(x=`Shuffled Location`, y=AvgMercury, fill=`Shuffled Location`)) + 
+  geom_boxplot() +   geom_jitter() + ggtitle("Mercury Levels in Florida Lakes") + 
+  xlab("Location") + ylab("Mercury Level") + theme(axis.text.x = element_text(angle = 90)) + ylim(c(0, 1.5)) + coord_flip()
+LakesPerm
+```
+
+```{r}
+LakesPermTable <- Shuffle1df %>% group_by(`Shuffled Location`) %>% summarize(MeanHg=mean(AvgMercury), StDevHg=sd(AvgMercury),  N=n())
+kable(LakesPermTable)
+```
+
+
+
+### R Code for Permutation Test    
+
+We'll write a `for` loop to perform 10,000 permutations and record the value of $b_1$ (the difference in sample means) for each simulation.  
+
+```{r}
+b1 <- Lakes_M$coef[2] ## record value of b1 from actual data
+
+## perform simulation
+b1Sim <- rep(NA, 10000)          ## vector to hold results
+ShuffledLakes <- FloridaLakes    ## create copy of dataset
+for (i in 1:10000){
+  #randomly shuffle locations
+ShuffledLakes$Location <- ShuffledLakes$Location[sample(1:nrow(ShuffledLakes))] 
+ShuffledLakes_M<- lm(data=ShuffledLakes, AvgMercury ~ Location)   #fit model to shuffled data
+b1Sim[i] <- ShuffledLakes_M$coef[2]  ## record b1 from shuffled model
+}
+NSLakes_SimulationResults <- data.frame(b1Sim)  #save results in dataframe
+```
+
+### Permutation Tests Results
+
+```{r}
+NSLakes_SimulationResultsPlot <- ggplot(data=NSLakes_SimulationResults, aes(x=b1Sim)) + 
+  geom_histogram(fill="lightblue", color="white") + 
+  geom_vline(xintercept=c(b1, -1*b1), color="red") + 
+  xlab("Lakes: Simulated Value of b1") + ylab("Frequency") + 
+  ggtitle("Distribution of b1 under assumption of no relationship")
+NSLakes_SimulationResultsPlot
+```
+
+It appears unlikely that we would observe a difference in sample mean ($b_1$) as extreme as 0.27195 ppm by chance, if there is really no relationship between location and mercury level. 
+
+### Conclusions
+
+Number of simulations (out of 10,000) resulting in difference in means more extreme than 0.27195. 
+
+```{r}
+sum(abs(b1Sim) > abs(b1))
+```
+
+
+Proportion of simulations resulting in difference in means more extreme than 0.27195. 
+
+
+```{r}
+mean(abs(b1Sim) > abs(b1))
+```
+
+The probability of observing a difference in means as extreme as 0.27195 by chance, when there is no relationship between location and mercury level is very low. 
+
+There is strong evidence of a relationship between location and mercury level. In this case, there is strong evidence that mercury level is higher in Southern Lakes than northern Lakes.    
+
+
+### Hypothesis Testing Terminology
+
+We can think of the simulation as a test of the following hypotheses:
+
+Hypothesis 1: Among all Florida lakes, average mercury level is the same for lakes in Northern Florida, as in Southern Florida. (Thus the difference of 0.27 we observed in our data occurred just by chance).   
+
+Hypothesis 2: Among all Florida lakes, there is a difference in average mercury level between lakes in Northern Florida and Southern Florida. 
+
+The "no difference," or "chance alone" hypothesis is called the **null hypothesis**. The other hypothesis is called the **alternative hypothesis**.     
+
+
+We used $b_1$ to measure difference in average mercury levels between the locations in our observed data. 
+
+We found that the probability of observing a difference in means as extreme as 0.27 when Hypothesis 1 is true is very low (approximately `r mean(abs(b1Sim > b1))`)
+
+* The statistic used to measure the difference or relationship we are interested in is called a **test statistic**. 
+    - In this case, the test statistic is the difference in sample means ($b_1$)
+
+* The **p-value** is the probability of observing a test statistic as extreme or more extreme than we did when the null hypothesis is true.    
+       - A low p-value provides evidence against the null hypothesis.      
+       -  A high p-value means that the data could have plausibly been obtained when the null hypothesis is true, and thus the null hypothesis cannot be ruled out.     
+      - A high p-value does not mean that the null hypothesis is true or probably true. A p-value can only tell us the strength of evidence against the null hypothesis, and should never be interpreted as support for the null hypothesis.      
+
+### How Low Should the p-value Be
+
+```{r, out.width = '100%'}
+knitr::include_graphics("pvals.png")
+```
+
+
+### Practical Importance    
+
+A low p-value tells us that the difference in average Mercury levels  that we saw in our sample is unlikely to have occurred by chance, providing evidence that there is indeed a difference in average Mercury levels between Northern and Southern lakes.   
+
+The p-value does not tell us anything about the size of the difference! 
+If the difference is really small (say 0.001 ppm), perhaps there is no need to worry about it.   
+
+It's possible to get a small p-value even when the true difference is very small (especially when our sample size is large).    
+
+In addition to a p-value, we should consider whether a difference is big enough to be meaningful in a practical way, before making any policy decisions.    
+
+For now, we can use the difference in sample means of 0.27 ppm as an estimate of the size of the difference. Based on our limited knowledge of mercury levels, this does seem big enough to merit further investigation, and possible action.   
+
+
+## Test for Difference in Standard Deviation
+
+
+### Standard Deviation Northern and Southern Lakes
+
+Recall that in our sample, the standard deviation was higher for the lakes in Southern Florida than Northern Florida.  
+
+Note: for a sample of $n$ observations, $y_1, \ldots, y_n$, standard deviation is a measure of spread, is calculated using the formula:
+
+\[
+SD=\sqrt{\frac{1}{n-1}\sum_{i=1}^n(y_i-\bar{y})^2}
+\]
+
+```{r}
+LakesBP <- ggplot(data=FloridaLakes, aes(x=Location, y=AvgMercury, fill=Location)) + 
+  geom_boxplot() +   geom_jitter() + ggtitle("Mercury Levels in Florida Lakes") + 
+  xlab("Location") + ylab("Mercury Level") + theme(axis.text.x = element_text(angle = 90)) + ylim(c(0, 1.5)) + coord_flip() 
+LakesBP
+```
+
+```{r}
+LakesTable <- FloridaLakes %>% group_by(Location) %>% summarize(MeanHg=mean(AvgMercury), StDevHg=sd(AvgMercury),  N=n())
+kable(LakesTable)
+```
+
+Does this provide evidence that there is really more variability in mercury levels for lakes in Southern Florida than in Northern Florida, or could we have just by chance picked lakes with more variability in South Florida?
+
+### Hypotheses
+
+**Null Hypothesis:** Standard deviation in mercury levels among all lakes in Northern Florida is the same as the standard deviation in mercury levels among all lakes in Southern Florida.   
+
+**Alternative Hypothesis:** Standard deviation in mercury levels among all lakes in Northern Florida is different than the standard deviation in mercury levels among all lakes in Southern Florida.   
+
+
+### Permutation Test Steps
+
+**Procedure:**
+
+1. Randomly shuffle the locations of the lakes, so that any relationship between location and mercury level is due only to chance.  
+
+2. Calculate the difference in **standard deviation** in mercury levels (i.e. value of $b_1$) in "Northern" and "Southern" lakes, using the shuffled data.  
+
+3. Repeat steps 1 and 2 many (say 10,000) times, recording the difference in standard deviations each time.   
+
+4. Analyze the distribution of differences in standard deviation, simulated under the assumption that there is no relationship between location and mercury level. Look whether the actual difference we observed is consistent with the simulation results.   
+
+**Question:** Looking back at the 5 simulations performed in the previous section, does it seem plausible that we could have observed a difference in standard deviations as extreme as $0.3839-0.2697 = 0.1142$ by chance?  
+
+
+### R Code for Permutation Test
+
+```{r}
+SDTab <- FloridaLakes %>% group_by(Location) %>% summarize(SD=sd(AvgMercury))
+DiffSD <- SDTab$SD[2] - SDTab$SD[1] 
+
+## perform simulation
+DiffSim <- rep(NA, 10000)          ## vector to hold results
+ShuffledLakes <- FloridaLakes    ## create copy of dataset
+for (i in 1:10000){
+  #randomly shuffle locations
+ShuffledLakes$Location <- ShuffledLakes$Location[sample(1:nrow(ShuffledLakes))] 
+SDTabSim <- ShuffledLakes %>% group_by(Location) %>% summarize(SD=sd(AvgMercury))
+DiffSim[i] <- SDTabSim$SD[2] - SDTabSim$SD[1] #record difference in SD for simulated data
+}
+NSLakes_SDSimResults <- data.frame(DiffSim)  #save results in dataframe
+```
+
+### Permutation Tests Results
+
+```{r}
+NSLakes_SDSimResultsPlot <- ggplot(data=NSLakes_SDSimResults, aes(x=DiffSim)) + 
+  geom_histogram(fill="lightblue", color="white") + 
+  geom_vline(xintercept=c(DiffSD, -1*DiffSD), color="red") + 
+  xlab("Lakes: Difference in SD") + ylab("Frequency") + 
+  ggtitle("Distribution of Difference in SD under assumption of no relationship")
+NSLakes_SDSimResultsPlot
+```
+
+
+Number of simulations (out of 10,000) resulting in standard deviations greater the 0.1142.  
+
+
+```{r}
+sum(abs(DiffSim) > abs(DiffSD))
+```
+
+
+Proportion of simulations (out of 10,000) resulting in standard deviations greater the 0.1142.  
+
+
+```{r}
+mean(abs(DiffSim) > abs(DiffSD))
+```
+
+### Conclusions
+
+It is unlikely that we would observe a difference in standard deviations as extreme as 0.1142 by chance. There is evidence that lakes in Southern Florida exhibit more variability in mercury levels than lakes in Northern Florida (though the evidence is not as strong as it was when we were testing for a difference in means).   
+
+Again, a p-value does not tell us whether a difference is practically meaningful. Without knowing a lot about mercury levels, and their impact on the ecosystem, it's harder to tell wheter an estimated difference in standard deviations of 0.11 ppm is meaningful or not. It would be good to consult a biologist before making any decisions based on these results.   
+
+
+## Test for Regression Slope
+
+### 2015 Cars Dataset
+
+We consider data from the Kelly Blue Book, pertaining to new cars, released in 2015. We'll investigate the relationship between price, length, and time it takes to accelerate from 0 to 60 mph.    
+
+```{r}
+data(Cars2015)
+glimpse(Cars2015)
+```
+
+
+### Car Price and Acceleration Time
+
+`LowPrice` represents the price of a standard (non-luxury) model of a car. `Acc060` represents time it takes to accelerate from 0 to 60 mph.
+
+```{r}
+data(Cars2015)
+```
+
+```{r}
+CarsA060 <- ggplot(data=Cars2015, aes(x=Acc060, y=LowPrice)) + geom_point() + stat_smooth(method="lm", se=FALSE) 
+CarsA060
+```
+
+### Modeling Price using Acc060
+
+$\widehat{Price} = b_0 + b_1\times\text{Acc. Time}$
+
+* Model assumes expected price is a linear function of acceleration time.   
+
+Parameter Interpretations:
+
+$b_0$ represents intercept of regression line, i.e. expected price of a car that can accelerate from 0 to 60 mph in no time. This is not a meaningful interpretation in context. 
+
+$b_1$ represents slope of regression line, i.e. expected change in price for each additional second it takes to accelerate from 0 to 60 mph. 
+
+### Modeling for Car Price and Acceleration
+
+```{r}
+Cars_M_A060 <- lm(data=Cars2015, LowPrice~Acc060)
+summary(Cars_M_A060)
+```
+
+
+### Acc060 Model Interpretations
+
+$\widehat{Price} = b_0 + b_1\times\text{Acc. Time}$
+
+$\widehat{Price} = 89.90 - 7.193\times\text{Acc. Time}$
+
+
+* Intercept $b_0$ might be interpreted as the price of a car that can accelerate from 0 to 60 in no time, but this is not a meaningful interpretation since there are no such cars.   
+
+* $b_1=-7.1933$ tells us that on average, the price of a car is expected to decrease by 7.19 thousand dollars for each additional second it takes to accelerate from 0 to 60 mph.  
+
+* $R^2 = 0.5521$ tells us that 55% of the variation in price is explained by the linear model using acceleration time as the explanatory variable.   
+
+
+### Is Car Price Associated with Acceleration Time?
+
+Is it possible that there is really no relationship between price and acceleration time, and we just happened to choose a sample that led to a slope of -7.1933, by chance?
+
+
+Is it possible that among all cars, the picture looks like the one below, and we just happened to draw a sample of 110 cars, showing a downward trend by chance?
+
+```{r, fig.height=4, fig.width=7, echo=FALSE}
+Rx <- runif(1000, 4, 13)
+Ry <- runif(1000, 0, 85)
+Acc060 <- c(Rx, Cars2015$Acc060)
+LowPrice <- c(Ry, Cars2015$LowPrice)
+InSample <- c(rep("No", 1000), rep("Yes", 110))
+df <- data.frame(Acc060, LowPrice, InSample)
+ggplot(data=df, aes(x=Acc060, y=LowPrice, color=InSample)) + geom_point()
+```
+
+
+### Acc060 Key Question and Hypotheses
+
+If there is really no relationship between price and acceleration time, then we would expect a slope (i.e value of $b_1$) equal to 0. 
+
+**Key Question:**
+
+* How likely is it that we would have observed a slope (i.e. a value of $b_1$) as extreme as -7.1933 merely by chance, if there is really no relationship between price and acceleration time?  
+
+
+**Null Hypothesis:** Among all 2015 cars, there is no relationship between price and acceleration time, and the slope we observed occurred merely by chance.    
+
+**Alternative Hypothesis:** The slope we observed is due to more than chance, and there is a relationship between price and acceleration time among all 2015 cars.   
+
+
+### Permutation Test for Slope
+
+**Procedure:**
+
+1. Randomly shuffle the acceleration times, so that any relationship between acceleration time and price is due only to chance.  
+
+2. Fit a regression line to the shuffled data and record the slope of the regression line.   
+
+3. Repeat steps 1 and 2 many (say 10,000) times, recording the slope (i.e. value of $b_1$) each time.      
+4. Analyze the distribution of slopes, simulated under the assumption that there is no relationship between price and acceleration time. Look whether the actual slope we observed is consistent with the simulation results.   
+
+
+### Five Permutations
+
+**First Permutation**
+
+```{r}
+ShuffledCars <- Cars2015    ## create copy of dataset
+ShuffledCars$Acc060 <- ShuffledCars$Acc060[sample(1:nrow(ShuffledCars))] 
+```
+
+```{r}
+Shuffle1df <- data.frame(Cars2015$Make, Cars2015$Model, Cars2015$LowPrice, Cars2015$Acc060, ShuffledCars$Acc060)
+names(Shuffle1df) <- c("Make", "Model", "LowPrice", "Acc060", "ShuffledAcc060")
+kable(head(Shuffle1df))
+```
+
+
+```{r}
+ggplot(data=Shuffle1df, aes(x=ShuffledAcc060, y=LowPrice)) + geom_point() + stat_smooth(method="lm", se=FALSE)
+```
+Slope of regression line from permuted data:   
+
+ 
+```{r}
+M_Cars_Shuffle <- lm(data=ShuffledCars, LowPrice~Acc060)
+summary(M_Cars_Shuffle)$coef[2]
+```
+
+
+**Second Permutation**
+
+```{r}
+ShuffledCars <- Cars2015    ## create copy of dataset
+ShuffledCars$Acc060 <- ShuffledCars$Acc060[sample(1:nrow(ShuffledCars))] 
+```
+
+```{r}
+Shuffle1df <- data.frame(Cars2015$Make, Cars2015$Model, Cars2015$LowPrice, Cars2015$Acc060, ShuffledCars$Acc060)
+names(Shuffle1df) <- c("Make", "Model", "LowPrice", "Acc060", "ShuffledAcc060")
+kable(head(Shuffle1df))
+```
+
+```{r}
+ggplot(data=Shuffle1df, aes(x=ShuffledAcc060, y=LowPrice)) + geom_point() + stat_smooth(method="lm", se=FALSE)
+```
+Slope of regression line from permuted data:   
+
+ 
+```{r}
+M_Cars_Shuffle <- lm(data=ShuffledCars, LowPrice~Acc060)
+summary(M_Cars_Shuffle)$coef[2]
+```
+
+
+**Third Permutation**
+
+```{r}
+ShuffledCars <- Cars2015    ## create copy of dataset
+ShuffledCars$Acc060 <- ShuffledCars$Acc060[sample(1:nrow(ShuffledCars))] 
+```
+
+```{r}
+Shuffle1df <- data.frame(Cars2015$Make, Cars2015$Model, Cars2015$LowPrice, Cars2015$Acc060, ShuffledCars$Acc060)
+names(Shuffle1df) <- c("Make", "Model", "LowPrice", "Acc060", "ShuffledAcc060")
+kable(head(Shuffle1df))
+```
+
+
+```{r}
+ggplot(data=Shuffle1df, aes(x=ShuffledAcc060, y=LowPrice)) + geom_point() + stat_smooth(method="lm", se=FALSE)
+```
+
+Slope of regression line from permuted data:   
+
+ 
+```{r}
+M_Cars_Shuffle <- lm(data=ShuffledCars, LowPrice~Acc060)
+summary(M_Cars_Shuffle)$coef[2]
+```
+
+
+
+### Fourth Permutation
+
+```{r}
+ShuffledCars <- Cars2015    ## create copy of dataset
+ShuffledCars$Acc060 <- ShuffledCars$Acc060[sample(1:nrow(ShuffledCars))] 
+```
+
+```{r}
+Shuffle1df <- data.frame(Cars2015$Make, Cars2015$Model, Cars2015$LowPrice, Cars2015$Acc060, ShuffledCars$Acc060)
+names(Shuffle1df) <- c("Make", "Model", "LowPrice", "Acc060", "ShuffledAcc060")
+kable(head(Shuffle1df))
+```
+
+```{r}
+ggplot(data=Shuffle1df, aes(x=ShuffledAcc060, y=LowPrice)) + geom_point() + stat_smooth(method="lm", se=FALSE)
+```
+Slope of regression line from permuted data:   
+
+ 
+```{r}
+M_Cars_Shuffle <- lm(data=ShuffledCars, LowPrice~Acc060)
+summary(M_Cars_Shuffle)$coef[2]
+```
+
+
+**Fifth Permutation**
+
+```{r}
+ShuffledCars <- Cars2015    ## create copy of dataset
+ShuffledCars$Acc060 <- ShuffledCars$Acc060[sample(1:nrow(ShuffledCars))] 
+```
+
+```{r}
+Shuffle1df <- data.frame(Cars2015$Make, Cars2015$Model, Cars2015$LowPrice, Cars2015$Acc060, ShuffledCars$Acc060)
+names(Shuffle1df) <- c("Make", "Model", "LowPrice", "Acc060", "ShuffledAcc060")
+kable(head(Shuffle1df))
+```
+
+
+```{r}
+ggplot(data=Shuffle1df, aes(x=ShuffledAcc060, y=LowPrice)) + geom_point() + stat_smooth(method="lm", se=FALSE)
+```
+Slope of regression line from permuted data:   
+
+ 
+```{r}
+M_Cars_Shuffle <- lm(data=ShuffledCars, LowPrice~Acc060)
+summary(M_Cars_Shuffle)$coef[2]
+```
+
+
+### R Code for Permutation Test
+
+```{r}
+b1 <- Cars_M_A060$coef[2] ## record value of b1 from actual data
+
+## perform simulation
+b1Sim <- rep(NA, 10000)          ## vector to hold results
+ShuffledCars <- Cars2015    ## create copy of dataset
+for (i in 1:10000){
+  #randomly shuffle acceleration times
+ShuffledCars$Acc060 <- ShuffledCars$Acc060[sample(1:nrow(ShuffledCars))] 
+ShuffledCars_M<- lm(data=ShuffledCars, LowPrice ~ Acc060)   #fit model to shuffled data
+b1Sim[i] <- ShuffledCars_M$coef[2]  ## record b1 from shuffled model
+}
+Cars_A060SimulationResults <- data.frame(b1Sim)  #save results in dataframe
+```
+
+### Permutation Test Results
+
+```{r}
+b1 <- Cars_M_A060$coef[2] ## record value of b1 from actual data
+Cars_A060SimulationResultsPlot <- ggplot(data=Cars_A060SimulationResults, aes(x=b1Sim)) + 
+  geom_histogram(fill="lightblue", color="white") + 
+  geom_vline(xintercept=c(b1, -1*b1), color="red") + 
+  xlab("Simulated Value of b1") + ylab("Frequency") + 
+  ggtitle("Distribution of b1 under assumption of no relationship")
+Cars_A060SimulationResultsPlot
+```
+
+It is extremely unlikely that we would observe a value of $b_1$ as extreme as -7.1933 by chance, if there is really no relationship between price and acceleration time. 
+
+### P-value and Conclusion
+
+
+Proportion of simulations resulting in simulation value of $b_2$ more extreme than -7.1933. 
+
+```{r}
+mean(abs(b1Sim) > abs(b1))
+```
+
+The probability of observing a value of $b_1$ as extreme as -7.1933 by chance, when there is no relationship between location and mercury level practically zero.  
+
+There is very strong evidence of a relationship between price and acceleration time.    
+
+A low p-value tells us only that there is evidence of a relationship, not that it is practically meaningful. But an estimated difference of more than $7 thousand for each additional second seems pretty important and would likely influence a buyer's decision.   
+
+
+## Test for Comparing Multiple Groups
+
+
+### Relationship Price and Car Size
+
+Continuing with the sample of 110 cars, seen in the previous section, let's compare prices of small, midsized, and large cars.  
+
+```{r, fig.height=2}
+ggplot(data=Cars2015, aes(x=Size, y=LowPrice, fill=Size)) + 
+  geom_boxplot() + geom_jitter() + coord_flip()
+```
+
+
+```{r}
+Cars2015 %>% group_by(Size) %>% summarize(MeanPrice = mean(LowPrice), 
+                                          StDevPrice=sd(LowPrice), 
+                                          N=n())
+```
+
+### Cars Questions of Interest
+
+1. Do the data provide evidence of a relationship between price and size of vehicle?
+
+2. Is there evidence of a difference in average price between...
+    a) large and midsized cars?     
+    b) large and small cars?     
+    c) small and midsized cars?
+
+
+### Cars Price and Size Model
+
+```{r}
+Cars_M_Size = lm(data=Cars2015, LowPrice~Size)
+summary(Cars_M_Size)
+```
+    
+### Relationship between Size and Price
+
+1. Do the data provide evidence of a relationship between price and size of vehicle?
+
+$\widehat{\text{Price}} = b_0 +b_1\times\text{I}_{\text{Midsized}}+ b_2\times\text{I}_{\text{Large}}$
+
+* $b_0$ represents expected price of large cars.   
+* $b_1$ represents expected difference in price between large and midsized cars.   
+* $b_2$ represents expected difference in price between large and small cars.   
+
+Unfortunately, none of these measure whether there is an overall relationship between price and size. 
+
+**Question:**What statistic can we use to assess the size of differences between more than two groups?   
+
+
+### Test Statistic for Car Size and Price
+
+```{r}
+Cars_A_Size <- aov(data=Cars2015, LowPrice~Size)
+summary(Cars_A_Size)
+```
+
+### Key Question in Car Size Investigation
+
+
+Null Hypothesis: Average price, among all 2015 cars, is the same between small, midsized, and large cars.  
+
+Alternative Hypothesis: Average price among all 2015 cars differs between at least two of these sizes.   
+
+
+**Key Question:** How likely is it that we would have obtained an F-statistic as extreme as 10.14 by chance, if there is really no difference in price between small, medium, and large sized cars, among all 2015 cars?
+
+
+### Simulation-Based Test for F-Statistic
+
+We'll simulate situations where there is no relationship between size and price, and see how often we observe an F-statistic as extreme as 10.14. 
+
+**Procedure:**
+
+1. Randomly shuffle the sizes of the vehicles, so that any relationship between size and price is due only to chance.  
+
+2. Fit a model, using the shuffled data, with price as the response variable, and size as the explanatory variable. Record the F-statistic.   
+
+3. Repeat steps 1 and 2 many (say 10,000) times, recording the F-statistic each time.   
+
+4. Analyze the distribution of F-statistics, simulated under the assumption that there is no relationship between size and price. Look whether the actual F-statistic we observed is consistent with the simulation results.    
+
+
+### Five Permutations
+
+**First Permutation**
+
+
+```{r}
+ShuffledCars <- Cars2015    ## create copy of dataset
+ShuffledCars$Size <- ShuffledCars$Size[sample(1:nrow(ShuffledCars))] 
+```
+
+```{r}
+Shuffle1df <- data.frame(Cars2015$Make, Cars2015$Model, Cars2015$LowPrice, Cars2015$Size, ShuffledCars$Size)
+names(Shuffle1df) <- c("Make", "Model", "LowPrice", "Size", "ShuffledSize")
+kable(head(Shuffle1df))
+```
+
+
+
+Recall this model was fit under an assumption of no relationship between price and size. 
+
+```{r, fig.height=2}
+ggplot(data=ShuffledCars, aes(x=Size, y=LowPrice, fill=Size)) + 
+  geom_boxplot() + geom_jitter() + coord_flip() + ggtitle("Shuffled Cars")
+```
+
+
+```{r}
+Cars_A_Size_Shuffle <- aov(data=ShuffledCars, LowPrice~Size)
+summary(Cars_A_Size_Shuffle)
+```
+
+
+**Second Permutation**
+
+```{r}
+ShuffledCars <- Cars2015    ## create copy of dataset
+ShuffledCars$Size <- ShuffledCars$Size[sample(1:nrow(ShuffledCars))] 
+```
+
+```{r}
+Shuffle1df <- data.frame(Cars2015$Make, Cars2015$Model, Cars2015$LowPrice, Cars2015$Size, ShuffledCars$Size)
+names(Shuffle1df) <- c("Make", "Model", "LowPrice", "Size", "ShuffledSize")
+kable(head(Shuffle1df))
+```
+
+
+
+```{r, fig.height=2}
+ggplot(data=ShuffledCars, aes(x=Size, y=LowPrice, fill=Size)) + 
+  geom_boxplot() + geom_jitter() + coord_flip() + ggtitle("Shuffled Cars")
+```
+
+
+```{r}
+Cars_A_Size_Shuffle <- aov(data=ShuffledCars, LowPrice~Size)
+summary(Cars_A_Size_Shuffle)
+```
+
+
+
+**Third Permutation**
+
+```{r}
+ShuffledCars <- Cars2015    ## create copy of dataset
+ShuffledCars$Size <- ShuffledCars$Size[sample(1:nrow(ShuffledCars))] 
+```
+
+```{r}
+Shuffle1df <- data.frame(Cars2015$Make, Cars2015$Model, Cars2015$LowPrice, Cars2015$Size, ShuffledCars$Size)
+names(Shuffle1df) <- c("Make", "Model", "LowPrice", "Size", "ShuffledSize")
+kable(head(Shuffle1df))
+```
+
+
+```{r, fig.height=2}
+ggplot(data=ShuffledCars, aes(x=Size, y=LowPrice, fill=Size)) + 
+  geom_boxplot() + geom_jitter() + coord_flip() + ggtitle("Shuffled Cars")
+```
+
+
+```{r}
+Cars_A_Size_Shuffle <- aov(data=ShuffledCars, LowPrice~Size)
+summary(Cars_A_Size_Shuffle)
+```
+
+
+**Fourth Permutation**
+
+```{r}
+ShuffledCars <- Cars2015    ## create copy of dataset
+ShuffledCars$Size <- ShuffledCars$Size[sample(1:nrow(ShuffledCars))] 
+```
+
+```{r}
+Shuffle1df <- data.frame(Cars2015$Make, Cars2015$Model, Cars2015$LowPrice, Cars2015$Size, ShuffledCars$Size)
+names(Shuffle1df) <- c("Make", "Model", "LowPrice", "Size", "ShuffledSize")
+kable(head(Shuffle1df))
+```
+
+
+Recall this model was fit under an assumption of no relationship between price and size. 
+
+```{r, fig.height=2}
+ggplot(data=ShuffledCars, aes(x=Size, y=LowPrice, fill=Size)) + 
+  geom_boxplot() + geom_jitter() + coord_flip() + ggtitle("Shuffled Cars")
+```
+
+
+```{r}
+Cars_A_Size_Shuffle <- aov(data=ShuffledCars, LowPrice~Size)
+summary(Cars_A_Size_Shuffle)
+```
+
+
+**Fifth Permutation**
+
+
+```{r}
+ShuffledCars <- Cars2015    ## create copy of dataset
+ShuffledCars$Size <- ShuffledCars$Size[sample(1:nrow(ShuffledCars))] 
+```
+
+```{r}
+Shuffle1df <- data.frame(Cars2015$Make, Cars2015$Model, Cars2015$LowPrice, Cars2015$Size, ShuffledCars$Size)
+names(Shuffle1df) <- c("Make", "Model", "LowPrice", "Size", "ShuffledSize")
+kable(head(Shuffle1df))
+```
+
+
+```{r, fig.height=2}
+ggplot(data=ShuffledCars, aes(x=Size, y=LowPrice, fill=Size)) + 
+  geom_boxplot() + geom_jitter() + coord_flip() + ggtitle("Shuffled Cars")
+```
+
+
+```{r}
+Cars_A_Size_Shuffle <- aov(data=ShuffledCars, LowPrice~Size)
+summary(Cars_A_Size_Shuffle)
+```
+
+
+
+### R Code For Permutation Test
+
+We'll simulate 10,000 permutations and record the F-statistic for each set of permuted data.  
+
+```{r}
+Fstat <- summary(Cars_M_Size)$fstatistic[1] ## record value of F-statistic from actual data
+
+## perform simulation
+FSim <- rep(NA, 10000)          ## vector to hold results
+ShuffledCars <- Cars2015    ## create copy of dataset
+for (i in 1:10000){
+  #randomly shuffle acceleration times
+ShuffledCars$Size <- ShuffledCars$Size[sample(1:nrow(ShuffledCars))] 
+ShuffledCars_M<- lm(data=ShuffledCars, LowPrice ~ Size)   #fit model to shuffled data
+FSim[i] <- summary(ShuffledCars_M)$fstatistic[1]  ## record F from shuffled model
+}
+CarSize_SimulationResults <- data.frame(FSim)  #save results in dataframe
+```
+
+### F-statistic for Size Simulation Results
+
+```{r, fig.height=2}
+CarSize_SimulationResults_Plot <- ggplot(data=CarSize_SimulationResults, aes(x=FSim)) + 
+  geom_histogram(fill="lightblue", color="white") +  geom_vline(xintercept=c(Fstat), color="red") + 
+  xlab("Simulated Value of F") + ylab("Frequency") +  ggtitle("Distribution of F under assumption of no relationship")
+CarSize_SimulationResults_Plot
+```
+
+p-value:
+
+```{r}
+mean(FSim > Fstat)
+```
+
+The data provide strong evidence of a relationship between price and size.   
+
+### Differences Between Different Sizes
+
+Now that we have evidence that car price is related to size, we might want to know which sizes differ from each other.  
+
+Is there evidence of a difference in average price between...    
+    a) large and midsized cars?     
+    b) large and small cars?     
+    c) small and midsized cars?
+    
+### Regression Coefficients for Tests Between Sizes
+
+$\widehat{\text{Price}} = b_0 +b_1\times\text{I}_{\text{Midsized}}+ b_2\times\text{I}_{\text{Large}}$
+
+* $b_0$ represents expected price of large cars.   
+* $b_1$ represents expected difference in price between large and midsized cars.   
+* $b_2$ represents expected difference in price between large and small cars.   
+
+Thus, we can answer each question by looking at the appropriate regression coefficient.    
+    a) large and midsized cars?   ($b_1$)  
+    b) large and small cars?      ($b_2$)     
+    c) small and midsized cars?   ($b_1-b_2$)
+
+### Simulation for Differences between Types of Cars
+
+We'll simulate situations where there is no relationship between size and price, and see how often we observe results for $b_1$, $b_2$, and $b_1-b_2$ as extreme as we did in the actual data.  
+
+**Procedure:**
+
+1. Randomly shuffle the sizes of the vehicles, so that any relationship between size and price is due only to chance.  
+
+2. Fit a model, using the shuffled data, with price as the response variable, and size as the explanatory variable. Record the values of $b_1$, $b_2$, and $b_1-b_2$.   
+
+3. Repeat steps 1 and 2 many (say 10,000) times, recording the values of $b_1$, $b_2$, and $b_1-b_2$ each time.   
+
+4. Analyze the distribution of $b_1$, $b_2$, $b_1-b_2$, simulated under the assumption that there is no relationship between size and price. Look whether the actual values we observed are consistent with the simulation results.    
+
+### Code for Simulation-Based Test of Prices by Size
+
+```{r}
+b1 <- Cars_M_Size$coefficients[2]  #record b1 from actual data
+b2 <- Cars_M_Size$coefficients[3]  #record b2 from actual data
+
+## perform simulation
+b1Sim <- rep(NA, 10000)          ## vector to hold results
+b2Sim <- rep(NA, 10000)          ## vector to hold results
+ShuffledCars <- Cars2015    ## create copy of dataset
+for (i in 1:10000){
+  #randomly shuffle acceleration times
+ShuffledCars$Size <- ShuffledCars$Size[sample(1:nrow(ShuffledCars))] 
+ShuffledCars_M<- lm(data=ShuffledCars, LowPrice ~ Size)   #fit model to shuffled data
+b1Sim[i] <- ShuffledCars_M$coefficients[2]   ## record b1 from shuffled model
+b2Sim[i] <- ShuffledCars_M$coefficients[3]   ## record b2 from shuffled model
+}
+Cars_Size2_SimulationResults <- data.frame(b1Sim, b2Sim)  #save results in dataframe
+```
+
+### Car Size Simulation-Based Results for $b_1$
+
+```{r, fig.height=2}
+Cars_Size2_SimulationResultsPlot_b1 <- ggplot(data=Cars_Size2_SimulationResults, aes(x=b1Sim)) + 
+  geom_histogram(fill="lightblue", color="white") + 
+  geom_vline(xintercept=c(b1, -1*b1), color="red") + 
+  xlab("Simulated Value of b1") + ylab("Frequency") + 
+  ggtitle("Large vs Midsize Cars: Distribution of b1 under assumption of no relationship")
+Cars_Size2_SimulationResultsPlot_b1
+```
+
+p-value:
+
+```{r}
+mean(abs(b1Sim)>abs(b1))
+```
+
+
+### Car Size Simulation-Based Results for $b_2$
+
+```{r, fig.height=2}
+Cars_Size2_SimulationResultsPlot_b2 <- ggplot(data=Cars_Size2_SimulationResults, aes(x=b2Sim)) + 
+  geom_histogram(fill="lightblue", color="white") + 
+  geom_vline(xintercept=c(b2, -1*b2), color="red") + 
+  xlab("Simulated Value of b2") + ylab("Frequency") + 
+  ggtitle("Large vs Small Cars: Distribution of b2 under assumption of no relationship")
+Cars_Size2_SimulationResultsPlot_b2
+```
+
+p-value:
+
+```{r}
+mean(abs(b2Sim)>abs(b2))
+```
+
+### Car Size Simulation-Based Results for $b_1-b_2$
+
+```{r, fig.height=2}
+Cars_Size2_SimulationResultsPlot_b1_b2 <- ggplot(data=Cars_Size2_SimulationResults, aes(x=b1Sim-b2Sim)) + 
+  geom_histogram(fill="lightblue", color="white") + geom_vline(xintercept=c(b1-b2, -1*(b1-b2)), color="red") + 
+  xlab("Simulated Value of b1-b2") + ylab("Frequency") + 
+  ggtitle("Small vs Midsize Cars: Distribution of b1-b2 under assumption of no relationship")
+Cars_Size2_SimulationResultsPlot_b1_b2
+```
+
+p-value:
+
+```{r}
+mean(abs(b1Sim-b2Sim)>abs(b1-b2))
+```
+
+### Conclusions and Bonferroni Correction
+
+* We might normally conclude that there is evidence of differences in group means in the p-value is less than 0.05. However, since we are performing multiple tests simultaneously, there is an increased chance that at least one of them will yield a small p-value just by chance. Thus, we should be more strict in deciding what constitutes evidence against the null hypothesis.     
+
+* A commone rule (known as the **Bonferroni correction**) is to divide the values usually used as criteria for evidence by the number of tests. In this example:     
+      - Here, we would say there is some evidence of differences between groups if the p-value is less than 0.10/3=0.0333.   
+      - We would say there is strong evidence of differences if the p-value is less than 0.05/3=0.0167
+
+| Comparison | Coefficient | p-value | Evidence of Difference |     
+|------ | ---------- | -----------| -----------| 
+| large vs midsize  | $b_1$ |`r mean(abs(b1Sim)>abs(b1))` | Some evidence  |
+| large vs small  | $b_2$ |`r mean(abs(b2Sim)>abs(b2))` |  Strong evidence  |
+| small vs midsize | $b_1-b_2$ |`r mean(abs(b1Sim-b2Sim)>abs(b1-b2))` | No evidence  |
+
+
+### Summary of Tests Between Multiple Groups
+
+When testing for differences between more than two groups:
+
+1. Perform an overall test, using the F-statistic. A large F-statistic and small p-value tell us there is evidence of differences between at least some of the groups.     
+2. If the F-tests yields evidence evidence of differences, perform tests on individual model coefficients to determine which groups differ. Use a more strict cutoff criteria, such as the Bonferroni correction.   
+
+
+### Bear Weights by Season
+
+```{r}
+ggplot(data=Bears_Subset, aes(y=Weight, x=Season, fill=Season)) + 
+   geom_boxplot() + geom_jitter() + coord_flip()
+```
+
+### Bear Weights by Season Model
+
+```{r}
+Bears_M_Season <- lm(data=Bears_Subset, Weight~Season)
+summary(Bears_M_Season)
+```
+
+
+### F-Statistic for Bear Weights by Season
+
+```{r}
+Bears_A_Season <- aov(data=Bears_Subset, Weight~Season)
+summary(Bears_A_Season)
+```
+
+### Hypotheses for Bears Seasons F-Test
+
+Null Hypothesis: Among all bears of this type, mean weight is the same in each season.   
+Alternative Hypothesis: Among all bears of this type, mean weight  differs between at least two of the seasons.   
+
+
+**Key Question:** What is the probability of observing an F-statistic as extreme as 0.976 if there is really no relationship between weight and season?
+
+
+### Simulation-Based Test for Bears F-Statistic
+
+We'll simulate situations where there is no relationship between size and price, and see how often we observe an F-statistic as extreme as 0.976. 
+
+**Procedure:**
+
+1. Randomly shuffle the seasons, so that any relationship between weight and season is due only to chance.  
+
+2. Fit a model, using the shuffled data, with weight as the response variable, and season as the explanatory variable. Record the F-statistic.   
+
+3. Repeat steps 1 and 2 many (say 10,000) times, recording the F-statistic each time.   
+
+4. Analyze the distribution of F-statistics, simulated under the assumption that there is no relationship between season and weight Look whether the actual F-statistic we observed is consistent with the simulation results.    
+
+### Bears F-Statistic Simulation
+
+```{r}
+Fstat <- summary(Bears_M_Season)$fstatistic[1] ## record value of F-statistic from actual data
+
+## perform simulation
+FSim <- rep(NA, 10000)          ## vector to hold results
+ShuffledBears <- Bears_Subset    ## create copy of dataset
+for (i in 1:10000){
+  #randomly shuffle acceleration times
+ShuffledBears$Season <- ShuffledBears$Season[sample(1:nrow(ShuffledBears))] 
+ShuffledBears_M<- lm(data=ShuffledBears, Weight ~ Season)   #fit model to shuffled data
+FSim[i] <- summary(ShuffledBears_M)$fstatistic[1]  ## record F from shuffled model
+}
+Bears_Seasons_SimulationResults <- data.frame(FSim)  #save results in dataframe
+```
+
+### F-statistic for Bears Season Simulation 
+
+```{r, echo=FALSE}
+Bears_Seasons_SimulationResultsPlot <- ggplot(data=Bears_Seasons_SimulationResults, aes(x=FSim)) + 
+  geom_histogram(fill="lightblue", color="white") + geom_vline(xintercept=c(Fstat), color="red") + 
+  xlab("Simulated Value of F") + ylab("Frequency") + 
+  ggtitle("Distribution of F under assumption of no relationship")
+Bears_Seasons_SimulationResultsPlot
+```
+
+```{r}
+mean(FSim > Fstat)
+```
+
+It is not at all unusual to observe an F-statistic as extreme or more extreme than we did if there is really no relationship between weight and season.    
+
+There is no evidence that average bear weights differ between seasons. 
+
+
+### Don't Accept Null Hypothesis
+
+* In the previous example, we concluded that there is no evidence that average bear weights differ between seasons.    
+
+
+* This is different than saying that bear weights are the same in each season. Why would it be inappropriate to say this?     
+
+### Comparison of Weights by Season
+
+```{r, echo=TRUE}
+Bears_Season_Table <- Bears_Subset %>% group_by(Season) %>% summarize(MeanWeight = mean(Weight),
+                                         StDevWeight = sd(Weight),
+                                         N=n())
+kable(Bears_Season_Table)
+```
+
+
+### Don't Accept Null Hypothesis (Cont.)
+
+
+The data do show differences in average weight between seasons. It's just that we can't rule out the possibility that these differences are due to chance alone.   
+
+* A hypothesis test can only tell us the strength of evidence against the null hypothesis. The absence of evidence against the null hypothesis should not be interpreted as evidence for the null hypothesis.  
+
+* We should never say that the data support/prove/confirm the null hypothesis. 
+
+* We can only say that the data do not provide evidence against the null hypothesis.     
+
+

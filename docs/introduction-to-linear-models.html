@@ -1,0 +1,2186 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Introduction to Linear Models | Stat 255: Statistics for Data Science Notes</title>
+  <meta name="description" content="Chapter 2 Introduction to Linear Models | Stat 255: Statistics for Data Science Notes" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Introduction to Linear Models | Stat 255: Statistics for Data Science Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Introduction to Linear Models | Stat 255: Statistics for Data Science Notes" />
+  
+  
+  
+
+<meta name="author" content="Andrew Sage - Lawrence University" />
+
+
+<meta name="date" content="2022-08-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="exploratory-data-analysis.html"/>
+<link rel="next" href="a-caucus-race-and-a-long-tale.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">STAT 255 Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Exploratory Data Analysis</a><ul>
+<li class="chapter" data-level="1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exploring-diamond-prices"><i class="fa fa-check"></i><b>1.1</b> Exploring Diamond Prices</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-data"><i class="fa fa-check"></i><b>1.1.1</b> The Data</a></li>
+<li class="chapter" data-level="1.1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#observations-and-variables"><i class="fa fa-check"></i><b>1.1.2</b> Observations and Variables</a></li>
+<li class="chapter" data-level="1.1.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exploring-the-data"><i class="fa fa-check"></i><b>1.1.3</b> Exploring the Data</a></li>
+<li class="chapter" data-level="1.1.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#boxplot-of-diamond-prices"><i class="fa fa-check"></i><b>1.1.4</b> Boxplot of Diamond Prices</a></li>
+<li class="chapter" data-level="1.1.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#histogram-of-carat-size-and-quality-of-cut"><i class="fa fa-check"></i><b>1.1.5</b> Histogram of carat size and quality of cut</a></li>
+<li class="chapter" data-level="1.1.6" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#average-carat-size-and-price-by-quality-of-cut"><i class="fa fa-check"></i><b>1.1.6</b> Average carat size and price by quality of cut</a></li>
+<li class="chapter" data-level="1.1.7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#scatterplot-of-carat-size-and-quality-of-cut"><i class="fa fa-check"></i><b>1.1.7</b> Scatterplot of carat size and quality of cut</a></li>
+<li class="chapter" data-level="1.1.8" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#thought-questions"><i class="fa fa-check"></i><b>1.1.8</b> Thought Questions</a></li>
+<li class="chapter" data-level="1.1.9" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#terminology"><i class="fa fa-check"></i><b>1.1.9</b> Terminology</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#working-with-data-in-r"><i class="fa fa-check"></i><b>1.2</b> Working With Data in R</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#loading-the-data"><i class="fa fa-check"></i><b>1.2.1</b> Loading the Data</a></li>
+<li class="chapter" data-level="1.2.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#previewing-the-data"><i class="fa fa-check"></i><b>1.2.2</b> Previewing the Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#adding-a-new-variable"><i class="fa fa-check"></i><b>1.2.3</b> Adding a New Variable</a></li>
+<li class="chapter" data-level="1.2.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#selecting-columns"><i class="fa fa-check"></i><b>1.2.4</b> Selecting Columns</a></li>
+<li class="chapter" data-level="1.2.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#filtering-by-row"><i class="fa fa-check"></i><b>1.2.5</b> Filtering by Row</a></li>
+<li class="chapter" data-level="1.2.6" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#histogram"><i class="fa fa-check"></i><b>1.2.6</b> Histogram</a></li>
+<li class="chapter" data-level="1.2.7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#density-plots"><i class="fa fa-check"></i><b>1.2.7</b> Density Plots</a></li>
+<li class="chapter" data-level="1.2.8" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#boxplot"><i class="fa fa-check"></i><b>1.2.8</b> Boxplot</a></li>
+<li class="chapter" data-level="1.2.9" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#violin-plot"><i class="fa fa-check"></i><b>1.2.9</b> Violin Plot</a></li>
+<li class="chapter" data-level="1.2.10" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#scatterplots"><i class="fa fa-check"></i><b>1.2.10</b> Scatterplots</a></li>
+<li class="chapter" data-level="1.2.11" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#bar-graphs"><i class="fa fa-check"></i><b>1.2.11</b> Bar Graphs</a></li>
+<li class="chapter" data-level="1.2.12" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#stacked-and-side-by-side-bar-graphs"><i class="fa fa-check"></i><b>1.2.12</b> Stacked and Side-by-Side Bar Graphs</a></li>
+<li class="chapter" data-level="1.2.13" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#correlation-plot"><i class="fa fa-check"></i><b>1.2.13</b> Correlation Plot</a></li>
+<li class="chapter" data-level="1.2.14" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#scatterplot-matrix"><i class="fa fa-check"></i><b>1.2.14</b> Scatterplot Matrix</a></li>
+<li class="chapter" data-level="1.2.15" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#summary-tables"><i class="fa fa-check"></i><b>1.2.15</b> Summary Tables</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html"><i class="fa fa-check"></i><b>2</b> Introduction to Linear Models</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#predicting-house-prices"><i class="fa fa-check"></i><b>2.1</b> Predicting House Prices</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#house-prices-in-ames-ia"><i class="fa fa-check"></i><b>2.1.1</b> House Prices in Ames IA</a></li>
+<li class="chapter" data-level="2.1.2" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#prices-by-neighborhood"><i class="fa fa-check"></i><b>2.1.2</b> Prices by Neighborhood</a></li>
+<li class="chapter" data-level="2.1.3" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#house-prices-by-size"><i class="fa fa-check"></i><b>2.1.3</b> House Prices by Size</a></li>
+<li class="chapter" data-level="2.1.4" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#explanatory-and-response-variables"><i class="fa fa-check"></i><b>2.1.4</b> Explanatory and Response Variables</a></li>
+<li class="chapter" data-level="2.1.5" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#prediction-with-no-explanatory-variables"><i class="fa fa-check"></i><b>2.1.5</b> Prediction with No Explanatory Variables</a></li>
+<li class="chapter" data-level="2.1.6" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#simple-model-in-r"><i class="fa fa-check"></i><b>2.1.6</b> Simple Model in R</a></li>
+<li class="chapter" data-level="2.1.7" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#prediction-for-a-categorical-explanatory-variable"><i class="fa fa-check"></i><b>2.1.7</b> Prediction for a Categorical Explanatory Variable</a></li>
+<li class="chapter" data-level="2.1.8" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#model-by-neighborhood-in-r"><i class="fa fa-check"></i><b>2.1.8</b> Model by Neighborhood in R</a></li>
+<li class="chapter" data-level="2.1.9" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#model-notation-for-houses-by-neighborhood"><i class="fa fa-check"></i><b>2.1.9</b> Model Notation for Houses by Neighborhood</a></li>
+<li class="chapter" data-level="2.1.10" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#prediction-for-quantitative-explanatory-variable"><i class="fa fa-check"></i><b>2.1.10</b> Prediction for Quantitative Explanatory Variable</a></li>
+<li class="chapter" data-level="2.1.11" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#model-using-square-feet"><i class="fa fa-check"></i><b>2.1.11</b> Model using Square Feet</a></li>
+<li class="chapter" data-level="2.1.12" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#model-for-squarefeet-and-interpretations"><i class="fa fa-check"></i><b>2.1.12</b> Model for SquareFeet and Interpretations</a></li>
+<li class="chapter" data-level="2.1.13" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#calculating-predicted-prices"><i class="fa fa-check"></i><b>2.1.13</b> Calculating Predicted Prices</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#variability-explained-by-a-model"><i class="fa fa-check"></i><b>2.2</b> Variability Explained by a Model</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#quantifying-variability"><i class="fa fa-check"></i><b>2.2.1</b> Quantifying Variability</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#residuals-for-three-models"><i class="fa fa-check"></i><b>2.2.2</b> Residuals for Three Models</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#quantifying-unexplained-variablility"><i class="fa fa-check"></i><b>2.2.3</b> Quantifying Unexplained Variablility</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#total-sum-of-squares-sst"><i class="fa fa-check"></i><b>2.2.4</b> Total Sum of Squares (SST)</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#ssr-and-ssm"><i class="fa fa-check"></i><b>2.2.5</b> SSR and SSM</a></li>
+<li class="chapter" data-level="2.2.6" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#summary-sst-ssr-ssm-r2"><i class="fa fa-check"></i><b>2.2.6</b> Summary: SST, SSR, SSM, <span class="math inline">\(R^2\)</span></a></li>
+<li class="chapter" data-level="2.2.7" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#r2-visually"><i class="fa fa-check"></i><b>2.2.7</b> <span class="math inline">\(R^2\)</span> Visually</a></li>
+<li class="chapter" data-level="2.2.8" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#residuals-for-square-feet-model"><i class="fa fa-check"></i><b>2.2.8</b> Residuals for Square Feet Model</a></li>
+<li class="chapter" data-level="2.2.9" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#variation-explained-by-squarefeet-model"><i class="fa fa-check"></i><b>2.2.9</b> Variation Explained by SquareFeet Model</a></li>
+<li class="chapter" data-level="2.2.10" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#variation-explained-by-square-feet-model"><i class="fa fa-check"></i><b>2.2.10</b> Variation Explained by Square Feet Model</a></li>
+<li class="chapter" data-level="2.2.11" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#linear-correlation-coefficient"><i class="fa fa-check"></i><b>2.2.11</b> Linear Correlation Coefficient</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#multiple-regression-model"><i class="fa fa-check"></i><b>2.3</b> Multiple Regression Model</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#multiple-regression-model-1"><i class="fa fa-check"></i><b>2.3.1</b> Multiple Regression Model</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#variable-model-different-slopes"><i class="fa fa-check"></i><b>2.3.2</b> 2-Variable Model Different Slopes</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#variable-model-with-constant-slope"><i class="fa fa-check"></i><b>2.3.3</b> 2-Variable Model with Constant Slope</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#mr-model-for-squarefeet-and-neighborhood"><i class="fa fa-check"></i><b>2.3.4</b> MR Model for SquareFeet and Neighborhood</a></li>
+<li class="chapter" data-level="2.3.5" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#predicting-price-in-mr-model"><i class="fa fa-check"></i><b>2.3.5</b> Predicting Price in MR Model</a></li>
+<li class="chapter" data-level="2.3.6" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#risk-of-extrapolation"><i class="fa fa-check"></i><b>2.3.6</b> Risk of Extrapolation</a></li>
+<li class="chapter" data-level="2.3.7" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#residuals-for-2-variable-model"><i class="fa fa-check"></i><b>2.3.7</b> Residuals for 2-Variable Model</a></li>
+<li class="chapter" data-level="2.3.8" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#residuals-for-2-variable-model-cont."><i class="fa fa-check"></i><b>2.3.8</b> Residuals for 2-Variable Model (cont.)</a></li>
+<li class="chapter" data-level="2.3.9" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#variation-explained-by-2-variable-model"><i class="fa fa-check"></i><b>2.3.9</b> Variation Explained by 2-Variable Model</a></li>
+<li class="chapter" data-level="2.3.10" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#model-comparison-summary"><i class="fa fa-check"></i><b>2.3.10</b> Model Comparison Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#least-squares-estimation"><i class="fa fa-check"></i><b>2.4</b> Least-Squares Estimation</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#line-of-best-fit"><i class="fa fa-check"></i><b>2.4.1</b> Line of Best Fit</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#least-squares-estimation-in-simple-linear-regression"><i class="fa fa-check"></i><b>2.4.2</b> Least-Squares Estimation in Simple Linear Regression</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#least-squares-estimation-in-simple-linear-regression-cont."><i class="fa fa-check"></i><b>2.4.3</b> Least-Squares Estimation in Simple Linear Regression (cont.)</a></li>
+<li class="chapter" data-level="2.4.4" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#ls-estimation-for-one-categorical-variable"><i class="fa fa-check"></i><b>2.4.4</b> LS Estimation for One Categorical Variable</a></li>
+<li class="chapter" data-level="2.4.5" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#ls-estimation-more-generally"><i class="fa fa-check"></i><b>2.4.5</b> LS Estimation More Generally</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>2.5</b> ANalysis Of VAriance</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#submodels"><i class="fa fa-check"></i><b>2.5.1</b> Submodels</a></li>
+<li class="chapter" data-level="2.5.2" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#comparing-submodels"><i class="fa fa-check"></i><b>2.5.2</b> Comparing Submodels</a></li>
+<li class="chapter" data-level="2.5.3" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#comments-on-f-statistic"><i class="fa fa-check"></i><b>2.5.3</b> Comments on F-Statistic</a></li>
+<li class="chapter" data-level="2.5.4" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#anova-f-statistic"><i class="fa fa-check"></i><b>2.5.4</b> ANOVA F-Statistic</a></li>
+<li class="chapter" data-level="2.5.5" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#anova-f-statistic-for-m2-vs-m3-in-r"><i class="fa fa-check"></i><b>2.5.5</b> ANOVA F-Statistic for M2 vs M3 in R</a></li>
+<li class="chapter" data-level="2.5.6" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#anova-f-statistic-for-m1-vs-m0"><i class="fa fa-check"></i><b>2.5.6</b> ANOVA F-Statistic for M1 vs M0</a></li>
+<li class="chapter" data-level="2.5.7" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#anova-f-statistic-for-m0-vs-m1-in-r"><i class="fa fa-check"></i><b>2.5.7</b> ANOVA F-Statistic for M0 vs M1 in R</a></li>
+<li class="chapter" data-level="2.5.8" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#anova-f-statistic-for-categorical-variables"><i class="fa fa-check"></i><b>2.5.8</b> ANOVA F-Statistic for Categorical Variables</a></li>
+<li class="chapter" data-level="2.5.9" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#f-statistic-for-categorical-variables-illustration"><i class="fa fa-check"></i><b>2.5.9</b> F-Statistic for Categorical Variables Illustration</a></li>
+<li class="chapter" data-level="2.5.10" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#alternative-f-statistic-formula"><i class="fa fa-check"></i><b>2.5.10</b> Alternative F-Statistic Formula</a></li>
+<li class="chapter" data-level="2.5.11" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#calculating-f-statistic-for-categorical-variables"><i class="fa fa-check"></i><b>2.5.11</b> Calculating F-Statistic for Categorical Variables</a></li>
+<li class="chapter" data-level="2.5.12" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#calculating-f-statistic-for-categorical-variables-1"><i class="fa fa-check"></i><b>2.5.12</b> Calculating F-Statistic for Categorical Variables</a></li>
+<li class="chapter" data-level="2.5.13" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#alternative-calculation-in-r"><i class="fa fa-check"></i><b>2.5.13</b> Alternative Calculation in R</a></li>
+<li class="chapter" data-level="2.5.14" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#f-statistic-in-r-output"><i class="fa fa-check"></i><b>2.5.14</b> F-Statistic in R Output</a></li>
+<li class="chapter" data-level="2.5.15" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#f-statistic-in-r-output-m1"><i class="fa fa-check"></i><b>2.5.15</b> F-Statistic in R Output M1</a></li>
+<li class="chapter" data-level="2.5.16" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#f-statistic-in-r-output-m2"><i class="fa fa-check"></i><b>2.5.16</b> F-Statistic in R Output M2</a></li>
+<li class="chapter" data-level="2.5.17" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#f-statistic-in-r-output-m3"><i class="fa fa-check"></i><b>2.5.17</b> F-Statistic in R Output M3</a></li>
+<li class="chapter" data-level="2.5.18" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#when-to-use-f-statistics-for-model-comparison"><i class="fa fa-check"></i><b>2.5.18</b> When to Use F-Statistics for Model Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#models-involving-interaction"><i class="fa fa-check"></i><b>2.6</b> Models Involving Interaction</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#bear-weights-dataset"><i class="fa fa-check"></i><b>2.6.1</b> Bear Weights Dataset</a></li>
+<li class="chapter" data-level="2.6.2" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#exploring-bears-data"><i class="fa fa-check"></i><b>2.6.2</b> Exploring Bears Data</a></li>
+<li class="chapter" data-level="2.6.3" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#bears-data-cleaning"><i class="fa fa-check"></i><b>2.6.3</b> Bears Data Cleaning</a></li>
+<li class="chapter" data-level="2.6.4" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#bear-weights-and-ages"><i class="fa fa-check"></i><b>2.6.4</b> Bear Weights and Ages</a></li>
+<li class="chapter" data-level="2.6.5" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#two-possible-models"><i class="fa fa-check"></i><b>2.6.5</b> Two Possible Models</a></li>
+<li class="chapter" data-level="2.6.6" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#models-with-interaction"><i class="fa fa-check"></i><b>2.6.6</b> Models with Interaction</a></li>
+<li class="chapter" data-level="2.6.7" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#model-equations"><i class="fa fa-check"></i><b>2.6.7</b> Model Equations</a></li>
+<li class="chapter" data-level="2.6.8" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#expected-weight-equations"><i class="fa fa-check"></i><b>2.6.8</b> Expected Weight Equations</a></li>
+<li class="chapter" data-level="2.6.9" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#interpretations-of-interaction-model-coefficients"><i class="fa fa-check"></i><b>2.6.9</b> Interpretations of Interaction Model Coefficients</a></li>
+<li class="chapter" data-level="2.6.10" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#model-1-r-output"><i class="fa fa-check"></i><b>2.6.10</b> Model 1 R Output</a></li>
+<li class="chapter" data-level="2.6.11" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#model-2-r-output"><i class="fa fa-check"></i><b>2.6.11</b> Model 2 R Output</a></li>
+<li class="chapter" data-level="2.6.12" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#estimated-weight-equations"><i class="fa fa-check"></i><b>2.6.12</b> Estimated Weight Equations</a></li>
+<li class="chapter" data-level="2.6.13" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#bears-int.-model-interpretations"><i class="fa fa-check"></i><b>2.6.13</b> Bears Int. Model Interpretations</a></li>
+<li class="chapter" data-level="2.6.14" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#predicting-bear-weights"><i class="fa fa-check"></i><b>2.6.14</b> Predicting Bear Weights</a></li>
+<li class="chapter" data-level="2.6.15" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#predict-function-in-r"><i class="fa fa-check"></i><b>2.6.15</b> <code>predict</code> Function in R</a></li>
+<li class="chapter" data-level="2.6.16" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#bears-weight-model-considerations"><i class="fa fa-check"></i><b>2.6.16</b> Bears Weight Model Considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#more-on-interaction"><i class="fa fa-check"></i><b>2.7</b> More on Interaction</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#two-categorical-variables"><i class="fa fa-check"></i><b>2.7.1</b> Two Categorical Variables</a></li>
+<li class="chapter" data-level="2.7.2" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#bears-weight-by-season-and-sex"><i class="fa fa-check"></i><b>2.7.2</b> Bears Weight By Season and Sex</a></li>
+<li class="chapter" data-level="2.7.3" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#two-models"><i class="fa fa-check"></i><b>2.7.3</b> Two Models</a></li>
+<li class="chapter" data-level="2.7.4" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#model-equations-1"><i class="fa fa-check"></i><b>2.7.4</b> Model Equations</a></li>
+<li class="chapter" data-level="2.7.5" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#bears-season-and-sex-interaction-model"><i class="fa fa-check"></i><b>2.7.5</b> Bears Season and Sex Interaction Model</a></li>
+<li class="chapter" data-level="2.7.6" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#predictions-for-season-and-sex-interaction-model"><i class="fa fa-check"></i><b>2.7.6</b> Predictions for Season and Sex Interaction Model</a></li>
+<li class="chapter" data-level="2.7.7" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#season-and-sex-interaction-model-interpretations"><i class="fa fa-check"></i><b>2.7.7</b> Season and Sex Interaction Model Interpretations</a></li>
+<li class="chapter" data-level="2.7.8" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#interpretations-for-season-and-sex-interaction-model"><i class="fa fa-check"></i><b>2.7.8</b> Interpretations for Season and Sex Interaction Model</a></li>
+<li class="chapter" data-level="2.7.9" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#predicting-new-observations-in-r"><i class="fa fa-check"></i><b>2.7.9</b> Predicting New Observations in R</a></li>
+<li class="chapter" data-level="2.7.10" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#interaction-between-two-quantitative-variables"><i class="fa fa-check"></i><b>2.7.10</b> Interaction Between Two Quantitative Variables</a></li>
+<li class="chapter" data-level="2.7.11" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#models-for-age-and-length"><i class="fa fa-check"></i><b>2.7.11</b> Models for Age and Length</a></li>
+<li class="chapter" data-level="2.7.12" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#model-equations-2"><i class="fa fa-check"></i><b>2.7.12</b> Model Equations</a></li>
+<li class="chapter" data-level="2.7.13" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#and-24-month-old-bears"><i class="fa fa-check"></i><b>2.7.13</b> 6 and 24 Month Old Bears</a></li>
+<li class="chapter" data-level="2.7.14" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#interaction-model-in-r"><i class="fa fa-check"></i><b>2.7.14</b> Interaction Model in R</a></li>
+<li class="chapter" data-level="2.7.15" data-path="introduction-to-linear-models.html"><a href="introduction-to-linear-models.html#interaction-vs-correlation"><i class="fa fa-check"></i><b>2.7.15</b> Interaction vs Correlation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="a-caucus-race-and-a-long-tale.html"><a href="a-caucus-race-and-a-long-tale.html"><i class="fa fa-check"></i><b>3</b> A caucus-race and a long tale</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Stat 255: Statistics for Data Science Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction-to-linear-models" class="section level1 hasAnchor">
+<h1><span class="header-section-number">Chapter 2</span> Introduction to Linear Models<a href="introduction-to-linear-models.html#introduction-to-linear-models" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="predicting-house-prices" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.1</span> Predicting House Prices<a href="introduction-to-linear-models.html#predicting-house-prices" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="house-prices-in-ames-ia" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.1</span> House Prices in Ames IA<a href="introduction-to-linear-models.html#house-prices-in-ames-ia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Shown below are the prices of 10 houses sold in Ames, IA between 2006 and 2010.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="introduction-to-linear-models.html#cb53-1"></a>Houses<span class="op">$</span>SalePrice</span></code></pre></div>
+<pre><code>##  [1] 187.00 163.99 235.00 113.00 110.00  84.90 123.00 176.50 150.00 137.00</code></pre>
+<p><strong>Question:</strong> Suppose we know that a particular house sold in Ames during this time period, but know nothing else about the house. Based on this estimation, how might we predict the price of the house? How confident are you in this prediction?</p>
+</div>
+<div id="prices-by-neighborhood" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.2</span> Prices by Neighborhood<a href="introduction-to-linear-models.html#prices-by-neighborhood" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Now, suppose that the houses are in one of three neighborhoods (College Creek, Edwards, North Ames). Prices of the houses in each neighborhood are shown below.</li>
+</ul>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="introduction-to-linear-models.html#cb55-1"></a><span class="kw">kable</span>(Houses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Neighborhood, SalePrice))</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Neighborhood</th>
+<th align="right">SalePrice</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">CollgCr</td>
+<td align="right">187.00</td>
+</tr>
+<tr class="even">
+<td align="left">CollgCr</td>
+<td align="right">163.99</td>
+</tr>
+<tr class="odd">
+<td align="left">CollgCr</td>
+<td align="right">235.00</td>
+</tr>
+<tr class="even">
+<td align="left">Edwards</td>
+<td align="right">113.00</td>
+</tr>
+<tr class="odd">
+<td align="left">Edwards</td>
+<td align="right">110.00</td>
+</tr>
+<tr class="even">
+<td align="left">Edwards</td>
+<td align="right">84.90</td>
+</tr>
+<tr class="odd">
+<td align="left">NAmes</td>
+<td align="right">123.00</td>
+</tr>
+<tr class="even">
+<td align="left">NAmes</td>
+<td align="right">176.50</td>
+</tr>
+<tr class="odd">
+<td align="left">NAmes</td>
+<td align="right">150.00</td>
+</tr>
+<tr class="even">
+<td align="left">NAmes</td>
+<td align="right">137.00</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Question:</strong> Suppose we know that a house sold in the College Creek neighborhood. How might we predict the price of the house? How confident are you in this prediction?</p>
+</div>
+<div id="house-prices-by-size" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.3</span> House Prices by Size<a href="introduction-to-linear-models.html#house-prices-by-size" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The scatterplot shows the relationship between the size of a house in square feet, and its saleprice.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="introduction-to-linear-models.html#cb56-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span>SquareFeet, <span class="dt">y=</span>SalePrice)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() </span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-49-1.png" width="576" /></p>
+<p><strong>Question:</strong> Suppose we know that another house, not in the original data, had 1200 square feet. How might we predict the saleprice of the house? How confident are you in this prediction?</p>
+</div>
+<div id="explanatory-and-response-variables" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.4</span> Explanatory and Response Variables<a href="introduction-to-linear-models.html#explanatory-and-response-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now, suppose we want to use information about the house’s neighborhood in our predictions.</p>
+<p>We’ll predict a price of a house to be the average price among houses in the neightborhood.</p>
+<ul>
+<li><p>The variable we are trying to predict (price) is called the <strong>response variable</strong> (denoted <span class="math inline">\(Y\)</span>).</p></li>
+<li><p>The variable(s) we use to help us make the prediction (neighborhood) is(are) called <strong>explanatory variables</strong> (denoted <span class="math inline">\(X\)</span>). These are also referred to as <strong>predictor variables</strong> or <strong>covariates</strong>.</p></li>
+</ul>
+</div>
+<div id="prediction-with-no-explanatory-variables" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.5</span> Prediction with No Explanatory Variables<a href="introduction-to-linear-models.html#prediction-with-no-explanatory-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If we have the prices of <span class="math inline">\(n\)</span> houses, <span class="math inline">\(y_i, y_2, \ldots, y_n\)</span>, and want to predict the price of a new house, without information about any explanatory variables the ``statistically optimal" prediction is the overall average price of all houses in the dataset.</p>
+<p><span class="math display">\[
+\widehat{\text{Price}} = \bar{y},  \text{where } \bar{y}=\frac{\displaystyle\sum_{i=1}^ny_i}{n}\]</span>.</p>
+<ul>
+<li>The symbol <span class="math inline">\(\widehat{\text{Price}}\)</span>, represents the predicted, or expected, price.</li>
+</ul>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="introduction-to-linear-models.html#cb57-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span><span class="dv">1</span>, <span class="dt">y=</span>SalePrice)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Price in thousands&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb57-2"><a href="introduction-to-linear-models.html#cb57-2"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)<span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb57-3"><a href="introduction-to-linear-models.html#cb57-3"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="kw">aes</span>(<span class="dt">ymax =</span> ..y.., <span class="dt">ymin =</span> ..y..), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb57-4"><a href="introduction-to-linear-models.html#cb57-4"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">y=</span><span class="dv">145</span>, <span class="dt">x=</span><span class="fl">1.25</span>, <span class="dt">label=</span><span class="st">&quot;sample mean&quot;</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;All 10 Houses&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-50-1.png" width="1152" /></p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="introduction-to-linear-models.html#cb58-1"></a><span class="kw">mean</span>(Houses<span class="op">$</span>SalePrice)</span></code></pre></div>
+<pre><code>## [1] 148.039</code></pre>
+<p>Without information about any explanatory variables, we would predict the price of a house sold in Ames, IA during this time to be about 148 thousand dollars.</p>
+</div>
+<div id="simple-model-in-r" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.6</span> Simple Model in R<a href="introduction-to-linear-models.html#simple-model-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="introduction-to-linear-models.html#cb60-1"></a>M0 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Houses, SalePrice<span class="op">~</span><span class="dv">1</span>)</span>
+<span id="cb60-2"><a href="introduction-to-linear-models.html#cb60-2"></a><span class="kw">summary</span>(M0)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = SalePrice ~ 1, data = Houses)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -63.139 -32.539  -4.539  25.334  86.961 
+## 
+## Coefficients:
+##             Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept)   148.04      13.97    10.6 0.0000022 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 44.17 on 9 degrees of freedom</code></pre>
+<p>Without information about any explanatory variables, we would predict the price of a house sold in Ames, IA during this time to be about 148 thousand dollars.</p>
+</div>
+<div id="prediction-for-a-categorical-explanatory-variable" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.7</span> Prediction for a Categorical Explanatory Variable<a href="introduction-to-linear-models.html#prediction-for-a-categorical-explanatory-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When we have a categorical explanatory variable (e.g. neighborhood), the “statistically optimal” prediction is the average response among all observations in the given category.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="introduction-to-linear-models.html#cb62-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span>Neighborhood, <span class="dt">y=</span>SalePrice)) <span class="op">+</span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb62-2"><a href="introduction-to-linear-models.html#cb62-2"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="kw">aes</span>(<span class="dt">ymax =</span> ..y.., <span class="dt">ymin =</span> ..y..),</span>
+<span id="cb62-3"><a href="introduction-to-linear-models.html#cb62-3"></a>                 <span class="dt">width =</span> <span class="fl">0.75</span>, <span class="dt">linetype =</span> <span class="st">&quot;solid&quot;</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Houses by Neighborhood&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-53-1.png" width="1152" /></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Neighborhood</th>
+<th align="right">AveragePrice</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">CollgCr</td>
+<td align="right">195.3300</td>
+</tr>
+<tr class="even">
+<td align="left">Edwards</td>
+<td align="right">102.6333</td>
+</tr>
+<tr class="odd">
+<td align="left">NAmes</td>
+<td align="right">146.6250</td>
+</tr>
+</tbody>
+</table>
+<p>We predict the price of a house in College Creek to be 195.33 thousand dollars, compared with 102.63 thousand dollars in Edwards, and 146.62 thousand dollars in Edwards.</p>
+</div>
+<div id="model-by-neighborhood-in-r" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.8</span> Model by Neighborhood in R<a href="introduction-to-linear-models.html#model-by-neighborhood-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="introduction-to-linear-models.html#cb63-1"></a>M_Nbhd &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Houses, SalePrice <span class="op">~</span><span class="st"> </span>Neighborhood)</span>
+<span id="cb63-2"><a href="introduction-to-linear-models.html#cb63-2"></a><span class="kw">summary</span>(M_Nbhd)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = SalePrice ~ Neighborhood, data = Houses)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -31.340 -15.706  -2.477   9.617  39.670 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value   Pr(&gt;|t|)    
+## (Intercept)           195.33      14.89  13.118 0.00000349 ***
+## NeighborhoodEdwards   -92.70      21.06  -4.402    0.00315 ** 
+## NeighborhoodNAmes     -48.70      19.70  -2.473    0.04267 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 25.79 on 7 degrees of freedom
+## Multiple R-squared:  0.7348, Adjusted R-squared:  0.6591 
+## F-statistic: 9.699 on 2 and 7 DF,  p-value: 0.009603</code></pre>
+<ul>
+<li>For categorical explanatory variables, R treats the category that comes first alphabetically (in this case CCreek), as a baseline. The intercept gives the prediction for this category.
+<ul>
+<li>We would expect a house in College Creek to cost 195.33 thousand dollars.</li>
+</ul></li>
+<li>Each of the other rows in the coefficients table represent the difference between the expected response (price) for that category (neighborhood), compared to the baseline.
+<ul>
+<li>We would expect a house in Edwards to cost 92.70 thousand less than a house in College Creek. (hence costing 102.63 thousand)<br />
+</li>
+<li>We would expect a house in North Ames to cost 48.71 thousand less than a house in College Creek. (hence costing 146.62 thousand)</li>
+</ul></li>
+</ul>
+</div>
+<div id="model-notation-for-houses-by-neighborhood" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.9</span> Model Notation for Houses by Neighborhood<a href="introduction-to-linear-models.html#model-notation-for-houses-by-neighborhood" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The model can be expressed in the form:</p>
+<p><span class="math inline">\(\widehat{\text{Price}}= b_0+ b_1 \times\text{I}_{\text{Edwards}} +b_2 \times\text{I}_{\text{NAmes}}\)</span></p>
+<p><span class="math inline">\(\widehat{\text{Price}}= 195.33+ -92.7 \times\text{I}_{\text{Edwards}} +-48.7 \times\text{I}_{\text{NAmes}}\)</span>, where</p>
+<p> represents an indicator variables, taking on values 0 or 1.<br />
+- Example: <span class="math display">\[ \text{I}_{\text{Edwards}} =\begin{cases} 
+      1 &amp; \text{if house is in Edwards Neighborhood} \\
+      0 &amp; \text{otherwise}
+       \end{cases}
+      \]</span></p>
+<p><strong>Predicted Prices:</strong></p>
+<p>College Creek: <span class="math inline">\(\widehat{\text{Price}}= 195.33+ -92.7 \times0 +-48.7 \times0 = 195.33\)</span> thousand.</p>
+<p>Edwards: <span class="math inline">\(\widehat{\text{Price}}= 195.33+ -92.7 \times1 +-48.7 \times0 = 102.63\)</span> thousand.</p>
+<p>North Ames: <span class="math inline">\(\widehat{\text{Price}}= 195.33+ -92.7 \times0 +-48.7 \times1 = 146.62\)</span> thousand.</p>
+</div>
+<div id="prediction-for-quantitative-explanatory-variable" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.10</span> Prediction for Quantitative Explanatory Variable<a href="introduction-to-linear-models.html#prediction-for-quantitative-explanatory-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For a quantitative explanatory variable like square feet, the “statistically optimal” prediction is found by fitting a “line of best fit” to the data (more details to come.)</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="introduction-to-linear-models.html#cb65-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span>SquareFeet, <span class="dt">y=</span>SalePrice)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb65-2"><a href="introduction-to-linear-models.html#cb65-2"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-57-1.png" width="576" /></p>
+<ul>
+<li>For a house with 1200 square feet, predicted price is about $150 thousand.</li>
+</ul>
+</div>
+<div id="model-using-square-feet" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.11</span> Model using Square Feet<a href="introduction-to-linear-models.html#model-using-square-feet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="introduction-to-linear-models.html#cb66-1"></a>M_SqFt &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Houses, SalePrice<span class="op">~</span>SquareFeet) </span>
+<span id="cb66-2"><a href="introduction-to-linear-models.html#cb66-2"></a><span class="kw">summary</span>(M_SqFt)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = SalePrice ~ SquareFeet, data = Houses)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -39.235 -14.309   2.052  10.966  43.971 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)  6.82000   36.35455   0.188  0.85586   
+## SquareFeet   0.12079    0.03022   3.997  0.00397 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 27.06 on 8 degrees of freedom
+## Multiple R-squared:  0.6663, Adjusted R-squared:  0.6246 
+## F-statistic: 15.97 on 1 and 8 DF,  p-value: 0.003967</code></pre>
+</div>
+<div id="model-for-squarefeet-and-interpretations" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.12</span> Model for SquareFeet and Interpretations<a href="introduction-to-linear-models.html#model-for-squarefeet-and-interpretations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the model using both square feet and neighborhood, the regression equation is</p>
+<p><span class="math inline">\(\widehat{\text{Price}}= b_0+ b_1 \times\text{SquareFeet}\)</span></p>
+<p><span class="math inline">\(\widehat{\text{Price}}= 6.82+ 0.121 \times\text{SquareFeet}\)</span></p>
+<ul>
+<li><p><span class="math inline">\(\widehat{\text{Price}}\)</span> represents the expected, or predicted, price.</p></li>
+<li><p>The slope, <span class="math inline">\(b_1\)</span> represents the expected change in price (in thousands) per one-unit increase in square feet.</p>
+<ul>
+<li>The price of a house is expected to increase by 121 dollars for each additional square foot.</li>
+</ul></li>
+<li><p>The intercept, <span class="math inline">\(b_0\)</span> represents the expected price of a house with 0 square feet.<br />
+- In this situation, this is not a meaningful interpretation.</p></li>
+</ul>
+</div>
+<div id="calculating-predicted-prices" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.13</span> Calculating Predicted Prices<a href="introduction-to-linear-models.html#calculating-predicted-prices" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math inline">\(\widehat{\text{Price}}= 6.82+ 0.121 \times\text{SquareFeet}\)</span></p>
+<ul>
+<li>Predicted price for a house with 1200 square feet:</li>
+</ul>
+<p><span class="math inline">\(\widehat{\text{Price}}= 6.82+ 0.121 \times 1200 = 151.8\)</span> thousand dollars.</p>
+</div>
+</div>
+<div id="variability-explained-by-a-model" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.2</span> Variability Explained by a Model<a href="introduction-to-linear-models.html#variability-explained-by-a-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="quantifying-variability" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.1</span> Quantifying Variability<a href="introduction-to-linear-models.html#quantifying-variability" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We’ve seen the “statistically optimal” way to make predictions for data with categorical and quantitative explanatory variables, but we shouldn’t expect these predictions to be exact. We see that prices of individual houses vary from one another, even if they are in the same neighborhood or have the same size.</p>
+<p>We can get a sense of how much variability we should expect in our prediction by looking at how much the values in our dataset differ from the predicted (mean) price.</p>
+<ul>
+<li>The difference between the true and predicted values (<span class="math inline">\(y_i - \hat{y}_i\)</span>) is called the <span class="math inline">\(ith\)</span> <strong>residual</strong>.</li>
+</ul>
+</div>
+<div id="residuals-for-three-models" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.2</span> Residuals for Three Models<a href="introduction-to-linear-models.html#residuals-for-three-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Model with No Explanatory Variables</strong></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-60-1.png" width="768" />
+<strong>Model with Neighborhood as Explanatory Variable</strong></p>
+<p><img src="Cat_Resid.png" width="80%" /></p>
+<p><strong>Model with Square Feet as Explanatory Variable</strong></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-62-1.png" width="768" /></p>
+</div>
+<div id="quantifying-unexplained-variablility" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.3</span> Quantifying Unexplained Variablility<a href="introduction-to-linear-models.html#quantifying-unexplained-variablility" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The residuals tell us how much variability in the response variable (sale price) is left unexplained by a model.</p>
+<p>For a model with given explanatory variable(s), we can calculate the proportion of variability in the response variable explained by the model by comparing the size of the residuals to those of a model with no explanatory variables.<br />
+* <span class="math inline">\(\displaystyle\sum_{i=1}^n (y_i - \hat{y})=0\)</span>, so this is not a helpful measure, but we can instead use:</p>
+<p><span class="math display">\[
+\displaystyle\sum_{i=1}^n (y_i - \hat{y})^2
+\]</span></p>
+</div>
+<div id="total-sum-of-squares-sst" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.4</span> Total Sum of Squares (SST)<a href="introduction-to-linear-models.html#total-sum-of-squares-sst" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We call the sum of squared residuals for the model with no explanatory variables the total sum of squares, abbreviated SST.</p>
+<p><span class="math display">\[SST = \displaystyle\sum_{i=1}^n (y_i - \bar{y})^2
+\]</span></p>
+<pre><code>##    SquareFeet SalePrice Predicted Residual     ResidSq
+## 1        1499    187.00   148.039   38.961 1517.959521
+## 2        1456    163.99   148.039   15.951  254.434401
+## 3        1525    235.00   148.039   86.961 7562.215521
+## 4         672    113.00   148.039  -35.039 1227.731521
+## 5        1179    110.00   148.039  -38.039 1446.965521
+## 6         930     84.90   148.039  -63.139 3986.533321
+## 7         864    123.00   148.039  -25.039  626.951521
+## 8        1414    176.50   148.039   28.461  810.028521
+## 9        1144    150.00   148.039    1.961    3.845521
+## 10       1008    137.00   148.039  -11.039  121.859521</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="introduction-to-linear-models.html#cb69-1"></a><span class="kw">sum</span>(Houses<span class="op">$</span>SalePrice <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(Houses<span class="op">$</span>SalePrice))</span></code></pre></div>
+<pre><code>## [1] 0.0000000000001421085</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="introduction-to-linear-models.html#cb71-1"></a><span class="kw">sum</span>((Houses<span class="op">$</span>SalePrice <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(Houses<span class="op">$</span>SalePrice))<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 17558.52</code></pre>
+<p><img src="SST.png" width="80%" /></p>
+<p>SST represents the total amount of variability in sale price (without accounting for any explanatory variables).</p>
+</div>
+<div id="ssr-and-ssm" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.5</span> SSR and SSM<a href="introduction-to-linear-models.html#ssr-and-ssm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When we fit a model with an explanatory variable (such as neighborhood), we can see how much the sum of squared residuals decreases, based on information introduced by that explanatory variable.</p>
+<pre><code>##    Neighborhood SalePrice Predicted   Residual    ResidSq
+## 1       CollgCr    187.00  195.3300  -8.330000   69.38890
+## 2       CollgCr    163.99  195.3300 -31.340000  982.19560
+## 3       CollgCr    235.00  195.3300  39.670000 1573.70890
+## 4       Edwards    113.00  102.6333  10.366667  107.46778
+## 5       Edwards    110.00  102.6333   7.366667   54.26778
+## 6       Edwards     84.90  102.6333 -17.733333  314.47111
+## 7         NAmes    123.00  146.6250 -23.625000  558.14062
+## 8         NAmes    176.50  146.6250  29.875000  892.51562
+## 9         NAmes    150.00  146.6250   3.375000   11.39063
+## 10        NAmes    137.00  146.6250  -9.625000   92.64062</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="introduction-to-linear-models.html#cb74-1"></a><span class="kw">sum</span>(M_Nbhd<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 4656.188</code></pre>
+<ul>
+<li>the variability in sale price remaining unexplained even after accounting for neighborhood is given by the sum of squared residuals. We abbreviate this SSR, for sum of squared residuals.</li>
+</ul>
+<p><span class="math display">\[
+\text{SSR} = \text{Variability Remaining}=\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2
+\]</span></p>
+<ul>
+<li><p>the difference, <span class="math inline">\(\text{SST} - \text{SSR} = 17558.52 - 4656.188 = 12902.33\)</span> tells us how much variability in sale price is explained by the model using neighborhood as an explanatory variable. We call this quantity the <strong>sum of squares explained by the model</strong>, abbreviated SSM.</p></li>
+<li><p>The proportion of variability in sale price explained by the model using neighborhoods as an explanatory variable is</p></li>
+</ul>
+<p><span class="math display">\[\frac{SSM}{SST}=\frac{12902.33}{17558.52} = 0.7348
+\]</span></p>
+<ul>
+<li>73.5% of the variation in house price is explained by the model using neighborhood as an explanatory variable.</li>
+</ul>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+<p>The proportion of variability in the response variable explained by a model with given explanatory variables is called <strong>the coefficient of determination</strong>, and is given the symbol <span class="math inline">\(R^2\)</span>.</p>
+<ul>
+<li>Our value matches the value of “Multiple R-squared” in the 2nd last line of the R model summary.</li>
+</ul>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="introduction-to-linear-models.html#cb76-1"></a><span class="kw">summary</span>(M_Nbhd)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = SalePrice ~ Neighborhood, data = Houses)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -31.340 -15.706  -2.477   9.617  39.670 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value   Pr(&gt;|t|)    
+## (Intercept)           195.33      14.89  13.118 0.00000349 ***
+## NeighborhoodEdwards   -92.70      21.06  -4.402    0.00315 ** 
+## NeighborhoodNAmes     -48.70      19.70  -2.473    0.04267 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 25.79 on 7 degrees of freedom
+## Multiple R-squared:  0.7348, Adjusted R-squared:  0.6591 
+## F-statistic: 9.699 on 2 and 7 DF,  p-value: 0.009603</code></pre>
+</div>
+<div id="summary-sst-ssr-ssm-r2" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.6</span> Summary: SST, SSR, SSM, <span class="math inline">\(R^2\)</span><a href="introduction-to-linear-models.html#summary-sst-ssr-ssm-r2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>the total variability in house prices is the sum of the squared differences between price and average price.</li>
+</ul>
+<p><span class="math display">\[\text{Total Variability in Price}= \text{SST} =\displaystyle\sum_{i=1}^n(y_i-\bar{y})^2\]</span></p>
+<ul>
+<li>the variability remaining unexplained even after accounting for neighborhood is given by the sum of squared residuals. We abbreviate this SSR, for sum of squared residuals.</li>
+</ul>
+<p><span class="math display">\[
+\text{SSR} = \text{Variability Remaining}=\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2
+\]</span></p>
+<ul>
+<li>the variability explained by the model, abbreviated SSM, is given by</li>
+</ul>
+<p><span class="math display">\[ \text{SSM} = \text{SST} - \text{SSR} \]</span></p>
+<p>It can be shown that <span class="math inline">\(\text{SSM}=\displaystyle\sum_{i=1}^n(\hat{y}_i-\bar{y})^2\)</span>. These abbreviations here vary across texts. Be careful!</p>
+<ul>
+<li>The coefficient of determination (abbreviated <span class="math inline">\(R^2\)</span>) is defined as</li>
+</ul>
+<p><span class="math display">\[R^2=\frac{\text{Variability Explained by Model}}{\text{Total Variability}}=\frac{\text{SSM}}{\text{SST}} =\frac{\displaystyle\sum_{i=1}^n(\hat{y}_i-\bar{y})^2}{\displaystyle\sum_{i=1}^n(y_i-\bar{y})^2}\]</span></p>
+</div>
+<div id="r2-visually" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.7</span> <span class="math inline">\(R^2\)</span> Visually<a href="introduction-to-linear-models.html#r2-visually" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="Rsq2.png" width="100%" /></p>
+<ul>
+<li><p>Blue Area = Total Variability (SST)</p></li>
+<li><p>Red Area = Variability Remaining Unexplained by Model (SSR)</p></li>
+<li><p>Blue Area - Red Area = Variability Explained by Model (SSM)</p></li>
+<li><p><span class="math inline">\(R^2 = \frac{\text{Area of Blue Squares} - \text{Area of Red Squares}}{\text{Area of Blue Squares}} = \frac{\text{SST}-\text{SSR}}{\text{SST}}= \frac{\text{SSM}}{\text{SST}}\)</span></p></li>
+</ul>
+</div>
+<div id="residuals-for-square-feet-model" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.8</span> Residuals for Square Feet Model<a href="introduction-to-linear-models.html#residuals-for-square-feet-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-72-1.png" width="768" /></p>
+<pre><code>##    SquareFeet SalePrice Predicted    Residual      ResidSq
+## 1        1499    187.00 187.88858  -0.8885824    0.7895786
+## 2        1456    163.99 182.69449 -18.7044870  349.8578356
+## 3        1525    235.00 191.02920  43.9708019 1933.4314183
+## 4         672    113.00  87.99284  25.0071576  625.3579304
+## 5        1179    110.00 149.23485 -39.2348498 1539.3734427
+## 6         930     84.90 119.15741 -34.2574142 1173.5704309
+## 7         864    123.00 111.18508  11.8149181  139.5922893
+## 8        1414    176.50 177.62118  -1.1211847    1.2570550
+## 9        1144    150.00 145.00710   4.9929021   24.9290718
+## 10       1008    137.00 128.57926   8.4207385   70.9088361</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="introduction-to-linear-models.html#cb79-1"></a><span class="kw">sum</span>(M_SqFt<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 5859.068</code></pre>
+</div>
+<div id="variation-explained-by-squarefeet-model" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.9</span> Variation Explained by SquareFeet Model<a href="introduction-to-linear-models.html#variation-explained-by-squarefeet-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="Rsq.png" width="100%" /></p>
+<p>Created at <a href="http://www.rossmanchance.com/applets/RegShuffle.htm" class="uri">http://www.rossmanchance.com/applets/RegShuffle.htm</a>.</p>
+<ul>
+<li><p>Blue Area = Total Variability (SST)</p></li>
+<li><p>Red Area = Variability Remaining Unexplained by Model (SSR)</p></li>
+<li><p>Blue Area - Red Area = Variability Explained by Model (SSM)</p></li>
+<li><p><span class="math inline">\(R^2 = \frac{\text{Area of Blue Squares} - \text{Area of Red Squares}}{\text{Area of Blue Squares}} = \frac{\text{SST}-\text{SSR}}{\text{SST}}= \frac{\text{SSM}}{\text{SST}}\)</span></p></li>
+</ul>
+</div>
+<div id="variation-explained-by-square-feet-model" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.10</span> Variation Explained by Square Feet Model<a href="introduction-to-linear-models.html#variation-explained-by-square-feet-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Total variability in house prices SST = 17,558.52<br />
+</p></li>
+<li><p>Variability remaining unexplained after accounting for square feet is SSR = 5,859.07<br />
+</p></li>
+<li><p>Variation explained by model accounting for square feet is <span class="math display">\[ \text{SSM} = 17,558.52 - 5,859.07 = 11,699.45 \]</span></p></li>
+<li><p>Proportion of variation explained by model accounting for square feet is <span class="math display">\[ R^2=\frac{11,699.45}{17,558.52}\approx0.6663\]</span></p></li>
+<li><p>66.6% of the variation in house price is explained by the model using square feet as an explanatory variable.</p></li>
+</ul>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="introduction-to-linear-models.html#cb81-1"></a><span class="kw">summary</span>(M_SqFt)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = SalePrice ~ SquareFeet, data = Houses)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -39.235 -14.309   2.052  10.966  43.971 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)  6.82000   36.35455   0.188  0.85586   
+## SquareFeet   0.12079    0.03022   3.997  0.00397 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 27.06 on 8 degrees of freedom
+## Multiple R-squared:  0.6663, Adjusted R-squared:  0.6246 
+## F-statistic: 15.97 on 1 and 8 DF,  p-value: 0.003967</code></pre>
+</div>
+<div id="linear-correlation-coefficient" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.11</span> Linear Correlation Coefficient<a href="introduction-to-linear-models.html#linear-correlation-coefficient" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-78-1.png" width="576" /></p>
+<ul>
+<li><p>For linear models with a single quantitative variable, the <strong>linear correlation coefficient</strong> <span class="math inline">\(r=\sqrt{R^2}\)</span>, or <span class="math inline">\(r=-\sqrt{R^2}\)</span> (with sign matching the sign on the slope of the line), provides information about the strength and direction of the linear relationship between the variables.</p></li>
+<li><p><span class="math inline">\(-1 \leq r \leq 1\)</span>, and <span class="math inline">\(r\)</span> close to <span class="math inline">\(\pm1\)</span> provides evidence of strong linear relationship, while <span class="math inline">\(r\)</span> close to 0 suggests linear relationship is weak.</p></li>
+<li><p><span class="math inline">\(r\)</span> is only relevant for models with a single quantitative explanatory variable and a quantitative response variable, while <span class="math inline">\(R^2\)</span> is relevant for any linear model with a quantitative response variable.</p></li>
+</ul>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="introduction-to-linear-models.html#cb83-1"></a><span class="kw">cor</span>(Houses<span class="op">$</span>SalePrice,Houses<span class="op">$</span>SquareFeet)</span></code></pre></div>
+<pre><code>## [1] 0.8162794</code></pre>
+</div>
+</div>
+<div id="multiple-regression-model" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.3</span> Multiple Regression Model<a href="introduction-to-linear-models.html#multiple-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="multiple-regression-model-1" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.3.1</span> Multiple Regression Model<a href="introduction-to-linear-models.html#multiple-regression-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose we have information on both the neighborhood and square feet in the houses. We can account for both of these together using a <strong>multiple regression model</strong>, i.e. a model with more than one explanatory variable.</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="introduction-to-linear-models.html#cb85-1"></a><span class="kw">kable</span>(Houses)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Neighborhood</th>
+<th align="right">SquareFeet</th>
+<th align="right">SalePrice</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">CollgCr</td>
+<td align="right">1499</td>
+<td align="right">187.00</td>
+</tr>
+<tr class="even">
+<td align="left">CollgCr</td>
+<td align="right">1456</td>
+<td align="right">163.99</td>
+</tr>
+<tr class="odd">
+<td align="left">CollgCr</td>
+<td align="right">1525</td>
+<td align="right">235.00</td>
+</tr>
+<tr class="even">
+<td align="left">Edwards</td>
+<td align="right">672</td>
+<td align="right">113.00</td>
+</tr>
+<tr class="odd">
+<td align="left">Edwards</td>
+<td align="right">1179</td>
+<td align="right">110.00</td>
+</tr>
+<tr class="even">
+<td align="left">Edwards</td>
+<td align="right">930</td>
+<td align="right">84.90</td>
+</tr>
+<tr class="odd">
+<td align="left">NAmes</td>
+<td align="right">864</td>
+<td align="right">123.00</td>
+</tr>
+<tr class="even">
+<td align="left">NAmes</td>
+<td align="right">1414</td>
+<td align="right">176.50</td>
+</tr>
+<tr class="odd">
+<td align="left">NAmes</td>
+<td align="right">1144</td>
+<td align="right">150.00</td>
+</tr>
+<tr class="even">
+<td align="left">NAmes</td>
+<td align="right">1008</td>
+<td align="right">137.00</td>
+</tr>
+</tbody>
+</table>
+<p>How can we predict the price of a:</p>
+<ul>
+<li>848 square foot house in College Creek?<br />
+</li>
+<li>1200 square foot house in North Ames?<br />
+</li>
+<li>2314 square foot house in Edwards?</li>
+</ul>
+</div>
+<div id="variable-model-different-slopes" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.3.2</span> 2-Variable Model Different Slopes<a href="introduction-to-linear-models.html#variable-model-different-slopes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We could try to lines to the houses in each neighborhood, independent of the other neighborhoods.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="introduction-to-linear-models.html#cb86-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span>SquareFeet, <span class="dt">y=</span>SalePrice, <span class="dt">color=</span>Neighborhood)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>) </span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-81-1.png" width="672" />
+Since there are only 3-4 houses per neighbhorhood, though, this isn’t a lot of information to go on.</p>
+</div>
+<div id="variable-model-with-constant-slope" class="section level3 smaller hasAnchor">
+<h3><span class="header-section-number">2.3.3</span> 2-Variable Model with Constant Slope<a href="introduction-to-linear-models.html#variable-model-with-constant-slope" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Instead, we’ll assume the rate of increase wrt. square feet (i.e. slope) is the same in each neighborhood, but that some neighborhoods are more expensive than others.</p>
+<p>This allows us to use all 10 houses to estimate slope, while allowing intercepts to differ between neighborhoods.</p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-83-1.png" width="768" />
+### House Price 2-Variable Model Summary {.smaller}</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="introduction-to-linear-models.html#cb87-1"></a>M_Nbhd_SqFt &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Houses, SalePrice<span class="op">~</span>SquareFeet<span class="op">+</span>Neighborhood)</span>
+<span id="cb87-2"><a href="introduction-to-linear-models.html#cb87-2"></a><span class="kw">summary</span>(M_Nbhd_SqFt)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = SalePrice ~ SquareFeet + Neighborhood, data = Houses)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -29.125  -9.050  -5.653   9.069  37.791 
+## 
+## Coefficients:
+##                      Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)         106.72593   68.92188   1.549    0.172
+## SquareFeet            0.05933    0.04517   1.314    0.237
+## NeighborhoodEdwards -59.09436   32.49761  -1.818    0.119
+## NeighborhoodNAmes   -25.81232   25.59807  -1.008    0.352
+## 
+## Residual standard error: 24.55 on 6 degrees of freedom
+## Multiple R-squared:  0.7941, Adjusted R-squared:  0.6911 
+## F-statistic: 7.711 on 3 and 6 DF,  p-value: 0.01757</code></pre>
+</div>
+<div id="mr-model-for-squarefeet-and-neighborhood" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.3.4</span> MR Model for SquareFeet and Neighborhood<a href="introduction-to-linear-models.html#mr-model-for-squarefeet-and-neighborhood" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the model using both square feet and neighborhood, the regression equation is</p>
+<p><span class="math inline">\(\widehat{\text{Price}}= b_0+ b_1 \times\text{SquareFeet}+ b_2\times\text{I}_{Edwards} + b_3 \times\text{I}_{NAmes}\)</span></p>
+<p><span class="math inline">\(\widehat{\text{Price}}= 106.73+ 0.06 \times\text{SquareFeet}+ -59.09 \times\text{I}_{Edwards} +-25.81 \times\text{I}_{NAmes}\)</span></p>
+<ul>
+<li>The intercept <span class="math inline">\(b_0\)</span> represents the expected price of a house in College Creek with 0 square feet.
+<ul>
+<li>the intercept has no meaningful interpretation in this context</li>
+</ul></li>
+<li><span class="math inline">\(b_1\)</span> represents the expected change in price (in thousands) per one-unit increase in square feet, assuming neighborhood is the same.
+<ul>
+<li>on average, we expect the price of a house to increase by $0.05933 thousand (i.e. $59.33) for each additional square foot, assuming the houses are in the same neighborhood.<br />
+</li>
+</ul></li>
+<li><span class="math inline">\(b_2\)</span> and <span class="math inline">\(b_3\)</span> represent the expected difference in price between a house in the Edwards (or North Ames) neighborhood, compared to the College Creek neighborhood, assuming square footage is the same.
+<ul>
+<li>We expect a house in the Edwards neighborhood to cost $59.094 less than a house in the College Creek Neighborhood, assuming the houses are the same size.<br />
+</li>
+<li>We expect a house in the North Ames Neighborhood to cost $25.812 less than a house in the College Creek Neighborhood, assuming the houses are the same size.</li>
+</ul></li>
+</ul>
+</div>
+<div id="predicting-price-in-mr-model" class="section level3 smaller hasAnchor">
+<h3><span class="header-section-number">2.3.5</span> Predicting Price in MR Model<a href="introduction-to-linear-models.html#predicting-price-in-mr-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math inline">\(\widehat{\text{Price}}= 106.73+ 0.06 \times\text{SquareFeet}+ -59.09 \times\text{I}_{Edwards} +-25.81 \times\text{I}_{NAmes}\)</span></p>
+<ul>
+<li>848 square foot house in College Creek</li>
+</ul>
+<p><span class="math inline">\(\widehat{\text{Price}}= 106.73+ 0.06 \times848+ -59.09 \times0 +-25.81 \times 0 =157.0378\)</span> thousand</p>
+<ul>
+<li>1200 square foot house in North Ames</li>
+</ul>
+<p><span class="math inline">\(\widehat{\text{Price}}= 106.73+ 0.06 \times1200+ -59.09 \times0 +-25.81 \times1 = 152.1096\)</span> thousand</p>
+<ul>
+<li>2314 square foot house in Edwards</li>
+</ul>
+<p><span class="math inline">\(\widehat{\text{Price}}= 106.73+ 0.06 \times\text{SquareFeet}+ -59.09 \times1 +-25.81 \times 0 =184.9212\)</span> thousand</p>
+</div>
+<div id="risk-of-extrapolation" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.3.6</span> Risk of Extrapolation<a href="introduction-to-linear-models.html#risk-of-extrapolation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Note that 2314 square feet is well outside the range of our observed data. We should treat this prediction with caution, since we don’t know whether the trend we see in our data will continue.</p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-86-1.png" width="768" /></p>
+</div>
+<div id="residuals-for-2-variable-model" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.3.7</span> Residuals for 2-Variable Model<a href="introduction-to-linear-models.html#residuals-for-2-variable-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-87-1.png" width="768" /></p>
+</div>
+<div id="residuals-for-2-variable-model-cont." class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.3.8</span> Residuals for 2-Variable Model (cont.)<a href="introduction-to-linear-models.html#residuals-for-2-variable-model-cont." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<pre><code>##    SalePrice Predicted   Residual     ResidSq
+## 1     187.00  195.6662  -8.666221   75.103383
+## 2     163.99  193.1149 -29.124898  848.259699
+## 3     235.00  197.2089  37.791119 1428.168680
+## 4     113.00   87.5034  25.496603  650.076744
+## 5     110.00  117.5853  -7.585270   57.536321
+## 6      84.90  102.8113 -17.911333  320.815835
+## 7     123.00  132.1774  -9.177395   84.224570
+## 8     176.50  164.8106  11.689410  136.642314
+## 9     150.00  148.7907   1.209343    1.462509
+## 10    137.00  140.7214  -3.721358   13.848508</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="introduction-to-linear-models.html#cb90-1"></a><span class="kw">sum</span>(M_Nbhd_SqFt<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 3616.139</code></pre>
+</div>
+<div id="variation-explained-by-2-variable-model" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.3.9</span> Variation Explained by 2-Variable Model<a href="introduction-to-linear-models.html#variation-explained-by-2-variable-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Total Variation in house prices: SST=17,558.52<br />
+</p></li>
+<li><p>Variation remaining unexplained after accounting for square feet is SSR=3,616.139<br />
+</p></li>
+<li><p>Variation explained by model accounting for square feet is
+<span class="math display">\[SSM=SST-SSR=17,558.52 - 3,616.139 = 13,942.38\]</span></p></li>
+<li><p>Proportion of variation in house prices explained by model is:</p></li>
+</ul>
+<p><span class="math display">\[ R^2 = \frac{13,942.38}{17,558.52}\approx0.794 \]</span></p>
+<ul>
+<li>79.4% of the variation in house price is explained by the model using square feet and neighborhood as an explanatory variables.</li>
+</ul>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
+</div>
+<div id="model-comparison-summary" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.3.10</span> Model Comparison Summary<a href="introduction-to-linear-models.html#model-comparison-summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Variables</th>
+<th>Unexplained Variability</th>
+<th>Variability Explained</th>
+<th><span class="math inline">\(R^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>None</td>
+<td>17558.52489</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>Nbhd</td>
+<td>4656.1875667</td>
+<td>12902.3373233</td>
+<td>0.734819</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>Sq. Ft.</td>
+<td>5859.0678887</td>
+<td>11699.4570013</td>
+<td>0.6663121</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>Nbhd, Sq. Ft.</td>
+<td>3616.1385638</td>
+<td>13942.3863262</td>
+<td>0.7940523</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Comments on <span class="math inline">\(R^2\)</span>:</strong></p>
+<ul>
+<li><p><span class="math inline">\(R^2\)</span> will never decrease when a new variable is added to a model.<br />
+</p></li>
+<li><p>This does not mean that adding more variables to a model always improves its ability to make predictions on new data.<br />
+</p></li>
+<li><p><span class="math inline">\(R^2\)</span> measures how well a model fits the data on which it was built.<br />
+</p></li>
+<li><p>It is possible for a model with high <span class="math inline">\(R^2\)</span> to “overfit” the data it was built from, and thus perform poorly on new data. We will discuss this idea extensively later in the course.</p></li>
+<li><p>On some datasets, there is a lot of “natural” variability in the response variable, and no model will achieve a high <span class="math inline">\(R^2\)</span>. That’s okay. Even a model with <span class="math inline">\(R^2 = 0.10\)</span> or less can provide useful information.</p></li>
+<li><p>The task of a statistician is not to achieve a model that makes perfect predictions, but rather to be able to quantify the amount of uncertainty associated with the predictions we make.</p></li>
+</ul>
+</div>
+</div>
+<div id="least-squares-estimation" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.4</span> Least-Squares Estimation<a href="introduction-to-linear-models.html#least-squares-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="line-of-best-fit" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.4.1</span> Line of Best Fit<a href="introduction-to-linear-models.html#line-of-best-fit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="introduction-to-linear-models.html#cb92-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span>SquareFeet, <span class="dt">y=</span>SalePrice)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb92-2"><a href="introduction-to-linear-models.html#cb92-2"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-92-1.png" width="576" /></p>
+<ul>
+<li>The line <span class="math inline">\(\text{Price} = 6.82 + 0.12 \times \text{Square Feet}\)</span> is considered the “line of best fit” in the sense that it minimizes the sum of the squared residuals.</li>
+</ul>
+<p><img src="LSE.png" width="75%" /></p>
+<ul>
+<li>This <a href="http://www.rossmanchance.com/applets/RegShuffle.htm">Rossman-Chance applet</a> provides an illustration of the line of best fit.</li>
+</ul>
+</div>
+<div id="least-squares-estimation-in-simple-linear-regression" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.4.2</span> Least-Squares Estimation in Simple Linear Regression<a href="introduction-to-linear-models.html#least-squares-estimation-in-simple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Consider a <strong>simple linear regression(SLR)</strong> model, which is one with a singe quantitative explanatory variable.</p></li>
+<li><p><span class="math inline">\(\hat{y}_i = b_0+b_1x_i\)</span></p></li>
+<li><p>we need to choose the values of <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> that minimize:</p></li>
+</ul>
+<p><span class="math display">\[
+\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2 =\displaystyle\sum_{i=1}^n(y_i-(b_0+b_1x_i))^2
+\]</span></p>
+</div>
+<div id="least-squares-estimation-in-simple-linear-regression-cont." class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.4.3</span> Least-Squares Estimation in Simple Linear Regression (cont.)<a href="introduction-to-linear-models.html#least-squares-estimation-in-simple-linear-regression-cont." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using calculus, it can be shown that this quantity is minimized when</p>
+<ul>
+<li><p><span class="math inline">\(b_1=\frac{\displaystyle\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}{\displaystyle\sum_{i=1}^{n}(x_i-\bar{x})^2}=\frac{\displaystyle\sum_{i=1}^{n} x_i y_i-\frac{\displaystyle\sum_{i=1}^{n} x_i \displaystyle\sum_{i=1}^{n} y_i }{n}}{\left(\displaystyle\sum_{i=1}^{n} x_i^2 -\frac{\left(\displaystyle\sum_{i=1}^{n} x_i\right)^2}{n}\right)}\)</span></p></li>
+<li><p><span class="math inline">\(b_0=\bar{y}-b_1\bar{x}\)</span> (where <span class="math inline">\(\bar{y}=\frac{\displaystyle\sum_{i=1}^{n}{y_i}}{n}\)</span>, and <span class="math inline">\(\bar{x}=\frac{\displaystyle\sum_{i=1}^{n}{x_i}}{n}\)</span>).</p></li>
+</ul>
+</div>
+<div id="ls-estimation-for-one-categorical-variable" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.4.4</span> LS Estimation for One Categorical Variable<a href="introduction-to-linear-models.html#ls-estimation-for-one-categorical-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Consider a model with a single categorical variable (such as neighborhood), with G+1 categories, numbered <span class="math inline">\(g=0,2, \ldots, G\)</span></p></li>
+<li><p>Then <span class="math inline">\(\hat{y}_i = b_0 + b_1x_{i1} + \ldots +b_{G}x_{iG}\)</span>.</p></li>
+<li><p>we need to minimize</p></li>
+</ul>
+<p><span class="math display">\[
+\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2 =\displaystyle\sum_{i=1}^n(y_i-(b_0 + b_1x_{i1} + \ldots +b_{G}x_{iG}))^2.   
+\]</span></p>
+<ul>
+<li>It can be shown that this is achieved when
+<ul>
+<li><span class="math inline">\(b_0 = \bar{y_0}\)</span> (i.e. the average response in the “baseline group”), and<br />
+</li>
+<li><span class="math inline">\(b_j = \bar{y_j} - \bar{y}_0\)</span></li>
+</ul></li>
+</ul>
+</div>
+<div id="ls-estimation-more-generally" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.4.5</span> LS Estimation More Generally<a href="introduction-to-linear-models.html#ls-estimation-more-generally" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>For multiple regression models, the logic is the same. We need to choose <span class="math inline">\(b_0, b_1, \ldots, b_p\)</span> in order to minimize</li>
+</ul>
+<p><span class="math display">\[ \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  = \displaystyle\sum_{i=1}^n (y_i -(b_0 + b_1x_{i1} + b_2x_{i2} + \ldots + b_px_{ip}))^2 \]</span></p>
+<ul>
+<li><p>The mathematics, however are more complicated and require inverting a matrix. This goes beyond the scope of this class, so we will let R do the estimation and use the results.</p></li>
+<li><p>More on least squares estimation in multiple regression can be found <a href="http://www.math.chalmers.se/Stat/Grundutb/GU/MSG500/A10/lecture5.pdf">here</a>.</p></li>
+</ul>
+</div>
+</div>
+<div id="analysis-of-variance" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.5</span> ANalysis Of VAriance<a href="introduction-to-linear-models.html#analysis-of-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="submodels" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.1</span> Submodels<a href="introduction-to-linear-models.html#submodels" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Variables</th>
+<th>Unexplained Variability</th>
+<th>Variability Explained</th>
+<th><span class="math inline">\(R^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>None</td>
+<td>17558.52489</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>Nbhd.</td>
+<td>4656.1875667</td>
+<td>12902.3373233</td>
+<td>0.734819</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>Sq. Ft</td>
+<td>5859.0678887</td>
+<td>11699.4570013</td>
+<td>0.6663121</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>Nbhd, Sq. Ft.</td>
+<td>3616.1385638</td>
+<td>13942.3863262</td>
+<td>0.7940523</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>Notice that Model 1 is a submodel of Model 3, since all variables used in Model 1 are also used in Model 3.</p></li>
+<li><p>Model 2 is also a submodel of Model 3.</p></li>
+<li><p>Model 0 is a submodel of Models 1, 2, and 3.</p></li>
+<li><p>Models 1 and 2 are not submodels of each other, since Model 1 contains a variable used in Model 2 and Model 2 contains a variable not used in Model 1.</p></li>
+</ul>
+</div>
+<div id="comparing-submodels" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.2</span> Comparing Submodels<a href="introduction-to-linear-models.html#comparing-submodels" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When one model is a submodel of another, we can compare the amount of variability explained by the models, using a technique known as <strong>ANalysis Of VAriance (ANOVA)</strong>.</p>
+<p>Reduced Model: <span class="math inline">\(\hat{y}_i = b_0 + b_1x_{i1} + b_2{x_i2} + \ldots + b_qx_{iq}\)</span></p>
+<p>Full Model: <span class="math inline">\(\hat{y}_i = b_0 + b_1x_{i1} + b_2{x_i2} + \ldots + b_qx_{iq} + b_{q+1}x_{i{q+1}} \ldots + b_px_{ip}\)</span></p>
+<p>p = # variables in Full Model<br />
+q = # variables in Reduced Model<br />
+n = number of observations</p>
+<p>We calculate a statistic called F:</p>
+<p><span class="math display">\[
+\begin{aligned}
+F  
+&amp;= \frac{\frac{\text{SSR}_{\text{Reduced}}-\text{SSR}_{\text{Full}}}{p-q}}{\frac{\text{SSR}_{\text{Full}}}{n-(p+1)}}
+\end{aligned}
+\]</span></p>
+<p><strong>Questions:</strong>
+1. If the full model does a much better job explaining variability in the response variable than the reduced model, will the F-statistic be large or small?</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Can an F-statistic ever be negative? Why or why not?</li>
+</ol>
+</div>
+<div id="comments-on-f-statistic" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.3</span> Comments on F-Statistic<a href="introduction-to-linear-models.html#comments-on-f-statistic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>The F-statistic measures the amount of variability explained by adding additional variable(s) to the model, relative to the total amount of unexplained variability.</p></li>
+<li><p>Large values of F indicate that adding the additional explanatory variables is helpful in explaining variability in the response variable<br />
+</p></li>
+<li><p>Small values of F indicate that adding new explanatory variables variables does not make much of a difference in explaining variability in the response variable<br />
+</p></li>
+<li><p>What counts as “large” is depends on <span class="math inline">\(n, p,\)</span> and <span class="math inline">\(q\)</span>. We will revisit this later in the course.</p></li>
+</ul>
+</div>
+<div id="anova-f-statistic" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.4</span> ANOVA F-Statistic<a href="introduction-to-linear-models.html#anova-f-statistic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s Calculate an ANOVA F-Statistic to compare Models 2 and 3.</p>
+<p>Reduced Model: <span class="math inline">\(\widehat{\text{Price}}= b_0+ b_1 \times\text{SquareFeet}\)</span></p>
+<p>Full Model: <span class="math inline">\(\widehat{\text{Price}}= b_0+ b_1 \times\text{SquareFeet}+ b_2\times\text{I}_{Edwards} + b_3 \times\text{I}_{NAmes}\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+F &amp;= \frac{\frac{\text{SSR}_{\text{Reduced}}-\text{SSR}_{\text{Full}}}{p-q}}{\frac{\text{SSR}_{\text{Full}}}{n-(p+1)}} \\
+&amp;=\frac{\frac{5,859.07-3,616.14}{3-1}}{\frac{3,616.13}{10-(3+1)}} \\
+\end{aligned}
+\]</span></p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="introduction-to-linear-models.html#cb93-1"></a>SSR2 &lt;-<span class="st"> </span><span class="kw">sum</span>(M_SqFt<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>); SSR3 &lt;-<span class="st"> </span><span class="kw">sum</span>(M_Nbhd_SqFt<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>);</span>
+<span id="cb93-2"><a href="introduction-to-linear-models.html#cb93-2"></a>((SSR2<span class="op">-</span>SSR3)<span class="op">/</span>(<span class="dv">3-1</span>))<span class="op">/</span>((SSR3)<span class="op">/</span>(<span class="dv">10</span><span class="op">-</span>(<span class="dv">3</span><span class="op">+</span><span class="dv">1</span>)))</span></code></pre></div>
+<pre><code>## [1] 1.860766</code></pre>
+</div>
+<div id="anova-f-statistic-for-m2-vs-m3-in-r" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.5</span> ANOVA F-Statistic for M2 vs M3 in R<a href="introduction-to-linear-models.html#anova-f-statistic-for-m2-vs-m3-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="introduction-to-linear-models.html#cb95-1"></a><span class="kw">anova</span>(M_SqFt, M_Nbhd_SqFt)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: SalePrice ~ SquareFeet
+## Model 2: SalePrice ~ SquareFeet + Neighborhood
+##   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
+## 1      8 5859.1                           
+## 2      6 3616.1  2    2242.9 1.8608 0.2351</code></pre>
+<p>Notice the F-statistic has the same value.</p>
+<p>Later, we will examine what this tells us about adding Neighborhood to a model already containing square feet as an explanatory variable.</p>
+</div>
+<div id="anova-f-statistic-for-m1-vs-m0" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.6</span> ANOVA F-Statistic for M1 vs M0<a href="introduction-to-linear-models.html#anova-f-statistic-for-m1-vs-m0" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now, let’s compare Models 0 and 1.</p>
+<p>Reduced Model: <span class="math inline">\(\widehat{\text{Price}}_i = b_0\)</span></p>
+<p>Full Model: <span class="math inline">\(\widehat{\text{Price}}_i = b_0 + b_1\text{I}_{\text{Edwards}} + b_2\text{I}_{\text{NAmes}}\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+F &amp;= \frac{\frac{\text{SSR}_{\text{Reduced}}-\text{SSR}_{\text{Full}}}{p-q}}{\frac{\text{SSR}_{\text{Full}}}{n-(p+1)}} \\
+&amp;=\frac{\frac{17558.52-4656.19}{2-0}}{\frac{4656.19}{10-(2+1)}}
+\end{aligned}
+\]</span></p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="introduction-to-linear-models.html#cb97-1"></a>SSR0 &lt;-<span class="st"> </span><span class="kw">sum</span>(M0<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>); SSR1 &lt;-<span class="st"> </span><span class="kw">sum</span>(M_Nbhd<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>);</span>
+<span id="cb97-2"><a href="introduction-to-linear-models.html#cb97-2"></a>((SSR0<span class="op">-</span>SSR1)<span class="op">/</span>(<span class="dv">2-0</span>))<span class="op">/</span>((SSR1)<span class="op">/</span>(<span class="dv">10</span><span class="op">-</span>(<span class="dv">2</span><span class="op">+</span><span class="dv">1</span>)))</span></code></pre></div>
+<pre><code>## [1] 9.698531</code></pre>
+</div>
+<div id="anova-f-statistic-for-m0-vs-m1-in-r" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.7</span> ANOVA F-Statistic for M0 vs M1 in R<a href="introduction-to-linear-models.html#anova-f-statistic-for-m0-vs-m1-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="introduction-to-linear-models.html#cb99-1"></a><span class="kw">anova</span>(M0, M_Nbhd)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: SalePrice ~ 1
+## Model 2: SalePrice ~ Neighborhood
+##   Res.Df     RSS Df Sum of Sq      F   Pr(&gt;F)   
+## 1      9 17558.5                                
+## 2      7  4656.2  2     12902 9.6985 0.009603 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="anova-f-statistic-for-categorical-variables" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.8</span> ANOVA F-Statistic for Categorical Variables<a href="introduction-to-linear-models.html#anova-f-statistic-for-categorical-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>The difference between M1 and M0 is that M1 considers the house’s neighborhood, while M0 does not.<br />
+</li>
+<li>If neighborhood is helpful in modeling house price, then we would expect to see a high F-statistic.<br />
+</li>
+<li>Another way to think about this is that if the amount of variability in house prices between different neighborhoods is large, relative to the amount of variability within neighborhoods, then the F-statistic should be large.<br />
+</li>
+<li>In fact, an alternative (an mathematically equivalent) way to calculate the F-statistic is to calculate the ratio of variability between different neighborhoods, relative to the amount of variability within neighborhoods.</li>
+</ul>
+</div>
+<div id="f-statistic-for-categorical-variables-illustration" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.9</span> F-Statistic for Categorical Variables Illustration<a href="introduction-to-linear-models.html#f-statistic-for-categorical-variables-illustration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An F-statistic compares the amount of variability between groups to the amount of variability within groups.</p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-99-1.png" width="864" /></p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Scenario 1</th>
+<th>Scenario 2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>variation between groups</td>
+<td>High</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<td>variation within groups</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<td>F Statistic</td>
+<td>Large</td>
+<td>Small</td>
+</tr>
+<tr class="even">
+<td>Result</td>
+<td>Evidence of Group Differences</td>
+<td>No evidence of differences</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Question:</strong> Suppose, in these scenarios, we perform an F-test comparing a model the includes group as an explanatory variable, to one the includes no explanatory variables? Which scenario (1 or 2) would you expect to result in a larger F-statistic?</p>
+</div>
+<div id="alternative-f-statistic-formula" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.10</span> Alternative F-Statistic Formula<a href="introduction-to-linear-models.html#alternative-f-statistic-formula" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For a categorical variable with <span class="math inline">\(g\)</span> groups,</p>
+<ul>
+<li><p>let <span class="math inline">\(\bar{y}_{1\cdot}, \ldots, \bar{y}_{g\cdot}\)</span> represent the mean response for each group.</p></li>
+<li><p>let <span class="math inline">\(n_1, \ldots, n_g\)</span> represent the sample size for each group</p></li>
+<li><p>Then <span class="math inline">\(\frac{\displaystyle\sum_{i=1}^g\sum_{j=1}^{n_i}n_i(y_{i\cdot}-\bar{y}_{\cdot\cdot})^2}{g-1}\)</span> gives a measure of how much the group means differ, and</p></li>
+<li><p><span class="math inline">\(\frac{\displaystyle\sum_{i=1}^g\sum_{j=1}^{n_i}(y_{ij}-\bar{y}_{i\cdot})^2}{n-g}\)</span> gives a measure of how much individual observations differ within groups</p></li>
+<li><p>An alternative formula for this F-statistic is:</p></li>
+</ul>
+<p><span class="math display">\[
+F= \frac{\text{Variability between Neighborhoods}}{\text{Variability within Neighborhoods}}= \frac{\frac{\displaystyle\sum_{i=1}^g\sum_{j=1}^{n_i}n_i(y_{i\cdot}-\bar{y}_{\cdot\cdot})^2}{g-1}}{\frac{\displaystyle\sum_{i=1}^g\sum_{j=1}^{n_i}(y_{ij}-\bar{y}_{i\cdot})^2}{n-g}}
+\]</span></p>
+<ul>
+<li>It can be shown that this statistic is equivalent to the one we saw previously.</li>
+</ul>
+</div>
+<div id="calculating-f-statistic-for-categorical-variables" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.11</span> Calculating F-Statistic for Categorical Variables<a href="introduction-to-linear-models.html#calculating-f-statistic-for-categorical-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We have seen previously that:</p>
+<ul>
+<li><span class="math inline">\(\bar{y}_{\cdot\cdot}=148.039\)</span> (overall average price), and <span class="math inline">\(n=10\)</span></li>
+<li><span class="math inline">\(\bar{y}_{1\cdot}=195.330\)</span> (average price in College Creek), and <span class="math inline">\(n_1=3\)</span><br />
+</li>
+<li><span class="math inline">\(\bar{y}_{2\cdot}=102.633\)</span> (average price in Edwards), and <span class="math inline">\(n_2=4\)</span><br />
+</li>
+<li><span class="math inline">\(\bar{y}_{3\cdot}=146.625\)</span> (average price in North Ames), and <span class="math inline">\(n_3=3\)</span></li>
+</ul>
+<p>Then,</p>
+<ul>
+<li><p><span class="math inline">\(\frac{\displaystyle\sum_{i=1}^g\sum_{j=1}^{n_i}(y_{i\cdot}-\bar{y}_{\cdot\cdot})^2}{g-1} = \frac{3(195.330-148.039)^2+3(102.633-148.039)^2+4(146.625-148.039)^2}{3-1} = \frac{12902}{2}\)</span>, and</p></li>
+<li><p><span class="math inline">\(\frac{\displaystyle\sum_{i=1}^g\sum_{j=1}^{n_i}(y_{ij}-\bar{y}_{i\cdot})^2}{n-g} = \frac{(123.00-146.625)^2+ (187.00 - 195.33)^2 + \ldots + (137.00-146.625)^2}{10-3} = \frac{4656}{7}\)</span></p></li>
+</ul>
+</div>
+<div id="calculating-f-statistic-for-categorical-variables-1" class="section level3 cont hasAnchor">
+<h3><span class="header-section-number">2.5.12</span> Calculating F-Statistic for Categorical Variables<a href="introduction-to-linear-models.html#calculating-f-statistic-for-categorical-variables-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display">\[
+F= \frac{\frac{\displaystyle\sum_{i=1}^g\sum_{j=1}^{n_i}n_i(y_{i\cdot}-\bar{y}_{\cdot\cdot})^2}{g-1}}{\frac{\displaystyle\sum_{i=1}^g\sum_{j=1}^{n_i}(y_{ij}-\bar{y}_{i\cdot})^2}{n-g}} = \frac{\frac{(195.330-148.039)^2+(102.633-148.039)^2+(146.625-148.039)^2}{3-1}}{\frac{(123.00-146.625)^2+ (187.00 - 195.33)^2 + \ldots + (137.00-146.625)^2}{10-3}} = \frac{\frac{12902}{2}}{\frac{4656}{7}}
+\]</span></p>
+<ul>
+<li>Note that the quantity in the the quantity in the third line is equivalent to the sum of the squared residuals using M2. Thus, we can calculate F using:</li>
+</ul>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="introduction-to-linear-models.html#cb101-1"></a>((<span class="dv">3</span><span class="op">*</span>(<span class="fl">195.330-148.039</span>)<span class="op">^</span><span class="dv">2</span><span class="op">+</span><span class="dv">3</span><span class="op">*</span>(<span class="fl">102.633-148.039</span>)<span class="op">^</span><span class="dv">2</span><span class="op">+</span><span class="dv">4</span><span class="op">*</span>(<span class="fl">146.625-148.039</span>)<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(<span class="dv">3-1</span>))<span class="op">/</span>(<span class="kw">sum</span>(M_Nbhd<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(<span class="dv">10-3</span>))</span></code></pre></div>
+<pre><code>## [1] 9.6986</code></pre>
+</div>
+<div id="alternative-calculation-in-r" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.13</span> Alternative Calculation in R<a href="introduction-to-linear-models.html#alternative-calculation-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This interpretation of the F-statistic can be seen using the AOV command in R.</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="introduction-to-linear-models.html#cb103-1"></a>AOV_Nbhd &lt;-<span class="st"> </span><span class="kw">aov</span>(<span class="dt">data=</span>Houses, SalePrice<span class="op">~</span>Neighborhood)</span>
+<span id="cb103-2"><a href="introduction-to-linear-models.html#cb103-2"></a><span class="kw">summary</span>(AOV_Nbhd)</span></code></pre></div>
+<pre><code>##              Df Sum Sq Mean Sq F value Pr(&gt;F)   
+## Neighborhood  2  12902    6451   9.699 0.0096 **
+## Residuals     7   4656     665                  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<ul>
+<li><p>The <em>Neighborhood</em> line represents the variability between neighborhoods<br />
+</p></li>
+<li><p>The <em>Residuals</em> line represents the variability within neighborhoods</p></li>
+<li><p>The first two columns give the quantities we use in our formula. The third column, representing the ratio of the first two columns is called a <strong>mean square.</strong></p></li>
+</ul>
+</div>
+<div id="f-statistic-in-r-output" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.14</span> F-Statistic in R Output<a href="introduction-to-linear-models.html#f-statistic-in-r-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The last line in the summary output includes the F-statistic for the specified model, compared to a reduced model that includes only the intercept.</p>
+<p>Reduced Model: <span class="math inline">\(\widehat{Y}= b_0\)</span></p>
+<p>Full Model: <span class="math inline">\(\widehat{Y}= b_0+ b_1 X_{i1}+ \ldots+ b_p X_{ip}\)</span></p>
+<p>This statistic addresses the question <em>“Do any of the explanatory variables help explain variability in Y?”</em>.</p>
+<p>When there is only one explanatory variable in the model, this statistic can be used to test whether there is evidence that this statistic is associated with <span class="math inline">\(Y\)</span>.</p>
+</div>
+<div id="f-statistic-in-r-output-m1" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.15</span> F-Statistic in R Output M1<a href="introduction-to-linear-models.html#f-statistic-in-r-output-m1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The F-statistic compares a full model that includes neighborhood to a reduced model that predicts each price using the overall average.</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="introduction-to-linear-models.html#cb105-1"></a><span class="kw">summary</span>(M_Nbhd)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = SalePrice ~ Neighborhood, data = Houses)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -31.340 -15.706  -2.477   9.617  39.670 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value   Pr(&gt;|t|)    
+## (Intercept)           195.33      14.89  13.118 0.00000349 ***
+## NeighborhoodEdwards   -92.70      21.06  -4.402    0.00315 ** 
+## NeighborhoodNAmes     -48.70      19.70  -2.473    0.04267 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 25.79 on 7 degrees of freedom
+## Multiple R-squared:  0.7348, Adjusted R-squared:  0.6591 
+## F-statistic: 9.699 on 2 and 7 DF,  p-value: 0.009603</code></pre>
+</div>
+<div id="f-statistic-in-r-output-m2" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.16</span> F-Statistic in R Output M2<a href="introduction-to-linear-models.html#f-statistic-in-r-output-m2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The F-statistic compares a full model that includes square feet to a reduced model that predicts each price using the overall average.</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="introduction-to-linear-models.html#cb107-1"></a><span class="kw">summary</span>(M_SqFt)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = SalePrice ~ SquareFeet, data = Houses)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -39.235 -14.309   2.052  10.966  43.971 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)  6.82000   36.35455   0.188  0.85586   
+## SquareFeet   0.12079    0.03022   3.997  0.00397 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 27.06 on 8 degrees of freedom
+## Multiple R-squared:  0.6663, Adjusted R-squared:  0.6246 
+## F-statistic: 15.97 on 1 and 8 DF,  p-value: 0.003967</code></pre>
+</div>
+<div id="f-statistic-in-r-output-m3" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.17</span> F-Statistic in R Output M3<a href="introduction-to-linear-models.html#f-statistic-in-r-output-m3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The F-statistic compares a full model that includes square feet and neighborhood to a reduced model that predicts each price using only the overall average.</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="introduction-to-linear-models.html#cb109-1"></a><span class="kw">summary</span>(M_Nbhd_SqFt)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = SalePrice ~ SquareFeet + Neighborhood, data = Houses)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -29.125  -9.050  -5.653   9.069  37.791 
+## 
+## Coefficients:
+##                      Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)         106.72593   68.92188   1.549    0.172
+## SquareFeet            0.05933    0.04517   1.314    0.237
+## NeighborhoodEdwards -59.09436   32.49761  -1.818    0.119
+## NeighborhoodNAmes   -25.81232   25.59807  -1.008    0.352
+## 
+## Residual standard error: 24.55 on 6 degrees of freedom
+## Multiple R-squared:  0.7941, Adjusted R-squared:  0.6911 
+## F-statistic: 7.711 on 3 and 6 DF,  p-value: 0.01757</code></pre>
+</div>
+<div id="when-to-use-f-statistics-for-model-comparison" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.5.18</span> When to Use F-Statistics for Model Comparison<a href="introduction-to-linear-models.html#when-to-use-f-statistics-for-model-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>We have used F-statistics to compare models 1 and 3, and models 0 and 2.</li>
+<li>We could also calculate F-statistics comparing models 2 and 3, models 0 and 1, and models 0 and 3.<br />
+</li>
+<li>We cannot use an F-statistic to compare models 1 and 2, since neither is a submodel of the other.<br />
+</li>
+<li>When comparing a model to the “intercept-only” model, we can use the model summary output. When comparing other to other submodels, use the <code>aov()</code> or <code>anova()</code> commands.</li>
+</ul>
+</div>
+</div>
+<div id="models-involving-interaction" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.6</span> Models Involving Interaction<a href="introduction-to-linear-models.html#models-involving-interaction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="bear-weights-dataset" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.6.1</span> Bear Weights Dataset<a href="introduction-to-linear-models.html#bear-weights-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>Bolstad</code> R package provides data on body measurements for a sample of 143 wild bears, who were anesthetized, measured and weighed, then released. Variables include:</p>
+<p><code>ID.</code>- Indentification number</p>
+<p><code>Age</code> - Bear’s age, in months. Note, wild bears are always born in January, so an expert can estimate the bear’s age without directly asking it how old it is.</p>
+<p><code>Month</code>- Month when the measurement was made. 1 = Jan., 12 = Dec. Since bears hibernate in the winter, their body shape probably depends on the season.</p>
+<p><code>Sex</code> - 1 = male 2 = female</p>
+<p><code>Head.L</code> - Length of the head, in inches</p>
+<p><code>Head.W.</code> - Width of the head, in inches</p>
+<p><code>Neck.G.</code> - Girth (distance around) the neck, in inches</p>
+<p><code>Length.</code> - Body length, in inches</p>
+<p><code>Chest.G.</code> - Girth (distance around) the chest, in inches</p>
+<p><code>Weight</code> - Weight of the bear, in pounds</p>
+<p><code>Obs.No</code> - Observation number for this bear. For example, the bear with ID = 41 (Bertha) was measured on four occasions, in the months coded 7, 8, 11, and 5. The value of Obs.No goes from 1 to 4 for these observations.</p>
+<p><code>Name</code> - The names of the bears given to them by the researchers</p>
+<p><strong>Question of Interest:</strong> How quickly do bears gain weight as they grow? Do male and female bears gain weight at the same rate?</p>
+</div>
+<div id="exploring-bears-data" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.6.2</span> Exploring Bears Data<a href="introduction-to-linear-models.html#exploring-bears-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="introduction-to-linear-models.html#cb111-1"></a><span class="kw">library</span>(Bolstad)</span>
+<span id="cb111-2"><a href="introduction-to-linear-models.html#cb111-2"></a><span class="kw">data</span>(bears)</span>
+<span id="cb111-3"><a href="introduction-to-linear-models.html#cb111-3"></a><span class="kw">glimpse</span>(bears)</span></code></pre></div>
+<pre><code>## Rows: 143
+## Columns: 12
+## $ ID      &lt;int&gt; 39, 41, 41, 41, 41, 43, 43, 45, 45, 48, 69, 83, 83, 83, 83, 91…
+## $ Age     &lt;int&gt; 19, 19, 20, 23, 29, 19, 20, 55, 67, 81, NA, 115, 117, 124, 140…
+## $ Month   &lt;int&gt; 7, 7, 8, 11, 5, 7, 8, 7, 7, 9, 10, 7, 9, 4, 8, 8, 4, 9, 7, 4, …
+## $ Sex     &lt;int&gt; 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1,…
+## $ Head.L  &lt;dbl&gt; 10.0, 11.0, 12.0, 12.5, 12.0, 11.0, 12.0, 16.5, 16.5, 15.5, 16…
+## $ Head.W  &lt;dbl&gt; 5.0, 6.5, 6.0, 5.0, 6.0, 5.5, 5.5, 9.0, 9.0, 8.0, 8.0, 10.0, 7…
+## $ Neck.G  &lt;dbl&gt; 15.0, 20.0, 17.0, 20.5, 18.0, 16.0, 17.0, 28.0, 27.0, 31.0, 32…
+## $ Length  &lt;dbl&gt; 45.0, 47.5, 57.0, 59.5, 62.0, 53.0, 56.0, 67.5, 78.0, 72.0, 77…
+## $ Chest.G &lt;dbl&gt; 23.0, 24.0, 27.0, 38.0, 31.0, 26.0, 30.5, 45.0, 49.0, 54.0, 52…
+## $ Weight  &lt;int&gt; 65, 70, 74, 142, 121, 80, 108, 344, 371, 416, 432, 348, 476, 4…
+## $ Obs.No  &lt;int&gt; 1, 1, 2, 3, 4, 1, 2, 1, 2, 1, 1, 1, 2, 3, 4, 1, 1, 2, 1, 1, 2,…
+## $ Name    &lt;fct&gt; Allen, Berta, Berta, Berta, Berta, Clyde, Clyde, Doc, Doc, Qui…</code></pre>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="introduction-to-linear-models.html#cb113-1"></a><span class="kw">head</span>(bears)</span></code></pre></div>
+<pre><code>##   ID Age Month Sex Head.L Head.W Neck.G Length Chest.G Weight Obs.No  Name
+## 1 39  19     7   1   10.0    5.0   15.0   45.0      23     65      1 Allen
+## 2 41  19     7   2   11.0    6.5   20.0   47.5      24     70      1 Berta
+## 3 41  20     8   2   12.0    6.0   17.0   57.0      27     74      2 Berta
+## 4 41  23    11   2   12.5    5.0   20.5   59.5      38    142      3 Berta
+## 5 41  29     5   2   12.0    6.0   18.0   62.0      31    121      4 Berta
+## 6 43  19     7   1   11.0    5.5   16.0   53.0      26     80      1 Clyde</code></pre>
+</div>
+<div id="bears-data-cleaning" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.6.3</span> Bears Data Cleaning<a href="introduction-to-linear-models.html#bears-data-cleaning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Notice that we have multiple observations on the same bears. The procedures we have learned so far require observations to be independent of each other. Thus, we’ll keep only the first observation on each bear.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="introduction-to-linear-models.html#cb115-1"></a>Bears_Subset &lt;-<span class="st"> </span>bears <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Obs.No <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</span></code></pre></div>
+<p>The variables Month and Sex are coded as integers, but it really makes more sense to think of these as categorical variables. Thus, we will convert them to factors.</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="introduction-to-linear-models.html#cb116-1"></a>Bears_Subset<span class="op">$</span>Month &lt;-<span class="st"> </span><span class="kw">as.factor</span>(Bears_Subset<span class="op">$</span>Month)</span>
+<span id="cb116-2"><a href="introduction-to-linear-models.html#cb116-2"></a>Bears_Subset<span class="op">$</span>Sex &lt;-<span class="st"> </span><span class="kw">as.factor</span>(Bears_Subset<span class="op">$</span>Sex)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="introduction-to-linear-models.html#cb117-1"></a><span class="kw">summary</span>(Bears_Subset)</span></code></pre></div>
+<pre><code>##        ID             Age             Month    Sex        Head.L     
+##  Min.   : 39.0   Min.   :  8.00   8      :23   1:62   Min.   : 9.00  
+##  1st Qu.:525.0   1st Qu.: 17.00   9      :20   2:35   1st Qu.:12.00  
+##  Median :579.0   Median : 34.00   10     :14          Median :13.00  
+##  Mean   :537.6   Mean   : 42.64   7      :11          Mean   :13.29  
+##  3rd Qu.:640.0   3rd Qu.: 57.25   11     : 9          3rd Qu.:14.50  
+##  Max.   :911.0   Max.   :177.00   4      : 8          Max.   :18.50  
+##                  NA&#39;s   :41       (Other):12                         
+##      Head.W           Neck.G          Length         Chest.G     
+##  Min.   : 4.000   Min.   :10.00   Min.   :36.00   Min.   :19.00  
+##  1st Qu.: 5.000   1st Qu.:17.50   1st Qu.:54.50   1st Qu.:30.00  
+##  Median : 6.000   Median :20.00   Median :61.00   Median :34.00  
+##  Mean   : 6.364   Mean   :21.03   Mean   :60.41   Mean   :35.93  
+##  3rd Qu.: 7.000   3rd Qu.:24.00   3rd Qu.:67.00   3rd Qu.:42.00  
+##  Max.   :10.000   Max.   :32.00   Max.   :83.00   Max.   :55.00  
+##                                                                  
+##      Weight          Obs.No       Name   
+##  Min.   : 26.0   Min.   :1   Ian    : 2  
+##  1st Qu.:114.0   1st Qu.:1   Abe    : 1  
+##  Median :154.0   Median :1   Addy   : 1  
+##  Mean   :187.2   Mean   :1   Albert : 1  
+##  3rd Qu.:236.0   3rd Qu.:1   Allen  : 1  
+##  Max.   :514.0   Max.   :1   (Other):89  
+##                              NA&#39;s   : 2</code></pre>
+</div>
+<div id="bear-weights-and-ages" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.6.4</span> Bear Weights and Ages<a href="introduction-to-linear-models.html#bear-weights-and-ages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Histogram of Bear Weights</strong></p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="introduction-to-linear-models.html#cb119-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Bears_Subset, <span class="kw">aes</span>(<span class="dt">x=</span>Weight)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb119-2"><a href="introduction-to-linear-models.html#cb119-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">color=</span><span class="st">&quot;white&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb119-3"><a href="introduction-to-linear-models.html#cb119-3"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Weight&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Weights of Bears&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
+<p>We see that bears most commonly weigh between 100 and 200 lbs, and the distribution of weights is right-skewed.</p>
+<p><strong>Histogram of Bear Ages</strong></p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="introduction-to-linear-models.html#cb120-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Bears_Subset, <span class="kw">aes</span>(<span class="dt">x=</span>Age)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb120-2"><a href="introduction-to-linear-models.html#cb120-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">color=</span><span class="st">&quot;white&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb120-3"><a href="introduction-to-linear-models.html#cb120-3"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Age (in months)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Ages of Bears (in months)&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
+<p>Most of the bears are less than 72 months (6 years) old, although there are a few older bears.</p>
+<p><strong>Bears with Missing Ages</strong></p>
+<p>Recall that 41 bears had missing ages. They will be ignored if we use age in our model. To see how this might impact predicted weights, let’s look at how weights compare for bears with and without missing ages.</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="introduction-to-linear-models.html#cb121-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Bears_Subset, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">is.na</span>(Age), <span class="dt">y=</span>Weight)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
+<p>Bears with missing ages do not seem to be systematically different than those whose ages are recorded, with respect to weight, so the missing ages should not cause too much concern with out model results.</p>
+<p><strong>Boxplot of Weight by Sex</strong></p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="introduction-to-linear-models.html#cb122-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Bears_Subset, <span class="kw">aes</span>(<span class="dt">y=</span>Weight, <span class="dt">x=</span>Sex)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb122-2"><a href="introduction-to-linear-models.html#cb122-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb122-3"><a href="introduction-to-linear-models.html#cb122-3"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sex(1=M, 2=F)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Weight in lbs&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Weight by Sex&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-113-1.png" width="672" /></p>
+<p><strong>Boxplot of Age by Sex</strong></p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="introduction-to-linear-models.html#cb123-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Bears_Subset, <span class="kw">aes</span>(<span class="dt">y=</span>Age, <span class="dt">x=</span>Sex)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb123-2"><a href="introduction-to-linear-models.html#cb123-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb123-3"><a href="introduction-to-linear-models.html#cb123-3"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sex(1=M, 2=F)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Age in Months&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Age by Sex&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
+<p>The median age for female bears is older than for male bears. There are 2 male bears that are much older than any others.</p>
+<p><strong>Scatterplot of Age and Weight</strong></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-115-1.png" width="768" /></p>
+<p>We see that there is a positive, roughly linear, relationship between age and weight.</p>
+<p>We should note that this linear trend is not likely to continue outside the range of our observed ages.</p>
+</div>
+<div id="two-possible-models" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.6.5</span> Two Possible Models<a href="introduction-to-linear-models.html#two-possible-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We’ll consider two possible models, based on different sets of assumptions.</p>
+<p><strong>Model 1 Assumptions:</strong><br />
+* Assume weight increases linearly with age<br />
+* Allow for differences in expected weight for male and female bears of same age<br />
+* Assume male and female bears gain weight at the same rate as they age</p>
+<p><strong>Model 2 Assumptions</strong><br />
+* Assumes weight increases linearly with age<br />
+* Allows for differences in expected weight for male and female bears of same age<br />
+* Allows male and female bears to gain weight at different rates as they age</p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-117-1.png" width="1152" /></p>
+</div>
+<div id="models-with-interaction" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.6.6</span> Models with Interaction<a href="introduction-to-linear-models.html#models-with-interaction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Notice that in Model 1, the effect of age on weight is the same for both sexes, while in Model 2, the effect of age on weight depends on sex.</p>
+<p>An <strong>interaction</strong> between two explanatory variables occurs when the effect of one explanatory variable on the response depends on the other explanatory variable.</p>
+<p>In Model 2, there is an interaction between age and sex.</p>
+<p>**Note that neigher Model 1 nor Model 2 is inherently “correct”. They are just different ways to represent and model growth of bears. We should rely on our intuition, and background knowledge, as well as the data to inform us which model is more appropriate in a given context.</p>
+</div>
+<div id="model-equations" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.6.7</span> Model Equations<a href="introduction-to-linear-models.html#model-equations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Model 1:</strong></p>
+<p><span class="math inline">\(\widehat{\text{Weight}}= b_0+ b_1 \times\text{Age}+ b_2\times\text{I}_{Female}\)</span></p>
+<p><strong>Model 2:</strong></p>
+<p><span class="math inline">\(\widehat{\text{Weight}}= b_0+ b_1 \times\text{Age}+ b_2\times\text{I}_{Female} + b_3\times\text{Age}\times\text{I}_{Female}\)</span></p>
+<p>The term <span class="math inline">\(b_3\times\text{Age}\times\text{I}_{Female}\)</span>, involving a product of the explanatory variables is called an <strong>interaction term</strong>.</p>
+</div>
+<div id="expected-weight-equations" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.6.8</span> Expected Weight Equations<a href="introduction-to-linear-models.html#expected-weight-equations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Model 1:</strong></p>
+<p><span class="math inline">\(\widehat{\text{Weight}}= b_0+ b_1 \times\text{Age}+ b_2\times\text{I}_{Female}\)</span></p>
+<table>
+<thead>
+<tr class="header">
+<th>Sex</th>
+<th>Pred. Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>M</td>
+<td><span class="math inline">\(b_0 + b_1 \times\text{Age}\)</span></td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td><span class="math inline">\((b_0 + b_2) + b_1 \times\text{Age}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Model 2:</strong></p>
+<p><span class="math inline">\(\widehat{\text{Weight}}= b_0+ b_1 \times\text{Age}+ b_2\times\text{I}_{Female} + b_3\times\text{Age}\times\text{I}_{Female}\)</span></p>
+<table>
+<thead>
+<tr class="header">
+<th>Sex</th>
+<th>Pred. Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>M</td>
+<td><span class="math inline">\(b_0 + b_1 \times\text{Age}\)</span></td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td><span class="math inline">\((b_0 + b_2) + (b_1 + b_3) \times\text{Age}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Question:</strong> How should we interpret the coefficient <span class="math inline">\(b_1\)</span> in Model 1? Is the interpretation the same in Model 2? Why or why not?</p>
+</div>
+<div id="interpretations-of-interaction-model-coefficients" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.6.9</span> Interpretations of Interaction Model Coefficients<a href="introduction-to-linear-models.html#interpretations-of-interaction-model-coefficients" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Model 2</strong></p>
+<p><span class="math inline">\(\widehat{\text{Weight}}= b_0+ b_1 \times\text{Age}+ b_2\times\text{I}_{Female} + b_3\times\text{Age}\times\text{I}_{Female}\)</span></p>
+<table>
+<thead>
+<tr class="header">
+<th>Sex</th>
+<th>Pred. Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>M</td>
+<td><span class="math inline">\(b_0 + b_1 \times\text{Age}\)</span></td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td><span class="math inline">\((b_0 + b_2) + (b_1 + b_3) \times\text{Age}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Interpretations:<br />
+<span class="math inline">\(b_0\)</span>: expected weight of a <em>male</em> bear at birth (caution:extrapolation)<br />
+<span class="math inline">\(b_1\)</span>: expected weight gain per month for <em>male</em> bears<br />
+<span class="math inline">\(b_2\)</span>: expected difference in weight between female and male bears at birth (caution:extrapolation)<br />
+<span class="math inline">\(b_3\)</span>: expected difference in monthly weight gain for female bears, compared to male bears<br />
+<span class="math inline">\(b_0+b_2\)</span>: expected weight of a <em>female</em> bear at birth (caution:extrapolation)<br />
+<span class="math inline">\(b1 + b3\)</span>: expected weight gain per month for <em>female</em> bears</p>
+</div>
+<div id="model-1-r-output" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.6.10</span> Model 1 R Output<a href="introduction-to-linear-models.html#model-1-r-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="introduction-to-linear-models.html#cb124-1"></a>Bears_M_Age_Sex &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Bears_Subset, Weight <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Sex)</span>
+<span id="cb124-2"><a href="introduction-to-linear-models.html#cb124-2"></a><span class="kw">summary</span>(Bears_M_Age_Sex)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Weight ~ Age + Sex, data = Bears_Subset)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -164.194  -48.483   -3.723   27.766  188.684 
+## 
+## Coefficients:
+##             Estimate Std. Error t value           Pr(&gt;|t|)    
+## (Intercept)  82.6049    16.4019   5.036 0.0000058437067215 ***
+## Age           2.9242     0.2914  10.035 0.0000000000000744 ***
+## Sex2        -79.8967    20.1416  -3.967            0.00022 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 71.33 on 53 degrees of freedom
+##   (41 observations deleted due to missingness)
+## Multiple R-squared:  0.6679, Adjusted R-squared:  0.6554 
+## F-statistic: 53.29 on 2 and 53 DF,  p-value: 0.0000000000002061</code></pre>
+</div>
+<div id="model-2-r-output" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.6.11</span> Model 2 R Output<a href="introduction-to-linear-models.html#model-2-r-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To fit an interaction model in R, use <code>*</code> instead of <code>+</code></p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="introduction-to-linear-models.html#cb126-1"></a>Bears_M_Age_Sex_Int &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Bears_Subset, Weight<span class="op">~</span><span class="st"> </span>Age<span class="op">*</span>Sex)</span>
+<span id="cb126-2"><a href="introduction-to-linear-models.html#cb126-2"></a><span class="kw">summary</span>(Bears_M_Age_Sex_Int)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Weight ~ Age * Sex, data = Bears_Subset)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -207.583  -38.854   -9.574   23.905  174.802 
+## 
+## Coefficients:
+##             Estimate Std. Error t value          Pr(&gt;|t|)    
+## (Intercept)  70.4322    17.7260   3.973          0.000219 ***
+## Age           3.2381     0.3435   9.428 0.000000000000765 ***
+## Sex2        -31.9574    35.0314  -0.912          0.365848    
+## Age:Sex2     -1.0350     0.6237  -1.659          0.103037    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 70.18 on 52 degrees of freedom
+##   (41 observations deleted due to missingness)
+## Multiple R-squared:  0.6846, Adjusted R-squared:  0.6664 
+## F-statistic: 37.62 on 3 and 52 DF,  p-value: 0.0000000000004552</code></pre>
+</div>
+<div id="estimated-weight-equations" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.6.12</span> Estimated Weight Equations<a href="introduction-to-linear-models.html#estimated-weight-equations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Model 1</strong></p>
+<p><span class="math inline">\(\widehat{\text{Weight}}= 82.60 + 2.92 \times\text{Age} - 79.90\times\text{I}_{Female}\)</span></p>
+<p><strong>Model 2</strong></p>
+<p><span class="math inline">\(\widehat{\text{Weight}}= 70.43 + 3.24 \times\text{Age}- 31.96\times\text{I}_{Female} -1.04\times\text{Age}\times\text{I}_{Female}\)</span></p>
+<p>For Model 2, we can write different equations for bears of each sex:</p>
+<p>Male Bears:
+<span class="math display">\[
+\widehat{\text{Weight}}= 82.60 + 2.92 \times\text{Age}
+\]</span></p>
+<p>Female Bears:
+<span class="math display">\[
+\widehat{\text{Weight}}= (82.60 -79.90) + (2.92)\times\text{Age} \\
+= 2.7+2.92\times Age
+\]</span></p>
+</div>
+<div id="bears-int.-model-interpretations" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.6.13</span> Bears Int. Model Interpretations<a href="introduction-to-linear-models.html#bears-int.-model-interpretations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>For bears of the same sex, weight is expected to increase by 2.92 lbs. each month.</p></li>
+<li><p>On average, a female bear is expected to weigh 79.90 lbs less than a male bear of the same age.</p></li>
+<li><p>The intercept <span class="math inline">\(b_0=82.60\)</span> represents the expected weight of a male bear at birth. We should treat this interpretation with caution, since all bears in the dataset were at least 8 months old.</p></li>
+</ul>
+<p>Approximately 67% of the variation in bear weights is explained by the model using age and sex as explanatory variables.</p>
+</div>
+<div id="predicting-bear-weights" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.6.14</span> Predicting Bear Weights<a href="introduction-to-linear-models.html#predicting-bear-weights" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose Sally and Yogi are 25 month old bears, Sally is a female, Yogi a male.</p>
+<p><strong>Model 1</strong></p>
+<p>Sally’s Predicted Weight:</p>
+<p><span class="math inline">\(\widehat{\text{Weight}}= 82.60 + 2.920 \times 25 -78.90\times 1 \approx 75.8 \text{ lbs.}\)</span></p>
+<p>Yogi’s Predicted Weight:</p>
+<p><span class="math inline">\(\widehat{\text{Weight}}= 82.60 + 2.920 \times 25 -78.90\times 0 \approx 155.7 \text{ lbs.}\)</span></p>
+<p><strong>Model 2</strong></p>
+<p>Sally’s Predicted Weight:</p>
+<p><span class="math inline">\(\widehat{\text{Weight}}= 70.43+ 3.24 \times 25- 31.96\times1 -1.04\times25\times1 \approx 93.55 \text{ lbs.}\)</span></p>
+<p>Yogi’s Predicted Weight:</p>
+<p><span class="math inline">\(\widehat{\text{Weight}}= 70.43+ 3.24 \times 25- 31.96\times0 -1.04\times25\times0 \approx 151.38 \text{ lbs.}\)</span></p>
+</div>
+<div id="predict-function-in-r" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.6.15</span> <code>predict</code> Function in R<a href="introduction-to-linear-models.html#predict-function-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can use the <code>predict</code> function in R to calculate predictions.</p>
+<p>We first create a dataframe with the values and categories of explanatory variables for the cases we’re trying to predict.</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="introduction-to-linear-models.html#cb128-1"></a>Sex &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb128-2"><a href="introduction-to-linear-models.html#cb128-2"></a>Age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">25</span>, <span class="dv">25</span>)</span>
+<span id="cb128-3"><a href="introduction-to-linear-models.html#cb128-3"></a>NewBears &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Age, Sex)</span></code></pre></div>
+<p><strong>Model 1</strong></p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="introduction-to-linear-models.html#cb129-1"></a><span class="kw">predict</span>(Bears_M_Age_Sex, <span class="dt">newdata=</span>NewBears)</span></code></pre></div>
+<pre><code>##         1         2 
+## 155.71061  75.81394</code></pre>
+<p><strong>Model 2</strong></p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="introduction-to-linear-models.html#cb131-1"></a><span class="kw">predict</span>(Bears_M_Age_Sex_Int, <span class="dt">newdata=</span>NewBears)</span></code></pre></div>
+<pre><code>##         1         2 
+## 151.38566  93.55306</code></pre>
+</div>
+<div id="bears-weight-model-considerations" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.6.16</span> Bears Weight Model Considerations<a href="introduction-to-linear-models.html#bears-weight-model-considerations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p><span class="math inline">\(R^2\)</span> increased from 0.67 to 0.68 when the interaction term is added. This is a relatively small increase, so we might question whether the interaction term is needed.</p></li>
+<li><p>The constant slope model allows us to combine information across sexes to estimate the expected slope. The interaction model treats the two sexes completely separately, thus has less information to use for each estimate.</p></li>
+<li><p>Which model is preferable is not clear. In addition to the data, we should consider other relevent information. Do experts who study bears believe it is reasonable to assume that male and female bears grow at the same rate per month?</p></li>
+<li><p>While the models yield drastically different predictions for very young bears, the differences are not as big for bear 8 months or older. Regardless of model we use, we should be careful about making predictions for bears that are younger or older than those that we have data on.</p></li>
+</ul>
+<p>Both of these models contain assumptions that are probably unrealistic</p>
+<ul>
+<li><p>Both models assume that bears of the same sex gain weight linearly with age.</p></li>
+<li><p>A more realistic model might assume that bears gain weight more quickly when they are younger, and that the rate of growth slows once they reach adulthood.</p></li>
+<li><p>Are there variables not included in the model that might be predictive of a bear’s weight?</p></li>
+</ul>
+<p>Of course there is no statistical model that perfectly describes expected weight gain of bears. The question is whether we can find a model that provides an approximation that is reasonable enough to draw conclusions from.</p>
+<p>As statistician George Box famously said,</p>
+<p><em>“All models are wrong, but some are useful.”</em></p>
+</div>
+</div>
+<div id="more-on-interaction" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.7</span> More on Interaction<a href="introduction-to-linear-models.html#more-on-interaction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="two-categorical-variables" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.7.1</span> Two Categorical Variables<a href="introduction-to-linear-models.html#two-categorical-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the previous section, we saw an example of an interaction involving a quantitative variable (age), and a categorical variable (sex).</p>
+<p>Interactions between two categorical variables (or two quantitative variables) also occur in practice.</p>
+<p>Recall the definition of an interaction is that the effect of one explanatory variable on the response variable depends on the other categorical variable.</p>
+</div>
+<div id="bears-weight-by-season-and-sex" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.7.2</span> Bears Weight By Season and Sex<a href="introduction-to-linear-models.html#bears-weight-by-season-and-sex" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We’ll investigate whether bears tend to weigh more in certain seasons than others, and whether there effect of season is the same for male and female bears.</p>
+<p>We start by creating plots to explore the relationship between season and sex.</p>
+<p><strong>Observations per Season</strong></p>
+<p>Recall that the dataset contains the month the bear was observed. Let’s combine the months of April and May into a category called “Spring”, June, July, and August into “Summer”, and “September”, “October”, and “November”, into “Fall”.</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="introduction-to-linear-models.html#cb133-1"></a>Bears_Subset &lt;-<span class="st"> </span>Bears_Subset <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Season =</span> <span class="kw">ifelse</span>(Month <span class="op">%in%</span><span class="st"> </span><span class="dv">4</span><span class="op">:</span><span class="dv">5</span>, <span class="st">&quot;Spring&quot;</span>,</span>
+<span id="cb133-2"><a href="introduction-to-linear-models.html#cb133-2"></a><span class="kw">ifelse</span>(Month <span class="op">%in%</span><span class="st"> </span><span class="dv">6</span><span class="op">:</span><span class="dv">8</span>, <span class="st">&quot;Summer&quot;</span>, <span class="st">&quot;Fall&quot;</span>)))</span>
+<span id="cb133-3"><a href="introduction-to-linear-models.html#cb133-3"></a>Bears_Subset<span class="op">$</span>Season &lt;-<span class="st"> </span><span class="kw">as.factor</span>(Bears_Subset<span class="op">$</span>Season)</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="introduction-to-linear-models.html#cb134-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Bears_Subset, <span class="kw">aes</span>(<span class="dt">x=</span>Season)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">color=</span><span class="st">&quot;white&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>) </span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-124-1.png" width="672" /></p>
+<p><strong>Boxplot of Weight by Season</strong></p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="introduction-to-linear-models.html#cb135-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Bears_Subset, <span class="kw">aes</span>(<span class="dt">x=</span>Season, <span class="dt">y=</span>Weight)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>() </span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-125-1.png" width="672" /></p>
+<p><strong>Boxplot of Weight by Sex</strong></p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="introduction-to-linear-models.html#cb136-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Bears_Subset, <span class="kw">aes</span>(<span class="dt">y=</span>Weight, <span class="dt">x=</span>Sex)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb136-2"><a href="introduction-to-linear-models.html#cb136-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>()<span class="op">+</span></span>
+<span id="cb136-3"><a href="introduction-to-linear-models.html#cb136-3"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sex(1=M, 2=F)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Weight&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Weight by Sex&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
+<p>We see that male bears (Category 1) weigh more than female bears on average, and that there is more variability in the weights of male bears than female bears.</p>
+</div>
+<div id="two-models" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.7.3</span> Two Models<a href="introduction-to-linear-models.html#two-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We’ll consider two models:</p>
+<p><strong>Model 1 Assumptions</strong> (No interaction):</p>
+<ul>
+<li>Allows weights to differ by sex and season.<br />
+</li>
+<li>Assumes difference between sexes is the same in each season and difference between seasons is the same for each sex.</li>
+</ul>
+<p><strong>Model 2 Assumptions</strong>: (Interaction between sex and season)</p>
+<ul>
+<li>Allows for differences between seasons and sexes.<br />
+</li>
+<li>Allows for differences between sexes to vary between seasons and difference between seasons to vary between sexes.</li>
+</ul>
+</div>
+<div id="model-equations-1" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.7.4</span> Model Equations<a href="introduction-to-linear-models.html#model-equations-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Model 1 Equation</strong> (No Interaction)</p>
+<p><span class="math inline">\(\widehat{\text{Weight}} = b_0+b_1\times\text{I}_{\text{Spring}}+b_2\times\text{I}_{\text{Summer}} + b_3\times\text{I}_{\text{Female}}\)</span></p>
+<table>
+<thead>
+<tr class="header">
+<th>Season</th>
+<th>Male</th>
+<th>Female</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fall</td>
+<td><span class="math inline">\(b_0\)</span></td>
+<td><span class="math inline">\(b_0 + b_3\)</span></td>
+</tr>
+<tr class="even">
+<td>Spring</td>
+<td><span class="math inline">\(b_0 + b_1\)</span></td>
+<td><span class="math inline">\(b_0 + b_1+ b_3\)</span></td>
+</tr>
+<tr class="odd">
+<td>Summer</td>
+<td><span class="math inline">\(b_0 + b_2\)</span></td>
+<td><span class="math inline">\(b_0 + b_2+ b_3\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Model 2 Equation</strong> (Interaction)</p>
+<p><span class="math display">\[\widehat{\text{Weight}} = b_0 + b_1 \times\text{I}_{\text{Spring}} + b_2\times\text{I}_{\text{Summer}} +b_3\times\text{I}_{\text{Female}}\\ +b_4\times\text{I}_{\text{Spring}}\text{I}_{\text{Female}} +b_5\times\text{I}_{\text{Summer}}\text{I}_{\text{Female}}\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Male</th>
+<th>Female</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fall</td>
+<td><span class="math inline">\(b_0\)</span></td>
+<td><span class="math inline">\(b_0+b_3\)</span></td>
+</tr>
+<tr class="even">
+<td>Spring</td>
+<td><span class="math inline">\(b_0+b_1\)</span></td>
+<td><span class="math inline">\(b_0+b_1 +b_3+b_4\)</span></td>
+</tr>
+<tr class="odd">
+<td>Summer</td>
+<td><span class="math inline">\(b_0+b_2\)</span></td>
+<td><span class="math inline">\(b_0+b_2+b_3+b_5\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(b_4\)</span> and <span class="math inline">\(b_5\)</span> are called <strong>interaction effects</strong>.</p>
+<p>Notice that in Model 1, <span class="math inline">\(b3\)</span> always represents the expected difference in weights between male and female bears, regardless of season, while in Model 2, the expected difference between male and female bears’ weights depends on the season.</p>
+</div>
+<div id="bears-season-and-sex-interaction-model" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.7.5</span> Bears Season and Sex Interaction Model<a href="introduction-to-linear-models.html#bears-season-and-sex-interaction-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To fit an interaction model in R, use <code>*</code> instead of <code>+</code></p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="introduction-to-linear-models.html#cb137-1"></a>Bears_M_Season_Sex_Int &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Bears_Subset, Weight<span class="op">~</span>Season <span class="op">*</span><span class="st"> </span>Sex)</span>
+<span id="cb137-2"><a href="introduction-to-linear-models.html#cb137-2"></a><span class="kw">summary</span>(Bears_M_Season_Sex_Int)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Weight ~ Season * Sex, data = Bears_Subset)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -181.14  -73.14  -13.07   58.81  292.86 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value            Pr(&gt;|t|)    
+## (Intercept)         221.14      20.28  10.905 &lt;0.0000000000000002 ***
+## SeasonSpring        -14.00      45.99  -0.304               0.762    
+## SeasonSummer        -17.95      29.49  -0.608               0.544    
+## Sex2                -50.07      35.54  -1.409               0.162    
+## SeasonSpring:Sex2   -29.08      68.34  -0.425               0.672    
+## SeasonSummer:Sex2   -30.41      50.73  -0.599               0.550    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 109.2 on 91 degrees of freedom
+## Multiple R-squared:  0.1064, Adjusted R-squared:  0.0573 
+## F-statistic: 2.167 on 5 and 91 DF,  p-value: 0.06458</code></pre>
+</div>
+<div id="predictions-for-season-and-sex-interaction-model" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.7.6</span> Predictions for Season and Sex Interaction Model<a href="introduction-to-linear-models.html#predictions-for-season-and-sex-interaction-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display">\[\widehat{\text{Weight}} = b_0 + b_1 \times\text{I}_{\text{Spring}} + b_2\times\text{I}_{\text{Summer}} +b_3\times\text{I}_{\text{Female}}\\ +b_4\times\text{I}_{\text{Spring}}\text{I}_{\text{Female}} +b_5\times\text{I}_{\text{Summer}}\text{I}_{\text{Female}}\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\widehat{\text{Weight}} &amp;= 221.14 -14.00 \times\text{I}_{\text{Spring}} -17.95\times\text{I}_{\text{Summer}} -50.07\times\text{I}_{\text{Female}} \\
+&amp;-29.08\times\text{I}_{\text{Spring}}\text{I}_{\text{Female}} -30.41\times\text{I}_{\text{Summer}}\text{I}_{\text{Female}}
+\end{aligned}
+\]</span></p>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="38%" />
+<col width="38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Male</th>
+<th>Female</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fall</td>
+<td>221.14 -14.00(0) -17.95(0) -50.07(0) -29.08(0)(0) -30.41(0)(0)=221.14</td>
+<td>221.14 -14.00(0) -17.95(0) -50.07(1) -29.08(0)(1) -30.41(0)(1) =171.07</td>
+</tr>
+<tr class="even">
+<td>Spring</td>
+<td>221.14 -14.00(1) -17.95(0) -50.07(0) -29.08(1)(0) -30.41(0)(0) =207.14</td>
+<td>211.375 + 8.01221.14 -14.00(1) -17.95(0) -50.07(1) -29.08(1)(1) -30.41(0)(1)=128.00</td>
+</tr>
+<tr class="odd">
+<td>Summer</td>
+<td>221.14 -14.00(0) -17.95(1) -50.07(0) -29.08(0)(0) -30.41(1)(0) =203.19</td>
+<td>221.14 -14.00(0) -17.95(1) -50.07(1) -29.08(0)(1) -30.41(1)(1) =122.71</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="season-and-sex-interaction-model-interpretations" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.7.7</span> Season and Sex Interaction Model Interpretations<a href="introduction-to-linear-models.html#season-and-sex-interaction-model-interpretations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display">\[\widehat{\text{Weight}} = b_0 + b_1 \times\text{I}_{\text{Spring}} + b_2\times\text{I}_{\text{Summer}} +b_3\times\text{I}_{\text{Female}}\\ +b_4\times\text{I}_{\text{Spring}}\text{I}_{\text{Female}} +b_5\times\text{I}_{\text{Summer}}\text{I}_{\text{Female}}\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Male</th>
+<th>Female</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fall</td>
+<td><span class="math inline">\(b_0\)</span></td>
+<td><span class="math inline">\(b_0+b_3\)</span></td>
+</tr>
+<tr class="even">
+<td>Spring</td>
+<td><span class="math inline">\(b_0+b_1\)</span></td>
+<td><span class="math inline">\(b_0+b_1 +b_3+b_4\)</span></td>
+</tr>
+<tr class="odd">
+<td>Summer</td>
+<td><span class="math inline">\(b_0+b_2\)</span></td>
+<td><span class="math inline">\(b_0+b_2+b_3+b_5\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><span class="math inline">\(b_0\)</span> represents expected weight of male bear in fall<br />
+</li>
+<li><span class="math inline">\(b_1\)</span> represents difference between expected male bear weight in spring, compared to fall<br />
+</li>
+<li><span class="math inline">\(b_2\)</span> represents difference between expected male bear weight in summer, compared to fall<br />
+</li>
+<li><span class="math inline">\(b_3\)</span> represents difference between expected female bear weight, compared to male bear weight in fall<br />
+</li>
+<li><span class="math inline">\(b_4\)</span> represents difference in expected weights between the sexes in the spring, compared to the difference in the fall<br />
+</li>
+<li><span class="math inline">\(b_5\)</span> represents difference in expected weights between the sexes in the summer, compared to the difference in the fall</li>
+</ul>
+</div>
+<div id="interpretations-for-season-and-sex-interaction-model" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.7.8</span> Interpretations for Season and Sex Interaction Model<a href="introduction-to-linear-models.html#interpretations-for-season-and-sex-interaction-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display">\[
+\begin{aligned}
+\widehat{\text{Weight}} &amp;= 221.14 -14.00 \times\text{I}_{\text{Spring}} -17.95\times\text{I}_{\text{Summer}} -50.07\times\text{I}_{\text{Female}} \\
+&amp;-29.08\times\text{I}_{\text{Spring}}\text{I}_{\text{Female}} -30.41\times\text{I}_{\text{Summer}}\text{I}_{\text{Female}}
+\end{aligned}
+\]</span></p>
+<ul>
+<li>On average, male bears are expected to weigh 221.14 lbs in the fall.<br />
+</li>
+<li>On average male bears are expected to weigh 14 lbs less in the spring than in the fall.<br />
+</li>
+<li>On average, male bears are expected to weigh 17.95 lbs less in the summer than in the fall.<br />
+</li>
+<li>On average, female bears are expected to weigh 50.07 lbs less than male bears in the fall.<br />
+</li>
+<li>On average, the female bears are expected to weigh 29.08 lbs. less relative to male bears in the spring, compared to the expected difference the fall. Thus, female bears are expected to weigh 50.07 + 29.08 = 79.17 lbs less than male bears in the spring.<br />
+</li>
+<li>On average, female bears are expected to weigh 30.41 lbs less, relative to male bears in the summer, compared to the expected difference in the fall. Thus, female bears are expected to weigh <span class="math inline">\(50.07 + 30.41 = 80.48\)</span> lbs less than male bears in the summer.</li>
+</ul>
+<p>The interaction model explains about 10.6% of the variation in bear weights.</p>
+</div>
+<div id="predicting-new-observations-in-r" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.7.9</span> Predicting New Observations in R<a href="introduction-to-linear-models.html#predicting-new-observations-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can calculate predictions directly in R by putting the new data in a data.frame and calling the <code>predict()</code> function.</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="introduction-to-linear-models.html#cb139-1"></a>Season &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Fall&quot;</span>, <span class="st">&quot;Fall&quot;</span>, <span class="st">&quot;Spring&quot;</span>, <span class="st">&quot;Spring&quot;</span>, <span class="st">&quot;Summer&quot;</span>, <span class="st">&quot;Summer&quot;</span>)</span>
+<span id="cb139-2"><a href="introduction-to-linear-models.html#cb139-2"></a>Sex &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb139-3"><a href="introduction-to-linear-models.html#cb139-3"></a>NewBears &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Season, Sex)</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="introduction-to-linear-models.html#cb140-1"></a><span class="kw">predict</span>(Bears_M_Season_Sex_Int, <span class="dt">newdata=</span>NewBears)</span></code></pre></div>
+<pre><code>##        1        2        3        4        5        6 
+## 221.1379 171.0714 207.1429 128.0000 203.1923 122.7143</code></pre>
+</div>
+<div id="interaction-between-two-quantitative-variables" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.7.10</span> Interaction Between Two Quantitative Variables<a href="introduction-to-linear-models.html#interaction-between-two-quantitative-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Interactions are also possible between two quantitative variables.</p>
+<p>Suppose, for example, that we want to examine the relationship between age and length on weight of a bear.</p>
+<p>If we expect that the effect of an additional inch in length, on the weight of a bear, might be different depending on the bear’s age, then this would be an example of an interaction between age and length.</p>
+</div>
+<div id="models-for-age-and-length" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.7.11</span> Models for Age and Length<a href="introduction-to-linear-models.html#models-for-age-and-length" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Model 1 Assumptions</strong> (No interaction):</p>
+<ul>
+<li>Allows weights to differ by sex and season.<br />
+</li>
+<li>Assumes difference between sexes is the same in each season and difference between seasons is the same for each sex.</li>
+</ul>
+<p><strong>Model 2 Assumptions</strong>: (Interaction between sex and season)</p>
+<ul>
+<li>Allows for differences between seasons and sexes.<br />
+</li>
+<li>Allows for differences between sexes to vary between seasons and difference between seasons to vary between sexes.</li>
+</ul>
+</div>
+<div id="model-equations-2" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.7.12</span> Model Equations<a href="introduction-to-linear-models.html#model-equations-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Model 1 Equation</strong> (No Interaction)</p>
+<p><span class="math inline">\(\widehat{\text{Weight}} = b_0+b_1\times\text{Age}+b_2\times\text{Length}\)</span></p>
+<p><strong>Model 2 Equation</strong> (Interaction)</p>
+<p><span class="math inline">\(\widehat{\text{Weight}} = b_0+b_1\times\text{Age}+b_2\times\text{Length} + b_3 \times\text{Age}\times\text{Length}\)</span></p>
+<p><span class="math inline">\(b_3\)</span> is an <strong>interaction effects</strong>.</p>
+</div>
+<div id="and-24-month-old-bears" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.7.13</span> 6 and 24 Month Old Bears<a href="introduction-to-linear-models.html#and-24-month-old-bears" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the interaction model (Model 2), the effect of length on weight depends on age:</p>
+<p>For a 6-month old bear:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\widehat{\text{Weight}} &amp; = b_0+6b_1+b_2\times\text{Length} + 6b_3 \times\text{Length} \\
+&amp; = (b_0+6b_1)+(b_2+6b_3)\times\text{Length} 
+\end{aligned}
+\]</span></p>
+<p>For each additional inch in length, the weight of a 6-month old bear is expected to increase by <span class="math inline">\(b_2+6b_3\)</span> pounds.</p>
+<p>For a 24-month old bear:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\widehat{\text{Weight}} &amp; = b_0+6b_1+b_2\times\text{Length} + 6b_3 \times\text{Length} \\
+&amp; = (b_0+24b_1)+(b_2+24b_3)\times\text{Length} 
+\end{aligned}
+\]</span></p>
+<p>For each additional inch in length, the weight of a 24-month old bear is expected to increase by <span class="math inline">\(b_2+24b_3\)</span> pounds.</p>
+</div>
+<div id="interaction-model-in-r" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.7.14</span> Interaction Model in R<a href="introduction-to-linear-models.html#interaction-model-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="introduction-to-linear-models.html#cb142-1"></a>Bears_M_Age_Length_Int &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Bears_Subset, Weight<span class="op">~</span><span class="st"> </span>Age<span class="op">*</span>Length)</span>
+<span id="cb142-2"><a href="introduction-to-linear-models.html#cb142-2"></a><span class="kw">summary</span>(Bears_M_Age_Length_Int)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Weight ~ Age * Length, data = Bears_Subset)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -121.93  -29.90   -7.37   16.25  130.22 
+## 
+## Coefficients:
+##               Estimate Std. Error t value    Pr(&gt;|t|)    
+## (Intercept) -165.82578   54.76390  -3.028    0.003826 ** 
+## Age           -7.66320    1.97286  -3.884    0.000292 ***
+## Length         5.62418    1.00480   5.597 0.000000826 ***
+## Age:Length     0.12577    0.02848   4.416 0.000051090 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 49.1 on 52 degrees of freedom
+##   (41 observations deleted due to missingness)
+## Multiple R-squared:  0.8456, Adjusted R-squared:  0.8367 
+## F-statistic: 94.94 on 3 and 52 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p>For each additional inch in length, the weight of a 6-month old bear is expected to increase by <span class="math inline">\(5.624+6(0.126)=6.38\)</span> pounds.</p>
+<p>For each additional inch in length, the weight of a 6-month old bear is expected to increase by <span class="math inline">\(5.624+24(0.126)=8.65\)</span> pounds.</p>
+<p>The interaction model explains about 85% of total variability in bear weight.</p>
+<p>We could, of course, perform similar calculations for bears of any age/length.</p>
+<p>The key is that the effect of length on weight depends on age (and likewise, the effect of age on weight depends on length).</p>
+</div>
+<div id="interaction-vs-correlation" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.7.15</span> Interaction vs Correlation<a href="introduction-to-linear-models.html#interaction-vs-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>It is easy to confuse the concept of interaction with that of correlation (seen in Section 1.2).</p>
+<p>A correlation between two variables means that as one increases, the other is more likely to increase or decrease.</p>
+<p>An interaction between two explanatory variables means that the effect of one on the response depends on the other.</p>
+<p>For example, we might expect that bigger cars will get lower gas mileage. This is an example of a (negative) correlation between gas mileage and size of the car.</p>
+<p>In the example, there would only be an interaction, if the effect of gas mileage on a response variable (say price) depends on the size of the car. If for example, better gas mileage was associated with higher price for small cars, but had no impact on price for large cars, then this would be an example of an interaction between price and gas mileage.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="exploratory-data-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="a-caucus-race-and-a-long-tale.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/Stat255-LU/Notes/edit/master/02_Introduction_to_Statistical_Models.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/Stat255-LU/Notes/blob/master/02_Introduction_to_Statistical_Models.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

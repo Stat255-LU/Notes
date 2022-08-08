@@ -23,14 +23,14 @@
 <meta name="author" content="Andrew Sage - Lawrence University" />
 
 
-<meta name="date" content="2022-08-01" />
+<meta name="date" content="2022-08-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="the-pool-of-tears.html"/>
+<link rel="prev" href="introduction-to-statistical-models.html"/>
 
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -134,13 +134,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">SHORT TITLE HERE</a></li>
+<li><a href="./">STAT 255 Notes</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#what-is-this-course"><i class="fa fa-check"></i><b>0.1</b> What is this course?</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#who-is-this-course-for"><i class="fa fa-check"></i><b>0.2</b> Who is this course for?</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Exploratory Data Analysis</a><ul>
 <li class="chapter" data-level="1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exploring-diamond-prices"><i class="fa fa-check"></i><b>1.1</b> Exploring Diamond Prices</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-data"><i class="fa fa-check"></i><b>1.1.1</b> The Data</a></li>
@@ -171,7 +168,110 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2.15" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#summary-tables"><i class="fa fa-check"></i><b>1.2.15</b> Summary Tables</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="the-pool-of-tears.html"><a href="the-pool-of-tears.html"><i class="fa fa-check"></i><b>2</b> The pool of tears</a></li>
+<li class="chapter" data-level="2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html"><i class="fa fa-check"></i><b>2</b> Introduction to Statistical Models</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#predicting-house-prices"><i class="fa fa-check"></i><b>2.1</b> Predicting House Prices</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#house-prices-in-ames-ia"><i class="fa fa-check"></i><b>2.1.1</b> House Prices in Ames IA</a></li>
+<li class="chapter" data-level="2.1.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#prices-by-neighborhood"><i class="fa fa-check"></i><b>2.1.2</b> Prices by Neighborhood</a></li>
+<li class="chapter" data-level="2.1.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#house-prices-by-size"><i class="fa fa-check"></i><b>2.1.3</b> House Prices by Size</a></li>
+<li class="chapter" data-level="2.1.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#explanatory-and-response-variables"><i class="fa fa-check"></i><b>2.1.4</b> Explanatory and Response Variables</a></li>
+<li class="chapter" data-level="2.1.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#prediction-with-no-explanatory-variables"><i class="fa fa-check"></i><b>2.1.5</b> Prediction with No Explanatory Variables</a></li>
+<li class="chapter" data-level="2.1.6" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#simple-model-in-r"><i class="fa fa-check"></i><b>2.1.6</b> Simple Model in R</a></li>
+<li class="chapter" data-level="2.1.7" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#prediction-for-a-categorical-explanatory-variable"><i class="fa fa-check"></i><b>2.1.7</b> Prediction for a Categorical Explanatory Variable</a></li>
+<li class="chapter" data-level="2.1.8" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-by-neighborhood-in-r"><i class="fa fa-check"></i><b>2.1.8</b> Model by Neighborhood in R</a></li>
+<li class="chapter" data-level="2.1.9" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-notation-for-houses-by-neighborhood"><i class="fa fa-check"></i><b>2.1.9</b> Model Notation for Houses by Neighborhood</a></li>
+<li class="chapter" data-level="2.1.10" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#prediction-for-quantitative-explanatory-variable"><i class="fa fa-check"></i><b>2.1.10</b> Prediction for Quantitative Explanatory Variable</a></li>
+<li class="chapter" data-level="2.1.11" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-using-square-feet"><i class="fa fa-check"></i><b>2.1.11</b> Model using Square Feet</a></li>
+<li class="chapter" data-level="2.1.12" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-for-squarefeet-and-interpretations"><i class="fa fa-check"></i><b>2.1.12</b> Model for SquareFeet and Interpretations</a></li>
+<li class="chapter" data-level="2.1.13" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#calculating-predicted-prices"><i class="fa fa-check"></i><b>2.1.13</b> Calculating Predicted Prices</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variability-explained-by-a-model"><i class="fa fa-check"></i><b>2.2</b> Variability Explained by a Model</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#quantifying-variability"><i class="fa fa-check"></i><b>2.2.1</b> Quantifying Variability</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#residuals-for-three-models"><i class="fa fa-check"></i><b>2.2.2</b> Residuals for Three Models</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#quantifying-unexplained-variablility"><i class="fa fa-check"></i><b>2.2.3</b> Quantifying Unexplained Variablility</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#total-sum-of-squares-sst"><i class="fa fa-check"></i><b>2.2.4</b> Total Sum of Squares (SST)</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#ssr-and-ssm"><i class="fa fa-check"></i><b>2.2.5</b> SSR and SSM</a></li>
+<li class="chapter" data-level="2.2.6" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#summary-sst-ssr-ssm-r2"><i class="fa fa-check"></i><b>2.2.6</b> Summary: SST, SSR, SSM, <span class="math inline">\(R^2\)</span></a></li>
+<li class="chapter" data-level="2.2.7" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#r2-visually"><i class="fa fa-check"></i><b>2.2.7</b> <span class="math inline">\(R^2\)</span> Visually</a></li>
+<li class="chapter" data-level="2.2.8" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#residuals-for-square-feet-model"><i class="fa fa-check"></i><b>2.2.8</b> Residuals for Square Feet Model</a></li>
+<li class="chapter" data-level="2.2.9" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variation-explained-by-squarefeet-model"><i class="fa fa-check"></i><b>2.2.9</b> Variation Explained by SquareFeet Model</a></li>
+<li class="chapter" data-level="2.2.10" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variation-explained-by-square-feet-model"><i class="fa fa-check"></i><b>2.2.10</b> Variation Explained by Square Feet Model</a></li>
+<li class="chapter" data-level="2.2.11" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#linear-correlation-coefficient"><i class="fa fa-check"></i><b>2.2.11</b> Linear Correlation Coefficient</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#multiple-regression-model"><i class="fa fa-check"></i><b>2.3</b> Multiple Regression Model</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#multiple-regression-model-1"><i class="fa fa-check"></i><b>2.3.1</b> Multiple Regression Model</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variable-model-different-slopes"><i class="fa fa-check"></i><b>2.3.2</b> 2-Variable Model Different Slopes</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variable-model-with-constant-slope"><i class="fa fa-check"></i><b>2.3.3</b> 2-Variable Model with Constant Slope</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#mr-model-for-squarefeet-and-neighborhood"><i class="fa fa-check"></i><b>2.3.4</b> MR Model for SquareFeet and Neighborhood</a></li>
+<li class="chapter" data-level="2.3.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#predicting-price-in-mr-model"><i class="fa fa-check"></i><b>2.3.5</b> Predicting Price in MR Model</a></li>
+<li class="chapter" data-level="2.3.6" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#risk-of-extrapolation"><i class="fa fa-check"></i><b>2.3.6</b> Risk of Extrapolation</a></li>
+<li class="chapter" data-level="2.3.7" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#residuals-for-2-variable-model"><i class="fa fa-check"></i><b>2.3.7</b> Residuals for 2-Variable Model</a></li>
+<li class="chapter" data-level="2.3.8" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#residuals-for-2-variable-model-cont."><i class="fa fa-check"></i><b>2.3.8</b> Residuals for 2-Variable Model (cont.)</a></li>
+<li class="chapter" data-level="2.3.9" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variation-explained-by-2-variable-model"><i class="fa fa-check"></i><b>2.3.9</b> Variation Explained by 2-Variable Model</a></li>
+<li class="chapter" data-level="2.3.10" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-comparison-summary"><i class="fa fa-check"></i><b>2.3.10</b> Model Comparison Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#least-squares-estimation"><i class="fa fa-check"></i><b>2.4</b> Least-Squares Estimation</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#line-of-best-fit"><i class="fa fa-check"></i><b>2.4.1</b> Line of Best Fit</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#least-squares-estimation-in-simple-linear-regression"><i class="fa fa-check"></i><b>2.4.2</b> Least-Squares Estimation in Simple Linear Regression</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#least-squares-estimation-in-simple-linear-regression-cont."><i class="fa fa-check"></i><b>2.4.3</b> Least-Squares Estimation in Simple Linear Regression (cont.)</a></li>
+<li class="chapter" data-level="2.4.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#ls-estimation-for-one-categorical-variable"><i class="fa fa-check"></i><b>2.4.4</b> LS Estimation for One Categorical Variable</a></li>
+<li class="chapter" data-level="2.4.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#ls-estimation-more-generally"><i class="fa fa-check"></i><b>2.4.5</b> LS Estimation More Generally</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>2.5</b> ANalysis Of VAriance</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#submodels"><i class="fa fa-check"></i><b>2.5.1</b> Submodels</a></li>
+<li class="chapter" data-level="2.5.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#comparing-submodels"><i class="fa fa-check"></i><b>2.5.2</b> Comparing Submodels</a></li>
+<li class="chapter" data-level="2.5.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#comments-on-f-statistic"><i class="fa fa-check"></i><b>2.5.3</b> Comments on F-Statistic</a></li>
+<li class="chapter" data-level="2.5.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#anova-f-statistic"><i class="fa fa-check"></i><b>2.5.4</b> ANOVA F-Statistic</a></li>
+<li class="chapter" data-level="2.5.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#anova-f-statistic-for-m2-vs-m3-in-r"><i class="fa fa-check"></i><b>2.5.5</b> ANOVA F-Statistic for M2 vs M3 in R</a></li>
+<li class="chapter" data-level="2.5.6" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#anova-f-statistic-for-m1-vs-m0"><i class="fa fa-check"></i><b>2.5.6</b> ANOVA F-Statistic for M1 vs M0</a></li>
+<li class="chapter" data-level="2.5.7" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#anova-f-statistic-for-m0-vs-m1-in-r"><i class="fa fa-check"></i><b>2.5.7</b> ANOVA F-Statistic for M0 vs M1 in R</a></li>
+<li class="chapter" data-level="2.5.8" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#anova-f-statistic-for-categorical-variables"><i class="fa fa-check"></i><b>2.5.8</b> ANOVA F-Statistic for Categorical Variables</a></li>
+<li class="chapter" data-level="2.5.9" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#f-statistic-for-categorical-variables-illustration"><i class="fa fa-check"></i><b>2.5.9</b> F-Statistic for Categorical Variables Illustration</a></li>
+<li class="chapter" data-level="2.5.10" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#alternative-f-statistic-formula"><i class="fa fa-check"></i><b>2.5.10</b> Alternative F-Statistic Formula</a></li>
+<li class="chapter" data-level="2.5.11" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#calculating-f-statistic-for-categorical-variables"><i class="fa fa-check"></i><b>2.5.11</b> Calculating F-Statistic for Categorical Variables</a></li>
+<li class="chapter" data-level="2.5.12" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#calculating-f-statistic-for-categorical-variables-1"><i class="fa fa-check"></i><b>2.5.12</b> Calculating F-Statistic for Categorical Variables</a></li>
+<li class="chapter" data-level="2.5.13" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#alternative-calculation-in-r"><i class="fa fa-check"></i><b>2.5.13</b> Alternative Calculation in R</a></li>
+<li class="chapter" data-level="2.5.14" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#f-statistic-in-r-output"><i class="fa fa-check"></i><b>2.5.14</b> F-Statistic in R Output</a></li>
+<li class="chapter" data-level="2.5.15" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#f-statistic-in-r-output-m1"><i class="fa fa-check"></i><b>2.5.15</b> F-Statistic in R Output M1</a></li>
+<li class="chapter" data-level="2.5.16" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#f-statistic-in-r-output-m2"><i class="fa fa-check"></i><b>2.5.16</b> F-Statistic in R Output M2</a></li>
+<li class="chapter" data-level="2.5.17" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#f-statistic-in-r-output-m3"><i class="fa fa-check"></i><b>2.5.17</b> F-Statistic in R Output M3</a></li>
+<li class="chapter" data-level="2.5.18" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#when-to-use-f-statistics-for-model-comparison"><i class="fa fa-check"></i><b>2.5.18</b> When to Use F-Statistics for Model Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#models-involving-interaction"><i class="fa fa-check"></i><b>2.6</b> Models Involving Interaction</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#bear-weights-dataset"><i class="fa fa-check"></i><b>2.6.1</b> Bear Weights Dataset</a></li>
+<li class="chapter" data-level="2.6.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#exploring-bears-data"><i class="fa fa-check"></i><b>2.6.2</b> Exploring Bears Data</a></li>
+<li class="chapter" data-level="2.6.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#bears-data-cleaning"><i class="fa fa-check"></i><b>2.6.3</b> Bears Data Cleaning</a></li>
+<li class="chapter" data-level="2.6.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#bear-weights-and-ages"><i class="fa fa-check"></i><b>2.6.4</b> Bear Weights and Ages</a></li>
+<li class="chapter" data-level="2.6.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#two-possible-models"><i class="fa fa-check"></i><b>2.6.5</b> Two Possible Models</a></li>
+<li class="chapter" data-level="2.6.6" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#models-with-interaction"><i class="fa fa-check"></i><b>2.6.6</b> Models with Interaction</a></li>
+<li class="chapter" data-level="2.6.7" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-equations"><i class="fa fa-check"></i><b>2.6.7</b> Model Equations</a></li>
+<li class="chapter" data-level="2.6.8" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#expected-weight-equations"><i class="fa fa-check"></i><b>2.6.8</b> Expected Weight Equations</a></li>
+<li class="chapter" data-level="2.6.9" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interpretations-of-interaction-model-coefficients"><i class="fa fa-check"></i><b>2.6.9</b> Interpretations of Interaction Model Coefficients</a></li>
+<li class="chapter" data-level="2.6.10" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-1-r-output"><i class="fa fa-check"></i><b>2.6.10</b> Model 1 R Output</a></li>
+<li class="chapter" data-level="2.6.11" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-2-r-output"><i class="fa fa-check"></i><b>2.6.11</b> Model 2 R Output</a></li>
+<li class="chapter" data-level="2.6.12" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#estimated-weight-equations"><i class="fa fa-check"></i><b>2.6.12</b> Estimated Weight Equations</a></li>
+<li class="chapter" data-level="2.6.13" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#bears-int.-model-interpretations"><i class="fa fa-check"></i><b>2.6.13</b> Bears Int. Model Interpretations</a></li>
+<li class="chapter" data-level="2.6.14" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#predicting-bear-weights"><i class="fa fa-check"></i><b>2.6.14</b> Predicting Bear Weights</a></li>
+<li class="chapter" data-level="2.6.15" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#predict-function-in-r"><i class="fa fa-check"></i><b>2.6.15</b> <code>predict</code> Function in R</a></li>
+<li class="chapter" data-level="2.6.16" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#bears-weight-model-considerations"><i class="fa fa-check"></i><b>2.6.16</b> Bears Weight Model Considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#more-on-interaction"><i class="fa fa-check"></i><b>2.7</b> More on Interaction</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#two-categorical-variables"><i class="fa fa-check"></i><b>2.7.1</b> Two Categorical Variables</a></li>
+<li class="chapter" data-level="2.7.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#bears-weight-by-season-and-sex"><i class="fa fa-check"></i><b>2.7.2</b> Bears Weight By Season and Sex</a></li>
+<li class="chapter" data-level="2.7.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#two-models"><i class="fa fa-check"></i><b>2.7.3</b> Two Models</a></li>
+<li class="chapter" data-level="2.7.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-equations-1"><i class="fa fa-check"></i><b>2.7.4</b> Model Equations</a></li>
+<li class="chapter" data-level="2.7.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#bears-season-and-sex-interaction-model"><i class="fa fa-check"></i><b>2.7.5</b> Bears Season and Sex Interaction Model</a></li>
+<li class="chapter" data-level="2.7.6" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#predictions-for-season-and-sex-interaction-model"><i class="fa fa-check"></i><b>2.7.6</b> Predictions for Season and Sex Interaction Model</a></li>
+<li class="chapter" data-level="2.7.7" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#season-and-sex-interaction-model-interpretations"><i class="fa fa-check"></i><b>2.7.7</b> Season and Sex Interaction Model Interpretations</a></li>
+<li class="chapter" data-level="2.7.8" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interpretations-for-season-and-sex-interaction-model"><i class="fa fa-check"></i><b>2.7.8</b> Interpretations for Season and Sex Interaction Model</a></li>
+<li class="chapter" data-level="2.7.9" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#predicting-new-observations-in-r"><i class="fa fa-check"></i><b>2.7.9</b> Predicting New Observations in R</a></li>
+<li class="chapter" data-level="2.7.10" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-between-two-quantitative-variables"><i class="fa fa-check"></i><b>2.7.10</b> Interaction Between Two Quantitative Variables</a></li>
+<li class="chapter" data-level="2.7.11" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#models-for-age-and-length"><i class="fa fa-check"></i><b>2.7.11</b> Models for Age and Length</a></li>
+<li class="chapter" data-level="2.7.12" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-equations-2"><i class="fa fa-check"></i><b>2.7.12</b> Model Equations</a></li>
+<li class="chapter" data-level="2.7.13" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#and-24-month-old-bears"><i class="fa fa-check"></i><b>2.7.13</b> 6 and 24 Month Old Bears</a></li>
+<li class="chapter" data-level="2.7.14" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-model-in-r"><i class="fa fa-check"></i><b>2.7.14</b> Interaction Model in R</a></li>
+<li class="chapter" data-level="2.7.15" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-vs-correlation"><i class="fa fa-check"></i><b>2.7.15</b> Interaction vs Correlation</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="a-caucus-race-and-a-long-tale.html"><a href="a-caucus-race-and-a-long-tale.html"><i class="fa fa-check"></i><b>3</b> A caucus-race and a long tale</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -201,7 +301,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="the-pool-of-tears.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction-to-statistical-models.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
@@ -256,6 +356,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

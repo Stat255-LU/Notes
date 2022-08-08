@@ -9,11 +9,11 @@ site: bookdown::bookdown_site
 
 These notes serve as the primary textual resource for Stat 255: Statistics for Data Science at Lawrence University.   
 
-## What is this course? 
+**What is this course about?**
 
 Stat 255 provides an introduction to essential statistical tasks including modeling, inference, prediction, and computation. The course employs a modern approach, intended to equip students with skills needed for working with today's complex data. Traditional concepts, like interval estimation, and hypothesis testing, are introduced through the lens of multivariate models and simulation. Data computation in R plays a central role throughout the course. 
 
-The course's learning overarching outcomes are:   
+The course's overarching learning outcomes are:   
 
 1. Visualize and wrangle data using statistical software R.    
 2. Build and assess multivariate models to predict future outcomes.    
@@ -24,7 +24,7 @@ The course's learning overarching outcomes are:
 
 More specific learning tasks, related to these outcomes are provided in each chapter.   
 
-## Who is this course for? 
+**Who is this course intended for?** 
 
 This course is intended for students who are interested in learning statistical modeling and data computation skills that might prove useful in further courses, research, or career. 
 

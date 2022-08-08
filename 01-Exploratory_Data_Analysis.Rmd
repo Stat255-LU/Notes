@@ -110,7 +110,7 @@ An **interaction** between two variables X and Y occurs when the relationship be
       Example: the relationship between cut and price depends on carat size, so there is an interaction between cut and carat size.  
 
 
-## Working With Data in R
+## Exploratory Analysis in R
 
 This section provides examples of how to read data into R, create graphics, and calculate summary statistics. 
 
