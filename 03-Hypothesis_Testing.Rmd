@@ -1,5 +1,9 @@
 # Hypothesis Testing via Permutation
 
+#### add parameters vs statistics
+
+#### add definition of p-value interpretations. 
+
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=TRUE)
 library(ggformula)
@@ -358,6 +362,7 @@ Proportion of simulations resulting in difference in means more extreme than 0.2
 mean(abs(b1Sim) > abs(b1))
 ```
 
+
 The probability of observing a difference in means as extreme as 0.27195 by chance, when there is no relationship between location and mercury level is very low. 
 
 There is strong evidence of a relationship between location and mercury level. In this case, there is strong evidence that mercury level is higher in Southern Lakes than northern Lakes.    
@@ -381,7 +386,7 @@ We found that the probability of observing a difference in means as extreme as 0
 * The statistic used to measure the difference or relationship we are interested in is called a **test statistic**. 
     - In this case, the test statistic is the difference in sample means ($b_1$)
 
-* The **p-value** is the probability of observing a test statistic as extreme or more extreme than we did when the null hypothesis is true.    
+* The **p-value** is the probability of observing a test statistic as extreme or more extreme than we did due to chance, when the null hypothesis is true.    
        - A low p-value provides evidence against the null hypothesis.      
        -  A high p-value means that the data could have plausibly been obtained when the null hypothesis is true, and thus the null hypothesis cannot be ruled out.     
       - A high p-value does not mean that the null hypothesis is true or probably true. A p-value can only tell us the strength of evidence against the null hypothesis, and should never be interpreted as support for the null hypothesis.      
@@ -501,6 +506,8 @@ Proportion of simulations (out of 10,000) resulting in standard deviations great
 mean(abs(DiffSim) > abs(DiffSD))
 ```
 
+This p-value represents the probability of observing a difference in sample standard deviations as extreme as 0.1142 in a samples of size 33 and 20 by chance, if in fact, the standard deviation in mercury concentration levels is the same for lakes in Northern Florida as in Southern Florida.  
+
 ### Conclusions
 
 It is unlikely that we would observe a difference in standard deviations as extreme as 0.1142 by chance. There is evidence that lakes in Southern Florida exhibit more variability in mercury levels than lakes in Northern Florida (though the evidence is not as strong as it was when we were testing for a difference in means).   
@@ -539,7 +546,7 @@ $\widehat{Price} = b_0 + b_1\times\text{Acc. Time}$
 
 * Model assumes expected price is a linear function of acceleration time.   
 
-Parameter Interpretations:
+Interpretations:
 
 $b_0$ represents intercept of regression line, i.e. expected price of a car that can accelerate from 0 to 60 mph in no time. This is not a meaningful interpretation in context. 
 
@@ -783,7 +790,9 @@ Proportion of simulations resulting in simulation value of $b_2$ more extreme th
 mean(abs(b1Sim) > abs(b1))
 ```
 
-The probability of observing a value of $b_1$ as extreme as -7.1933 by chance, when there is no relationship between location and mercury level practically zero.  
+The p-value represents the probability of observing a slope as extreme or more extreme than -7.1933 by chance when there is actually no relationship between price and acceleration time.   
+
+The probability of observing a slope as extreme as -7.1933 by chance, when there is no relationship between location and mercury level practically zero.  
 
 There is very strong evidence of a relationship between price and acceleration time.    
 
@@ -1050,6 +1059,8 @@ p-value:
 mean(FSim > Fstat)
 ```
 
+The p-value represents the probability of observing an F-statistic as extreme as 10.14 by chance, in samples of size 29, 34, and 47, if in fact there is no relationship between price and size of car. 
+
 The data provide strong evidence of a relationship between price and size.   
 
 ### Differences Between Different Sizes
@@ -1126,6 +1137,8 @@ mean(abs(b1Sim)>abs(b1))
 ```
 
 
+The p-value represents the probability of observing a difference in mean prices as extreme as 9.1 by chance, in samples of size 29 and 34 cars, if in fact there is no difference in average prices of large and midsized cars. 
+
 ### Car Size Simulation-Based Results for $b_2$
 
 ```{r, fig.height=2}
@@ -1143,6 +1156,10 @@ p-value:
 mean(abs(b2Sim)>abs(b2))
 ```
 
+The p-value represents the probability of observing a difference in mean prices as extreme as 15.4 by chance, in samples of size 29 and 47 cars, if in fact there is no difference in average prices of large and small cars. 
+
+
+
 ### Car Size Simulation-Based Results for $b_1-b_2$
 
 ```{r, fig.height=2}
@@ -1159,7 +1176,11 @@ p-value:
 mean(abs(b1Sim-b2Sim)>abs(b1-b2))
 ```
 
-### Conclusions and Bonferroni Correction
+
+The p-value represents the probability of observing a difference in mean prices as extreme as 6.5 by chance, in samples of size 34 and 47 cars, if in fact there is no difference in average prices of midsized and small cars. 
+
+
+### Bonferroni Correction
 
 * We might normally conclude that there is evidence of differences in group means in the p-value is less than 0.05. However, since we are performing multiple tests simultaneously, there is an increased chance that at least one of them will yield a small p-value just by chance. Thus, we should be more strict in deciding what constitutes evidence against the null hypothesis.     
 
@@ -1257,6 +1278,8 @@ Bears_Seasons_SimulationResultsPlot
 ```{r}
 mean(FSim > Fstat)
 ```
+
+The p-value represents the probability of observing and F-statistic as extreme as 0.976 by chance, in a sample of 97, if in fact there is no difference in average weights of bears between seasons. 
 
 It is not at all unusual to observe an F-statistic as extreme or more extreme than we did if there is really no relationship between weight and season.    
 
