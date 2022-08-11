@@ -18,14 +18,7 @@ set.seed(07302020)
 ```
 
 
-
-
-
-
-
-
-
-## Variable Selection    
+## Modeling SAT Score  
 
 ### Overview of Model Building
 
@@ -37,11 +30,238 @@ set.seed(07302020)
 
 * We'll also need to make other decisions, such as whether or not to use interaction terms, or transformations.     
 
+
+
+### SAT Scores Dataset
+
+We'll now look at a dataset containing education data on all 50 states. It includes the following variables. 
+
+`state` - a factor with names of each state
+
+`expend` - expenditure per pupil in average daily attendance in public elementary and secondary schools, 1994-95 (in thousands of US dollars)
+
+`ratio` - average pupil/teacher ratio in public elementary and secondary schools, Fall 1994
+
+`salary` - estimated average annual salary of teachers in public elementary and secondary schools, 1994-95 (in thousands of US dollars)
+
+`frac` - percentage of all eligible students taking the SAT, 1994-95  
+
+`sat` - average total SAT score, 1994-95
+
+
+```{r, fig.height=2.5, fig.width=5, include=FALSE}
+library(mosaicData)
+data(SAT)
+SAT <- SAT %>% select(-c(verbal, math))
+```
+
+```{r}
+glimpse(SAT)
+```
+
+
+
+### Teacher Salaries and SAT Scores 
+
+The plot displays average SAT score against average teacher salary for all 50 US states.
+
+```{r, fig.height=4, fig.width=6}
+ggplot(data=SAT, aes(y=sat, x=salary)) + geom_point() +
+  stat_smooth(method="lm", se=FALSE) + 
+  ggtitle("Average SAT score vs Average Teacher Salary") + 
+  xlab("Average Teacher Salary in Thousands") 
+```
+
+What conclusion do you draw from the plot? 
+
+Are these results surprising?
+
+### Simple Linear Regression Model {.smaller}
+
+```{r}
+SAT_M1 <- lm(data=SAT, sat~salary)
+summary(SAT_M1)
+```
+
+### A Closer Look
+
+Let's break the data down by the percentage of students who take the SAT.
+
+Low = 0%-22%   
+Medium = 22-49%    
+High = 49-81%
+
+```{r}
+SAT <- mutate(SAT, fracgrp = cut(frac, 
+      breaks=c(0, 22, 49, 81), 
+      labels=c("low", "medium", "high")))
+```
+
+
+### A Closer Look
+
+```{r, fig.height=2.5, fig.width=9, echo=FALSE}
+ggplot(data=SAT, aes( y=sat, x=salary )) +geom_point() + facet_wrap(facets = ~fracgrp) +
+stat_smooth(method="lm", se=FALSE) + xlab("Average Teacher Salary in Thousands")
+```
+
+Now what conclusions do you draw from the plots?
+
+### Multiple Regression Model {.smaller}
+
+```{r}
+SAT_M2 <- lm(data=SAT, sat~salary+frac)
+summary(SAT_M2)
+```
+For each one thousand dollar increase in average teacher salary, a state's average SAT score is expected to increase by 2.18 points, assuming percentage of students taking the test is the same.   
+
+For each one percent increase in percentage of students taking the SAT, a state's average score is expected to decrease by 2.78 points, assuming average teacher salary is the same.  
+
+
+### Add Other Variables?
+
+Let's see what other possible explanatory variables we might want to add to the model. We'll 
+
+```{r}
+SAT_Num <- select_if(SAT, is.numeric)
+C <- cor(SAT_Num, use = "pairwise.complete.obs")
+round(C,2)
+```
+
+```{r}
+corrplot(C)
+```
+
+### Add Student-to-Teacher Ratio
+
+```{r}
+SAT_M3 <- lm(data=SAT, sat~salary+frac+ratio)
+summary(SAT_M3)
+```
+
+### Add Expendatures
+
+```{r}
+SAT_M4 <- lm(data=SAT, sat~salary+frac+ratio+expend)
+summary(SAT_M4)
+```
+### Confidence Intervals 
+
+Confidence intervals for model involving teacher salary, percentage taking the test, and student-to-teacher ratio.  
+
+```{r}
+confint(SAT_M3)
+```
+
+Confidence intervals for model with above variables plus expendature. 
+
+
+```{r}
+confint(SAT_M4)
+```
+
+**Question** What happened to the confidence interval associated with teacher salary? How might we explain this? (Hint: think about how to interpret estimates/confidence intervals in multiple regression)
+
+
+### Residual Plots for SAT 3-variable Model
+
+Let's return to the model with salary, ratio, and fraction taking test. 
+
+We use residual plots to assess model assumptions. 
+
+```{r, echo=FALSE, fig.width=9}
+P1 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$fitted.values)) + geom_point() + ggtitle("Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
+P2 <- ggplot(data=data.frame(SAT_M3$residuals), aes(x=SAT_M3$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
+P3 <- ggplot(data=data.frame(SAT_M3$residuals), aes(sample = scale(SAT_M3$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("QQ Plot")
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+There is some sign of a quadratic trend in the residual plot, creating concern about the linearity assumption. 
+
+### Plots of Residuals Against Predictors
+
+We can plot our residuals against the explanatory variables to see whether the model is properly accounting for relationships involving each variable. If we see nonlinear trends, we should consider adding a nonlinear function of that explanatory variable.  
+
+```{r, echo=FALSE, fig.width=9}
+P1 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$salary)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("Salary") + ylab("Residuals") 
+P2 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$frac)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("Fraction Taking Test") + ylab("Residuals")
+P3 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$ratio)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("Student to Teach Ratio") + ylab("Residuals")
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+There is also a quadratic trend in the plot involving the fraction variable. 
+
+### Model Using Frac^2
+
+```{r}
+SAT_M5 <- lm(data=SAT, sat~salary+frac+I(frac^2)+ratio)
+summary(SAT_M5)
+```
+
+### Residual Plots for Quadratic SAT Model
+
+```{r, echo=FALSE, fig.width=9}
+P1 <- ggplot(data=data.frame(SAT_M4$residuals), aes(y=SAT_M4$residuals, x=SAT_M5$fitted.values)) + geom_point() + ggtitle("Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
+P2 <- ggplot(data=data.frame(SAT_M5$residuals), aes(x=SAT_M5$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
+P3 <- ggplot(data=data.frame(SAT_M5$residuals), aes(sample = scale(SAT_M5$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("QQ Plot")
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+### Model with Linear Term on Frac
+
+```{r}
+summary(SAT_M3)
+```
+
+### Interpretations for Model with Linear Terms
+
+On average, a $1,000 dollar increase in average teacher salary is associated with a 2.5 point increase in average SAT score assuming fraction of students taking the SAT, and student to teacher ratio are held constant.
+
+On average, a 1% increase in percentage of students taking the SAT is associated with a 2.9 point decrease in average SAT score assuming average teacher salary, and student to teacher ratio are held constant. 
+
+On average, a 1 student per teacher increase in student to teacher ratio is associated with a 4.6 point from in average SAT score, assuming average teacher salary, and percentage of students taking the SAT are held constant. 
+
+
+### Model with Quadratic Term on Frac
+
+```{r}
+summary(SAT_M5)
+```
+
+### Interpretations for Model with Linear Terms
+
+On average, a $1,000 dollar increase in average teacher salary is associated with a 1.8 point increase in average SAT score assuming fraction of students taking the SAT, and student to teacher ratio are held constant.
+
+On average, a 1 student per teacher increase in student to teacher ratio is associated with a 0.05 point from in average SAT score, assuming average teacher salary, and percentage of students taking the SAT are held constant. 
+
+We cannot give a clear interpretation of the fraction variable, since it occurs in both linear and quadratic terms. In fact, the vertex of the parabola given by $y=-6.64x + 0.05x^2$ occurs at $x=\frac{6.64}{2(0.05)}\approx 66$. So the model estimates that SAT score decreases in a quadratic fashion with respect to fraction taking the test, until that fraction reaches 66 percent of student, then is expected to increase. 
+
+### Plot of SAT and Frac
+
+```{r}
+ggplot(data=SAT, aes(x=frac, y=sat)) + geom_point() + stat_smooth(se=FALSE)
+```
+
+We do see some possible quadratic trend, but we should be really careful about extrapolation.  
+
+### SAT Model Summary
+
+* Modeling SAT scores based on teacher salary alone led to misleading results, due to Simpson's Paradox. This is corrected by adding percentage of students taking the test to the model. 
+
+* Modeling two highly correlated variables like average teacher salary and expenditure on education inflates the width of confidence intervals associated with both variables, preventing us from drawing meaningful conclusions about either variable. This issue is called **multicollinearity**.  
+
+* Including a quadratic term on the proportion taking the test improves the model fit, and validity of model assumptions, but also makes the model harder to interpret. We need to use judgement when deciding whether or not to include quadratic or higher power terms.   
+
+* There is no clear reason to expect an interaction between these variables, so we did not include an interaction effect in the model.  
+
+
+## Predicting Car Price
+
 ### Model for Price of 2015 Cars
 
 What factors contribute to the price of a car?
 
-Build a model for the price of a new 2015 car, in order to help us answer this question.  
+We build a model for the price of a new 2015 car, in order to help us answer this question.  
 
 ```{r}
 data(Cars2015)
@@ -157,17 +377,6 @@ exp(predict(Cars_M3, newdata = data.frame(Acc060=9.5, QtrMile=17.3)))
 
 The predicted values are similar. Multicollinearity does not hurt predictions, only interpretations.   
 
-### Modeling with Correlation
-
-Let's use quartermile time as an explanatory variable. Should we add others?
-
-Correlations with  Quarter mile Time
-```{r}
-Cars_Num <- select_if(Cars2015, is.numeric)
-C <- cor(Cars_Num)
-round(C[,14],2)
-```
-
 
 ### Adding Weight to Model
 
@@ -215,6 +424,11 @@ Cars_M7 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile + Weight + Drive)
 summary(Cars_M7)
 ```
 
+### Add More Variables
+
+Consider adding other variables
+
+
 ### Check of Model Assumptions
 
 ```{r, echo=FALSE, fig.width=9}
@@ -225,6 +439,18 @@ grid.arrange(P1, P2, P3, ncol=3)
 ```
 
 There is slight concern about constant variance, but otherwise, the model assumptions look good. 
+
+### Residual by Predictor Plots
+
+
+```{r, echo=FALSE, fig.width=9}
+P1 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$QtrMile)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("QtrMile") + ylab("Residuals") 
+P2 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$Weight)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("Weight") + ylab("Residuals") 
+P3 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$Drive)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("Drive") + ylab("Residuals") 
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+These plots don't raise any concerns. 
 
 ### Coefficients and Exponentiation
 
@@ -252,107 +478,7 @@ FWD cars are expected to cost 20% less than AWD cars, assuming quarter mile time
 RWD cars are expected to cost 13% less than AWD cars, assuming quarter mile time and weight are held constant. 
 
 
-
-## Polynomial Regression    
-
-### Car Price and Fuel Capacity
-
-The plot shows the relationship between price (in thousands) and fuel capacity (in gallons) for a sample of 2015 new cars. 
-
-```{r}
-ggplot(data=Cars2015, aes(y=LowPrice, x=FuelCap)) + geom_point()
-```
-
-### Polynomial Regression for Car Fuel Cap. 
-
-To this point, we have mostly considered models with the explanatory variables entered as linear functions. There is no reason we need to restrict ourselves in this manner. Sometimes, using powers of explanatory variables will allow us to better model our response. 
-
-Suppose $Y$ is the price of a 2015 new car, and $X$ is its fuel capacity in gallons.  
-
-Let's consider the following models.  
-
-$Y=\beta_0 + \beta_1 X + \epsilon_i$  
-$Y=\beta_0 + \beta_1 X + \beta_2X^2 + \epsilon_i$     
-$Y=\beta_0 + \beta_1 X + \beta_2X^2+ \beta_3X^3 + \epsilon_i$    
-$Y=\beta_0 + \beta_1 X + \beta_2X^2+ \beta_3X^3+ \beta_4X^4+ \epsilon_i$     
-
-
-$Y=\beta_0 + \beta_1 X + \beta_2X^2+ \beta_3X^3+ \beta_4X^4+ \beta_5X^5 +\epsilon_i$, 
-
-where $\epsilon_i \sim \mathcal{N}(0, \sigma)$ in each model.    
-
-
-### Price by Fuel Cap: Linear Model
-
-```{r, fig.height=4, fig.width=8}
-ggplot(data=Cars2015, aes(y=LowPrice, x=FuelCap)) + geom_point()+ stat_smooth(method="lm", se=FALSE)
-```
-
-### Price by Fuel Cap: Quadratic Model
-
-```{r, fig.height=4, fig.width=8}
-ggplot(data=Cars2015, aes(y=LowPrice, x=FuelCap)) + geom_point()+ stat_smooth(method="lm", se=FALSE) +
- stat_smooth(method="lm", se=TRUE, fill=NA,formula=y ~ poly(x, 2, raw=TRUE),colour="red") 
-```
-
-### Price by Fuel Cap: Cubic Model
-
-```{r, fig.height=4, fig.width=8}
-ggplot(data=Cars2015, aes(y=LowPrice, x=FuelCap)) + geom_point()+ stat_smooth(method="lm", se=FALSE) +
- stat_smooth(method="lm", se=TRUE, fill=NA,formula=y ~ poly(x, 2, raw=TRUE),colour="red") + 
-  stat_smooth(method="lm", se=TRUE, fill=NA,formula=y ~ poly(x, 3, raw=TRUE),colour="green")
-```
-
-### Price by Fuel Cap: Fourth-Degree Model
-
-```{r, fig.height=4, fig.width=8}
-ggplot(data=Cars2015, aes(y=LowPrice, x=FuelCap)) + geom_point()+ stat_smooth(method="lm", se=FALSE) + stat_smooth(method="lm", se=TRUE, fill=NA,formula=y ~ poly(x, 2, raw=TRUE),colour="red") + 
-  stat_smooth(method="lm", se=TRUE, fill=NA,formula=y ~ poly(x, 3, raw=TRUE),colour="green")+ 
-  stat_smooth(method="lm", se=TRUE, fill=NA,formula=y ~ poly(x, 4, raw=TRUE),colour="orange")
-```
-
-### Price by Fuel Cap: Fifth-Degree Model
-
-```{r, fig.height=4, fig.width=8}
-ggplot(data=Cars2015, aes(y=LowPrice, x=FuelCap)) + geom_point()+ stat_smooth(method="lm", se=FALSE) + stat_smooth(method="lm", se=TRUE, fill=NA,formula=y ~ poly(x, 2, raw=TRUE),colour="red") + 
-  stat_smooth(method="lm", se=TRUE, fill=NA,formula=y ~ poly(x, 3, raw=TRUE),colour="green")+ 
-  stat_smooth(method="lm", se=TRUE, fill=NA,formula=y ~ poly(x, 4, raw=TRUE),colour="orange")+ 
-  stat_smooth(method="lm", se=TRUE, fill=NA,formula=y ~ poly(x, 5, raw=TRUE),colour="purple")
-```
-
-### Price by Fuel Cap: Sixth-Degree Model
-
-```{r, fig.height=4, fig.width=8}
-ggplot(data=Cars2015, aes(y=LowPrice, x=FuelCap)) + geom_point()+ stat_smooth(method="lm", se=FALSE) + stat_smooth(method="lm", se=TRUE, fill=NA,formula=y ~ poly(x, 2, raw=TRUE),colour="red") + stat_smooth(method="lm", se=TRUE, fill=NA,formula=y ~ poly(x, 3, raw=TRUE),colour="green")+ stat_smooth(method="lm", se=TRUE, fill=NA,formula=y ~ poly(x, 4, raw=TRUE),colour="orange")+ stat_smooth(method="lm", se=TRUE, fill=NA,formula=y ~ poly(x, 5, raw=TRUE),colour="purple") + stat_smooth(method="lm", se=TRUE, fill=NA,formula=y ~ poly(x, 6, raw=TRUE),colour="darkgreen")
-```
-
-
-### Fitting Polynonimal Models in R
-
-```{r}
-CarLength_M1 <- lm(data=Cars2015, LowPrice~FuelCap)
-CarLength_M2 <- lm(data=Cars2015, LowPrice~FuelCap + I(FuelCap^2))
-CarLength_M3 <- lm(data=Cars2015, LowPrice~FuelCap + I(FuelCap^2) + I(FuelCap^3))
-CarLength_M4 <- lm(data=Cars2015, LowPrice~FuelCap + I(FuelCap^2) + I(FuelCap^3) + I(FuelCap^4))
-CarLength_M5 <- lm(data=Cars2015, LowPrice~FuelCap + I(FuelCap^2) + I(FuelCap^3) + I(FuelCap^4) + 
-                     I(FuelCap^5))
-CarLength_M6 <- lm(data=Cars2015, LowPrice~FuelCap + I(FuelCap^2) + I(FuelCap^3) + I(FuelCap^4) + 
-                     I(FuelCap^5)+ I(FuelCap^6))
-```
-
-### $R^2$ for each Model
-
-```{r, echo=FALSE}
-Degree <- c(1,2,3,4,5,6)
-R2 <- c(summary(CarLength_M1)$r.squared, summary(CarLength_M2)$r.squared, 
-summary(CarLength_M3)$r.squared, summary(CarLength_M4)$r.squared, 
-summary(CarLength_M5)$r.squared, summary(CarLength_M6)$r.squared)
-R2tab <- data.frame(Degree, R2)
-kable(R2tab)
-```
-
-
-### Variable Selection
+### Adjusted $R^2$, AIC, BIC
 
 When additional variables are added to a model, SSR never increases, hence $R^2$ never decreases. 
 
@@ -362,293 +488,28 @@ These include:
 
 * Adjusted $R^2$
 * Akaike Information Criterion (AIC)    
-* Bayesian Information Criterion (BIC)
+* Bayesian Information Criterion (BIC)    
 
+These are intended to help guide us in deciding whether or not to include a variable in a model.They can decrease (or increase) when an additional variables is added if it doesn't contain much useful information.   
 
-### Adjusted $R^2$
 
-\[
-R^2 = 1 - \frac{\text{SSR}}{\text{SST}} = 1 - \frac{\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}{\sum_{i=1}^{n}(y_i - \bar{y})^2}.
-\]
+These are mostly ad-hoc approaches designed for specific situations. Although they might work well in certain contexts, none are meanth for general use. Furthermore, they can and often do disagree on the best model. I do not advise using these to choose a model, unless you have good reason to in your specific context. 
 
-Adjusted $R^2$:
 
-\[
-R_a^2 = 1 - \frac{\text{SSR}/(n-(p+1))}{\text{SST}/(n-1)} = 1 - \left(  \frac{n-1}{n-(p+1)} \right)(1-R^2)
-\]
-
-Large values of $R_a^2$ are desirable. 
-
-Adding variables that result in little to no change in RSS results in a decrease in adjusted $R^2$. 
-
-### Akaike Information Criterion (AIC)    
-
-\[
-\text{AIC} = n\log\left(\frac{\text{SSR}}{n}\right) + 2(p+1)
-\]
-
-Low values of AIC are desirable. 
-
-As $p$ increases, RSS decreases, but $2p$ increases. The question is whether RSS decreases enough to offset the increase in $2(p+1)$. 
-
-### Bayesian Information Criterion (BIC)
-
-\[
-\text{BIC} = n\log\left(\frac{\text{RSS}}{n}\right) + \log(n)(p+1)
-\]
-
-Low values of BIC are desirable. 
-
-BIC penalizes additional terms more harshly than AIC, especially when $n$ is large. Thus BIC will lead to a "smaller" model. 
-
-### Comparison of Adjusted $R^2$, AIC, BIC {.smaller}
-
-```{r, echo=FALSE}
-R2tab$AdjR2 <- c(summary(CarLength_M1)$adj.r.squared, 
-summary(CarLength_M2)$adj.r.squared, 
-summary(CarLength_M3)$adj.r.squared, 
-summary(CarLength_M4)$adj.r.squared, 
-summary(CarLength_M5)$adj.r.squared, 
-summary(CarLength_M6)$adj.r.squared)
-R2tab$AIC <- c(AIC(CarLength_M1),
-AIC(CarLength_M2),
-AIC(CarLength_M3),
-AIC(CarLength_M4),
-AIC(CarLength_M5),
-AIC(CarLength_M6))
-R2tab$BIC <- c(BIC(CarLength_M1),
-BIC(CarLength_M2),
-BIC(CarLength_M3),
-BIC(CarLength_M4),
-BIC(CarLength_M5),
-BIC(CarLength_M6))
-kable(R2tab)
-```
-
-Adjusted $R^2$ and AIC favor the 3rd degree model. BIC favors the 2nd degree model.   
-
-### Output for Quadratic Model
-
-```{r}
-summary(CarLength_M2)
-```
-
-### Output for Cubic Model
-
-```{r}
-summary(CarLength_M3)
-```
-
-### Conclusions for Car Price Polynomial Example
-
-
-The adjusted R^2, and AIC measures favor the cubic model:
-
-\[
-\widehat{\text{Price}} = 25.70 -5.07 \times \text{Fuel Cap.} + 0.47 \times \text{Fuel Cap.}^2 - 0.01 \times \text{Fuel Cap.}^3
-\]
-
-
-The BIC measure favors the quadratic model:
-
-\[
-\widehat{\text{Price}} = -43.29 + 6.21 \times \text{Fuel Cap.} - 0.10 \times \text{Fuel Cap.}^2
-\]
-
-### Interpreting Coefficients in Polynomial Regression
-
-It is hard to attach meaning to the coefficients in polymial regression. We cannot talk about holding Fuel Cap.$^2$ constant while increasing Fuel Cap.
-
-We can get a general sense of the shape of the regression curve, from the signs of the coefficients, but that's about it. 
-
-This illustrates a trade-off between model complexity and interpretation. More complex models might fit the data better, but are typically harder to interpret.  
-
-We could also use other functions of explanatory variables (for example, log, square root, or a trigonometric function) if we have reason to do so. Like polynomial terms, these can improve fit, but also make the model more complicated and harder to interpret, and should only be used if there is strong reason to do so.  
-
-
-## Confounding and Simpson's Paradox   
-
-### SAT Scores Dataset
-
-We'll now look at a dataset containing education data on all 50 states. Among the variables are average SAT score, average teacher salary, and fraction of students who took the SAT.
-
-```{r, fig.height=2.5, fig.width=5, include=FALSE}
-library(mosaicData)
-data(SAT)
-```
-
-```{r}
-glimpse(SAT)
-```
-
-
-
-### Teacher Salaries and SAT Scores {.smaller}
-
-The plot displays average SAT score against average teacher salary for all 50 US states.
-
-```{r, fig.height=4, fig.width=6}
-ggplot(data=SAT, aes(y=sat, x=salary)) + geom_point() +
-  stat_smooth(method="lm", se=FALSE) + 
-  ggtitle("Average SAT score vs Average Teacher Salary") + 
-  xlab("Average Teacher Salary in Thousands") 
-```
-
-What conclusion do you draw from the plot? 
-
-Are these results surprising?
-
-### Simple Linear Regression Model {.smaller}
-
-```{r}
-SAT_M1 <- lm(data=SAT, sat~salary)
-summary(SAT_M1)
-```
-
-
-### A Closer Look
-
-Let's break the data down by the percentage of students who take the SAT.
-
-Low = 0%-22%   
-Medium = 22-49%    
-High = 49-81%
-
-```{r}
-SAT <- mutate(SAT, fracgrp = cut(frac, 
-      breaks=c(0, 22, 49, 81), 
-      labels=c("low", "medium", "high")))
-```
-
-
-### A Closer Look
-
-```{r, fig.height=2.5, fig.width=9, echo=FALSE}
-ggplot(data=SAT, aes( y=sat, x=salary )) +geom_point() + facet_wrap(facets = ~fracgrp) +
-stat_smooth(method="lm", se=FALSE) + xlab("Average Teacher Salary in Thousands")
-```
-
-Now what conclusions do you draw from the plots?
-
-### Multiple Regression Model {.smaller}
-
-```{r}
-SAT_M2 <- lm(data=SAT, sat~salary+frac)
-summary(SAT_M2)
-```
-
-### Add Other Variables?
-
-```{r}
-SAT_Num <- select_if(SAT, is.numeric)
-C <- cor(SAT_Num, use = "pairwise.complete.obs")
-round(C,2)
-```
-
-### Add Student to Teacher Ratio
-
-```{r}
-SAT_M3 <- lm(data=SAT, sat~salary+frac+ratio)
-summary(SAT_M3)
-```
-
-### Residual Plots for SAT 3-variable Model
-
-```{r, echo=FALSE, fig.width=9}
-P1 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$fitted.values)) + geom_point() + ggtitle("Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
-P2 <- ggplot(data=data.frame(SAT_M3$residuals), aes(x=SAT_M3$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
-P3 <- ggplot(data=data.frame(SAT_M3$residuals), aes(sample = scale(SAT_M3$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("QQ Plot")
-grid.arrange(P1, P2, P3, ncol=3)
-```
-
-There is some sign of a quadratic trend in the residual plot, creating concern about the linearity assumption. 
-
-### Plots of Residuals Against Predictors
-
-```{r, echo=FALSE, fig.width=9}
-P1 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$salary)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("Salary") + ylab("Residuals") 
-P2 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$frac)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("Fraction Taking Test") + ylab("Residuals")
-P3 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$ratio)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("Student to Teach Ratio") + ylab("Residuals")
-grid.arrange(P1, P2, P3, ncol=3)
-```
-
-There is also a quadratic trend in the plot involving the fraction variable. 
-
-### Model Using Frac^2
-
-```{r}
-SAT_M4 <- lm(data=SAT, sat~salary+frac+I(frac^2)+ratio)
-summary(SAT_M4)
-```
-
-### Residual Plots for Quadratic SAT Model
-
-```{r, echo=FALSE, fig.width=9}
-P1 <- ggplot(data=data.frame(SAT_M4$residuals), aes(y=SAT_M4$residuals, x=SAT_M4$fitted.values)) + geom_point() + ggtitle("Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
-P2 <- ggplot(data=data.frame(SAT_M4$residuals), aes(x=SAT_M4$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
-P3 <- ggplot(data=data.frame(SAT_M4$residuals), aes(sample = scale(SAT_M4$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("QQ Plot")
-grid.arrange(P1, P2, P3, ncol=3)
-```
-
-### Model with Linear Term on Frac
-
-```{r}
-summary(SAT_M3)
-```
-
-### Interpretations for Model with Linear Terms
-
-On average, a $1,000 dollar increase in average teacher salary is associated with a 2.5 point increase in average SAT score assuming fraction of students taking the SAT, and student to teacher ratio are held constant.
-
-On average, a 1% increase in percentage of students taking the SAT is associated with a 2.9 point decrease in average SAT score assuming average teacher salary, and student to teacher ratio are held constant. 
-
-On average, a 1 student per teacher increase in student to teacher ratio is associated with a 4.6 point from in average SAT score, assuming average teacher salary, and percentage of students taking the SAT are held constant. 
-
-
-### Model with Quadratic Term on Frac
-
-```{r}
-summary(SAT_M4)
-```
-
-### Interpretations for Model with Linear Terms
-
-On average, a $1,000 dollar increase in average teacher salary is associated with a 1.8 point increase in average SAT score assuming fraction of students taking the SAT, and student to teacher ratio are held constant.
-
-On average, a 1 student per teacher increase in student to teacher ratio is associated with a 0.05 point from in average SAT score, assuming average teacher salary, and percentage of students taking the SAT are held constant. 
-
-We cannot give a clear interpretation of the fraction variable, since it occurs in both linear and quadratic terms. In fact, the vertex of the parabola given by $y=-6.64x + 0.05x^2$ occurs at $x=\frac{6.64}{2(0.05)}\approx 66$. So the model estimates that SAT score decreases in a quadratic fashion with respect to fraction taking the test, until that fraction reaches 66 percent of student, then is expected to increase. 
-
-### Plot of SAT and Frac
-
-```{r}
-ggplot(data=SAT, aes(x=frac, y=sat)) + geom_point() + stat_smooth(se=FALSE)
-```
-
-We do see some possible quadratic trend, but we should be really careful about extrapolation.  
-
-### SAT Model Summary
-
-* Modeling SAT scores based on teacher salary alone led to misleading results, due to Simpson's Paradox. This is corrected by adding percentage of students taking the test to the model.    
-
-* Including a quadratic term on the proportion taking the test improves the model fit, and validity of model assumptions, but also makes the model harder to interpret. We need to use judgement when deciding whether or not to include quadratic or higher power terms.   
-
-* There is no clear reason to expect an interaction between these variables, so we did not include an interaction effect in the model.  
-
-
-## Model Building Summary   
-
-### Modeling for Interpretation
+### Model Building Summary   
 
 Consider the following when building a model for the purpose of interpreting parameters and understanding and drawing conclusions about a population or process. 
 
 * Model driven by research question
 * Include variables of interest    
 * Include potential confounders (like in SAT example)    
+* Avoid including highly correlated explanatory variables    
+* Avoid messy transformations and interactions where possible    
+* Use residual plots to assess appropriatness of model assumptions    
 * Aim for high $R^2$ but not highest     
-* Use F-tests, AIC, BIC, Adjusted $R^2$ to balance goodness of fit with model complexity   
-* Avoid messy transformations where possible    
+* Only use AIC, BIC, Adjusted $R^2$ in the other factors listed above (if you use them at all). Do not rely on these measures alone!  
 * Aim for model complex enough to capture nature of data, but simple enough to give clear interpretations     
+
 
 
 
