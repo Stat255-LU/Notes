@@ -1,5 +1,21 @@
 # Normal Error Regression Model
 
+
+**Learning Outcomes:**     
+
+1. Explain when it is appropriate to use "theory-based" standard error formulas.   
+2. Interpret estimates, standard errors, test statistics, and p-values resulting from linear model output in R.   
+3. List the assumptions made in the normal error regression model.   
+4. Calculate p-values corresponding to t-statistics and F-statistics in R.   
+5. Interpret confidence intervals for an expected response, and prediction intervals, and distinguish between these two types of intervals.   
+6. Assess the whether linear model assumptions are reasonably satisfied, using residual plots, histograms, and normal QQ plots.  
+7. Explain when we should or should not expect p-values and confidence intervals obtained via "theory-based" approaches to agree with those obtained via simulation.   
+
+8. Identify situations where a log transformation of the response variable is appropriate.   
+9. Calculate predicted values for models involving a log transformation of the response variable.    
+10. Interpret regression coefficients in models involving a log transformation of the response variable.   
+11. Explain the regression effect.   
+
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=TRUE)
 library(ggformula)

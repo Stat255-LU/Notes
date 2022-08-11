@@ -1,5 +1,15 @@
 # Exploratory Data Analysis
 
+**Learning Outcomes:**  
+
+1. Interpret graphical summaries of data, including boxplots, histograms, violin plots, density plots, scatterplots, and correlation plots.    
+2. Read data from a .csv file into R.    
+3. Preview data in R.   
+4. Create graphical summaries of data using R.    
+5. Calculate summary statistics for entire datasets and grouped summaries.   
+6. Create reproducible documents using R Markdown.  
+
+
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=TRUE)
 library(ggformula)
@@ -37,7 +47,6 @@ diamonds$cut <- factor(x = diamonds$cut, levels = c("Fair",
                                         "Premium",
                                         "Ideal"), ordered = TRUE)
 ```
-
 
 
 

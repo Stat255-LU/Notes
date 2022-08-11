@@ -124,8 +124,6 @@ and-24-month-old-bears
 interaction-model-in-r
 interaction-vs-correlation
 hypothesis-testing-via-permutation
-add-parameters-vs-statistics
-add-definition-of-p-value-interpretations.
 test-for-difference-in-means
 mercury-levels-in-florida-lakes
 florida-lakes-dataset

@@ -1,5 +1,21 @@
 # Logistic Regression and Classification
 
+**Learning Outcomes:**     
+
+1. Define and distinguish between probability, odds, and odds ratio. 
+2. Identify situations where it is appropriate to use logistic regression.    
+3. Estimate probabilities, odds, and odds ratios using logistic regression.    
+4. Interpret coefficients in a logistic regression model. 
+
+5. Explain how probability estimates are obtained from decision trees and random forests.   
+
+6. Define specificity and sensitivity, and calculate them for given data.   
+7. Explain the information contained in a receiver operating characteristic (ROC) curve.   
+8. Construct receiver operating curves for small sets of data.   
+9. Compare classifiers using misclassification rate, and AUC.  
+
+
+
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=TRUE)
 library(ggformula)

@@ -1,8 +1,14 @@
 # Hypothesis Testing via Permutation
 
-#### add parameters vs statistics
+**Learning Outcomes:**     
 
-#### add definition of p-value interpretations. 
+1. State null and alternative hypotheses associated with models involving categorical and quantitative explanatory variables.   
+2. Explain how to use permutation tests for hypotheses involving means, medians, F-statistics, slopes, and other regression coefficients, as well as functions of these statistics.   
+3. Interpret p-values in context.    
+4. Explain the conclusions we should draw from from a hypothesis test, while accounting for   other information available in a dataset.   
+5. Explain how to simultaneously test for differences between multiple groups.    
+6. Distinguish between statistical significance and practical importance.    
+
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=TRUE)

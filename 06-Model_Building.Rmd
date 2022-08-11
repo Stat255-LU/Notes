@@ -1,5 +1,15 @@
 # Model Building
 
+**Learning Outcomes:**     
+
+1. Explain the differences in the ways we construct statistical models when we are focused primarily on interpretation.   
+2. Describe the ways that multicollinearity influences the interpretability of regression models.    
+3. Recognize situations where confounding and Simpson's paradox might influence conclusions we draw from a model, and make appropriate interpretations in these situations.   
+4. Evaluate the appropriateness of models using plots of residuals vs explanatory variables.    
+5. Recognize when it is appropriate to use polynomials or other nonlinear functions in a statistical model, and interpret corresponding estimates of regression coefficients.    
+6. Decide which variables to include in a statistical model, and justify your decision.   
+
+
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=TRUE)
 library(ggformula)

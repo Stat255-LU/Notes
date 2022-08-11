@@ -1,5 +1,23 @@
 # Predictive Modeling
 
+**Learning Outcomes:**     
+
+1. Explain how prediction error changes, depending on model complexity, for both training data and test data.   
+2. Explain the variance bias tradeoff, and identify situations when predictions might be impacted by either variance or bias.    
+3. Describe how overfitting can impact prediction accuracy.    
+4. Explain how and why we use cross-validation in predictive modeling.     
+5. Compare and contrast Ridge regression and ordinary least squares regression.    
+6. Explain the role of the parameter $\lambda$ is Ridge regression.   
+7. Given possible sets of regression coefficients, determine which would be optimal, using either ordinary least squares, Ridge regression, or Lasso regression.     
+8. Compare and contrast the assumptions made in decision trees, to those in the normal error regression model.    
+9. Given possible splits for a node in a decision tree, determine which is optimal.   
+10. Explain how the depth of a tree impacts prediction variance and bias, and overfitting.     
+11. Describe how decision trees in a random forest differ from one another.   
+12. Explain the process of fitting a polynomial spline to data, and the impact the the number of knots has on the process.   
+13. Explain the assumptions made in predictive modeling, and identify situations where these assumptions might be inappropriate or problematic from an ethical standpoint.  
+
+
+
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=TRUE)
 library(ggformula)

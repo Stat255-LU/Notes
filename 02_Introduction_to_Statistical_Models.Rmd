@@ -1,5 +1,19 @@
 # Introduction to Statistical Models
 
+**Learning Outcomes:**     
+
+1. Calculate sums of squares related to variability explained, including SST, SSR, and SSM., when given small datasets and/or summary statistics.    
+2. Explain the meaning of SST, SSR, and SSM in a given context.    
+3. Calculate $R^2$ and ANOVA F-Statistics, when given small datasets and/or summary statistics.     
+4. Intrepret $R^2$ and F-statistics in context.    
+5. Explain the process for estimating least-squares regression coefficients.     
+6. Calculate predictions from linear regression models.    
+7. Interpret regression coefficients for models involving quantitative and/or categorical variables in context, or explain why it is inappropriate to do so.    
+8. Explain the meaning of interaction between quantitative and categorical explanatory variables.   
+9. Apply graphical methods, statistical summaries, and background knowledge to argue for whether or not interaction term(s) should be used in a statistical model.   
+10. Determine slopes, intercepts, and other regression coefficients for specific categories or values of an explanatory variable in models that involve interaction.  
+
+
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=TRUE)
 library(ggformula)
