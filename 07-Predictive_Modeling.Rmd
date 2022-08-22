@@ -39,14 +39,6 @@ set.seed(07302020)
 ## Training and Test Error
 
 
-### Modeling for Prediction
-
-* When our purpose is purely prediction, we don't need to worry about keeping the model simple enough to interpret.     
-* Goal is to fit data well enough to make good predictions on new data without modeling random noise (overfitting)     
-* A model that is too simple suffers from high bias    
-* A model that is too complex suffers from high variance and is prone to overfitting    
-* The right balance is different for every dataset    
-* Measuring error on data used to fit the model (training data) does not accurately predict how well model will be able to predict new data (test data)
 
 ### Prediction Simulation Example
 
@@ -73,7 +65,7 @@ df$new <- rownames(df) %in% new
 ggplot(data=Sampdf, aes(y=y, x=x))+geom_point() 
 ```
 
-
+We want to find a model that captures the trend in the data and will be best able to predict new values of y, for given x.  
 
 **Constant Model to Sample Data**
 
@@ -434,6 +426,16 @@ In fact, it can be shown that:
 $\text{Expected RMSPE} = \text{Variance} + \text{Bias}^2$
 
 Our goal is the find the "sweetspot" where expected RMSPE is minimized.  
+
+### Modeling for Prediction
+
+* When our purpose is purely prediction, we don't need to worry about keeping the model simple enough to interpret.     
+* Goal is to fit data well enough to make good predictions on new data without modeling random noise in the training (overfitting)     
+* A model that is too simple suffers from high bias    
+* A model that is too complex suffers from high variance and is prone to overfitting    
+* The right balance is different for every dataset    
+* Measuring error on data used to fit the model (training data) does not accurately predict how well model will be able to predict new data (test data)
+
 
 
 ## Cross-Validation
@@ -1277,22 +1279,66 @@ The best choices for all of these will vary between datasets and can be assessed
 
 
 
-## Ethical Considerations    
+## Assumptions in Predictive Models    
 
 ### Assumptions in Predictive Models
 
-1. Be sure we're predicting the right thing   
-2. Training/Test data representative of population    
+Like any other statistical technique, predictive inference (sometimes done through machine learning algorithms) depends on the validity of assumptions.   
+
+1. The response variable observed in the data is actually the thing we want to predict   
+2. Training/Test data representative of population of interest    
+
 3. Prediction accuracy is appropriate metric    
+
+
+Below are some examples of real uses of predictive inference in which some of these assumptions were violated, leading to inappropriate and unethical conclusions.   
+
+
+
 
 ### Amazon Hiring Algorithm    
 
-### Recividism    
+In 2014, Amazon began working on an algorithm to predict whether a job applicant would be suitable for hire for software developer positions, based on characteristics of their job application.  
+
+response variable: rating of candidate's strength (1-5) 
+explanatory variables: many variables based on information included on the resume (e.g. highest degree, major, GPA, college/university, prior job experiences, internships, frequency of certain words on resume, etc.)   
+
+The algorithm was trained using data from past applications, rated by humans, over the past 10 years. It could then be used to predict ratings of future job applicants.   
+
+According to [Reuters])(https://www.reuters.com/article/us-amazon-com-jobs-automation-insight/amazon-scraps-secret-ai-recruiting-tool-that-showed-bias-against-women-idUSKCN1MK08G),
+
+"In effect, Amazon’s system taught itself that male candidates were preferable. It penalized resumes that included the word “women’s,” as in “women’s chess club captain.” And it downgraded graduates of two all-women’s colleges, according to people familiar with the matter." 
+
+While the algorithm was intended to predict candidate quality, the response variable on the training data actually reflected biases in past hiring decisions, leading the algorithm to do the same.   
+
 
 ### Facial Recognition     
 
 
+Facial recognition technology is used by law enforcement surveillance, airport passenger screening, and employment and housing decisions. It has, however, been banned for use by police in some cities, including San Francisco and Boston, due to concerns about inequity and privacy.   
 
+[Research](https://sitn.hms.harvard.edu/flash/2020/racial-discrimination-in-face-recognition-technology/) has shown that although certain facial recognition algorithms achieve over 90% accuracy overall, accuracy rate is lower among subjects who are female, Black, or 18-30 years old. 
+
+This is likely due, at least in part, to the algorithms being trained primarily on data an images of people who are not members of these groups.  
+
+Although the algorithms might attain strong accuracy overall, it is inappropriate to evaluate them on this basis, without accounting for performance on subgroups in the population.
+
+
+### Comments
+
+The biases and assumptions noted above are not reasons to abandon predictive modeling, but rather flaws to be aware of and work to correct. 
+
+Predictive algorithms, are only as good as the data on which they are trained and the societies in which they are developed, and will reflect inherent biases. Thus, they should be used cautiously and with with human judgment, just like any other statistical technique.   
+
+Beware of statements like:  
+
+"The data say this!" 
+
+"The algorithm is objective."
+
+"The numbers don't lie."   
+
+Any data-driven analysis depends on assumptions, and sound judgment and awareness of context are required when assessing the validaty of conclusions drawn.   
 
 
 ### Modeling for Prediction   

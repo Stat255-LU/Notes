@@ -139,6 +139,7 @@ round(C,2)
 ```
 
 ```{r}
+library(corrplot)
 corrplot(C)
 ```
 
@@ -276,6 +277,10 @@ We build a model for the price of a new 2015 car, in order to help us answer thi
 ```{r}
 data(Cars2015)
 glimpse(Cars2015)
+```
+
+```{r}
+Cars2015 <- Cars2015 %>% select(-HighPrice)
 ```
 
 ### Categorical Variables
@@ -434,9 +439,20 @@ Cars_M7 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile + Weight + Drive)
 summary(Cars_M7)
 ```
 
-### Add More Variables
+### Add Size
 
-Consider adding other variables
+```{r}
+Cars_M8 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile + Weight + Drive + Size)
+summary(Cars_M8)
+```
+Adding size barely increased $R^2$ at all. We find no evidence of differences in price between the three sizes, after accounting for the other variables.   
+
+Note: Information about car size is already being taken into account through the `Weight` variable.   
+
+We could keep looking at other variables to add, but at this point, we have a model that gives us a good sense of the factors related to price of a car, capturing 80% of total variability in car price, and is still easy to interpret.  
+
+For our research purposes, this model is good enough.   
+
 
 
 ### Check of Model Assumptions
@@ -519,19 +535,4 @@ Consider the following when building a model for the purpose of interpreting par
 * Aim for high $R^2$ but not highest     
 * Only use AIC, BIC, Adjusted $R^2$ in the other factors listed above (if you use them at all). Do not rely on these measures alone!  
 * Aim for model complex enough to capture nature of data, but simple enough to give clear interpretations     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -28,19 +28,100 @@ set.seed(07302020)
 ```
 
 
-## Exploring Diamond Prices
+## Exploring Data Visualizations
 
-### The Data
 
-We consider a dataset with prices (in $ US) and other information on 53,940 round cut diamonds. The first 6 rows are shown below. 
+### COVID-19 Data
 
-```{r}
-library(tidyverse)
-data(diamonds)
-head(diamonds)
+The following data were contained in a UK technical report on the Delta Variant on August 2, 2021
+
+| Vaccination Status      | Deaths  |   Total Cases | Fatality Rate |
+| ------- | ------- | ----------|   
+| Fully Vax | 402 | 47,008 | 0.86% | 
+| Unvax | 253 | 151,054 | 0.17 % | 
+
+```{r, echo=FALSE}
+Vac_Status <- c(rep("Fully Vax", 47008), c(rep("Unvax", 151054)))
+Outcome <- c(rep("Death", 402), rep("Survival", 47008-402), rep("Death", 253), rep("Survival", 151054-253))
+Age <- c(rep("<50", 13), rep(">50", 389), rep("<50", 25536-13), rep(">50", 21472-389), 
+         rep("<50", 48), rep(">50", 205), rep("<50", 147614-48), rep(">50", 3440-205))
+Covid_Data <- data.frame(Vac_Status, Outcome, Age)
 ```
 
-```{r, echo=TRUE}
+
+```{r}
+ggplot(data=Covid_Data, aes(x=Vac_Status, fill=Outcome)) + geom_bar(position="fill")
+```
+
+One explanation would be that vaccines don't work, and even cause harm.  
+
+Can you think of another explanation?  
+
+
+### Vax by Age Breakdown
+
+
+```{r}
+ggplot(data=Covid_Data, aes(x=Vac_Status, fill=Age)) + geom_bar(position="fill") 
+```
+
+Since almost all of the unvaccinated people were from the lower risk category, the death rate among unvaccinated people appears lower. 
+
+We should account for age when comparing survival rates.  
+
+### Breakdown by Age < 50
+
+We break down the cases based on whether the patient was older or younger than 50. 
+
+Under 50
+
+| Vaccination Status      | Deaths  |   Total Cases | Fatality Rate |
+| ------- | ------- | ----------|   
+| Fully Vax | 13 | 25,536 | 0.05% | 
+| Unvax | 48 | 147, 612 | 0.03 % | 
+
+
+50 or Older
+
+| Vaccination Status      | Deaths  |   Total Cases | Fatality Rate |
+| ------- | ------- | ----------|   
+| Fully Vax | 389 | 21,472 | 1.81% | 
+| Unvax | 205 | 3,440 | 5.96 % | 
+
+
+```{r}
+ggplot(data=Covid_Data, aes(x=Vac_Status, fill=Outcome)) + geom_bar(position="fill") + facet_wrap(~Age)
+```
+
+
+Before accounting for age, vaccinated people appear to be 5 times MORE likely to die from covid than unvaccinated people.   
+
+After accounting for age, vaccinated young people appear to be about 1.5 times more likely to die from covid (though death rates are very low) overall, and vaccinated older people appear to be more than 3 times LESS likely.   
+
+This is an example of a statistical phenomenon known as **Simpson's Paradox.**
+
+### Simpson's Paradox
+
+**Simpson's Paradox** refers to a situation where an apparent trend either disappears or reverses when one or more additional variables are accounted for. These additional variables are called **confounding variables.**
+
+In this situation, age is a counfouding variable. Older people are more likely to be vaccinated, and also more likely to die of covid (regardless of vaccination status), thus it appears that vaccinated people are more likely to die from covid, unless we account for age.   
+
+When we build statistical models, it will be important to account for potential confounding variables in our data, otherwise a model will give misleading results.  
+
+
+Final note: Subsequent data has shown that among people under 50, vaccinated people also had lower death rates (though death rates remained very low for both vaccinated and unvaccinated people). The slightly higher death rate for vaccinated people under 50, seen in these early data, is likely due to young people with other risk conditions being vaccinated first. 
+
+[Data Source](https://www.covid-datascience.com/post/simpson-s-paradox-strikes-again-refuting-reports-vaxxed-have-5x-case-fatality-rate-than-untaxed)
+
+
+### Exploring Diamond Prices
+
+The following data come from a dataset with information on over 53,940 diamonds. We'll explore the relationship between price (in $ US) and quality of the cut of the diamond (ideal, premium, very good, good, fair." 
+
+```{r, echo=FALSE}
+library(tidyverse)
+data(diamonds)
+
 diamonds$cut <- factor(x = diamonds$cut, levels = c("Fair",
                                         "Good",
                                         "Very Good",
@@ -48,80 +129,44 @@ diamonds$cut <- factor(x = diamonds$cut, levels = c("Fair",
                                         "Ideal"), ordered = TRUE)
 ```
 
-
-
-### Observations and Variables
-
-We call the rows of the dataset **observations** and the columns **variables**. In this dataset, the observations are the diamonds, and the variables are their attributes.   
-The dataset incudes both:
-
-* **categorical (or factor) variables:** cut, color, clarity, and   
-* **quantitative (or numeric) variables**, depth, table, price, x, y, z
-
-### Exploring the Data
-
-When encountering a new dataset, a good way to start is to create some graphs and tables that help us understand the nature of the data. 
-
-For now, we'll focus on factors related to the price of diamonds.   
-
-### Boxplot of Diamond Prices
+Consider the following plots:
 
 ```{r}
 ggplot(data=diamonds, aes(x=price, y=cut, fill=cut)) + 
   geom_boxplot(outlier.size=0.01, outlier.alpha = 0.1) + 
-    stat_summary(fun=mean, geom="point", shape=4, color="red", size=3)
+    stat_summary(fun=mean, geom="point", shape=4, color="red", size=3) + ggtitle("Price by Quality of Cut")
 ```
 
+Diamonds come in different carat sizes, so we should consider information about that as well. 
 
-### Histogram of carat size and quality of cut
-
-Next, we examine a histogram, displaying price, cut, and carat size.  
+We examine a histogram, displaying the number of diamonds with each cut, and carat size.  
 
 ```{r}
-ggplot(data=diamonds, aes(x=carat, fill=cut)) + geom_histogram()
+ggplot(data=diamonds, aes(x=carat, fill=cut)) + geom_histogram() + ggtitle("Diamonds by Carat Size and Cut Quality")
 ```
+The table shows the number of diamonds of each cut, as well as the average carat size and price of each diamond.  
 
-
-### Average carat size and price by quality of cut
 
 ```{r}
 diamonds %>% group_by(cut) %>% summarize(N=n(), 
                                          Avg_carat=mean(carat), 
-                                         Avg_price=mean(price) )
+                                         Avg_price=mean(price) ) 
 
 ```
 
-### Scatterplot of carat size and quality of cut
-
-Next, we use a scatterplot to visualize cut, price, and carat size. 
+Finally, we use a scatterplot to visualize cut, price, and carat size. 
 
 ```{r}
-ggplot(data=diamonds, aes(x=carat, y=price, color=cut)) + geom_point()
+ggplot(data=diamonds, aes(x=carat, y=price, color=cut)) + geom_point() + ggtitle("Price by Carat Size and Cut")
 ```
 
-### Thought Questions
-
-1. Consider only the first boxplot. What do we notice about the relationship between price and cut? Is this surprising?   
-
-2. Consider also the histogram and table. How does this information help explain the surprising result noted in Question 1?    
-
-3. Now consider all of the plots and the table. What should we conclude about the relationship between price and quality of cut? Are better cuts generally more expensive? less expensive? about the same? Does the relationship between price and cut seem to depend on carat size?
-
-
-### Terminology
-
-The diamonds dataset is an example of two statistical concepts:
-
-**Simpson's Paradox** refers to a situation when an apparent relationship between two variables changes or reverses when additional variable(s) are considered.     
-       Example: diamonds with higher quality of cut appear less expensive than lower quality cuts, until we account for carat size
-    
-An **interaction** between two variables X and Y occurs when the relationship between X and a third variable Z depends on Y.     
-      Example: the relationship between cut and price depends on carat size, so there is an interaction between cut and carat size.  
+**Question:**   
+How is Simpson's paradox present in the diamonds data? What is the confounding variable? What conclusion should we draw about the relationship between the price of a diamond and the quality of the cut?  
 
 
 ## Exploratory Analysis in R
 
-This section provides examples of how to read data into R, create graphics, and calculate summary statistics. 
+This section provides examples of how to read data into R, create graphics, like those in the previous section, and calculate summary statistics. 
 
 We'll work with data on movies released in Hollywood between 2012 and 2018.  
 
@@ -155,13 +200,20 @@ The `head()` function displays the first 5 rows of the dataset.
 head(HollywoodMovies)
 ```
 
+
+The rows of the dataset are called **observations.** In this case, the observations are the movies.   
+
+The columns of the dataset, which contain information about the movies, are called **variables.**
+
+
+
 **`glimpse `**
 
 The `glimpse()` command shows the number of observations (rows), and the number of variables, (columns). We also see the name of each variable and its type. Variable types include 
 
-* Categorical variables, which take on groups or categories, rather than numeric values. In R, these might be coded as logical `<logi>`, character `<chr>`, factor `<fct>` and ordered factor `<ord>`.  
+* **Categorical variables**, which take on groups or categories, rather than numeric values. In R, these might be coded as logical `<logi>`, character `<chr>`, factor `<fct>` and ordered factor `<ord>`.  
   
-* Quantitative variables, which take on meaningful numeric values. These include numeric `<num>`, integer `<int>`, and double `<dbl>`.   
+* **Quantitative variables**, which take on meaningful numeric values. These include numeric `<num>`, integer `<int>`, and double `<dbl>`.   
 
 ```{r}
 glimpse(HollywoodMovies)

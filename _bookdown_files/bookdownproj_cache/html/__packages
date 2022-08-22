@@ -34,3 +34,13 @@ glmnet
 rpart
 rpart.plot
 ISLR
+pROC
+spam
+viridisLite
+viridis
+fields
+boot
+CircStats
+proxy
+dtw
+verification

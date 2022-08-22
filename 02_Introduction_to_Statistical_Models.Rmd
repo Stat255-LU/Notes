@@ -55,11 +55,27 @@ Shown below are the prices of 10 houses sold in Ames, IA between 2006 and 2010.
 Houses$SalePrice
 ```
 
+```{r, fig.height=4.5, fig.width=12}
+ggplot(data=Houses, aes(x=SalePrice)) + geom_histogram(binwidth=60, fill="blue", color="white") + xlab("Price in thousands") + ylab("Frequency")+ theme_bw() + ggtitle("House Prices in Ames, IA")
+```
+
+```{r}
+summary(Houses$SalePrice)
+```
+
+
 **Question:** Suppose we know that a particular house sold in Ames during this time period, but know nothing else about the house. Based on this estimation, how might we predict the price of the house? How confident are you in this prediction?   
 
 ### Prices by Neighborhood
 
+
+
 * Now, suppose that the houses are in one of three neighborhoods (College Creek, Edwards, North Ames). Prices of the houses in each neighborhood are shown below.   
+
+```{r, fig.height=4.5, fig.width=12}
+p_House_Nbhd <- ggplot(data=Houses, aes(x=Neighborhood, y=SalePrice)) +geom_point()  + theme_bw() + ggtitle("Houses by Neighborhood")
+p_House_Nbhd
+```
 
 
 ```{r}
@@ -131,9 +147,7 @@ Without information about any explanatory variables, we would predict the price 
 When we have a categorical explanatory variable (e.g. neighborhood), the "statistically optimal" prediction is the average response among all observations in the given category.  
 
 ```{r, fig.height=4.5, fig.width=12}
-ggplot(data=Houses, aes(x=Neighborhood, y=SalePrice)) +geom_point() + 
-  stat_summary(fun.y = mean, geom = "errorbar", aes(ymax = ..y.., ymin = ..y..),
-                 width = 0.75, linetype = "solid", color="red") + theme_bw() + ggtitle("Houses by Neighborhood")
+p_House_Nbhd
 ```
 
 
@@ -285,17 +299,18 @@ For a model with given explanatory variable(s), we can calculate the proportion 
 * $\displaystyle\sum_{i=1}^n (y_i - \hat{y})=0$, so this is not a helpful measure, but we can instead use: 
 
 \[
-\displaystyle\sum_{i=1}^n (y_i - \hat{y})^2
+\displaystyle\sum_{i=1}^n (y_i - \hat{y}_i)^2
 \]
 
 
 
 ### Total Sum of Squares (SST)
 
-We call the sum of squared residuals for the model with no explanatory variables the total sum of squares, abbreviated SST.   
+We call the sum of squared residuals for the model with no explanatory variables the total sum of squares, abbreviated SST. In this model, $\hat{y}_i = \bar{y}$.   
 
 \[SST = \displaystyle\sum_{i=1}^n (y_i - \bar{y})^2
 \]
+
 
 
 ```{r, echo=FALSE}
