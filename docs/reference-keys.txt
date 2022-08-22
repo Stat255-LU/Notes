@@ -54,6 +54,7 @@ multiple-regression-model
 multiple-regression-model-1
 variable-model-different-slopes
 variable-model-with-constant-slope
+house-price-2-variable-model-summary
 mr-model-for-squarefeet-and-neighborhood
 predicting-price-in-mr-model
 risk-of-extrapolation
@@ -98,8 +99,8 @@ expected-weight-equations
 interpretations-of-interaction-model-coefficients
 model-1-r-output
 model-2-r-output
-estimated-weight-equations
-bears-int.-model-interpretations
+model-1-interpretations
+model-2-interpretations
 predicting-bear-weights
 predict-function-in-r
 bears-weight-model-considerations
@@ -118,6 +119,7 @@ models-for-age-and-length
 model-equations-2
 and-24-month-old-bears
 interaction-model-in-r
+age-length-interaction-interpretations
 interaction-vs-correlation
 hypothesis-testing-via-permutation
 test-for-difference-in-means

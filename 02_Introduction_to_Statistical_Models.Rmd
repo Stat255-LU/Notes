@@ -543,10 +543,11 @@ We could try to lines to the houses in each neighborhood, independent of the oth
 ```{r}
 ggplot(data=Houses, aes(x=SquareFeet, y=SalePrice, color=Neighborhood)) + geom_point() + stat_smooth(method="lm", se=FALSE) 
 ```
+
 Since there are only 3-4 houses per neighbhorhood, though, this isn't a lot of information to go on.  
 
 
-### 2-Variable Model with Constant Slope  {.smaller}
+### 2-Variable Model with Constant Slope  
 
 
 Instead, we'll assume the rate of increase wrt. square feet (i.e. slope) is the same in each neighborhood, but that some neighborhoods are more expensive than others. 
@@ -567,7 +568,8 @@ PM3 <- ggplot(data=Houses, aes(x=SquareFeet, y=SalePrice, color=Neighborhood)) +
         stat_function(fun=equation3,geom="line",color=scales::hue_pal()(3)[3])   
 PM3
 ```
-### House Price 2-Variable Model Summary {.smaller}
+
+### House Price 2-Variable Model Summary 
 
 ```{r}
 M_Nbhd_SqFt <- lm(data=Houses, SalePrice~SquareFeet+Neighborhood)
@@ -598,7 +600,7 @@ $\widehat{\text{Price}}= `r b0`+ `r b1` \times\text{SquareFeet}+ `r b2` \times\t
     - We expect a house in the North Ames Neighborhood to cost $25.812 less than a house in the College Creek Neighborhood, assuming the houses are the same size.   
     
     
-### Predicting Price in MR Model {.smaller}
+### Predicting Price in MR Model 
 
 $\widehat{\text{Price}}= `r b0`+ `r b1` \times\text{SquareFeet}+ `r b2` \times\text{I}_{Edwards} +`r b3` \times\text{I}_{NAmes}$
 
@@ -1295,23 +1297,17 @@ summary(Bears_M_Age_Sex_Int)
 
 
 
-### Estimated Weight Equations 
 
-**Model 1**
+
+
+### Model 1 Interpretations
 
 $\widehat{\text{Weight}}= 82.60 + 2.92 \times\text{Age} - 79.90\times\text{I}_{Female}$     
 
 
-**Model 2**
-
-$\widehat{\text{Weight}}= 70.43 + 3.24 \times\text{Age}- 31.96\times\text{I}_{Female} -1.04\times\text{Age}\times\text{I}_{Female}$ 
-
-
-For Model 2, we can write different equations for bears of each sex:
-
 Male Bears:
 \[
-\widehat{\text{Weight}}= 82.60 + 2.92 \times\text{Age}
+\widehat{\text{Weight}}= 70.43 + 2.92 \times\text{Age}
 \]
 
 Female Bears:
@@ -1321,15 +1317,38 @@ Female Bears:
 \]
 
 
-### Bears Int. Model Interpretations
-
 * For bears of the same sex, weight is expected to increase by 2.92 lbs. each month.    
 
 * On average, a female bear is expected to weigh 79.90 lbs less than a male bear of the same age.   
 
-* The intercept $b_0=82.60$ represents the expected weight of a male bear at birth. We should treat this interpretation with caution, since all bears in the dataset were at least 8 months old. 
 
-Approximately 67% of the variation in bear weights is explained by the model using age and sex as explanatory variables. 
+* Approximately 67% of the variation in bear weights is explained by the model using age and sex as explanatory variables. 
+
+
+### Model 2 Interpretations
+
+$\widehat{\text{Weight}}= 70.43 + 3.24 \times\text{Age}- 31.96\times\text{I}_{Female} -1.04\times\text{Age}\times\text{I}_{Female}$ 
+
+
+For Model 2, we can write different equations for bears of each sex:
+
+Male Bears:
+\[
+\widehat{\text{Weight}}= 70.43 + 3.24 \times\text{Age}
+\]
+
+Female Bears:
+\[
+\widehat{\text{Weight}}= (70.43 -31.96) + (3.24-1.04)\times\text{Age} \\
+= 38.47+ 2.20\times Age
+\]
+
+
+* On average, a male bear is expected to weigh $b_0=70.43$ lbs at birth, and a female bear is expected to weigh 38.47 lbs at birth. We should treat these interpretation with caution, since all bears in the dataset were at least 8 months old. 
+
+* A male bear is expected to gain 3.24 lbs per month, on average. A female bear is expected to gain 2.2 lbs per month on average. 
+
+* Approximately 68.5% of the variation in bear weights is explained by the model using age and sex as explanatory variables. 
 
 
 ### Predicting Bear Weights
@@ -1595,13 +1614,15 @@ If we expect that the effect of an additional inch in length, on the weight of a
 
 **Model 1 Assumptions** (No interaction):   
 
-* Allows weights to differ by sex and season.     
-* Assumes difference between sexes is the same in each season and difference between seasons is the same for each sex. 
+* Allows weights to differ by age and length     
+* Assumes rate of change in weight with respect to age is the same, regardless of length, and rate of change in age with respect to length is same, regardless of age.  
 
-**Model 2 Assumptions**: (Interaction between sex and season)   
+
+**Model 2 Assumptions**: (Interaction between age and length)   
 
 * Allows for differences between seasons and sexes.   
-* Allows for differences between sexes to vary between seasons and difference between seasons to vary between sexes. 
+* Allows rate of change in weight with respect to age, to differ, depending on length, and rate of change in weight with respect to length, to differ, depending on age.   
+
 
 
 ### Model Equations
@@ -1652,9 +1673,30 @@ Bears_M_Age_Length_Int <- lm(data=Bears_Subset, Weight~ Age*Length)
 summary(Bears_M_Age_Length_Int)
 ```
 
-For each additional inch in length, the weight of a 6-month old bear is expected to increase by $5.624+6(0.126)=6.38$ pounds. 
 
-For each additional inch in length, the weight of a 6-month old bear is expected to increase by $5.624+24(0.126)=8.65$ pounds. 
+### Age, Length Interaction Interpretations
+
+For a 6-month old bear:  
+
+$$
+\begin{aligned}
+\widehat{\text{Weight}} &= (-165.83+6(-7.66))+(5.62+6(0.13))\times\text{Length} \\
+& = -211.79+6.4\times\text{Length} 
+\end{aligned}
+$$
+
+For a 24-month old bear:  
+
+$$
+\begin{aligned}
+\widehat{\text{Weight}} &= (-165.83+24(-7.66))+(5.62+24(0.13))\times\text{Length} \\
+& = -349.67+8.65\times\text{Length} 
+\end{aligned}
+$$
+
+For each additional inch in length, the weight of a 6-month old bear is expected to increase by $5.62+6(0.13)=6.4$ pounds. 
+
+For each additional inch in length, the weight of a 24-month old bear is expected to increase by $5.62+24(0.13)=8.65$ pounds. 
 
 The interaction model explains about 85% of total variability in bear weight.   
 
@@ -1673,5 +1715,5 @@ An interaction between two explanatory variables means that the effect of one on
 
 For example, we might expect that bigger cars will get lower gas mileage. This is an example of a (negative) correlation between gas mileage and size of the car. 
 
-In the example, there would only be an interaction, if the effect of gas mileage on a response variable (say price) depends on the size of the car. If for example, better gas mileage was associated with higher price for small cars, but had no impact on price for large cars, then this would be an example of an interaction between price and gas mileage.   
+In the example, there would only be an interaction, if the effect of gas mileage on a response variable (say price) depends on the size of the car. If for example, better gas mileage was associated with higher price for small cars, but had no impact on price for large cars, then this would be an example of an interaction between size and gas mileage.   
 
