@@ -152,7 +152,7 @@ p_House_Nbhd
 
 
 
-```{r, echo=FALSE}
+```{r}
 NbhdTbl <- Houses %>% group_by(Neighborhood) %>% 
   summarize(AveragePrice=mean(SalePrice))
 kable(NbhdTbl)
@@ -268,7 +268,7 @@ We can get a sense of how much variability we should expect in our prediction by
 
 **Model with No Explanatory Variables**
 
-```{r, echo=FALSE, fig.height=3, fig.width=8}
+```{r, fig.height=3, fig.width=8}
 M0Resid <-ggplot(data=Houses, aes(x = 1:10, y = SalePrice)) +geom_point() + 
   geom_segment(aes(xend = 1:10, yend = M0$fitted.values), color="red") + 
   geom_abline(slope=0, intercept=mean(M0$fitted.values)) + xlab("")  + theme_bw() + theme(axis.text.x = element_blank())
@@ -282,7 +282,7 @@ knitr::include_graphics("Cat_Resid.png")
 
 **Model with Square Feet as Explanatory Variable**
 
-```{r, echo=FALSE, fig.height=3.5, fig.width=8}
+```{r,  fig.height=3.5, fig.width=8}
 ggplot(data=Houses, aes(x = SquareFeet, y = SalePrice)) +
   geom_segment(aes(xend = SquareFeet, yend = M_SqFt$fitted.values), color="red") +
   geom_point() +
@@ -313,7 +313,7 @@ We call the sum of squared residuals for the model with no explanatory variables
 
 
 
-```{r, echo=FALSE}
+```{r}
 SalePrice <- Houses$SalePrice
 Predicted <- M0$fitted.values
 SquareFeet <- Houses$SquareFeet
@@ -332,7 +332,7 @@ sum((Houses$SalePrice - mean(Houses$SalePrice))^2)
 ```
 
 
-```{r, echo=FALSE, out.width= '80%' }
+```{r,  out.width= '80%' }
 knitr::include_graphics("SST.png")
 ```
 
@@ -342,7 +342,7 @@ SST represents the total amount of variability in sale price (without accounting
 
 When we fit a model with an explanatory variable (such as neighborhood), we can see how much the sum of squared residuals decreases, based on information introduced by that explanatory variable. 
 
-```{r, echo=FALSE}
+```{r}
 SalePrice <- Houses$SalePrice
 Predicted <- M_Nbhd$fitted.values
 Residual <- M_Nbhd$residuals   
@@ -433,7 +433,7 @@ knitr::include_graphics("Rsq2.png")
 ### Residuals for Square Feet Model
 
 
-```{r, echo=FALSE, fig.height=3.5, fig.width=8}
+```{r, fig.height=3.5, fig.width=8}
 ggplot(data=Houses, aes(x = SquareFeet, y = SalePrice)) +
   geom_segment(aes(xend = SquareFeet, yend = M_SqFt$fitted.values), color="red") +
   geom_point() +
@@ -443,7 +443,7 @@ ggplot(data=Houses, aes(x = SquareFeet, y = SalePrice)) +
 ```
 
 
-```{r, echo=FALSE}
+```{r}
 SalePrice <- Houses$SalePrice
 Predicted <- M_SqFt$fitted.values
 Residual <- M_SqFt$residuals   
@@ -503,7 +503,7 @@ summary(M_SqFt)
 
 ### Linear Correlation Coefficient
 
-```{r, fig.height=3, fig.width=6, echo=FALSE}
+```{r, fig.height=3, fig.width=6}
 ggplot(data=Houses, aes(x=SquareFeet, y=SalePrice)) + geom_point() + 
   stat_smooth(method="lm", se=FALSE)
 ```
@@ -641,7 +641,7 @@ geom_segment(aes(xend = SquareFeet, yend = M_Nbhd_SqFt$fitted.values), color="re
 
 ### Residuals for 2-Variable Model  (cont.)
 
-```{r, echo=FALSE}
+```{r}
 SalePrice <- Houses$SalePrice
 Predicted <- M_Nbhd_SqFt$fitted.values
 Residual <- M_Nbhd_SqFt$residuals   
@@ -1162,7 +1162,7 @@ The median age for female bears is older than for male bears. There are 2 male b
 
 **Scatterplot of Age and Weight**
 
-```{r, echo=FALSE, fig.height=4, fig.width=8}
+```{r,  fig.height=4, fig.width=8}
 ggplot(data=Bears_Subset, aes(x=Age, y=Weight, color=Sex)) + geom_point() + xlab("Age in Months")
 ```
 

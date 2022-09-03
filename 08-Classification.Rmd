@@ -66,7 +66,7 @@ summary(Default)
 ggplot(data=Default, aes(y=default, x=balance)) + geom_point(alpha=0.2) 
 ```
 
-### Linear Regression Model for Education Level
+### Linear Regression Model for Default
 
 ```{r}
 #convert default from yes/no to 0/1
@@ -107,7 +107,7 @@ i.e. $\beta_0+\beta_1x_{i1} + \ldots \beta_px_{ip}= \text{log}\left(\frac{\pi_i}
 * Instead of assuming that the expected response is a linear function of the explanatory variables, we are assuming that it is a function of a linear function of the explanatory variables.   
 
 
-### Logistic Regression Model for Balance
+### Logistic Regression Model for Default
 
 ```{r, fig.height=3, fig.width=8, message=FALSE, warning=FALSE}
 ggplot(data=Default, aes(y=default, x= balance)) + geom_point(alpha=0.2) + 
@@ -247,21 +247,23 @@ $\text{log}\left(\frac{\pi_j}{1-\pi_j}\right) = \beta_0+\beta_1(x+1)$.
 
 $\text{log}\left(\frac{\frac{\pi_j}{1-\pi_j}}{\frac{\pi_i}{1-\pi_i}}\right)=\text{log}\left(\frac{\pi_j}{1-\pi_j}\right)-\text{log}\left(\frac{\pi_i}{1-\pi_j}\right)=\beta_0+\beta_1(x+1)-(\beta_0+\beta_1(x))=\beta_1.$
 
-Thus a 1-unit increase in $x$ is associated with a multiplicative change in the log odds by a factor of $\beta_1$. 
+For every 1-unit increase in $x$ we expect the log odds of "success" to multiply by a factor of $\beta_1$. 
 
-A 1-unit increase in $x$ is associated with a multiplicative change in the odds by a factor of $e^{\beta_1}$. 
+For every 1-unit increase in $x$ we expect the odds of "success" to multiply by a factor of $e^{\beta_1}$. 
 
 ### Intrepretation in Credit Card Example
 
 $b_1=0.0055$
 
-The odds of default are estimated to multiply by $e^{0.0055}\approx1.0055$ for each 1-dollar increase in balance on the credit card. 
+For each 1-dollar increase in balance on the credit card., the odds of default are estimated to multiply by $e^{0.0055}\approx1.0055$. 
 
-That is, the odds of default are estimated to increase by 0.55% for each additional dollar on the card balance. 
+That is, for each additional dollar on the card balance, the odds of default are estimated to increase by 0.55%  
 
-An increase of $d$ dollars in credit card balance is estimated to be associated with an increase odds of default by a factor of $e^{0.0055d}$.
+For each increase of $d$ dollars in credit card balance, odds of default are estimated to multiply by a factor of $e^{0.0055d}$.
 
-The odds of default for a balance of \$2,000 are estimated to be $e^{0.0055\times 1000}\approx 244$ times as great as the odds of default for a \$1,000 balance. 
+For every \$1,000 increase in balance, the odds of default are expected to multiply by a factor of $e^{0.0055\times 1000}\approx 244$. 
+
+Thus, the odds of default for a balance of \$2,000 are estimated to be $e^{0.0055\times 1000}\approx 244$ times as great as the odds of default for a \$1,000 balance. 
 
 ### Hypothesis Tests in Logistic Regression
 
@@ -276,7 +278,7 @@ The odds of default for a balance of \$2,000 are estimated to be $e^{0.0055\time
 confint(M, level = 0.95)
 ```
 
-We are 95% confident that a 1 dollar increase in credit card balance is associate with an increased odds of default by a factor between $e^{0.00508}\approx 1.0051$ and $e^{0.00594}\approx 1.0060$.
+We are 95% confident that for each 1 dollar increase in credit card balance, the odds of default are expected to multiply by a factor between $e^{0.00508}\approx 1.0051$ and $e^{0.00594}\approx 1.0060$.
 
 This is a profile-likelihood interval, which you can read more about [here](https://rpubs.com/FJRubio/PLCIN). 
 
@@ -307,13 +309,13 @@ ggplot(data=Default, aes(y=default, x= balance, color=student)) + geom_point(alp
 The regression equation is:
 
 \[
-P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.75+0.00575\times\text{balance}-0.7149\times\text{I}_{\text{student}}}}{1+e^{-10.75+0.00575\times\text{balance}-0.7149\times\text{I}_{\text{student}}}}
+P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.75+0.005738\times\text{balance}-0.7149\times\text{I}_{\text{student}}}}{1+e^{-10.75+0.005738\times\text{balance}-0.7149\times\text{I}_{\text{student}}}}
 \]
 
 
-* The odds of default are estimated to multiply by $e^{0.005738}\approx 1.00575$ for each 1 dollar increase in balance whether the user is a student or nonstudent. Thus, the estimated odds of default increase by about 0.05%.
+* For each 1 dollar increase in balance, the odds of default are estimated to multiply by a factor $e^{0.005738}\approx 1.00575$, whether the user is a student or nonstudent. Thus, the estimated odds of default increase by about 0.5%, for each 1-dollar increase in balance..
 
-* We might be more interested in what would happen with a larger increase, say $100. The odds of default are estimated to multiply by $e^{0.005738\times100}\approx 1.775$ for each $100 increase in balance for students as well as nonstudents. Thus, the estimated odds of default increase by about 77.5%.  
+* For every \$100 increase in balance, the odds of default are estimated to multiply by $e^{0.005738\times100}\approx 1.775$ for students as well as nonstudents. Thus, the estimated odds of default increase by about 77.5%.  
 
 The odds of default for students are estimated to be $e^{-0.7149} \approx 0.49$ as high for students as non-students, assuming balance amount is held constant. 
 
@@ -340,6 +342,23 @@ summary(CCDefault_M_Int)
 P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.87+0.0058\times\text{balance}-0.35\times\text{I}_{\text{student}}-0.0002\times\text{balance}\times{\text{I}_{\text{student}}}}}{1+e^{-10.87+0.0058\times\text{balance}-0.35\times\text{I}_{\text{student}}-0.0002\times\text{balance}\times{\text{I}_{\text{student}}}}}
 \]
 
+
+**Equation for Students**
+
+\[
+P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.52+0.0056\times\text{balance}}}{1+e^{-10.52+0.0056\times\text{balance}}}
+\]
+
+Assuming a person is a student, for every \$100 increase in balance, the odds of default are expected to multiply by a factor of $e^{0.0056\times 100}=1.75$, a 75\% increase.  
+
+**Equation for Non-Students**
+
+\[
+P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.87+0.0058\times\text{balance}}}{1+e^{-10.87+0.0058\times\text{balance}}}
+\]
+
+Assuming a person is a student, for every \$100 increase in balance, the odds of default are expected to multiply by a factor of $e^{0.0058\times 100}=1.786$, a 78.6\% increase.  
+
 * Since estimate of the interaction effect is so small and the p-value on this estimate is large, it is plausible that there is no interaction at all. Thus, the simpler non-interaction model is preferable. 
 
 
@@ -353,9 +372,9 @@ P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.87+0.0058\times\text{balance}-0.
 
 * $\beta_0+\beta_1x_i + \ldots\beta_px_{ip} = \text{log}\left(\frac{\pi_i}{1-\pi_i}\right)$ 
 
-* For quantitative $x_j$, when all other explanatory variables are held constant, the odds of "success" multiply be a factor of $e^\beta_j$ for each 1 unit increase in $x_j$    
+* For quantitative $x_j$, when all other explanatory variables are held constant, the odds of "success" multiply be a factor of $e^{\beta_j}$ for each 1 unit increase in $x_j$    
 
-* For categorical $x_j$, when all other explanatory variables are held constant, the odds of "success" are $e^\beta_j$ times higher for category $j$ than for the "baseline category."    
+* For categorical $x_j$, when all other explanatory variables are held constant, the odds of "success" are $e^\{beta_j}$ times higher for category $j$ than for the "baseline category."    
 
 * For models with interaction, we can only interpret $\beta_j$ when the values of all other explanatory variables are given (since the effect of $x_j$ depends on the other variables.)
 
@@ -397,8 +416,8 @@ Let's look at the predicted probability of default for the first 50 test cases, 
 
 ```{r}
 LR_Prob <- predict(LR_Default_M_Int, newdata=Default_Test, type="response")
-LR_Predict_Default <- ifelse(LR_Prob > 0.5, "Yes", "No")
-Actual_Default <- ifelse(Default_Test$default==1, "Yes", "No")
+LR_Predict_Default <- factor(ifelse(LR_Prob > 0.5, "Yes", "No"))
+Actual_Default <- factor(ifelse(Default_Test$default==1, "Yes", "No"))
 LR_Res_df <- data.frame(LR_Prob, LR_Predict_Default, Actual_Default)
 kable(head(LR_Res_df, 50)%>% arrange(desc(LR_Prob)))
 ```
@@ -412,10 +431,10 @@ A **confusion matrix** is a two-by-two table displaying the number of cases pred
 
 
 
-| | Negative Prediction | Positive Prediction |
-| | ---------------- | ------------------- |
-Actually Negative | True Negative | False Positive |
-Actually Positive | False Negative | True Positive |
+| | Actually Negative | Actually Positive |
+|--------- | ---------------- | ------------------- |
+Predicted Negative | True Negative | False Negative |
+Predicted Positive | False Positive | True Positive |
 
 
 Create a confusion matrix for the first 50 cases.  
@@ -427,7 +446,8 @@ Now, let's look at the confusion matrix for all 1,000 test cases.
 
 
 ```{r}
-confusionMatrix( data = factor(Actual_Default), reference=factor(LR_Predict_Default), positive="Yes")
+LR_Predict_Default <- factor(LR_Predict_Default) 
+confusionMatrix( data =LR_Predict_Default, reference=factor(Actual_Default) , positive="Yes")
 ```
 
 ### Decision Tree Classifier
@@ -438,14 +458,22 @@ In a binary classification problem, we can treat a default as $y=1$ and non-defa
 
 The mean response in a node $\bar{Y}$ can be interpreted as the probability of default.  
 
+The first few splits of the tree are shown.  
+
 ```{r}
 library(rpart)
+library(rpart.plot)
+tree <- rpart(data=Default_Train, default~balance + student, cp=0.005)
+rpart.plot(tree, box.palette="RdBu", shadow.col="gray", nn=TRUE, cex=1, extra=1)
+```
+
+```{r}
 tree <- rpart(data=Default_Train, default~balance + student)
 ```
 
 ```{r}
 Tree_Prob <- predict(tree, newdata = Default_Test)
-Tree_Pred_Default <- ifelse(Tree_Prob > 0.5, "Yes", "No")
+Tree_Pred_Default <- factor(ifelse(Tree_Prob > 0.5, "Yes", "No"))
 LR_Res_df <- data.frame(LR_Prob, LR_Predict_Default, Tree_Prob, Tree_Pred_Default, Actual_Default)
 kable(head(LR_Res_df, 50)%>% arrange(desc(LR_Prob)))
 ```
@@ -453,7 +481,9 @@ kable(head(LR_Res_df, 50)%>% arrange(desc(LR_Prob)))
 ### Tree Confusion Matrix
 
 ```{r}
-confusionMatrix( data = factor(Actual_Default), reference=factor(Tree_Pred_Default), positive="Yes")
+# data is predicted class
+# reference is actual class
+confusionMatrix( data = Tree_Pred_Default , reference= Actual_Default, "Yes")
 ```
 
 **Question:** Which classifier, the logistic regression model or decision tree, appears to do better at predicting default?   
@@ -477,17 +507,17 @@ Classification accuracy rate can be misleading, especially in cases of unbalance
 
 ### Sensitivity and Specificity
 
-The **sensitivity** of a classifier is the proportion of all positive cases that the model correctly identifies as positive.  
+The **sensitivity** of a classifier is the proportion of all positive cases that the model correctly identifies as positive. (i.e. probability model says "positive" given actually is positive.)  
 
 \[
-\text{Sensitivity} = \frac{\text{True Positive}}{\text{True Positive} + \text{False Positive}}
+\text{Sensitivity} = \frac{\text{True Positive}}{\text{True Positive} + \text{False Negative}} = \frac{\text{Predicted Positives}}{\text{Actual Positives}}
 \]
 
 
 **LR Sensitivity**  
 
 \[
-\frac{15}{15+8} \approx 0.6522
+\frac{15}{15+20} \approx 0.4286
 \]
 
 
@@ -495,14 +525,14 @@ The **sensitivity** of a classifier is the proportion of all positive cases that
 
 
 \[
-\frac{11}{5+11} \approx 0.6875
+\frac{11}{11+24} \approx 0.3143
 \]
 
 
-The **specificity** of a classifier is the proportion of all negative cases that the model correctly identifies as negative  
+The **specificity** of a classifier is the proportion of all negative cases that the model correctly identifies as negative (i.e probabiltiy model says "negative" given truly is negative.)  
 
 \[
-\text{Sensitivity} = \frac{\text{True Negative}}{\text{True Negative} + \text{False Positive}}
+\text{Specificity} = \frac{\text{True Negative}}{\text{True Negative} + \text{False Positive}}= \frac{\text{Predicted Negatives}}{\text{Actual Negatives}}
 \]
 
 
@@ -510,7 +540,7 @@ The **specificity** of a classifier is the proportion of all negative cases that
 **LR Specificity**  
 
 \[
-\frac{957}{957+8} \approx 0.9795
+\frac{957}{957+8} \approx 0.9917
 \]
 
 
@@ -518,8 +548,11 @@ The **specificity** of a classifier is the proportion of all negative cases that
 
 
 \[
-\frac{960}{960+24} \approx 0.9756
+\frac{960}{960+5} \approx 0.9948
 \]
+
+In a given situation, we should think about the cost of a false negative vs a false positive when determining whether to place more weight on sensitivity or specificity. For example, "is it worse to tell a patient they tested positive for a disease when they really don't have it, or to not tell them they tested positive when they really do have it?"    
+
 
 
 
@@ -541,6 +574,7 @@ The ROC curve plots the true positive (or hit) rate against the false positive r
 ```{r echo=FALSE, out.width = '75%', caption="Image from Wikipedia"}
 knitr::include_graphics("Roc_Curve.png")
 ```
+
 The higher the curve, the better the predictor is able to separate positive cases from negative ones.   
 
 Predictions made totally at random would be expected to yield a diagonal ROC curve.   
@@ -583,16 +617,7 @@ auc(response=Default_Test$default, predictor = RandProb)
 ```
 
 
-predict randomly, so that 3.3% of cases are positive
-
-```{r}
-PredRandom <- sample(0:1, size=10000, prob=c(0.9667, 0.0333), replace=TRUE)
-```
-
-```{r}
-confusionMatrix( data = factor(Default$default), reference=factor(PredRandom))
-```
-
+Even though a model that assigns predictions randomly, with 97% predicted as negatives will have a high accuracy rate, it will yield a poor ROC curve indicating an inability to separate positive cases from negative ones. 
 
 ### Constructing ROC Curve
 
@@ -600,8 +625,8 @@ confusionMatrix( data = factor(Default$default), reference=factor(PredRandom))
 1. Order the probabilities from highest to lowest.   
 2. Assume only the case with the highest probability is predicted as a positive.   
 3. Calculate the true positive rate (hit rate) $\frac{\text{# True Positives}}{\text{# Actual Positives}}$ and false positive (false alarm) $\frac{\text{# False Positives}}{\text{# Actual Negatives}}$rate. 
-4. Plot the point $\left( \frac{\text{# True Positives}}{\text{# Actual Positives}}, \frac{\text{# False Positives}}{\text{# Actual Negatives}} \right)$ in the coordinate plane.   
-5. Now assume the cases with the two highest probabilities are predicted as positives, adn repeat steps 3-4.   
+4. Plot the point $\left( \frac{\text{# False Positives}}{\text{# Actual Negatives}}, \frac{\text{# True Positives}}{\text{# Actual Positives}} \right)$ in the coordinate plane.   
+5. Now assume the cases with the two highest probabilities are predicted as positives, and repeat steps 3-4.   
 6. Continue, by classifiying one more case as positive in each step.   
 
 ### Construct ROC Example

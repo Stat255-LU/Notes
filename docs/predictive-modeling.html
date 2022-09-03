@@ -23,14 +23,14 @@
 <meta name="author" content="Andrew Sage - Lawrence University" />
 
 
-<meta name="date" content="2022-08-22" />
+<meta name="date" content="2022-09-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="model-building.html"/>
+<link rel="prev" href="building-models-for-interpretation.html"/>
 <link rel="next" href="logistic-regression-and-classification.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -345,9 +345,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html"><i class="fa fa-check"></i><b>4</b> Bootstrap Confindence Intervals</a><ul>
-<li class="chapter" data-level="4.1" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#estimating-sampling-variability"><i class="fa fa-check"></i><b>4.1</b> Estimating Sampling Variability</a><ul>
+<li class="chapter" data-level="4.1" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#quantifying-sampling-variability"><i class="fa fa-check"></i><b>4.1</b> Quantifying Sampling Variability</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#distribution-of-mercury-levels-in-florida-lakes"><i class="fa fa-check"></i><b>4.1.1</b> Distribution of Mercury Levels in Florida Lakes</a></li>
-<li class="chapter" data-level="4.1.2" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#simulation-to-estimate-sample-variability"><i class="fa fa-check"></i><b>4.1.2</b> Simulation to Estimate Sample Variability</a></li>
+<li class="chapter" data-level="4.1.2" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#simulation-to-quantify-variability"><i class="fa fa-check"></i><b>4.1.2</b> Simulation to Quantify Variability</a></li>
 <li class="chapter" data-level="4.1.3" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrap-sampling"><i class="fa fa-check"></i><b>4.1.3</b> Bootstrap Sampling</a></li>
 <li class="chapter" data-level="4.1.4" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#original-sample"><i class="fa fa-check"></i><b>4.1.4</b> Original Sample</a></li>
 <li class="chapter" data-level="4.1.5" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#five-bootstrap-samples-in-r"><i class="fa fa-check"></i><b>4.1.5</b> Five Bootstrap Samples in R</a></li>
@@ -435,13 +435,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#hypothesis-test-for-lakes-in-north-and-south-florida"><i class="fa fa-check"></i><b>5.2.7</b> Hypothesis Test for Lakes in North and South Florida</a></li>
 <li class="chapter" data-level="5.2.8" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#t-statistic-and-p-value"><i class="fa fa-check"></i><b>5.2.8</b> t-statistic and p-value</a></li>
 <li class="chapter" data-level="5.2.9" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#theory-based-ci-for-beta_1-in-florida-lakes"><i class="fa fa-check"></i><b>5.2.9</b> Theory-Based CI for <span class="math inline">\(\beta_1\)</span> in Florida Lakes</a></li>
-<li class="chapter" data-level="5.2.10" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#coefficients-table-in-r-output"><i class="fa fa-check"></i><b>5.2.10</b> Coefficients Table in R Output</a></li>
-<li class="chapter" data-level="5.2.11" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#bear-weight-by-season"><i class="fa fa-check"></i><b>5.2.11</b> Bear Weight by Season</a></li>
-<li class="chapter" data-level="5.2.12" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#bears-f-test-illustration"><i class="fa fa-check"></i><b>5.2.12</b> Bears F-Test Illustration</a></li>
-<li class="chapter" data-level="5.2.13" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#comparison-to-simulation"><i class="fa fa-check"></i><b>5.2.13</b> Comparison to Simulation</a></li>
-<li class="chapter" data-level="5.2.14" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#car-size-and-price"><i class="fa fa-check"></i><b>5.2.14</b> Car Size and Price</a></li>
-<li class="chapter" data-level="5.2.15" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#bears-f-test-illustration-1"><i class="fa fa-check"></i><b>5.2.15</b> Bears F-Test Illustration</a></li>
-<li class="chapter" data-level="5.2.16" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#simulation-based-f-test"><i class="fa fa-check"></i><b>5.2.16</b> Simulation-Based F-test</a></li>
+<li class="chapter" data-level="5.2.10" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#comparison-to-simulation"><i class="fa fa-check"></i><b>5.2.10</b> Comparison to Simulation</a></li>
+<li class="chapter" data-level="5.2.11" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#coefficients-table-in-r-output"><i class="fa fa-check"></i><b>5.2.11</b> Coefficients Table in R Output</a></li>
+<li class="chapter" data-level="5.2.12" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#bear-weight-by-season"><i class="fa fa-check"></i><b>5.2.12</b> Bear Weight by Season</a></li>
+<li class="chapter" data-level="5.2.13" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#bears-f-test-illustration"><i class="fa fa-check"></i><b>5.2.13</b> Bears F-Test Illustration</a></li>
+<li class="chapter" data-level="5.2.14" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#comparison-to-simulation-1"><i class="fa fa-check"></i><b>5.2.14</b> Comparison to Simulation</a></li>
+<li class="chapter" data-level="5.2.15" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#car-size-and-price"><i class="fa fa-check"></i><b>5.2.15</b> Car Size and Price</a></li>
+<li class="chapter" data-level="5.2.16" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#bears-f-test-illustration-1"><i class="fa fa-check"></i><b>5.2.16</b> Bears F-Test Illustration</a></li>
+<li class="chapter" data-level="5.2.17" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#simulation-based-f-test"><i class="fa fa-check"></i><b>5.2.17</b> Simulation-Based F-test</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#intervals-for-predicted-values"><i class="fa fa-check"></i><b>5.3</b> Intervals for Predicted Values</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#estimation-and-prediction"><i class="fa fa-check"></i><b>5.3.1</b> Estimation and Prediction</a></li>
@@ -529,51 +530,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7.8" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#other-examples-of-regression-effect"><i class="fa fa-check"></i><b>5.7.8</b> Other Examples of Regression Effect</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>6</b> Model Building</a><ul>
-<li class="chapter" data-level="6.1" data-path="model-building.html"><a href="model-building.html#modeling-sat-score"><i class="fa fa-check"></i><b>6.1</b> Modeling SAT Score</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="model-building.html"><a href="model-building.html#overview-of-model-building"><i class="fa fa-check"></i><b>6.1.1</b> Overview of Model Building</a></li>
-<li class="chapter" data-level="6.1.2" data-path="model-building.html"><a href="model-building.html#sat-scores-dataset"><i class="fa fa-check"></i><b>6.1.2</b> SAT Scores Dataset</a></li>
-<li class="chapter" data-level="6.1.3" data-path="model-building.html"><a href="model-building.html#teacher-salaries-and-sat-scores"><i class="fa fa-check"></i><b>6.1.3</b> Teacher Salaries and SAT Scores</a></li>
-<li class="chapter" data-level="6.1.4" data-path="model-building.html"><a href="model-building.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>6.1.4</b> Simple Linear Regression Model</a></li>
-<li class="chapter" data-level="6.1.5" data-path="model-building.html"><a href="model-building.html#a-closer-look"><i class="fa fa-check"></i><b>6.1.5</b> A Closer Look</a></li>
-<li class="chapter" data-level="6.1.6" data-path="model-building.html"><a href="model-building.html#a-closer-look-1"><i class="fa fa-check"></i><b>6.1.6</b> A Closer Look</a></li>
-<li class="chapter" data-level="6.1.7" data-path="model-building.html"><a href="model-building.html#multiple-regression-model-2"><i class="fa fa-check"></i><b>6.1.7</b> Multiple Regression Model</a></li>
-<li class="chapter" data-level="6.1.8" data-path="model-building.html"><a href="model-building.html#add-other-variables"><i class="fa fa-check"></i><b>6.1.8</b> Add Other Variables?</a></li>
-<li class="chapter" data-level="6.1.9" data-path="model-building.html"><a href="model-building.html#add-student-to-teacher-ratio"><i class="fa fa-check"></i><b>6.1.9</b> Add Student-to-Teacher Ratio</a></li>
-<li class="chapter" data-level="6.1.10" data-path="model-building.html"><a href="model-building.html#add-expendatures"><i class="fa fa-check"></i><b>6.1.10</b> Add Expendatures</a></li>
-<li class="chapter" data-level="6.1.11" data-path="model-building.html"><a href="model-building.html#confidence-intervals-1"><i class="fa fa-check"></i><b>6.1.11</b> Confidence Intervals</a></li>
-<li class="chapter" data-level="6.1.12" data-path="model-building.html"><a href="model-building.html#residual-plots-for-sat-3-variable-model"><i class="fa fa-check"></i><b>6.1.12</b> Residual Plots for SAT 3-variable Model</a></li>
-<li class="chapter" data-level="6.1.13" data-path="model-building.html"><a href="model-building.html#plots-of-residuals-against-predictors"><i class="fa fa-check"></i><b>6.1.13</b> Plots of Residuals Against Predictors</a></li>
-<li class="chapter" data-level="6.1.14" data-path="model-building.html"><a href="model-building.html#model-using-frac2"><i class="fa fa-check"></i><b>6.1.14</b> Model Using Frac^2</a></li>
-<li class="chapter" data-level="6.1.15" data-path="model-building.html"><a href="model-building.html#residual-plots-for-quadratic-sat-model"><i class="fa fa-check"></i><b>6.1.15</b> Residual Plots for Quadratic SAT Model</a></li>
-<li class="chapter" data-level="6.1.16" data-path="model-building.html"><a href="model-building.html#model-with-linear-term-on-frac"><i class="fa fa-check"></i><b>6.1.16</b> Model with Linear Term on Frac</a></li>
-<li class="chapter" data-level="6.1.17" data-path="model-building.html"><a href="model-building.html#interpretations-for-model-with-linear-terms"><i class="fa fa-check"></i><b>6.1.17</b> Interpretations for Model with Linear Terms</a></li>
-<li class="chapter" data-level="6.1.18" data-path="model-building.html"><a href="model-building.html#model-with-quadratic-term-on-frac"><i class="fa fa-check"></i><b>6.1.18</b> Model with Quadratic Term on Frac</a></li>
-<li class="chapter" data-level="6.1.19" data-path="model-building.html"><a href="model-building.html#interpretations-for-model-with-linear-terms-1"><i class="fa fa-check"></i><b>6.1.19</b> Interpretations for Model with Linear Terms</a></li>
-<li class="chapter" data-level="6.1.20" data-path="model-building.html"><a href="model-building.html#plot-of-sat-and-frac"><i class="fa fa-check"></i><b>6.1.20</b> Plot of SAT and Frac</a></li>
-<li class="chapter" data-level="6.1.21" data-path="model-building.html"><a href="model-building.html#sat-model-summary"><i class="fa fa-check"></i><b>6.1.21</b> SAT Model Summary</a></li>
+<li class="chapter" data-level="6" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html"><i class="fa fa-check"></i><b>6</b> Building Models for Interpretation</a><ul>
+<li class="chapter" data-level="6.1" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#modeling-sat-score"><i class="fa fa-check"></i><b>6.1</b> Modeling SAT Score</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#overview-of-model-building"><i class="fa fa-check"></i><b>6.1.1</b> Overview of Model Building</a></li>
+<li class="chapter" data-level="6.1.2" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#considerations-in-modeling"><i class="fa fa-check"></i><b>6.1.2</b> Considerations in Modeling</a></li>
+<li class="chapter" data-level="6.1.3" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#sat-scores-dataset"><i class="fa fa-check"></i><b>6.1.3</b> SAT Scores Dataset</a></li>
+<li class="chapter" data-level="6.1.4" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#teacher-salaries-and-sat-scores"><i class="fa fa-check"></i><b>6.1.4</b> Teacher Salaries and SAT Scores</a></li>
+<li class="chapter" data-level="6.1.5" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>6.1.5</b> Simple Linear Regression Model</a></li>
+<li class="chapter" data-level="6.1.6" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#a-closer-look"><i class="fa fa-check"></i><b>6.1.6</b> A Closer Look</a></li>
+<li class="chapter" data-level="6.1.7" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#a-closer-look-1"><i class="fa fa-check"></i><b>6.1.7</b> A Closer Look</a></li>
+<li class="chapter" data-level="6.1.8" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#multiple-regression-model-2"><i class="fa fa-check"></i><b>6.1.8</b> Multiple Regression Model</a></li>
+<li class="chapter" data-level="6.1.9" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#add-other-variables"><i class="fa fa-check"></i><b>6.1.9</b> Add Other Variables?</a></li>
+<li class="chapter" data-level="6.1.10" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#add-student-to-teacher-ratio"><i class="fa fa-check"></i><b>6.1.10</b> Add Student-to-Teacher Ratio</a></li>
+<li class="chapter" data-level="6.1.11" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#add-expendatures"><i class="fa fa-check"></i><b>6.1.11</b> Add Expendatures</a></li>
+<li class="chapter" data-level="6.1.12" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#confidence-intervals-1"><i class="fa fa-check"></i><b>6.1.12</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="6.1.13" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#residual-plots-for-sat-3-variable-model"><i class="fa fa-check"></i><b>6.1.13</b> Residual Plots for SAT 3-variable Model</a></li>
+<li class="chapter" data-level="6.1.14" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#plots-of-residuals-against-predictors"><i class="fa fa-check"></i><b>6.1.14</b> Plots of Residuals Against Predictors</a></li>
+<li class="chapter" data-level="6.1.15" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-using-frac2"><i class="fa fa-check"></i><b>6.1.15</b> Model Using Frac^2</a></li>
+<li class="chapter" data-level="6.1.16" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#residual-plots-for-quadratic-sat-model"><i class="fa fa-check"></i><b>6.1.16</b> Residual Plots for Quadratic SAT Model</a></li>
+<li class="chapter" data-level="6.1.17" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-with-linear-term-on-frac"><i class="fa fa-check"></i><b>6.1.17</b> Model with Linear Term on Frac</a></li>
+<li class="chapter" data-level="6.1.18" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#interpretations-for-model-with-linear-terms"><i class="fa fa-check"></i><b>6.1.18</b> Interpretations for Model with Linear Terms</a></li>
+<li class="chapter" data-level="6.1.19" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-with-quadratic-term-on-frac"><i class="fa fa-check"></i><b>6.1.19</b> Model with Quadratic Term on Frac</a></li>
+<li class="chapter" data-level="6.1.20" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#interpretations-for-model-with-quadratic-terms"><i class="fa fa-check"></i><b>6.1.20</b> Interpretations for Model with Quadratic Terms</a></li>
+<li class="chapter" data-level="6.1.21" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#plot-of-sat-and-frac"><i class="fa fa-check"></i><b>6.1.21</b> Plot of SAT and Frac</a></li>
+<li class="chapter" data-level="6.1.22" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#sat-model-summary"><i class="fa fa-check"></i><b>6.1.22</b> SAT Model Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="model-building.html"><a href="model-building.html#predicting-car-price"><i class="fa fa-check"></i><b>6.2</b> Predicting Car Price</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="model-building.html"><a href="model-building.html#model-for-price-of-2015-cars"><i class="fa fa-check"></i><b>6.2.1</b> Model for Price of 2015 Cars</a></li>
-<li class="chapter" data-level="6.2.2" data-path="model-building.html"><a href="model-building.html#categorical-variables"><i class="fa fa-check"></i><b>6.2.2</b> Categorical Variables</a></li>
-<li class="chapter" data-level="6.2.3" data-path="model-building.html"><a href="model-building.html#correlation-matrix"><i class="fa fa-check"></i><b>6.2.3</b> Correlation Matrix</a></li>
-<li class="chapter" data-level="6.2.4" data-path="model-building.html"><a href="model-building.html#model-using-acceleration-time"><i class="fa fa-check"></i><b>6.2.4</b> Model Using Acceleration Time</a></li>
-<li class="chapter" data-level="6.2.5" data-path="model-building.html"><a href="model-building.html#model-using-quarter-mile-time"><i class="fa fa-check"></i><b>6.2.5</b> Model Using Quarter Mile Time</a></li>
-<li class="chapter" data-level="6.2.6" data-path="model-building.html"><a href="model-building.html#model-using-quarter-mile-time-and-acc.-time"><i class="fa fa-check"></i><b>6.2.6</b> Model Using Quarter Mile Time and Acc. Time</a></li>
-<li class="chapter" data-level="6.2.7" data-path="model-building.html"><a href="model-building.html#problems-with-multicollinearity-in-modeling"><i class="fa fa-check"></i><b>6.2.7</b> Problems with Multicollinearity in Modeling</a></li>
-<li class="chapter" data-level="6.2.8" data-path="model-building.html"><a href="model-building.html#impact-on-prediction"><i class="fa fa-check"></i><b>6.2.8</b> Impact on Prediction</a></li>
-<li class="chapter" data-level="6.2.9" data-path="model-building.html"><a href="model-building.html#adding-weight-to-model"><i class="fa fa-check"></i><b>6.2.9</b> Adding Weight to Model</a></li>
-<li class="chapter" data-level="6.2.10" data-path="model-building.html"><a href="model-building.html#add-interaction-term"><i class="fa fa-check"></i><b>6.2.10</b> Add Interaction Term?</a></li>
-<li class="chapter" data-level="6.2.11" data-path="model-building.html"><a href="model-building.html#add-hwy-mpg"><i class="fa fa-check"></i><b>6.2.11</b> Add HWY MPG?</a></li>
-<li class="chapter" data-level="6.2.12" data-path="model-building.html"><a href="model-building.html#categorical-variables-to-consider"><i class="fa fa-check"></i><b>6.2.12</b> Categorical Variables to Consider</a></li>
-<li class="chapter" data-level="6.2.13" data-path="model-building.html"><a href="model-building.html#model-with-qtrmile-weight-and-drive"><i class="fa fa-check"></i><b>6.2.13</b> Model with QtrMile, Weight, and Drive</a></li>
-<li class="chapter" data-level="6.2.14" data-path="model-building.html"><a href="model-building.html#add-size"><i class="fa fa-check"></i><b>6.2.14</b> Add Size</a></li>
-<li class="chapter" data-level="6.2.15" data-path="model-building.html"><a href="model-building.html#check-of-model-assumptions"><i class="fa fa-check"></i><b>6.2.15</b> Check of Model Assumptions</a></li>
-<li class="chapter" data-level="6.2.16" data-path="model-building.html"><a href="model-building.html#residual-by-predictor-plots"><i class="fa fa-check"></i><b>6.2.16</b> Residual by Predictor Plots</a></li>
-<li class="chapter" data-level="6.2.17" data-path="model-building.html"><a href="model-building.html#coefficients-and-exponentiation"><i class="fa fa-check"></i><b>6.2.17</b> Coefficients and Exponentiation</a></li>
-<li class="chapter" data-level="6.2.18" data-path="model-building.html"><a href="model-building.html#interpretation-of-coefficients"><i class="fa fa-check"></i><b>6.2.18</b> Interpretation of Coefficients</a></li>
-<li class="chapter" data-level="6.2.19" data-path="model-building.html"><a href="model-building.html#adjusted-r2-aic-bic"><i class="fa fa-check"></i><b>6.2.19</b> Adjusted <span class="math inline">\(R^2\)</span>, AIC, BIC</a></li>
-<li class="chapter" data-level="6.2.20" data-path="model-building.html"><a href="model-building.html#model-building-summary"><i class="fa fa-check"></i><b>6.2.20</b> Model Building Summary</a></li>
+<li class="chapter" data-level="6.2" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#modeling-car-price"><i class="fa fa-check"></i><b>6.2</b> Modeling Car Price</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-for-price-of-2015-cars"><i class="fa fa-check"></i><b>6.2.1</b> Model for Price of 2015 Cars</a></li>
+<li class="chapter" data-level="6.2.2" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#categorical-variables"><i class="fa fa-check"></i><b>6.2.2</b> Categorical Variables</a></li>
+<li class="chapter" data-level="6.2.3" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#correlation-matrix"><i class="fa fa-check"></i><b>6.2.3</b> Correlation Matrix</a></li>
+<li class="chapter" data-level="6.2.4" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-using-acceleration-time"><i class="fa fa-check"></i><b>6.2.4</b> Model Using Acceleration Time</a></li>
+<li class="chapter" data-level="6.2.5" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-using-quarter-mile-time"><i class="fa fa-check"></i><b>6.2.5</b> Model Using Quarter Mile Time</a></li>
+<li class="chapter" data-level="6.2.6" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-using-quarter-mile-time-and-acc.-time"><i class="fa fa-check"></i><b>6.2.6</b> Model Using Quarter Mile Time and Acc. Time</a></li>
+<li class="chapter" data-level="6.2.7" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#problems-with-multicollinearity-in-modeling"><i class="fa fa-check"></i><b>6.2.7</b> Problems with Multicollinearity in Modeling</a></li>
+<li class="chapter" data-level="6.2.8" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#impact-on-prediction"><i class="fa fa-check"></i><b>6.2.8</b> Impact on Prediction</a></li>
+<li class="chapter" data-level="6.2.9" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#adding-weight-to-model"><i class="fa fa-check"></i><b>6.2.9</b> Adding Weight to Model</a></li>
+<li class="chapter" data-level="6.2.10" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#add-interaction-term"><i class="fa fa-check"></i><b>6.2.10</b> Add Interaction Term?</a></li>
+<li class="chapter" data-level="6.2.11" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#add-hwy-mpg"><i class="fa fa-check"></i><b>6.2.11</b> Add HWY MPG?</a></li>
+<li class="chapter" data-level="6.2.12" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#categorical-variables-to-consider"><i class="fa fa-check"></i><b>6.2.12</b> Categorical Variables to Consider</a></li>
+<li class="chapter" data-level="6.2.13" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-with-qtrmile-weight-and-drive"><i class="fa fa-check"></i><b>6.2.13</b> Model with QtrMile, Weight, and Drive</a></li>
+<li class="chapter" data-level="6.2.14" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#add-size"><i class="fa fa-check"></i><b>6.2.14</b> Add Size</a></li>
+<li class="chapter" data-level="6.2.15" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#check-of-model-assumptions"><i class="fa fa-check"></i><b>6.2.15</b> Check of Model Assumptions</a></li>
+<li class="chapter" data-level="6.2.16" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#residual-by-predictor-plots"><i class="fa fa-check"></i><b>6.2.16</b> Residual by Predictor Plots</a></li>
+<li class="chapter" data-level="6.2.17" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#coefficients-and-exponentiation"><i class="fa fa-check"></i><b>6.2.17</b> Coefficients and Exponentiation</a></li>
+<li class="chapter" data-level="6.2.18" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#interpretation-of-coefficients"><i class="fa fa-check"></i><b>6.2.18</b> Interpretation of Coefficients</a></li>
+<li class="chapter" data-level="6.2.19" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#adjusted-r2-aic-bic"><i class="fa fa-check"></i><b>6.2.19</b> Adjusted <span class="math inline">\(R^2\)</span>, AIC, BIC</a></li>
+<li class="chapter" data-level="6.2.20" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-building-summary"><i class="fa fa-check"></i><b>6.2.20</b> Model Building Summary</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="predictive-modeling.html"><a href="predictive-modeling.html"><i class="fa fa-check"></i><b>7</b> Predictive Modeling</a><ul>
@@ -614,15 +616,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3.6" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cv-conclusions"><i class="fa fa-check"></i><b>7.3.6</b> CV Conclusions</a></li>
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression"><i class="fa fa-check"></i><b>7.4</b> Ridge Regression</a><ul>
-<li class="chapter" data-level="7.4.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#regression-on-housing-dataset---some-exp.-vars."><i class="fa fa-check"></i><b>7.4.1</b> Regression on Housing Dataset - Some Exp. Vars.</a></li>
-<li class="chapter" data-level="7.4.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#complexity-in-model-coefficients"><i class="fa fa-check"></i><b>7.4.2</b> Complexity in Model Coefficients</a></li>
-<li class="chapter" data-level="7.4.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression-penalty"><i class="fa fa-check"></i><b>7.4.3</b> Ridge Regression Penalty</a></li>
-<li class="chapter" data-level="7.4.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#choosing-lambda"><i class="fa fa-check"></i><b>7.4.4</b> Choosing <span class="math inline">\(\lambda\)</span></a></li>
-<li class="chapter" data-level="7.4.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#optimal-value-of-lambda"><i class="fa fa-check"></i><b>7.4.5</b> Optimal value of <span class="math inline">\(\lambda\)</span></a></li>
-<li class="chapter" data-level="7.4.6" data-path="predictive-modeling.html"><a href="predictive-modeling.html#standardizing"><i class="fa fa-check"></i><b>7.4.6</b> Standardizing</a></li>
-<li class="chapter" data-level="7.4.7" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression-on-housing-dataset"><i class="fa fa-check"></i><b>7.4.7</b> Ridge Regression on Housing Dataset</a></li>
-<li class="chapter" data-level="7.4.8" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression-on-housing-dataset-1"><i class="fa fa-check"></i><b>7.4.8</b> Ridge Regression on Housing Dataset</a></li>
-<li class="chapter" data-level="7.4.9" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression-mspe-by-lambda"><i class="fa fa-check"></i><b>7.4.9</b> Ridge Regression MSPE by <span class="math inline">\(\lambda\)</span></a></li>
+<li class="chapter" data-level="7.4.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#complexity-in-model-coefficients"><i class="fa fa-check"></i><b>7.4.1</b> Complexity in Model Coefficients</a></li>
+<li class="chapter" data-level="7.4.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#regression-on-housing-dataset"><i class="fa fa-check"></i><b>7.4.2</b> Regression on Housing Dataset</a></li>
+<li class="chapter" data-level="7.4.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#housing-model--some-exp.-vars."><i class="fa fa-check"></i><b>7.4.3</b> Housing Model- Some Exp. Vars.</a></li>
+<li class="chapter" data-level="7.4.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression-penalty"><i class="fa fa-check"></i><b>7.4.4</b> Ridge Regression Penalty</a></li>
+<li class="chapter" data-level="7.4.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#choosing-lambda"><i class="fa fa-check"></i><b>7.4.5</b> Choosing <span class="math inline">\(\lambda\)</span></a></li>
+<li class="chapter" data-level="7.4.6" data-path="predictive-modeling.html"><a href="predictive-modeling.html#optimal-value-of-lambda"><i class="fa fa-check"></i><b>7.4.6</b> Optimal value of <span class="math inline">\(\lambda\)</span></a></li>
+<li class="chapter" data-level="7.4.7" data-path="predictive-modeling.html"><a href="predictive-modeling.html#standardizing"><i class="fa fa-check"></i><b>7.4.7</b> Standardizing</a></li>
+<li class="chapter" data-level="7.4.8" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression-on-housing-dataset"><i class="fa fa-check"></i><b>7.4.8</b> Ridge Regression on Housing Dataset</a></li>
+<li class="chapter" data-level="7.4.9" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression-rmspe-by-lambda"><i class="fa fa-check"></i><b>7.4.9</b> Ridge Regression RMSPE by <span class="math inline">\(\lambda\)</span></a></li>
 <li class="chapter" data-level="7.4.10" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression-coefficients-for-optimal-model"><i class="fa fa-check"></i><b>7.4.10</b> Ridge Regression Coefficients for Optimal Model</a></li>
 <li class="chapter" data-level="7.4.11" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ols-and-ridge-predictions"><i class="fa fa-check"></i><b>7.4.11</b> OLS and Ridge Predictions</a></li>
 <li class="chapter" data-level="7.4.12" data-path="predictive-modeling.html"><a href="predictive-modeling.html#choosing-b_j-in-ols"><i class="fa fa-check"></i><b>7.4.12</b> Choosing <span class="math inline">\(b_j\)</span> in OLS</a></li>
@@ -678,9 +680,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1.1" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#modeling-binary-response"><i class="fa fa-check"></i><b>8.1.1</b> Modeling Binary Response</a></li>
 <li class="chapter" data-level="8.1.2" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#credit-card-dataset"><i class="fa fa-check"></i><b>8.1.2</b> Credit Card Dataset</a></li>
 <li class="chapter" data-level="8.1.3" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#default-and-balance"><i class="fa fa-check"></i><b>8.1.3</b> Default and Balance</a></li>
-<li class="chapter" data-level="8.1.4" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#linear-regression-model-for-education-level"><i class="fa fa-check"></i><b>8.1.4</b> Linear Regression Model for Education Level</a></li>
+<li class="chapter" data-level="8.1.4" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#linear-regression-model-for-default"><i class="fa fa-check"></i><b>8.1.4</b> Linear Regression Model for Default</a></li>
 <li class="chapter" data-level="8.1.5" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#transforming-into-interval-01"><i class="fa fa-check"></i><b>8.1.5</b> Transforming into interval (0,1)</a></li>
-<li class="chapter" data-level="8.1.6" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#logistic-regression-model-for-balance"><i class="fa fa-check"></i><b>8.1.6</b> Logistic Regression Model for Balance</a></li>
+<li class="chapter" data-level="8.1.6" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#logistic-regression-model-for-default"><i class="fa fa-check"></i><b>8.1.6</b> Logistic Regression Model for Default</a></li>
 <li class="chapter" data-level="8.1.7" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#fitting-the-logistic-regression-model-in-r"><i class="fa fa-check"></i><b>8.1.7</b> Fitting the Logistic Regression Model in R</a></li>
 <li class="chapter" data-level="8.1.8" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#the-logistic-regression-equation"><i class="fa fa-check"></i><b>8.1.8</b> The Logistic Regression Equation</a></li>
 <li class="chapter" data-level="8.1.9" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#predict-in-r"><i class="fa fa-check"></i><b>8.1.9</b> Predict in R</a></li>
@@ -780,20 +782,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="prediction-simulation-example" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.1.1</span> Prediction Simulation Example<a href="predictive-modeling.html#prediction-simulation-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Suppose we have a set of 100 observations of a single explanatory variable <span class="math inline">\(x\)</span>, and response variable <span class="math inline">\(y\)</span>. A scatterplot of the data is shown below.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-504-1.png" width="768" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-505-1.png" width="768" /></p>
 <p>We want to find a model that captures the trend in the data and will be best able to predict new values of y, for given x.</p>
 <p><strong>Constant Model to Sample Data</strong></p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-505-1.png" width="768" /></p>
-<p><strong>Linear Model to Sample Data</strong></p>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-506-1.png" width="768" /></p>
-<p><strong>Quadratic Model</strong></p>
+<p><strong>Linear Model to Sample Data</strong></p>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-507-1.png" width="768" /></p>
-<p><strong>Cubic Model</strong></p>
+<p><strong>Quadratic Model</strong></p>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-508-1.png" width="768" /></p>
-<p><strong>Quartic Model</strong></p>
+<p><strong>Cubic Model</strong></p>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-509-1.png" width="768" /></p>
-<p><strong>Degree 8 Model</strong></p>
+<p><strong>Quartic Model</strong></p>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-510-1.png" width="768" /></p>
+<p><strong>Degree 8 Model</strong></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-511-1.png" width="768" /></p>
 </div>
 <div id="model-complexity" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.1.2</span> Model Complexity<a href="predictive-modeling.html#model-complexity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -801,7 +803,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>The complexity of the model increases as we add higher-order terms. This makes the model more flexible. The curve is allowed to have more twists and bends.</p></li>
 <li><p>For higher-order, more complex models, individual points have more influence on the shape of the curve.</p></li>
 </ul>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-511-1.png" width="960" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-512-1.png" width="960" /></p>
 </div>
 <div id="new-data-for-prediction" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.1.3</span> New Data for Prediction<a href="predictive-modeling.html#new-data-for-prediction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -839,32 +841,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="fit-polynomial-models" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.1.4</span> Fit Polynomial Models<a href="predictive-modeling.html#fit-polynomial-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="predictive-modeling.html#cb589-1"></a>Sim_M0 &lt;-<span class="kw">lm</span>(<span class="dt">data=</span>Sampdf, y<span class="op">~</span><span class="dv">1</span>)</span>
-<span id="cb589-2"><a href="predictive-modeling.html#cb589-2"></a>Sim_M1 &lt;-<span class="kw">lm</span>(<span class="dt">data=</span>Sampdf, y<span class="op">~</span>x)</span>
-<span id="cb589-3"><a href="predictive-modeling.html#cb589-3"></a>Sim_M2 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Sampdf, y<span class="op">~</span>x<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb589-4"><a href="predictive-modeling.html#cb589-4"></a>Sim_M3 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Sampdf, y<span class="op">~</span>x<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">3</span>))</span>
-<span id="cb589-5"><a href="predictive-modeling.html#cb589-5"></a>Sim_M4 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Sampdf, y<span class="op">~</span>x<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">3</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">4</span>))</span>
-<span id="cb589-6"><a href="predictive-modeling.html#cb589-6"></a>Sim_M5 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Sampdf, y<span class="op">~</span>x<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">3</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">4</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">5</span>))</span>
-<span id="cb589-7"><a href="predictive-modeling.html#cb589-7"></a>Sim_M6 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Sampdf, y<span class="op">~</span>x<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">3</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">4</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">5</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">6</span>))</span>
-<span id="cb589-8"><a href="predictive-modeling.html#cb589-8"></a>Sim_M7 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Sampdf, y<span class="op">~</span>x<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">3</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">4</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">5</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">6</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">7</span>))</span>
-<span id="cb589-9"><a href="predictive-modeling.html#cb589-9"></a>Sim_M8 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Sampdf, y<span class="op">~</span>x<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">3</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">4</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">5</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">6</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">7</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">8</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb654-1"><a href="predictive-modeling.html#cb654-1"></a>Sim_M0 &lt;-<span class="kw">lm</span>(<span class="dt">data=</span>Sampdf, y<span class="op">~</span><span class="dv">1</span>)</span>
+<span id="cb654-2"><a href="predictive-modeling.html#cb654-2"></a>Sim_M1 &lt;-<span class="kw">lm</span>(<span class="dt">data=</span>Sampdf, y<span class="op">~</span>x)</span>
+<span id="cb654-3"><a href="predictive-modeling.html#cb654-3"></a>Sim_M2 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Sampdf, y<span class="op">~</span>x<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb654-4"><a href="predictive-modeling.html#cb654-4"></a>Sim_M3 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Sampdf, y<span class="op">~</span>x<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">3</span>))</span>
+<span id="cb654-5"><a href="predictive-modeling.html#cb654-5"></a>Sim_M4 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Sampdf, y<span class="op">~</span>x<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">3</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">4</span>))</span>
+<span id="cb654-6"><a href="predictive-modeling.html#cb654-6"></a>Sim_M5 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Sampdf, y<span class="op">~</span>x<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">3</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">4</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">5</span>))</span>
+<span id="cb654-7"><a href="predictive-modeling.html#cb654-7"></a>Sim_M6 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Sampdf, y<span class="op">~</span>x<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">3</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">4</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">5</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">6</span>))</span>
+<span id="cb654-8"><a href="predictive-modeling.html#cb654-8"></a>Sim_M7 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Sampdf, y<span class="op">~</span>x<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">3</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">4</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">5</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">6</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">7</span>))</span>
+<span id="cb654-9"><a href="predictive-modeling.html#cb654-9"></a>Sim_M8 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Sampdf, y<span class="op">~</span>x<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">3</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">4</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">5</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">6</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">7</span>)<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">8</span>))</span></code></pre></div>
 </div>
 <div id="predictions-for-new-data" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.1.5</span> Predictions for New Data<a href="predictive-modeling.html#predictions-for-new-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb590-1"><a href="predictive-modeling.html#cb590-1"></a>Newdf<span class="op">$</span>Deg0Pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Sim_M0, <span class="dt">newdata=</span>Newdf)</span>
-<span id="cb590-2"><a href="predictive-modeling.html#cb590-2"></a>Newdf<span class="op">$</span>Deg1Pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Sim_M1, <span class="dt">newdata=</span>Newdf)</span>
-<span id="cb590-3"><a href="predictive-modeling.html#cb590-3"></a>Newdf<span class="op">$</span>Deg2Pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Sim_M2, <span class="dt">newdata=</span>Newdf)</span>
-<span id="cb590-4"><a href="predictive-modeling.html#cb590-4"></a>Newdf<span class="op">$</span>Deg3Pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Sim_M3, <span class="dt">newdata=</span>Newdf)</span>
-<span id="cb590-5"><a href="predictive-modeling.html#cb590-5"></a>Newdf<span class="op">$</span>Deg4Pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Sim_M4, <span class="dt">newdata=</span>Newdf)</span>
-<span id="cb590-6"><a href="predictive-modeling.html#cb590-6"></a>Newdf<span class="op">$</span>Deg5Pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Sim_M5, <span class="dt">newdata=</span>Newdf)</span>
-<span id="cb590-7"><a href="predictive-modeling.html#cb590-7"></a>Newdf<span class="op">$</span>Deg6Pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Sim_M6, <span class="dt">newdata=</span>Newdf)</span>
-<span id="cb590-8"><a href="predictive-modeling.html#cb590-8"></a>Newdf<span class="op">$</span>Deg7Pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Sim_M7, <span class="dt">newdata=</span>Newdf)</span>
-<span id="cb590-9"><a href="predictive-modeling.html#cb590-9"></a>Newdf<span class="op">$</span>Deg8Pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Sim_M8, <span class="dt">newdata=</span>Newdf)</span></code></pre></div>
+<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="predictive-modeling.html#cb655-1"></a>Newdf<span class="op">$</span>Deg0Pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Sim_M0, <span class="dt">newdata=</span>Newdf)</span>
+<span id="cb655-2"><a href="predictive-modeling.html#cb655-2"></a>Newdf<span class="op">$</span>Deg1Pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Sim_M1, <span class="dt">newdata=</span>Newdf)</span>
+<span id="cb655-3"><a href="predictive-modeling.html#cb655-3"></a>Newdf<span class="op">$</span>Deg2Pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Sim_M2, <span class="dt">newdata=</span>Newdf)</span>
+<span id="cb655-4"><a href="predictive-modeling.html#cb655-4"></a>Newdf<span class="op">$</span>Deg3Pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Sim_M3, <span class="dt">newdata=</span>Newdf)</span>
+<span id="cb655-5"><a href="predictive-modeling.html#cb655-5"></a>Newdf<span class="op">$</span>Deg4Pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Sim_M4, <span class="dt">newdata=</span>Newdf)</span>
+<span id="cb655-6"><a href="predictive-modeling.html#cb655-6"></a>Newdf<span class="op">$</span>Deg5Pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Sim_M5, <span class="dt">newdata=</span>Newdf)</span>
+<span id="cb655-7"><a href="predictive-modeling.html#cb655-7"></a>Newdf<span class="op">$</span>Deg6Pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Sim_M6, <span class="dt">newdata=</span>Newdf)</span>
+<span id="cb655-8"><a href="predictive-modeling.html#cb655-8"></a>Newdf<span class="op">$</span>Deg7Pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Sim_M7, <span class="dt">newdata=</span>Newdf)</span>
+<span id="cb655-9"><a href="predictive-modeling.html#cb655-9"></a>Newdf<span class="op">$</span>Deg8Pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Sim_M8, <span class="dt">newdata=</span>Newdf)</span></code></pre></div>
 </div>
 <div id="predicted-values-and-true-y" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.1.6</span> Predicted Values and True y<a href="predictive-modeling.html#predicted-values-and-true-y" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In fact, since these data were simulated, we know the true value of <span class="math inline">\(y\)</span>, so we can compare the predicted values to the true ones.</p>
-<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb591-1"><a href="predictive-modeling.html#cb591-1"></a><span class="kw">kable</span>(Newdf <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(samp)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="predictive-modeling.html#cb656-1"></a><span class="kw">kable</span>(Newdf <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(samp)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">5</span>))</span></code></pre></div>
 <table>
 <colgroup>
 <col width="5%" />
@@ -980,15 +982,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="calculate-prediction-error" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.1.8</span> Calculate Prediction Error<a href="predictive-modeling.html#calculate-prediction-error" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb592-1"><a href="predictive-modeling.html#cb592-1"></a>RMSPE0 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Newdf<span class="op">$</span>y<span class="op">-</span>Newdf<span class="op">$</span>Deg0Pred)<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb592-2"><a href="predictive-modeling.html#cb592-2"></a>RMSPE1 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Newdf<span class="op">$</span>y<span class="op">-</span>Newdf<span class="op">$</span>Deg1Pred)<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb592-3"><a href="predictive-modeling.html#cb592-3"></a>RMSPE2 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Newdf<span class="op">$</span>y<span class="op">-</span>Newdf<span class="op">$</span>Deg2Pred)<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb592-4"><a href="predictive-modeling.html#cb592-4"></a>RMSPE3 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Newdf<span class="op">$</span>y<span class="op">-</span>Newdf<span class="op">$</span>Deg3Pred)<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb592-5"><a href="predictive-modeling.html#cb592-5"></a>RMSPE4 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Newdf<span class="op">$</span>y<span class="op">-</span>Newdf<span class="op">$</span>Deg4Pred)<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb592-6"><a href="predictive-modeling.html#cb592-6"></a>RMSPE5 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Newdf<span class="op">$</span>y<span class="op">-</span>Newdf<span class="op">$</span>Deg5Pred)<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb592-7"><a href="predictive-modeling.html#cb592-7"></a>RMSPE6 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Newdf<span class="op">$</span>y<span class="op">-</span>Newdf<span class="op">$</span>Deg6Pred)<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb592-8"><a href="predictive-modeling.html#cb592-8"></a>RMSPE7 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Newdf<span class="op">$</span>y<span class="op">-</span>Newdf<span class="op">$</span>Deg7Pred)<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb592-9"><a href="predictive-modeling.html#cb592-9"></a>RMSPE8 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Newdf<span class="op">$</span>y<span class="op">-</span>Newdf<span class="op">$</span>Deg8Pred)<span class="op">^</span><span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb657-1"><a href="predictive-modeling.html#cb657-1"></a>RMSPE0 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Newdf<span class="op">$</span>y<span class="op">-</span>Newdf<span class="op">$</span>Deg0Pred)<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb657-2"><a href="predictive-modeling.html#cb657-2"></a>RMSPE1 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Newdf<span class="op">$</span>y<span class="op">-</span>Newdf<span class="op">$</span>Deg1Pred)<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb657-3"><a href="predictive-modeling.html#cb657-3"></a>RMSPE2 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Newdf<span class="op">$</span>y<span class="op">-</span>Newdf<span class="op">$</span>Deg2Pred)<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb657-4"><a href="predictive-modeling.html#cb657-4"></a>RMSPE3 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Newdf<span class="op">$</span>y<span class="op">-</span>Newdf<span class="op">$</span>Deg3Pred)<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb657-5"><a href="predictive-modeling.html#cb657-5"></a>RMSPE4 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Newdf<span class="op">$</span>y<span class="op">-</span>Newdf<span class="op">$</span>Deg4Pred)<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb657-6"><a href="predictive-modeling.html#cb657-6"></a>RMSPE5 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Newdf<span class="op">$</span>y<span class="op">-</span>Newdf<span class="op">$</span>Deg5Pred)<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb657-7"><a href="predictive-modeling.html#cb657-7"></a>RMSPE6 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Newdf<span class="op">$</span>y<span class="op">-</span>Newdf<span class="op">$</span>Deg6Pred)<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb657-8"><a href="predictive-modeling.html#cb657-8"></a>RMSPE7 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Newdf<span class="op">$</span>y<span class="op">-</span>Newdf<span class="op">$</span>Deg7Pred)<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb657-9"><a href="predictive-modeling.html#cb657-9"></a>RMSPE8 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Newdf<span class="op">$</span>y<span class="op">-</span>Newdf<span class="op">$</span>Deg8Pred)<span class="op">^</span><span class="dv">2</span>))</span></code></pre></div>
 </div>
 <div id="prediction-rmspe-by-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.1.9</span> Prediction RMSPE by Model<a href="predictive-modeling.html#prediction-rmspe-by-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1051,23 +1053,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="training-data-error" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.1.11</span> Training Data Error<a href="predictive-modeling.html#training-data-error" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="predictive-modeling.html#cb593-1"></a>RMSE0 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>(Sim_M0<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb593-2"><a href="predictive-modeling.html#cb593-2"></a>RMSE1 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>(Sim_M1<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb593-3"><a href="predictive-modeling.html#cb593-3"></a>RMSE2 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>(Sim_M2<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb593-4"><a href="predictive-modeling.html#cb593-4"></a>RMSE3 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>(Sim_M3<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb593-5"><a href="predictive-modeling.html#cb593-5"></a>RMSE4 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>(Sim_M4<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb593-6"><a href="predictive-modeling.html#cb593-6"></a>RMSE5 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>(Sim_M5<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb593-7"><a href="predictive-modeling.html#cb593-7"></a>RMSE6 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>(Sim_M6<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb593-8"><a href="predictive-modeling.html#cb593-8"></a>RMSE7 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>(Sim_M7<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb593-9"><a href="predictive-modeling.html#cb593-9"></a>RMSE8 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>(Sim_M8<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="predictive-modeling.html#cb658-1"></a>RMSE0 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>(Sim_M0<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb658-2"><a href="predictive-modeling.html#cb658-2"></a>RMSE1 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>(Sim_M1<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb658-3"><a href="predictive-modeling.html#cb658-3"></a>RMSE2 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>(Sim_M2<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb658-4"><a href="predictive-modeling.html#cb658-4"></a>RMSE3 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>(Sim_M3<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb658-5"><a href="predictive-modeling.html#cb658-5"></a>RMSE4 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>(Sim_M4<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb658-6"><a href="predictive-modeling.html#cb658-6"></a>RMSE5 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>(Sim_M5<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb658-7"><a href="predictive-modeling.html#cb658-7"></a>RMSE6 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>(Sim_M6<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb658-8"><a href="predictive-modeling.html#cb658-8"></a>RMSE7 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>(Sim_M7<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb658-9"><a href="predictive-modeling.html#cb658-9"></a>RMSE8 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>(Sim_M8<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>))</span></code></pre></div>
 </div>
 <div id="test-and-training-error" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.1.12</span> Test and Training Error<a href="predictive-modeling.html#test-and-training-error" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="predictive-modeling.html#cb594-1"></a>Degree &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">8</span></span>
-<span id="cb594-2"><a href="predictive-modeling.html#cb594-2"></a>Test &lt;-<span class="st"> </span><span class="kw">c</span>(RMSPE0, RMSPE1, RMSPE2, RMSPE3, RMSPE4, RMSPE5, RMSPE6, RMSPE7, RMSPE8)</span>
-<span id="cb594-3"><a href="predictive-modeling.html#cb594-3"></a>Train &lt;-<span class="st"> </span><span class="kw">c</span>(RMSE0, RMSE1, RMSE2, RMSE3, RMSE4, RMSE5, RMSE6, RMSE7, RMSE8)</span>
-<span id="cb594-4"><a href="predictive-modeling.html#cb594-4"></a>RMSPEdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Degree, Test, Train)</span>
-<span id="cb594-5"><a href="predictive-modeling.html#cb594-5"></a>RMSPEdf</span></code></pre></div>
+<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb659-1"><a href="predictive-modeling.html#cb659-1"></a>Degree &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">8</span></span>
+<span id="cb659-2"><a href="predictive-modeling.html#cb659-2"></a>Test &lt;-<span class="st"> </span><span class="kw">c</span>(RMSPE0, RMSPE1, RMSPE2, RMSPE3, RMSPE4, RMSPE5, RMSPE6, RMSPE7, RMSPE8)</span>
+<span id="cb659-3"><a href="predictive-modeling.html#cb659-3"></a>Train &lt;-<span class="st"> </span><span class="kw">c</span>(RMSE0, RMSE1, RMSE2, RMSE3, RMSE4, RMSE5, RMSE6, RMSE7, RMSE8)</span>
+<span id="cb659-4"><a href="predictive-modeling.html#cb659-4"></a>RMSPEdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Degree, Test, Train)</span>
+<span id="cb659-5"><a href="predictive-modeling.html#cb659-5"></a>RMSPEdf</span></code></pre></div>
 <pre><code>##   Degree     Test    Train
 ## 1      0 4.051309 3.431842
 ## 2      1 3.849624 3.366650
@@ -1081,7 +1083,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="graph-of-rmspe" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.1.13</span> Graph of RMSPE<a href="predictive-modeling.html#graph-of-rmspe" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-521-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-522-1.png" width="672" /></p>
 <ul>
 <li>Training error decreases as model becomes more complex<br />
 </li>
@@ -1090,7 +1092,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="third-degree-model-summary" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.1.14</span> Third Degree Model Summary<a href="predictive-modeling.html#third-degree-model-summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="predictive-modeling.html#cb596-1"></a><span class="kw">summary</span>(Sim_M3)</span></code></pre></div>
+<div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb661-1"><a href="predictive-modeling.html#cb661-1"></a><span class="kw">summary</span>(Sim_M3)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ x + I(x^2) + I(x^3), data = Sampdf)
@@ -1115,33 +1117,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="true-data-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.1.15</span> True Data Model<a href="predictive-modeling.html#true-data-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In fact, the data were generated from the model <span class="math inline">\(y_i = 4.5x - 1.4x^2 + 0.1x^3 + \epsilon_i\)</span>, where <span class="math inline">\(\epsilon_i\sim\mathcal{N}(0,3)\)</span></p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-523-1.png" width="768" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-524-1.png" width="768" /></p>
 </div>
 <div id="true-data-model-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.1.16</span> True Data Model<a href="predictive-modeling.html#true-data-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In fact, the data were generated from the model <span class="math inline">\(y_i = 4.5x - 1.4x^2 + 0.1x^3 + \epsilon_i\)</span>, where <span class="math inline">\(\epsilon_i\sim\mathcal{N}(0,3)\)</span></p>
 <p>The yellow curve represents the true expected response curve.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-525-1.png" width="768" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-526-1.png" width="768" /></p>
 </div>
 <div id="linear-model-on-larger-population" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.1.17</span> Linear Model on Larger Population<a href="predictive-modeling.html#linear-model-on-larger-population" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The yellow curve represents the true expected response curve.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-526-1.png" width="768" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-527-1.png" width="768" /></p>
 </div>
 <div id="cubic-model-on-larger-population" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.1.18</span> Cubic Model on Larger Population<a href="predictive-modeling.html#cubic-model-on-larger-population" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The yellow curve represents the true expected response curve.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-528-1.png" width="768" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-529-1.png" width="768" /></p>
 </div>
 <div id="eighth-degree-model-on-larger-population" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.1.19</span> Eighth-Degree Model on Larger Population<a href="predictive-modeling.html#eighth-degree-model-on-larger-population" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The yellow curve represents the true expected response curve.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-530-1.png" width="768" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-531-1.png" width="768" /></p>
 <p>The 8th degree model performs worse than the cubic. The extra terms cause the model to be “too flexible,” and it starts to model random fluctuations (noise) in the training data, that do not capture the true trend for the population. This is called <strong>overfitting.</strong></p>
 </div>
 <div id="model-complexity-training-error-and-test-error" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.1.20</span> Model Complexity, Training Error, and Test Error<a href="predictive-modeling.html#model-complexity-training-error-and-test-error" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-531-1.png" width="960" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-532-1.png" width="960" /></p>
 </div>
 </div>
 <div id="variance-bias-tradeoff" class="section level2 hasAnchor">
@@ -1163,12 +1165,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The third source of variability cannot be controlled or eliminated. The first two, however are things we can control. If we could figure out how to minimize bias while also minimizing variance associated with a prediction, that would be great! But…</p>
 <p>The constant model suffers from high bias. Since it does not include a linear, quadratic, or cubic term, it cannot accurately approximate the true regression function.</p>
 <p>The Eighth degree model suffers from high variance. Although it could, in theory, approximate the true regression function correctly, it is too flexible, and is thrown off because of the influence of individual points with high degrees of variability.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-532-1.png" width="960" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-533-1.png" width="960" /></p>
 </div>
 <div id="variance-bias-tradeoff-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.2.3</span> Variance-Bias Tradeoff<a href="predictive-modeling.html#variance-bias-tradeoff-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>As model complexity (flexibility) increases, bias decreases. Variance, however, increases.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-533-1.png" width="960" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-534-1.png" width="960" /></p>
 <p>In fact, it can be shown that:</p>
 <p><span class="math inline">\(\text{Expected RMSPE} = \text{Variance} + \text{Bias}^2\)</span></p>
 <p>Our goal is the find the “sweetspot” where expected RMSPE is minimized.</p>
@@ -1212,22 +1214,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="cross-validation-illustration" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.3.2</span> Cross-Validation Illustration<a href="predictive-modeling.html#cross-validation-illustration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="CV.png" width="75%" /></p>
+<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb663-1"><a href="predictive-modeling.html#cb663-1"></a>Order &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Cars2015))</span>
+<span id="cb663-2"><a href="predictive-modeling.html#cb663-2"></a>fold1 &lt;-<span class="st"> </span>Order[<span class="dv">1</span><span class="op">:</span><span class="dv">22</span>]</span>
+<span id="cb663-3"><a href="predictive-modeling.html#cb663-3"></a>fold2 &lt;-<span class="st"> </span>Order[<span class="dv">23</span><span class="op">:</span><span class="dv">44</span>]</span>
+<span id="cb663-4"><a href="predictive-modeling.html#cb663-4"></a>fold3 &lt;-<span class="st"> </span>Order[<span class="dv">45</span><span class="op">:</span><span class="dv">66</span>]</span>
+<span id="cb663-5"><a href="predictive-modeling.html#cb663-5"></a>fold4 &lt;-<span class="st"> </span>Order[<span class="dv">67</span><span class="op">:</span><span class="dv">88</span>]</span>
+<span id="cb663-6"><a href="predictive-modeling.html#cb663-6"></a>fold5 &lt;-<span class="st"> </span>Order[<span class="dv">89</span><span class="op">:</span><span class="dv">110</span>]</span>
+<span id="cb663-7"><a href="predictive-modeling.html#cb663-7"></a>Fold &lt;-<span class="st"> </span><span class="kw">data.frame</span>(fold1, fold2, fold3, fold4, fold5)</span></code></pre></div>
 </div>
 <div id="models-for-price-of-new-cars" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.3.3</span> Models for Price of New Cars<a href="predictive-modeling.html#models-for-price-of-new-cars" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Consider the following five models for predicting the price of a new car:</p>
-<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb598-1"><a href="predictive-modeling.html#cb598-1"></a>M1 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, LowPrice<span class="op">~</span>Acc060)</span>
-<span id="cb598-2"><a href="predictive-modeling.html#cb598-2"></a>M2 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, LowPrice<span class="op">~</span>Acc060 <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Acc060<span class="op">^</span><span class="dv">2</span>))</span>
-<span id="cb598-3"><a href="predictive-modeling.html#cb598-3"></a>M3 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, LowPrice<span class="op">~</span>Acc060 <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Acc060<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>Size)</span>
-<span id="cb598-4"><a href="predictive-modeling.html#cb598-4"></a>M4 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, LowPrice<span class="op">~</span>Acc060 <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Acc060<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>Size <span class="op">+</span><span class="st"> </span>PageNum)</span>
-<span id="cb598-5"><a href="predictive-modeling.html#cb598-5"></a>M5 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, LowPrice<span class="op">~</span>Acc060 <span class="op">*</span><span class="st"> </span><span class="kw">I</span>(Acc060<span class="op">^</span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>Size)</span>
-<span id="cb598-6"><a href="predictive-modeling.html#cb598-6"></a>M6 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, LowPrice<span class="op">~</span>Acc060 <span class="op">*</span><span class="st"> </span><span class="kw">I</span>(Acc060<span class="op">^</span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>Size <span class="op">*</span><span class="st"> </span>PageNum)</span></code></pre></div>
+<div class="sourceCode" id="cb664"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb664-1"><a href="predictive-modeling.html#cb664-1"></a>M1 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, LowPrice<span class="op">~</span>Acc060)</span>
+<span id="cb664-2"><a href="predictive-modeling.html#cb664-2"></a>M2 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, LowPrice<span class="op">~</span>Acc060 <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Acc060<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb664-3"><a href="predictive-modeling.html#cb664-3"></a>M3 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, LowPrice<span class="op">~</span>Acc060 <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Acc060<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>Size)</span>
+<span id="cb664-4"><a href="predictive-modeling.html#cb664-4"></a>M4 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, LowPrice<span class="op">~</span>Acc060 <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Acc060<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>Size <span class="op">+</span><span class="st"> </span>PageNum)</span>
+<span id="cb664-5"><a href="predictive-modeling.html#cb664-5"></a>M5 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, LowPrice<span class="op">~</span>Acc060 <span class="op">*</span><span class="st"> </span><span class="kw">I</span>(Acc060<span class="op">^</span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>Size)</span>
+<span id="cb664-6"><a href="predictive-modeling.html#cb664-6"></a>M6 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, LowPrice<span class="op">~</span>Acc060 <span class="op">*</span><span class="st"> </span><span class="kw">I</span>(Acc060<span class="op">^</span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>Size <span class="op">*</span><span class="st"> </span>PageNum)</span></code></pre></div>
+<div class="sourceCode" id="cb665"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb665-1"><a href="predictive-modeling.html#cb665-1"></a>RMSPE &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="ot">NA</span>, <span class="dt">dim=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">6</span>)) <span class="co">#5 folds, 5 models</span></span>
+<span id="cb665-2"><a href="predictive-modeling.html#cb665-2"></a></span>
+<span id="cb665-3"><a href="predictive-modeling.html#cb665-3"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>){</span>
+<span id="cb665-4"><a href="predictive-modeling.html#cb665-4"></a>M1 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015[<span class="op">-</span>Fold[,i], ], LowPrice<span class="op">~</span>Acc060)</span>
+<span id="cb665-5"><a href="predictive-modeling.html#cb665-5"></a>M2 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015[<span class="op">-</span>Fold[,i], ], LowPrice<span class="op">~</span>Acc060 <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Acc060<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb665-6"><a href="predictive-modeling.html#cb665-6"></a>M3 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015[<span class="op">-</span>Fold[,i], ], LowPrice<span class="op">~</span>Acc060 <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Acc060<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>Size)</span>
+<span id="cb665-7"><a href="predictive-modeling.html#cb665-7"></a>M4 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015[<span class="op">-</span>Fold[,i], ], LowPrice<span class="op">~</span>Acc060 <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Acc060<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>Size <span class="op">+</span><span class="st"> </span>PageNum)</span>
+<span id="cb665-8"><a href="predictive-modeling.html#cb665-8"></a>M5 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015[<span class="op">-</span>Fold[,i], ], LowPrice<span class="op">~</span>Acc060 <span class="op">*</span><span class="st"> </span><span class="kw">I</span>(Acc060<span class="op">^</span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>Size)</span>
+<span id="cb665-9"><a href="predictive-modeling.html#cb665-9"></a>M6 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015[<span class="op">-</span>Fold[,i], ], LowPrice<span class="op">~</span>Acc060 <span class="op">*</span><span class="st"> </span><span class="kw">I</span>(Acc060<span class="op">^</span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span>Size <span class="op">*</span><span class="st"> </span>PageNum)</span>
+<span id="cb665-10"><a href="predictive-modeling.html#cb665-10"></a></span>
+<span id="cb665-11"><a href="predictive-modeling.html#cb665-11"></a>Yhat1 &lt;-<span class="st"> </span><span class="kw">predict</span>(M1, <span class="dt">newdata=</span>Cars2015[Fold[,i], ])</span>
+<span id="cb665-12"><a href="predictive-modeling.html#cb665-12"></a>Yhat2 &lt;-<span class="st"> </span><span class="kw">predict</span>(M2, <span class="dt">newdata=</span>Cars2015[Fold[,i], ])</span>
+<span id="cb665-13"><a href="predictive-modeling.html#cb665-13"></a>Yhat3 &lt;-<span class="st"> </span><span class="kw">predict</span>(M3, <span class="dt">newdata=</span>Cars2015[Fold[,i], ])</span>
+<span id="cb665-14"><a href="predictive-modeling.html#cb665-14"></a>Yhat4 &lt;-<span class="st"> </span><span class="kw">predict</span>(M4, <span class="dt">newdata=</span>Cars2015[Fold[,i], ])</span>
+<span id="cb665-15"><a href="predictive-modeling.html#cb665-15"></a>Yhat5 &lt;-<span class="st"> </span><span class="kw">predict</span>(M5, <span class="dt">newdata=</span>Cars2015[Fold[,i], ])</span>
+<span id="cb665-16"><a href="predictive-modeling.html#cb665-16"></a>Yhat6 &lt;-<span class="st"> </span><span class="kw">predict</span>(M6, <span class="dt">newdata=</span>Cars2015[Fold[,i], ])</span>
+<span id="cb665-17"><a href="predictive-modeling.html#cb665-17"></a></span>
+<span id="cb665-18"><a href="predictive-modeling.html#cb665-18"></a>Y &lt;-<span class="st"> </span>Cars2015[Fold[,i], ]<span class="op">$</span>LowPrice</span>
+<span id="cb665-19"><a href="predictive-modeling.html#cb665-19"></a>RMSPE[i, <span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Y<span class="op">-</span>Yhat1)<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb665-20"><a href="predictive-modeling.html#cb665-20"></a>RMSPE[i, <span class="dv">2</span>] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Y<span class="op">-</span>Yhat2)<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb665-21"><a href="predictive-modeling.html#cb665-21"></a>RMSPE[i, <span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Y<span class="op">-</span>Yhat3)<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb665-22"><a href="predictive-modeling.html#cb665-22"></a>RMSPE[i, <span class="dv">4</span>] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Y<span class="op">-</span>Yhat4)<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb665-23"><a href="predictive-modeling.html#cb665-23"></a>RMSPE[i, <span class="dv">5</span>] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Y<span class="op">-</span>Yhat5)<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb665-24"><a href="predictive-modeling.html#cb665-24"></a>RMSPE[i, <span class="dv">6</span>] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">mean</span>((Y<span class="op">-</span>Yhat6)<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb665-25"><a href="predictive-modeling.html#cb665-25"></a>}</span></code></pre></div>
 </div>
 <div id="cross-validation-in-cars-dataset" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.3.4</span> Cross Validation in Cars Dataset<a href="predictive-modeling.html#cross-validation-in-cars-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To Use cross validation on the cars dataset, we’ll fit each model to 4 folds (88 cars), while withholding the other 1 fold (22 cars).</p>
 <p>We then make predictions on the last fold, and see which model yields the lowest MSPE.</p>
-<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="predictive-modeling.html#cb599-1"></a><span class="kw">t</span>(Fold)</span></code></pre></div>
+<div class="sourceCode" id="cb666"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb666-1"><a href="predictive-modeling.html#cb666-1"></a><span class="kw">t</span>(Fold)</span></code></pre></div>
 <pre><code>##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13]
 ## fold1   76   82   73   14   30   15  109    5  102    92    25    24     6
 ## fold2   65   80  107   62    8    4   91   75    2    41    99    81    37
@@ -1244,7 +1278,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="cv-results" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.3.5</span> CV Results<a href="predictive-modeling.html#cv-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Rows show RMSPE, columns show model.</p>
-<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="predictive-modeling.html#cb601-1"></a><span class="kw">kable</span>(RMSPE)</span></code></pre></div>
+<div class="sourceCode" id="cb668"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb668-1"><a href="predictive-modeling.html#cb668-1"></a><span class="kw">kable</span>(RMSPE)</span></code></pre></div>
 <table>
 <tbody>
 <tr class="odd">
@@ -1290,7 +1324,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Mean RMSPE</p>
-<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="predictive-modeling.html#cb602-1"></a><span class="kw">apply</span>(RMSPE,<span class="dv">2</span>,mean)</span></code></pre></div>
+<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="predictive-modeling.html#cb669-1"></a><span class="kw">apply</span>(RMSPE,<span class="dv">2</span>,mean)</span></code></pre></div>
 <pre><code>## [1] 10.755437 10.377157  9.861570 10.126937  9.973025 14.536803</code></pre>
 </div>
 <div id="cv-conclusions" class="section level3 hasAnchor">
@@ -1305,25 +1339,462 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="ridge-regression" class="section level2 hasAnchor">
 <h2><span class="header-section-number">7.4</span> Ridge Regression<a href="predictive-modeling.html#ridge-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="regression-on-housing-dataset---some-exp.-vars." class="section level3 hasAnchor">
-<h3><span class="header-section-number">7.4.1</span> Regression on Housing Dataset - Some Exp. Vars.<a href="predictive-modeling.html#regression-on-housing-dataset---some-exp.-vars." class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="predictive-modeling.html#cb604-1"></a>M_OLS &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Train_Data, SalePrice <span class="op">~</span><span class="st"> </span>.)</span>
-<span id="cb604-2"><a href="predictive-modeling.html#cb604-2"></a><span class="kw">head</span>(<span class="kw">coef</span>(M_OLS),<span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>##     (Intercept)  `Overall Qual`    `Year Built`  `Mas Vnr Area`  `Central Air`Y 
-##   -14136063.894        6975.925         494.582          33.382       -3745.363 
-##   `Gr Liv Area`  `Lot Frontage`    `1st Flr SF` `Bedroom AbvGr` `TotRms AbvGrd` 
-##          37.229         -14.959          13.369       -2353.038         914.559</code></pre>
-</div>
 <div id="complexity-in-model-coefficients" class="section level3 hasAnchor">
-<h3><span class="header-section-number">7.4.2</span> Complexity in Model Coefficients<a href="predictive-modeling.html#complexity-in-model-coefficients" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">7.4.1</span> Complexity in Model Coefficients<a href="predictive-modeling.html#complexity-in-model-coefficients" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><p>We’ve thought about complexity in terms of the number of terms we include in a model, as well as whether we include quadratic terms and higher order terms and interactions</p></li>
 <li><p>We can also think about model complexity in terms of the coefficients <span class="math inline">\(b_1, \ldots, b_p\)</span>.</p></li>
 <li><p>Larger values of <span class="math inline">\(b_1, \ldots, b_p\)</span> are associated with more complex models. Smaller values of <span class="math inline">\(b_1, \ldots, b_p\)</span> are associated with less complex models. When <span class="math inline">\(b_j=0\)</span>, this mean variable <span class="math inline">\(j\)</span> is not used in the model.</p></li>
 </ul>
 </div>
+<div id="regression-on-housing-dataset" class="section level3 hasAnchor">
+<h3><span class="header-section-number">7.4.2</span> Regression on Housing Dataset<a href="predictive-modeling.html#regression-on-housing-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb671-1"><a href="predictive-modeling.html#cb671-1"></a><span class="kw">set.seed</span>(<span class="dv">10302021</span>)</span>
+<span id="cb671-2"><a href="predictive-modeling.html#cb671-2"></a>samp &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(ames_raw), <span class="dv">1000</span>)</span>
+<span id="cb671-3"><a href="predictive-modeling.html#cb671-3"></a>Train_Data &lt;-<span class="st"> </span>ames_raw[samp,]</span></code></pre></div>
+<div class="sourceCode" id="cb672"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb672-1"><a href="predictive-modeling.html#cb672-1"></a>M_OLS &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Train_Data, SalePrice <span class="op">~</span><span class="st"> </span>.)</span>
+<span id="cb672-2"><a href="predictive-modeling.html#cb672-2"></a><span class="kw">summary</span>(M_OLS)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = SalePrice ~ ., data = Train_Data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -158158   -8892     213    9496  158158 
+## 
+## Coefficients:
+##                               Estimate     Std. Error t value
+## (Intercept)             -14136063.8945  19081301.5981  -0.741
+## `Overall Qual`               6975.9250      1187.4137   5.875
+## `Year Built`                  494.5820       107.1664   4.615
+## `Mas Vnr Area`                 33.3817         6.4707   5.159
+## `Central Air`Y              -3745.3629      4857.8749  -0.771
+## `Gr Liv Area`                  37.2290        18.5297   2.009
+## `Lot Frontage`                -14.9594        60.3992  -0.248
+## `1st Flr SF`                   13.3690        19.2561   0.694
+## `Bedroom AbvGr`             -2353.0379      1675.4799  -1.404
+## `TotRms AbvGrd`               914.5595      1112.3776   0.822
+## Order                           9.0730        15.1005   0.601
+## PID                             0.7939         4.3378   0.183
+## `MS SubClass`030             1747.3878      6199.3466   0.282
+## `MS SubClass`040             5867.2885     18051.4432   0.325
+## `MS SubClass`045             7182.7066     10431.2913   0.689
+## `MS SubClass`050            -1330.0097      5044.6915  -0.264
+## `MS SubClass`060            -7400.8589      5261.2795  -1.407
+## `MS SubClass`070             -953.7000      7122.4627  -0.134
+## `MS SubClass`075           -10585.7403     12375.9825  -0.855
+## `MS SubClass`080            -6516.1315      4515.3606  -1.443
+## `MS SubClass`085            -6527.2338      6376.7201  -1.024
+## `MS SubClass`090           -21891.2260      9761.2969  -2.243
+## `MS SubClass`120           -20296.4700      4678.1426  -4.339
+## `MS SubClass`160           -34837.6664      7079.2626  -4.921
+## `MS SubClass`180           -18822.1874     12977.3945  -1.450
+## `MS SubClass`190           -12421.4283      7938.1494  -1.565
+## `MS Zoning`C (all)         -38785.6865     33604.3855  -1.154
+## `MS Zoning`FV              -23114.7183     29478.1257  -0.784
+## `MS Zoning`I (all)         -17213.3332     41603.5670  -0.414
+## `MS Zoning`RH              -13306.2220     29844.8659  -0.446
+## `MS Zoning`RL              -17643.5479     28756.2363  -0.614
+## `MS Zoning`RM              -24783.4465     29226.7175  -0.848
+## `Lot Area`                      0.7408         0.1658   4.468
+## StreetPave                  37262.6394     17051.5092   2.185
+## AlleyPave                    2527.1840      7354.5945   0.344
+## AlleyNA                        29.0268      5198.4814   0.006
+## `Lot Shape`IR2               8575.5874      5485.4669   1.563
+## `Lot Shape`IR3              10397.8002     12598.2284   0.825
+## `Lot Shape`Reg               2676.2691      2031.2908   1.318
+## `Land Contour`HLS           11318.1617      6089.7012   1.859
+## `Land Contour`Low          -22452.1871     11524.1454  -1.948
+## `Land Contour`Lvl           12230.7110      4699.3902   2.603
+## `Lot Config`CulDSac         10427.6522      5333.0392   1.955
+## `Lot Config`FR2            -12317.5424      5422.2301  -2.272
+## `Lot Config`FR3            -14557.2814     11621.4721  -1.253
+## `Lot Config`Inside          -1168.2308      2362.0973  -0.495
+## `Land Slope`Mod             10550.3767      4611.9960   2.288
+## `Land Slope`Sev            -24213.7594     18971.9679  -1.276
+## NeighborhoodBlueste         19001.1402     15359.2081   1.237
+## NeighborhoodBrDale          20558.0541     14183.6972   1.449
+## NeighborhoodBrkSide         14314.5790     12163.1858   1.177
+## NeighborhoodClearCr          7379.3466     15007.2726   0.492
+## NeighborhoodCollgCr           -46.6308     10100.6076  -0.005
+## NeighborhoodCrawfor         28775.4385     11758.9005   2.447
+## NeighborhoodEdwards         -7491.2919     10588.5901  -0.707
+## NeighborhoodGilbert          1951.6205      9311.2407   0.210
+## NeighborhoodGreens           4667.7593     24819.3716   0.188
+## NeighborhoodIDOTRR          12473.1493     13394.5390   0.931
+## NeighborhoodMeadowV         18891.1265     14852.3899   1.272
+## NeighborhoodMitchel         -9274.3206     11674.4738  -0.794
+## NeighborhoodNAmes            1781.9099      9557.5827   0.186
+## NeighborhoodNoRidge         32109.4882     10208.1864   3.145
+## NeighborhoodNPkVill         19601.4138     12568.2771   1.560
+## NeighborhoodNridgHt         34407.2004      9268.6339   3.712
+## NeighborhoodNWAmes          -3367.8476      9915.0330  -0.340
+## NeighborhoodOldTown          9857.0795     11660.0353   0.845
+## NeighborhoodSawyer           6761.6510     10233.7204   0.661
+## NeighborhoodSawyerW          3945.8509      9472.8485   0.417
+## NeighborhoodSomerst         20453.1723      9940.5448   2.058
+## NeighborhoodStoneBr         44556.0799     10407.7868   4.281
+## NeighborhoodSWISU            8518.9311     12621.7640   0.675
+## NeighborhoodTimber           1455.9164     11778.9617   0.124
+## NeighborhoodVeenker          5759.5517     11938.6907   0.482
+## `Condition 1`Feedr           -315.5373      6556.3195  -0.048
+## `Condition 1`Norm           10041.9750      5463.8941   1.838
+## `Condition 1`PosA           49498.8746     23721.3107   2.087
+## `Condition 1`PosN           15873.9314      9869.5060   1.608
+## `Condition 1`RRAe          -11599.3285      9309.0850  -1.246
+## `Condition 1`RRAn            7894.0461      8747.5548   0.902
+## `Condition 1`RRNn            6045.1254     14793.6446   0.409
+## `Condition 2`Feedr           7639.7933     31157.3993   0.245
+## `Condition 2`Norm            6804.6579     27562.1927   0.247
+## `Condition 2`PosA            1496.1297     39927.8279   0.037
+## `Condition 2`PosN         -224695.9130     33982.6831  -6.612
+## `Condition 2`RRNn           20826.2553     37187.7025   0.560
+## `Overall Cond`               5652.4500      1110.9628   5.088
+## `Year Remod/Add`              115.1030        67.4315   1.707
+## `Roof Style`Gable            -983.4966     21461.8852  -0.046
+## `Roof Style`Gambrel         -3775.4699     23821.0554  -0.158
+## `Roof Style`Hip             -1020.9768     21560.9811  -0.047
+## `Roof Style`Mansard         18711.8071     32901.5367   0.569
+## `Roof Style`Shed            -9552.0309     40823.6097  -0.234
+## `Roof Matl`CompShg         671041.0671     49405.0627  13.582
+## `Roof Matl`Membran         738250.2085     60710.0732  12.160
+## `Roof Matl`Tar&amp;Grv         653237.7171     51651.9656  12.647
+## `Roof Matl`WdShngl         757954.9463     51602.0280  14.688
+## `Mas Vnr Type`BrkFace      -14297.1434     10170.9970  -1.406
+## `Mas Vnr Type`None          -5178.2754     10178.9123  -0.509
+## `Mas Vnr Type`Stone        -11764.3736     10522.7000  -1.118
+## `Exter Qual`Fa             -21903.6214     14605.4913  -1.500
+## `Exter Qual`Gd             -37435.0319      5548.9279  -6.746
+## `Exter Qual`TA             -40396.2769      6354.0424  -6.358
+## `Exter Cond`Fa              -2499.1726     12458.9295  -0.201
+## `Exter Cond`Gd               9625.5182     10138.4484   0.949
+## `Exter Cond`Po              -9090.3356     27937.9324  -0.325
+## `Exter Cond`TA              10976.5040      9966.7706   1.101
+## FoundationCBlock             2136.6597      3877.0143   0.551
+## FoundationPConc              4341.3771      4362.7304   0.995
+## FoundationSlab              -8011.2101     13611.4882  -0.589
+## FoundationStone              5209.4079     17623.6756   0.296
+## FoundationWood             -21499.8677     15486.8933  -1.388
+## `Bsmt Qual`Fa              -19118.1142      7414.2132  -2.579
+## `Bsmt Qual`Gd              -13338.1127      3835.2102  -3.478
+## `Bsmt Qual`Po               58476.8071     51564.9674   1.134
+## `Bsmt Qual`TA              -14904.6825      5075.8325  -2.936
+## `Bsmt Qual`NA               29237.6695     26500.2573   1.103
+## `Bsmt Exposure`Gd            8445.8558      3569.0548   2.366
+## `Bsmt Exposure`Mn           -5636.1528      3589.6788  -1.570
+## `Bsmt Exposure`No           -5726.8656      2630.3304  -2.177
+## `Bsmt Exposure`NA          -28286.6797     22803.9493  -1.240
+## `BsmtFin SF 1`                 33.8128         5.9187   5.713
+## `BsmtFin SF 2`                 24.9525         7.4967   3.328
+## `Bsmt Unf SF`                  13.2018         5.7763   2.286
+## HeatingGasW                  3554.5996      9352.0654   0.380
+## HeatingWall                 16477.8270     25523.1969   0.646
+## `Heating QC`Fa              -7277.0668      5802.5586  -1.254
+## `Heating QC`Gd               -760.5325      2379.1850  -0.320
+## `Heating QC`Po             -17982.8274     20110.2913  -0.894
+## `Heating QC`TA              -5710.2836      2478.7220  -2.304
+## ElectricalFuseF               728.4352      8127.3798   0.090
+## ElectricalFuseP             25345.9011     20610.3725   1.230
+## ElectricalMix               51715.0816     52375.4236   0.987
+## ElectricalSBrkr             -2872.3538      3735.6385  -0.769
+## `2nd Flr SF`                   12.4887        18.3682   0.680
+## `Bsmt Full Bath`             -498.4666      2188.6038  -0.228
+## `Bsmt Half Bath`             3026.8853      3865.0541   0.783
+## `Full Bath`                  3781.8172      2857.0874   1.324
+## `Half Bath`                  3333.8342      2530.9936   1.317
+## `Kitchen AbvGr`            -12956.8476      9020.3081  -1.436
+## `Kitchen Qual`Fa            -7789.8981      8251.1512  -0.944
+## `Kitchen Qual`Gd           -13554.1557      4309.1256  -3.145
+## `Kitchen Qual`TA           -13298.5376      4825.6842  -2.756
+## FunctionalMaj2             -24570.4189     29046.5460  -0.846
+## FunctionalMin1              -8664.3164     13350.1102  -0.649
+## FunctionalMin2             -12709.0599     13033.9665  -0.975
+## FunctionalMod              -14394.7177     14722.7551  -0.978
+## FunctionalTyp                4206.1036     12139.0145   0.346
+## Fireplaces                  11467.2013      3016.6825   3.801
+## `Fireplace Qu`Fa           -12766.1233      8228.9993  -1.551
+## `Fireplace Qu`Gd           -14204.2309      6274.3681  -2.264
+## `Fireplace Qu`Po           -23140.9430      9267.6637  -2.497
+## `Fireplace Qu`TA           -17684.2618      6494.6717  -2.723
+## `Fireplace Qu`NA            -5555.0116      7184.2516  -0.773
+## `Garage Type`Attchd         -1098.5464     10410.7828  -0.106
+## `Garage Type`Basment         -698.4291     12956.4102  -0.054
+## `Garage Type`BuiltIn        -4596.8780     11028.1180  -0.417
+## `Garage Type`CarPort       -10478.5628     14668.5208  -0.714
+## `Garage Type`Detchd          -138.9775     10352.7490  -0.013
+## `Garage Yr Blt`               -61.6634        71.0809  -0.868
+## `Garage Finish`RFn          -4343.2684      2324.3495  -1.869
+## `Garage Finish`Unf          -1482.5096      2761.9889  -0.537
+## `Garage Cars`                2990.4178      2575.0518   1.161
+## `Garage Area`                  24.3014         8.4310   2.882
+## `Garage Qual`Fa            -70420.9028     34399.0827  -2.047
+## `Garage Qual`Gd            -51114.4969     34997.4461  -1.461
+## `Garage Qual`Po           -134052.9765     53225.9619  -2.519
+## `Garage Qual`TA            -67768.2608     34050.0303  -1.990
+## `Garage Cond`Fa             73986.1047     38135.5692   1.940
+## `Garage Cond`Gd             64104.4269     44282.0927   1.448
+## `Garage Cond`Po            112712.4021     42502.3108   2.652
+## `Garage Cond`TA             71259.2489     37706.9633   1.890
+## `Paved Drive`P               5257.0318      6578.8847   0.799
+## `Paved Drive`Y               2077.1864      4637.9411   0.448
+## `Wood Deck SF`                  7.6415         7.1551   1.068
+## `Open Porch SF`               -16.2882        14.7710  -1.103
+## `Enclosed Porch`              -11.3738        15.5858  -0.730
+## `3Ssn Porch`                   16.1217        25.0628   0.643
+## `Screen Porch`                 38.2573        13.2698   2.883
+## `Pool Area`                  -106.8683       172.5566  -0.619
+## `Pool QC`TA                 24551.0372     50543.0049   0.486
+## `Pool QC`NA               -100661.2222    115845.2657  -0.869
+## FenceGdWo                       3.7226      6004.9653   0.001
+## FenceMnPrv                   1567.2382      5154.5417   0.304
+## FenceMnWw                    -880.4036     11445.7271  -0.077
+## FenceNA                      1297.2149      4799.1348   0.270
+## `Misc Feature`Gar2         545161.5428     41606.6518  13.103
+## `Misc Feature`Othr         569599.2024     49966.9781  11.400
+## `Misc Feature`Shed         551469.2570     55133.8721  10.002
+## `Misc Feature`NA           547892.2455     57027.5502   9.608
+## `Misc Val`                      1.6361         2.9165   0.561
+## `Mo Sold`                    -262.1973       301.1296  -0.871
+## `Yr Sold`                    5937.2903      9495.7730   0.625
+## `Sale Type`Con               7985.9754     14377.6833   0.555
+## `Sale Type`ConLD            23972.1097     12356.7468   1.940
+## `Sale Type`ConLI             9525.1931     14763.1370   0.645
+## `Sale Type`ConLw            11056.3865     17164.1972   0.644
+## `Sale Type`CWD              -9551.0936     15096.9006  -0.633
+## `Sale Type`New              23118.1311     16568.0832   1.395
+## `Sale Type`Oth              39733.0338     17369.1737   2.288
+## `Sale Type`VWD             -11729.6976     24093.7246  -0.487
+## `Sale Type`WD                4819.9398      4886.0362   0.986
+## `Sale Condition`AdjLand     41276.9513     18154.2390   2.274
+## `Sale Condition`Alloca      24461.6278     10762.9224   2.273
+## `Sale Condition`Family        404.8499      6776.3642   0.060
+## `Sale Condition`Normal       1592.2626      3745.5754   0.425
+## `Sale Condition`Partial     -4641.7581     15793.5170  -0.294
+##                                     Pr(&gt;|t|)    
+## (Intercept)                         0.459014    
+## `Overall Qual`               0.0000000062218 ***
+## `Year Built`                 0.0000045805578 ***
+## `Mas Vnr Area`               0.0000003140313 ***
+## `Central Air`Y                      0.440943    
+## `Gr Liv Area`                       0.044859 *  
+## `Lot Frontage`                      0.804449    
+## `1st Flr SF`                        0.487714    
+## `Bedroom AbvGr`                     0.160592    
+## `TotRms AbvGrd`                     0.411229    
+## Order                               0.548117    
+## PID                                 0.854835    
+## `MS SubClass`030                    0.778119    
+## `MS SubClass`040                    0.745243    
+## `MS SubClass`045                    0.491293    
+## `MS SubClass`050                    0.792122    
+## `MS SubClass`060                    0.159918    
+## `MS SubClass`070                    0.893515    
+## `MS SubClass`075                    0.392618    
+## `MS SubClass`080                    0.149386    
+## `MS SubClass`085                    0.306334    
+## `MS SubClass`090                    0.025194 *  
+## `MS SubClass`120             0.0000161908290 ***
+## `MS SubClass`160             0.0000010467637 ***
+## `MS SubClass`180                    0.147347    
+## `MS SubClass`190                    0.118034    
+## `MS Zoning`C (all)                  0.248771    
+## `MS Zoning`FV                       0.433197    
+## `MS Zoning`I (all)                  0.679171    
+## `MS Zoning`RH                       0.655830    
+## `MS Zoning`RL                       0.539685    
+## `MS Zoning`RM                       0.396709    
+## `Lot Area`                   0.0000090257776 ***
+## StreetPave                          0.029159 *  
+## AlleyPave                           0.731223    
+## AlleyNA                             0.995546    
+## `Lot Shape`IR2                      0.118374    
+## `Lot Shape`IR3                      0.409427    
+## `Lot Shape`Reg                      0.188044    
+## `Land Contour`HLS                   0.063457 .  
+## `Land Contour`Low                   0.051734 .  
+## `Land Contour`Lvl                   0.009424 ** 
+## `Lot Config`CulDSac                 0.050899 .  
+## `Lot Config`FR2                     0.023373 *  
+## `Lot Config`FR3                     0.210713    
+## `Lot Config`Inside                  0.621038    
+## `Land Slope`Mod                     0.022423 *  
+## `Land Slope`Sev                     0.202226    
+## NeighborhoodBlueste                 0.216409    
+## NeighborhoodBrDale                  0.147617    
+## NeighborhoodBrkSide                 0.239597    
+## NeighborhoodClearCr                 0.623055    
+## NeighborhoodCollgCr                 0.996318    
+## NeighborhoodCrawfor                 0.014616 *  
+## NeighborhoodEdwards                 0.479471    
+## NeighborhoodGilbert                 0.834035    
+## NeighborhoodGreens                  0.850870    
+## NeighborhoodIDOTRR                  0.352027    
+## NeighborhoodMeadowV                 0.203772    
+## NeighborhoodMitchel                 0.427194    
+## NeighborhoodNAmes                   0.852148    
+## NeighborhoodNoRidge                 0.001720 ** 
+## NeighborhoodNPkVill                 0.119254    
+## NeighborhoodNridgHt                 0.000220 ***
+## NeighborhoodNWAmes                  0.734194    
+## NeighborhoodOldTown                 0.398157    
+## NeighborhoodSawyer                  0.508982    
+## NeighborhoodSawyerW                 0.677125    
+## NeighborhoodSomerst                 0.039959 *  
+## NeighborhoodStoneBr          0.0000208772751 ***
+## NeighborhoodSWISU                   0.499910    
+## NeighborhoodTimber                  0.901661    
+## NeighborhoodVeenker                 0.629635    
+## `Condition 1`Feedr                  0.961627    
+## `Condition 1`Norm                   0.066454 .  
+## `Condition 1`PosA                   0.037235 *  
+## `Condition 1`PosN                   0.108149    
+## `Condition 1`RRAe                   0.213124    
+## `Condition 1`RRAn                   0.367103    
+## `Condition 1`RRNn                   0.682921    
+## `Condition 2`Feedr                  0.806365    
+## `Condition 2`Norm                   0.805062    
+## `Condition 2`PosA                   0.970119    
+## `Condition 2`PosN            0.0000000000695 ***
+## `Condition 2`RRNn                   0.575616    
+## `Overall Cond`               0.0000004522273 ***
+## `Year Remod/Add`                    0.088220 .  
+## `Roof Style`Gable                   0.963461    
+## `Roof Style`Gambrel                 0.874109    
+## `Roof Style`Hip                     0.962244    
+## `Roof Style`Mansard                 0.569706    
+## `Roof Style`Shed                    0.815058    
+## `Roof Matl`CompShg      &lt; 0.0000000000000002 ***
+## `Roof Matl`Membran      &lt; 0.0000000000000002 ***
+## `Roof Matl`Tar&amp;Grv      &lt; 0.0000000000000002 ***
+## `Roof Matl`WdShngl      &lt; 0.0000000000000002 ***
+## `Mas Vnr Type`BrkFace               0.160211    
+## `Mas Vnr Type`None                  0.611086    
+## `Mas Vnr Type`Stone                 0.263905    
+## `Exter Qual`Fa                      0.134094    
+## `Exter Qual`Gd               0.0000000000292 ***
+## `Exter Qual`TA               0.0000000003455 ***
+## `Exter Cond`Fa                      0.841068    
+## `Exter Cond`Gd                      0.342702    
+## `Exter Cond`Po                      0.744982    
+## `Exter Cond`TA                      0.271096    
+## FoundationCBlock                    0.581714    
+## FoundationPConc                     0.319988    
+## FoundationSlab                      0.556322    
+## FoundationStone                     0.767619    
+## FoundationWood                      0.165447    
+## `Bsmt Qual`Fa                       0.010100 *  
+## `Bsmt Qual`Gd                       0.000533 ***
+## `Bsmt Qual`Po                       0.257119    
+## `Bsmt Qual`TA                       0.003416 ** 
+## `Bsmt Qual`NA                       0.270232    
+## `Bsmt Exposure`Gd                   0.018201 *  
+## `Bsmt Exposure`Mn                   0.116790    
+## `Bsmt Exposure`No                   0.029756 *  
+## `Bsmt Exposure`NA                   0.215183    
+## `BsmtFin SF 1`               0.0000000157066 ***
+## `BsmtFin SF 2`                      0.000913 ***
+## `Bsmt Unf SF`                       0.022545 *  
+## HeatingGasW                         0.703982    
+## HeatingWall                         0.518724    
+## `Heating QC`Fa                      0.210170    
+## `Heating QC`Gd                      0.749309    
+## `Heating QC`Po                      0.371480    
+## `Heating QC`TA                      0.021496 *  
+## ElectricalFuseF                     0.928606    
+## ElectricalFuseP                     0.219150    
+## ElectricalMix                       0.323751    
+## ElectricalSBrkr                     0.442178    
+## `2nd Flr SF`                        0.496762    
+## `Bsmt Full Bath`                    0.819895    
+## `Bsmt Half Bath`                    0.433777    
+## `Full Bath`                         0.185996    
+## `Half Bath`                         0.188150    
+## `Kitchen AbvGr`                     0.151280    
+## `Kitchen Qual`Fa                    0.345407    
+## `Kitchen Qual`Gd                    0.001720 ** 
+## `Kitchen Qual`TA                    0.005989 ** 
+## FunctionalMaj2                      0.397864    
+## FunctionalMin1                      0.516521    
+## FunctionalMin2                      0.329821    
+## FunctionalMod                       0.328511    
+## FunctionalTyp                       0.729063    
+## Fireplaces                          0.000155 ***
+## `Fireplace Qu`Fa                    0.121214    
+## `Fireplace Qu`Gd                    0.023852 *  
+## `Fireplace Qu`Po                    0.012728 *  
+## `Fireplace Qu`TA                    0.006613 ** 
+## `Fireplace Qu`NA                    0.439622    
+## `Garage Type`Attchd                 0.915990    
+## `Garage Type`Basment                0.957024    
+## `Garage Type`BuiltIn                0.676914    
+## `Garage Type`CarPort                0.475216    
+## `Garage Type`Detchd                 0.989293    
+## `Garage Yr Blt`                     0.385925    
+## `Garage Finish`RFn                  0.062047 .  
+## `Garage Finish`Unf                  0.591588    
+## `Garage Cars`                       0.245867    
+## `Garage Area`                       0.004053 ** 
+## `Garage Qual`Fa                     0.040970 *  
+## `Garage Qual`Gd                     0.144543    
+## `Garage Qual`Po                     0.011979 *  
+## `Garage Qual`TA                     0.046905 *  
+## `Garage Cond`Fa                     0.052724 .  
+## `Garage Cond`Gd                     0.148113    
+## `Garage Cond`Po                     0.008163 ** 
+## `Garage Cond`TA                     0.059147 .  
+## `Paved Drive`P                      0.424485    
+## `Paved Drive`Y                      0.654370    
+## `Wood Deck SF`                      0.285852    
+## `Open Porch SF`                     0.270485    
+## `Enclosed Porch`                    0.465753    
+## `3Ssn Porch`                        0.520245    
+## `Screen Porch`                      0.004045 ** 
+## `Pool Area`                         0.535881    
+## `Pool QC`TA                         0.627282    
+## `Pool QC`NA                         0.385149    
+## FenceGdWo                           0.999506    
+## FenceMnPrv                          0.761169    
+## FenceMnWw                           0.938707    
+## FenceNA                             0.786998    
+## `Misc Feature`Gar2      &lt; 0.0000000000000002 ***
+## `Misc Feature`Othr      &lt; 0.0000000000000002 ***
+## `Misc Feature`Shed      &lt; 0.0000000000000002 ***
+## `Misc Feature`NA        &lt; 0.0000000000000002 ***
+## `Misc Val`                          0.574961    
+## `Mo Sold`                           0.384174    
+## `Yr Sold`                           0.531983    
+## `Sale Type`Con                      0.578749    
+## `Sale Type`ConLD                    0.052733 .  
+## `Sale Type`ConLI                    0.518983    
+## `Sale Type`ConLw                    0.519662    
+## `Sale Type`CWD                      0.527143    
+## `Sale Type`New                      0.163303    
+## `Sale Type`Oth                      0.022425 *  
+## `Sale Type`VWD                      0.626509    
+## `Sale Type`WD                       0.324202    
+## `Sale Condition`AdjLand             0.023251 *  
+## `Sale Condition`Alloca              0.023307 *  
+## `Sale Condition`Family              0.952374    
+## `Sale Condition`Normal              0.670875    
+## `Sale Condition`Partial             0.768909    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 21710 on 794 degrees of freedom
+## Multiple R-squared:  0.943,  Adjusted R-squared:  0.9283 
+## F-statistic: 64.08 on 205 and 794 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+</div>
+<div id="housing-model--some-exp.-vars." class="section level3 hasAnchor">
+<h3><span class="header-section-number">7.4.3</span> Housing Model- Some Exp. Vars.<a href="predictive-modeling.html#housing-model--some-exp.-vars." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s focus on the first 10 variables on the list.</p>
+<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb674-1"><a href="predictive-modeling.html#cb674-1"></a><span class="kw">head</span>(<span class="kw">coef</span>(M_OLS),<span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##     (Intercept)  `Overall Qual`    `Year Built`  `Mas Vnr Area`  `Central Air`Y 
+##   -14136063.894        6975.925         494.582          33.382       -3745.363 
+##   `Gr Liv Area`  `Lot Frontage`    `1st Flr SF` `Bedroom AbvGr` `TotRms AbvGrd` 
+##          37.229         -14.959          13.369       -2353.038         914.559</code></pre>
+</div>
 <div id="ridge-regression-penalty" class="section level3 hasAnchor">
-<h3><span class="header-section-number">7.4.3</span> Ridge Regression Penalty<a href="predictive-modeling.html#ridge-regression-penalty" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">7.4.4</span> Ridge Regression Penalty<a href="predictive-modeling.html#ridge-regression-penalty" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>We’ve seen that in ordinary least-squares regression, <span class="math inline">\(b_0, b_1, \ldots, b_p\)</span> are chosen in a way that to minimizes</li>
 </ul>
@@ -1344,7 +1815,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 <div id="choosing-lambda" class="section level3 hasAnchor">
-<h3><span class="header-section-number">7.4.4</span> Choosing <span class="math inline">\(\lambda\)</span><a href="predictive-modeling.html#choosing-lambda" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">7.4.5</span> Choosing <span class="math inline">\(\lambda\)</span><a href="predictive-modeling.html#choosing-lambda" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The value of <span class="math inline">\(\lambda\)</span> is predetermined by the user. The larger the value of <span class="math inline">\(\lambda\)</span>, the more heavily large <span class="math inline">\(b_j&#39;s\)</span> are penalized. A value of <span class="math inline">\(\lambda=0\)</span> corresponds to ordinary least-squares.</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -1353,7 +1824,7 @@ Q=&amp; \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum
 \]</span></p>
 </div>
 <div id="optimal-value-of-lambda" class="section level3 hasAnchor">
-<h3><span class="header-section-number">7.4.5</span> Optimal value of <span class="math inline">\(\lambda\)</span><a href="predictive-modeling.html#optimal-value-of-lambda" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">7.4.6</span> Optimal value of <span class="math inline">\(\lambda\)</span><a href="predictive-modeling.html#optimal-value-of-lambda" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Small values of <span class="math inline">\(\lambda\)</span> lead to more complex models, with larger <span class="math inline">\(|b_j|\)</span>’s.<br />
 </li>
@@ -1361,11 +1832,11 @@ Q=&amp; \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum
 </li>
 <li>We can use cross validation to determine the optimal value of <span class="math inline">\(\lambda\)</span></li>
 </ul>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-544-1.png" width="960" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-546-1.png" width="960" /></p>
 </div>
 <div id="standardizing" class="section level3 hasAnchor">
-<h3><span class="header-section-number">7.4.6</span> Standardizing<a href="predictive-modeling.html#standardizing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="predictive-modeling.html#cb606-1"></a>Train_sc &lt;-<span class="st"> </span>Train_Data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.numeric, scale)</span></code></pre></div>
+<h3><span class="header-section-number">7.4.7</span> Standardizing<a href="predictive-modeling.html#standardizing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb676"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb676-1"><a href="predictive-modeling.html#cb676-1"></a>Train_sc &lt;-<span class="st"> </span>Train_Data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.numeric, scale)</span></code></pre></div>
 <ul>
 <li><p>It is important to standardize each explanatory variable (i.e. subtract the mean and divide by the standard deviation).</p></li>
 <li><p>This ensures each variable has mean 0 and standard deviation 1.</p></li>
@@ -1375,35 +1846,29 @@ Q=&amp; \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum
 </ul>
 </div>
 <div id="ridge-regression-on-housing-dataset" class="section level3 hasAnchor">
-<h3><span class="header-section-number">7.4.7</span> Ridge Regression on Housing Dataset<a href="predictive-modeling.html#ridge-regression-on-housing-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb607"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb607-1"><a href="predictive-modeling.html#cb607-1"></a>control =<span class="st"> </span><span class="kw">trainControl</span>(<span class="st">&quot;repeatedcv&quot;</span>, <span class="dt">number =</span> <span class="dv">10</span>, <span class="dt">repeats=</span><span class="dv">10</span>)</span>
-<span id="cb607-2"><a href="predictive-modeling.html#cb607-2"></a>l_vals =<span class="st"> </span><span class="dv">10</span><span class="op">^</span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">length =</span> <span class="dv">100</span>)</span>
-<span id="cb607-3"><a href="predictive-modeling.html#cb607-3"></a></span>
-<span id="cb607-4"><a href="predictive-modeling.html#cb607-4"></a><span class="kw">set.seed</span>(<span class="dv">11162020</span>)</span>
-<span id="cb607-5"><a href="predictive-modeling.html#cb607-5"></a>Housing_ridge &lt;-<span class="st"> </span><span class="kw">train</span>(SalePrice <span class="op">~</span><span class="st"> </span>.,</span>
-<span id="cb607-6"><a href="predictive-modeling.html#cb607-6"></a>                       <span class="dt">data =</span> Train_sc, <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>, <span class="dt">trControl=</span>control , </span>
-<span id="cb607-7"><a href="predictive-modeling.html#cb607-7"></a>                      <span class="dt">tuneGrid=</span><span class="kw">expand.grid</span>(<span class="dt">alpha=</span><span class="dv">0</span>, <span class="dt">lambda=</span>l_vals))</span></code></pre></div>
-<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="predictive-modeling.html#cb608-1"></a>Housing_ridge<span class="op">$</span>bestTune<span class="op">$</span>lambda</span></code></pre></div>
+<h3><span class="header-section-number">7.4.8</span> Ridge Regression on Housing Dataset<a href="predictive-modeling.html#ridge-regression-on-housing-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb677"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb677-1"><a href="predictive-modeling.html#cb677-1"></a>control =<span class="st"> </span><span class="kw">trainControl</span>(<span class="st">&quot;repeatedcv&quot;</span>, <span class="dt">number =</span> <span class="dv">10</span>, <span class="dt">repeats=</span><span class="dv">10</span>)</span>
+<span id="cb677-2"><a href="predictive-modeling.html#cb677-2"></a>l_vals =<span class="st"> </span><span class="dv">10</span><span class="op">^</span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">length =</span> <span class="dv">100</span>)</span>
+<span id="cb677-3"><a href="predictive-modeling.html#cb677-3"></a></span>
+<span id="cb677-4"><a href="predictive-modeling.html#cb677-4"></a><span class="kw">set.seed</span>(<span class="dv">11162020</span>)</span>
+<span id="cb677-5"><a href="predictive-modeling.html#cb677-5"></a>Housing_ridge &lt;-<span class="st"> </span><span class="kw">train</span>(SalePrice <span class="op">~</span><span class="st"> </span>.,</span>
+<span id="cb677-6"><a href="predictive-modeling.html#cb677-6"></a>                       <span class="dt">data =</span> Train_sc, <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>, <span class="dt">trControl=</span>control , </span>
+<span id="cb677-7"><a href="predictive-modeling.html#cb677-7"></a>                      <span class="dt">tuneGrid=</span><span class="kw">expand.grid</span>(<span class="dt">alpha=</span><span class="dv">0</span>, <span class="dt">lambda=</span>l_vals))</span></code></pre></div>
+<div class="sourceCode" id="cb678"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb678-1"><a href="predictive-modeling.html#cb678-1"></a>Housing_ridge<span class="op">$</span>bestTune<span class="op">$</span>lambda</span></code></pre></div>
 <pre><code>## [1] 0.6135907</code></pre>
 </div>
-<div id="ridge-regression-on-housing-dataset-1" class="section level3 hasAnchor">
-<h3><span class="header-section-number">7.4.8</span> Ridge Regression on Housing Dataset<a href="predictive-modeling.html#ridge-regression-on-housing-dataset-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="predictive-modeling.html#cb610-1"></a>control =<span class="st"> </span><span class="kw">trainControl</span>(<span class="st">&quot;repeatedcv&quot;</span>, <span class="dt">number =</span> <span class="dv">10</span>, <span class="dt">repeats=</span><span class="dv">10</span>)</span>
-<span id="cb610-2"><a href="predictive-modeling.html#cb610-2"></a>l_vals =<span class="st"> </span><span class="dv">10</span><span class="op">^</span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">length =</span> <span class="dv">100</span>)</span>
-<span id="cb610-3"><a href="predictive-modeling.html#cb610-3"></a></span>
-<span id="cb610-4"><a href="predictive-modeling.html#cb610-4"></a><span class="kw">set.seed</span>(<span class="dv">11162020</span>)</span>
-<span id="cb610-5"><a href="predictive-modeling.html#cb610-5"></a>Housing_ridge &lt;-<span class="st"> </span><span class="kw">train</span>(SalePrice <span class="op">~</span><span class="st"> </span>.,</span>
-<span id="cb610-6"><a href="predictive-modeling.html#cb610-6"></a>                       <span class="dt">data =</span> Train_sc, <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>, <span class="dt">trControl=</span>control , </span>
-<span id="cb610-7"><a href="predictive-modeling.html#cb610-7"></a>                      <span class="dt">tuneGrid=</span><span class="kw">expand.grid</span>(<span class="dt">alpha=</span><span class="dv">0</span>, <span class="dt">lambda=</span>l_vals))</span></code></pre></div>
-<div class="sourceCode" id="cb611"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb611-1"><a href="predictive-modeling.html#cb611-1"></a>Housing_ridge<span class="op">$</span>bestTune<span class="op">$</span>lambda</span></code></pre></div>
-<pre><code>## [1] 0.6135907</code></pre>
-</div>
-<div id="ridge-regression-mspe-by-lambda" class="section level3 hasAnchor">
-<h3><span class="header-section-number">7.4.9</span> Ridge Regression MSPE by <span class="math inline">\(\lambda\)</span><a href="predictive-modeling.html#ridge-regression-mspe-by-lambda" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="ridge-regression-rmspe-by-lambda" class="section level3 hasAnchor">
+<h3><span class="header-section-number">7.4.9</span> Ridge Regression RMSPE by <span class="math inline">\(\lambda\)</span><a href="predictive-modeling.html#ridge-regression-rmspe-by-lambda" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-550-1.png" width="672" /></p>
 </div>
 <div id="ridge-regression-coefficients-for-optimal-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.4.10</span> Ridge Regression Coefficients for Optimal Model<a href="predictive-modeling.html#ridge-regression-coefficients-for-optimal-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb680"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb680-1"><a href="predictive-modeling.html#cb680-1"></a>M_OLS_sc &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Train_sc, SalePrice <span class="op">~</span><span class="st"> </span>.)</span>
+<span id="cb680-2"><a href="predictive-modeling.html#cb680-2"></a>OLS_coef &lt;-<span class="st"> </span>M_OLS_sc<span class="op">$</span>coefficients</span>
+<span id="cb680-3"><a href="predictive-modeling.html#cb680-3"></a>Ridge_coef &lt;-<span class="st"> </span><span class="kw">coef</span>(Housing_ridge<span class="op">$</span>finalModel, Housing_ridge<span class="op">$</span>bestTune<span class="op">$</span>lambda)[,<span class="dv">1</span>]</span>
+<span id="cb680-4"><a href="predictive-modeling.html#cb680-4"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(OLS_coef[<span class="dv">2</span><span class="op">:</span><span class="dv">10</span>], Ridge_coef[<span class="dv">2</span><span class="op">:</span><span class="dv">10</span>])</span>
+<span id="cb680-5"><a href="predictive-modeling.html#cb680-5"></a><span class="kw">names</span>(df) &lt;-<span class="kw">c</span>(<span class="st">&quot;OLS Coeff&quot;</span>, <span class="st">&quot;Ridge Coeff&quot;</span>)</span>
+<span id="cb680-6"><a href="predictive-modeling.html#cb680-6"></a>df</span></code></pre></div>
 <pre><code>##                    OLS Coeff Ridge Coeff
 ## `Overall Qual`   0.121728754  0.10435284
 ## `Year Built`     0.187102422  0.03451303
@@ -1417,9 +1882,17 @@ Q=&amp; \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum
 </div>
 <div id="ols-and-ridge-predictions" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.4.11</span> OLS and Ridge Predictions<a href="predictive-modeling.html#ols-and-ridge-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb614-1"><a href="predictive-modeling.html#cb614-1"></a><span class="kw">library</span>(glmnet)</span>
-<span id="cb614-2"><a href="predictive-modeling.html#cb614-2"></a>MAT &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(SalePrice<span class="op">~</span>., <span class="dt">data=</span>Train_sc)</span>
-<span id="cb614-3"><a href="predictive-modeling.html#cb614-3"></a>ridge_mod &lt;-<span class="st"> </span><span class="kw">glmnet</span>(<span class="dt">x=</span>MAT, <span class="dt">y=</span>Train_sc<span class="op">$</span>SalePrice, <span class="dt">alpha =</span> <span class="dv">0</span>, <span class="dt">lambda=</span>Housing_ridge<span class="op">$</span>bestTune<span class="op">$</span>lambda )</span></code></pre></div>
+<div class="sourceCode" id="cb682"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb682-1"><a href="predictive-modeling.html#cb682-1"></a><span class="kw">library</span>(glmnet)</span>
+<span id="cb682-2"><a href="predictive-modeling.html#cb682-2"></a>MAT &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(SalePrice<span class="op">~</span>., <span class="dt">data=</span>Train_sc)</span>
+<span id="cb682-3"><a href="predictive-modeling.html#cb682-3"></a>ridge_mod &lt;-<span class="st"> </span><span class="kw">glmnet</span>(<span class="dt">x=</span>MAT, <span class="dt">y=</span>Train_sc<span class="op">$</span>SalePrice, <span class="dt">alpha =</span> <span class="dv">0</span>, <span class="dt">lambda=</span>Housing_ridge<span class="op">$</span>bestTune<span class="op">$</span>lambda )</span></code></pre></div>
+<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb683-1"><a href="predictive-modeling.html#cb683-1"></a>y &lt;-<span class="st"> </span>Train_sc<span class="op">$</span>SalePrice</span>
+<span id="cb683-2"><a href="predictive-modeling.html#cb683-2"></a>Pred_OLS &lt;-<span class="st"> </span><span class="kw">predict</span>(M_OLS_sc)</span>
+<span id="cb683-3"><a href="predictive-modeling.html#cb683-3"></a>Pred_Ridge &lt;-<span class="st"> </span><span class="kw">predict</span>(ridge_mod, <span class="dt">newx=</span>MAT)</span>
+<span id="cb683-4"><a href="predictive-modeling.html#cb683-4"></a>OLS_Resid &lt;-<span class="st"> </span>y <span class="op">-</span><span class="st"> </span>Pred_OLS</span>
+<span id="cb683-5"><a href="predictive-modeling.html#cb683-5"></a>Ridge_Resid &lt;-<span class="st"> </span>y <span class="op">-</span><span class="st"> </span>Pred_Ridge</span>
+<span id="cb683-6"><a href="predictive-modeling.html#cb683-6"></a>Resdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(y, Pred_OLS, Pred_Ridge, OLS_Resid, Ridge_Resid)</span>
+<span id="cb683-7"><a href="predictive-modeling.html#cb683-7"></a><span class="kw">names</span>(Resdf) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;y&quot;</span>, <span class="st">&quot;OLS Pred&quot;</span>, <span class="st">&quot;Ridge Pred&quot;</span>, <span class="st">&quot;OLS Resid&quot;</span>, <span class="st">&quot;Ridge Resid&quot;</span>)</span>
+<span id="cb683-8"><a href="predictive-modeling.html#cb683-8"></a><span class="kw">kable</span>(<span class="kw">head</span>(Resdf))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1488,10 +1961,10 @@ Q=&amp; \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum
 <p>In OLS, we choose <span class="math inline">\(b_0, b_1, \ldots, b_p\)</span> are chosen in a way that minimizes</p>
 <p><span class="math display">\[ \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  = \displaystyle\sum_{i=1}^n (y_i -(b_0 + b_1x_{i1} + b_2x_{i2} + \ldots + b_px_{ip}))^2 \]</span></p>
 <p>OLS: <span class="math inline">\(\displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2\)</span></p>
-<div class="sourceCode" id="cb615"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb615-1"><a href="predictive-modeling.html#cb615-1"></a><span class="kw">sum</span>((y<span class="op">-</span>Pred_OLS)<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb684-1"><a href="predictive-modeling.html#cb684-1"></a><span class="kw">sum</span>((y<span class="op">-</span>Pred_OLS)<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 56.94383</code></pre>
 <p>Ridge: <span class="math inline">\(\displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2\)</span></p>
-<div class="sourceCode" id="cb617"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb617-1"><a href="predictive-modeling.html#cb617-1"></a><span class="kw">sum</span>((y<span class="op">-</span>Pred_Ridge)<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb686-1"><a href="predictive-modeling.html#cb686-1"></a><span class="kw">sum</span>((y<span class="op">-</span>Pred_Ridge)<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 127.1331</code></pre>
 <p>Not surprisingly the OLS model achieves smaller <span class="math inline">\(\displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2\)</span>. This has to be true, since the OLS coefficients are chosen to minimize this quantity.</p>
 </div>
@@ -1504,10 +1977,10 @@ Q=&amp; \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum
 \end{aligned}
 \]</span></p>
 <p>OLS: <span class="math inline">\(\displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2 + \lambda\displaystyle\sum_{j=1}^pb_j^2\)</span></p>
-<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="predictive-modeling.html#cb619-1"></a><span class="kw">sum</span>((y<span class="op">-</span>Pred_OLS)<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="fl">0.6136</span><span class="op">*</span><span class="kw">sum</span>(<span class="kw">coef</span>(M_OLS_sc)[<span class="op">-</span><span class="dv">1</span>]<span class="op">^</span><span class="dv">2</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb688-1"><a href="predictive-modeling.html#cb688-1"></a><span class="kw">sum</span>((y<span class="op">-</span>Pred_OLS)<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="fl">0.6136</span><span class="op">*</span><span class="kw">sum</span>(<span class="kw">coef</span>(M_OLS_sc)[<span class="op">-</span><span class="dv">1</span>]<span class="op">^</span><span class="dv">2</span>) </span></code></pre></div>
 <pre><code>## [1] 373.1205</code></pre>
 <p>Ridge: <span class="math inline">\(\displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2 + \lambda\displaystyle\sum_{j=1}^pb_j^2\)</span></p>
-<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="predictive-modeling.html#cb621-1"></a><span class="kw">sum</span>((y<span class="op">-</span>Pred_Ridge)<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="fl">0.6136</span><span class="op">*</span><span class="kw">sum</span>((Ridge_coef)[<span class="op">-</span><span class="dv">1</span>]<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb690-1"><a href="predictive-modeling.html#cb690-1"></a><span class="kw">sum</span>((y<span class="op">-</span>Pred_Ridge)<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="fl">0.6136</span><span class="op">*</span><span class="kw">sum</span>((Ridge_coef)[<span class="op">-</span><span class="dv">1</span>]<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 130.3375</code></pre>
 <p>We see that the ridge coefficients achieve a lower value of Q than the OLS ones.</p>
 </div>
@@ -1534,6 +2007,10 @@ Q=&amp; \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum
 </div>
 <div id="decision-tree-example" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.5.2</span> Decision Tree Example<a href="predictive-modeling.html#decision-tree-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb692-1"><a href="predictive-modeling.html#cb692-1"></a><span class="kw">library</span>(rpart)</span>
+<span id="cb692-2"><a href="predictive-modeling.html#cb692-2"></a><span class="kw">library</span>(rpart.plot)</span>
+<span id="cb692-3"><a href="predictive-modeling.html#cb692-3"></a>tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(SalePrice<span class="op">~</span>., <span class="dt">data=</span>Train_Data, <span class="dt">cp=</span><span class="fl">0.04</span>)</span>
+<span id="cb692-4"><a href="predictive-modeling.html#cb692-4"></a><span class="kw">rpart.plot</span>(tree, <span class="dt">box.palette=</span><span class="st">&quot;RdBu&quot;</span>, <span class="dt">shadow.col=</span><span class="st">&quot;gray&quot;</span>, <span class="dt">nn=</span><span class="ot">TRUE</span>, <span class="dt">cex=</span><span class="dv">1</span>, <span class="dt">extra=</span><span class="dv">1</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-558-1.png" width="1056" /></p>
 <ul>
 <li><p>The predicted price of a House with overall quality 7, and was built in 1995 is $200,000.</p></li>
@@ -1704,28 +2181,37 @@ Q=&amp; \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum
 </div>
 <div id="cross-validation-on-housing-data" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.5.19</span> Cross-Validation on Housing Data<a href="predictive-modeling.html#cross-validation-on-housing-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb624-1"><a href="predictive-modeling.html#cb624-1"></a>cp_vals =<span class="st"> </span><span class="dv">10</span><span class="op">^</span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">8</span>, <span class="dv">1</span>, <span class="dt">length =</span> <span class="dv">100</span>)</span>
-<span id="cb624-2"><a href="predictive-modeling.html#cb624-2"></a><span class="co">#cp_vals = c(0.00000001, 0.00001)</span></span>
-<span id="cb624-3"><a href="predictive-modeling.html#cb624-3"></a><span class="kw">colnames</span>(Train_sc) &lt;-<span class="st"> </span><span class="kw">make.names</span>(<span class="kw">colnames</span>(Train_sc))</span>
-<span id="cb624-4"><a href="predictive-modeling.html#cb624-4"></a><span class="co">#colnames(Train_Data) &lt;- make.names(colnames(Train_Data))</span></span>
-<span id="cb624-5"><a href="predictive-modeling.html#cb624-5"></a></span>
-<span id="cb624-6"><a href="predictive-modeling.html#cb624-6"></a><span class="kw">set.seed</span>(<span class="dv">11162020</span>)</span>
-<span id="cb624-7"><a href="predictive-modeling.html#cb624-7"></a>Housing_Tree &lt;-<span class="st"> </span><span class="kw">train</span>(<span class="dt">data=</span>Train_sc, SalePrice <span class="op">~</span><span class="st"> </span>.,  <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">trControl=</span>control, </span>
-<span id="cb624-8"><a href="predictive-modeling.html#cb624-8"></a>                     <span class="dt">tuneGrid=</span><span class="kw">expand.grid</span>(<span class="dt">cp=</span>cp_vals))</span>
-<span id="cb624-9"><a href="predictive-modeling.html#cb624-9"></a>Housing_Tree<span class="op">$</span>bestTune</span></code></pre></div>
+<div class="sourceCode" id="cb694"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb694-1"><a href="predictive-modeling.html#cb694-1"></a>cp_vals =<span class="st"> </span><span class="dv">10</span><span class="op">^</span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">8</span>, <span class="dv">1</span>, <span class="dt">length =</span> <span class="dv">100</span>)</span>
+<span id="cb694-2"><a href="predictive-modeling.html#cb694-2"></a><span class="co">#cp_vals = c(0.00000001, 0.00001)</span></span>
+<span id="cb694-3"><a href="predictive-modeling.html#cb694-3"></a><span class="kw">colnames</span>(Train_sc) &lt;-<span class="st"> </span><span class="kw">make.names</span>(<span class="kw">colnames</span>(Train_sc))</span>
+<span id="cb694-4"><a href="predictive-modeling.html#cb694-4"></a><span class="co">#colnames(Train_Data) &lt;- make.names(colnames(Train_Data))</span></span>
+<span id="cb694-5"><a href="predictive-modeling.html#cb694-5"></a></span>
+<span id="cb694-6"><a href="predictive-modeling.html#cb694-6"></a><span class="kw">set.seed</span>(<span class="dv">11162020</span>)</span>
+<span id="cb694-7"><a href="predictive-modeling.html#cb694-7"></a>Housing_Tree &lt;-<span class="st"> </span><span class="kw">train</span>(<span class="dt">data=</span>Train_sc, SalePrice <span class="op">~</span><span class="st"> </span>.,  <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">trControl=</span>control, </span>
+<span id="cb694-8"><a href="predictive-modeling.html#cb694-8"></a>                     <span class="dt">tuneGrid=</span><span class="kw">expand.grid</span>(<span class="dt">cp=</span>cp_vals))</span>
+<span id="cb694-9"><a href="predictive-modeling.html#cb694-9"></a>Housing_Tree<span class="op">$</span>bestTune</span></code></pre></div>
 <pre><code>##              cp
 ## 52 0.0004328761</code></pre>
+<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb696-1"><a href="predictive-modeling.html#cb696-1"></a>cp &lt;-<span class="st"> </span>Housing_Tree<span class="op">$</span>results<span class="op">$</span>cp</span>
+<span id="cb696-2"><a href="predictive-modeling.html#cb696-2"></a>RMSPE &lt;-<span class="st"> </span>Housing_Tree<span class="op">$</span>results<span class="op">$</span>RMSE</span>
+<span id="cb696-3"><a href="predictive-modeling.html#cb696-3"></a><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(cp, RMSPE), <span class="kw">aes</span>(<span class="dt">x=</span>cp, <span class="dt">y=</span>RMSPE))<span class="op">+</span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.001</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="fl">0.475</span>,<span class="fl">0.485</span>))  <span class="op">+</span><span class="st"> </span></span>
+<span id="cb696-4"><a href="predictive-modeling.html#cb696-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Regression Tree Cross Validation Results&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-570-1.png" width="672" /></p>
 </div>
 <div id="comparing-ols-lasso-ridge-and-tree" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.5.20</span> Comparing OLS, Lasso, Ridge, and Tree<a href="predictive-modeling.html#comparing-ols-lasso-ridge-and-tree" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="predictive-modeling.html#cb626-1"></a><span class="kw">min</span>(Housing_OLS <span class="op">$</span>results<span class="op">$</span>RMSE)</span></code></pre></div>
+<div class="sourceCode" id="cb697"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb697-1"><a href="predictive-modeling.html#cb697-1"></a><span class="kw">set.seed</span>(<span class="dv">11162020</span>)</span>
+<span id="cb697-2"><a href="predictive-modeling.html#cb697-2"></a>Housing_OLS &lt;-<span class="st"> </span><span class="kw">train</span>(<span class="dt">data=</span>Train_sc, SalePrice <span class="op">~</span><span class="st"> </span>.,  <span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">trControl=</span>control)</span>
+<span id="cb697-3"><a href="predictive-modeling.html#cb697-3"></a><span class="kw">set.seed</span>(<span class="dv">11162020</span>)</span>
+<span id="cb697-4"><a href="predictive-modeling.html#cb697-4"></a>Housing_lasso &lt;-<span class="st"> </span><span class="kw">train</span>(SalePrice <span class="op">~</span>., <span class="dt">data =</span> Train_sc, <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>, <span class="dt">trControl=</span>control, </span>
+<span id="cb697-5"><a href="predictive-modeling.html#cb697-5"></a>                      <span class="dt">tuneGrid=</span><span class="kw">expand.grid</span>(<span class="dt">alpha=</span><span class="dv">1</span>, <span class="dt">lambda=</span>l_vals))</span></code></pre></div>
+<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="predictive-modeling.html#cb698-1"></a><span class="kw">min</span>(Housing_OLS <span class="op">$</span>results<span class="op">$</span>RMSE)</span></code></pre></div>
 <pre><code>## [1] 0.5634392</code></pre>
-<div class="sourceCode" id="cb628"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb628-1"><a href="predictive-modeling.html#cb628-1"></a><span class="kw">min</span>(Housing_ridge<span class="op">$</span>results<span class="op">$</span>RMSE)</span></code></pre></div>
+<div class="sourceCode" id="cb700"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb700-1"><a href="predictive-modeling.html#cb700-1"></a><span class="kw">min</span>(Housing_ridge<span class="op">$</span>results<span class="op">$</span>RMSE)</span></code></pre></div>
 <pre><code>## [1] 0.4570054</code></pre>
-<div class="sourceCode" id="cb630"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb630-1"><a href="predictive-modeling.html#cb630-1"></a><span class="kw">min</span>(Housing_lasso<span class="op">$</span>results<span class="op">$</span>RMSE)</span></code></pre></div>
+<div class="sourceCode" id="cb702"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb702-1"><a href="predictive-modeling.html#cb702-1"></a><span class="kw">min</span>(Housing_lasso<span class="op">$</span>results<span class="op">$</span>RMSE)</span></code></pre></div>
 <pre><code>## [1] 0.4730849</code></pre>
-<div class="sourceCode" id="cb632"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb632-1"><a href="predictive-modeling.html#cb632-1"></a><span class="kw">min</span>(Housing_Tree<span class="op">$</span>results<span class="op">$</span>RMSE)</span></code></pre></div>
+<div class="sourceCode" id="cb704"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb704-1"><a href="predictive-modeling.html#cb704-1"></a><span class="kw">min</span>(Housing_Tree<span class="op">$</span>results<span class="op">$</span>RMSE)</span></code></pre></div>
 <pre><code>## [1] 0.4783224</code></pre>
 <p>In this situation, the tree outperforms OLS, but does not do as well as lasso or ridge. The best model will vary depending on the nature of the data. We can use cross-validation to determine which model is likely to perform best in prediction.</p>
 </div>
@@ -1756,11 +2242,11 @@ Q=&amp; \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum
 </div>
 <div id="price-of-2015-new-cars" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.6.2</span> Price of 2015 New Cars<a href="predictive-modeling.html#price-of-2015-new-cars" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-574-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-574-1.png" width="960" /></p>
 </div>
 <div id="two-models-with-high-bias" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.6.3</span> Two Models with High Bias<a href="predictive-modeling.html#two-models-with-high-bias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-575-1.png" width="1056" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-575-1.png" width="1152" /></p>
 </div>
 <div id="cubic-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.6.4</span> Cubic Model<a href="predictive-modeling.html#cubic-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1768,26 +2254,26 @@ Q=&amp; \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum
 </div>
 <div id="cubic-splines" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.6.5</span> Cubic Splines<a href="predictive-modeling.html#cubic-splines" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-577-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-577-1.png" width="960" /></p>
 </div>
 <div id="cubic-splines-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.6.6</span> Cubic Splines<a href="predictive-modeling.html#cubic-splines-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-578-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-578-1.png" width="960" /></p>
 <ul>
 <li>region boundaries are called <strong>knots</strong></li>
 </ul>
 </div>
 <div id="cubic-spline-with-5-knots" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.6.7</span> Cubic Spline with 5 Knots<a href="predictive-modeling.html#cubic-spline-with-5-knots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-579-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-579-1.png" width="960" /></p>
 </div>
 <div id="cubic-spline-with-10-knots" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.6.8</span> Cubic Spline with 10 Knots<a href="predictive-modeling.html#cubic-spline-with-10-knots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-580-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-580-1.png" width="960" /></p>
 </div>
 <div id="cubic-spline-with-20-knots" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.6.9</span> Cubic Spline with 20 Knots<a href="predictive-modeling.html#cubic-spline-with-20-knots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-581-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-581-1.png" width="960" /></p>
 </div>
 <div id="model-evaluation" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.6.10</span> Model Evaluation<a href="predictive-modeling.html#model-evaluation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1796,7 +2282,7 @@ Q=&amp; \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum
 </li>
 <li>calculated mean square prediction error (MSPE)</li>
 </ul>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-582-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-582-1.png" width="960" /></p>
 </div>
 <div id="implementation-of-splines" class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.6.11</span> Implementation of Splines<a href="predictive-modeling.html#implementation-of-splines" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1875,7 +2361,7 @@ explanatory variables: many variables based on information included on the resum
           </div>
         </div>
       </div>
-<a href="model-building.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="building-models-for-interpretation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="logistic-regression-and-classification.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

@@ -1080,7 +1080,7 @@ Is there evidence of a difference in average price between...
     
 ### Regression Coefficients for Tests Between Sizes
 
-$\widehat{\text{Price}} = b_0 +b_1\times\text{I}_{\text{Midsized}}+ b_2\times\text{I}_{\text{Large}}$
+$\widehat{\text{Price}} = b_0 +b_1\times\text{I}_{\text{Midsized}}+ b_2\times\text{I}_{\text{Small}}$
 
 * $b_0$ represents expected price of large cars.   
 * $b_1$ represents expected difference in price between large and midsized cars.   
@@ -1273,7 +1273,7 @@ Bears_Seasons_SimulationResults <- data.frame(FSim)  #save results in dataframe
 
 ### F-statistic for Bears Season Simulation 
 
-```{r, echo=FALSE}
+```{r}
 Bears_Seasons_SimulationResultsPlot <- ggplot(data=Bears_Seasons_SimulationResults, aes(x=FSim)) + 
   geom_histogram(fill="lightblue", color="white") + geom_vline(xintercept=c(Fstat), color="red") + 
   xlab("Simulated Value of F") + ylab("Frequency") + 

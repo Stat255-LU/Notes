@@ -34,14 +34,14 @@ set.seed(07302020)
 
 
 
-## Estimating Sampling Variability 
+## Quantifying Sampling Variability 
 
 ### Distribution of Mercury Levels in Florida Lakes
 
 Recall the example of mercury levels in a sample of 53 Florida Lakes, seen in the previous chapter.   
 
 
-```{r, echo=FALSE}
+```{r}
 Lakes_Hist <- ggplot(data=FloridaLakes, aes(x=AvgMercury)) + 
   geom_histogram(color="white", fill="lightblue", binwidth = 0.2) + 
   ggtitle("Mercury Levels in Sample of Florida Lakes") + 
@@ -57,7 +57,7 @@ The table shows
 * proportion of lakes with mercury level above 1 ppm
 
 
-```{r, echo=FALSE}
+```{r}
 Lakes_Stats <- FloridaLakes %>% summarize(MeanHg = mean(AvgMercury), 
                            MedianHg = median(AvgMercury),
                            StDevHG = sd(AvgMercury),
@@ -83,7 +83,7 @@ Unfortunately, we don't have lots of samples of size 53, we only have one sample
 
 
 
-### Simulation to Estimate Sample Variability
+### Simulation to Quantify Variability
 
 Somehow, we need to use information from just this one sample to estimate how much variability could plausibly occur between the mean of many different samples of 53 lakes.   
 
@@ -116,7 +116,7 @@ The approach of sampling from the original sample, described on the previous pag
 
 2. Calculate the mean mercury concentration in the bootstrap sample.    
 
-3. Repeat steps 2 and 3 many (say 10,000) times, keeping track of the mean mercury concentrations in each bootstrap sample. 
+3. Repeat steps 1 and 2 many (say 10,000) times, keeping track of the mean mercury concentrations in each bootstrap sample. 
 
 4. Look at the distribution of mean concentrations from the bootstrap samples. The variability in this distribution can be used to approximate the variability in the sampling distribution for the sample mean. 
 
@@ -124,7 +124,7 @@ The approach of sampling from the original sample, described on the previous pag
 ### Original Sample
 
 
-```{r, echo=FALSE}
+```{r}
 print.data.frame(data.frame(FloridaLakes %>% select(Lake, AvgMercury)), row.names = FALSE)
 ```
 
@@ -147,7 +147,7 @@ BootstrapSample1 <- sample_n(FloridaLakes, 53, replace=TRUE) %>% arrange(Lake)
 ```
 
 
-```{r, echo=FALSE}
+```{r}
 print.data.frame(data.frame(BootstrapSample1%>% select(Lake, AvgMercury)), row.names = FALSE)
 ```
 
@@ -164,7 +164,7 @@ BootstrapSample2 <- sample_n(FloridaLakes, 53, replace=TRUE) %>% arrange(Lake)
 ```
 
 
-```{r, echo=FALSE}
+```{r}
 print.data.frame(data.frame(BootstrapSample2%>% select(Lake, AvgMercury)), row.names = FALSE)
 ```
 
@@ -180,7 +180,7 @@ BootstrapSample3 <- sample_n(FloridaLakes, 53, replace=TRUE) %>% arrange(Lake)
 ```
 
 
-```{r, echo=FALSE}
+```{r}
 print.data.frame(data.frame(BootstrapSample3%>% select(Lake, AvgMercury)), row.names = FALSE)
 ```
 
@@ -196,7 +196,7 @@ BootstrapSample4 <- sample_n(FloridaLakes, 53, replace=TRUE) %>% arrange(Lake)
 ```
 
 
-```{r, echo=FALSE}
+```{r}
 print.data.frame(data.frame(BootstrapSample4%>% select(Lake, AvgMercury)), row.names = FALSE)
 ```
 
@@ -213,7 +213,7 @@ BootstrapSample5 <- sample_n(FloridaLakes, 53, replace=TRUE) %>% arrange(Lake)
 ```
 
 
-```{r, echo=FALSE}
+```{r}
 print.data.frame(data.frame(BootstrapSample5%>% select(Lake, AvgMercury)), row.names = FALSE)
 ```
 
@@ -257,14 +257,10 @@ c(q.025, q.975)
 ```
 
 
-```{r, fig.height=2, fig.width=7}
-Lakes_Bootstrap_Mean  + geom_segment(x = q.025, y = 0,
-               xend = q.975, yend = 0,
-               color = "black",
-               size=5,
-               arrow = arrow(ends="both"))
-```
-
+```{r}
+Lakes_Bootstrap_Mean  + geom_segment(aes(x=q.025,xend=q.975, y=50, yend=50), color="gold", size=10, alpha=0.01) + geom_text(label="Middle 95%", x=(q.025 + q.975)/2 , y=50)
+```  
+  
 We are 95% confident that the mean mercury level is all Florida Lakes is between `r round(q.025,2)` and `r round(q.975,2)` ppm.  
 
 
@@ -284,7 +280,7 @@ When we estimate a population parameter, using a statistic from a sample, we nee
 
 ### What Bootstrapping Does and Doesn't Do
 
-* The purpose of bootsrapping is to quantify the amount of uncertainty associated with a statistic that was calculated from a sample.   
+* The purpose of bootstrapping is to quantify the amount of uncertainty associated with a statistic that was calculated from a sample.   
 
 * A common misperception is that bootstrapping somehow increases the size of a sample by creating copies (or sampling with replacement). **This is wrong!!!!** Bootstrap samples are obtained by sampling from the original data, so they contain no new information and do not increase sample size. They simply help us understand how much our sample result could reasonably differ from that of the full population.   
 
@@ -303,7 +299,7 @@ Given a statistic that was calculated from a sample...
 
 2. Calculate the statistic of interest in the bootstrap sample.    
 
-3. Repeat steps 2 and 3 many (say 10,000) times, keeping track of the statistic calculated in each bootstrap sample. 
+3. Repeat steps 1 and 2 many (say 10,000) times, keeping track of the statistic calculated in each bootstrap sample. 
 
 4. Look at the distribution of statistics calculated from the bootstrap samples. The variability in this distribution can be used to approximate the variability in the sampling distribution for the statistic of interest.   
 
@@ -356,15 +352,11 @@ c(q.025, q.975)
 ```
 
 
-```{r, echo=FALSE}
+```{r}
 Lakes_Bootstrap_SD <- ggplot(data=Lakes_Bootstrap_Results_Other, aes(x=StDevHg)) +  geom_histogram(color="white", fill="lightblue") + 
   xlab("Standard Devation in Bootstrap Sample ") + ylab("Frequency") +
   ggtitle("Bootstrap Distribution for Standard Deviation in Florida Lakes") 
-Lakes_Bootstrap_SD   + geom_segment(x = q.025, y = 0,
-               xend = q.975, yend = 0,
-               color = "black",
-               size=5,
-               arrow = arrow(ends="both"))
+Lakes_Bootstrap_SD   + geom_segment(aes(x=q.025,xend=q.975, y=50, yend=50), color="gold", size=10, alpha=0.01)
 ```
 
 
@@ -379,15 +371,11 @@ q.975 <- quantile(Lakes_Bootstrap_Results_Other$PropOver1, 0.975)
 c(q.025, q.975)
 ```
 
-```{r, echo=FALSE}
+```{r}
 Lakes_Bootstrap_PropOver1 <- ggplot(data=Lakes_Bootstrap_Results_Other, aes(x=PropOver1)) +  geom_histogram(color="white", fill="lightblue") + 
   xlab("Proportion of Lakes over 1 ppm ") + ylab("Frequency") +
   ggtitle("Bootstrap Distribution for Prop. Lakes > 1.0 ppm") 
-Lakes_Bootstrap_PropOver1 + geom_segment(x = q.025, y = 0,
-               xend = q.975, yend = 0,
-               color = "black",
-               size=5,
-               arrow = arrow(ends="both"))
+Lakes_Bootstrap_PropOver1 + geom_segment(aes(x=q.025,xend=q.975, y=50, yend=50), color="gold", size=10, alpha=0.01)
 ```
 
 
@@ -396,21 +384,17 @@ We are 95% confident that the proportion of all Florida lakes with mercury level
 
 ### Bootstrap Percentile CI for Median
 
-```{r, echo=FALSE}
+```{r}
 q.025 <- quantile(Lakes_Bootstrap_Results_Other$MedianHg, 0.025)
 q.975 <- quantile(Lakes_Bootstrap_Results_Other$MedianHg, 0.975)
 ``` 
 
-```{r, fig.height=3, fig.width=7, echo=FALSE}
+```{r}
 Lakes_Bootstrap_Median <- ggplot(data=Lakes_Bootstrap_Results_Other, aes(x=MedianHg)) + geom_histogram(fill="lightblue")+
   xlab("Median Mercury in Bootstrap Sample ") + ylab("Frequency") +
-  ggtitle("Bootstrap Distribution for Sample Median in Florida Lakes") + geom_segment(x = q.025, y = 0,
-               xend = q.975, yend = 0,
-               color = "black",
-               size=5,
-               arrow = arrow(ends="both"))
+  ggtitle("Bootstrap Distribution for Sample Median in Florida Lakes") 
 
-Lakes_Bootstrap_Median 
+Lakes_Bootstrap_Median  + geom_segment(aes(x=q.025,xend=q.975, y=50, yend=50), color="gold", size=10, alpha=0.01)
 ```
 
 * We should not draw conclusions from this bootstrap distribution. The bootstrap is unreliable when we see the same values coming up repeatedly in clusters, with large gaps in between.    
@@ -439,7 +423,7 @@ grid.arrange(V1, V2, ncol=2)
 * Before you do this, explore the data, such as through jitter plots. Do not change binwidth to intentionally manipulate or hide undesirable information. Your goal should be to find a plot that accurately displays the shape/trend in the data.   
 
 
-```{r, fig.height=2, fig.width=7}
+```{r}
 ggplot(data=Lakes_Bootstrap_Results_Other, aes(x=PropOver1)) +  
   geom_histogram(color="white", fill="lightblue", binwidth=0.02) + 
   xlab("Proportion of Lakes over 1 ppm ") + ylab("Frequency") +
@@ -455,7 +439,7 @@ ggplot(data=Lakes_Bootstrap_Results_Other, aes(x=PropOver1)) +
 We previously used a permutation test and determined that there was strong evidence the the average mercury level for lakes in Southern Florida is higher than the average mercury level for lakes in Northern Florida.  
  
 
-```{r, echo=FALSE}
+```{r}
 library(Lock5Data)
 data(FloridaLakes)
 #Location relative to rt. 50
@@ -509,7 +493,7 @@ summary(Lakes_M)
 
 2. Fit a model and record regression coefficient $b_1$, which represents the difference in mean mercury levels between the samples.      
 
-3. Repeat steps 2 and 3 10,000 times, keeping track of the regression coefficient estimates in each bootstrap sample. 
+3. Repeat steps 1 and 2 10,000 times, keeping track of the regression coefficient estimates in each bootstrap sample. 
 
 4. Look at the distribution of regression coefficients in the bootstrap samples. The variability in this distribution can be used to approximate the variability in the sampling distributions for the $b_1$. 
 
@@ -536,16 +520,12 @@ q.975 <- quantile(NS_Lakes_Bootstrap_Results$b1, 0.975)
 c(q.025, q.975)
 ```
 
-```{r, echo=FALSE, fig.height=2.5}
+```{r}
 NS_Lakes_Bootstrap_Plot_b1 <- ggplot(data=NS_Lakes_Bootstrap_Results, aes(x=b1)) +  
   geom_histogram(color="white", fill="lightblue") + 
   xlab("b1 in Bootstrap Sample") + ylab("Frequency") +
   ggtitle("Northern vs Southern Lakes: Bootstrap Distribution for b1") 
-NS_Lakes_Bootstrap_Plot_b1 + geom_segment(x = q.025, y = 0,
-               xend = q.975, yend = 0,
-               color = "black",
-               size=5,
-               arrow = arrow(ends="both"))
+NS_Lakes_Bootstrap_Plot_b1 + geom_segment(aes(x=q.025,xend=q.975, y=50, yend=50), color="gold", size=10, alpha=0.01)
 ```
 
 We are 95% confident the average mercury level in Southern Lakes is between `r round(q.025,2)` and `r round(q.975,2)` ppm higher than in Northern Florida. 
@@ -567,7 +547,7 @@ Since $b_0$ and $b_1$ were calculated from a sample of 110 new 2015 cars, we do 
 
 2. Fit a linear regression model to the bootstrap sample with price as the response variable, and Acc060 as the explanatory variable. Record $b_0$ and $b_1$.       
 
-3. Repeat steps 2 and 3 10,000 times, keeping track of the values on $b_0$ and $b_1$ in each bootstrap sample.  
+3. Repeat steps 1 and 2 10,000 times, keeping track of the values on $b_0$ and $b_1$ in each bootstrap sample.  
 
 4. Look at the distribution of $b_0$ and $b_1$ from the bootstrap samples. The variability in these distributions can be used to approximate the variability in the sampling distribution for the intercept and slope.   
 
@@ -605,15 +585,11 @@ q.975 <- quantile(Cars_Bootstrap_Results_Acc060$b1, 0.975)
 c(q.025, q.975)
 ```
 
-```{r, echo=FALSE}
+```{r}
 Cars_Acc060_B_Slope_Plot <- ggplot(data=Cars_Bootstrap_Results_Acc060, aes(x=b1)) +  geom_histogram(color="white", fill="lightblue") + 
   xlab("Cars Acc060: Slope in Bootstrap Sample ") + ylab("Frequency") +
   ggtitle("Bootstrap Distribution for Slope") 
-Cars_Acc060_B_Slope_Plot +   geom_segment(x = q.025, y = 0,
-               xend = q.975, yend = 0,
-               color = "black",
-               size=5,
-               arrow = arrow(ends="both"))
+Cars_Acc060_B_Slope_Plot + geom_segment(aes(x=q.025,xend=q.975, y=50, yend=50), color="gold", size=10, alpha=0.01)
 ```
 
 
@@ -697,7 +673,7 @@ $$
 
 2. Fit a model and record regression coefficients $b_0$, $b_1$, $b_2$, $b_3$.     
 
-3. Repeat steps 2 and 3 10,000 times, keeping track of the regression coefficient estimates in each bootstrap sample. 
+3. Repeat steps 1 and 2 10,000 times, keeping track of the regression coefficient estimates in each bootstrap sample. 
 
 4. Look at the distribution of regression coefficients in the bootstrap samples. The variability in this distribution can be used to approximate the variability in the sampling distributions for the regression coefficients. 
 
@@ -730,15 +706,11 @@ q.975 <- quantile(Bears_Bootstrap_Results$b1, 0.975)
 c(q.025, q.975)
 ```
 
-```{r, echo=FALSE, fig.height=2.5}
+```{r}
 Bears_plot_b1 <- ggplot(data=Bears_Bootstrap_Results, aes(x=b1)) +  
   geom_histogram(color="white", fill="lightblue") +   xlab("b1 in Bootstrap Sample") + ylab("Frequency") +
   ggtitle("Bears Weight by Age and Sex: Bootstrap Distribution for b1") 
-Bears_plot_b1 +    geom_segment(x = q.025, y = 0,
-               xend = q.975, yend = 0,
-               color = "black",
-               size=5,
-               arrow = arrow(ends="both"))
+Bears_plot_b1 + geom_segment(aes(x=q.025,xend=q.975, y=50, yend=50), color="gold", size=10, alpha=0.01)
 ```
 
 We are 95% confident that male bears gain between `r round(q.025,2)` and `r round(q.975,2)` pounds per month, on average.  
@@ -751,20 +723,13 @@ The average weight gain per month for female bears is represented by $b_1 + b3$.
 ```{r}
 q.025 <- quantile(Bears_Bootstrap_Results$b1 + Bears_Bootstrap_Results$b3, 0.025)
 q.975 <- quantile(Bears_Bootstrap_Results$b1 + Bears_Bootstrap_Results$b3, 0.975)
-```
-
-```{r}
 c(q.025, q.975)
 ```
 
-```{r, echo=FALSE, fig.height=2}
+```{r}
 ggplot(data=Bears_Bootstrap_Results, aes(x=b1+b3, fill=!(b1+b3 >=q.975 | b1 + b3 <= q.025))) +  geom_histogram(color="white", fill="lightblue") + 
   xlab("b1 + b3 in Bootstrap Sample") + ylab("Frequency") +
-  ggtitle("Bears Weight by Age and Sex:Bootstrap Distribution for b1+b3") + geom_segment(x = q.025, y = 0,
-               xend = q.975, yend = 0,
-               color = "black",
-               size=5,
-               arrow = arrow(ends="both")) 
+  ggtitle("Bears Weight by Age and Sex:Bootstrap Distribution for b1+b3") + geom_segment(aes(x=q.025,xend=q.975, y=50, yend=50), color="gold", size=10, alpha=0.01)
 ```
 
 We are 95% confident that female bears gain between `r q.025` and `r q.975` pounds per month, on average.  
@@ -777,22 +742,15 @@ The mean weight of all 24 month old male bears is represented by $b_0 + 24b_1$.
 ```{r}
 q.025 <- quantile(Bears_Bootstrap_Results$b0 + 24*Bears_Bootstrap_Results$b1, 0.025)
 q.975 <- quantile(Bears_Bootstrap_Results$b0 + 24*Bears_Bootstrap_Results$b1, 0.975)
-```
-
-```{r}
 c(q.025, q.975)
 ```
 
-```{r, echo=FALSE, fig.height=2}
+```{r}
 ggplot(data=Bears_Bootstrap_Results, aes(x=b0+24*b1)) +  
   geom_histogram(color="white", fill="lightblue") + 
   xlab("b0 + 24b1 in Bootstrap Sample") + 
   ylab("Frequency") +
-  ggtitle("Bears Weight by Age and Sex: Bootstrap Distribution for b0+24b1")  + geom_segment(x = q.025, y = 0,
-               xend = q.975, yend = 0,
-               color = "black",
-               size=5,
-               arrow = arrow(ends="both")) 
+  ggtitle("Bears Weight by Age and Sex: Bootstrap Distribution for b0+24b1")  + geom_segment(aes(x=q.025,xend=q.975, y=50, yend=50), color="gold", size=10, alpha=0.01)
 ```
 
 We are 95% confident that the mean weight of all 24 month old bears is between `r q.025` and `r q.975` pounds.  
@@ -807,23 +765,16 @@ q.025 <- quantile(Bears_Bootstrap_Results$b0 + Bears_Bootstrap_Results$b2 +
                     24*(Bears_Bootstrap_Results$b1 + Bears_Bootstrap_Results$b3), 0.025)
 q.975 <- quantile(Bears_Bootstrap_Results$b0 + Bears_Bootstrap_Results$b2 + 
                     24*(Bears_Bootstrap_Results$b1 + Bears_Bootstrap_Results$b3), 0.975)
-```
-
-```{r}
 c(q.025, q.975)
 ```
 
 
-```{r, echo=FALSE, fig.height=2}
+```{r}
 ggplot(data=Bears_Bootstrap_Results, aes(x=(b0+b2)+24*(b1+b3))) +  
   geom_histogram(color="white", fill="lightblue") + 
   xlab("(b0+b2)+24*(b1+b3) in Bootstrap Sample") + 
   ylab("Frequency") +
-  ggtitle("Bears Weight by Age and Sex: Bootstrap Distribution for (b0+b2)+24*(b1+b3)")  + geom_segment(x = q.025, y = 0,
-               xend = q.975, yend = 0,
-               color = "black",
-               size=5,
-               arrow = arrow(ends="both"))
+  ggtitle("Bears Weight by Age and Sex: Bootstrap Distribution for (b0+b2)+24*(b1+b3)")  + geom_segment(aes(x=q.025,xend=q.975, y=50, yend=50), color="gold", size=10, alpha=0.01)
 ```
 
 We are 95% confident that the mean weight of all 24 month old female bears is between `r q.025` and `r q.975` pounds.  
@@ -884,14 +835,12 @@ c(q.025, q.975)
 ```
 
 
-```{r, fig.height=2, fig.width=7}
-Lakes_Bootstrap_Mean  + geom_segment(x = q.025, y = 0, xend = q.975, 
-                                     yend = 0,color = "black",size=5,
-                                     arrow = arrow(ends="both")) + geom_segment(x = -2*SE, y = 100, xend = +2*SE, 
-                                     yend = 100,color = "yellow",size=5,
-                                     arrow = arrow(ends="both"))
+```{r}
+Lakes_Bootstrap_Mean  + geom_segment(aes(x=q.025,xend=q.975, y=50, yend=50), color="gold", size=10, alpha=0.01) + geom_segment(aes(x = Stat-2*SE, y = 150, xend = Stat+2*SE, 
+                                     yend = 150),color = "darkgray",size=10, alpha=0.01)
 ```
-Percentile interval in black, standard error interval in yellow. 
+
+Percentile interval in gold, standard error interval in gray 
 
 
 ### Difference in Mean Hg in Lakes    
@@ -909,7 +858,7 @@ SE
 
 ```{r}
 Stat <- mean(NS_Lakes_Bootstrap_Results$b1)
-c(-2*SE, +2*SE)
+c(Stat-2*SE, Stat+2*SE)
 ```
 
 
@@ -922,19 +871,17 @@ c(q.025, q.975)
 ```
 
 
-```{r, fig.height=2, fig.width=7}
-NS_Lakes_Bootstrap_Plot_b1  + geom_segment(x = q.025, y = 0, xend = q.975, 
-                                     yend = 0,color = "black",size=5,
-                                     arrow = arrow(ends="both")) + geom_segment(x = -2*SE, y = 100, xend = +2*SE, 
-                                     yend = 100,color = "yellow",size=5,
-                                     arrow = arrow(ends="both"))
+```{r}
+NS_Lakes_Bootstrap_Plot_b1 + geom_segment(aes(x=q.025,xend=q.975, y=50, yend=50), color="gold", size=10, alpha=0.01) + geom_segment(aes(x = Stat-2*SE, y = 150, xend = Stat+2*SE, 
+                                     yend = 150),color = "darkgray",size=10, alpha=0.01)
 ```
-Percentile interval in black, standard error interval in yellow. 
+
+Percentile interval in gold, standard error interval in gray 
 
 
 ### Proportion Lakes Exceeding 1 ppm Hg
 
-```{r, echo=FALSE}
+```{r}
 Lakes_Bootstrap_PropOver1 
 ```
 
@@ -959,21 +906,19 @@ q.975 <- quantile(Lakes_Bootstrap_Results_Other$PropOver1, 0.975)
 c(q.025, q.975)
 ```
 
-```{r, fig.height=2, fig.width=7}
-Cars_Acc060_B_Slope_Plot  + geom_segment(x = q.025, y = 0, xend = q.975, 
-                                     yend = 0,color = "black",size=5,
-                                     arrow = arrow(ends="both")) + geom_segment(x = Stat-2*SE, y = 100, xend = Stat+2*SE, 
-                                     yend = 100,color = "yellow",size=5,
-                                     arrow = arrow(ends="both"))
+```{r}
+ Lakes_Bootstrap_PropOver1 + geom_segment(aes(x=q.025,xend=q.975, y=50, yend=50), color="gold", size=10, alpha=0.01) + geom_segment(aes(x = Stat-2*SE, y = 150, xend = Stat+2*SE, 
+                                     yend = 150),color = "darkgray",size=10, alpha=0.01)
 ```
-Percentile interval in black, standard error interval in yellow. 
+
+Percentile interval in gold, standard error interval in gray. 
 
 
 
 ### Cars Regression Slope
 
 
-```{r, echo=FALSE}
+```{r}
 Cars_Acc060_B_Slope_Plot 
 ```
 
@@ -1001,14 +946,13 @@ c(q.025, q.975)
 ```
 
 
-```{r, fig.height=2, fig.width=7}
-Lakes_Bootstrap_PropOver1  + geom_segment(x = q.025, y = 0, xend = q.975, 
-                                     yend = 0,color = "black",size=5,
-                                     arrow = arrow(ends="both")) + geom_segment(x = Stat-2*SE, y = 100, xend = Stat+2*SE, 
-                                     yend = 100,color = "yellow",size=5,
-                                     arrow = arrow(ends="both"))
+```{r}
+Cars_Acc060_B_Slope_Plot  + geom_segment(aes(x=q.025,xend=q.975, y=50, yend=50), color="gold", size=10) + geom_segment(aes(x = Stat-2*SE, y = 100, xend = Stat+2*SE, 
+                                     yend = 100),color = "gray",size=10)
 ```
-Percentile interval in black, standard error interval in yellow. 
+
+
+Percentile interval in gold, standard error interval in gray 
 
 
 
@@ -1047,14 +991,12 @@ c(q.025, q.975)
 
 
 
-```{r, fig.height=2, fig.width=7}
-Bears_plot_b1 +xlim(c(1.5,6.5)) + geom_segment(x = q.025, y = 0, xend = q.975, 
-                                     yend = 0,color = "black",size=5,
-                                     arrow = arrow(ends="both")) + geom_segment(x = Stat-2*SE, y = 100, xend = Stat+2*SE, 
-                                     yend = 100,color = "yellow",size=5,
-                                     arrow = arrow(ends="both"))
+```{r}
+Bears_plot_b1 +xlim(c(1.5,6.5)) + geom_segment(aes(x=q.025,xend=q.975, y=50, yend=50), color="gold", size=10, alpha=0.01) + geom_segment(aes(x = Stat-2*SE, y = 150, xend = Stat+2*SE, 
+                                     yend = 150),color = "gray",size=10, alpha=0.01)
 ```
-Percentile interval in black, standard error interval in yellow. 
+
+Percentile interval in gold, standard error interval in gray 
 
 
 ## Standard Error Formulas
@@ -1069,13 +1011,13 @@ This is different than the sample standard deviation, which pertains to the amou
 
 Distribution of Mercury Levels in Florida Lakes: 
 
-```{r, fig.height=2, echo=FALSE, fig.width=4}
+```{r}
 Lakes_Hist
 ```
 
 Standard Deviation of Mercury Levels Between Lakes:
 
-```{r, fig.height=2}
+```{r}
 sd(FloridaLakes$AvgMercury)
 ```
 
@@ -1085,7 +1027,7 @@ This describes how much variability there is in mercury levels between individua
 
 Bootstrap Distribution for Mean Mercury Level ($n=53$)
 
-```{r, fig.height=2, echo=FALSE, fig.width=4}
+```{r}
 Lakes_Bootstrap_Mean + xlim(c(0,1.5))
 ```
 
@@ -1148,7 +1090,7 @@ summary(lm(data=FloridaLakes, AvgMercury~1))
 
 Comparison to Bootstrap:    
 
-```{r, fig.height=2, echo=FALSE, fig.width=7}
+```{r}
 Lakes_Bootstrap_Mean
 ```
 
@@ -1281,7 +1223,7 @@ The table below tells us what must be true of the sampling distribution for a st
 
 Mean mercury level for all Florida lakes: 
 
-```{r, echo=FALSE}
+```{r}
 Lakes_Bootstrap_Mean
 ```
 
@@ -1296,7 +1238,7 @@ The methods should all produce similar results.
 
 Slope of regression line in cars example
 
-```{r, echo=FALSE}
+```{r}
 Cars_Acc060_B_Slope_Plot
 ```
 
@@ -1312,7 +1254,7 @@ The methods should all produce similar results.
 
 Standard deviation of mercury level in Florida Lakes
 
-```{r, echo=FALSE}
+```{r}
 Lakes_Bootstrap_SD
 ```
 
@@ -1324,7 +1266,7 @@ Lakes_Bootstrap_SD
 
 Regression slope in bears age model
 
-```{r, echo=FALSE}
+```{r}
 Bears_plot_b1
 ```
 
@@ -1335,7 +1277,7 @@ Bears_plot_b1
 
 Median mercury level in Florida Lakes
 
-```{r, echo=FALSE}
+```{r}
 Lakes_Bootstrap_Median
 ```
 

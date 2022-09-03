@@ -1,4 +1,5 @@
-# Model Building
+# Building Models for Interpretation
+
 
 **Learning Outcomes:**     
 
@@ -39,6 +40,23 @@ set.seed(07302020)
 
 
 * We'll also need to make other decisions, such as whether or not to use interaction terms, or transformations.     
+* In this chapter, we'll focus on building models for situations when we want to make interpretations and draw conclusions about  relationships between our explanatory and response variables. 
+
+* In Chapter 7, we focus on modeling for the purpose of prediction, when we are not interested in making interpretations or conclusions about relationships between variables.
+
+
+### Considerations in Modeling
+
+When building a model for the purpose of consideration, we'll need to think about things like:
+
+* which explanatory variables should we include in the model, and how many?    
+* should we include any interaction terms?    
+* should we use any nonlinear terms?    
+* should we use a transformation of the response variable?    
+
+We'll go through a couple example to see how we can address these questions in building a model. 
+
+Keep in mind, there is no single correct model, but there are common characteristics of a good model. While two statisticians might use different models for a given set of data, they will hopefully lead to reasonably similar conclusions if constructed carefully. 
 
 
 
@@ -110,7 +128,7 @@ SAT <- mutate(SAT, fracgrp = cut(frac,
 
 ### A Closer Look
 
-```{r, fig.height=2.5, fig.width=9, echo=FALSE}
+```{r, fig.height=2.5, fig.width=9}
 ggplot(data=SAT, aes( y=sat, x=salary )) +geom_point() + facet_wrap(facets = ~fracgrp) +
 stat_smooth(method="lm", se=FALSE) + xlab("Average Teacher Salary in Thousands")
 ```
@@ -180,7 +198,7 @@ Let's return to the model with salary, ratio, and fraction taking test.
 
 We use residual plots to assess model assumptions. 
 
-```{r, echo=FALSE, fig.width=9}
+```{r, fig.width=9}
 P1 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$fitted.values)) + geom_point() + ggtitle("Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
 P2 <- ggplot(data=data.frame(SAT_M3$residuals), aes(x=SAT_M3$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
 P3 <- ggplot(data=data.frame(SAT_M3$residuals), aes(sample = scale(SAT_M3$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("QQ Plot")
@@ -193,7 +211,7 @@ There is some sign of a quadratic trend in the residual plot, creating concern a
 
 We can plot our residuals against the explanatory variables to see whether the model is properly accounting for relationships involving each variable. If we see nonlinear trends, we should consider adding a nonlinear function of that explanatory variable.  
 
-```{r, echo=FALSE, fig.width=9}
+```{r,  fig.width=9}
 P1 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$salary)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("Salary") + ylab("Residuals") 
 P2 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$frac)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("Fraction Taking Test") + ylab("Residuals")
 P3 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$ratio)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("Student to Teach Ratio") + ylab("Residuals")
@@ -211,7 +229,7 @@ summary(SAT_M5)
 
 ### Residual Plots for Quadratic SAT Model
 
-```{r, echo=FALSE, fig.width=9}
+```{r, fig.width=9}
 P1 <- ggplot(data=data.frame(SAT_M4$residuals), aes(y=SAT_M4$residuals, x=SAT_M5$fitted.values)) + geom_point() + ggtitle("Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
 P2 <- ggplot(data=data.frame(SAT_M5$residuals), aes(x=SAT_M5$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
 P3 <- ggplot(data=data.frame(SAT_M5$residuals), aes(sample = scale(SAT_M5$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("QQ Plot")
@@ -239,7 +257,7 @@ On average, a 1 student per teacher increase in student to teacher ratio is asso
 summary(SAT_M5)
 ```
 
-### Interpretations for Model with Linear Terms
+### Interpretations for Model with Quadratic Terms
 
 On average, a $1,000 dollar increase in average teacher salary is associated with a 1.8 point increase in average SAT score assuming fraction of students taking the SAT, and student to teacher ratio are held constant.
 
@@ -266,7 +284,7 @@ We do see some possible quadratic trend, but we should be really careful about e
 * There is no clear reason to expect an interaction between these variables, so we did not include an interaction effect in the model.  
 
 
-## Predicting Car Price
+## Modeling Car Price
 
 ### Model for Price of 2015 Cars
 
@@ -457,7 +475,7 @@ For our research purposes, this model is good enough.
 
 ### Check of Model Assumptions
 
-```{r, echo=FALSE, fig.width=9}
+```{r, fig.width=9}
 P1 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$fitted.values)) + geom_point() + ggtitle("Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
 P2 <- ggplot(data=data.frame(Cars_M7$residuals), aes(x=Cars_M7$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
 P3 <- ggplot(data=data.frame(Cars_M7$residuals), aes(sample = scale(Cars_M7$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("QQ Plot")
@@ -469,7 +487,7 @@ There is slight concern about constant variance, but otherwise, the model assump
 ### Residual by Predictor Plots
 
 
-```{r, echo=FALSE, fig.width=9}
+```{r,  fig.width=9}
 P1 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$QtrMile)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("QtrMile") + ylab("Residuals") 
 P2 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$Weight)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("Weight") + ylab("Residuals") 
 P3 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$Drive)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("Drive") + ylab("Residuals") 

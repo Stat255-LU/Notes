@@ -96,7 +96,7 @@ A normal distribution is defined by two parameters:
       - $\mu$ representing the center of the distribution    
       - $\sigma$ representing the standard deviation
 
-This distribution is denoted $\mathcal{N}(0, \sigma)$.   
+This distribution is denoted $\mathcal{N}(\mu, \sigma)$.   
 
 ```{r, echo=FALSE, fig.height=3, fig.width=10}
 dnorm1 <- function(x){
@@ -127,9 +127,18 @@ p <- ggplot(df, aes(x = x, y = y)) +
 p
 ```
 
-Note that for standard deviation $\sigma$, $\sigma^2$ is called the variance. Some books denote the normal distribution as $\mathcal{N}(0, \sigma^2)$, instead of $\mathcal{N}(0,\sigma)$.  
+Note that for standard deviation $\sigma$, $\sigma^2$ is called the variance. Some books denote the normal distribution as $\mathcal{N}(\mu, \sigma^2)$, instead of $\mathcal{N}(\mu,\sigma)$.  
 
 ### Signal and Noise in Icecream Example
+
+In this example, I simulated the amount of ice cream dispensed by adding a random number from a normal distribution with mean 0 and standard deviation 0.5 to the expected amount dispensed, which is given by $2x$, where $x$ represents time pressing the dispenser.  
+
+Thus, amount dispensed for person $i$ is given by
+
+\[Y_i = 2x_i+\epsilon_i, \text{ where } \epsilon_i\sim\mathcal{N}(0, 0.5)
+\]
+
+
 
 ```{r, fig.height=2.5}
 set.seed(10082020)
@@ -145,7 +154,7 @@ kable(head(Icecream))
 
 In reality, we do not see the signal and noise columns, we only see time and amount. From this, we need to estimate signal, without being thrown off by noise.   
 
-```{r, fig.height=4, fig.width = 7, echo=FALSE}
+```{r, fig.height=4, fig.width = 7}
 ggplot(data=Icecream1, aes(x=time, y=amount)) + geom_point() + ggtitle("Icecream Dispensed") + xlab("Time Pressing Dispensor") + ylab("Amount Dispensed")
 ```
 
@@ -154,7 +163,7 @@ The red line represents the "true" relationship between time and average amount 
 The blue line represents the least squares regression line, fit from the data. The blue line is an approximation of the red line.   
 
 
-```{r, fig.height=4, fig.width = 7, echo=FALSE}
+```{r, fig.height=4, fig.width = 7}
 ggplot(data=Icecream1, aes(x=time, y=amount)) + geom_point() + ggtitle("Icecream Dispensed") + xlab("Time Pressing Dispensor") + ylab("Amount Dispensed") + stat_smooth(method="lm", se=FALSE) + geom_abline(slope=2, intercept=0, color="red") + 
   annotate("text", label="y=2x", x= 3.5, y=6.5, size=10, color="red")
 ```
@@ -199,8 +208,8 @@ As statistician George Box said, *"All models are wrong, but some are useful."*
 
 Notice that when we used simulation to approximate the sampling distributions of statistics, many (but not all) of these turned out to be symmetric and bell-shaped. 
 
-```{r, fig.width=9, fig.height=3.5, echo=FALSE}
-grid.arrange(Lakes_Bootstrap_Mean, Cars_Acc060_B_Slope_Plot, NSLakes_SimulationResultsPlot, Bears_plot_b1, ncol=2)
+```{r, fig.width=10, fig.height=5}
+grid.arrange(Lakes_Bootstrap_Mean, Cars_Acc060_B_Slope_Plot, NS_Lakes_Bootstrap_Plot_b1, Bears_plot_b1, ncol=2)
 ```
 
 In a normal error regression model, we assume that response $Y_i$ deviates from its expectation,  $E(Y_i) = \beta_0 + \beta_iX_{i1} + \ldots + \beta_p X_{ip}$, according to a normally distributed random error term.  
@@ -211,7 +220,7 @@ When this assumption is valid we can use symmetric, bell-shaped curves to approx
 
 A t-distribution is a symmetric, bell-shaped curve, with thicker tails (hence more variability), than a $\mathcal{N}(0,1)$ distribution.   
 
-```{r, fig.height=3.5, fig.width=8, warning=FALSE, message=FALSE, include=FALSE}
+```{r, fig.height=5, fig.width=10, warning=FALSE, message=FALSE, include=FALSE}
 gf_dist("t", df=3, color = ~ "3 df", kind = "density")  %>%
 gf_dist("t", df=10, color = ~ "10 df", kind = "density") %>%
 gf_dist("t", df=20, color = ~ "20 df", kind = "density") %>%
@@ -219,7 +228,7 @@ gf_dist("t", df=30, color = ~ "30 df", kind = "density") %>%
 gf_dist("norm", color = ~ "N(0,1)", kind = "density") + xlim(c(-3,3))
 ```
 
-```{r, echo=FALSE, fig.height=3, fig.width=10}
+```{r, echo=FALSE, fig.height=5, fig.width=10}
 dt1 <- function(x){
   dt(x, df=3)
 }
@@ -364,7 +373,7 @@ summary(Lakes_M)
 
 ### t-statistic and p-value
 
-```{r, echo=FALSE, fig.height=1.5, fig.width=6}
+```{r, fig.height=4, fig.width=8}
 ts=3.027
 gf_dist("t", df=51, geom = "area", fill = ~ (abs(x)< abs(ts)), show.legend=FALSE) + geom_vline(xintercept=c(ts, -ts), color="red")  + xlab("t")
 ```
@@ -388,6 +397,49 @@ The low p-value gives us strong evidence of a difference in average mercury leve
 \]
 
 We can be 95% confident that average mercury level is between 0.09 and 0.45 ppm higher in Southern Florida, than Northern Florida.  
+
+
+### Comparison to Simulation
+
+Let's compare these results to those given by the permutation test and bootstrap confidence interval.
+
+
+**Permutation Test**
+```{r}
+NSLakes_SimulationResultsPlot
+```
+
+p-value:
+
+```{r}
+b1 <- Lakes_M$coef[2] ## record value of b1 from actual data
+
+mean(abs(NSLakes_SimulationResults$b1Sim) > abs(b1))
+```
+
+
+**Percentile Bootstrap Confidence Interval**
+
+```{r}
+q.025 <- quantile(NS_Lakes_Bootstrap_Results$b1, 0.025)
+q.975 <- quantile(NS_Lakes_Bootstrap_Results$b1, 0.975)
+c(q.025, q.975)
+```
+
+```{r}
+NS_Lakes_Bootstrap_Plot_b1 <- ggplot(data=NS_Lakes_Bootstrap_Results, aes(x=b1)) +  
+  geom_histogram(color="white", fill="lightblue") + 
+  xlab("b1 in Bootstrap Sample") + ylab("Frequency") +
+  ggtitle("Northern vs Southern Lakes: Bootstrap Distribution for b1") 
+NS_Lakes_Bootstrap_Plot_b1 + geom_segment(aes(x=q.025,xend=q.975, y=50, yend=50), color="gold", size=10, alpha=0.01)
+```
+
+We are 95% confident the average mercury level in Southern Lakes is between `r round(q.025,2)` and `r round(q.975,2)` ppm higher than in Northern Florida. 
+
+
+As long as the normal error regression model is a reasonable approximation of the phenomenon we're modeling, then we would expect the results of the t-test to closely match those obtained using simulation.  
+
+
 
 ### Coefficients Table in R Output
 
@@ -427,7 +479,7 @@ summary(Bears_A_Season)
 
 ### Bears F-Test Illustration
 
-```{r, echo=FALSE, fig.height=1.5, fig.width=6}
+```{r, fig.height=4, fig.width=8}
 ts=0.976
 gf_dist("f", df1=2, df2=94, geom = "area", fill = ~ (abs(x)< abs(ts)), show.legend=FALSE) + geom_vline(xintercept=c(ts), color="red")  + xlab("t")
 ```
@@ -470,7 +522,7 @@ summary(Cars_A_Size)
 
 ### Bears F-Test Illustration
 
-```{r, echo=FALSE, fig.height=1.5, fig.width=6}
+```{r, fig.height=4, fig.width=8}
 ts=10.14
 gf_dist("f", df1=2, df2=107, geom = "area", fill = ~ (abs(x)> abs(ts)), show.legend=FALSE) + geom_vline(xintercept=c(ts), color="red")  + xlab("t")
 ```
@@ -534,7 +586,7 @@ kable(t(round(Icecream1, 2)))
 ```
 
 
-```{r, echo=FALSE}
+```{r}
 ggplot(data=Icecream1, aes(x=time, y=amount)) + geom_point() + ggtitle("Icecream Dispensed") + xlab("Time Pressing Dispensor") + ylab("Amount Dispensed") 
 ```
 
@@ -550,7 +602,7 @@ kable(t(round(Icecream1, 2)))
 ```
 
 
-```{r, echo=FALSE}
+```{r}
 ggplot(data=Icecream1, aes(x=time, y=amount)) + geom_point() + ggtitle("Icecream Dispensed") + xlab("Time Pressing Dispensor") + ylab("Amount Dispensed") + geom_abline(slope=2, intercept=0, color="red") + stat_smooth(method="lm")
 ```
 
@@ -561,7 +613,7 @@ ggplot(data=Icecream1, aes(x=time, y=amount)) + geom_point() + ggtitle("Icecream
 summary(IC_Model)
 ```
 
-```{r, echo=FALSE}
+```{r}
 b0 <- IC_Model$coefficients[1]
 b1 <- IC_Model$coefficients[2]
 s <- sigma(IC_Model)
@@ -834,7 +886,7 @@ Useful for detecting issues with the linearity or constant variance assumption.
 * curvature indicates a problem with linearity assumption       
 * "funnel" or "megaphone" shape indicates problem with constant variance assumption      
 
-```{r, fig.height=3, fig.width=9}
+```{r, fig.height=4, fig.width=8}
 P1 <- ggplot(data=Violations, aes(y=no_viol_Model$residuals, x=no_viol_Model$fitted.values)) + geom_point() + ggtitle("No Violation") + xlab("Predicted Values") + ylab("Residuals")
 P2 <- ggplot(data=Violations, aes(y=lin_viol_Model$residuals, x=no_viol_Model$fitted.values)) + geom_point() + ggtitle("Violation of Linearity Assumption")+ xlab("Predicted Values") + ylab("Residuals")
 P3 <- ggplot(data=Violations, aes(y=cvar_viol_Model$residuals, x=no_viol_Model$fitted.values)) + geom_point() + ggtitle("Violation of Constant Variance Assumption")+ xlab("Predicted Values") + ylab("Residuals")
@@ -849,7 +901,7 @@ Useful for assessing normality assumption.
 
 * Severe skewness indicates violation of normality assumption
 
-```{r, fig.height=3, fig.width=9}
+```{r, fig.height=4, fig.width=8}
 P1 <- ggplot(data=Violations, aes(x=no_viol_Model$residuals)) + geom_histogram() + ggtitle("No Violation") +xlab("Residual")
 P2 <- ggplot(data=Violations, aes(x=norm_viol_Model$residuals)) + geom_histogram() + ggtitle("Violation of Normality Assumption") + xlab("Residual")
 grid.arrange(P1, P2, ncol=2)
@@ -863,7 +915,7 @@ A Normal quantile-quantile plot displays quantiles of the residuals against the 
 
 * Severe departures from diagonal line indicate a problem with normality assumption. 
 
-```{r, fig.height=3, fig.width=6}
+```{r, fig.height=4, fig.width=8}
 P1 <- ggplot(data=Violations, aes(sample = scale(no_viol_Model$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("No Violation") + xlim(c(-4,4)) + ylim(c(-4,4))
 P2 <- ggplot(data=Violations, aes(sample = scale(norm_viol_Model$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("Violation of Normality Assumption") + xlim(c(-4,4)) + ylim(c(-4,4))
 grid.arrange(P1, P2, ncol=2)
@@ -939,7 +991,7 @@ Recall our sample of 53 Florida Lakes, 33 in the north, and 20 in the south.
 
 $\text{Mercury}_i = \beta_0 + \beta_1\times\text{I}_{\text{South}_i} + \epsilon_i$, where $\epsilon_i\sim\mathcal{N}(0, \sigma)$. 
 
-```{r, fig.height=3, fig.width=7}
+```{r, fig.height=4, fig.width=8}
 LakesBP
 ```
 
@@ -1004,7 +1056,7 @@ We are 95% confident that the average price of a new 2015 car decreases between 
 
 Bootstrap Confidence Interval for $\beta_1$: 
 
-```{r, echo=FALSE}
+```{r}
 q.025 <- quantile(Cars_Bootstrap_Results_Acc060$b1, 0.025)
 q.975 <- quantile(Cars_Bootstrap_Results_Acc060$b1, 0.975)
 c(q.025, q.975)
@@ -1046,7 +1098,7 @@ We are 95% confident that a single car that can accelerate from 0 to 60 mph in 1
 
 ### Confidence and Prediction Interval Illustration
 
-```{r, fig.height=5, fig.width=8, echo=FALSE}
+```{r, fig.height=5, fig.width=10, echo=FALSE}
 temp_var <- predict(Cars_M_A060, interval="prediction")
 new_df <- cbind(Cars2015, temp_var)
 gf_point(LowPrice~Acc060, data=new_df) %>% 
@@ -1106,7 +1158,7 @@ We should only use the p-values and confidence intervals provided by R, which de
 
 ### Model Assumption Check for Transformed Model
 
-```{r, echo=FALSE, fig.width=9}
+```{r,  fig.width=9}
 P1 <- ggplot(data=Cars2015, aes(y=Cars_M_Log$residuals, x=Cars_M_Log$fitted.values)) + geom_point() + ggtitle("Cars Log Model Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
 P2 <- ggplot(data=Cars2015, aes(x=Cars_M_Log$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
 P3 <- ggplot(data=Cars2015, aes(sample = scale(Cars_M_Log$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("Cars Model QQ Plot")
@@ -1264,7 +1316,7 @@ Notice that the transformed interval is not symmetric and allows for a longer "t
 
 ### Log Model Visualization
 
-```{r, fig.height=5, fig.width=8, echo=FALSE}
+```{r, fig.height=5, fig.width=10, echo=FALSE}
 temp_var <- data.frame(exp(predict(Cars_M_Log, interval="prediction")))
 temp_var2 <- data.frame(exp(predict(Cars_M_Log, interval="confidence")))
 new_df <- cbind(Cars2015, temp_var, temp_var2[,2:3])
@@ -1360,13 +1412,13 @@ Flights_NY_CHI <- flights %>%
 
 ### Visualizing New York to Chicago Flights
 
-```{r, fig.height=3, fig.width=8, echo=FALSE}
+```{r, fig.height=4, fig.width=8}
 p1 <- ggplot(data=Flights_NY_CHI, aes(x=air_time, fill=origin, color=origin)) + geom_density(alpha=0.2) + ggtitle("Flight Time")
 p2 <- ggplot(data=Flights_NY_CHI, aes(x=air_time, y=origin)) + geom_boxplot() + ggtitle("Flight Time")
 grid.arrange(p1, p2, ncol=2)
 ```
 
-```{r, fig.height=3, fig.width=5, echo=FALSE}
+```{r, fig.height=3, fig.width=5}
 library(knitr)
 T <- Flights_NY_CHI %>% group_by(origin) %>% 
   summarize(Mean_Airtime = mean(air_time, na.rm=TRUE), 
@@ -1420,13 +1472,13 @@ samp2 <- seq(from=3, to=852, by=17)
 NCBirths <- rbind(Smokers[samp1, ], NonSmokers[samp2, ])
 ```
 
-```{r, fig.height=2, fig.width=8, echo=FALSE}
+```{r, fig.height=4, fig.width=8}
 p1 <- ggplot(data=NCBirths, aes(x=weight, fill=habit, color=habit)) + geom_density(alpha=0.2) + ggtitle("Birthweight and Smoking")
 p2 <- ggplot(data=NCBirths, aes(x=weight, y=habit)) + geom_boxplot() + ggtitle("Birthweight and Smoking")
 grid.arrange(p1, p2, ncol=2)
 ```
 
-```{r, fig.height=3, fig.width=5, echo=FALSE}
+```{r, fig.height=3, fig.width=5}
 library(knitr)
 T <- NCBirths %>% group_by(habit) %>% summarize(Mean_Weight = mean(weight), SD = sd(weight), n=n())
 kable(T)
@@ -1498,7 +1550,7 @@ summary(M_Birthwt_Full)
 
 Exam 1 vs Exam 2 scores for intro stat students at another college
 
-```{r, fig.height=3, fig.width=6, echo=FALSE}
+```{r, fig.height=4, fig.width=8, echo=FALSE}
 data(StatGrades)
 gf_point(data=StatGrades, Exam2~Exam1) %>% gf_lm 
 ```
@@ -1509,7 +1561,7 @@ What is the relationship between scores on the two exams?
 
 Exam 1 vs Exam 2 scores for intro stat students at another college
 
-```{r, fig.height=3, fig.width=6, echo=FALSE}
+```{r, fig.height=4, fig.width=8, echo=FALSE}
 data(StatGrades)
 gf_point(data=StatGrades, Exam2~Exam1) %>% gf_lm  %>% gf_function(fun = identity)
 ```
@@ -1531,7 +1583,7 @@ Likewise, some of the highest performers may simply not be as lucky on exam 2, s
 
 ### Simulating Regression Effect {.smaller}
 
-```{r, fig.height=3.5, fig.width=7}
+```{r, fig.height=4, fig.width=8}
 set.seed(110322018)
 Understanding <-rnorm(25, 80, 10)
 Score1 <- Understanding + rnorm(25, 0, 5)
@@ -1566,7 +1618,7 @@ These students' lack of success on test 1 is due to a low understanding and poor
 
 Wins by NFL teams in 2017 and 2018
 
-```{r, each=FALSE, fig.height=4, fig.width=7, echo=FALSE}
+```{r, each=FALSE, fig.height=4, fig.width=8, echo=FALSE}
 Wins2017 <- c(8,10,9,9,11,5,7,0,9,5,9,7,4,4,10,10,9,11,6,13,13,11,3,5,6,13,13,6,9,5,9,7)
 Wins2018 <- c(3,7,10,6,7,12,6,7.5,10,6,6,6.5, 11,10,5,12,12,13,7,8.5,11,13,5,4,4,9,9.5,4,10,5,9,7 )
 NFL <- data.frame(Wins2017, Wins2018)
