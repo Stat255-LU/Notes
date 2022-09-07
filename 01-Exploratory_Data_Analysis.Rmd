@@ -36,7 +36,7 @@ set.seed(07302020)
 The following data were contained in a UK technical report on the Delta Variant on August 2, 2021
 
 | Vaccination Status      | Deaths  |   Total Cases | Fatality Rate |
-| ------- | ------- | ----------|   
+| ------- | ------- | ----------| -----|  
 | Fully Vax | 402 | 47,008 | 0.86% | 
 | Unvax | 253 | 151,054 | 0.17 % | 
 
@@ -76,7 +76,7 @@ We break down the cases based on whether the patient was older or younger than 5
 Under 50
 
 | Vaccination Status      | Deaths  |   Total Cases | Fatality Rate |
-| ------- | ------- | ----------|   
+| ------- | ------- | ----------|------|   
 | Fully Vax | 13 | 25,536 | 0.05% | 
 | Unvax | 48 | 147, 612 | 0.03 % | 
 
@@ -84,7 +84,7 @@ Under 50
 50 or Older
 
 | Vaccination Status      | Deaths  |   Total Cases | Fatality Rate |
-| ------- | ------- | ----------|   
+| ------- | ------- | ----------| ----- |   
 | Fully Vax | 389 | 21,472 | 1.81% | 
 | Unvax | 205 | 3,440 | 5.96 % | 
 

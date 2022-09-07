@@ -488,6 +488,12 @@ cubic-spline-with-10-knots
 cubic-spline-with-20-knots
 model-evaluation
 implementation-of-splines
+predicting-house-prices-summary
+modeling-with-ols
+ridge-regression-with-housing-data
+decision-tree
+comparing-performance
+predictions-on-new-data
 assumptions-in-predictive-models
 assumptions-in-predictive-models-1
 amazon-hiring-algorithm

@@ -23,7 +23,7 @@
 <meta name="author" content="Andrew Sage - Lawrence University" />
 
 
-<meta name="date" content="2022-09-02" />
+<meta name="date" content="2022-09-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -667,12 +667,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.6.10" data-path="predictive-modeling.html"><a href="predictive-modeling.html#model-evaluation"><i class="fa fa-check"></i><b>7.6.10</b> Model Evaluation</a></li>
 <li class="chapter" data-level="7.6.11" data-path="predictive-modeling.html"><a href="predictive-modeling.html#implementation-of-splines"><i class="fa fa-check"></i><b>7.6.11</b> Implementation of Splines</a></li>
 </ul></li>
-<li class="chapter" data-level="7.7" data-path="predictive-modeling.html"><a href="predictive-modeling.html#assumptions-in-predictive-models"><i class="fa fa-check"></i><b>7.7</b> Assumptions in Predictive Models</a><ul>
-<li class="chapter" data-level="7.7.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#assumptions-in-predictive-models-1"><i class="fa fa-check"></i><b>7.7.1</b> Assumptions in Predictive Models</a></li>
-<li class="chapter" data-level="7.7.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#amazon-hiring-algorithm"><i class="fa fa-check"></i><b>7.7.2</b> Amazon Hiring Algorithm</a></li>
-<li class="chapter" data-level="7.7.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#facial-recognition"><i class="fa fa-check"></i><b>7.7.3</b> Facial Recognition</a></li>
-<li class="chapter" data-level="7.7.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#comments"><i class="fa fa-check"></i><b>7.7.4</b> Comments</a></li>
-<li class="chapter" data-level="7.7.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#modeling-for-prediction-1"><i class="fa fa-check"></i><b>7.7.5</b> Modeling for Prediction</a></li>
+<li class="chapter" data-level="7.7" data-path="predictive-modeling.html"><a href="predictive-modeling.html#predicting-house-prices-summary"><i class="fa fa-check"></i><b>7.7</b> Predicting House Prices Summary</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#modeling-with-ols"><i class="fa fa-check"></i><b>7.7.1</b> Modeling with OLS</a></li>
+<li class="chapter" data-level="7.7.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression-with-housing-data"><i class="fa fa-check"></i><b>7.7.2</b> Ridge Regression with Housing Data</a></li>
+<li class="chapter" data-level="7.7.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#decision-tree"><i class="fa fa-check"></i><b>7.7.3</b> Decision Tree</a></li>
+<li class="chapter" data-level="7.7.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#comparing-performance"><i class="fa fa-check"></i><b>7.7.4</b> Comparing Performance</a></li>
+<li class="chapter" data-level="7.7.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#predictions-on-new-data"><i class="fa fa-check"></i><b>7.7.5</b> Predictions on New Data</a></li>
+</ul></li>
+<li class="chapter" data-level="7.8" data-path="predictive-modeling.html"><a href="predictive-modeling.html#assumptions-in-predictive-models"><i class="fa fa-check"></i><b>7.8</b> Assumptions in Predictive Models</a><ul>
+<li class="chapter" data-level="7.8.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#assumptions-in-predictive-models-1"><i class="fa fa-check"></i><b>7.8.1</b> Assumptions in Predictive Models</a></li>
+<li class="chapter" data-level="7.8.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#amazon-hiring-algorithm"><i class="fa fa-check"></i><b>7.8.2</b> Amazon Hiring Algorithm</a></li>
+<li class="chapter" data-level="7.8.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#facial-recognition"><i class="fa fa-check"></i><b>7.8.3</b> Facial Recognition</a></li>
+<li class="chapter" data-level="7.8.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#comments"><i class="fa fa-check"></i><b>7.8.4</b> Comments</a></li>
+<li class="chapter" data-level="7.8.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#modeling-for-prediction-1"><i class="fa fa-check"></i><b>7.8.5</b> Modeling for Prediction</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression and Classification</a><ul>
@@ -2297,10 +2304,220 @@ Q=&amp; \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum
 <p>The best choices for all of these will vary between datasets and can be assessed through cross-validation.</p>
 </div>
 </div>
+<div id="predicting-house-prices-summary" class="section level2 hasAnchor">
+<h2><span class="header-section-number">7.7</span> Predicting House Prices Summary<a href="predictive-modeling.html#predicting-house-prices-summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the previous sections, we’ve applied various predictive modeling techniques to predict house prices in Ames, IA. In each section, we’ve focused on an individual predictive technique (OLS, ridge/lasso regression, trees, splines), but in practice, we often test out these techniques together to find which is likely to perform best on a set of data. Here, we’ll go through the steps to test out and evaluate these techiques on the Ames Housing dataset.</p>
+<p>There are no new statistical ideas presented in this section, just a synthesis of the preceeding material. We leave out splines, since we did not discuss using splines in a multivariate setting, but we compare OLS, ridge and decision trees.</p>
+<p>We use a subset of variables for illustrative purposes.</p>
+<div class="sourceCode" id="cb706"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb706-1"><a href="predictive-modeling.html#cb706-1"></a><span class="kw">set.seed</span>(<span class="dv">10302021</span>)</span>
+<span id="cb706-2"><a href="predictive-modeling.html#cb706-2"></a>samp &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(ames_raw), <span class="dv">1000</span>)</span>
+<span id="cb706-3"><a href="predictive-modeling.html#cb706-3"></a>Houses &lt;-<span class="st"> </span>ames_raw[samp,]</span></code></pre></div>
+<div class="sourceCode" id="cb707"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb707-1"><a href="predictive-modeling.html#cb707-1"></a>New_Houses &lt;-<span class="st"> </span>ames_raw &lt;-<span class="st"> </span>ames_raw[<span class="op">-</span>samp,]</span>
+<span id="cb707-2"><a href="predictive-modeling.html#cb707-2"></a>New_Houses &lt;-<span class="st"> </span>New_Houses[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, ]</span></code></pre></div>
+<p>We’ll begin by doing some data preparation.</p>
+<p>We standardize all explanatory variables in the training and new data. We do not standardize the response variable, price, so we can interpret predicted values more easily.</p>
+<div class="sourceCode" id="cb708"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb708-1"><a href="predictive-modeling.html#cb708-1"></a>Houses_Combined &lt;-<span class="st"> </span><span class="kw">rbind</span>(Houses, New_Houses)</span>
+<span id="cb708-2"><a href="predictive-modeling.html#cb708-2"></a>Houses_sc &lt;-<span class="st"> </span>Houses_Combined <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.numeric, scale)</span>
+<span id="cb708-3"><a href="predictive-modeling.html#cb708-3"></a>Houses_sc<span class="op">$</span>SalePrice &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(Houses_Combined<span class="op">$</span>SalePrice)</span>
+<span id="cb708-4"><a href="predictive-modeling.html#cb708-4"></a>Houses_sc_Train &lt;-<span class="st"> </span>Houses_sc[<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, ]</span>
+<span id="cb708-5"><a href="predictive-modeling.html#cb708-5"></a>Houses_sc_New &lt;-<span class="st"> </span>Houses_sc[<span class="dv">1001</span><span class="op">:</span><span class="dv">1005</span>, ]</span></code></pre></div>
+<p>The <code>Houses_sc_Train</code> dataset contains standardized values for the 1000 houses in the training data. The first six rows are shown below.</p>
+<div class="sourceCode" id="cb709"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb709-1"><a href="predictive-modeling.html#cb709-1"></a><span class="kw">head</span>(Houses_sc_Train)</span></code></pre></div>
+<pre><code>##      Overall.Qual  Year.Built Central.Air  Gr.Liv.Area X1st.Flr.SF
+## 2771  -0.07619084  0.79212207           Y -0.003620472  -0.9340706
+## 2909  -0.77229808  0.18658251           Y -0.392399656  -1.3891530
+## 2368  -0.07619084  0.01837707           Y -0.938684253  -1.6993209
+## 2604  -2.16451257 -1.89916487           Y -0.571836202  -1.1908489
+## 669   -0.07619084 -0.14982836           Y -0.918746859  -0.3111924
+## 1427   2.01213088  1.22945620           Y  0.528707949   1.5345608
+##      Bedroom.AbvGr TotRms.AbvGrd    Lot.Area Lot.Shape Land.Contour
+## 2771     0.1632018    -0.2910546  0.28570669       IR1          Lvl
+## 2909     0.1632018    -0.9160758 -0.88703104       Reg          Lvl
+## 2368     0.1632018    -0.2910546 -0.98002927       Reg          Lvl
+## 2604     0.1632018    -0.2910546  0.04235132       Reg          Lvl
+## 669      0.1632018    -0.2910546  0.17314883       IR1          Lvl
+## 1427     0.1632018     0.9589877  0.20650820       Reg          Lvl
+##      Overall.Cond Exter.Qual Heating.QC Paved.Drive SalePrice
+## 2771   -0.4680319         Gd         Ex           Y    187000
+## 2909    0.4279149         TA         TA           Y    104500
+## 2368    1.3238618         TA         Ex           Y    116000
+## 2604   -1.3639788         TA         TA           Y    105000
+## 669    -1.3639788         Fa         Gd           Y    163000
+## 1427   -0.4680319         Ex         Ex           Y    395039</code></pre>
+<p>The <code>Houses_sc_New</code> displays standardized values for the new houses that we’re trying to predict.</p>
+<div class="sourceCode" id="cb711"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb711-1"><a href="predictive-modeling.html#cb711-1"></a><span class="kw">head</span>(Houses_sc_New)</span></code></pre></div>
+<pre><code>##   Overall.Qual Year.Built Central.Air Gr.Liv.Area X1st.Flr.SF Bedroom.AbvGr
+## 2  -0.77229808 -0.3516749           Y  -1.2058453  -0.6772922    -1.0608118
+## 4   0.61991640 -0.1161873           Y   1.2145543   2.4091326     0.1632018
+## 6  -0.07619084  0.8930453           Y   0.2057222  -0.6010214     0.1632018
+## 7   1.31602364  0.9939686           Y  -0.3246125   0.4464308    -1.0608118
+## 8   1.31602364  0.6911988           Y  -0.4402494   0.2989739    -1.0608118
+##   TotRms.AbvGrd   Lot.Area Lot.Shape Land.Contour Overall.Cond Exter.Qual
+## 2    -0.9160758  0.1877886       Reg          Lvl    0.4279149         TA
+## 4     0.9589877  0.1323496       Reg          Lvl   -0.4680319         Gd
+## 6     0.3339665 -0.0094877       IR1          Lvl    0.4279149         TA
+## 7    -0.2910546 -0.6164362       Reg          Lvl   -0.4680319         Gd
+## 8    -0.9160758 -0.6062364       IR1          HLS   -0.4680319         Gd
+##   Heating.QC Paved.Drive SalePrice
+## 2         TA           Y    105000
+## 4         Ex           Y    244000
+## 6         Ex           Y    195500
+## 7         Ex           Y    213500
+## 8         Ex           Y    191500</code></pre>
+<p>Since the <code>glmnet</code> command requires training data to be entered as a matrix, we create versions of the datasets in matrix form.</p>
+<div class="sourceCode" id="cb713"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb713-1"><a href="predictive-modeling.html#cb713-1"></a>Houses_sc<span class="op">$</span>SalePrice[<span class="kw">is.na</span>(Houses<span class="op">$</span>SalePrice)] &lt;-<span class="st"> </span><span class="dv">0</span> <span class="co">#can&#39;t take NA&#39;s when fitting model matrix, doesn&#39;t matter since only need x-coeffs</span></span>
+<span id="cb713-2"><a href="predictive-modeling.html#cb713-2"></a>Houses_sc_Combined_MAT &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(SalePrice<span class="op">~</span>., <span class="dt">data=</span><span class="kw">rbind</span>(Houses_sc))</span>
+<span id="cb713-3"><a href="predictive-modeling.html#cb713-3"></a>Houses_sc_Train_MAT &lt;-<span class="st"> </span>Houses_sc_Combined_MAT[<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, ]</span>
+<span id="cb713-4"><a href="predictive-modeling.html#cb713-4"></a>Houses_sc_New_MAT &lt;-<span class="st"> </span>Houses_sc_Combined_MAT[<span class="dv">1001</span><span class="op">:</span><span class="dv">1005</span>, ]</span></code></pre></div>
+<div id="modeling-with-ols" class="section level3 hasAnchor">
+<h3><span class="header-section-number">7.7.1</span> Modeling with OLS<a href="predictive-modeling.html#modeling-with-ols" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We first fit an ordinary least squares regression model to the data.</p>
+<div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb714-1"><a href="predictive-modeling.html#cb714-1"></a>Housing_OLS &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Houses_sc_Train, SalePrice<span class="op">~</span><span class="st"> </span>.)</span>
+<span id="cb714-2"><a href="predictive-modeling.html#cb714-2"></a><span class="kw">coef</span>(Housing_OLS)</span></code></pre></div>
+<pre><code>##     (Intercept)    Overall.Qual      Year.Built    Central.AirY     Gr.Liv.Area 
+##     238908.0614      23368.4152      14036.2549      -4497.1153      29640.4606 
+##     X1st.Flr.SF   Bedroom.AbvGr   TotRms.AbvGrd        Lot.Area    Lot.ShapeIR2 
+##       8320.1472      -5011.0485       1554.7785       7566.9377       1570.1676 
+##    Lot.ShapeIR3    Lot.ShapeReg Land.ContourHLS Land.ContourLow Land.ContourLvl 
+##      19082.7508      -4566.5111      44704.8906      22406.5959      19096.4163 
+##    Overall.Cond    Exter.QualFa    Exter.QualGd    Exter.QualTA    Heating.QCFa 
+##       7965.6704     -68750.2773     -62800.5804     -74028.3841      -3972.4036 
+##    Heating.QCGd    Heating.QCPo    Heating.QCTA    Paved.DriveP    Paved.DriveY 
+##      -4478.6876     -23000.4394      -5272.7136      -1901.9235        709.1532</code></pre>
+</div>
+<div id="ridge-regression-with-housing-data" class="section level3 hasAnchor">
+<h3><span class="header-section-number">7.7.2</span> Ridge Regression with Housing Data<a href="predictive-modeling.html#ridge-regression-with-housing-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now, we’ll use ridge regression to predict insurance costs.</p>
+<p>We use cross validation to determine the optimal value of lamba. We perform 10 repeats of 10-fold cross-validation. We test 100 lambda-values ranging from <span class="math inline">\(10^-5\)</span> to <span class="math inline">\(10^5\)</span>.</p>
+<div class="sourceCode" id="cb716"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb716-1"><a href="predictive-modeling.html#cb716-1"></a>control =<span class="st"> </span><span class="kw">trainControl</span>(<span class="st">&quot;repeatedcv&quot;</span>, <span class="dt">number =</span> <span class="dv">10</span>, <span class="dt">repeats=</span><span class="dv">10</span>)</span>
+<span id="cb716-2"><a href="predictive-modeling.html#cb716-2"></a>l_vals =<span class="st"> </span><span class="dv">10</span><span class="op">^</span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dt">length =</span> <span class="dv">100</span>)</span>
+<span id="cb716-3"><a href="predictive-modeling.html#cb716-3"></a></span>
+<span id="cb716-4"><a href="predictive-modeling.html#cb716-4"></a><span class="kw">set.seed</span>(<span class="dv">2022</span>)</span>
+<span id="cb716-5"><a href="predictive-modeling.html#cb716-5"></a>Housing_ridge &lt;-<span class="st"> </span><span class="kw">train</span>( SalePrice <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Houses_sc_Train, <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>, <span class="dt">trControl=</span>control , <span class="dt">tuneGrid=</span><span class="kw">expand.grid</span>(<span class="dt">alpha=</span><span class="dv">0</span>, <span class="dt">lambda=</span>l_vals))</span></code></pre></div>
+<div class="sourceCode" id="cb717"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb717-1"><a href="predictive-modeling.html#cb717-1"></a>Housing_ridge<span class="op">$</span>bestTune<span class="op">$</span>lambda</span></code></pre></div>
+<pre><code>## [1] 6135.907</code></pre>
+<p>We fit a model to the full training dataset using the optimal value of <span class="math inline">\(lambda\)</span> .</p>
+<div class="sourceCode" id="cb719"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb719-1"><a href="predictive-modeling.html#cb719-1"></a>ridge_mod &lt;-<span class="st"> </span><span class="kw">glmnet</span>(<span class="dt">x=</span>Houses_sc_Train_MAT, <span class="dt">y=</span>Houses_sc_Train<span class="op">$</span>SalePrice, <span class="dt">alpha =</span> <span class="dv">0</span>, <span class="dt">lambda=</span>Housing_ridge<span class="op">$</span>bestTune<span class="op">$</span>lambda )</span>
+<span id="cb719-2"><a href="predictive-modeling.html#cb719-2"></a><span class="kw">coef</span>(ridge_mod)</span></code></pre></div>
+<pre><code>## 26 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                          s0
+## (Intercept)     206079.5442
+## (Intercept)          .     
+## Overall.Qual     24716.6502
+## Year.Built       12909.8224
+## Central.AirY     -1693.4832
+## Gr.Liv.Area      24137.8185
+## X1st.Flr.SF      10707.5001
+## Bedroom.AbvGr    -5034.2266
+## TotRms.AbvGrd     5394.5170
+## Lot.Area          7086.7613
+## Lot.ShapeIR2      3322.3720
+## Lot.ShapeIR3     18987.3176
+## Lot.ShapeReg     -5345.7478
+## Land.ContourHLS  41239.7682
+## Land.ContourLow  15011.2269
+## Land.ContourLvl  12784.0351
+## Overall.Cond      6560.4987
+## Exter.QualFa    -29042.5581
+## Exter.QualGd    -24942.6445
+## Exter.QualTA    -35102.6069
+## Heating.QCFa     -8118.6371
+## Heating.QCGd     -6380.1279
+## Heating.QCPo    -19693.6611
+## Heating.QCTA     -7645.0855
+## Paved.DriveP      -613.3798
+## Paved.DriveY      1324.2704</code></pre>
+<p>The regression coefficients are displayed together with the OLS coefficients in a data.frame.</p>
+<div class="sourceCode" id="cb721"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb721-1"><a href="predictive-modeling.html#cb721-1"></a>Ridge_coef &lt;-<span class="st"> </span><span class="kw">as.vector</span>(ridge_mod<span class="op">$</span>beta)[<span class="op">-</span><span class="dv">1</span>] <span class="co">#leave off intercept using [-1]</span></span>
+<span id="cb721-2"><a href="predictive-modeling.html#cb721-2"></a>OLS_coef &lt;-<span class="st"> </span><span class="kw">coef</span>(Housing_OLS)[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb721-3"><a href="predictive-modeling.html#cb721-3"></a><span class="kw">data.frame</span>(OLS_coef, Ridge_coef)</span></code></pre></div>
+<pre><code>##                    OLS_coef  Ridge_coef
+## Overall.Qual     23368.4152  24716.6502
+## Year.Built       14036.2549  12909.8224
+## Central.AirY     -4497.1153  -1693.4832
+## Gr.Liv.Area      29640.4606  24137.8185
+## X1st.Flr.SF       8320.1472  10707.5001
+## Bedroom.AbvGr    -5011.0485  -5034.2266
+## TotRms.AbvGrd     1554.7785   5394.5170
+## Lot.Area          7566.9377   7086.7613
+## Lot.ShapeIR2      1570.1676   3322.3720
+## Lot.ShapeIR3     19082.7508  18987.3176
+## Lot.ShapeReg     -4566.5111  -5345.7478
+## Land.ContourHLS  44704.8906  41239.7682
+## Land.ContourLow  22406.5959  15011.2269
+## Land.ContourLvl  19096.4163  12784.0351
+## Overall.Cond      7965.6704   6560.4987
+## Exter.QualFa    -68750.2773 -29042.5581
+## Exter.QualGd    -62800.5804 -24942.6445
+## Exter.QualTA    -74028.3841 -35102.6069
+## Heating.QCFa     -3972.4036  -8118.6371
+## Heating.QCGd     -4478.6876  -6380.1279
+## Heating.QCPo    -23000.4394 -19693.6611
+## Heating.QCTA     -5272.7136  -7645.0855
+## Paved.DriveP     -1901.9235   -613.3798
+## Paved.DriveY       709.1532   1324.2704</code></pre>
+</div>
+<div id="decision-tree" class="section level3 hasAnchor">
+<h3><span class="header-section-number">7.7.3</span> Decision Tree<a href="predictive-modeling.html#decision-tree" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now, we’ll predict house prices using using a decision tree.</p>
+<p>First, we grow and display a small decision tree, by setting the <code>cp</code> parameter equal to 0.05.</p>
+<div class="sourceCode" id="cb723"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb723-1"><a href="predictive-modeling.html#cb723-1"></a>tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(SalePrice<span class="op">~</span>., <span class="dt">data=</span>Houses_sc_Train, <span class="dt">cp=</span><span class="fl">0.05</span>)</span>
+<span id="cb723-2"><a href="predictive-modeling.html#cb723-2"></a><span class="kw">rpart.plot</span>(tree, <span class="dt">box.palette=</span><span class="st">&quot;RdBu&quot;</span>, <span class="dt">shadow.col=</span><span class="st">&quot;gray&quot;</span>, <span class="dt">nn=</span><span class="ot">TRUE</span>, <span class="dt">cex=</span><span class="dv">1</span>, <span class="dt">extra=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-595-1.png" width="672" /></p>
+<p>Now we use cross-validation to determine the optimal value of the <code>cp</code> parameter. We use 10 repeats of 10-fold cross-validation. We test 1000 cp-values ranging from <span class="math inline">\(10^-5\)</span> to <span class="math inline">\(10^5\)</span>.</p>
+<div class="sourceCode" id="cb724"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb724-1"><a href="predictive-modeling.html#cb724-1"></a>cp_vals =<span class="st"> </span><span class="dv">10</span><span class="op">^</span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dt">length =</span> <span class="dv">100</span>)</span>
+<span id="cb724-2"><a href="predictive-modeling.html#cb724-2"></a><span class="kw">colnames</span>(Houses_sc_Train) &lt;-<span class="st"> </span><span class="kw">make.names</span>(<span class="kw">colnames</span>(Houses_sc_Train))</span>
+<span id="cb724-3"><a href="predictive-modeling.html#cb724-3"></a></span>
+<span id="cb724-4"><a href="predictive-modeling.html#cb724-4"></a><span class="kw">set.seed</span>(<span class="dv">2022</span>)</span>
+<span id="cb724-5"><a href="predictive-modeling.html#cb724-5"></a>Housing_Tree &lt;-<span class="st"> </span><span class="kw">train</span>(<span class="dt">data=</span>Houses_sc_Train, SalePrice <span class="op">~</span><span class="st"> </span>.,  <span class="dt">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="dt">trControl=</span>control,<span class="dt">tuneGrid=</span><span class="kw">expand.grid</span>(<span class="dt">cp=</span>cp_vals))</span>
+<span id="cb724-6"><a href="predictive-modeling.html#cb724-6"></a>Housing_Tree<span class="op">$</span>bestTune</span></code></pre></div>
+<pre><code>##              cp
+## 4 0.00002009233</code></pre>
+<p>We grow a full tree using the optimal <code>cp</code> value.</p>
+<div class="sourceCode" id="cb726"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb726-1"><a href="predictive-modeling.html#cb726-1"></a>Housing_Best_Tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(SalePrice<span class="op">~</span>., <span class="dt">data=</span>Houses_sc_Train, <span class="dt">cp=</span>Housing_Tree<span class="op">$</span>bestTune)</span></code></pre></div>
+</div>
+<div id="comparing-performance" class="section level3 hasAnchor">
+<h3><span class="header-section-number">7.7.4</span> Comparing Performance<a href="predictive-modeling.html#comparing-performance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We use cross-validation to compare the performance of the linear model, ridge regression model, and decision tree.</p>
+<div class="sourceCode" id="cb727"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb727-1"><a href="predictive-modeling.html#cb727-1"></a><span class="kw">set.seed</span>(<span class="dv">2022</span>)</span>
+<span id="cb727-2"><a href="predictive-modeling.html#cb727-2"></a>Housing_OLS &lt;-<span class="st"> </span><span class="kw">train</span>(<span class="dt">data=</span>Houses_sc_Train, SalePrice <span class="op">~</span><span class="st"> </span>.,  <span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">trControl=</span>control)</span></code></pre></div>
+<div class="sourceCode" id="cb728"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb728-1"><a href="predictive-modeling.html#cb728-1"></a><span class="kw">min</span>(Housing_OLS<span class="op">$</span>results<span class="op">$</span>RMSE)</span></code></pre></div>
+<pre><code>## [1] 35313.3</code></pre>
+<div class="sourceCode" id="cb730"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb730-1"><a href="predictive-modeling.html#cb730-1"></a><span class="kw">min</span>(Housing_ridge<span class="op">$</span>results<span class="op">$</span>RMSE)</span></code></pre></div>
+<pre><code>## [1] 35747.22</code></pre>
+<div class="sourceCode" id="cb732"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb732-1"><a href="predictive-modeling.html#cb732-1"></a><span class="kw">min</span>(Housing_Tree<span class="op">$</span>results<span class="op">$</span>RMSE)</span></code></pre></div>
+<pre><code>## [1] 33675.53</code></pre>
+<p>The tree predictions give slightly lower RMSPE.</p>
+</div>
+<div id="predictions-on-new-data" class="section level3 hasAnchor">
+<h3><span class="header-section-number">7.7.5</span> Predictions on New Data<a href="predictive-modeling.html#predictions-on-new-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We now predict the sale price of the five new houses using each technique.</p>
+<p>Ordinary Least-Squares model:</p>
+<div class="sourceCode" id="cb734"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb734-1"><a href="predictive-modeling.html#cb734-1"></a>OLS_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Housing_OLS, <span class="dt">newdata=</span>Houses_sc_New)</span>
+<span id="cb734-2"><a href="predictive-modeling.html#cb734-2"></a><span class="kw">head</span>(OLS_pred)</span></code></pre></div>
+<pre><code>##        2        4        6        7        8 
+## 114709.4 253695.8 195078.1 222117.6 242493.9</code></pre>
+<p>Ridge regression model:</p>
+<p>We use the <code>Customers_sc_New_MAT</code> dataset, since the <code>glmnet</code> package requires inputs in matrix form.</p>
+<div class="sourceCode" id="cb736"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb736-1"><a href="predictive-modeling.html#cb736-1"></a>ridge_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(ridge_mod, <span class="dt">newx=</span>Houses_sc_New_MAT)</span>
+<span id="cb736-2"><a href="predictive-modeling.html#cb736-2"></a><span class="kw">head</span>(ridge_pred)</span></code></pre></div>
+<pre><code>##         s0
+## 2 114950.4
+## 4 259359.8
+## 6 195288.0
+## 7 226841.6
+## 8 249064.8</code></pre>
+<p>Decision tree:</p>
+<div class="sourceCode" id="cb738"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb738-1"><a href="predictive-modeling.html#cb738-1"></a>tree_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(Housing_Best_Tree, <span class="dt">newdata=</span>Houses_sc_New)</span>
+<span id="cb738-2"><a href="predictive-modeling.html#cb738-2"></a><span class="kw">head</span>(tree_pred)</span></code></pre></div>
+<pre><code>##        2        4        6        7        8 
+## 132926.5 287045.1 183978.6 207079.4 207079.4</code></pre>
+</div>
+</div>
 <div id="assumptions-in-predictive-models" class="section level2 hasAnchor">
-<h2><span class="header-section-number">7.7</span> Assumptions in Predictive Models<a href="predictive-modeling.html#assumptions-in-predictive-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">7.8</span> Assumptions in Predictive Models<a href="predictive-modeling.html#assumptions-in-predictive-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="assumptions-in-predictive-models-1" class="section level3 hasAnchor">
-<h3><span class="header-section-number">7.7.1</span> Assumptions in Predictive Models<a href="predictive-modeling.html#assumptions-in-predictive-models-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">7.8.1</span> Assumptions in Predictive Models<a href="predictive-modeling.html#assumptions-in-predictive-models-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Like any other statistical technique, predictive inference (sometimes done through machine learning algorithms) depends on the validity of assumptions.</p>
 <ol style="list-style-type: decimal">
 <li><p>The response variable observed in the data is actually the thing we want to predict<br />
@@ -2311,7 +2528,7 @@ Q=&amp; \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum
 <p>Below are some examples of real uses of predictive inference in which some of these assumptions were violated, leading to inappropriate and unethical conclusions.</p>
 </div>
 <div id="amazon-hiring-algorithm" class="section level3 hasAnchor">
-<h3><span class="header-section-number">7.7.2</span> Amazon Hiring Algorithm<a href="predictive-modeling.html#amazon-hiring-algorithm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">7.8.2</span> Amazon Hiring Algorithm<a href="predictive-modeling.html#amazon-hiring-algorithm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In 2014, Amazon began working on an algorithm to predict whether a job applicant would be suitable for hire for software developer positions, based on characteristics of their job application.</p>
 <p>response variable: rating of candidate’s strength (1-5)
 explanatory variables: many variables based on information included on the resume (e.g. highest degree, major, GPA, college/university, prior job experiences, internships, frequency of certain words on resume, etc.)</p>
@@ -2321,14 +2538,14 @@ explanatory variables: many variables based on information included on the resum
 <p>While the algorithm was intended to predict candidate quality, the response variable on the training data actually reflected biases in past hiring decisions, leading the algorithm to do the same.</p>
 </div>
 <div id="facial-recognition" class="section level3 hasAnchor">
-<h3><span class="header-section-number">7.7.3</span> Facial Recognition<a href="predictive-modeling.html#facial-recognition" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">7.8.3</span> Facial Recognition<a href="predictive-modeling.html#facial-recognition" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Facial recognition technology is used by law enforcement surveillance, airport passenger screening, and employment and housing decisions. It has, however, been banned for use by police in some cities, including San Francisco and Boston, due to concerns about inequity and privacy.</p>
 <p><a href="https://sitn.hms.harvard.edu/flash/2020/racial-discrimination-in-face-recognition-technology/">Research</a> has shown that although certain facial recognition algorithms achieve over 90% accuracy overall, accuracy rate is lower among subjects who are female, Black, or 18-30 years old.</p>
 <p>This is likely due, at least in part, to the algorithms being trained primarily on data an images of people who are not members of these groups.</p>
 <p>Although the algorithms might attain strong accuracy overall, it is inappropriate to evaluate them on this basis, without accounting for performance on subgroups in the population.</p>
 </div>
 <div id="comments" class="section level3 hasAnchor">
-<h3><span class="header-section-number">7.7.4</span> Comments<a href="predictive-modeling.html#comments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">7.8.4</span> Comments<a href="predictive-modeling.html#comments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The biases and assumptions noted above are not reasons to abandon predictive modeling, but rather flaws to be aware of and work to correct.</p>
 <p>Predictive algorithms, are only as good as the data on which they are trained and the societies in which they are developed, and will reflect inherent biases. Thus, they should be used cautiously and with with human judgment, just like any other statistical technique.</p>
 <p>Beware of statements like:</p>
@@ -2338,7 +2555,7 @@ explanatory variables: many variables based on information included on the resum
 <p>Any data-driven analysis depends on assumptions, and sound judgment and awareness of context are required when assessing the validaty of conclusions drawn.</p>
 </div>
 <div id="modeling-for-prediction-1" class="section level3 hasAnchor">
-<h3><span class="header-section-number">7.7.5</span> Modeling for Prediction<a href="predictive-modeling.html#modeling-for-prediction-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">7.8.5</span> Modeling for Prediction<a href="predictive-modeling.html#modeling-for-prediction-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Goal is to make the most accurate predictions possible.<br />
 </li>

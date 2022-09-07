@@ -1272,6 +1272,195 @@ Important Considerations:
 
 The best choices for all of these will vary between datasets and can be assessed through cross-validation.   
 
+## Predicting House Prices Summary
+
+In the previous sections, we've applied various predictive modeling techniques to predict house prices in Ames, IA. In each section, we've focused on an individual predictive technique (OLS, ridge/lasso regression, trees, splines), but in practice, we often test out these techniques together to find which is likely to perform best on a set of data. Here, we'll go through the steps to test out and evaluate these techiques on the Ames Housing dataset.
+
+There are no new statistical ideas presented in this section, just a synthesis of the preceeding material. We leave out splines, since we did not discuss using splines in a multivariate setting, but we compare OLS, ridge and decision trees. 
+
+We use a subset of variables for illustrative purposes. 
+
+```{r, echo=FALSE}
+select <- dplyr::select
+data("ames_raw")
+ames_raw <- as.data.frame(ames_raw)
+ames_raw <- ames_raw %>% mutate_if(is.character, as.factor)
+ames_raw <- ames_raw %>% select( `Overall Qual`, `Year Built`,  `Central Air`, `Gr Liv Area`, `1st Flr SF`, `Bedroom AbvGr`, `TotRms AbvGrd`, `Lot Area`, `Lot Shape`, `Land Contour`, `Overall Cond`, `Exter Qual`, `Heating QC`, `Paved Drive`, `SalePrice`)
+ames_raw <- data.frame(ames_raw)
+```
+
+
+```{r}
+set.seed(10302021)
+samp <- sample(1:nrow(ames_raw), 1000)
+Houses <- ames_raw[samp,]
+```
+
+
+```{r}
+New_Houses <- ames_raw <- ames_raw[-samp,]
+New_Houses <- New_Houses[1:5, ]
+```
+
+We'll begin by doing some data preparation. 
+
+We standardize all explanatory variables in the training and new data. We do not standardize the response variable, price, so we can interpret predicted values more easily. 
+
+```{r}
+Houses_Combined <- rbind(Houses, New_Houses)
+Houses_sc <- Houses_Combined %>% mutate_if(is.numeric, scale)
+Houses_sc$SalePrice <- as.numeric(Houses_Combined$SalePrice)
+Houses_sc_Train <- Houses_sc[1:1000, ]
+Houses_sc_New <- Houses_sc[1001:1005, ]
+```
+
+The `Houses_sc_Train` dataset contains standardized values for the 1000 houses in the training data. The first six rows are shown below. 
+
+```{r}
+head(Houses_sc_Train)
+```
+
+The `Houses_sc_New` displays standardized values for the new houses that we're trying to predict. 
+
+```{r}
+head(Houses_sc_New)
+```
+
+Since the `glmnet` command requires training data to be entered as a matrix, we create versions of the datasets in matrix form. 
+
+```{r}
+Houses_sc$SalePrice[is.na(Houses$SalePrice)] <- 0 #can't take NA's when fitting model matrix, doesn't matter since only need x-coeffs
+Houses_sc_Combined_MAT <- model.matrix(SalePrice~., data=rbind(Houses_sc))
+Houses_sc_Train_MAT <- Houses_sc_Combined_MAT[1:1000, ]
+Houses_sc_New_MAT <- Houses_sc_Combined_MAT[1001:1005, ]
+```
+
+### Modeling with OLS
+
+We first fit an ordinary least squares regression model to the data. 
+
+```{r}
+Housing_OLS <- lm(data=Houses_sc_Train, SalePrice~ .)
+coef(Housing_OLS)
+```
+
+
+### Ridge Regression with Housing Data
+
+Now, we'll use ridge regression to predict insurance costs. 
+
+We use cross validation to determine the optimal value of lamba. We perform 10 repeats of 10-fold cross-validation. We test 100 lambda-values ranging from $10^-5$ to $10^5$.   
+
+```{r}
+control = trainControl("repeatedcv", number = 10, repeats=10)
+l_vals = 10^seq(-5, 5, length = 100)
+
+set.seed(2022)
+Housing_ridge <- train( SalePrice ~ ., data = Houses_sc_Train, method = "glmnet", trControl=control , tuneGrid=expand.grid(alpha=0, lambda=l_vals))
+```
+
+```{r}
+Housing_ridge$bestTune$lambda
+```
+
+We fit a model to the full training dataset using the optimal value of $lambda$ . 
+
+```{r}
+ridge_mod <- glmnet(x=Houses_sc_Train_MAT, y=Houses_sc_Train$SalePrice, alpha = 0, lambda=Housing_ridge$bestTune$lambda )
+coef(ridge_mod)
+```
+
+The regression coefficients are displayed together with the OLS coefficients in a data.frame. 
+
+```{r}
+Ridge_coef <- as.vector(ridge_mod$beta)[-1] #leave off intercept using [-1]
+OLS_coef <- coef(Housing_OLS)[-1]
+data.frame(OLS_coef, Ridge_coef)
+```
+
+
+### Decision Tree
+
+Now, we'll predict house prices using using a decision tree. 
+
+First, we grow and display a small decision tree, by setting the `cp` parameter equal to 0.05.   
+
+```{r}
+tree <- rpart(SalePrice~., data=Houses_sc_Train, cp=0.05)
+rpart.plot(tree, box.palette="RdBu", shadow.col="gray", nn=TRUE, cex=1, extra=1)
+```
+
+Now we use cross-validation to determine the optimal value of the `cp` parameter. We use 10 repeats of 10-fold cross-validation. We test 1000 cp-values ranging from $10^-5$ to $10^5$. 
+
+```{r}
+cp_vals = 10^seq(-5, 5, length = 100)
+colnames(Houses_sc_Train) <- make.names(colnames(Houses_sc_Train))
+
+set.seed(2022)
+Housing_Tree <- train(data=Houses_sc_Train, SalePrice ~ .,  method="rpart", trControl=control,tuneGrid=expand.grid(cp=cp_vals))
+Housing_Tree$bestTune
+```
+
+We grow a full tree using the optimal `cp` value. 
+
+
+```{r}
+Housing_Best_Tree <- rpart(SalePrice~., data=Houses_sc_Train, cp=Housing_Tree$bestTune)
+```
+
+
+### Comparing Performance
+
+We use cross-validation to compare the performance of the linear model, ridge regression model, and decision tree. 
+
+
+```{r}
+set.seed(2022)
+Housing_OLS <- train(data=Houses_sc_Train, SalePrice ~ .,  method="lm", trControl=control)
+```
+
+```{r}
+min(Housing_OLS$results$RMSE)
+```
+
+```{r}
+min(Housing_ridge$results$RMSE)
+```
+
+
+```{r}
+min(Housing_Tree$results$RMSE)
+```
+
+The tree predictions give slightly lower RMSPE.  
+
+### Predictions on New Data
+
+We now predict the sale price of the five new houses using each technique.
+
+Ordinary Least-Squares model:
+
+```{r}
+OLS_pred <- predict(Housing_OLS, newdata=Houses_sc_New)
+head(OLS_pred)
+```
+
+Ridge regression model:
+
+We use the `Customers_sc_New_MAT` dataset, since the `glmnet` package requires inputs in matrix form.   
+
+```{r}
+ridge_pred <- predict(ridge_mod, newx=Houses_sc_New_MAT)
+head(ridge_pred)
+```
+
+
+Decision tree:
+
+```{r}
+tree_pred <- predict(Housing_Best_Tree, newdata=Houses_sc_New)
+head(tree_pred)
+```
 
 
 
