@@ -58,16 +58,6 @@ One explanation would be that vaccines don't work, and even cause harm.
 Can you think of another explanation?  
 
 
-### Vax by Age Breakdown
-
-
-```{r}
-ggplot(data=Covid_Data, aes(x=Vac_Status, fill=Age)) + geom_bar(position="fill") 
-```
-
-Since almost all of the unvaccinated people were from the lower risk category, the death rate among unvaccinated people appears lower. 
-
-We should account for age when comparing survival rates.  
 
 ### Breakdown by Age < 50
 
@@ -98,7 +88,17 @@ Before accounting for age, vaccinated people appear to be 5 times MORE likely to
 
 After accounting for age, vaccinated young people appear to be about 1.5 times more likely to die from covid (though death rates are very low) overall, and vaccinated older people appear to be more than 3 times LESS likely.   
 
-This is an example of a statistical phenomenon known as **Simpson's Paradox.**
+### Vaccination by Age Breakdown
+
+
+```{r}
+ggplot(data=Covid_Data, aes(x=Vac_Status, fill=Age)) + geom_bar(position="fill") 
+```
+
+Since almost all of the unvaccinated people were from the lower risk category, the death rate among unvaccinated people appears lower. 
+
+We should account for age when comparing survival rates.  
+
 
 ### Simpson's Paradox
 

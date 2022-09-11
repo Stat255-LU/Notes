@@ -3,8 +3,8 @@ fig:unnamed-chunk-139
 exploratory-data-analysis
 exploring-data-visualizations
 covid-19-data
-vax-by-age-breakdown
 breakdown-by-age-50
+vaccination-by-age-breakdown
 simpsons-paradox
 exploring-diamond-prices
 exploratory-analysis-in-r

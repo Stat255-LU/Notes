@@ -23,7 +23,7 @@
 <meta name="author" content="Andrew Sage - Lawrence University" />
 
 
-<meta name="date" content="2022-09-07" />
+<meta name="date" content="2022-09-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -141,8 +141,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Exploratory Data Analysis</a><ul>
 <li class="chapter" data-level="1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exploring-data-visualizations"><i class="fa fa-check"></i><b>1.1</b> Exploring Data Visualizations</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#covid-19-data"><i class="fa fa-check"></i><b>1.1.1</b> COVID-19 Data</a></li>
-<li class="chapter" data-level="1.1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#vax-by-age-breakdown"><i class="fa fa-check"></i><b>1.1.2</b> Vax by Age Breakdown</a></li>
-<li class="chapter" data-level="1.1.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#breakdown-by-age-50"><i class="fa fa-check"></i><b>1.1.3</b> Breakdown by Age &lt; 50</a></li>
+<li class="chapter" data-level="1.1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#breakdown-by-age-50"><i class="fa fa-check"></i><b>1.1.2</b> Breakdown by Age &lt; 50</a></li>
+<li class="chapter" data-level="1.1.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#vaccination-by-age-breakdown"><i class="fa fa-check"></i><b>1.1.3</b> Vaccination by Age Breakdown</a></li>
 <li class="chapter" data-level="1.1.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#simpsons-paradox"><i class="fa fa-check"></i><b>1.1.4</b> Simpson’s Paradox</a></li>
 <li class="chapter" data-level="1.1.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exploring-diamond-prices"><i class="fa fa-check"></i><b>1.1.5</b> Exploring Diamond Prices</a></li>
 </ul></li>
@@ -804,15 +804,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>One explanation would be that vaccines don’t work, and even cause harm.</p>
 <p>Can you think of another explanation?</p>
 </div>
-<div id="vax-by-age-breakdown" class="section level3 hasAnchor">
-<h3><span class="header-section-number">1.1.2</span> Vax by Age Breakdown<a href="exploratory-data-analysis.html#vax-by-age-breakdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="exploratory-data-analysis.html#cb2-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Covid_Data, <span class="kw">aes</span>(<span class="dt">x=</span>Vac_Status, <span class="dt">fill=</span>Age)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">position=</span><span class="st">&quot;fill&quot;</span>) </span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>Since almost all of the unvaccinated people were from the lower risk category, the death rate among unvaccinated people appears lower.</p>
-<p>We should account for age when comparing survival rates.</p>
-</div>
 <div id="breakdown-by-age-50" class="section level3 hasAnchor">
-<h3><span class="header-section-number">1.1.3</span> Breakdown by Age &lt; 50<a href="exploratory-data-analysis.html#breakdown-by-age-50" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">1.1.2</span> Breakdown by Age &lt; 50<a href="exploratory-data-analysis.html#breakdown-by-age-50" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We break down the cases based on whether the patient was older or younger than 50.</p>
 <p>Under 50</p>
 <table>
@@ -864,11 +857,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="exploratory-data-analysis.html#cb3-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Covid_Data, <span class="kw">aes</span>(<span class="dt">x=</span>Vac_Status, <span class="dt">fill=</span>Outcome)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">position=</span><span class="st">&quot;fill&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Age)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="exploratory-data-analysis.html#cb2-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Covid_Data, <span class="kw">aes</span>(<span class="dt">x=</span>Vac_Status, <span class="dt">fill=</span>Outcome)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">position=</span><span class="st">&quot;fill&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Age)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Before accounting for age, vaccinated people appear to be 5 times MORE likely to die from covid than unvaccinated people.</p>
 <p>After accounting for age, vaccinated young people appear to be about 1.5 times more likely to die from covid (though death rates are very low) overall, and vaccinated older people appear to be more than 3 times LESS likely.</p>
-<p>This is an example of a statistical phenomenon known as <strong>Simpson’s Paradox.</strong></p>
+</div>
+<div id="vaccination-by-age-breakdown" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.1.3</span> Vaccination by Age Breakdown<a href="exploratory-data-analysis.html#vaccination-by-age-breakdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="exploratory-data-analysis.html#cb3-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Covid_Data, <span class="kw">aes</span>(<span class="dt">x=</span>Vac_Status, <span class="dt">fill=</span>Age)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">position=</span><span class="st">&quot;fill&quot;</span>) </span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Since almost all of the unvaccinated people were from the lower risk category, the death rate among unvaccinated people appears lower.</p>
+<p>We should account for age when comparing survival rates.</p>
 </div>
 <div id="simpsons-paradox" class="section level3 hasAnchor">
 <h3><span class="header-section-number">1.1.4</span> Simpson’s Paradox<a href="exploratory-data-analysis.html#simpsons-paradox" class="anchor-section" aria-label="Anchor link to header"></a></h3>
