@@ -23,7 +23,7 @@
 <meta name="author" content="Andrew Sage - Lawrence University" />
 
 
-<meta name="date" content="2022-09-25" />
+<meta name="date" content="2022-10-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="introduction-to-statistical-models.html"/>
-
+<link rel="next" href="bootstrap-confindence-intervals.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -342,6 +342,76 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.27" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#dont-accept-null-hypothesis"><i class="fa fa-check"></i><b>3.4.27</b> Don’t Accept Null Hypothesis</a></li>
 <li class="chapter" data-level="3.4.28" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#comparison-of-weights-by-season"><i class="fa fa-check"></i><b>3.4.28</b> Comparison of Weights by Season</a></li>
 <li class="chapter" data-level="3.4.29" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#dont-accept-null-hypothesis-cont."><i class="fa fa-check"></i><b>3.4.29</b> Don’t Accept Null Hypothesis (Cont.)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html"><i class="fa fa-check"></i><b>4</b> Bootstrap Confindence Intervals</a><ul>
+<li class="chapter" data-level="4.1" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#quantifying-sampling-variability"><i class="fa fa-check"></i><b>4.1</b> Quantifying Sampling Variability</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#distribution-of-mercury-levels-in-florida-lakes"><i class="fa fa-check"></i><b>4.1.1</b> Distribution of Mercury Levels in Florida Lakes</a></li>
+<li class="chapter" data-level="4.1.2" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#simulation-to-quantify-variability"><i class="fa fa-check"></i><b>4.1.2</b> Simulation to Quantify Variability</a></li>
+<li class="chapter" data-level="4.1.3" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrap-sampling"><i class="fa fa-check"></i><b>4.1.3</b> Bootstrap Sampling</a></li>
+<li class="chapter" data-level="4.1.4" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#original-sample"><i class="fa fa-check"></i><b>4.1.4</b> Original Sample</a></li>
+<li class="chapter" data-level="4.1.5" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#five-bootstrap-samples-in-r"><i class="fa fa-check"></i><b>4.1.5</b> Five Bootstrap Samples in R</a></li>
+<li class="chapter" data-level="4.1.6" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#code-for-bootstrap-for-sample-mean"><i class="fa fa-check"></i><b>4.1.6</b> Code for Bootstrap for Sample Mean</a></li>
+<li class="chapter" data-level="4.1.7" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrap-distribution-for-sample-mean"><i class="fa fa-check"></i><b>4.1.7</b> Bootstrap Distribution for Sample Mean</a></li>
+<li class="chapter" data-level="4.1.8" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#confidence-intervals"><i class="fa fa-check"></i><b>4.1.8</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="4.1.9" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#what-bootstrapping-does-and-doesnt-do"><i class="fa fa-check"></i><b>4.1.9</b> What Bootstrapping Does and Doesn’t Do</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrapping-other-statistics"><i class="fa fa-check"></i><b>4.2</b> Bootstrapping Other Statistics</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#general-bootstrapping-procedure"><i class="fa fa-check"></i><b>4.2.1</b> General Bootstrapping Procedure</a></li>
+<li class="chapter" data-level="4.2.2" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrapping-for-other-quantities"><i class="fa fa-check"></i><b>4.2.2</b> Bootstrapping for Other Quantities</a></li>
+<li class="chapter" data-level="4.2.3" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#lakes-bootstrap-percentile-ci-for-st.-dev."><i class="fa fa-check"></i><b>4.2.3</b> Lakes Bootstrap Percentile CI for St. Dev.</a></li>
+<li class="chapter" data-level="4.2.4" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrap-percentile-ci-for-prop.-1-ppm"><i class="fa fa-check"></i><b>4.2.4</b> Bootstrap Percentile CI for Prop. &gt; 1 ppm</a></li>
+<li class="chapter" data-level="4.2.5" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrap-percentile-ci-for-median"><i class="fa fa-check"></i><b>4.2.5</b> Bootstrap Percentile CI for Median</a></li>
+<li class="chapter" data-level="4.2.6" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#when-gaps-are-arent-ok"><i class="fa fa-check"></i><b>4.2.6</b> When Gaps are/ aren’t OK</a></li>
+<li class="chapter" data-level="4.2.7" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#changing-binwidth-in-histogram"><i class="fa fa-check"></i><b>4.2.7</b> Changing Binwidth in Histogram</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#difference-in-sample-means"><i class="fa fa-check"></i><b>4.3</b> Difference in Sample Means</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#mercury-levels-in-northern-vs-southern-florida-lakes"><i class="fa fa-check"></i><b>4.3.1</b> Mercury Levels in Northern vs Southern Florida Lakes</a></li>
+<li class="chapter" data-level="4.3.2" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#model-for-northern-and-southern-lakes-1"><i class="fa fa-check"></i><b>4.3.2</b> Model for Northern and Southern Lakes</a></li>
+<li class="chapter" data-level="4.3.3" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#model-for-lakes-r-output-1"><i class="fa fa-check"></i><b>4.3.3</b> Model for Lakes R Output</a></li>
+<li class="chapter" data-level="4.3.4" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrapping-for-northern-vs-southern-lakes"><i class="fa fa-check"></i><b>4.3.4</b> Bootstrapping for Northern vs Southern Lakes</a></li>
+<li class="chapter" data-level="4.3.5" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#code-for-bootstrapping-for-n-vs-s-lakes"><i class="fa fa-check"></i><b>4.3.5</b> Code for Bootstrapping for N vs S Lakes</a></li>
+<li class="chapter" data-level="4.3.6" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#lakes-bootstrap-percentile-ci-for-avg.-diff."><i class="fa fa-check"></i><b>4.3.6</b> Lakes: Bootstrap Percentile CI for Avg. Diff.</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrapping-regression-coefficients"><i class="fa fa-check"></i><b>4.4</b> Bootstrapping Regression Coefficients</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrapping-regression-slope-for-all-cars"><i class="fa fa-check"></i><b>4.4.1</b> Bootstrapping Regression Slope for All Cars</a></li>
+<li class="chapter" data-level="4.4.2" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#code-for-cars-regression-bootstrap"><i class="fa fa-check"></i><b>4.4.2</b> Code for Cars Regression Bootstrap</a></li>
+<li class="chapter" data-level="4.4.3" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#first-10-bootstrap-regression-lines"><i class="fa fa-check"></i><b>4.4.3</b> First 10 Bootstrap Regression Lines</a></li>
+<li class="chapter" data-level="4.4.4" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrap-percentile-ci-for-slope-of-cars-reg.-line"><i class="fa fa-check"></i><b>4.4.4</b> Bootstrap Percentile CI for Slope of Cars Reg. Line</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrapping-coefficients-in-multiple-regression"><i class="fa fa-check"></i><b>4.5</b> Bootstrapping Coefficients in Multiple Regression</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#model-for-predicting-bear-weights"><i class="fa fa-check"></i><b>4.5.1</b> Model for Predicting Bear Weights</a></li>
+<li class="chapter" data-level="4.5.2" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#model-for-predicting-bear-weights-cont."><i class="fa fa-check"></i><b>4.5.2</b> Model for Predicting Bear Weights (cont.)</a></li>
+<li class="chapter" data-level="4.5.3" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#model-interpretations-in-bears-interaction-model"><i class="fa fa-check"></i><b>4.5.3</b> Model Interpretations in Bears Interaction Model</a></li>
+<li class="chapter" data-level="4.5.4" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#quantities-of-interest"><i class="fa fa-check"></i><b>4.5.4</b> Quantities of Interest</a></li>
+<li class="chapter" data-level="4.5.5" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrapping-for-bears-regression-coefficients"><i class="fa fa-check"></i><b>4.5.5</b> Bootstrapping for Bears Regression Coefficients</a></li>
+<li class="chapter" data-level="4.5.6" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrap-code-for-bears-regression-coefficients"><i class="fa fa-check"></i><b>4.5.6</b> Bootstrap Code for Bears Regression Coefficients</a></li>
+<li class="chapter" data-level="4.5.7" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrap-percentile-ci-for-b_1-in-bears-model"><i class="fa fa-check"></i><b>4.5.7</b> Bootstrap Percentile CI for <span class="math inline">\(b_1\)</span> in Bears Model</a></li>
+<li class="chapter" data-level="4.5.8" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrap-percentile-ci-for-b_1-b_3"><i class="fa fa-check"></i><b>4.5.8</b> Bootstrap Percentile CI for <span class="math inline">\(b_1 + b_3\)</span></a></li>
+<li class="chapter" data-level="4.5.9" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrap-percentile-ci-for-b_0-24b_1"><i class="fa fa-check"></i><b>4.5.9</b> Bootstrap Percentile CI for <span class="math inline">\(b_0 + 24b_1\)</span></a></li>
+<li class="chapter" data-level="4.5.10" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrap-percentile-ci-for-b_0-b_2-24b_1b_3"><i class="fa fa-check"></i><b>4.5.10</b> Bootstrap Percentile CI for <span class="math inline">\((b_0 + b_2) + 24(b_1+b_3)\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bootstrap-standard-error-confidence-intervals"><i class="fa fa-check"></i><b>4.6</b> Bootstrap Standard Error Confidence Intervals</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#shape-of-bootstrap-distributions"><i class="fa fa-check"></i><b>4.6.1</b> Shape of Bootstrap Distributions</a></li>
+<li class="chapter" data-level="4.6.2" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#comparing-se-and-percential-bootstrap-intervals"><i class="fa fa-check"></i><b>4.6.2</b> Comparing SE and Percential Bootstrap Intervals</a></li>
+<li class="chapter" data-level="4.6.3" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#mean-hg-in-lakes"><i class="fa fa-check"></i><b>4.6.3</b> Mean Hg in Lakes</a></li>
+<li class="chapter" data-level="4.6.4" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#difference-in-mean-hg-in-lakes"><i class="fa fa-check"></i><b>4.6.4</b> Difference in Mean Hg in Lakes</a></li>
+<li class="chapter" data-level="4.6.5" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#proportion-lakes-exceeding-1-ppm-hg"><i class="fa fa-check"></i><b>4.6.5</b> Proportion Lakes Exceeding 1 ppm Hg</a></li>
+<li class="chapter" data-level="4.6.6" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#cars-regression-slope"><i class="fa fa-check"></i><b>4.6.6</b> Cars Regression Slope</a></li>
+<li class="chapter" data-level="4.6.7" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#bears-b1-coefficient"><i class="fa fa-check"></i><b>4.6.7</b> Bears <span class="math inline">\(b1\)</span> Coefficient</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#standard-error-formulas"><i class="fa fa-check"></i><b>4.7</b> Standard Error Formulas</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#what-is-standard-error"><i class="fa fa-check"></i><b>4.7.1</b> What is Standard Error?</a></li>
+<li class="chapter" data-level="4.7.2" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#why-did-we-use-simulation"><i class="fa fa-check"></i><b>4.7.2</b> Why Did We Use Simulation?</a></li>
+<li class="chapter" data-level="4.7.3" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#theory-based-standard-error-formulas"><i class="fa fa-check"></i><b>4.7.3</b> Theory-Based Standard Error Formulas</a></li>
+<li class="chapter" data-level="4.7.4" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#one-sample-mean-example"><i class="fa fa-check"></i><b>4.7.4</b> One-Sample Mean Example</a></li>
+<li class="chapter" data-level="4.7.5" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#standard-error-for-difference-in-means-cont."><i class="fa fa-check"></i><b>4.7.5</b> Standard Error for Difference in Means (cont.)</a></li>
+<li class="chapter" data-level="4.7.6" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#standard-error-for-slope-and-intercept-in-slr"><i class="fa fa-check"></i><b>4.7.6</b> Standard Error for Slope and Intercept in SLR</a></li>
+<li class="chapter" data-level="4.7.7" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#textseb_j-in-mlr"><i class="fa fa-check"></i><b>4.7.7</b> <span class="math inline">\(\text{SE}(b_j)\)</span> in MLR</a></li>
+<li class="chapter" data-level="4.7.8" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#r-output-for-ses-in-mlr"><i class="fa fa-check"></i><b>4.7.8</b> R Output for SE’s in MLR</a></li>
+<li class="chapter" data-level="4.7.9" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#theory-based-confidence-intervals"><i class="fa fa-check"></i><b>4.7.9</b> Theory-Based Confidence Intervals</a></li>
+<li class="chapter" data-level="4.7.10" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#comparison-of-ci-methods"><i class="fa fa-check"></i><b>4.7.10</b> Comparison of CI Methods</a></li>
+<li class="chapter" data-level="4.7.11" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#when-to-use-each-ci-method"><i class="fa fa-check"></i><b>4.7.11</b> When to use Each CI Method</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -2637,8 +2707,8 @@ Alternative Hypothesis: Among all bears of this type, mean weight differs betwee
           </div>
         </div>
       </div>
-<a href="introduction-to-statistical-models.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="introduction-to-statistical-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bootstrap-confindence-intervals.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
