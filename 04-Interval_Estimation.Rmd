@@ -1421,6 +1421,18 @@ mean(abs(NSLakes_SimulationResults$b1Sim) > abs(b1))
 
 We can be 95% confident that average mercury level is between 0.09 and 0.45 ppm higher in Southern Florida, than Northern Florida.  
 
+The `confint` command returns confidence intervals for all model parameters.  
+
+
+```{r}
+confint(Lakes_M)
+```
+
+We can be 95% confident that average mercury level in lakes in North Florida is between 0.31 and 0.54 ppm.  
+
+We can be 95% confident that average mercury level is between 0.09 and 0.45 ppm higher in Southern Florida, than Northern Florida.  
+
+
 
 **Percentile Bootstrap Confidence Interval**
 

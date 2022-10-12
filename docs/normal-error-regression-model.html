@@ -435,7 +435,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1.8" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#parameters-and-statistics"><i class="fa fa-check"></i><b>5.1.8</b> Parameters and Statistics</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#inference-in-normal-error-regression-model"><i class="fa fa-check"></i><b>5.2</b> Inference in Normal Error Regression Model</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#distribution-of-t-fracb_j-beta_jtextseb_j"><i class="fa fa-check"></i><b>5.2.1</b> Distribution of <span class="math inline">\(t= \frac{{b_j}-\beta_j}{\text{SE}(b_j)}\)</span></a></li>
+<li class="chapter" data-level="5.2.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#distribution-of-t-fracb_jtextseb_j"><i class="fa fa-check"></i><b>5.2.1</b> Distribution of <span class="math inline">\(t= \frac{{b_j}}{\text{SE}(b_j)}\)</span></a></li>
 <li class="chapter" data-level="5.2.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#f-distribution"><i class="fa fa-check"></i><b>5.2.2</b> F-Distribution</a></li>
 <li class="chapter" data-level="5.2.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#distribution-of-f-statistic"><i class="fa fa-check"></i><b>5.2.3</b> Distribution of F-Statistic</a></li>
 <li class="chapter" data-level="5.2.4" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#bear-weight-by-season"><i class="fa fa-check"></i><b>5.2.4</b> Bear Weight by Season</a></li>
@@ -578,7 +578,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">5.1.1</span> Example: Ice Cream Dispensor<a href="normal-error-regression-model.html#example-ice-cream-dispensor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="Ice_Cream.png" width="100%" /></p>
 <p>Suppose an ice cream machine is manufacturered to dispense 2 oz. of ice cream per second, on average. If each person using the machine got exactly 2 oz. per second, the relationship between time and amount dispensed would look like this:</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-366-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-367-1.png" width="672" /></p>
 <p>In reality, however, the actual amount dispensed each time it is used will vary due to unknown factors like:</p>
 <ul>
 <li>force applied to dispensor<br />
@@ -590,7 +590,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>other unknown factors</li>
 </ul>
 <p>Thus, the data will actually look like this:</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-367-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-368-1.png" width="672" /></p>
 </div>
 <div id="signal-and-noise" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.2</span> Signal and Noise<a href="normal-error-regression-model.html#signal-and-noise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -608,7 +608,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 - <span class="math inline">\(\mu\)</span> representing the center of the distribution<br />
 - <span class="math inline">\(\sigma\)</span> representing the standard deviation</p>
 <p>This distribution is denoted <span class="math inline">\(\mathcal{N}(\mu, \sigma)\)</span>.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-369-1.png" width="576" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-370-1.png" width="576" /></p>
 <p>Note that for standard deviation <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(\sigma^2\)</span> is called the variance. Some books denote the normal distribution as <span class="math inline">\(\mathcal{N}(\mu, \sigma^2)\)</span>, instead of <span class="math inline">\(\mathcal{N}(\mu,\sigma)\)</span>.</p>
 </div>
 <div id="signal-and-noise-in-icecream-example" class="section level3 hasAnchor">
@@ -617,13 +617,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Thus, amount dispensed for person <span class="math inline">\(i\)</span> is given by</p>
 <p><span class="math display">\[Y_i = 2x_i+\epsilon_i, \text{ where } \epsilon_i\sim\mathcal{N}(0, 0.5)
 \]</span></p>
-<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="normal-error-regression-model.html#cb459-1"></a><span class="kw">set.seed</span>(<span class="dv">10082020</span>)</span>
-<span id="cb459-2"><a href="normal-error-regression-model.html#cb459-2"></a>time &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">1.2</span>, <span class="fl">1.5</span>, <span class="fl">1.8</span>, <span class="fl">2.1</span>, <span class="fl">2.1</span>, <span class="fl">2.3</span>, <span class="fl">2.5</span>, <span class="fl">2.6</span>, <span class="fl">2.8</span>, <span class="fl">2.9</span>, <span class="fl">2.9</span>, <span class="fl">3.1</span>, <span class="fl">3.2</span>, <span class="fl">3.6</span>)</span>
-<span id="cb459-3"><a href="normal-error-regression-model.html#cb459-3"></a>signal &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>time</span>
-<span id="cb459-4"><a href="normal-error-regression-model.html#cb459-4"></a>noise &lt;-<span class="kw">rnorm</span>(<span class="dv">15</span>, <span class="dv">0</span>, <span class="fl">0.5</span>)</span>
-<span id="cb459-5"><a href="normal-error-regression-model.html#cb459-5"></a>amount &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>time <span class="op">+</span><span class="st"> </span>noise</span>
-<span id="cb459-6"><a href="normal-error-regression-model.html#cb459-6"></a>Icecream &lt;-<span class="st"> </span><span class="kw">data.frame</span>(time, signal, noise, amount)</span>
-<span id="cb459-7"><a href="normal-error-regression-model.html#cb459-7"></a><span class="kw">kable</span>(<span class="kw">head</span>(Icecream))</span></code></pre></div>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="normal-error-regression-model.html#cb461-1"></a><span class="kw">set.seed</span>(<span class="dv">10082020</span>)</span>
+<span id="cb461-2"><a href="normal-error-regression-model.html#cb461-2"></a>time &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">1.2</span>, <span class="fl">1.5</span>, <span class="fl">1.8</span>, <span class="fl">2.1</span>, <span class="fl">2.1</span>, <span class="fl">2.3</span>, <span class="fl">2.5</span>, <span class="fl">2.6</span>, <span class="fl">2.8</span>, <span class="fl">2.9</span>, <span class="fl">2.9</span>, <span class="fl">3.1</span>, <span class="fl">3.2</span>, <span class="fl">3.6</span>)</span>
+<span id="cb461-3"><a href="normal-error-regression-model.html#cb461-3"></a>signal &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>time</span>
+<span id="cb461-4"><a href="normal-error-regression-model.html#cb461-4"></a>noise &lt;-<span class="kw">rnorm</span>(<span class="dv">15</span>, <span class="dv">0</span>, <span class="fl">0.5</span>)</span>
+<span id="cb461-5"><a href="normal-error-regression-model.html#cb461-5"></a>amount &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>time <span class="op">+</span><span class="st"> </span>noise</span>
+<span id="cb461-6"><a href="normal-error-regression-model.html#cb461-6"></a>Icecream &lt;-<span class="st"> </span><span class="kw">data.frame</span>(time, signal, noise, amount)</span>
+<span id="cb461-7"><a href="normal-error-regression-model.html#cb461-7"></a><span class="kw">kable</span>(<span class="kw">head</span>(Icecream))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -676,18 +676,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="what-we-actually-get-to-see" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.5</span> What We Actually Get to See<a href="normal-error-regression-model.html#what-we-actually-get-to-see" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In reality, we do not see the signal and noise columns, we only see time and amount. From this, we need to estimate signal, without being thrown off by noise.</p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="normal-error-regression-model.html#cb460-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Icecream1, <span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y=</span>amount)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Icecream Dispensed&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Time Pressing Dispensor&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Amount Dispensed&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-371-1.png" width="672" /></p>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="normal-error-regression-model.html#cb462-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Icecream1, <span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y=</span>amount)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Icecream Dispensed&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Time Pressing Dispensor&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Amount Dispensed&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-372-1.png" width="672" /></p>
 <p>The red line represents the “true” relationship between time and average amount dispensed.</p>
 <p>The blue line represents the least squares regression line, fit from the data. The blue line is an approximation of the red line.</p>
-<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="normal-error-regression-model.html#cb461-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Icecream1, <span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y=</span>amount)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Icecream Dispensed&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Time Pressing Dispensor&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Amount Dispensed&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">slope=</span><span class="dv">2</span>, <span class="dt">intercept=</span><span class="dv">0</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb461-2"><a href="normal-error-regression-model.html#cb461-2"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">label=</span><span class="st">&quot;y=2x&quot;</span>, <span class="dt">x=</span> <span class="fl">3.5</span>, <span class="dt">y=</span><span class="fl">6.5</span>, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-372-1.png" width="672" /></p>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="normal-error-regression-model.html#cb463-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Icecream1, <span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y=</span>amount)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Icecream Dispensed&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Time Pressing Dispensor&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Amount Dispensed&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">slope=</span><span class="dv">2</span>, <span class="dt">intercept=</span><span class="dv">0</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb463-2"><a href="normal-error-regression-model.html#cb463-2"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">label=</span><span class="st">&quot;y=2x&quot;</span>, <span class="dt">x=</span> <span class="fl">3.5</span>, <span class="dt">y=</span><span class="fl">6.5</span>, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-373-1.png" width="672" /></p>
 </div>
 <div id="icecream-model-from-simulated-data" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.6</span> IceCream Model From Simulated Data<a href="normal-error-regression-model.html#icecream-model-from-simulated-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="normal-error-regression-model.html#cb462-1"></a>IC_Model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Icecream1, <span class="kw">lm</span>(amount<span class="op">~</span>time))</span>
-<span id="cb462-2"><a href="normal-error-regression-model.html#cb462-2"></a><span class="kw">summary</span>(IC_Model)</span></code></pre></div>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="normal-error-regression-model.html#cb464-1"></a>IC_Model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Icecream1, <span class="kw">lm</span>(amount<span class="op">~</span>time))</span>
+<span id="cb464-2"><a href="normal-error-regression-model.html#cb464-2"></a><span class="kw">summary</span>(IC_Model)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = lm(amount ~ time), data = Icecream1)
@@ -726,8 +726,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="inference-in-normal-error-regression-model" class="section level2 hasAnchor">
 <h2><span class="header-section-number">5.2</span> Inference in Normal Error Regression Model<a href="normal-error-regression-model.html#inference-in-normal-error-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="distribution-of-t-fracb_j-beta_jtextseb_j" class="section level3 hasAnchor">
-<h3><span class="header-section-number">5.2.1</span> Distribution of <span class="math inline">\(t= \frac{{b_j}-\beta_j}{\text{SE}(b_j)}\)</span><a href="normal-error-regression-model.html#distribution-of-t-fracb_j-beta_jtextseb_j" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="distribution-of-t-fracb_jtextseb_j" class="section level3 hasAnchor">
+<h3><span class="header-section-number">5.2.1</span> Distribution of <span class="math inline">\(t= \frac{{b_j}}{\text{SE}(b_j)}\)</span><a href="normal-error-regression-model.html#distribution-of-t-fracb_jtextseb_j" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ve already seen that we can use t-distributions to perform inference on regression model parameters (<span class="math inline">\(b_j\)</span>’s)when sample sizes are large enough.</p>
 <p>When our data can reasonably be assumed to follow a normal error regression model, then we can use these t-distributions regardless of sample size.</p>
 <p><strong>Important Fact:</strong> If <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots + \beta_pX_{ip} + \epsilon_i\)</span>, with <span class="math inline">\(\epsilon_i\sim\mathcal{N}(0,\sigma)\)</span>, then</p>
@@ -742,19 +742,19 @@ t= \frac{{b_j}}{\text{SE}(b_j)}
 <ul>
 <li>For a 95% confidence interval, use <span class="math inline">\(t^*=2\)</span>.</li>
 </ul>
-<p><strong>Hypothesis test for <span class="math inline">\(\beta_j=\gamma\)</span></strong></p>
+<p><strong>Hypothesis test for <span class="math inline">\(\beta_j=0\)</span></strong></p>
 <ul>
-<li>If <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots + \beta_pX_{ip} + \epsilon_i\)</span>, with <span class="math inline">\(\epsilon_i\sim\mathcal{N}(0,\sigma)\)</span>, then a test statistic for the null hypothesis: <span class="math inline">\(\beta_j = \gamma\)</span> is given by:</li>
+<li>If <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots + \beta_pX_{ip} + \epsilon_i\)</span>, with <span class="math inline">\(\epsilon_i\sim\mathcal{N}(0,\sigma)\)</span>, then a test statistic for the null hypothesis: <span class="math inline">\(\beta_j = 0\)</span> is given by:</li>
 </ul>
 <p><span class="math display">\[
-t=\frac{{b_j}-\gamma}{\text{SE}(b_j)}, 
+t=\frac{{b_j}}{\text{SE}(b_j)}, 
 \]</span></p>
 <p>and calculate a p-value using a t-distribution.</p>
 </div>
 <div id="f-distribution" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.2</span> F-Distribution<a href="normal-error-regression-model.html#f-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>An [F distribution] is a right-skewed distribution. It is defined by two parameters, <span class="math inline">\(\nu_1, \nu_2\)</span>, called numerator and denominator degrees of freedom.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-374-1.png" width="960" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-375-1.png" width="960" /></p>
 </div>
 <div id="distribution-of-f-statistic" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.3</span> Distribution of F-Statistic<a href="normal-error-regression-model.html#distribution-of-f-statistic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -768,10 +768,10 @@ F=\frac{\frac{\text{Unexplained Variability in Reduced Model}-\text{Unexplained 
 <div id="bear-weight-by-season" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.4</span> Bear Weight by Season<a href="normal-error-regression-model.html#bear-weight-by-season" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Recall Bear Weights by Season</p>
-<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="normal-error-regression-model.html#cb464-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Bears_Subset, <span class="kw">aes</span>(<span class="dt">y=</span>Weight, <span class="dt">x=</span>Season, <span class="dt">fill=</span>Season)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb464-2"><a href="normal-error-regression-model.html#cb464-2"></a><span class="st">   </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-375-1.png" width="672" /></p>
-<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="normal-error-regression-model.html#cb465-1"></a><span class="kw">summary</span>(Bears_M_Season)</span></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="normal-error-regression-model.html#cb466-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Bears_Subset, <span class="kw">aes</span>(<span class="dt">y=</span>Weight, <span class="dt">x=</span>Season, <span class="dt">fill=</span>Season)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb466-2"><a href="normal-error-regression-model.html#cb466-2"></a><span class="st">   </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-376-1.png" width="672" /></p>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="normal-error-regression-model.html#cb467-1"></a><span class="kw">summary</span>(Bears_M_Season)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Weight ~ Season, data = Bears_Subset)
@@ -791,27 +791,27 @@ F=\frac{\frac{\text{Unexplained Variability in Reduced Model}-\text{Unexplained 
 ## Residual standard error: 112.5 on 94 degrees of freedom
 ## Multiple R-squared:  0.02034,    Adjusted R-squared:  -0.0005074 
 ## F-statistic: 0.9757 on 2 and 94 DF,  p-value: 0.3807</code></pre>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="normal-error-regression-model.html#cb467-1"></a>Bears_A_Season &lt;-<span class="st"> </span><span class="kw">aov</span>(<span class="dt">data=</span>Bears_Subset, Weight<span class="op">~</span>Season)</span>
-<span id="cb467-2"><a href="normal-error-regression-model.html#cb467-2"></a><span class="kw">summary</span>(Bears_A_Season)</span></code></pre></div>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="normal-error-regression-model.html#cb469-1"></a>Bears_A_Season &lt;-<span class="st"> </span><span class="kw">aov</span>(<span class="dt">data=</span>Bears_Subset, Weight<span class="op">~</span>Season)</span>
+<span id="cb469-2"><a href="normal-error-regression-model.html#cb469-2"></a><span class="kw">summary</span>(Bears_A_Season)</span></code></pre></div>
 <pre><code>##             Df  Sum Sq Mean Sq F value Pr(&gt;F)
 ## Season       2   24699   12350   0.976  0.381
 ## Residuals   94 1189818   12658</code></pre>
 </div>
 <div id="bears-f-test-illustration" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.5</span> Bears F-Test Illustration<a href="normal-error-regression-model.html#bears-f-test-illustration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="normal-error-regression-model.html#cb469-1"></a>ts=<span class="fl">0.976</span></span>
-<span id="cb469-2"><a href="normal-error-regression-model.html#cb469-2"></a><span class="kw">gf_dist</span>(<span class="st">&quot;f&quot;</span>, <span class="dt">df1=</span><span class="dv">2</span>, <span class="dt">df2=</span><span class="dv">94</span>, <span class="dt">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="dt">fill =</span> <span class="op">~</span><span class="st"> </span>(<span class="kw">abs</span>(x)<span class="op">&lt;</span><span class="st"> </span><span class="kw">abs</span>(ts)), <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="kw">c</span>(ts), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;t&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-378-1.png" width="768" />
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="normal-error-regression-model.html#cb471-1"></a>ts=<span class="fl">0.976</span></span>
+<span id="cb471-2"><a href="normal-error-regression-model.html#cb471-2"></a><span class="kw">gf_dist</span>(<span class="st">&quot;f&quot;</span>, <span class="dt">df1=</span><span class="dv">2</span>, <span class="dt">df2=</span><span class="dv">94</span>, <span class="dt">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="dt">fill =</span> <span class="op">~</span><span class="st"> </span>(<span class="kw">abs</span>(x)<span class="op">&lt;</span><span class="st"> </span><span class="kw">abs</span>(ts)), <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="kw">c</span>(ts), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;t&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-379-1.png" width="768" />
 p-value:</p>
-<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="normal-error-regression-model.html#cb470-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pf</span>(ts, <span class="dt">df1=</span><span class="dv">2</span>, <span class="dt">df2=</span><span class="dv">94</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="normal-error-regression-model.html#cb472-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pf</span>(ts, <span class="dt">df1=</span><span class="dv">2</span>, <span class="dt">df2=</span><span class="dv">94</span>)</span></code></pre></div>
 <pre><code>## [1] 0.3806007</code></pre>
 </div>
 <div id="comparison-to-simulation-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.6</span> Comparison to Simulation<a href="normal-error-regression-model.html#comparison-to-simulation-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="normal-error-regression-model.html#cb472-1"></a>Fstat &lt;-<span class="st"> </span><span class="kw">summary</span>(Bears_M_Season)<span class="op">$</span>fstatistic[<span class="dv">1</span>]</span>
-<span id="cb472-2"><a href="normal-error-regression-model.html#cb472-2"></a>Bears_Seasons_SimulationResultsPlot</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-380-1.png" width="672" /></p>
-<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="normal-error-regression-model.html#cb473-1"></a><span class="kw">mean</span>(FSim <span class="op">&gt;</span><span class="st"> </span>Fstat)</span></code></pre></div>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="normal-error-regression-model.html#cb474-1"></a>Fstat &lt;-<span class="st"> </span><span class="kw">summary</span>(Bears_M_Season)<span class="op">$</span>fstatistic[<span class="dv">1</span>]</span>
+<span id="cb474-2"><a href="normal-error-regression-model.html#cb474-2"></a>Bears_Seasons_SimulationResultsPlot</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-381-1.png" width="672" /></p>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="normal-error-regression-model.html#cb475-1"></a><span class="kw">mean</span>(FSim <span class="op">&gt;</span><span class="st"> </span>Fstat)</span></code></pre></div>
 <pre><code>## [1] 0.3762</code></pre>
 <p>The p-value we obtained is very similar to the one we obtained using the simulation-based test.</p>
 <p>In this case, even though we had concerns about normality, they did not have much impact on the p-value from the F-distribution. The F-test is fairly robust to minor departures from normality.</p>
@@ -843,54 +843,6 @@ p-value:</p>
 </div>
 <div id="estimation-in-ic-example" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.3.3</span> Estimation in IC Example<a href="normal-error-regression-model.html#estimation-in-ic-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="normal-error-regression-model.html#cb475-1"></a><span class="kw">kable</span>(<span class="kw">t</span>(<span class="kw">round</span>(Icecream1, <span class="dv">2</span>)))</span></code></pre></div>
-<table>
-<tbody>
-<tr class="odd">
-<td align="left">time</td>
-<td align="right">1.00</td>
-<td align="right">1.20</td>
-<td align="right">1.50</td>
-<td align="right">1.80</td>
-<td align="right">2.10</td>
-<td align="right">2.10</td>
-<td align="right">2.30</td>
-<td align="right">2.50</td>
-<td align="right">2.60</td>
-<td align="right">2.80</td>
-<td align="right">2.90</td>
-<td align="right">2.90</td>
-<td align="right">3.1</td>
-<td align="right">3.20</td>
-<td align="right">3.60</td>
-</tr>
-<tr class="even">
-<td align="left">amount</td>
-<td align="right">2.23</td>
-<td align="right">1.91</td>
-<td align="right">3.58</td>
-<td align="right">3.57</td>
-<td align="right">4.37</td>
-<td align="right">3.27</td>
-<td align="right">4.65</td>
-<td align="right">4.63</td>
-<td align="right">4.74</td>
-<td align="right">5.77</td>
-<td align="right">5.21</td>
-<td align="right">5.92</td>
-<td align="right">6.2</td>
-<td align="right">7.07</td>
-<td align="right">7.25</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="normal-error-regression-model.html#cb476-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Icecream1, <span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y=</span>amount)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Icecream Dispensed&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Time Pressing Dispensor&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Amount Dispensed&quot;</span>) </span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-384-1.png" width="672" /></p>
-<p>In the estimation setting, we are trying o determine the location of the regression line for the entire population.</p>
-<p>Uncertainty comes from the fact that we only have data from a sample.</p>
-</div>
-<div id="estimation-in-ic-example-1" class="section level3 hasAnchor">
-<h3><span class="header-section-number">5.3.4</span> Estimation in IC Example<a href="normal-error-regression-model.html#estimation-in-ic-example-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="normal-error-regression-model.html#cb477-1"></a><span class="kw">kable</span>(<span class="kw">t</span>(<span class="kw">round</span>(Icecream1, <span class="dv">2</span>)))</span></code></pre></div>
 <table>
 <tbody>
@@ -932,12 +884,60 @@ p-value:</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="normal-error-regression-model.html#cb478-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Icecream1, <span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y=</span>amount)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Icecream Dispensed&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Time Pressing Dispensor&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Amount Dispensed&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">slope=</span><span class="dv">2</span>, <span class="dt">intercept=</span><span class="dv">0</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-386-1.png" width="672" /></p>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="normal-error-regression-model.html#cb478-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Icecream1, <span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y=</span>amount)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Icecream Dispensed&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Time Pressing Dispensor&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Amount Dispensed&quot;</span>) </span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-385-1.png" width="672" /></p>
+<p>In the estimation setting, we are trying o determine the location of the regression line for the entire population.</p>
+<p>Uncertainty comes from the fact that we only have data from a sample.</p>
+</div>
+<div id="estimation-in-ic-example-1" class="section level3 hasAnchor">
+<h3><span class="header-section-number">5.3.4</span> Estimation in IC Example<a href="normal-error-regression-model.html#estimation-in-ic-example-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="normal-error-regression-model.html#cb479-1"></a><span class="kw">kable</span>(<span class="kw">t</span>(<span class="kw">round</span>(Icecream1, <span class="dv">2</span>)))</span></code></pre></div>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left">time</td>
+<td align="right">1.00</td>
+<td align="right">1.20</td>
+<td align="right">1.50</td>
+<td align="right">1.80</td>
+<td align="right">2.10</td>
+<td align="right">2.10</td>
+<td align="right">2.30</td>
+<td align="right">2.50</td>
+<td align="right">2.60</td>
+<td align="right">2.80</td>
+<td align="right">2.90</td>
+<td align="right">2.90</td>
+<td align="right">3.1</td>
+<td align="right">3.20</td>
+<td align="right">3.60</td>
+</tr>
+<tr class="even">
+<td align="left">amount</td>
+<td align="right">2.23</td>
+<td align="right">1.91</td>
+<td align="right">3.58</td>
+<td align="right">3.57</td>
+<td align="right">4.37</td>
+<td align="right">3.27</td>
+<td align="right">4.65</td>
+<td align="right">4.63</td>
+<td align="right">4.74</td>
+<td align="right">5.77</td>
+<td align="right">5.21</td>
+<td align="right">5.92</td>
+<td align="right">6.2</td>
+<td align="right">7.07</td>
+<td align="right">7.25</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="normal-error-regression-model.html#cb480-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Icecream1, <span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y=</span>amount)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Icecream Dispensed&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Time Pressing Dispensor&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Amount Dispensed&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">slope=</span><span class="dv">2</span>, <span class="dt">intercept=</span><span class="dv">0</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-387-1.png" width="672" /></p>
 </div>
 <div id="recall-ice-cream-model-output" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.3.5</span> Recall Ice Cream Model Output<a href="normal-error-regression-model.html#recall-ice-cream-model-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="normal-error-regression-model.html#cb479-1"></a><span class="kw">summary</span>(IC_Model)</span></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="normal-error-regression-model.html#cb481-1"></a><span class="kw">summary</span>(IC_Model)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = lm(amount ~ time), data = Icecream1)
@@ -956,9 +956,9 @@ p-value:</p>
 ## Residual standard error: 0.4527 on 13 degrees of freedom
 ## Multiple R-squared:  0.9256, Adjusted R-squared:  0.9198 
 ## F-statistic: 161.6 on 1 and 13 DF,  p-value: 0.00000001042</code></pre>
-<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="normal-error-regression-model.html#cb481-1"></a>b0 &lt;-<span class="st"> </span>IC_Model<span class="op">$</span>coefficients[<span class="dv">1</span>]</span>
-<span id="cb481-2"><a href="normal-error-regression-model.html#cb481-2"></a>b1 &lt;-<span class="st"> </span>IC_Model<span class="op">$</span>coefficients[<span class="dv">2</span>]</span>
-<span id="cb481-3"><a href="normal-error-regression-model.html#cb481-3"></a>s &lt;-<span class="st"> </span><span class="kw">sigma</span>(IC_Model)</span></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="normal-error-regression-model.html#cb483-1"></a>b0 &lt;-<span class="st"> </span>IC_Model<span class="op">$</span>coefficients[<span class="dv">1</span>]</span>
+<span id="cb483-2"><a href="normal-error-regression-model.html#cb483-2"></a>b1 &lt;-<span class="st"> </span>IC_Model<span class="op">$</span>coefficients[<span class="dv">2</span>]</span>
+<span id="cb483-3"><a href="normal-error-regression-model.html#cb483-3"></a>s &lt;-<span class="st"> </span><span class="kw">sigma</span>(IC_Model)</span></code></pre></div>
 </div>
 <div id="estimation-in-slr" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.3.6</span> Estimation in SLR<a href="normal-error-regression-model.html#estimation-in-slr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -985,21 +985,21 @@ The extra <span class="math inline">\(s^2\)</span> in the calculation of predict
 </div>
 <div id="confidence-interval-in-r" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.3.7</span> Confidence Interval in R<a href="normal-error-regression-model.html#confidence-interval-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="normal-error-regression-model.html#cb482-1"></a><span class="kw">predict</span>(IC_Model, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">time=</span><span class="fl">1.5</span>), <span class="dt">interval =</span> <span class="st">&quot;confidence&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="normal-error-regression-model.html#cb484-1"></a><span class="kw">predict</span>(IC_Model, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">time=</span><span class="fl">1.5</span>), <span class="dt">interval =</span> <span class="st">&quot;confidence&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
 <pre><code>##        fit      lwr      upr
 ## 1 2.916965 2.523728 3.310201</code></pre>
 <p>We are 95% confident that the mean amount of ice cream dispensed when the dispensor is held for 1.5 seconds is between 2.52 and 3.31 oz.</p>
 </div>
 <div id="prediction-interval-in-r" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.3.8</span> Prediction Interval in R<a href="normal-error-regression-model.html#prediction-interval-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="normal-error-regression-model.html#cb484-1"></a><span class="kw">predict</span>(IC_Model, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">time=</span><span class="fl">1.5</span>), <span class="dt">interval =</span> <span class="st">&quot;prediction&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="normal-error-regression-model.html#cb486-1"></a><span class="kw">predict</span>(IC_Model, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">time=</span><span class="fl">1.5</span>), <span class="dt">interval =</span> <span class="st">&quot;prediction&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
 <pre><code>##        fit      lwr      upr
 ## 1 2.916965 1.862832 3.971097</code></pre>
 <p>We are 95% confident that in individual who holds the dispensor for 1.5 seconds will get between 1.86 and 3.97 oz of ice cream.</p>
 </div>
 <div id="confidence-and-prediction-intervals" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.3.9</span> Confidence and Prediction Intervals<a href="normal-error-regression-model.html#confidence-and-prediction-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-391-1.png" width="768" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-392-1.png" width="768" /></p>
 <p>The prediction interval (in red) is wider than the confidence interval (in blue), since it must account for variability between individuals, in addition to sampling variability.</p>
 </div>
 <div id="confidence-and-prediction-bands" class="section level3 hasAnchor">
@@ -1052,7 +1052,7 @@ SE(\hat{Y}|X=x^*) = \sqrt{\frac{1}{n}+ \frac{(x^*-\bar{x})^2}{\displaystyle\sum_
 <div id="cars-confidence-interval" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.3.13</span> Cars Confidence Interval<a href="normal-error-regression-model.html#cars-confidence-interval" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>What is a reasonable range for the average price of all new 2015 cars that can accelerate from 0 to 60 mph in 7 seconds?</p>
-<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="normal-error-regression-model.html#cb486-1"></a><span class="kw">predict</span>(Cars_M_A060, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="dv">7</span>), <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="normal-error-regression-model.html#cb488-1"></a><span class="kw">predict</span>(Cars_M_A060, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="dv">7</span>), <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
 <pre><code>##       fit      lwr      upr
 ## 1 39.5502 37.21856 41.88184</code></pre>
 <p>We are 95% confident that the average price of new 2015 cars that accelerate from 0 to 60 mph in 7 seconds is between 37.2 and 41.9 thousand dollars.</p>
@@ -1061,14 +1061,14 @@ SE(\hat{Y}|X=x^*) = \sqrt{\frac{1}{n}+ \frac{(x^*-\bar{x})^2}{\displaystyle\sum_
 <div id="cars-prediction-interval" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.3.14</span> Cars Prediction Interval<a href="normal-error-regression-model.html#cars-prediction-interval" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If a car I am looking to buy can accelerate from 0 to 60 mph in 7 seconds, what price range should I expect?</p>
-<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="normal-error-regression-model.html#cb488-1"></a><span class="kw">predict</span>(Cars_M_A060, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="dv">7</span>), <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="normal-error-regression-model.html#cb490-1"></a><span class="kw">predict</span>(Cars_M_A060, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="dv">7</span>), <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
 <pre><code>##       fit      lwr      upr
 ## 1 39.5502 18.19826 60.90215</code></pre>
 <p>We are 95% confident that a single new 2015 car that accelerates from 0 to 60 mph in 7 seconds will cost between 18.2 and 60.9 thousand dollars.</p>
 </div>
 <div id="cars-interval-visualization" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.3.15</span> Cars Interval Visualization<a href="normal-error-regression-model.html#cars-interval-visualization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-395-1.png" width="768" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-396-1.png" width="768" /></p>
 </div>
 <div id="lakes-questions-of-interest" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.3.16</span> Lakes Questions of Interest<a href="normal-error-regression-model.html#lakes-questions-of-interest" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1079,7 +1079,7 @@ SE(\hat{Y}|X=x^*) = \sqrt{\frac{1}{n}+ \frac{(x^*-\bar{x})^2}{\displaystyle\sum_
 </div>
 <div id="lakes-confidence-interval" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.3.17</span> Lakes Confidence Interval<a href="normal-error-regression-model.html#lakes-confidence-interval" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="normal-error-regression-model.html#cb490-1"></a><span class="kw">predict</span>(Lakes_M, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Location=</span><span class="kw">c</span>(<span class="st">&quot;N&quot;</span>, <span class="st">&quot;S&quot;</span>)), <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="normal-error-regression-model.html#cb492-1"></a><span class="kw">predict</span>(Lakes_M, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Location=</span><span class="kw">c</span>(<span class="st">&quot;N&quot;</span>, <span class="st">&quot;S&quot;</span>)), <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
 <pre><code>##         fit       lwr       upr
 ## 1 0.4245455 0.3137408 0.5353501
 ## 2 0.6965000 0.5541689 0.8388311</code></pre>
@@ -1089,7 +1089,7 @@ Note: these are confidence intervals for <span class="math inline">\(\beta_0\)</
 </div>
 <div id="lakes-prediction-interval" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.3.18</span> Lakes Prediction Interval<a href="normal-error-regression-model.html#lakes-prediction-interval" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="normal-error-regression-model.html#cb492-1"></a><span class="kw">predict</span>(Lakes_M, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Location=</span><span class="kw">c</span>(<span class="st">&quot;N&quot;</span>, <span class="st">&quot;S&quot;</span>)), <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="normal-error-regression-model.html#cb494-1"></a><span class="kw">predict</span>(Lakes_M, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Location=</span><span class="kw">c</span>(<span class="st">&quot;N&quot;</span>, <span class="st">&quot;S&quot;</span>)), <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
 <pre><code>##         fit         lwr      upr
 ## 1 0.4245455 -0.22155101 1.070642
 ## 2 0.6965000  0.04425685 1.348743</code></pre>
@@ -1141,11 +1141,11 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 </li>
 <li>“funnel” or “megaphone” shape indicates problem with constant variance assumption</li>
 </ul>
-<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="normal-error-regression-model.html#cb494-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Violations, <span class="kw">aes</span>(<span class="dt">y=</span>no_viol_Model<span class="op">$</span>residuals, <span class="dt">x=</span>no_viol_Model<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;No Violation&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb494-2"><a href="normal-error-regression-model.html#cb494-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Violations, <span class="kw">aes</span>(<span class="dt">y=</span>lin_viol_Model<span class="op">$</span>residuals, <span class="dt">x=</span>no_viol_Model<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Violation of Linearity Assumption&quot;</span>)<span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb494-3"><a href="normal-error-regression-model.html#cb494-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Violations, <span class="kw">aes</span>(<span class="dt">y=</span>cvar_viol_Model<span class="op">$</span>residuals, <span class="dt">x=</span>no_viol_Model<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Violation of Constant Variance Assumption&quot;</span>)<span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb494-4"><a href="normal-error-regression-model.html#cb494-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-400-1.png" width="768" /></p>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="normal-error-regression-model.html#cb496-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Violations, <span class="kw">aes</span>(<span class="dt">y=</span>no_viol_Model<span class="op">$</span>residuals, <span class="dt">x=</span>no_viol_Model<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;No Violation&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb496-2"><a href="normal-error-regression-model.html#cb496-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Violations, <span class="kw">aes</span>(<span class="dt">y=</span>lin_viol_Model<span class="op">$</span>residuals, <span class="dt">x=</span>no_viol_Model<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Violation of Linearity Assumption&quot;</span>)<span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb496-3"><a href="normal-error-regression-model.html#cb496-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Violations, <span class="kw">aes</span>(<span class="dt">y=</span>cvar_viol_Model<span class="op">$</span>residuals, <span class="dt">x=</span>no_viol_Model<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Violation of Constant Variance Assumption&quot;</span>)<span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb496-4"><a href="normal-error-regression-model.html#cb496-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-401-1.png" width="768" /></p>
 <p>If there is only one explanatory variable, plotting the residuals against that variable reveals the same information.</p>
 </div>
 <div id="histogram-of-residuals" class="section level3 hasAnchor">
@@ -1154,10 +1154,10 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 <ul>
 <li>Severe skewness indicates violation of normality assumption</li>
 </ul>
-<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="normal-error-regression-model.html#cb495-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Violations, <span class="kw">aes</span>(<span class="dt">x=</span>no_viol_Model<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;No Violation&quot;</span>) <span class="op">+</span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
-<span id="cb495-2"><a href="normal-error-regression-model.html#cb495-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Violations, <span class="kw">aes</span>(<span class="dt">x=</span>norm_viol_Model<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Violation of Normality Assumption&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
-<span id="cb495-3"><a href="normal-error-regression-model.html#cb495-3"></a><span class="kw">grid.arrange</span>(P1, P2, <span class="dt">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-401-1.png" width="768" /></p>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="normal-error-regression-model.html#cb497-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Violations, <span class="kw">aes</span>(<span class="dt">x=</span>no_viol_Model<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;No Violation&quot;</span>) <span class="op">+</span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
+<span id="cb497-2"><a href="normal-error-regression-model.html#cb497-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Violations, <span class="kw">aes</span>(<span class="dt">x=</span>norm_viol_Model<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Violation of Normality Assumption&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
+<span id="cb497-3"><a href="normal-error-regression-model.html#cb497-3"></a><span class="kw">grid.arrange</span>(P1, P2, <span class="dt">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-402-1.png" width="768" /></p>
 </div>
 <div id="normal-quantile-quantile-qq-plot" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.4.6</span> Normal Quantile-Quantile (QQ) Plot<a href="normal-error-regression-model.html#normal-quantile-quantile-qq-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1166,10 +1166,10 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 <ul>
 <li>Severe departures from diagonal line indicate a problem with normality assumption.</li>
 </ul>
-<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="normal-error-regression-model.html#cb496-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Violations, <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(no_viol_Model<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;No Violation&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>))</span>
-<span id="cb496-2"><a href="normal-error-regression-model.html#cb496-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Violations, <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(norm_viol_Model<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Violation of Normality Assumption&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>))</span>
-<span id="cb496-3"><a href="normal-error-regression-model.html#cb496-3"></a><span class="kw">grid.arrange</span>(P1, P2, <span class="dt">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-402-1.png" width="768" /></p>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="normal-error-regression-model.html#cb498-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Violations, <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(no_viol_Model<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;No Violation&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>))</span>
+<span id="cb498-2"><a href="normal-error-regression-model.html#cb498-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Violations, <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(norm_viol_Model<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Violation of Normality Assumption&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>))</span>
+<span id="cb498-3"><a href="normal-error-regression-model.html#cb498-3"></a><span class="kw">grid.arrange</span>(P1, P2, <span class="dt">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-403-1.png" width="768" /></p>
 </div>
 <div id="checking-model-assumptions---independence" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.4.7</span> Checking Model Assumptions - Independence<a href="normal-error-regression-model.html#checking-model-assumptions---independence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1237,11 +1237,11 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 </tr>
 <tr class="even">
 <td>Constant Variance</td>
-<td>predictions still reliable; some intervals will be too wide and others too narrow.</td>
+<td>predictions still reliable; some intervals will be too wide and others too narrow, prediction intervals heavily affected, confidence intervals may be affected, especially when sample size is small</td>
 </tr>
 <tr class="odd">
 <td>Normality</td>
-<td>predictions still reliable; intervals will be symmetric when they shouldn’t be</td>
+<td>predictions still reliable; intervals will be symmetric when they shouldn’t be , prediction intervals heavily affected, confidence intervals may be affected, especially when sample size is small</td>
 </tr>
 <tr class="even">
 <td>Independence</td>
@@ -1266,19 +1266,20 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 </div>
 <div id="cars-assumptions-check" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.4.11</span> Cars Assumptions Check<a href="normal-error-regression-model.html#cars-assumptions-check" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="normal-error-regression-model.html#cb497-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M_A060<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M_A060<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Cars Model Residual Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb497-2"><a href="normal-error-regression-model.html#cb497-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">x=</span>Cars_M_A060<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
-<span id="cb497-3"><a href="normal-error-regression-model.html#cb497-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(Cars_M_A060<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Cars Model QQ Plot&quot;</span>)</span>
-<span id="cb497-4"><a href="normal-error-regression-model.html#cb497-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-403-1.png" width="960" /></p>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="normal-error-regression-model.html#cb499-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M_A060<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M_A060<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Cars Model Residual Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb499-2"><a href="normal-error-regression-model.html#cb499-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">x=</span>Cars_M_A060<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
+<span id="cb499-3"><a href="normal-error-regression-model.html#cb499-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(Cars_M_A060<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Cars Model QQ Plot&quot;</span>)</span>
+<span id="cb499-4"><a href="normal-error-regression-model.html#cb499-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-404-1.png" width="960" /></p>
 <p>There is a funnel-shape in the residual plot, indicating a concern about the constant variance assumption. There appears to be more variability in prices for more expensive cars than for cheaper cars. There is also some concern about the normality assumption, as the histogram and QQ plot indicate right-skew in the residuals.</p>
+<p>Since the sample size is large and the violations aren’t too severe, these concerns probably won’t have much impact on tests and confidence intervals associated with the slope and intercept of the regression line, but they will likely lead to unreliable prediction intervals.</p>
 </div>
 <div id="model-for-mercury-florida-lakes" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.4.12</span> Model for Mercury Florida Lakes<a href="normal-error-regression-model.html#model-for-mercury-florida-lakes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Recall our sample of 53 Florida Lakes, 33 in the north, and 20 in the south.</p>
 <p><span class="math inline">\(\text{Mercury}_i = \beta_0 + \beta_1\times\text{I}_{\text{South}_i} + \epsilon_i\)</span>, where <span class="math inline">\(\epsilon_i\sim\mathcal{N}(0, \sigma)\)</span>.</p>
-<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="normal-error-regression-model.html#cb498-1"></a>LakesBP</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-404-1.png" width="768" /></p>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="normal-error-regression-model.html#cb500-1"></a>LakesBP</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-405-1.png" width="768" /></p>
 </div>
 <div id="lakes-model-assumptions" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.4.13</span> Lakes Model Assumptions<a href="normal-error-regression-model.html#lakes-model-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1292,14 +1293,15 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 </div>
 <div id="lakes-assumptions-check" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.4.14</span> Lakes Assumptions Check<a href="normal-error-regression-model.html#lakes-assumptions-check" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="normal-error-regression-model.html#cb499-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>FloridaLakes, <span class="kw">aes</span>(<span class="dt">y=</span>Lakes_M<span class="op">$</span>residuals, <span class="dt">x=</span>Lakes_M<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Lakes Model Residual Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb499-2"><a href="normal-error-regression-model.html#cb499-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>FloridaLakes, <span class="kw">aes</span>(<span class="dt">x=</span>Lakes_M<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Lakes of Residuals&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
-<span id="cb499-3"><a href="normal-error-regression-model.html#cb499-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>FloridaLakes, <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(Lakes_M<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Lakes Model QQ Plot&quot;</span>)</span>
-<span id="cb499-4"><a href="normal-error-regression-model.html#cb499-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-405-1.png" width="960" /></p>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="normal-error-regression-model.html#cb501-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>FloridaLakes, <span class="kw">aes</span>(<span class="dt">y=</span>Lakes_M<span class="op">$</span>residuals, <span class="dt">x=</span>Lakes_M<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Lakes Model Residual Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb501-2"><a href="normal-error-regression-model.html#cb501-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>FloridaLakes, <span class="kw">aes</span>(<span class="dt">x=</span>Lakes_M<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Lakes of Residuals&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
+<span id="cb501-3"><a href="normal-error-regression-model.html#cb501-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>FloridaLakes, <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(Lakes_M<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Lakes Model QQ Plot&quot;</span>)</span>
+<span id="cb501-4"><a href="normal-error-regression-model.html#cb501-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-406-1.png" width="960" /></p>
 <p>Notice that we see two lines of predicted values and residuals. This makes sense since all lakes in North Florida will have the same predicted value, as will all lakes in Southern Florida.</p>
 <p>There appears to be a little more variability in residuals for Southern Florida (on the right), than Northern Florida, causing some concern about the constant variance assumption.</p>
 <p>Overall, though, the assumptions seem mostly reasonable.</p>
+<p>We shouldn’t be concerned about using theory-based hypothesis tests or confidence intervals for the mean mercury level or difference in mean mercury levels. There might be some concern that prediction intervals could be either too wide or too narrow, but this is not a major concern, since the constant variance assumption is not severe.</p>
 </div>
 <div id="general-comments-on-model-assumptions" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.4.15</span> General Comments on Model Assumptions<a href="normal-error-regression-model.html#general-comments-on-model-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1319,24 +1321,24 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 <h2><span class="header-section-number">5.5</span> Transformations<a href="normal-error-regression-model.html#transformations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="cars-assumptions-check-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.5.1</span> Cars Assumptions Check<a href="normal-error-regression-model.html#cars-assumptions-check-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="normal-error-regression-model.html#cb500-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M_A060<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M_A060<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Cars Model Residual Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb500-2"><a href="normal-error-regression-model.html#cb500-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">x=</span>Cars_M_A060<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
-<span id="cb500-3"><a href="normal-error-regression-model.html#cb500-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(Cars_M_A060<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Cars Model QQ Plot&quot;</span>)</span>
-<span id="cb500-4"><a href="normal-error-regression-model.html#cb500-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-406-1.png" width="960" /></p>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="normal-error-regression-model.html#cb502-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M_A060<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M_A060<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Cars Model Residual Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb502-2"><a href="normal-error-regression-model.html#cb502-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">x=</span>Cars_M_A060<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
+<span id="cb502-3"><a href="normal-error-regression-model.html#cb502-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(Cars_M_A060<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Cars Model QQ Plot&quot;</span>)</span>
+<span id="cb502-4"><a href="normal-error-regression-model.html#cb502-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-407-1.png" width="960" /></p>
 <p>There is a funnel-shape in the residual plot, indicating a concern about the constant variance assumption. There appears to be more variability in prices for more expensive cars than for cheaper cars. There is also some concern about the normality assumption, as the histogram and QQ plot indicate right-skew in the residuals.</p>
 </div>
 <div id="confidence-interval-for-beta_1-in-cars-example" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.5.2</span> Confidence Interval for <span class="math inline">\(\beta_1\)</span> in Cars Example<a href="normal-error-regression-model.html#confidence-interval-for-beta_1-in-cars-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="normal-error-regression-model.html#cb501-1"></a><span class="kw">confint</span>(Cars_M_A060, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="normal-error-regression-model.html#cb503-1"></a><span class="kw">confint</span>(Cars_M_A060, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
 <pre><code>##                 2.5 %    97.5 %
 ## (Intercept) 79.888995 99.918163
 ## Acc060      -8.429027 -5.957651</code></pre>
 <p>We are 95% confident that the average price of a new 2015 car decreases between 8.43 and 5.96 thousand dollars for each additional second it takes to accelerate from 0 to 60 mph.</p>
 <p>Bootstrap Confidence Interval for <span class="math inline">\(\beta_1\)</span>:</p>
-<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="normal-error-regression-model.html#cb503-1"></a>q<span class="fl">.025</span> &lt;-<span class="st"> </span><span class="kw">quantile</span>(Cars_Bootstrap_Results_Acc060<span class="op">$</span>b1, <span class="fl">0.025</span>)</span>
-<span id="cb503-2"><a href="normal-error-regression-model.html#cb503-2"></a>q<span class="fl">.975</span> &lt;-<span class="st"> </span><span class="kw">quantile</span>(Cars_Bootstrap_Results_Acc060<span class="op">$</span>b1, <span class="fl">0.975</span>)</span>
-<span id="cb503-3"><a href="normal-error-regression-model.html#cb503-3"></a><span class="kw">c</span>(q<span class="fl">.025</span>, q<span class="fl">.975</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="normal-error-regression-model.html#cb505-1"></a>q<span class="fl">.025</span> &lt;-<span class="st"> </span><span class="kw">quantile</span>(Cars_Bootstrap_Results_Acc060<span class="op">$</span>b1, <span class="fl">0.025</span>)</span>
+<span id="cb505-2"><a href="normal-error-regression-model.html#cb505-2"></a>q<span class="fl">.975</span> &lt;-<span class="st"> </span><span class="kw">quantile</span>(Cars_Bootstrap_Results_Acc060<span class="op">$</span>b1, <span class="fl">0.975</span>)</span>
+<span id="cb505-3"><a href="normal-error-regression-model.html#cb505-3"></a><span class="kw">c</span>(q<span class="fl">.025</span>, q<span class="fl">.975</span>)</span></code></pre></div>
 <pre><code>##      2.5%     97.5% 
 ## -8.797594 -5.696359</code></pre>
 <p>The bootstrap confidence interval is slightly wider than the one based on the t-approximation.</p>
@@ -1344,10 +1346,10 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 </div>
 <div id="confidence-and-prediction-intervals-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.5.3</span> Confidence and Prediction Intervals<a href="normal-error-regression-model.html#confidence-and-prediction-intervals-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="normal-error-regression-model.html#cb505-1"></a><span class="kw">predict</span>(Cars_M_A060, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="dv">7</span>), <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="normal-error-regression-model.html#cb507-1"></a><span class="kw">predict</span>(Cars_M_A060, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="dv">7</span>), <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
 <pre><code>##       fit      lwr      upr
 ## 1 39.5502 37.21856 41.88184</code></pre>
-<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="normal-error-regression-model.html#cb507-1"></a><span class="kw">predict</span>(Cars_M_A060, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="dv">10</span>), <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="normal-error-regression-model.html#cb509-1"></a><span class="kw">predict</span>(Cars_M_A060, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="dv">10</span>), <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
 <pre><code>##        fit      lwr      upr
 ## 1 17.97018 14.71565 21.22472</code></pre>
 <p>We are 95% confident that the mean price for all cars that can accelerate from 0 to 60 mph in 7 seconds is between 37.2 and 41.9 thousand dollars.</p>
@@ -1355,10 +1357,10 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 </div>
 <div id="prediction-intervals-for-expected-price-given-acc060" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.5.4</span> Prediction Intervals for Expected Price Given Acc060<a href="normal-error-regression-model.html#prediction-intervals-for-expected-price-given-acc060" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="normal-error-regression-model.html#cb509-1"></a><span class="kw">predict</span>(Cars_M_A060, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="dv">7</span>), <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="normal-error-regression-model.html#cb511-1"></a><span class="kw">predict</span>(Cars_M_A060, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="dv">7</span>), <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
 <pre><code>##       fit      lwr      upr
 ## 1 39.5502 18.19826 60.90215</code></pre>
-<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="normal-error-regression-model.html#cb511-1"></a><span class="kw">predict</span>(Cars_M_A060, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="dv">10</span>), <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="normal-error-regression-model.html#cb513-1"></a><span class="kw">predict</span>(Cars_M_A060, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="dv">10</span>), <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
 <pre><code>##        fit       lwr      upr
 ## 1 17.97018 -3.502148 39.44252</code></pre>
 <p>We are 95% confident that a single car that can accelerate from 0 to 60 mph in 7 seconds will cost between 18.2 thousand and 60.9 thousand dollars.</p>
@@ -1366,7 +1368,7 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 </div>
 <div id="confidence-and-prediction-interval-illustration" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.5.5</span> Confidence and Prediction Interval Illustration<a href="normal-error-regression-model.html#confidence-and-prediction-interval-illustration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-413-1.png" width="960" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-414-1.png" width="960" /></p>
 </div>
 <div id="concerns-about-intervals-and-model-assumptions" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.5.6</span> Concerns about Intervals and Model Assumptions<a href="normal-error-regression-model.html#concerns-about-intervals-and-model-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1386,15 +1388,15 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 </div>
 <div id="plot-of-logprice-and-acc060" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.5.8</span> Plot of LogPrice and Acc060<a href="normal-error-regression-model.html#plot-of-logprice-and-acc060" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="normal-error-regression-model.html#cb513-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">x=</span>Acc060, <span class="dt">y=</span><span class="kw">log</span>(LowPrice))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb513-2"><a href="normal-error-regression-model.html#cb513-2"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Acceleration Time&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Log of Price&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb513-3"><a href="normal-error-regression-model.html#cb513-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Acceleration Time and Log Price&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-414-1.png" width="672" /></p>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="normal-error-regression-model.html#cb515-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">x=</span>Acc060, <span class="dt">y=</span><span class="kw">log</span>(LowPrice))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb515-2"><a href="normal-error-regression-model.html#cb515-2"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Acceleration Time&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Log of Price&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb515-3"><a href="normal-error-regression-model.html#cb515-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Acceleration Time and Log Price&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-415-1.png" width="672" /></p>
 </div>
 <div id="model-for-log-transform" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.5.9</span> Model for Log Transform<a href="normal-error-regression-model.html#model-for-log-transform" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="normal-error-regression-model.html#cb514-1"></a>Cars_M_Log &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(LowPrice)<span class="op">~</span>Acc060)</span>
-<span id="cb514-2"><a href="normal-error-regression-model.html#cb514-2"></a><span class="kw">summary</span>(Cars_M_Log)</span></code></pre></div>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="normal-error-regression-model.html#cb516-1"></a>Cars_M_Log &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(LowPrice)<span class="op">~</span>Acc060)</span>
+<span id="cb516-2"><a href="normal-error-regression-model.html#cb516-2"></a><span class="kw">summary</span>(Cars_M_Log)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(LowPrice) ~ Acc060, data = Cars2015)
@@ -1426,11 +1428,11 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 </div>
 <div id="model-assumption-check-for-transformed-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.5.11</span> Model Assumption Check for Transformed Model<a href="normal-error-regression-model.html#model-assumption-check-for-transformed-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="normal-error-regression-model.html#cb516-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M_Log<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M_Log<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Cars Log Model Residual Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb516-2"><a href="normal-error-regression-model.html#cb516-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">x=</span>Cars_M_Log<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
-<span id="cb516-3"><a href="normal-error-regression-model.html#cb516-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(Cars_M_Log<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Cars Model QQ Plot&quot;</span>)</span>
-<span id="cb516-4"><a href="normal-error-regression-model.html#cb516-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-416-1.png" width="864" /></p>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="normal-error-regression-model.html#cb518-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M_Log<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M_Log<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Cars Log Model Residual Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb518-2"><a href="normal-error-regression-model.html#cb518-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">x=</span>Cars_M_Log<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
+<span id="cb518-3"><a href="normal-error-regression-model.html#cb518-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(Cars_M_Log<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Cars Model QQ Plot&quot;</span>)</span>
+<span id="cb518-4"><a href="normal-error-regression-model.html#cb518-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-417-1.png" width="864" /></p>
 <p>There is still some concern about constant variance, though perhaps not as much. The normality assumption appears more reasonable.</p>
 </div>
 <div id="model-for-log-of-car-price" class="section level3 hasAnchor">
@@ -1468,10 +1470,10 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 \end{aligned}
 \]</span></p>
 <p>Predictions are for log(Price), so we need to exponentiate.</p>
-<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="normal-error-regression-model.html#cb517-1"></a><span class="kw">predict</span>(Cars_M_Log, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="kw">c</span>(<span class="dv">7</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="normal-error-regression-model.html#cb519-1"></a><span class="kw">predict</span>(Cars_M_Log, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="kw">c</span>(<span class="dv">7</span>)))</span></code></pre></div>
 <pre><code>##        1 
 ## 3.592343</code></pre>
-<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="normal-error-regression-model.html#cb519-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M_Log, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="kw">c</span>(<span class="dv">7</span>))))</span></code></pre></div>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="normal-error-regression-model.html#cb521-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M_Log, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="kw">c</span>(<span class="dv">7</span>))))</span></code></pre></div>
 <pre><code>##        1 
 ## 36.31908</code></pre>
 <p>A car that accelerates from 0 to 60 mph in 7 seconds is expected to cost 36.3 thousand dollars.</p>
@@ -1493,7 +1495,7 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 </div>
 <div id="log-model-ci-for-beta_0-beta_1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.5.15</span> Log Model CI for <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span><a href="normal-error-regression-model.html#log-model-ci-for-beta_0-beta_1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="normal-error-regression-model.html#cb521-1"></a><span class="kw">confint</span>(Cars_M_Log)</span></code></pre></div>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="normal-error-regression-model.html#cb523-1"></a><span class="kw">confint</span>(Cars_M_Log)</span></code></pre></div>
 <pre><code>##                  2.5 %     97.5 %
 ## (Intercept)  4.8787105  5.3949208
 ## Acc060      -0.2524862 -0.1887916</code></pre>
@@ -1503,20 +1505,20 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 </div>
 <div id="log-model-ci-for-expected-response" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.5.16</span> Log Model CI for Expected Response<a href="normal-error-regression-model.html#log-model-ci-for-expected-response" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="normal-error-regression-model.html#cb523-1"></a><span class="kw">predict</span>(Cars_M_Log, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="kw">c</span>(<span class="dv">7</span>)), <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="normal-error-regression-model.html#cb525-1"></a><span class="kw">predict</span>(Cars_M_Log, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="kw">c</span>(<span class="dv">7</span>)), <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
 <pre><code>##        fit     lwr      upr
 ## 1 3.592343 3.53225 3.652436</code></pre>
-<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="normal-error-regression-model.html#cb525-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M_Log, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="kw">c</span>(<span class="dv">7</span>)), <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="normal-error-regression-model.html#cb527-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M_Log, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="kw">c</span>(<span class="dv">7</span>)), <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>))</span></code></pre></div>
 <pre><code>##        fit      lwr      upr
 ## 1 36.31908 34.20083 38.56852</code></pre>
 <p>We are 95% confident that the mean price amoung all cars that accelerate from 0 to 60 mph in 7 seconds is between <span class="math inline">\(e^{3.53225} =34.2\)</span> and <span class="math inline">\(e^{3.652436}=38.6\)</span> thousand dollars.</p>
 </div>
 <div id="log-model-prediction-interval" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.5.17</span> Log Model Prediction Interval<a href="normal-error-regression-model.html#log-model-prediction-interval" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="normal-error-regression-model.html#cb527-1"></a><span class="kw">predict</span>(Cars_M_Log, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="kw">c</span>(<span class="dv">7</span>)), <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="normal-error-regression-model.html#cb529-1"></a><span class="kw">predict</span>(Cars_M_Log, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="kw">c</span>(<span class="dv">7</span>)), <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
 <pre><code>##        fit      lwr      upr
 ## 1 3.592343 3.042041 4.142645</code></pre>
-<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="normal-error-regression-model.html#cb529-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M_Log, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="kw">c</span>(<span class="dv">7</span>)), <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="normal-error-regression-model.html#cb531-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M_Log, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="kw">c</span>(<span class="dv">7</span>)), <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>))</span></code></pre></div>
 <pre><code>##        fit      lwr      upr
 ## 1 36.31908 20.94796 62.96917</code></pre>
 <p>We are 95% confident that the expected price for a car that accelerates from 0 to 60 mph in 7 seconds is between <span class="math inline">\(e^{3.04} =20.9\)</span> and <span class="math inline">\(e^{4.14}=63.9\)</span> thousand dollars.</p>
@@ -1525,11 +1527,11 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 <h3><span class="header-section-number">5.5.18</span> Confidence Interval Comparison<a href="normal-error-regression-model.html#confidence-interval-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>95% Confidence interval for average price of cars that take 7 seconds to accelerate:</p>
 <p>Original Model:</p>
-<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="normal-error-regression-model.html#cb531-1"></a><span class="kw">predict</span>(Cars_M_A060, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="dv">7</span>), <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="normal-error-regression-model.html#cb533-1"></a><span class="kw">predict</span>(Cars_M_A060, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="dv">7</span>), <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
 <pre><code>##       fit      lwr      upr
 ## 1 39.5502 37.21856 41.88184</code></pre>
 <p>Transformed Model:</p>
-<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="normal-error-regression-model.html#cb533-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M_Log, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="kw">c</span>(<span class="dv">7</span>)), <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="normal-error-regression-model.html#cb535-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M_Log, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="kw">c</span>(<span class="dv">7</span>)), <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>))</span></code></pre></div>
 <pre><code>##        fit      lwr      upr
 ## 1 36.31908 34.20083 38.56852</code></pre>
 </div>
@@ -1537,18 +1539,18 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 <h3><span class="header-section-number">5.5.19</span> Prediction Interval Comparison<a href="normal-error-regression-model.html#prediction-interval-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>95% Prediction interval for price of an individual car that takes 7 seconds to accelerate:</p>
 <p>Original Model:</p>
-<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="normal-error-regression-model.html#cb535-1"></a><span class="kw">predict</span>(Cars_M_A060, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="dv">7</span>), <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb537-1"><a href="normal-error-regression-model.html#cb537-1"></a><span class="kw">predict</span>(Cars_M_A060, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="dv">7</span>), <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
 <pre><code>##       fit      lwr      upr
 ## 1 39.5502 18.19826 60.90215</code></pre>
 <p>Transformed Model:</p>
-<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb537-1"><a href="normal-error-regression-model.html#cb537-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M_Log, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="kw">c</span>(<span class="dv">7</span>)), <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="normal-error-regression-model.html#cb539-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M_Log, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="kw">c</span>(<span class="dv">7</span>)), <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>))</span></code></pre></div>
 <pre><code>##        fit      lwr      upr
 ## 1 36.31908 20.94796 62.96917</code></pre>
 <p>Notice that the transformed interval is not symmetric and allows for a longer “tail” on the right than the left.</p>
 </div>
 <div id="log-model-visualization" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.5.20</span> Log Model Visualization<a href="normal-error-regression-model.html#log-model-visualization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-428-1.png" width="960" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-429-1.png" width="960" /></p>
 <p>The log model suggests an nonlinear trend in price with respect to acceleration time and gives wider confidence and prediction intervals for cars that accelerate faster and tend to be more expensive. It also gives non-symmetric intervals. These results appear to be consistent with the observed data.</p>
 </div>
 <div id="comments-on-transformations" class="section level3 hasAnchor">
@@ -1602,26 +1604,26 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 </ul>
 <p>We have data on the times of flights from both airports to Chicago’s O’Hare airport from 2013 (more than 14,000 flights).</p>
 <p>Assuming these flights represent a random sample of all flights from these airports to Chicago, consider how the traveler might use this information to decide which airport to fly out of.</p>
-<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="normal-error-regression-model.html#cb539-1"></a><span class="kw">library</span>(nycflights13)</span>
-<span id="cb539-2"><a href="normal-error-regression-model.html#cb539-2"></a><span class="kw">data</span>(flights)</span>
-<span id="cb539-3"><a href="normal-error-regression-model.html#cb539-3"></a>flights<span class="op">$</span>origin &lt;-<span class="st"> </span><span class="kw">as.factor</span>(flights<span class="op">$</span>origin)</span>
-<span id="cb539-4"><a href="normal-error-regression-model.html#cb539-4"></a>flights<span class="op">$</span>dest &lt;-<span class="st"> </span><span class="kw">as.factor</span>(flights<span class="op">$</span>dest)</span></code></pre></div>
+<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="normal-error-regression-model.html#cb541-1"></a><span class="kw">library</span>(nycflights13)</span>
+<span id="cb541-2"><a href="normal-error-regression-model.html#cb541-2"></a><span class="kw">data</span>(flights)</span>
+<span id="cb541-3"><a href="normal-error-regression-model.html#cb541-3"></a>flights<span class="op">$</span>origin &lt;-<span class="st"> </span><span class="kw">as.factor</span>(flights<span class="op">$</span>origin)</span>
+<span id="cb541-4"><a href="normal-error-regression-model.html#cb541-4"></a>flights<span class="op">$</span>dest &lt;-<span class="st"> </span><span class="kw">as.factor</span>(flights<span class="op">$</span>dest)</span></code></pre></div>
 <p>We’ll create a dataset containing only flights from Newark and Laguardia to O’Hare, and only the variables we’re interested in.</p>
-<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="normal-error-regression-model.html#cb540-1"></a>Flights_NY_CHI &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb540-2"><a href="normal-error-regression-model.html#cb540-2"></a><span class="st">  </span><span class="kw">filter</span>(origin <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;EWR&quot;</span>, <span class="st">&quot;LGA&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>dest <span class="op">==</span><span class="st">&quot;ORD&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb540-3"><a href="normal-error-regression-model.html#cb540-3"></a><span class="st">  </span><span class="kw">select</span>(origin, dest, air_time)</span></code></pre></div>
+<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="normal-error-regression-model.html#cb542-1"></a>Flights_NY_CHI &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb542-2"><a href="normal-error-regression-model.html#cb542-2"></a><span class="st">  </span><span class="kw">filter</span>(origin <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;EWR&quot;</span>, <span class="st">&quot;LGA&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>dest <span class="op">==</span><span class="st">&quot;ORD&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb542-3"><a href="normal-error-regression-model.html#cb542-3"></a><span class="st">  </span><span class="kw">select</span>(origin, dest, air_time)</span></code></pre></div>
 </div>
 <div id="visualizing-new-york-to-chicago-flights" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.6.4</span> Visualizing New York to Chicago Flights<a href="normal-error-regression-model.html#visualizing-new-york-to-chicago-flights" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="normal-error-regression-model.html#cb541-1"></a>p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Flights_NY_CHI, <span class="kw">aes</span>(<span class="dt">x=</span>air_time, <span class="dt">fill=</span>origin, <span class="dt">color=</span>origin)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Flight Time&quot;</span>)</span>
-<span id="cb541-2"><a href="normal-error-regression-model.html#cb541-2"></a>p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Flights_NY_CHI, <span class="kw">aes</span>(<span class="dt">x=</span>air_time, <span class="dt">y=</span>origin)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Flight Time&quot;</span>)</span>
-<span id="cb541-3"><a href="normal-error-regression-model.html#cb541-3"></a><span class="kw">grid.arrange</span>(p1, p2, <span class="dt">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-431-1.png" width="768" /></p>
-<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="normal-error-regression-model.html#cb542-1"></a><span class="kw">library</span>(knitr)</span>
-<span id="cb542-2"><a href="normal-error-regression-model.html#cb542-2"></a>T &lt;-<span class="st"> </span>Flights_NY_CHI <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(origin) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb542-3"><a href="normal-error-regression-model.html#cb542-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Mean_Airtime =</span> <span class="kw">mean</span>(air_time, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), </span>
-<span id="cb542-4"><a href="normal-error-regression-model.html#cb542-4"></a>            <span class="dt">SD =</span> <span class="kw">sd</span>(air_time, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), <span class="dt">n=</span><span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(air_time)))</span>
-<span id="cb542-5"><a href="normal-error-regression-model.html#cb542-5"></a><span class="kw">kable</span>(T)</span></code></pre></div>
+<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="normal-error-regression-model.html#cb543-1"></a>p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Flights_NY_CHI, <span class="kw">aes</span>(<span class="dt">x=</span>air_time, <span class="dt">fill=</span>origin, <span class="dt">color=</span>origin)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Flight Time&quot;</span>)</span>
+<span id="cb543-2"><a href="normal-error-regression-model.html#cb543-2"></a>p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Flights_NY_CHI, <span class="kw">aes</span>(<span class="dt">x=</span>air_time, <span class="dt">y=</span>origin)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Flight Time&quot;</span>)</span>
+<span id="cb543-3"><a href="normal-error-regression-model.html#cb543-3"></a><span class="kw">grid.arrange</span>(p1, p2, <span class="dt">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-432-1.png" width="768" /></p>
+<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="normal-error-regression-model.html#cb544-1"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb544-2"><a href="normal-error-regression-model.html#cb544-2"></a>T &lt;-<span class="st"> </span>Flights_NY_CHI <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(origin) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb544-3"><a href="normal-error-regression-model.html#cb544-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Mean_Airtime =</span> <span class="kw">mean</span>(air_time, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), </span>
+<span id="cb544-4"><a href="normal-error-regression-model.html#cb544-4"></a>            <span class="dt">SD =</span> <span class="kw">sd</span>(air_time, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), <span class="dt">n=</span><span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(air_time)))</span>
+<span id="cb544-5"><a href="normal-error-regression-model.html#cb544-5"></a><span class="kw">kable</span>(T)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1650,8 +1652,8 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 </div>
 <div id="model-for-airlines-data" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.6.5</span> Model for Airlines Data<a href="normal-error-regression-model.html#model-for-airlines-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="normal-error-regression-model.html#cb543-1"></a>M_Flights &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Flights_NY_CHI, air_time<span class="op">~</span>origin)</span>
-<span id="cb543-2"><a href="normal-error-regression-model.html#cb543-2"></a><span class="kw">summary</span>(M_Flights)</span></code></pre></div>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="normal-error-regression-model.html#cb545-1"></a>M_Flights &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Flights_NY_CHI, air_time<span class="op">~</span>origin)</span>
+<span id="cb545-2"><a href="normal-error-regression-model.html#cb545-2"></a><span class="kw">summary</span>(M_Flights)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = air_time ~ origin, data = Flights_NY_CHI)
@@ -1674,7 +1676,7 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 </div>
 <div id="confidence-interval-for-flights" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.6.6</span> Confidence Interval for Flights<a href="normal-error-regression-model.html#confidence-interval-for-flights" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="normal-error-regression-model.html#cb545-1"></a><span class="kw">confint</span>(M_Flights)</span></code></pre></div>
+<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="normal-error-regression-model.html#cb547-1"></a><span class="kw">confint</span>(M_Flights)</span></code></pre></div>
 <pre><code>##                 2.5 %     97.5 %
 ## (Intercept) 113.00572 113.514871
 ## originLGA     2.20905   2.869984</code></pre>
@@ -1693,13 +1695,13 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 <div id="smoking-and-birthweight-example" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.6.8</span> Smoking and Birthweight Example<a href="normal-error-regression-model.html#smoking-and-birthweight-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We consider data on the relationship between a pregnant mother’s smoking and the birthweight of the baby. Data come from a sample of 80 babies born in North Carolina in 2004. Thirty of the mothers were smokers, and fifty were nonsmokers.</p>
-<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="normal-error-regression-model.html#cb547-1"></a>p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>NCBirths, <span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">fill=</span>habit, <span class="dt">color=</span>habit)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Birthweight and Smoking&quot;</span>)</span>
-<span id="cb547-2"><a href="normal-error-regression-model.html#cb547-2"></a>p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>NCBirths, <span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>habit)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Birthweight and Smoking&quot;</span>)</span>
-<span id="cb547-3"><a href="normal-error-regression-model.html#cb547-3"></a><span class="kw">grid.arrange</span>(p1, p2, <span class="dt">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-436-1.png" width="768" /></p>
-<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="normal-error-regression-model.html#cb548-1"></a><span class="kw">library</span>(knitr)</span>
-<span id="cb548-2"><a href="normal-error-regression-model.html#cb548-2"></a>T &lt;-<span class="st"> </span>NCBirths <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(habit) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">Mean_Weight =</span> <span class="kw">mean</span>(weight), <span class="dt">SD =</span> <span class="kw">sd</span>(weight), <span class="dt">n=</span><span class="kw">n</span>())</span>
-<span id="cb548-3"><a href="normal-error-regression-model.html#cb548-3"></a><span class="kw">kable</span>(T)</span></code></pre></div>
+<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="normal-error-regression-model.html#cb549-1"></a>p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>NCBirths, <span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">fill=</span>habit, <span class="dt">color=</span>habit)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Birthweight and Smoking&quot;</span>)</span>
+<span id="cb549-2"><a href="normal-error-regression-model.html#cb549-2"></a>p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>NCBirths, <span class="kw">aes</span>(<span class="dt">x=</span>weight, <span class="dt">y=</span>habit)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Birthweight and Smoking&quot;</span>)</span>
+<span id="cb549-3"><a href="normal-error-regression-model.html#cb549-3"></a><span class="kw">grid.arrange</span>(p1, p2, <span class="dt">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-437-1.png" width="768" /></p>
+<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="normal-error-regression-model.html#cb550-1"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb550-2"><a href="normal-error-regression-model.html#cb550-2"></a>T &lt;-<span class="st"> </span>NCBirths <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(habit) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">Mean_Weight =</span> <span class="kw">mean</span>(weight), <span class="dt">SD =</span> <span class="kw">sd</span>(weight), <span class="dt">n=</span><span class="kw">n</span>())</span>
+<span id="cb550-3"><a href="normal-error-regression-model.html#cb550-3"></a><span class="kw">kable</span>(T)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1727,8 +1729,8 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 </div>
 <div id="model-for-birthweight" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.6.9</span> Model for Birthweight<a href="normal-error-regression-model.html#model-for-birthweight" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="normal-error-regression-model.html#cb549-1"></a>M_Birthwt &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>NCBirths, weight<span class="op">~</span>habit)</span>
-<span id="cb549-2"><a href="normal-error-regression-model.html#cb549-2"></a><span class="kw">summary</span>(M_Birthwt)</span></code></pre></div>
+<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="normal-error-regression-model.html#cb551-1"></a>M_Birthwt &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>NCBirths, weight<span class="op">~</span>habit)</span>
+<span id="cb551-2"><a href="normal-error-regression-model.html#cb551-2"></a><span class="kw">summary</span>(M_Birthwt)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = weight ~ habit, data = NCBirths)
@@ -1750,7 +1752,7 @@ The statement <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots 
 </div>
 <div id="conclusions-from-birthweight-data" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.6.10</span> Conclusions from Birthweight Data<a href="normal-error-regression-model.html#conclusions-from-birthweight-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="normal-error-regression-model.html#cb551-1"></a><span class="kw">confint</span>(M_Birthwt)</span></code></pre></div>
+<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="normal-error-regression-model.html#cb553-1"></a><span class="kw">confint</span>(M_Birthwt)</span></code></pre></div>
 <pre><code>##                 2.5 %    97.5 %
 ## (Intercept)  6.613070 7.4653303
 ## habitsmoker -1.118735 0.2730012</code></pre>
@@ -1772,8 +1774,8 @@ Many studies have shown that a mother’s smoking puts a baby at risk of low bir
 <div id="larger-dataset" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.6.12</span> Larger Dataset<a href="normal-error-regression-model.html#larger-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In fact, this sample of 80 babies is part of a larger dataset, consisting of 1,000 babies born in NC in 2004. When we consider the full dataset, notice that the difference between the groups is similar, but the p-value is much smaller, providing stronger evidence of a relationship between a mother’s smoking and lower birthweight.</p>
-<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="normal-error-regression-model.html#cb553-1"></a>M_Birthwt_Full &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>ncbirths, weight<span class="op">~</span>habit)</span>
-<span id="cb553-2"><a href="normal-error-regression-model.html#cb553-2"></a><span class="kw">summary</span>(M_Birthwt_Full)</span></code></pre></div>
+<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="normal-error-regression-model.html#cb555-1"></a>M_Birthwt_Full &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>ncbirths, weight<span class="op">~</span>habit)</span>
+<span id="cb555-2"><a href="normal-error-regression-model.html#cb555-2"></a><span class="kw">summary</span>(M_Birthwt_Full)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = weight ~ habit, data = ncbirths)
@@ -1824,13 +1826,13 @@ Many studies have shown that a mother’s smoking puts a baby at risk of low bir
 <div id="the-regression-effect-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.7.1</span> The Regression Effect<a href="normal-error-regression-model.html#the-regression-effect-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Exam 1 vs Exam 2 scores for intro stat students at another college</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-441-1.png" width="768" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-442-1.png" width="768" /></p>
 <p>What is the relationship between scores on the two exams?</p>
 </div>
 <div id="the-regression-effect-2" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.7.2</span> The Regression Effect<a href="normal-error-regression-model.html#the-regression-effect-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Exam 1 vs Exam 2 scores for intro stat students at another college</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-442-1.png" width="768" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-443-1.png" width="768" /></p>
 <p>How many of the 6 students who scored below 70 on Exam 1 improved their scores on Exam 2?</p>
 <p>How many of the 7 students who scored above 90 improved on Exam 2?</p>
 </div>
@@ -1843,20 +1845,20 @@ Many studies have shown that a mother’s smoking puts a baby at risk of low bir
 </div>
 <div id="simulating-regression-effect" class="section level3 smaller hasAnchor">
 <h3><span class="header-section-number">5.7.4</span> Simulating Regression Effect<a href="normal-error-regression-model.html#simulating-regression-effect" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="normal-error-regression-model.html#cb555-1"></a><span class="kw">set.seed</span>(<span class="dv">110322018</span>)</span>
-<span id="cb555-2"><a href="normal-error-regression-model.html#cb555-2"></a>Understanding &lt;-<span class="kw">rnorm</span>(<span class="dv">25</span>, <span class="dv">80</span>, <span class="dv">10</span>)</span>
-<span id="cb555-3"><a href="normal-error-regression-model.html#cb555-3"></a>Score1 &lt;-<span class="st"> </span>Understanding <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">25</span>, <span class="dv">0</span>, <span class="dv">5</span>)</span>
-<span id="cb555-4"><a href="normal-error-regression-model.html#cb555-4"></a>Score2 &lt;-<span class="st"> </span>Understanding <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">25</span>, <span class="dv">0</span>, <span class="dv">5</span>)</span>
-<span id="cb555-5"><a href="normal-error-regression-model.html#cb555-5"></a>Understanding &lt;-<span class="st"> </span><span class="kw">round</span>(Understanding,<span class="dv">0</span>)</span>
-<span id="cb555-6"><a href="normal-error-regression-model.html#cb555-6"></a>TestSim &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Understanding, Score1, Score2)</span>
-<span id="cb555-7"><a href="normal-error-regression-model.html#cb555-7"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>TestSim, <span class="kw">aes</span>(<span class="dt">y=</span>Score2, <span class="dt">x=</span>Score1))<span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>) <span class="op">+</span></span>
-<span id="cb555-8"><a href="normal-error-regression-model.html#cb555-8"></a><span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">slope=</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span>Understanding), <span class="dt">vjust =</span> <span class="dv">0</span>, <span class="dt">nudge_y =</span> <span class="fl">0.5</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-443-1.png" width="768" /></p>
+<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="normal-error-regression-model.html#cb557-1"></a><span class="kw">set.seed</span>(<span class="dv">110322018</span>)</span>
+<span id="cb557-2"><a href="normal-error-regression-model.html#cb557-2"></a>Understanding &lt;-<span class="kw">rnorm</span>(<span class="dv">25</span>, <span class="dv">80</span>, <span class="dv">10</span>)</span>
+<span id="cb557-3"><a href="normal-error-regression-model.html#cb557-3"></a>Score1 &lt;-<span class="st"> </span>Understanding <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">25</span>, <span class="dv">0</span>, <span class="dv">5</span>)</span>
+<span id="cb557-4"><a href="normal-error-regression-model.html#cb557-4"></a>Score2 &lt;-<span class="st"> </span>Understanding <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">25</span>, <span class="dv">0</span>, <span class="dv">5</span>)</span>
+<span id="cb557-5"><a href="normal-error-regression-model.html#cb557-5"></a>Understanding &lt;-<span class="st"> </span><span class="kw">round</span>(Understanding,<span class="dv">0</span>)</span>
+<span id="cb557-6"><a href="normal-error-regression-model.html#cb557-6"></a>TestSim &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Understanding, Score1, Score2)</span>
+<span id="cb557-7"><a href="normal-error-regression-model.html#cb557-7"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>TestSim, <span class="kw">aes</span>(<span class="dt">y=</span>Score2, <span class="dt">x=</span>Score1))<span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>) <span class="op">+</span></span>
+<span id="cb557-8"><a href="normal-error-regression-model.html#cb557-8"></a><span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">slope=</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span>Understanding), <span class="dt">vjust =</span> <span class="dv">0</span>, <span class="dt">nudge_y =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-444-1.png" width="768" /></p>
 <p>This phenomon is called the <strong>regression effect</strong>.</p>
 </div>
 <div id="test-scores-simulation---highest-scores" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.7.5</span> Test Scores Simulation - Highest Scores<a href="normal-error-regression-model.html#test-scores-simulation---highest-scores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="normal-error-regression-model.html#cb556-1"></a><span class="kw">kable</span>(<span class="kw">head</span>(TestSim<span class="op">%&gt;%</span><span class="kw">arrange</span>(<span class="kw">desc</span>(Score1))))</span></code></pre></div>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="normal-error-regression-model.html#cb558-1"></a><span class="kw">kable</span>(<span class="kw">head</span>(TestSim<span class="op">%&gt;%</span><span class="kw">arrange</span>(<span class="kw">desc</span>(Score1))))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1902,7 +1904,7 @@ Many studies have shown that a mother’s smoking puts a baby at risk of low bir
 </div>
 <div id="test-scores-simulation---lowest-scores" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.7.6</span> Test Scores Simulation - Lowest Scores<a href="normal-error-regression-model.html#test-scores-simulation---lowest-scores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="normal-error-regression-model.html#cb557-1"></a><span class="kw">kable</span>(<span class="kw">head</span>(TestSim<span class="op">%&gt;%</span><span class="kw">arrange</span>(Score1)))</span></code></pre></div>
+<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="normal-error-regression-model.html#cb559-1"></a><span class="kw">kable</span>(<span class="kw">head</span>(TestSim<span class="op">%&gt;%</span><span class="kw">arrange</span>(Score1)))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1949,7 +1951,7 @@ Many studies have shown that a mother’s smoking puts a baby at risk of low bir
 <div id="another-example" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.7.7</span> Another Example<a href="normal-error-regression-model.html#another-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Wins by NFL teams in 2017 and 2018</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-446-1.png" width="768" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-447-1.png" width="768" /></p>
 </div>
 <div id="other-examples-of-regression-effect" class="section level3 smaller hasAnchor">
 <h3><span class="header-section-number">5.7.8</span> Other Examples of Regression Effect<a href="normal-error-regression-model.html#other-examples-of-regression-effect" class="anchor-section" aria-label="Anchor link to header"></a></h3>

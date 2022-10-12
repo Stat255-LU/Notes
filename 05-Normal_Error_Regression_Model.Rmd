@@ -202,7 +202,7 @@ As statistician George Box said, *"All models are wrong, but some are useful."*
 
 ## Inference in Normal Error Regression Model    
 
-### Distribution of $t= \frac{{b_j}-\beta_j}{\text{SE}(b_j)}$
+### Distribution of $t= \frac{{b_j}}{\text{SE}(b_j)}$
 
 We've already seen that we can use t-distributions to perform inference on regression model parameters ($b_j$'s)when sample sizes are large enough.  
 
@@ -229,12 +229,12 @@ where $t^*$ is chosen to achieve the desired confidence level.
 * For a 95% confidence interval, use $t^*=2$.   
 
 
-**Hypothesis test for $\beta_j=\gamma$**
+**Hypothesis test for $\beta_j=0$**
 
-*  If $Y_i = \beta_0 + \beta_1X_{i1}+ \ldots + \beta_pX_{ip} + \epsilon_i$, with $\epsilon_i\sim\mathcal{N}(0,\sigma)$,  then a test statistic for the null hypothesis: $\beta_j = \gamma$ is given by:
+*  If $Y_i = \beta_0 + \beta_1X_{i1}+ \ldots + \beta_pX_{ip} + \epsilon_i$, with $\epsilon_i\sim\mathcal{N}(0,\sigma)$,  then a test statistic for the null hypothesis: $\beta_j = 0$ is given by:
 
 \[
-t=\frac{{b_j}-\gamma}{\text{SE}(b_j)}, 
+t=\frac{{b_j}}{\text{SE}(b_j)}, 
 \]
 
 and calculate a p-value using a t-distribution.   
@@ -717,8 +717,8 @@ All of these require more complicated models that account for correlation using 
 |   Model assumption           | Impact | 
 |-----------|----------|
 | Linearity | predictions and intervals unreliable |
-| Constant Variance | predictions still reliable; some intervals will be too wide and others too narrow. |
-| Normality | predictions still reliable; intervals will be symmetric when they shouldn't be|
+| Constant Variance | predictions still reliable; some intervals will be too wide and others too narrow, prediction intervals heavily affected, confidence intervals may be affected, especially when sample size is small |
+| Normality | predictions still reliable; intervals will be symmetric when they shouldn't be , prediction intervals heavily affected, confidence intervals may be affected, especially when sample size is small |
 | Independence | predictions unreliable and intervals unreliable |
 
 
@@ -752,6 +752,9 @@ grid.arrange(P1, P2, P3, ncol=3)
 ```
 
 There is a funnel-shape in the residual plot, indicating a concern about the constant variance assumption. There appears to be more variability in prices for more expensive cars than for cheaper cars. There is also some concern about the normality assumption, as the histogram and QQ plot indicate right-skew in the residuals.   
+
+Since the sample size is large and the violations aren't too severe, these concerns probably won't have much impact on tests and confidence intervals associated with the slope and intercept of the regression line, but they will likely lead to unreliable prediction intervals.   
+
 
 ### Model for Mercury Florida Lakes 
 
@@ -789,6 +792,9 @@ Notice that we see two lines of predicted values and residuals. This makes sense
 There appears to be a little more variability in residuals for Southern Florida (on the right), than Northern Florida, causing some concern about the constant variance assumption. 
 
 Overall, though, the assumptions seem mostly reasonable. 
+
+We shouldn't be concerned about using theory-based hypothesis tests or  confidence intervals for the mean mercury level or difference in mean mercury levels. There might be some concern that prediction intervals could be either too wide or too narrow, but this is not a major concern, since the constant variance assumption is not severe.   
+
 
 ### General Comments on Model Assumptions
 

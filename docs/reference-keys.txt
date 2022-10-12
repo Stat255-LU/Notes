@@ -271,7 +271,7 @@ icecream-model-from-simulated-data
 mathematical-form-of-normal-error-regression-model
 parameters-and-statistics
 inference-in-normal-error-regression-model
-distribution-of-t-fracb_j-beta_jtextseb_j
+distribution-of-t-fracb_jtextseb_j
 f-distribution
 distribution-of-f-statistic
 bear-weight-by-season
