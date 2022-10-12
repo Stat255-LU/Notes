@@ -1,0 +1,1407 @@
+# Normal Error Regression Model
+
+
+**Learning Outcomes:**     
+
+1. Explain when it is appropriate to use "theory-based" standard error formulas.   
+2. Interpret estimates, standard errors, test statistics, and p-values resulting from linear model output in R.   
+3. List the assumptions made in the normal error regression model.   
+4. Calculate p-values corresponding to t-statistics and F-statistics in R.   
+5. Interpret confidence intervals for an expected response, and prediction intervals, and distinguish between these two types of intervals.   
+6. Assess the whether linear model assumptions are reasonably satisfied, using residual plots, histograms, and normal QQ plots.  
+7. Explain when we should or should not expect p-values and confidence intervals obtained via "theory-based" approaches to agree with those obtained via simulation.   
+
+8. Identify situations where a log transformation of the response variable is appropriate.   
+9. Calculate predicted values for models involving a log transformation of the response variable.    
+10. Interpret regression coefficients in models involving a log transformation of the response variable.   
+11. Explain the regression effect.   
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=TRUE)
+library(ggformula)
+library(moderndive)
+library(gridExtra)
+library(skimr)
+library(Bolstad)
+library(GGally)
+library(Lock5Data)
+library(knitr)
+library(caret)
+library(MASS)
+library(tidyverse)
+options(scipen=999)
+set.seed(07302020)
+```
+
+
+
+## The Normal Error Regression Model
+
+### Example: Ice Cream Dispensor
+
+```{r echo=FALSE, out.width = '100%'}
+knitr::include_graphics("Ice_Cream.png")
+```
+
+Suppose an ice cream machine is manufacturered to dispense 2 oz. of ice cream per second, on average. If each person using the machine got exactly 2 oz. per second, the relationship between time and amount dispensed would look like this:
+
+```{r, echo=FALSE, fig.height=2.5}
+set.seed(10082020)
+time <- c(1, 1.2, 1.5, 1.8, 2.1, 2.1, 2.3, 2.5, 2.6, 2.8, 2.9, 2.9, 3.1, 3.2, 3.6)
+signal <- 2*time
+noise <-rnorm(15, 0, 0.5)
+amount <- 2*time + noise
+Icecream1 <- data.frame(time, amount)
+
+ICplot0 <- ggplot(data=Icecream1, aes(x=time, y=signal)) + geom_point() + ggtitle("Icecream Dispensed without Accounting for Unknown Factors") + xlab("Time Pressing Dispensor") + ylab("Amount Dispensed") + geom_abline(slope=2, intercept=0, color="red") + 
+  annotate("text", label="y=2x", x= 3.5, y=6.5, size=10, color="red")
+ICplot0
+```
+
+
+
+In reality, however, the actual amount dispensed each time it is used will vary due to unknown factors like:  
+
+* force applied to dispensor    
+* temperature    
+* build-up of ice cream   
+* other unknown factors   
+
+Thus, the data will actually look like this:
+
+```{r, echo=FALSE}
+ICplot <- ggplot(data=Icecream1, aes(x=time, y=amount)) + geom_point() + ggtitle("Icecream Dispensed") + xlab("Time Pressing Dispensor") + ylab("Amount Dispensed") 
+ICplot + geom_abline(slope=2, intercept=0, color="red") + 
+  annotate("text", label="y=2x", x= 3.5, y=6.5, size=10, color="red")
+```
+
+
+### Signal and Noise
+
+We assume that there are two components that contribute to our response variable $Y_i$. These are:    
+
+1. A function that relates the expected (or average) value of $Y$ to explanatory variables $X_1, X_2, \ldots{X_p}$. That is, $E(Y_i)= f(X_{i1}, X_{i2}, \ldots, X_{ip})$. This function is often assumed to be linear, that is $E(Y_i)= \beta_0 + \beta_1X_{i1} + \beta_2X_{i2}+ \ldots+ \beta_pX_{ip}$     
+
+2. Random, unexplained, variability that results in an individual response $Y_i$ differing from $E(Y_i)$.   
+
+The first component is often referred to as **signal**. The second is referred to as **noise**. 
+
+
+
+### Normal Distribution 
+
+In a linear regression model, we assume individual response values $Y_i$ deviate from their expectation, according to a **normal distribution**.   
+
+A normal distribution is defined by two parameters:  
+      - $\mu$ representing the center of the distribution    
+      - $\sigma$ representing the standard deviation
+
+This distribution is denoted $\mathcal{N}(\mu, \sigma)$.   
+
+```{r, echo=FALSE, fig.height=3, fig.width=10}
+dnorm1 <- function(x){
+  dnorm(x, 0, 1)
+}
+dnorm2 <- function(x){
+  dnorm(x, 0, 2)
+}
+dnorm0.5 <- function(x){
+  dnorm(x, 0, 0.5)
+}
+
+```
+
+```{r, echo=FALSE, fig.height=2.5, fig.width=6}
+df <- data.frame(x = seq(from=-5, to=5, by=0.1), y = dnorm(seq(from=-5, to=5, by=0.1), 0,1/sqrt(3)))
+p <- ggplot(df, aes(x = x, y = y)) +
+  stat_function(fun=dnorm,geom="line",color=scales::hue_pal()(3)[1]) + 
+    stat_function(fun=dnorm1, geom="line",color=scales::hue_pal()(3)[1]) +
+   annotate(geom="text", x=0, y=0.81, label="N(0,0.5)",
+              color=scales::hue_pal()(3)[3]) +
+    stat_function(fun=dnorm2, geom="line",color=scales::hue_pal()(3)[2]) +
+    annotate(geom="text", x=0, y=0.41, label="N(0,1)",
+              color=scales::hue_pal()(3)[1]) +
+      stat_function(fun=dnorm0.5, geom="line",color=scales::hue_pal()(3)[3]) +
+   annotate(geom="text", x=0, y=0.21, label="N(0,2)",
+              color=scales::hue_pal()(3)[2]) 
+p
+```
+
+Note that for standard deviation $\sigma$, $\sigma^2$ is called the variance. Some books denote the normal distribution as $\mathcal{N}(\mu, \sigma^2)$, instead of $\mathcal{N}(\mu,\sigma)$.  
+
+### Signal and Noise in Icecream Example
+
+In this example, I simulated the amount of ice cream dispensed by adding a random number from a normal distribution with mean 0 and standard deviation 0.5 to the expected amount dispensed, which is given by $2x$, where $x$ represents time pressing the dispenser.  
+
+Thus, amount dispensed for person $i$ is given by
+
+\[Y_i = 2x_i+\epsilon_i, \text{ where } \epsilon_i\sim\mathcal{N}(0, 0.5)
+\]
+
+
+
+```{r, fig.height=2.5}
+set.seed(10082020)
+time <- c(1, 1.2, 1.5, 1.8, 2.1, 2.1, 2.3, 2.5, 2.6, 2.8, 2.9, 2.9, 3.1, 3.2, 3.6)
+signal <- 2*time
+noise <-rnorm(15, 0, 0.5)
+amount <- 2*time + noise
+Icecream <- data.frame(time, signal, noise, amount)
+kable(head(Icecream))
+```
+
+### What We Actually Get to See
+
+In reality, we do not see the signal and noise columns, we only see time and amount. From this, we need to estimate signal, without being thrown off by noise.   
+
+```{r, fig.height=4, fig.width = 7}
+ggplot(data=Icecream1, aes(x=time, y=amount)) + geom_point() + ggtitle("Icecream Dispensed") + xlab("Time Pressing Dispensor") + ylab("Amount Dispensed")
+```
+
+The red line represents the "true" relationship between time and average amount dispensed.  
+
+The blue line represents the least squares regression line, fit from the data. The blue line is an approximation of the red line.   
+
+
+```{r, fig.height=4, fig.width = 7}
+ggplot(data=Icecream1, aes(x=time, y=amount)) + geom_point() + ggtitle("Icecream Dispensed") + xlab("Time Pressing Dispensor") + ylab("Amount Dispensed") + stat_smooth(method="lm", se=FALSE) + geom_abline(slope=2, intercept=0, color="red") + 
+  annotate("text", label="y=2x", x= 3.5, y=6.5, size=10, color="red")
+```
+
+
+### IceCream Model From Simulated Data
+
+
+```{r}
+IC_Model <- lm(data=Icecream1, lm(amount~time))
+summary(IC_Model)
+```
+
+
+
+### Mathematical Form of Normal Error Regression Model
+
+The mathematical form of a normal error linear regression model is
+
+$Y_i = \beta_0 + \beta_1X_{i1}+ \ldots + \beta_pX_{ip} + \epsilon_i$, with $\epsilon_i\sim\mathcal{N}(0,\sigma)$. 
+
+Note that in place of $X_{ip}$, we could have indicators for categories, or functions of $X_{ip}$, such as $X_{ip}^2$, $\text{log}(X_{ip})$, or $\text{sin}(X_{ip})$. 
+
+
+### Parameters and Statistics
+
+* We call the quantities $\beta_0, \beta_1, \ldots, \beta_p$ **parameters.** They pertain to the true but unknown data generating mechanism.   
+
+* We call the estimates $b_0, b_1, \ldots, b_p$, **statistics**. They are calculated from our observed data.   
+
+* We use confidence intervals and hypothesis tests make statements about parameters, based on information provided by statistics. 
+
+In reality, data almost never truly come from normal distributions, but the normal distributions are often useful in approximating real data distributions. 
+
+As statistician George Box said, *"All models are wrong, but some are useful."*    
+
+## Inference in Normal Error Regression Model    
+
+### Distribution of $t= \frac{{b_j}-\beta_j}{\text{SE}(b_j)}$
+
+We've already seen that we can use t-distributions to perform inference on regression model parameters ($b_j$'s)when sample sizes are large enough.  
+
+When our data can reasonably be assumed to follow a normal error regression model, then we can use these t-distributions regardless of sample size.   
+
+
+**Important Fact:** If $Y_i = \beta_0 + \beta_1X_{i1}+ \ldots + \beta_pX_{ip} + \epsilon_i$, with $\epsilon_i\sim\mathcal{N}(0,\sigma)$,  then   
+
+\[
+t= \frac{{b_j}}{\text{SE}(b_j)}  
+\]
+
+follows a t-distribution.  
+
+**Confidence Interval for $\beta_j$**
+
+
+A 95% confidence interval for $\beta_j$ is given by
+
+$b_j \pm t^*\left({\text{SE}(b_j)}\right)$, 
+
+where $t^*$ is chosen to achieve the desired confidence level. 
+
+* For a 95% confidence interval, use $t^*=2$.   
+
+
+**Hypothesis test for $\beta_j=\gamma$**
+
+*  If $Y_i = \beta_0 + \beta_1X_{i1}+ \ldots + \beta_pX_{ip} + \epsilon_i$, with $\epsilon_i\sim\mathcal{N}(0,\sigma)$,  then a test statistic for the null hypothesis: $\beta_j = \gamma$ is given by:
+
+\[
+t=\frac{{b_j}-\gamma}{\text{SE}(b_j)}, 
+\]
+
+and calculate a p-value using a t-distribution.   
+
+
+
+### F-Distribution
+
+An [F distribution] is a right-skewed distribution. It is defined by two parameters, $\nu_1, \nu_2$, called numerator and denominator degrees of freedom. 
+
+```{r, fig.height=5, fig.width=10, echo=FALSE, warning=FALSE, message=FALSE}
+gf_dist("f", df1=5, df2=5, color = ~ "5,5 df", kind = "density")  %>%
+gf_dist("f", df1=5, df2=20, color = ~ "5,20 df", kind = "density") %>%
+gf_dist("f", df1=20, df2=5, color = ~ "20,5 df", kind = "density") %>%
+gf_dist("f", df1=20, df2=20, color = ~ "20,20 df", kind = "density") + xlim(c(0,10)) + xlab("F")
+```
+
+### Distribution of F-Statistic
+
+If $Y_i = \beta_0 + \beta_1X_{i1} + \beta_2{X_i2} + \ldots + \beta_qX_{iq} + \epsilon_i$, with $\epsilon_i\sim\mathcal{N}(0,\sigma)$, 
+
+and   $Y_i = \beta_0 + \beta_1X_{i1} + \beta_2{X_i2} + \ldots + \beta_qX_{iq} + \beta_{q+1}X_{i{q+1}} \ldots + \beta_pX_{ip}+ \epsilon_i$, is another proposed model, then
+
+\[
+F=\frac{\frac{\text{Unexplained Variability in Reduced Model}-\text{Unexplained Variability in Full Model}}{p-q}}{\frac{\text{Unexplained Variability in Full Model}}{n-(p+1)}}
+\]
+
+follows an F-distribution.   
+
+
+### Bear Weight by Season
+
+
+Recall Bear Weights by Season
+
+```{r}
+ggplot(data=Bears_Subset, aes(y=Weight, x=Season, fill=Season)) + 
+   geom_boxplot() + geom_jitter()
+```
+
+
+```{r}
+summary(Bears_M_Season)
+```
+
+```{r}
+Bears_A_Season <- aov(data=Bears_Subset, Weight~Season)
+summary(Bears_A_Season)
+```
+
+
+### Bears F-Test Illustration
+
+```{r, fig.height=4, fig.width=8}
+ts=0.976
+gf_dist("f", df1=2, df2=94, geom = "area", fill = ~ (abs(x)< abs(ts)), show.legend=FALSE) + geom_vline(xintercept=c(ts), color="red")  + xlab("t")
+```
+p-value:
+
+```{r}
+1-pf(ts, df1=2, df2=94)
+```
+
+
+### Comparison to Simulation
+
+```{r}
+Fstat <- summary(Bears_M_Season)$fstatistic[1]
+Bears_Seasons_SimulationResultsPlot
+```
+
+```{r}
+mean(FSim > Fstat)
+```
+
+
+The p-value we obtained is very similar to the one we obtained using the simulation-based test. 
+
+In this case, even though we had concerns about normality, they did not have much impact on the p-value from the F-distribution. The F-test is fairly robust to minor departures from normality.   
+
+
+
+
+## Intervals for Predicted Values
+
+### Estimation and Prediction
+
+Recall the icecream dispensor that is known to dispense icecream at a rate of 2 oz. per second on average, with individual amounts varying according to a normal distribution with mean 0 and standard deviation 0.5
+
+Consider the following two questions:      
+
+1. On average, how much icecream will be dispensed for people who press the dispensor for 1.5 seconds?    
+
+2. If a single person presses the dispensor for 1.5 seconds, how much icecream will be dispensed?     
+
+The first question is one of estimation. The second pertains to prediction. 
+
+### Uncertainty in Estimation and Prediction
+
+In estimation and prediction, we must think about two sources of variability.  
+
+1. We are using data to estimate $\beta_0$ and $\beta_1$, which introduces sampling variability.  
+2. Even if we did know $\beta_0$ and $\beta_1$, there is variability in individual observations, which follows a $\mathcal{N}(0, \sigma)$ distribution.    
+
+In an estimation problem, we only need to think about (1). When predicting the value of a single new observation, we need to think about both (1) and (2).   
+
+Thus, intervals for predictions of individual observations carry more uncertainty and are wider than confidence intervals for $E(Y|X)$.   
+
+```{r echo=FALSE, out.width = '50%'}
+knitr::include_graphics("SLR_Model_Assumptions.png")
+```
+
+### Estimation in IC Example
+
+```{r}
+kable(t(round(Icecream1, 2)))
+```
+
+
+```{r}
+ggplot(data=Icecream1, aes(x=time, y=amount)) + geom_point() + ggtitle("Icecream Dispensed") + xlab("Time Pressing Dispensor") + ylab("Amount Dispensed") 
+```
+
+In the estimation setting, we are trying o determine the location of the regression line for the entire population.   
+
+Uncertainty comes from the fact that we only have data from a sample. 
+
+
+### Estimation in IC Example
+
+```{r}
+kable(t(round(Icecream1, 2)))
+```
+
+
+```{r}
+ggplot(data=Icecream1, aes(x=time, y=amount)) + geom_point() + ggtitle("Icecream Dispensed") + xlab("Time Pressing Dispensor") + ylab("Amount Dispensed") + geom_abline(slope=2, intercept=0, color="red") + stat_smooth(method="lm")
+```
+
+
+### Recall Ice Cream Model Output
+
+```{r}
+summary(IC_Model)
+```
+
+```{r}
+b0 <- IC_Model$coefficients[1]
+b1 <- IC_Model$coefficients[2]
+s <- sigma(IC_Model)
+```
+
+### Estimation in SLR
+
+The first question: 
+
+"On average, how much icecream will be dispensed for people who press the dispensor for 1.5 seconds?"    
+
+is a question of estimation. It is of the form, for a given $X$, on average what do we expect to be true of $Y$.   
+
+In the ice cream question, we can answer this exactly, since we know $\beta_0$ and $\beta_1$.  
+
+In a real situation, we don't know these and have to estimate them from the data, which introduces uncertainty. 
+
+Confidence interval for $E(Y | (X=x))$:
+
+$$
+\begin{aligned}
+& b_0+b_1x^* \pm t^*SE(\hat{Y}|X=x^*) \\
+& b_0+b_1x^* \pm t^*\sqrt{\widehat{Var}(\hat{Y}|X=x^*)}
+\end{aligned}
+$$
+
+The second question is a question of prediction. Even if we knew the true values of $beta_0$ and $\beta_1$, we would not be able to given the exact amount dispensed for an individual user, since this varies between users.  
+
+
+Prediction interval for $E(Y | (X=x))$:
+
+$$
+\begin{aligned}
+& b_0+b_1x^* \pm t^*\sqrt{\widehat{Var}(\hat{Y}|X=x^*) + s^2} 
+\end{aligned}
+$$
+The extra $s^2$ in the calculation of prediction variance comes from the uncertainty associated with individual observations. 
+
+
+### Confidence Interval in R
+
+```{r}
+predict(IC_Model, newdata=data.frame(time=1.5), interval = "confidence", level=0.95)
+```
+
+
+We are 95% confident that the mean amount of ice cream dispensed when the dispensor is held for 1.5 seconds is between `r round(predict(IC_Model, newdata=data.frame(time=1.5), interval = "confidence", level=0.95)[2],2)` and `r round(predict(IC_Model, newdata=data.frame(time=1.5), interval = "confidence", level=0.95)[3],2)` oz. 
+
+
+
+### Prediction Interval in R
+
+```{r}
+predict(IC_Model, newdata=data.frame(time=1.5), interval = "prediction", level=0.95)
+```
+
+
+We are 95% confident that in individual who holds the dispensor for 1.5 seconds will get between `r round(predict(IC_Model, newdata=data.frame(time=1.5), interval = "predict", level=0.95)[2],2)` and `r round(predict(IC_Model, newdata=data.frame(time=1.5), interval = "predict", level=0.95)[3],2)` oz of ice cream. 
+
+### Confidence and Prediction Intervals
+
+```{r, fig.height=4, fig.width=8, echo=FALSE}
+temp_var <- predict(IC_Model, interval="prediction")
+new_df <- cbind(Icecream1, temp_var)
+gf_point(amount~time, data=new_df) %>% 
+  gf_labs(x="Time", 
+          y="Amount") %>% gf_lm() +
+  geom_smooth(method=lm, se=TRUE) +
+    geom_line(aes(y=lwr), color = "red", linetype = "dashed") +
+    geom_line(aes(y=upr), color = "red", linetype = "dashed") 
+```
+
+The prediction interval (in red) is wider than the confidence interval (in blue), since it must account for variability between individuals, in addition to sampling variability. 
+
+
+### Confidence and Prediction Bands
+
+```{r echo=FALSE, out.width = '75%'}
+knitr::include_graphics("C_P_Band.png")
+```
+
+
+### Calculations (Optional)
+
+In simple linear regression, 
+
+$$
+\begin{aligned}
+SE(\hat{Y}|X=x^*) = \sqrt{\frac{1}{n}+ \frac{(x^*-\bar{x})^2}{\displaystyle\sum_{i=1}^n(x_i-\bar{x})^2}}
+\end{aligned}
+$$
+
+Thus a confidence interval for $E(Y | (X=x))$ is:  
+
+$$
+\begin{aligned}
+& b_0+b_1x^* \pm t^*SE(\hat{Y}|X=x^*) \\
+& = b_0+b_1x^* \pm 2s\sqrt{\frac{1}{n}+ \frac{(x^*-\bar{x})^2}{\displaystyle\sum_{i=1}^n(x_i-\bar{x})^2}}  \
+\end{aligned}
+$$
+
+A prediction interval for $E(Y | (X=x))$ is:  
+
+
+\[\beta_0 + \beta_1x^* \pm t^* s\sqrt{\left(\frac{1}{n}+ \frac{(x^*-\bar{x})^2}{\displaystyle\sum_{i=1}^n(x_i-\bar{x})^2}\right) + 1}
+\]
+
+**Calculations in Icecream example**
+
+For $x=1.5$, a confidence interval is:
+
+$$
+\begin{aligned}
+& b_0+b_1x^* \pm t^*SE(\hat{Y}|X=x^*) \\
+& = b_0+b_1x^* \pm 2s\sqrt{\frac{1}{n}+ \frac{(x^*-\bar{x})^2}{\displaystyle\sum_{i=1}^n(x_i-\bar{x})^2}}  \\
+& = `r b0` + `r b1` \pm 2`r s` \sqrt{\frac{1}{15}+ \frac{(1.5-2.3733)^2}{8.02933}}
+\end{aligned}
+$$
+
+A prediction interval is:  
+
+$$
+\begin{aligned}
+& b_0+b_1x^* \pm t^*SE(\hat{Y}|X=x^*) \\
+& = b_0+b_1x^* \pm 2s\sqrt{\frac{1}{n}+ \frac{(x^*-\bar{x})^2}{\displaystyle\sum_{i=1}^n(x_i-\bar{x})^2}}  \\
+& = `r b0` + `r b1` \pm 2`r s` \sqrt{\left(\frac{1}{15}+ \frac{(1.5-2.3733)^2}{8.02933}\right)+1}
+\end{aligned}
+$$
+
+
+
+
+### Intervals in Cars Model
+
+1. What is a reasonable range for the average price of all new 2015 cars that can accelerate from 0 to 60 mph in 7 seconds? 
+
+2. If a car I am looking to buy can accelerate from 0 to 60 mph in 7 seconds, what price range should I expect?
+
+### Cars Confidence Interval  
+
+What is a reasonable range for the average price of all new 2015 cars that can accelerate from 0 to 60 mph in 7 seconds? 
+
+```{r}
+predict(Cars_M_A060, newdata=data.frame(Acc060=7), interval="confidence", level=0.95)
+```
+
+We are 95% confident that the average price of new 2015 cars that accelerate from 0 to 60 mph in 7 seconds is between 37.2 and 41.9 thousand dollars.    
+
+Note: this is a confidence interval for $\beta_0 -7\beta_1$. 
+
+
+### Cars Prediction Interval 
+
+If a car I am looking to buy can accelerate from 0 to 60 mph in 7 seconds, what price range should I expect? 
+
+```{r}
+predict(Cars_M_A060, newdata=data.frame(Acc060=7), interval="prediction", level=0.95)
+```
+
+We are 95% confident that a single new 2015 car that accelerates from 0 to 60 mph in 7 seconds will cost between 18.2 and 60.9 thousand dollars.  
+
+
+
+### Cars Interval Visualization
+
+```{r, fig.height=5, fig.width=8, echo=FALSE}
+temp_var <- predict(Cars_M_A060, interval="prediction")
+new_df <- cbind(Cars2015, temp_var)
+gf_point(LowPrice~Acc060, data=new_df) %>% 
+  gf_labs(x="Acc060 Time", 
+          y="Price") %>% gf_lm() +
+  geom_smooth(method=lm, se=TRUE) +
+    geom_line(aes(y=lwr), color = "red", linetype = "dashed") +
+    geom_line(aes(y=upr), color = "red", linetype = "dashed") 
+```
+
+
+
+### Lakes Questions of Interest
+
+1. Calculate an interval that we are 95% confident contains the mean mercury concentration for all lakes in Northern Florida. Do the same for Southern Florida.   
+
+1. Calculate an interval that we are 95% confident contains the mean mercury concentration for an individual lake in Northern Florida. Do the same for a lake in Southern Florida.   
+
+### Lakes Confidence Interval 
+
+```{r}
+predict(Lakes_M, newdata=data.frame(Location=c("N", "S")), interval="confidence", level=0.95)
+```
+
+We are 95% confident that the mean mercury level in North Florida is between 0.31 and 0.54 ppm.   
+We are 95% confident that the mean mercury level in South Florida is between 0.55 and 0.84 ppm.  
+Note: these are confidence intervals for $\beta_0$, and $\beta_0 + \beta_1$, respectively.   
+
+### Lakes Prediction Interval 
+
+```{r}
+predict(Lakes_M, newdata=data.frame(Location=c("N", "S")), interval="prediction", level=0.95)
+```
+
+We are 95% confident that an individual lake in North Florida will have mercury level between 0 and 1.07 ppm.    
+
+We are 95% confident that the mean mercury level in South Florida is between 0.04 and 1.35 ppm.  
+
+Note that the normality assumption, which allows for negative mercury levels leads to a somewhat nonsensical result.   
+
+
+## Regression Model Assumptions
+
+### What We're Assuming
+
+Let's think carefully about what we are assuming in order to use the hypothesis tests and confidence intervals provided in R.   
+The statement $Y_i = \beta_0 + \beta_1X_{i1}+ \ldots + \beta_pX_{ip} + \epsilon_i$, with $\epsilon_i\sim\mathcal{N}(0,\sigma)$ implies the following:  
+
+1. Linearity: the expected value of $Y$ is a linear function of $X_1, X_2, \ldots, X_p$.    
+
+2. Normality: Given the values of $X_1, X_2, \ldots, X_p$, $Y$ follows a normal distribution.   
+
+3. Constant Variance: Regardless of the values of $X_1, X_2, \ldots, X_p$, the variance (or standard deviation) in the normal distribution for $Y$ is the same.   
+
+4. Independence: each observation is independent of the rest.    
+
+
+### Illustration of Model Assumptions
+
+```{r echo=FALSE, out.width = '50%'}
+knitr::include_graphics("SLR_Model_Assumptions.png")
+```
+
+
+We know that these assumptions held true in the ice cream example, because we generated the data in a way that was consistent with these. 
+
+In practice, we will have only the data, without knowing the exact mechanism that produced it. We should only rely on the t-distribution based p-values and confidence intervals in the R output if these appear to be reasonable assumptions.  
+
+Of course, these assumptions will almost never be truly satisfied, but they should at least be a reasonable approximation if we are to draw meaningful conclusions.   
+
+### Checking Model Assumptions
+
+The following plots are useful when assessing the appropriateness of the normal error regression model.   
+
+1. Scatterplot of residuals against predicted values    
+
+2. Histogram of standardized residuals    
+     - heavy skewness indicates a problem with normality assumption     
+     
+3. Normal quantile plot
+      - severe departures from diagonal line indicate problem with normality assumption
+
+
+```{r, include=FALSE}
+set.seed(10102021)
+N <- 100
+time <- runif(N, 1,3)
+amount <- 2*time + rnorm(N, 0, 0.5)  ## no violation
+amount_lin_viol <- 2*time^2 + rnorm(N, 0, 0.5) ## linearity violation
+amount_norm_viol <- 2*time + rexp(N, 1) -1
+amount_cvar_viol <- 2*time + rnorm(N,0,time^2)
+Violations <- data.frame(amount, amount_lin_viol, amount_norm_viol, amount_cvar_viol)
+no_viol_Model <- lm(data=Violations, amount ~ time)
+lin_viol_Model <- lm(data=Violations, amount_lin_viol~time)
+norm_viol_Model <- lm(data=Violations, amount_norm_viol~time)
+cvar_viol_Model <- lm(data=Violations, amount_cvar_viol~time)
+```
+
+
+### Residual vs Predicted Plots
+
+Useful for detecting issues with the linearity or constant variance assumption. 
+
+* curvature indicates a problem with linearity assumption       
+* "funnel" or "megaphone" shape indicates problem with constant variance assumption      
+
+```{r, fig.height=4, fig.width=8}
+P1 <- ggplot(data=Violations, aes(y=no_viol_Model$residuals, x=no_viol_Model$fitted.values)) + geom_point() + ggtitle("No Violation") + xlab("Predicted Values") + ylab("Residuals")
+P2 <- ggplot(data=Violations, aes(y=lin_viol_Model$residuals, x=no_viol_Model$fitted.values)) + geom_point() + ggtitle("Violation of Linearity Assumption")+ xlab("Predicted Values") + ylab("Residuals")
+P3 <- ggplot(data=Violations, aes(y=cvar_viol_Model$residuals, x=no_viol_Model$fitted.values)) + geom_point() + ggtitle("Violation of Constant Variance Assumption")+ xlab("Predicted Values") + ylab("Residuals")
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+If there is only one explanatory variable, plotting the residuals against that variable reveals the same information. 
+
+### Histogram of Residuals
+
+Useful for assessing normality assumption. 
+
+* Severe skewness indicates violation of normality assumption
+
+```{r, fig.height=4, fig.width=8}
+P1 <- ggplot(data=Violations, aes(x=no_viol_Model$residuals)) + geom_histogram() + ggtitle("No Violation") +xlab("Residual")
+P2 <- ggplot(data=Violations, aes(x=norm_viol_Model$residuals)) + geom_histogram() + ggtitle("Violation of Normality Assumption") + xlab("Residual")
+grid.arrange(P1, P2, ncol=2)
+```
+
+### Normal Quantile-Quantile (QQ) Plot
+
+Sometimes histograms can be inconclusive, especially when sample size is smaller. 
+
+A Normal quantile-quantile plot displays quantiles of the residuals against the expected quantiles of a normal distribution. 
+
+* Severe departures from diagonal line indicate a problem with normality assumption. 
+
+```{r, fig.height=4, fig.width=8}
+P1 <- ggplot(data=Violations, aes(sample = scale(no_viol_Model$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("No Violation") + xlim(c(-4,4)) + ylim(c(-4,4))
+P2 <- ggplot(data=Violations, aes(sample = scale(norm_viol_Model$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("Violation of Normality Assumption") + xlim(c(-4,4)) + ylim(c(-4,4))
+grid.arrange(P1, P2, ncol=2)
+```
+
+### Checking Model Assumptions - Independence
+
+Independence is often difficult to assess through plots of data, but it is important to think about whether there were factors in the data collection that would cause some observations to be more highly correlated than others. 
+
+For example:
+
+1. People in the study who are related.   
+2. Some plants grown in the same greenhouse and others in different greenhouses.    
+3. Some observations taken in same time period and others at different times. 
+
+All of these require more complicated models that account for correlation using spatial and time structure. 
+
+
+
+### Summary of Checks for Model Assumptions
+
+|   Model assumption           | How to detect violation | 
+|-----------|----------|
+| Linearity | Curvature in residual plot |
+| Constant Variance | Funnel shape in residual plot |
+| Normality | Skewness in histogram of residuals or departure from diag. line in QQ plot |
+| Independence | No graphical check, carefully examine data collection |
+
+### Impact of Model Assumption Violations
+
+|   Model assumption           | Impact | 
+|-----------|----------|
+| Linearity | predictions and intervals unreliable |
+| Constant Variance | predictions still reliable; some intervals will be too wide and others too narrow. |
+| Normality | predictions still reliable; intervals will be symmetric when they shouldn't be|
+| Independence | predictions unreliable and intervals unreliable |
+
+
+### Cars Model Assumptions
+
+Recall the regression line estimating the relationship between a car's price and acceleration time.   
+
+This line was calculated using a sample of 110 cars, released in 2015.   
+
+$\text{Price}_i = \beta_0 + \beta_1\times\text{Acc. Time}_i + \epsilon_i$, where $\epsilon_i\sim\mathcal{N}(0, \sigma)$. 
+
+The model assumes:
+
+1. Linearity: the expected price of a car is a linear function of its acceleration time.    
+
+2. Normality: for any given acceleration time, the prices of actual cars follow a normal distribution. For example the distribution of prices for all cars that accelerate from 0 to 60 in 8 seconds is normal, and so is the distribution of prices of cars that accelerate from 0 to 60 in 10 seconds (though these normal distributions have different means.)
+
+3. Constant Variance: the normal distribution for prices is the same for all acceleration times.  
+
+4. Independence: no two cars are any more alike than any others.    
+
+We should only use the p-values and confidence intervals provided by R, which depend on the t-distribution approximation, if we believe these assumptions are reasonable. 
+
+### Cars Assumptions Check
+
+```{r, fig.width=10}
+P1 <- ggplot(data=Cars2015, aes(y=Cars_M_A060$residuals, x=Cars_M_A060$fitted.values)) + geom_point() + ggtitle("Cars Model Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
+P2 <- ggplot(data=Cars2015, aes(x=Cars_M_A060$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
+P3 <- ggplot(data=Cars2015, aes(sample = scale(Cars_M_A060$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("Cars Model QQ Plot")
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+There is a funnel-shape in the residual plot, indicating a concern about the constant variance assumption. There appears to be more variability in prices for more expensive cars than for cheaper cars. There is also some concern about the normality assumption, as the histogram and QQ plot indicate right-skew in the residuals.   
+
+### Model for Mercury Florida Lakes 
+
+Recall our sample of 53 Florida Lakes, 33 in the north, and 20 in the south.
+
+$\text{Mercury}_i = \beta_0 + \beta_1\times\text{I}_{\text{South}_i} + \epsilon_i$, where $\epsilon_i\sim\mathcal{N}(0, \sigma)$. 
+
+```{r, fig.height=4, fig.width=8}
+LakesBP
+```
+
+### Lakes Model Assumptions
+
+1. Linearity: there is an expected mercury concentration for lakes in North Florida, and another for lakes in South Florida.     
+
+2. Normality: mercury concentrations of individual lakes in the north are normally distributed, and so are mercury concentrations in the south. These normal distributions might have different means. 
+
+3. Constant Variance: the normal distribution for mercury concentrations in North Florida has the same standard deviation as the normal distribution for mercury concentrations in South Florida 
+
+4. Independence: no two lakes are any more alike than any others. We might have concerns about this, do to some lakes being geographically closer to each other than others.   
+
+We should only use the p-values and confidence intervals provided by R, which depend on the t-distribution approximation, if we believe these assumptions are reasonable. 
+
+### Lakes Assumptions Check
+
+```{r, fig.width=10}
+P1 <- ggplot(data=FloridaLakes, aes(y=Lakes_M$residuals, x=Lakes_M$fitted.values)) + geom_point() + ggtitle("Lakes Model Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
+P2 <- ggplot(data=FloridaLakes, aes(x=Lakes_M$residuals)) + geom_histogram() + ggtitle("Lakes of Residuals") + xlab("Residual")
+P3 <- ggplot(data=FloridaLakes, aes(sample = scale(Lakes_M$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("Lakes Model QQ Plot")
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+Notice that we see two lines of predicted values and residuals. This makes sense since all lakes in North Florida will have the same predicted value, as will all lakes in Southern Florida. 
+
+There appears to be a little more variability in residuals for Southern Florida (on the right), than Northern Florida, causing some concern about the constant variance assumption. 
+
+Overall, though, the assumptions seem mostly reasonable. 
+
+### General Comments on Model Assumptions
+
+* We shouldn't think about model assumptions being satisfied as a yes/no question.     
+* In reality assumptions are never perfectly satisfied, so it's a question of how severe violations must be in order to impact results. This is context dependent.     
+* A model might be reasonable for certain purposes  (i.e. confidence interval for $\beta_1$) but not for others (i.e. prediction of response value for new observation).   
+* When model assumptions are a concern, consider a using a transformation of the data or a more flexible technique, such as a nonparametric method or statistical machine learning algorithm. We'll talk more about these soon.   
+
+* Remember that all statistical techniques are approximations
+
+
+## Transformations
+
+### Cars Assumptions Check
+
+```{r, fig.width=10}
+P1 <- ggplot(data=Cars2015, aes(y=Cars_M_A060$residuals, x=Cars_M_A060$fitted.values)) + geom_point() + ggtitle("Cars Model Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
+P2 <- ggplot(data=Cars2015, aes(x=Cars_M_A060$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
+P3 <- ggplot(data=Cars2015, aes(sample = scale(Cars_M_A060$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("Cars Model QQ Plot")
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+There is a funnel-shape in the residual plot, indicating a concern about the constant variance assumption. There appears to be more variability in prices for more expensive cars than for cheaper cars. There is also some concern about the normality assumption, as the histogram and QQ plot indicate right-skew in the residuals.   
+
+
+### Confidence Interval for $\beta_1$ in Cars Example
+
+```{r}
+confint(Cars_M_A060, level=0.95)
+```
+
+We are 95% confident that the average price of a new 2015 car decreases between 8.43 and 5.96 thousand dollars for each additional second it takes to accelerate from 0 to 60 mph.   
+
+Bootstrap Confidence Interval for $\beta_1$: 
+
+```{r}
+q.025 <- quantile(Cars_Bootstrap_Results_Acc060$b1, 0.025)
+q.975 <- quantile(Cars_Bootstrap_Results_Acc060$b1, 0.975)
+c(q.025, q.975)
+```
+
+The bootstrap confidence interval is slightly wider than the one based on the t-approximation. 
+
+This difference can be attributed to the questions about the constant variance and normality assumptions. 
+
+### Confidence and Prediction Intervals
+
+```{r}
+predict(Cars_M_A060, newdata=data.frame(Acc060=7), interval="confidence")
+```
+
+
+```{r}
+predict(Cars_M_A060, newdata=data.frame(Acc060=10), interval="confidence")
+```
+
+We are 95% confident that the mean price for all cars that can accelerate from 0 to 60 mph in 7 seconds is between 37.2 and 41.9 thousand dollars. 
+
+We are 95% confident that the mean price for all cars that can accelerate from 0 to 60 mph in 10 seconds is between 14.7 and 22.2 thousand dollars. 
+
+### Prediction Intervals for Expected Price Given Acc060
+
+```{r}
+predict(Cars_M_A060, newdata=data.frame(Acc060=7), interval="prediction")
+```
+
+
+```{r}
+predict(Cars_M_A060, newdata=data.frame(Acc060=10), interval="prediction")
+```
+
+We are 95% confident that a single car that can accelerate from 0 to 60 mph in 7 seconds will cost between 18.2 thousand and 60.9 thousand dollars.  
+
+We are 95% confident that a single car that can accelerate from 0 to 60 mph in 10 seconds will cost between 0 thousand and 39.4 thousand dollars.  
+
+### Confidence and Prediction Interval Illustration
+
+```{r, fig.height=5, fig.width=10, echo=FALSE}
+temp_var <- predict(Cars_M_A060, interval="prediction")
+new_df <- cbind(Cars2015, temp_var)
+gf_point(LowPrice~Acc060, data=new_df) %>% 
+  gf_labs(x="Acc060 Time", 
+          y="Price") %>% gf_lm() +
+  geom_smooth(method=lm, se=TRUE) +
+    geom_line(aes(y=lwr), color = "red", linetype = "dashed") +
+    geom_line(aes(y=upr), color = "red", linetype = "dashed") 
+```
+
+### Concerns about Intervals and Model Assumptions
+
+* The confidence and prediction intervals for cars that take 7 and 10 seconds to accelerate have similar widths. This seems inconsistent with the data, which showed more variability about prices for more expensive cars than less expensive ones.   
+        - The intervals are computed using same value for $s$, which is a result of the constant variance assumption. Our residual plot showed us this assumption might not be valid in this situation.      
+        
+* The confidence and prediction intervals are symmetric about the expected price, even though the distribution of residuals was right-skewed. 
+        - This is the result of the normality assumption, which our histogram and QQ-plot showed might not be valid here. 
+
+Since we had concerns about the model assumptions, the intervals might not be reliable. We saw that the confidence interval for $\beta_1$ differed somewhat, but not terribly, from the one produced via Bootstrap. It is harder to tell the degree to which the confidence and prediction intervals for price for a given acceleration time might be off, but we should treat these with caution.  
+
+### Modeling Log Price
+
+When residual plots yield model inadequacy, we might try to correct these by applying a transformation to the response variable.   
+
+When working a nonnegative, right-skewed response variable, it is often helpful to work with the logarithm of the response variable.   
+
+Note: In R, `log()` denotes the natural (base e) logarithm, often denoted `ln()`. We can actually use any logarithm, but the natural logarithm is commonly used.   
+
+### Plot of LogPrice and Acc060
+
+```{r}
+ggplot(data=Cars2015, aes(x=Acc060, y=log(LowPrice))) + geom_point() + 
+  xlab("Acceleration Time") + ylab("Log of Price") + 
+  ggtitle("Acceleration Time and Log Price") + stat_smooth(method="lm", se=FALSE)
+```      
+
+
+### Model for Log Transform
+
+```{r}
+Cars_M_Log <- lm(data=Cars2015, log(LowPrice)~Acc060)
+summary(Cars_M_Log)
+```
+
+### LogPrice Model: What We're Assuming
+
+1. Linearity: the log of expected price of a car is a linear function of its acceleration time.    
+
+2. Normality: for any given acceleration time, the log of prices of actual cars follow a normal distribution. 
+
+3. Constant Variance: the normal distribution for log of price is the same for all acceleration times.  
+
+4. Independence: no two cars are any more alike than any others.    
+
+We should only use the p-values and confidence intervals provided by R, which depend on the t-distribution approximation, if we believe these assumptions are reasonable. 
+
+
+### Model Assumption Check for Transformed Model
+
+```{r,  fig.width=9}
+P1 <- ggplot(data=Cars2015, aes(y=Cars_M_Log$residuals, x=Cars_M_Log$fitted.values)) + geom_point() + ggtitle("Cars Log Model Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
+P2 <- ggplot(data=Cars2015, aes(x=Cars_M_Log$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
+P3 <- ggplot(data=Cars2015, aes(sample = scale(Cars_M_Log$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("Cars Model QQ Plot")
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+There is still some concern about constant variance, though perhaps not as much. The normality assumption appears more reasonable. 
+
+
+### Model for Log of Car Price
+
+\[
+\widehat{\text{Log Price}} = b_0 + b_1\times \text{Acc060} 
+\]  
+
+Thus
+
+$$
+\begin{aligned}
+\widehat{\text{Price}} & = e^{b_0 + b_1\times \text{Acc060} } \\
+ & e^{b_0}e^{b_1 \times \text{Acc060}} \\
+ & e^{b_0}(e^{b_1})^\text{Acc060}
+\end{aligned}
+$$
+
+### Log Model Predictions
+
+Prediction Equation: 
+
+$$
+\begin{aligned}
+\widehat{\text{Price}} & = e^{5.13582}e^{-0.22064 \times \text{Acc060}}
+\end{aligned}
+$$
+
+Predicted price for car that takes 7 seconds to accelerate:
+
+$$
+\begin{aligned}
+\widehat{\text{Price}} & = e^{5.13582}e^{-0.22064 \times \text{7}} = 36.3
+\end{aligned}
+$$
+
+Predicted price for car that takes 10 seconds to accelerate:
+
+$$
+\begin{aligned}
+\widehat{\text{Price}} & = e^{5.13582}e^{-0.22064 \times \text{10}}= 18.7
+\end{aligned}
+$$
+
+
+Predictions are for log(Price), so we need to exponentiate. 
+
+```{r}
+predict(Cars_M_Log, newdata=data.frame(Acc060=c(7)))
+```
+
+
+```{r}
+exp(predict(Cars_M_Log, newdata=data.frame(Acc060=c(7))))
+```
+
+A car that accelerates from 0 to 60 mph in 7 seconds is expected to cost 36.3 thousand dollars.  
+
+### Log Model Interpretations 
+
+$$
+\begin{aligned}
+\widehat{\text{Price}} & = e^{b_0 + b_1\times \text{Acc060} } \\
+ & e^{b_0}e^{b_1 \times \text{Acc060}} \\
+ & e^{b_0}(e^{b_1})^\text{Acc060}
+\end{aligned}
+$$
+
+
+* $e^{b_0}$ is theoretically the expected price of a car that can accelerate from 0 to 60 mph in no time, but this is not a meaningful interpretation. 
+
+* For each additional second it takes a car to accelerate, price is expected to multiply by a factor of $e^{b_1}$. 
+
+* For each additional second in acceleration time, price is expected to multiply by a a factor of $e^{-0.22} = 0.80$. Thus, each 1-second increase in acceleration time is estimated to be associated with a 20% drop in price, on average.     
+
+
+
+### Log Model CI for $\beta_0$, $\beta_1$
+
+```{r}
+confint(Cars_M_Log)
+```
+
+
+* We are 95% confident that the price of a car changes, on average, by multiplicative factor between $e^{-0.252} = 0.7773$ and $e^{-0.189}=0.828$ for each additional second in acceleration time. That is, we believe the price decreases between 17% and 23% on average for each additional second in acceleration time.   
+
+### Log Model CI for Expected Response
+
+```{r}
+predict(Cars_M_Log, newdata=data.frame(Acc060=c(7)), interval="confidence")
+```
+
+```{r}
+exp(predict(Cars_M_Log, newdata=data.frame(Acc060=c(7)), interval="confidence"))
+```
+
+We are 95% confident that the mean price amoung all cars that accelerate from 0 to 60 mph in 7 seconds is between $e^{3.53225} =34.2$  and $e^{3.652436}=38.6$ thousand dollars. 
+
+### Log Model Prediction Interval
+
+
+```{r}
+predict(Cars_M_Log, newdata=data.frame(Acc060=c(7)), interval="prediction")
+```
+
+```{r}
+exp(predict(Cars_M_Log, newdata=data.frame(Acc060=c(7)), interval="prediction"))
+```
+
+We are 95% confident that the expected price for a car that accelerates from 0 to 60 mph in 7 seconds is between $e^{3.04} =20.9$  and $e^{4.14}=63.9$ thousand dollars. 
+
+
+### Confidence Interval Comparison
+
+95% Confidence interval for average price of cars that take 7 seconds to accelerate:
+
+Original Model:
+
+```{r}
+predict(Cars_M_A060, newdata=data.frame(Acc060=7), interval="confidence", level=0.95)
+```
+
+Transformed Model:
+
+```{r}
+exp(predict(Cars_M_Log, newdata=data.frame(Acc060=c(7)), interval="confidence", level=0.95))
+```
+
+
+### Prediction Interval Comparison
+
+95% Prediction interval for price of an individual car that takes 7 seconds to accelerate:
+
+Original Model:
+
+```{r}
+predict(Cars_M_A060, newdata=data.frame(Acc060=7), interval="prediction", level=0.95)
+```
+
+Transformed Model:
+
+```{r}
+exp(predict(Cars_M_Log, newdata=data.frame(Acc060=c(7)), interval="prediction", level=0.95))
+```
+
+Notice that the transformed interval is not symmetric and allows for a longer "tail" on the right than the left. 
+
+
+### Log Model Visualization
+
+```{r, fig.height=5, fig.width=10, echo=FALSE}
+temp_var <- data.frame(exp(predict(Cars_M_Log, interval="prediction")))
+temp_var2 <- data.frame(exp(predict(Cars_M_Log, interval="confidence")))
+new_df <- cbind(Cars2015, temp_var, temp_var2[,2:3])
+names(new_df)[ncol(new_df)-1] <- "lwrCI"
+names(new_df)[ncol(new_df)] <- "uprCI"
+gf_point(LowPrice~Acc060, data=new_df) %>% 
+  gf_labs(x="Acc060 Time", 
+          y="Price") %>% +
+    geom_line(aes(y=lwr), color = "red", linetype = "dashed") +
+    geom_line(aes(y=upr), color = "red", linetype = "dashed") + 
+    geom_line(aes(y=fit), color = "blue", linetype = "solid") + 
+    geom_line(aes(y=lwrCI), color = "black", linetype = "dashed") + 
+    geom_line(aes(y=uprCI), color = "black", linetype = "dashed") + theme_bw()
+
+  
+```
+
+The log model suggests an nonlinear trend in price with respect to acceleration time and gives wider confidence and prediction intervals for cars that accelerate faster and tend to be more expensive. It also gives non-symmetric intervals. These results appear to be consistent with the observed data.   
+
+
+### Comments on Transformations
+
+* We could have used another transformation, such as $\sqrt{\text{Price}}$    
+
+* The log tranform leads to a nice interpretation involving percent change. Other transformations might yield better predictions, but are often hard to interpret. 
+
+* There is often a tradeoff between model complexity and interpretability. We'll talk more about this. 
+
+* We did an example of a transformation in a model with a single explanatory variable. 
+
+* If the explanatory variable is categorical:    
+        - $e^{b_0}$ represents the expected response in the baseline category     
+        - $e^{b_j}$ represents the number of times larger the expected response in category $j$ is, compared to the baseline category.    
+        
+  
+        
+* When working with multiple regression models, it is still important to mention holding other variables constant when interpreting parameters associated with one of the variables. 
+
+
+## Responsible Statistical Inference   
+
+
+### Statistical Significance vs Practical Importance
+
+* “(S)cientists have embraced and even avidly pursued meaningless differences solely because they are statistically significant, and have ignored important effects because they failed to pass the screen of statistical significance...It is a safe bet that people have suffered or died because scientists (and editors, regulators, journalists and others) have used significance tests to interpret results, and have consequently failed to identify the most beneficial courses of action.” -ASA statement on p-values, 2016
+
+### What a p-value tells us
+
+Performing responsible statistical inference requires understanding what p-values do and do not tell us, and how they should and should not be interpreted.   
+
+* A low p-value tells us that the data we observed are inconsistent with our null hypothesis or some assumption we make in our model.    
+
+* A large p-value tells us that the data we observed could have plausibly been obtained under our supposed model and null hypothesis.   
+
+* A p-value never provides evidence supporting the null hypothesis, it only tells us the strength of evidence against it.   
+
+* A p-value is impacted by  
+    - the size of the difference between group, or change per unit increase (effect size)     
+    - the amount of variability in the data    
+    - the sample size     
+    
+* Sometimes, a p-value tells us more about sample size, than relationship we're actually interested in. 
+
+* A p-value does not tell us the "size" of a difference or effect, or whether it is practically meaningful. 
+
+
+### Flights from New York to Chicago
+
+A travelor lives in New York and wants to fly to Chicago. They consider flying out of two New York airports:   
+
+* Newark (EWR)     
+* LaGuardia (LGA)    
+
+We have data on the times of flights from both airports to Chicago's O'Hare airport from 2013 (more than 14,000 flights). 
+
+Assuming these flights represent a random sample of all flights from these airports to Chicago, consider how the traveler might use this information to decide which airport to fly out of. 
+
+```{r}
+library(nycflights13)
+data(flights)
+flights$origin <- as.factor(flights$origin)
+flights$dest <- as.factor(flights$dest)
+```
+
+
+We'll create a dataset containing only flights from Newark and Laguardia to O'Hare, and only the variables we're interested in. 
+
+```{r}
+Flights_NY_CHI <- flights %>% 
+  filter(origin %in% c("EWR", "LGA") & dest =="ORD") %>%
+  select(origin, dest, air_time)
+```
+
+### Visualizing New York to Chicago Flights
+
+```{r, fig.height=4, fig.width=8}
+p1 <- ggplot(data=Flights_NY_CHI, aes(x=air_time, fill=origin, color=origin)) + geom_density(alpha=0.2) + ggtitle("Flight Time")
+p2 <- ggplot(data=Flights_NY_CHI, aes(x=air_time, y=origin)) + geom_boxplot() + ggtitle("Flight Time")
+grid.arrange(p1, p2, ncol=2)
+```
+
+```{r, fig.height=3, fig.width=5}
+library(knitr)
+T <- Flights_NY_CHI %>% group_by(origin) %>% 
+  summarize(Mean_Airtime = mean(air_time, na.rm=TRUE), 
+            SD = sd(air_time, na.rm=TRUE), n=sum(!is.na(air_time)))
+kable(T)
+```
+
+**Question:** If you were flying from New York to Chicago, would this information influence which airport you would fly out of? If so, which would you be more likely to choose?   
+
+
+### Model for Airlines Data
+
+```{r}
+M_Flights <- lm(data=Flights_NY_CHI, air_time~origin)
+summary(M_Flights)
+```
+
+### Confidence Interval for Flights
+
+```{r}
+confint(M_Flights)
+```
+
+
+* Flights from LGA are estimated to take 2.5 minutes longer than flights from EWR on average. 
+
+* The very low p-value provides strong evidence of a difference in mean flight time. 
+
+* We are 95% confident that flights from LGA to ORD take between 2.2 and 2.9 minutes longer, on average, than flights from EWR to ORD. 
+
+### Flights Conclusions?
+
+Although we have a low p-value, indicating a discernable difference, the size of this difference (2-3 minutes in airtime) is very small. A travelor would most likely have other, more important considerations when deciding which airport to fly from.  
+
+The low p-value is due to the very large sample size, rather than the size of the difference.   
+
+Note: there is also some question about whether it is appropriate to use a hypothesis test or confidence interval here at all. We have data on all flights in 2013, so one could argue that we have the entire population already. Perhaps, we could view this as a sample and generalize to flights in other years, though conditions change, so it is not clear that these flights from 2013 would be representative of flights in other years.  
+
+### Smoking and Birthweight Example
+
+We consider data on the relationship between a pregnant mother's smoking and the birthweight of the baby. Data come from a sample of 80 babies born in North Carolina in 2004. Thirty of the mothers were smokers, and fifty were nonsmokers. 
+
+```{r, include=FALSE}
+set.seed(10212019)
+library(openintro)
+data(ncbirths)
+Smokers <- ncbirths%>%filter(habit=="smoker")
+NonSmokers <- ncbirths%>%filter(habit=="nonsmoker")
+samp1 <- seq(from=3, to=122, by=4)
+samp2 <- seq(from=3, to=852, by=17)
+NCBirths <- rbind(Smokers[samp1, ], NonSmokers[samp2, ])
+```
+
+```{r, fig.height=4, fig.width=8}
+p1 <- ggplot(data=NCBirths, aes(x=weight, fill=habit, color=habit)) + geom_density(alpha=0.2) + ggtitle("Birthweight and Smoking")
+p2 <- ggplot(data=NCBirths, aes(x=weight, y=habit)) + geom_boxplot() + ggtitle("Birthweight and Smoking")
+grid.arrange(p1, p2, ncol=2)
+```
+
+```{r, fig.height=3, fig.width=5}
+library(knitr)
+T <- NCBirths %>% group_by(habit) %>% summarize(Mean_Weight = mean(weight), SD = sd(weight), n=n())
+kable(T)
+```
+
+### Model for Birthweight
+
+```{r}
+M_Birthwt <- lm(data=NCBirths, weight~habit)
+summary(M_Birthwt)
+```
+
+### Conclusions from Birthweight Data
+
+```{r}
+confint(M_Birthwt)
+```
+
+
+* The average birtweight of babies whose mothers are smokers is estimated to be about 0.42 lbs less than the average birthweight for babies whose mothers are nonsmokers. 
+
+* The large p-value of 0.23, tells us that there is not enough evidence to say that a mother's smoking is associated with lower birthweights. It is plausible that this difference could have occurred by chance.  
+
+* We are 95% confident that the average birtweight of babies whose mothers are smokers is between 1.12 lbs less and 0.27 lbs more than the average birthweight for babies whose mothers are nonsmokers.   
+
+**Question:**
+Many studies have shown that a mother's smoking puts a baby at risk of low birthweight. Do our results contradict this research? Should we conclude that smoking has no impact on birthweights? 
+
+
+### Impact of Small Sample Size
+
+Notice that we observed a difference of about 0.4 lbs. in mean birthweight, which is a considerable difference. 
+
+The large p-value is mosty due to the relatively small sample size. Even though we observed a mean difference of 0.4 lbs, the sample is to small to allow us to say conclusively that smoking is associated with lower birthweights. 
+
+This is very different from concluding that smoking does not impact birthweight.  
+
+This is an example of why we should never "accept the null hypothesis" or say that our data "support the null hypothesis."
+
+### Larger Dataset
+
+In fact, this sample of 80 babies is part of a larger dataset, consisting of 1,000 babies born in NC in 2004. When we consider the full dataset, notice that the difference between the groups is similar, but the p-value is much smaller, providing stronger evidence of a relationship between a mother's smoking and lower birthweight.  
+
+```{r}
+M_Birthwt_Full <- lm(data=ncbirths, weight~habit)
+summary(M_Birthwt_Full)
+```
+
+
+### Cautions and Advice
+
+**p-values are only (a small) part of a statistical analysis.** 
+
+* For small samples, real differences might not be statistically significant.       
+      -Don't accept null hypothesis. Gather more information.    
+* For large, even very small differences will be statistically significant.    
+      -Look at confidence interval. Is difference practically important?     
+* When many hypotheses are tested at once (such as many food items) some will produce a significant result just by change.     
+       -Use a multiple testing correction, such as Bonferroni   
+* Interpret p-values on a “sliding scale”     
+     - 0.049 is practically the same as 0.051
+* Is sample representative of larger population?    
+* Were treatments randomly assigned (for experiments)?    
+* Are there other variables to consider?
+
+## The Regression Effect
+
+### The Regression Effect
+
+Exam 1 vs Exam 2 scores for intro stat students at another college
+
+```{r, fig.height=4, fig.width=8, echo=FALSE}
+data(StatGrades)
+gf_point(data=StatGrades, Exam2~Exam1) %>% gf_lm 
+```
+
+What is the relationship between scores on the two exams? 
+
+### The Regression Effect
+
+Exam 1 vs Exam 2 scores for intro stat students at another college
+
+```{r, fig.height=4, fig.width=8, echo=FALSE}
+data(StatGrades)
+gf_point(data=StatGrades, Exam2~Exam1) %>% gf_lm  %>% gf_function(fun = identity)
+```
+
+How many of the 6 students who scored below 70 on Exam 1 improved their scores on Exam 2?
+
+How many of the 7 students who scored above 90 improved on Exam 2?
+
+### The Regression Effect
+
+A low score on an exam is often the result of both poor preparation and bad luck.
+
+A high score often results from both good preparation and good luck. 
+
+While changes in study habits and preparation likely explain some improvement in low scores, we would also expect the lowest performers to improve simply because of better luck. 
+
+Likewise, some of the highest performers may simply not be as lucky on exam 2, so a small dropoff should not be interpreted as weaker understanding of the exam material.
+
+
+### Simulating Regression Effect {.smaller}
+
+```{r, fig.height=4, fig.width=8}
+set.seed(110322018)
+Understanding <-rnorm(25, 80, 10)
+Score1 <- Understanding + rnorm(25, 0, 5)
+Score2 <- Understanding + rnorm(25, 0, 5)
+Understanding <- round(Understanding,0)
+TestSim <- data.frame(Understanding, Score1, Score2)
+ggplot(data=TestSim, aes(y=Score2, x=Score1))+ geom_point() + stat_smooth(method="lm") +
+  geom_abline(slope=1) + geom_text(aes(label=Understanding), vjust = 0, nudge_y = 0.5)
+```
+
+This phenomon is called the **regression effect**.
+
+### Test Scores Simulation - Highest Scores
+
+
+```{r}
+kable(head(TestSim%>%arrange(desc(Score1))))
+```
+
+These students' success on test 1 is due to a strong understanding and good luck. We would expect the understanding to carry over to test 2 (provided the student continues to study in a similar way), but not necessarily the luck. 
+
+### Test Scores Simulation - Lowest Scores
+
+
+```{r}
+kable(head(TestSim%>%arrange(Score1)))
+```
+
+These students' lack of success on test 1 is due to a low understanding and poor luck. We would expect the understanding to carry over to test 2 (unless the student improves their preparation), but not necessarily the luck. 
+
+### Another Example
+
+Wins by NFL teams in 2017 and 2018
+
+```{r, each=FALSE, fig.height=4, fig.width=8, echo=FALSE}
+Wins2017 <- c(8,10,9,9,11,5,7,0,9,5,9,7,4,4,10,10,9,11,6,13,13,11,3,5,6,13,13,6,9,5,9,7)
+Wins2018 <- c(3,7,10,6,7,12,6,7.5,10,6,6,6.5, 11,10,5,12,12,13,7,8.5,11,13,5,4,4,9,9.5,4,10,5,9,7 )
+NFL <- data.frame(Wins2017, Wins2018)
+gf_point(Wins2018~Wins2017, data=NFL) %>% gf_lm %>% gf_function(fun=identity) %>%
+  gf_labs(title="NFL Wins 2017-2018")
+
+```
+
+### Other Examples of Regression Effect {.smaller}
+
+A 1973 article by Kahneman, D. and Tversky, A., "On the Psychology of Prediction," Pysch. Rev. 80:237-251 describes an instance of the regression effect in the training of Israeli air force pilots. 
+
+Trainees were praised after performing well and criticized after performing badly. The flight instructors observed that "high praise for good execution of complex maneuvers typically results in a decrement of performance on the next try." 
+
+Kahneman and Tversky write that :
+
+*"We normally reinforce others when their behavior is good and punish them when their behavior is bad. By regression alone, therefore, they [the trainees] are most likely to improve after being punished and most likely to deteriorate after being rewarded. Consequently, we are exposed to a lifetime schedule in which we are most often rewarded for punishing others, and punished for rewarding."*
+

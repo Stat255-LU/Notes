@@ -1043,21 +1043,113 @@ This describes how much variability there is in mean mercury levels between diff
 
 **Question:**   
 
-1. Suppose the sample consisted of 100 lakes, instead of 53, and that the distribution of the new lakes in the sample was similar to that of the original 53. Would you expect the mercury level of individual lakes to increase, decrese, or stay about the same? What about the standard error of the mean mercury level?    
+1. Suppose the sample consisted of only 10 lakes, or 30 lakes, instead of 53, and that the distribution of the new lakes in the sample was otherwise similar to that of the original 53. Would you expect the mercury level of individual lakes to increase, decrese, or stay about the same? What about the standard error of the mean mercury level?    
 
 
-### Why Did We Use Simulation?
+### Sample Size and Standard Deviation
 
-We've used simulation (permutation tests and bootstrapping) to do two different things.    
 
-1. To approximate the distribution of a statistic under the assumption that the null hypothesis is true.    
-2. To determine how much a sample statistic might vary from one sample to the next.     
+```{r, echo=FALSE}
+set.seed(10122022)
+LakesSample10 <- sample_n(FloridaLakes, 10, replace=TRUE)
+LakesSample30 <- sample_n(FloridaLakes, 30, replace=TRUE)
+```
 
-In some common situations, it is possible to use mathematical theory to calculate standard errors, without relying on simulation.  
+```{r, echo=FALSE, fig.width=12}
+Lakes_Hist10 <- ggplot(data=LakesSample10, aes(x=AvgMercury)) + 
+  geom_histogram(color="white", fill="lightblue", binwidth = 0.2) + 
+  ggtitle("n=10") + 
+  xlab("Mercury Level") + ylab("Frequency") + xlim(c(0,2))
+
+Lakes_Hist30 <- ggplot(data=LakesSample30, aes(x=AvgMercury)) + 
+  geom_histogram(color="white", fill="lightblue", binwidth = 0.2) + 
+  ggtitle("n=30") + 
+  xlab("Mercury Level") + ylab("Frequency") + xlim(c(0,2))
+
+Lakes_Hist53 <- Lakes_Hist + ggtitle("n=53") + xlim(c(0,2))
+
+grid.arrange(Lakes_Hist10, Lakes_Hist30, Lakes_Hist53, ncol=3)
+```
+Standard deviation in Mercury levels between 10 lakes:
+
+```{r, echo=FALSE}
+sd(LakesSample10$AvgMercury)
+```
+
+Standard deviation in Mercury levels between 30 lakes:
+
+```{r, echo=FALSE}
+sd(LakesSample30$AvgMercury)
+```
+
+Standard deviation in Mercury levels between 53 lakes:
+
+```{r, echo=FALSE}
+sd(FloridaLakes$AvgMercury)
+```
+
+Sample size does not impact the amount of variability between individual lakes. Standard deviation in mercury levels between individual lakes does not systematically increase or decrease based on sample size (of course it varies a little based on the lakes randomly chosen in the sample).   
+
+### Sample Size and Standard Error
+
+```{r, echo=FALSE}
+MeanHg10 <- rep(NA, 10000)
+MeanHg30 <- rep(NA, 10000)
+
+for (i in 1:10000){
+BootstrapSample <- sample_n(LakesSample10, 10, replace=TRUE) 
+MeanHg10[i] <- mean(BootstrapSample$AvgMercury)
+BootstrapSample <- sample_n(LakesSample30, 30, replace=TRUE) 
+MeanHg30[i] <- mean(BootstrapSample$AvgMercury)
+}
+Lakes_Bootstrap_Results_Mean1030 <- data.frame(MeanHg10, MeanHg30)
+```
+
+**Distributions of Mean Between Different Samples**
+
+```{r, echo=FALSE, fig.width=12}
+Lakes_Bootstrap_Mean10 <- ggplot(data=Lakes_Bootstrap_Results_Mean1030, aes(x=MeanHg10)) +  
+  geom_histogram(color="white", fill="lightblue") +
+  xlab("Sample Mean") + ylab("Frequency") +
+  ggtitle("n=10") + xlim(c(0,1)) + 
+  theme(legend.position = "none")
+
+Lakes_Bootstrap_Mean30 <- ggplot(data=Lakes_Bootstrap_Results_Mean1030, aes(x=MeanHg30)) +  
+  geom_histogram(color="white", fill="lightblue") +
+  xlab("Sample Mean") + ylab("Frequency") +
+  ggtitle("n=30") + xlim(c(0,1)) +
+  theme(legend.position = "none") 
+
+Lakes_Bootstrap_Mean53 <- Lakes_Bootstrap_Mean + ggtitle("n=53)") + xlim(c(0,1)) + xlab("Sample Mean")
+
+grid.arrange(Lakes_Bootstrap_Mean10, Lakes_Bootstrap_Mean30, Lakes_Bootstrap_Mean53, ncol=3)
+```
+
+
+Standard Error of the Mean (n=10):
+
+```{r, echo=FALSE}
+sd(Lakes_Bootstrap_Results_Mean1030$MeanHg10)
+```
+
+Standard Error of the Mean (n=30):
+
+```{r, echo=FALSE}
+sd(Lakes_Bootstrap_Results_Mean1030$MeanHg30)
+```
+
+Standard Error of the Mean (n=53):
+
+```{r, echo=FALSE}
+sd(Lakes_Bootstrap_Results_Mean$MeanHg)
+```
+
+As sample size increases, variability between means of different samples decreases. Standard error of the mean decreases.  
+
+This is also true of standard errors for other statistics (i.e. difference in means, regression slopes, etc.)
+
 
 ### Theory-Based Standard Error Formulas  
-
-Recall that standard error tells us about the variability in the distribution of a statistic between different samples size $n$.   
 
 In special cases, there are mathematical formulas for standard errors associated regression coefficients.   
 
@@ -1135,61 +1227,6 @@ sd(NS_Lakes_Bootstrap_Results$b1)
 ```
 
 
-### Standard Error for Slope and Intercept in SLR
-
-Standard Errors pertaining to the variability in slope and intercept of regression line relating price and acceleration time in samples of 110 cars.  
-
-
-Standard Error for Intercept of Regression Line: 
-
-\[
-SE(b_0)=s\sqrt{\frac{1}{n}+\frac{\bar{x}^2}{\sum(x_i-\bar{x})^2}}
-\]
-
-Standard Error for Slope of Regression Line: 
-
-\[
-SE(b_1)=\sqrt{\frac{s^2}{\sum(x_i-\bar{x})^2}} 
-\]
-
-```{r}
-s <- summary(Cars_M_A060)$sigma
-xbar <- mean(Cars2015$Acc060)
-SSx <- sum((Cars2015$Acc060-xbar)^2)
-```
-
-SE for Intercept
-
-```{r}
-s*sqrt(1/110 + xbar^2/SSx)
-```
-
-SE for Slope:
-
-```{r}
-sqrt(s^2/SSx)
-```
-
-```{r}
-summary(Cars_M_A060)
-```
-
-
-### $\text{SE}(b_j)$ in MLR
-
-When there is more than one explanatory variable, estimates of regression coefficients and their standard errors become more complicated, and involves inversion of a "design matrix."
-
-This [link](http://users.stat.umn.edu/~helwig/notes/mlr-Notes.pdf) provides additional information on the topic. Understanding it will likely require experience with linear algebra (i.e MATH 250). 
-
-Estimation in MLR goes beyond the scope of this class. For MLR in this class, you may use the estimates and standard errors reported in the R output, without being expected to calculate them yourself. 
-
-
-### R Output for SE's in MLR
-
-```{r}
-summary(Bear_M_Age_Sex_Int)
-```
-
 ### Theory-Based Confidence Intervals
 
 
@@ -1216,73 +1253,201 @@ The table below tells us what must be true of the sampling distribution for a st
 | Bootstrap Standard Error |  x   |   x   |    |
 | Theory-Based | x  |  x   |  x   | 
 
+## Intervals and Tests in Normal Error Regression Model
 
-### When to use Each CI Method 
+### Distribution of Model Parameters     
 
-**Example 1**
+Notice that when we used simulation to approximate the sampling distributions of statistics, many (but not all) of these turned out to be symmetric and bell-shaped. 
 
-Mean mercury level for all Florida lakes: 
-
-```{r}
-Lakes_Bootstrap_Mean
+```{r, fig.width=10, fig.height=5}
+grid.arrange(Lakes_Bootstrap_Mean, Cars_Acc060_B_Slope_Plot, NS_Lakes_Bootstrap_Plot_b1, Bears_plot_b1, ncol=2)
 ```
 
-It is appropriate to use any of the 3 CI methods since    
 
-* sampling distribution is symmetric and bell-shaped with no gaps     
-* there is a known formula to calculate standard error for a sample mean
-
-The methods should all produce similar results.    
-
-**Example 2**
-
-Slope of regression line in cars example
+### Hypothesis Tests in R Output
 
 ```{r}
-Cars_Acc060_B_Slope_Plot
+summary(Lakes_M)
 ```
 
-It is appropriate to use any of the 3 CI methods since    
+p-values for each line in the R-output are associated with the null hypothesis $\beta_j=0$.   
 
-* sampling distribution is symmetric and bell-shaped with no gaps     
-* there is a known formula to calculate standard error for a slope of regression line
+**Hypothesis Test for line (intercept)**
 
-The methods should all produce similar results.    
+**Null Hypothesis:** The average mercury level among all lakes in North Florida is 0 ($\beta_0=0$).   
+
+**Alternative Hypothesis:** The average mercury level among all lakes in Northern Florida is not 0 ($\beta_0\neq 0$).  
+
+We already know the average mercury level among all lakes in North Florida is not 0, so this is a silly test. 
 
 
-**Example 3**
+**Hypothesis Test for line LocationS**
 
-Standard deviation of mercury level in Florida Lakes
+**Null Hypothesis:** There is no difference in average mercury levels between Northern and Southern Florida ($\beta_1=0$).   
+
+**Alternative Hypothesis:** There is a difference in average mercury levels in Northern and Southern Florida ($\beta_1\neq 0$).  
+
+This test is relevant to us.  
+
+
+
+### Coefficients Table in R Output
+
+
+* **Estimate** gives the least-squares estimates $b_0, b_1, \ldots, b_p$     
+
+* **Standard Error** gives estimates of the standard deviation in the sampling distribution for estimate. (i.e. how much uncertainty is there about the estimate?) These are computed using the formulas in Section 4.7.   
+
+* **t value** is the estimate divided by its standard error.     
+
+* **Pr(>|t|)** is a p-value for the hypothesis test of whether quantity represented $b_j$ could plausibly be 0.   
+
+R does not obtain these p-values through simulation, but rather by using the  symmetric and bell-shaped t-distribution approximate the distribution of these statistics. This is appropriate when the assumptions of the normal error regression model are reasonably satisfied.   
+
+
+
+### t-distribution
+
+A t-distribution is a symmetric, bell-shaped curve, with thicker tails (hence more variability), than a $\mathcal{N}(0,1)$ distribution.   
+
+```{r, fig.height=5, fig.width=10, warning=FALSE, message=FALSE, include=FALSE}
+gf_dist("t", df=3, color = ~ "3 df", kind = "density")  %>%
+gf_dist("t", df=10, color = ~ "10 df", kind = "density") %>%
+gf_dist("t", df=20, color = ~ "20 df", kind = "density") %>%
+gf_dist("t", df=30, color = ~ "30 df", kind = "density") %>%
+gf_dist("norm", color = ~ "N(0,1)", kind = "density") + xlim(c(-3,3))
+```
+
+```{r, echo=FALSE, fig.height=5, fig.width=10}
+dt1 <- function(x){
+  dt(x, df=3)
+}
+dt2 <- function(x){
+  dt(x, df=10)
+}
+dt3 <- function(x){
+  dt(x, df=20)
+}
+dt4 <- function(x){
+  dt(x, df=30)
+}
+
+```
+
+```{r, echo=FALSE, fig.height=6, fig.width=8}
+df <- data.frame(x = seq(from=-3, to=3, by=0.1), y = dnorm(seq(from=-3, to=3, by=0.1), 0,1/sqrt(3)))
+p <- ggplot(df, aes(x = x, y = y)) +
+  stat_function(fun=dnorm,geom="line",color=scales::hue_pal()(5)[1]) + 
+  annotate(geom="text", x=0.5, y=0.4, label="N(0,1)",
+              color=scales::hue_pal()(5)[1]) +
+    stat_function(fun=dt1, geom="line",color=scales::hue_pal()(5)[2]) +
+   annotate(geom="text", x=0, y=0.35, label="t with 3 df",
+              color=scales::hue_pal()(5)[2]) +
+    stat_function(fun=dt2, geom="line",color=scales::hue_pal()(5)[3]) +
+    annotate(geom="text", x=0, y=0.37, label="t with 10 df",
+              color=scales::hue_pal()(5)[3]) +
+      stat_function(fun=dt3, geom="line",color=scales::hue_pal()(5)[4]) +
+   annotate(geom="text", x=0.5, y=0.38, label="t with 20 df",
+              color=scales::hue_pal()(5)[4]) +
+     stat_function(fun=dt, geom="line",color=scales::hue_pal()(5)[5]) +
+   annotate(geom="text", x=0.5, y=0.39, label="t with 30 df",
+              color=scales::hue_pal()(5)[5]) 
+p
+```
+
+### t-Distribution for Regression Coefficients
+
+When the distribution of a regression coefficient $b_j$ is reasonably symmetric, then we can use a t-distribution to approximate the distribution of the statistic:
+
+\[
+t= \frac{{b_j}}{\text{SE}(b_j)}  
+\]
+
+
+###  Hypothesis Test for Lakes in North and South Florida
+
+**Null Hypothesis:** There is no difference in average mercury levels between Northern and Southern Florida ($\beta_1=0$).   
+
+**Alternative Hypothesis:** There is a difference in average mercury levels in Northern and Southern Florida ($\beta_1\neq 0$).  
+
+**Test Statistic**: $t=\frac{{b_j}}{\text{SE}(b_j)} = \frac{0.27195}{0.08985} = 3.027$ 
+
+**Key Question:** What is the probability of getting a t-statistic as extreme as 3.027 if $\beta_1=0$ (i.e. there is no difference in mercury levels between northern and southern lakes).  
+
+### t-statistic and p-value
+
+```{r, fig.height=4, fig.width=8}
+ts=3.027
+gf_dist("t", df=51, geom = "area", fill = ~ (abs(x)< abs(ts)), show.legend=FALSE) + geom_vline(xintercept=c(ts, -ts), color="red")  + xlab("t")
+```
 
 ```{r}
-Lakes_Bootstrap_SD
+2*pt(-abs(ts), df=51)
 ```
 
-* It is appropriate to use the bootstrap percentile, and bootstrap standard error CI's since the sampling distribution is symmetric and bell-shaped.   
-* We cannot use the theory-based interval because we do not have a formula to calculate the standard error, associated with an estimate of $\sigma$. 
+The low p-value gives us strong evidence of a difference in average mercury levels between lakes in Northern and Southern Florida.  
+
+### Comparison to Simulation
+
+Let's compare these results to those given by the permutation test and bootstrap confidence interval.
 
 
-**Example 4**
+**Permutation Test**
+```{r}
+NSLakes_SimulationResultsPlot
+```
 
-Regression slope in bears age model
+p-value:
 
 ```{r}
-Bears_plot_b1
+b1 <- Lakes_M$coef[2] ## record value of b1 from actual data
+
+mean(abs(NSLakes_SimulationResults$b1Sim) > abs(b1))
 ```
 
-* It is appropriate to use the bootstrap percentile CI, since the sampling distribution has no gaps.   
-* Since the distribution is not symmetric, it would be inappropriate to use the bootstrap standard error, or theory-based confidence interval (Although R does calculate a SE, using it to produce a CI would be unreliable).     
 
-**Example 5**
 
-Median mercury level in Florida Lakes
+### Theory-Based CI for $\beta_1$ in Florida Lakes
+
+**95% confidence interval for $\beta_0$:**     
+
+\[
+\text{Statistic} \pm 2\times\text{Standard Error}
+\]
+
+\[
+0.27195 \pm 2(0.08985)
+\]
+
+We can be 95% confident that average mercury level is between 0.09 and 0.45 ppm higher in Southern Florida, than Northern Florida.  
+
+
+**Percentile Bootstrap Confidence Interval**
 
 ```{r}
-Lakes_Bootstrap_Median
+q.025 <- quantile(NS_Lakes_Bootstrap_Results$b1, 0.025)
+q.975 <- quantile(NS_Lakes_Bootstrap_Results$b1, 0.975)
+c(q.025, q.975)
 ```
 
-* Since the distribution has gaps, and is not symmetric, none of these procedures are appropriate.    
-* In some cases (usually with larger sample size), a bootstrap distribution for the median will not have these gaps. In these situations, the percentile bootstrap interval would be appropriate. If the distribution is bell-shaped, the standard error method would also be appropriate. We would not be able to use the theory-based approach, because there is no formula for the standard error associated with a sample median. 
+```{r}
+NS_Lakes_Bootstrap_Plot_b1 <- ggplot(data=NS_Lakes_Bootstrap_Results, aes(x=b1)) +  
+  geom_histogram(color="white", fill="lightblue") + 
+  xlab("b1 in Bootstrap Sample") + ylab("Frequency") +
+  ggtitle("Northern vs Southern Lakes: Bootstrap Distribution for b1") 
+NS_Lakes_Bootstrap_Plot_b1 + geom_segment(aes(x=q.025,xend=q.975, y=50, yend=50), color="gold", size=10, alpha=0.01)
+```
 
+We are 95% confident the average mercury level in Southern Lakes is between `r round(q.025,2)` and `r round(q.975,2)` ppm higher than in Northern Florida. 
 
+### When to Use "Theory-Based Inference"    
 
+Probability theory (such as the Central Limit Theorem), tells us that when sample sizes are large enough, the distributions of model parameters are approximately symmetric and bell-shaped. 
+
+How big the sample size needs to be varies. People sometimes use $n\geq 30$ as a guide, but this is context dependent.    
+
+The more skeweness there is in the orginal data, the larger the sample size needs to be, in order to use "theory-based" inference.   
+
+In Chapter 5, we'll look into more ways to check the appropriateness of "theory-based" tests and intervals.    
+
+If in doubt, check your p-values and confidence intervals against those obtained using simulation. (Or just use simulation!)    
