@@ -23,7 +23,7 @@
 <meta name="author" content="Andrew Sage - Lawrence University" />
 
 
-<meta name="date" content="2022-09-11" />
+<meta name="date" content="2022-10-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="normal-error-regression-model.html"/>
-<link rel="next" href="predictive-modeling.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -402,16 +402,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#standard-error-formulas"><i class="fa fa-check"></i><b>4.7</b> Standard Error Formulas</a><ul>
 <li class="chapter" data-level="4.7.1" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#what-is-standard-error"><i class="fa fa-check"></i><b>4.7.1</b> What is Standard Error?</a></li>
-<li class="chapter" data-level="4.7.2" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#why-did-we-use-simulation"><i class="fa fa-check"></i><b>4.7.2</b> Why Did We Use Simulation?</a></li>
-<li class="chapter" data-level="4.7.3" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#theory-based-standard-error-formulas"><i class="fa fa-check"></i><b>4.7.3</b> Theory-Based Standard Error Formulas</a></li>
-<li class="chapter" data-level="4.7.4" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#one-sample-mean-example"><i class="fa fa-check"></i><b>4.7.4</b> One-Sample Mean Example</a></li>
-<li class="chapter" data-level="4.7.5" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#standard-error-for-difference-in-means-cont."><i class="fa fa-check"></i><b>4.7.5</b> Standard Error for Difference in Means (cont.)</a></li>
-<li class="chapter" data-level="4.7.6" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#standard-error-for-slope-and-intercept-in-slr"><i class="fa fa-check"></i><b>4.7.6</b> Standard Error for Slope and Intercept in SLR</a></li>
-<li class="chapter" data-level="4.7.7" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#textseb_j-in-mlr"><i class="fa fa-check"></i><b>4.7.7</b> <span class="math inline">\(\text{SE}(b_j)\)</span> in MLR</a></li>
-<li class="chapter" data-level="4.7.8" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#r-output-for-ses-in-mlr"><i class="fa fa-check"></i><b>4.7.8</b> R Output for SE’s in MLR</a></li>
-<li class="chapter" data-level="4.7.9" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#theory-based-confidence-intervals"><i class="fa fa-check"></i><b>4.7.9</b> Theory-Based Confidence Intervals</a></li>
-<li class="chapter" data-level="4.7.10" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#comparison-of-ci-methods"><i class="fa fa-check"></i><b>4.7.10</b> Comparison of CI Methods</a></li>
-<li class="chapter" data-level="4.7.11" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#when-to-use-each-ci-method"><i class="fa fa-check"></i><b>4.7.11</b> When to use Each CI Method</a></li>
+<li class="chapter" data-level="4.7.2" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#sample-size-and-standard-deviation"><i class="fa fa-check"></i><b>4.7.2</b> Sample Size and Standard Deviation</a></li>
+<li class="chapter" data-level="4.7.3" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#sample-size-and-standard-error"><i class="fa fa-check"></i><b>4.7.3</b> Sample Size and Standard Error</a></li>
+<li class="chapter" data-level="4.7.4" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#theory-based-standard-error-formulas"><i class="fa fa-check"></i><b>4.7.4</b> Theory-Based Standard Error Formulas</a></li>
+<li class="chapter" data-level="4.7.5" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#one-sample-mean-example"><i class="fa fa-check"></i><b>4.7.5</b> One-Sample Mean Example</a></li>
+<li class="chapter" data-level="4.7.6" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#standard-error-for-difference-in-means-cont."><i class="fa fa-check"></i><b>4.7.6</b> Standard Error for Difference in Means (cont.)</a></li>
+<li class="chapter" data-level="4.7.7" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#theory-based-confidence-intervals"><i class="fa fa-check"></i><b>4.7.7</b> Theory-Based Confidence Intervals</a></li>
+<li class="chapter" data-level="4.7.8" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#comparison-of-ci-methods"><i class="fa fa-check"></i><b>4.7.8</b> Comparison of CI Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#intervals-and-tests-in-normal-error-regression-model"><i class="fa fa-check"></i><b>4.8</b> Intervals and Tests in Normal Error Regression Model</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#distribution-of-model-parameters"><i class="fa fa-check"></i><b>4.8.1</b> Distribution of Model Parameters</a></li>
+<li class="chapter" data-level="4.8.2" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#hypothesis-tests-in-r-output"><i class="fa fa-check"></i><b>4.8.2</b> Hypothesis Tests in R Output</a></li>
+<li class="chapter" data-level="4.8.3" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#coefficients-table-in-r-output"><i class="fa fa-check"></i><b>4.8.3</b> Coefficients Table in R Output</a></li>
+<li class="chapter" data-level="4.8.4" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#t-distribution"><i class="fa fa-check"></i><b>4.8.4</b> t-distribution</a></li>
+<li class="chapter" data-level="4.8.5" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#t-distribution-for-regression-coefficients"><i class="fa fa-check"></i><b>4.8.5</b> t-Distribution for Regression Coefficients</a></li>
+<li class="chapter" data-level="4.8.6" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#hypothesis-test-for-lakes-in-north-and-south-florida"><i class="fa fa-check"></i><b>4.8.6</b> Hypothesis Test for Lakes in North and South Florida</a></li>
+<li class="chapter" data-level="4.8.7" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#t-statistic-and-p-value"><i class="fa fa-check"></i><b>4.8.7</b> t-statistic and p-value</a></li>
+<li class="chapter" data-level="4.8.8" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#comparison-to-simulation"><i class="fa fa-check"></i><b>4.8.8</b> Comparison to Simulation</a></li>
+<li class="chapter" data-level="4.8.9" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#theory-based-ci-for-beta_1-in-florida-lakes"><i class="fa fa-check"></i><b>4.8.9</b> Theory-Based CI for <span class="math inline">\(\beta_1\)</span> in Florida Lakes</a></li>
+<li class="chapter" data-level="4.8.10" data-path="bootstrap-confindence-intervals.html"><a href="bootstrap-confindence-intervals.html#when-to-use-theory-based-inference"><i class="fa fa-check"></i><b>4.8.10</b> When to Use “Theory-Based Inference”</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html"><i class="fa fa-check"></i><b>5</b> Normal Error Regression Model</a><ul>
@@ -425,24 +434,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#mathematical-form-of-normal-error-regression-model"><i class="fa fa-check"></i><b>5.1.7</b> Mathematical Form of Normal Error Regression Model</a></li>
 <li class="chapter" data-level="5.1.8" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#parameters-and-statistics"><i class="fa fa-check"></i><b>5.1.8</b> Parameters and Statistics</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#intervals-and-tests-in-normal-error-regression-model"><i class="fa fa-check"></i><b>5.2</b> Intervals and Tests in Normal Error Regression Model</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#symmetric-bell-shaped-distributions"><i class="fa fa-check"></i><b>5.2.1</b> Symmetric, Bell-Shaped Distributions</a></li>
-<li class="chapter" data-level="5.2.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#t-distribution"><i class="fa fa-check"></i><b>5.2.2</b> t-distribution</a></li>
-<li class="chapter" data-level="5.2.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#f-distribution"><i class="fa fa-check"></i><b>5.2.3</b> F-Distribution</a></li>
-<li class="chapter" data-level="5.2.4" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#distribution-of-t-fracb_j-beta_jtextseb_j"><i class="fa fa-check"></i><b>5.2.4</b> Distribution of <span class="math inline">\(t= \frac{{b_j}-\beta_j}{\text{SE}(b_j)}\)</span></a></li>
-<li class="chapter" data-level="5.2.5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#distribution-of-f-statistic"><i class="fa fa-check"></i><b>5.2.5</b> Distribution of F-Statistic</a></li>
-<li class="chapter" data-level="5.2.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#mercury-levels-in-lakes-in-northern-and-southern-florida"><i class="fa fa-check"></i><b>5.2.6</b> Mercury Levels in Lakes in Northern and Southern Florida</a></li>
-<li class="chapter" data-level="5.2.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#hypothesis-test-for-lakes-in-north-and-south-florida"><i class="fa fa-check"></i><b>5.2.7</b> Hypothesis Test for Lakes in North and South Florida</a></li>
-<li class="chapter" data-level="5.2.8" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#t-statistic-and-p-value"><i class="fa fa-check"></i><b>5.2.8</b> t-statistic and p-value</a></li>
-<li class="chapter" data-level="5.2.9" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#theory-based-ci-for-beta_1-in-florida-lakes"><i class="fa fa-check"></i><b>5.2.9</b> Theory-Based CI for <span class="math inline">\(\beta_1\)</span> in Florida Lakes</a></li>
-<li class="chapter" data-level="5.2.10" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#comparison-to-simulation"><i class="fa fa-check"></i><b>5.2.10</b> Comparison to Simulation</a></li>
-<li class="chapter" data-level="5.2.11" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#coefficients-table-in-r-output"><i class="fa fa-check"></i><b>5.2.11</b> Coefficients Table in R Output</a></li>
-<li class="chapter" data-level="5.2.12" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#bear-weight-by-season"><i class="fa fa-check"></i><b>5.2.12</b> Bear Weight by Season</a></li>
-<li class="chapter" data-level="5.2.13" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#bears-f-test-illustration"><i class="fa fa-check"></i><b>5.2.13</b> Bears F-Test Illustration</a></li>
-<li class="chapter" data-level="5.2.14" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#comparison-to-simulation-1"><i class="fa fa-check"></i><b>5.2.14</b> Comparison to Simulation</a></li>
-<li class="chapter" data-level="5.2.15" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#car-size-and-price"><i class="fa fa-check"></i><b>5.2.15</b> Car Size and Price</a></li>
-<li class="chapter" data-level="5.2.16" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#bears-f-test-illustration-1"><i class="fa fa-check"></i><b>5.2.16</b> Bears F-Test Illustration</a></li>
-<li class="chapter" data-level="5.2.17" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#simulation-based-f-test"><i class="fa fa-check"></i><b>5.2.17</b> Simulation-Based F-test</a></li>
+<li class="chapter" data-level="5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#inference-in-normal-error-regression-model"><i class="fa fa-check"></i><b>5.2</b> Inference in Normal Error Regression Model</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#distribution-of-t-fracb_jtextseb_j"><i class="fa fa-check"></i><b>5.2.1</b> Distribution of <span class="math inline">\(t= \frac{{b_j}}{\text{SE}(b_j)}\)</span></a></li>
+<li class="chapter" data-level="5.2.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#f-distribution"><i class="fa fa-check"></i><b>5.2.2</b> F-Distribution</a></li>
+<li class="chapter" data-level="5.2.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#distribution-of-f-statistic"><i class="fa fa-check"></i><b>5.2.3</b> Distribution of F-Statistic</a></li>
+<li class="chapter" data-level="5.2.4" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#bear-weight-by-season"><i class="fa fa-check"></i><b>5.2.4</b> Bear Weight by Season</a></li>
+<li class="chapter" data-level="5.2.5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#bears-f-test-illustration"><i class="fa fa-check"></i><b>5.2.5</b> Bears F-Test Illustration</a></li>
+<li class="chapter" data-level="5.2.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#comparison-to-simulation-1"><i class="fa fa-check"></i><b>5.2.6</b> Comparison to Simulation</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#intervals-for-predicted-values"><i class="fa fa-check"></i><b>5.3</b> Intervals for Predicted Values</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#estimation-and-prediction"><i class="fa fa-check"></i><b>5.3.1</b> Estimation and Prediction</a></li>
@@ -578,163 +576,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2.20" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-building-summary"><i class="fa fa-check"></i><b>6.2.20</b> Model Building Summary</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="predictive-modeling.html"><a href="predictive-modeling.html"><i class="fa fa-check"></i><b>7</b> Predictive Modeling</a><ul>
-<li class="chapter" data-level="7.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#training-and-test-error"><i class="fa fa-check"></i><b>7.1</b> Training and Test Error</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#prediction-simulation-example"><i class="fa fa-check"></i><b>7.1.1</b> Prediction Simulation Example</a></li>
-<li class="chapter" data-level="7.1.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#model-complexity"><i class="fa fa-check"></i><b>7.1.2</b> Model Complexity</a></li>
-<li class="chapter" data-level="7.1.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#new-data-for-prediction"><i class="fa fa-check"></i><b>7.1.3</b> New Data for Prediction</a></li>
-<li class="chapter" data-level="7.1.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#fit-polynomial-models"><i class="fa fa-check"></i><b>7.1.4</b> Fit Polynomial Models</a></li>
-<li class="chapter" data-level="7.1.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#predictions-for-new-data"><i class="fa fa-check"></i><b>7.1.5</b> Predictions for New Data</a></li>
-<li class="chapter" data-level="7.1.6" data-path="predictive-modeling.html"><a href="predictive-modeling.html#predicted-values-and-true-y"><i class="fa fa-check"></i><b>7.1.6</b> Predicted Values and True y</a></li>
-<li class="chapter" data-level="7.1.7" data-path="predictive-modeling.html"><a href="predictive-modeling.html#evaluating-predictions---rmse"><i class="fa fa-check"></i><b>7.1.7</b> Evaluating Predictions - RMSE</a></li>
-<li class="chapter" data-level="7.1.8" data-path="predictive-modeling.html"><a href="predictive-modeling.html#calculate-prediction-error"><i class="fa fa-check"></i><b>7.1.8</b> Calculate Prediction Error</a></li>
-<li class="chapter" data-level="7.1.9" data-path="predictive-modeling.html"><a href="predictive-modeling.html#prediction-rmspe-by-model"><i class="fa fa-check"></i><b>7.1.9</b> Prediction RMSPE by Model</a></li>
-<li class="chapter" data-level="7.1.10" data-path="predictive-modeling.html"><a href="predictive-modeling.html#training-and-test-data"><i class="fa fa-check"></i><b>7.1.10</b> Training and Test Data</a></li>
-<li class="chapter" data-level="7.1.11" data-path="predictive-modeling.html"><a href="predictive-modeling.html#training-data-error"><i class="fa fa-check"></i><b>7.1.11</b> Training Data Error</a></li>
-<li class="chapter" data-level="7.1.12" data-path="predictive-modeling.html"><a href="predictive-modeling.html#test-and-training-error"><i class="fa fa-check"></i><b>7.1.12</b> Test and Training Error</a></li>
-<li class="chapter" data-level="7.1.13" data-path="predictive-modeling.html"><a href="predictive-modeling.html#graph-of-rmspe"><i class="fa fa-check"></i><b>7.1.13</b> Graph of RMSPE</a></li>
-<li class="chapter" data-level="7.1.14" data-path="predictive-modeling.html"><a href="predictive-modeling.html#third-degree-model-summary"><i class="fa fa-check"></i><b>7.1.14</b> Third Degree Model Summary</a></li>
-<li class="chapter" data-level="7.1.15" data-path="predictive-modeling.html"><a href="predictive-modeling.html#true-data-model"><i class="fa fa-check"></i><b>7.1.15</b> True Data Model</a></li>
-<li class="chapter" data-level="7.1.16" data-path="predictive-modeling.html"><a href="predictive-modeling.html#true-data-model-1"><i class="fa fa-check"></i><b>7.1.16</b> True Data Model</a></li>
-<li class="chapter" data-level="7.1.17" data-path="predictive-modeling.html"><a href="predictive-modeling.html#linear-model-on-larger-population"><i class="fa fa-check"></i><b>7.1.17</b> Linear Model on Larger Population</a></li>
-<li class="chapter" data-level="7.1.18" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cubic-model-on-larger-population"><i class="fa fa-check"></i><b>7.1.18</b> Cubic Model on Larger Population</a></li>
-<li class="chapter" data-level="7.1.19" data-path="predictive-modeling.html"><a href="predictive-modeling.html#eighth-degree-model-on-larger-population"><i class="fa fa-check"></i><b>7.1.19</b> Eighth-Degree Model on Larger Population</a></li>
-<li class="chapter" data-level="7.1.20" data-path="predictive-modeling.html"><a href="predictive-modeling.html#model-complexity-training-error-and-test-error"><i class="fa fa-check"></i><b>7.1.20</b> Model Complexity, Training Error, and Test Error</a></li>
-</ul></li>
-<li class="chapter" data-level="7.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#variance-bias-tradeoff"><i class="fa fa-check"></i><b>7.2</b> Variance-Bias Tradeoff</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#what-contributes-to-prediction-error"><i class="fa fa-check"></i><b>7.2.1</b> What Contributes to Prediction Error?</a></li>
-<li class="chapter" data-level="7.2.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#variance-and-bias"><i class="fa fa-check"></i><b>7.2.2</b> Variance and Bias</a></li>
-<li class="chapter" data-level="7.2.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#variance-bias-tradeoff-1"><i class="fa fa-check"></i><b>7.2.3</b> Variance-Bias Tradeoff</a></li>
-<li class="chapter" data-level="7.2.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#modeling-for-prediction"><i class="fa fa-check"></i><b>7.2.4</b> Modeling for Prediction</a></li>
-</ul></li>
-<li class="chapter" data-level="7.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cross-validation"><i class="fa fa-check"></i><b>7.3</b> Cross-Validation</a><ul>
-<li class="chapter" data-level="7.3.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cross-validation-cv"><i class="fa fa-check"></i><b>7.3.1</b> Cross-Validation (CV)</a></li>
-<li class="chapter" data-level="7.3.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cross-validation-illustration"><i class="fa fa-check"></i><b>7.3.2</b> Cross-Validation Illustration</a></li>
-<li class="chapter" data-level="7.3.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#models-for-price-of-new-cars"><i class="fa fa-check"></i><b>7.3.3</b> Models for Price of New Cars</a></li>
-<li class="chapter" data-level="7.3.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cross-validation-in-cars-dataset"><i class="fa fa-check"></i><b>7.3.4</b> Cross Validation in Cars Dataset</a></li>
-<li class="chapter" data-level="7.3.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cv-results"><i class="fa fa-check"></i><b>7.3.5</b> CV Results</a></li>
-<li class="chapter" data-level="7.3.6" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cv-conclusions"><i class="fa fa-check"></i><b>7.3.6</b> CV Conclusions</a></li>
-</ul></li>
-<li class="chapter" data-level="7.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression"><i class="fa fa-check"></i><b>7.4</b> Ridge Regression</a><ul>
-<li class="chapter" data-level="7.4.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#complexity-in-model-coefficients"><i class="fa fa-check"></i><b>7.4.1</b> Complexity in Model Coefficients</a></li>
-<li class="chapter" data-level="7.4.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#regression-on-housing-dataset"><i class="fa fa-check"></i><b>7.4.2</b> Regression on Housing Dataset</a></li>
-<li class="chapter" data-level="7.4.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#housing-model--some-exp.-vars."><i class="fa fa-check"></i><b>7.4.3</b> Housing Model- Some Exp. Vars.</a></li>
-<li class="chapter" data-level="7.4.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression-penalty"><i class="fa fa-check"></i><b>7.4.4</b> Ridge Regression Penalty</a></li>
-<li class="chapter" data-level="7.4.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#choosing-lambda"><i class="fa fa-check"></i><b>7.4.5</b> Choosing <span class="math inline">\(\lambda\)</span></a></li>
-<li class="chapter" data-level="7.4.6" data-path="predictive-modeling.html"><a href="predictive-modeling.html#optimal-value-of-lambda"><i class="fa fa-check"></i><b>7.4.6</b> Optimal value of <span class="math inline">\(\lambda\)</span></a></li>
-<li class="chapter" data-level="7.4.7" data-path="predictive-modeling.html"><a href="predictive-modeling.html#standardizing"><i class="fa fa-check"></i><b>7.4.7</b> Standardizing</a></li>
-<li class="chapter" data-level="7.4.8" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression-on-housing-dataset"><i class="fa fa-check"></i><b>7.4.8</b> Ridge Regression on Housing Dataset</a></li>
-<li class="chapter" data-level="7.4.9" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression-rmspe-by-lambda"><i class="fa fa-check"></i><b>7.4.9</b> Ridge Regression RMSPE by <span class="math inline">\(\lambda\)</span></a></li>
-<li class="chapter" data-level="7.4.10" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression-coefficients-for-optimal-model"><i class="fa fa-check"></i><b>7.4.10</b> Ridge Regression Coefficients for Optimal Model</a></li>
-<li class="chapter" data-level="7.4.11" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ols-and-ridge-predictions"><i class="fa fa-check"></i><b>7.4.11</b> OLS and Ridge Predictions</a></li>
-<li class="chapter" data-level="7.4.12" data-path="predictive-modeling.html"><a href="predictive-modeling.html#choosing-b_j-in-ols"><i class="fa fa-check"></i><b>7.4.12</b> Choosing <span class="math inline">\(b_j\)</span> in OLS</a></li>
-<li class="chapter" data-level="7.4.13" data-path="predictive-modeling.html"><a href="predictive-modeling.html#choosing-b_j-in-ridge-regression"><i class="fa fa-check"></i><b>7.4.13</b> Choosing <span class="math inline">\(b_j\)</span> in Ridge Regression</a></li>
-<li class="chapter" data-level="7.4.14" data-path="predictive-modeling.html"><a href="predictive-modeling.html#lasso-regression"><i class="fa fa-check"></i><b>7.4.14</b> Lasso Regression</a></li>
-</ul></li>
-<li class="chapter" data-level="7.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#decision-trees"><i class="fa fa-check"></i><b>7.5</b> Decision Trees</a><ul>
-<li class="chapter" data-level="7.5.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#basics-of-decision-trees"><i class="fa fa-check"></i><b>7.5.1</b> Basics of Decision Trees</a></li>
-<li class="chapter" data-level="7.5.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#decision-tree-example"><i class="fa fa-check"></i><b>7.5.2</b> Decision Tree Example</a></li>
-<li class="chapter" data-level="7.5.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#partitioning-in-a-decision-tree"><i class="fa fa-check"></i><b>7.5.3</b> Partitioning in A Decision Tree</a></li>
-<li class="chapter" data-level="7.5.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#partitioning-example"><i class="fa fa-check"></i><b>7.5.4</b> Partitioning Example</a></li>
-<li class="chapter" data-level="7.5.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#one-possible-split-x_1-5.5"><i class="fa fa-check"></i><b>7.5.5</b> One Possible Split (<span class="math inline">\(x_1 &lt; 5.5\)</span>)</a></li>
-<li class="chapter" data-level="7.5.6" data-path="predictive-modeling.html"><a href="predictive-modeling.html#one-possible-split-x_1-5.5-cont."><i class="fa fa-check"></i><b>7.5.6</b> One Possible Split (<span class="math inline">\(x_1 &lt; 5.5\)</span>) (cont.)</a></li>
-<li class="chapter" data-level="7.5.7" data-path="predictive-modeling.html"><a href="predictive-modeling.html#second-possible-split-x_1-6.5"><i class="fa fa-check"></i><b>7.5.7</b> Second Possible Split (<span class="math inline">\(x_1 &lt; 6.5\)</span>)</a></li>
-<li class="chapter" data-level="7.5.8" data-path="predictive-modeling.html"><a href="predictive-modeling.html#second-possible-split-x_1-6.5-cont."><i class="fa fa-check"></i><b>7.5.8</b> Second Possible Split (<span class="math inline">\(x_1 &lt; 6.5\)</span>) (cont.)</a></li>
-<li class="chapter" data-level="7.5.9" data-path="predictive-modeling.html"><a href="predictive-modeling.html#third-possible-split-x_2-5.5"><i class="fa fa-check"></i><b>7.5.9</b> Third Possible Split (<span class="math inline">\(x_2 &lt; 5.5\)</span>)</a></li>
-<li class="chapter" data-level="7.5.10" data-path="predictive-modeling.html"><a href="predictive-modeling.html#third-possible-split-x_2-5.5-cont."><i class="fa fa-check"></i><b>7.5.10</b> Third Possible Split (<span class="math inline">\(x_2 &lt; 5.5\)</span>) (cont.)</a></li>
-<li class="chapter" data-level="7.5.11" data-path="predictive-modeling.html"><a href="predictive-modeling.html#comparison-of-splits"><i class="fa fa-check"></i><b>7.5.11</b> Comparison of Splits</a></li>
-<li class="chapter" data-level="7.5.12" data-path="predictive-modeling.html"><a href="predictive-modeling.html#first-split"><i class="fa fa-check"></i><b>7.5.12</b> First Split</a></li>
-<li class="chapter" data-level="7.5.13" data-path="predictive-modeling.html"><a href="predictive-modeling.html#first-split-in-the-tree"><i class="fa fa-check"></i><b>7.5.13</b> First Split in the Tree</a></li>
-<li class="chapter" data-level="7.5.14" data-path="predictive-modeling.html"><a href="predictive-modeling.html#next-splits"><i class="fa fa-check"></i><b>7.5.14</b> Next Splits</a></li>
-<li class="chapter" data-level="7.5.15" data-path="predictive-modeling.html"><a href="predictive-modeling.html#next-splits-in-tree"><i class="fa fa-check"></i><b>7.5.15</b> Next Splits in Tree</a></li>
-<li class="chapter" data-level="7.5.16" data-path="predictive-modeling.html"><a href="predictive-modeling.html#recursive-partitioning"><i class="fa fa-check"></i><b>7.5.16</b> Recursive Partitioning</a></li>
-<li class="chapter" data-level="7.5.17" data-path="predictive-modeling.html"><a href="predictive-modeling.html#tree-on-housing-data"><i class="fa fa-check"></i><b>7.5.17</b> Tree on Housing Data</a></li>
-<li class="chapter" data-level="7.5.18" data-path="predictive-modeling.html"><a href="predictive-modeling.html#model-complexity-in-trees"><i class="fa fa-check"></i><b>7.5.18</b> Model Complexity in Trees</a></li>
-<li class="chapter" data-level="7.5.19" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cross-validation-on-housing-data"><i class="fa fa-check"></i><b>7.5.19</b> Cross-Validation on Housing Data</a></li>
-<li class="chapter" data-level="7.5.20" data-path="predictive-modeling.html"><a href="predictive-modeling.html#comparing-ols-lasso-ridge-and-tree"><i class="fa fa-check"></i><b>7.5.20</b> Comparing OLS, Lasso, Ridge, and Tree</a></li>
-<li class="chapter" data-level="7.5.21" data-path="predictive-modeling.html"><a href="predictive-modeling.html#random-forest"><i class="fa fa-check"></i><b>7.5.21</b> Random Forest</a></li>
-</ul></li>
-<li class="chapter" data-level="7.6" data-path="predictive-modeling.html"><a href="predictive-modeling.html#regression-splines"><i class="fa fa-check"></i><b>7.6</b> Regression Splines</a><ul>
-<li class="chapter" data-level="7.6.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#regression-splines-1"><i class="fa fa-check"></i><b>7.6.1</b> Regression Splines</a></li>
-<li class="chapter" data-level="7.6.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#price-of-2015-new-cars"><i class="fa fa-check"></i><b>7.6.2</b> Price of 2015 New Cars</a></li>
-<li class="chapter" data-level="7.6.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#two-models-with-high-bias"><i class="fa fa-check"></i><b>7.6.3</b> Two Models with High Bias</a></li>
-<li class="chapter" data-level="7.6.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cubic-model"><i class="fa fa-check"></i><b>7.6.4</b> Cubic Model</a></li>
-<li class="chapter" data-level="7.6.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cubic-splines"><i class="fa fa-check"></i><b>7.6.5</b> Cubic Splines</a></li>
-<li class="chapter" data-level="7.6.6" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cubic-splines-1"><i class="fa fa-check"></i><b>7.6.6</b> Cubic Splines</a></li>
-<li class="chapter" data-level="7.6.7" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cubic-spline-with-5-knots"><i class="fa fa-check"></i><b>7.6.7</b> Cubic Spline with 5 Knots</a></li>
-<li class="chapter" data-level="7.6.8" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cubic-spline-with-10-knots"><i class="fa fa-check"></i><b>7.6.8</b> Cubic Spline with 10 Knots</a></li>
-<li class="chapter" data-level="7.6.9" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cubic-spline-with-20-knots"><i class="fa fa-check"></i><b>7.6.9</b> Cubic Spline with 20 Knots</a></li>
-<li class="chapter" data-level="7.6.10" data-path="predictive-modeling.html"><a href="predictive-modeling.html#model-evaluation"><i class="fa fa-check"></i><b>7.6.10</b> Model Evaluation</a></li>
-<li class="chapter" data-level="7.6.11" data-path="predictive-modeling.html"><a href="predictive-modeling.html#implementation-of-splines"><i class="fa fa-check"></i><b>7.6.11</b> Implementation of Splines</a></li>
-</ul></li>
-<li class="chapter" data-level="7.7" data-path="predictive-modeling.html"><a href="predictive-modeling.html#predicting-house-prices-summary"><i class="fa fa-check"></i><b>7.7</b> Predicting House Prices Summary</a><ul>
-<li class="chapter" data-level="7.7.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#modeling-with-ols"><i class="fa fa-check"></i><b>7.7.1</b> Modeling with OLS</a></li>
-<li class="chapter" data-level="7.7.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression-with-housing-data"><i class="fa fa-check"></i><b>7.7.2</b> Ridge Regression with Housing Data</a></li>
-<li class="chapter" data-level="7.7.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#decision-tree"><i class="fa fa-check"></i><b>7.7.3</b> Decision Tree</a></li>
-<li class="chapter" data-level="7.7.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#comparing-performance"><i class="fa fa-check"></i><b>7.7.4</b> Comparing Performance</a></li>
-<li class="chapter" data-level="7.7.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#predictions-on-new-data"><i class="fa fa-check"></i><b>7.7.5</b> Predictions on New Data</a></li>
-</ul></li>
-<li class="chapter" data-level="7.8" data-path="predictive-modeling.html"><a href="predictive-modeling.html#assumptions-in-predictive-models"><i class="fa fa-check"></i><b>7.8</b> Assumptions in Predictive Models</a><ul>
-<li class="chapter" data-level="7.8.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#assumptions-in-predictive-models-1"><i class="fa fa-check"></i><b>7.8.1</b> Assumptions in Predictive Models</a></li>
-<li class="chapter" data-level="7.8.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#amazon-hiring-algorithm"><i class="fa fa-check"></i><b>7.8.2</b> Amazon Hiring Algorithm</a></li>
-<li class="chapter" data-level="7.8.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#facial-recognition"><i class="fa fa-check"></i><b>7.8.3</b> Facial Recognition</a></li>
-<li class="chapter" data-level="7.8.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#comments"><i class="fa fa-check"></i><b>7.8.4</b> Comments</a></li>
-<li class="chapter" data-level="7.8.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#modeling-for-prediction-1"><i class="fa fa-check"></i><b>7.8.5</b> Modeling for Prediction</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression and Classification</a><ul>
-<li class="chapter" data-level="8.1" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#logistic-regression"><i class="fa fa-check"></i><b>8.1</b> Logistic Regression</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#modeling-binary-response"><i class="fa fa-check"></i><b>8.1.1</b> Modeling Binary Response</a></li>
-<li class="chapter" data-level="8.1.2" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#credit-card-dataset"><i class="fa fa-check"></i><b>8.1.2</b> Credit Card Dataset</a></li>
-<li class="chapter" data-level="8.1.3" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#default-and-balance"><i class="fa fa-check"></i><b>8.1.3</b> Default and Balance</a></li>
-<li class="chapter" data-level="8.1.4" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#linear-regression-model-for-default"><i class="fa fa-check"></i><b>8.1.4</b> Linear Regression Model for Default</a></li>
-<li class="chapter" data-level="8.1.5" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#transforming-into-interval-01"><i class="fa fa-check"></i><b>8.1.5</b> Transforming into interval (0,1)</a></li>
-<li class="chapter" data-level="8.1.6" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#logistic-regression-model-for-default"><i class="fa fa-check"></i><b>8.1.6</b> Logistic Regression Model for Default</a></li>
-<li class="chapter" data-level="8.1.7" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#fitting-the-logistic-regression-model-in-r"><i class="fa fa-check"></i><b>8.1.7</b> Fitting the Logistic Regression Model in R</a></li>
-<li class="chapter" data-level="8.1.8" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#the-logistic-regression-equation"><i class="fa fa-check"></i><b>8.1.8</b> The Logistic Regression Equation</a></li>
-<li class="chapter" data-level="8.1.9" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#predict-in-r"><i class="fa fa-check"></i><b>8.1.9</b> Predict in R</a></li>
-<li class="chapter" data-level="8.1.10" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#where-do-the-bs-come-from"><i class="fa fa-check"></i><b>8.1.10</b> Where do the b’s come from?</a></li>
-</ul></li>
-<li class="chapter" data-level="8.2" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#interpretations-in-a-logistic-regression-model"><i class="fa fa-check"></i><b>8.2</b> Interpretations in a Logistic Regression Model</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#recall-logistic-regression-curve-for-credit-card-data"><i class="fa fa-check"></i><b>8.2.1</b> Recall Logistic Regression Curve for Credit Card Data</a></li>
-<li class="chapter" data-level="8.2.2" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#recall-credit-card-model-output"><i class="fa fa-check"></i><b>8.2.2</b> Recall Credit Card Model Output</a></li>
-<li class="chapter" data-level="8.2.3" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#balance-logistic-model-equation"><i class="fa fa-check"></i><b>8.2.3</b> Balance Logistic Model Equation</a></li>
-<li class="chapter" data-level="8.2.4" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#odds-and-odds-ratio"><i class="fa fa-check"></i><b>8.2.4</b> Odds and Odds Ratio</a></li>
-<li class="chapter" data-level="8.2.5" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#odds-in-logistic-regression"><i class="fa fa-check"></i><b>8.2.5</b> Odds in Logistic Regression</a></li>
-<li class="chapter" data-level="8.2.6" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#odds-ratio-in-regression"><i class="fa fa-check"></i><b>8.2.6</b> Odds Ratio in Regression</a></li>
-<li class="chapter" data-level="8.2.7" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#interpretation-of-beta_1"><i class="fa fa-check"></i><b>8.2.7</b> Interpretation of <span class="math inline">\(\beta_1\)</span></a></li>
-<li class="chapter" data-level="8.2.8" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#intrepretation-in-credit-card-example"><i class="fa fa-check"></i><b>8.2.8</b> Intrepretation in Credit Card Example</a></li>
-<li class="chapter" data-level="8.2.9" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#hypothesis-tests-in-logistic-regression"><i class="fa fa-check"></i><b>8.2.9</b> Hypothesis Tests in Logistic Regression</a></li>
-<li class="chapter" data-level="8.2.10" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#confidence-intervals-for-beta_1"><i class="fa fa-check"></i><b>8.2.10</b> Confidence Intervals for <span class="math inline">\(\beta_1\)</span></a></li>
-</ul></li>
-<li class="chapter" data-level="8.3" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>8.3</b> Multiple Logistic Regression</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#logistic-regression-models-with-multiple-explanatory-variables"><i class="fa fa-check"></i><b>8.3.1</b> Logistic Regression Models with Multiple Explanatory Variables</a></li>
-<li class="chapter" data-level="8.3.2" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#logistic-model-with-multiple-predictors"><i class="fa fa-check"></i><b>8.3.2</b> Logistic Model with Multiple Predictors</a></li>
-<li class="chapter" data-level="8.3.3" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#multiple-logistic-model-illustration"><i class="fa fa-check"></i><b>8.3.3</b> Multiple Logistic Model Illustration</a></li>
-<li class="chapter" data-level="8.3.4" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#multiple-logistic-regression-interpretation"><i class="fa fa-check"></i><b>8.3.4</b> Multiple Logistic Regression Interpretation</a></li>
-<li class="chapter" data-level="8.3.5" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#hypothesis-tests-in-multiple-logistic-regression-model"><i class="fa fa-check"></i><b>8.3.5</b> Hypothesis Tests in Multiple Logistic Regression Model</a></li>
-<li class="chapter" data-level="8.3.6" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#multiple-logistic-regression-model-with-interaction"><i class="fa fa-check"></i><b>8.3.6</b> Multiple Logistic Regression Model with Interaction</a></li>
-<li class="chapter" data-level="8.3.7" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#interpretations-for-logistic-model-with-interaction"><i class="fa fa-check"></i><b>8.3.7</b> Interpretations for Logistic Model with Interaction</a></li>
-<li class="chapter" data-level="8.3.8" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#logistic-regression-key-points"><i class="fa fa-check"></i><b>8.3.8</b> Logistic Regression Key Points</a></li>
-</ul></li>
-<li class="chapter" data-level="8.4" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#assessing-a-classifiers-performance"><i class="fa fa-check"></i><b>8.4</b> Assessing a Classifier’s Performance</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#measuring-prediction-accuracy"><i class="fa fa-check"></i><b>8.4.1</b> Measuring Prediction Accuracy</a></li>
-<li class="chapter" data-level="8.4.2" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#classification-accuracy"><i class="fa fa-check"></i><b>8.4.2</b> Classification Accuracy</a></li>
-<li class="chapter" data-level="8.4.3" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#first-50-cases"><i class="fa fa-check"></i><b>8.4.3</b> First 50 Cases</a></li>
-<li class="chapter" data-level="8.4.4" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#confusion-matrix"><i class="fa fa-check"></i><b>8.4.4</b> Confusion Matrix</a></li>
-<li class="chapter" data-level="8.4.5" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#full-test-data-confusion-matrix"><i class="fa fa-check"></i><b>8.4.5</b> Full Test Data Confusion Matrix</a></li>
-<li class="chapter" data-level="8.4.6" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#decision-tree-classifier"><i class="fa fa-check"></i><b>8.4.6</b> Decision Tree Classifier</a></li>
-<li class="chapter" data-level="8.4.7" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#tree-confusion-matrix"><i class="fa fa-check"></i><b>8.4.7</b> Tree Confusion Matrix</a></li>
-<li class="chapter" data-level="8.4.8" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#more-on-accuracy-rate"><i class="fa fa-check"></i><b>8.4.8</b> More on Accuracy Rate</a></li>
-<li class="chapter" data-level="8.4.9" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#sensitivity-and-specificity"><i class="fa fa-check"></i><b>8.4.9</b> Sensitivity and Specificity</a></li>
-</ul></li>
-<li class="chapter" data-level="8.5" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#receiver-operating-characteristic-curve"><i class="fa fa-check"></i><b>8.5</b> Receiver Operating Characteristic Curve</a><ul>
-<li class="chapter" data-level="8.5.1" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#roc-curve"><i class="fa fa-check"></i><b>8.5.1</b> ROC Curve</a></li>
-<li class="chapter" data-level="8.5.2" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#lr-and-tree-roc-curves"><i class="fa fa-check"></i><b>8.5.2</b> LR and Tree ROC Curves</a></li>
-<li class="chapter" data-level="8.5.3" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#constructing-roc-curve"><i class="fa fa-check"></i><b>8.5.3</b> Constructing ROC Curve</a></li>
-<li class="chapter" data-level="8.5.4" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#construct-roc-example"><i class="fa fa-check"></i><b>8.5.4</b> Construct ROC Example</a></li>
-</ul></li>
-</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -807,7 +648,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>salary</code> - estimated average annual salary of teachers in public elementary and secondary schools, 1994-95 (in thousands of US dollars)</p>
 <p><code>frac</code> - percentage of all eligible students taking the SAT, 1994-95</p>
 <p><code>sat</code> - average total SAT score, 1994-95</p>
-<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="building-models-for-interpretation.html#cb577-1"></a><span class="kw">glimpse</span>(SAT)</span></code></pre></div>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="building-models-for-interpretation.html#cb560-1"></a><span class="kw">glimpse</span>(SAT)</span></code></pre></div>
 <pre><code>## Rows: 50
 ## Columns: 6
 ## $ state  &lt;fct&gt; Alabama, Alaska, Arizona, Arkansas, California, Colorado, Conne…
@@ -820,18 +661,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="teacher-salaries-and-sat-scores" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.4</span> Teacher Salaries and SAT Scores<a href="building-models-for-interpretation.html#teacher-salaries-and-sat-scores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The plot displays average SAT score against average teacher salary for all 50 US states.</p>
-<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="building-models-for-interpretation.html#cb579-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>SAT, <span class="kw">aes</span>(<span class="dt">y=</span>sat, <span class="dt">x=</span>salary)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb579-2"><a href="building-models-for-interpretation.html#cb579-2"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb579-3"><a href="building-models-for-interpretation.html#cb579-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Average SAT score vs Average Teacher Salary&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb579-4"><a href="building-models-for-interpretation.html#cb579-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Average Teacher Salary in Thousands&quot;</span>) </span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-458-1.png" width="576" /></p>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb562-1"><a href="building-models-for-interpretation.html#cb562-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>SAT, <span class="kw">aes</span>(<span class="dt">y=</span>sat, <span class="dt">x=</span>salary)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb562-2"><a href="building-models-for-interpretation.html#cb562-2"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb562-3"><a href="building-models-for-interpretation.html#cb562-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Average SAT score vs Average Teacher Salary&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb562-4"><a href="building-models-for-interpretation.html#cb562-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Average Teacher Salary in Thousands&quot;</span>) </span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-451-1.png" width="576" /></p>
 <p>What conclusion do you draw from the plot?</p>
 <p>Are these results surprising?</p>
 </div>
 <div id="simple-linear-regression-model" class="section level3 smaller hasAnchor">
 <h3><span class="header-section-number">6.1.5</span> Simple Linear Regression Model<a href="building-models-for-interpretation.html#simple-linear-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="building-models-for-interpretation.html#cb580-1"></a>SAT_M1 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>SAT, sat<span class="op">~</span>salary)</span>
-<span id="cb580-2"><a href="building-models-for-interpretation.html#cb580-2"></a><span class="kw">summary</span>(SAT_M1)</span></code></pre></div>
+<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb563-1"><a href="building-models-for-interpretation.html#cb563-1"></a>SAT_M1 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>SAT, sat<span class="op">~</span>salary)</span>
+<span id="cb563-2"><a href="building-models-for-interpretation.html#cb563-2"></a><span class="kw">summary</span>(SAT_M1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = sat ~ salary, data = SAT)
@@ -857,21 +698,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Low = 0%-22%<br />
 Medium = 22-49%<br />
 High = 49-81%</p>
-<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="building-models-for-interpretation.html#cb582-1"></a>SAT &lt;-<span class="st"> </span><span class="kw">mutate</span>(SAT, <span class="dt">fracgrp =</span> <span class="kw">cut</span>(frac, </span>
-<span id="cb582-2"><a href="building-models-for-interpretation.html#cb582-2"></a>      <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">22</span>, <span class="dv">49</span>, <span class="dv">81</span>), </span>
-<span id="cb582-3"><a href="building-models-for-interpretation.html#cb582-3"></a>      <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb565-1"><a href="building-models-for-interpretation.html#cb565-1"></a>SAT &lt;-<span class="st"> </span><span class="kw">mutate</span>(SAT, <span class="dt">fracgrp =</span> <span class="kw">cut</span>(frac, </span>
+<span id="cb565-2"><a href="building-models-for-interpretation.html#cb565-2"></a>      <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">22</span>, <span class="dv">49</span>, <span class="dv">81</span>), </span>
+<span id="cb565-3"><a href="building-models-for-interpretation.html#cb565-3"></a>      <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>)))</span></code></pre></div>
 </div>
 <div id="a-closer-look-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.7</span> A Closer Look<a href="building-models-for-interpretation.html#a-closer-look-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="building-models-for-interpretation.html#cb583-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>SAT, <span class="kw">aes</span>( <span class="dt">y=</span>sat, <span class="dt">x=</span>salary )) <span class="op">+</span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="dt">facets =</span> <span class="op">~</span>fracgrp) <span class="op">+</span></span>
-<span id="cb583-2"><a href="building-models-for-interpretation.html#cb583-2"></a><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Average Teacher Salary in Thousands&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-461-1.png" width="864" /></p>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="building-models-for-interpretation.html#cb566-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>SAT, <span class="kw">aes</span>( <span class="dt">y=</span>sat, <span class="dt">x=</span>salary )) <span class="op">+</span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="dt">facets =</span> <span class="op">~</span>fracgrp) <span class="op">+</span></span>
+<span id="cb566-2"><a href="building-models-for-interpretation.html#cb566-2"></a><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Average Teacher Salary in Thousands&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-454-1.png" width="864" /></p>
 <p>Now what conclusions do you draw from the plots?</p>
 </div>
 <div id="multiple-regression-model-2" class="section level3 smaller hasAnchor">
 <h3><span class="header-section-number">6.1.8</span> Multiple Regression Model<a href="building-models-for-interpretation.html#multiple-regression-model-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="building-models-for-interpretation.html#cb584-1"></a>SAT_M2 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>SAT, sat<span class="op">~</span>salary<span class="op">+</span>frac)</span>
-<span id="cb584-2"><a href="building-models-for-interpretation.html#cb584-2"></a><span class="kw">summary</span>(SAT_M2)</span></code></pre></div>
+<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="building-models-for-interpretation.html#cb567-1"></a>SAT_M2 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>SAT, sat<span class="op">~</span>salary<span class="op">+</span>frac)</span>
+<span id="cb567-2"><a href="building-models-for-interpretation.html#cb567-2"></a><span class="kw">summary</span>(SAT_M2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = sat ~ salary + frac, data = SAT)
@@ -897,23 +738,23 @@ High = 49-81%</p>
 <div id="add-other-variables" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.9</span> Add Other Variables?<a href="building-models-for-interpretation.html#add-other-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s see what other possible explanatory variables we might want to add to the model. We’ll</p>
-<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="building-models-for-interpretation.html#cb586-1"></a>SAT_Num &lt;-<span class="st"> </span><span class="kw">select_if</span>(SAT, is.numeric)</span>
-<span id="cb586-2"><a href="building-models-for-interpretation.html#cb586-2"></a>C &lt;-<span class="st"> </span><span class="kw">cor</span>(SAT_Num, <span class="dt">use =</span> <span class="st">&quot;pairwise.complete.obs&quot;</span>)</span>
-<span id="cb586-3"><a href="building-models-for-interpretation.html#cb586-3"></a><span class="kw">round</span>(C,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="building-models-for-interpretation.html#cb569-1"></a>SAT_Num &lt;-<span class="st"> </span><span class="kw">select_if</span>(SAT, is.numeric)</span>
+<span id="cb569-2"><a href="building-models-for-interpretation.html#cb569-2"></a>C &lt;-<span class="st"> </span><span class="kw">cor</span>(SAT_Num, <span class="dt">use =</span> <span class="st">&quot;pairwise.complete.obs&quot;</span>)</span>
+<span id="cb569-3"><a href="building-models-for-interpretation.html#cb569-3"></a><span class="kw">round</span>(C,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##        expend ratio salary  frac   sat
 ## expend   1.00 -0.37   0.87  0.59 -0.38
 ## ratio   -0.37  1.00   0.00 -0.21  0.08
 ## salary   0.87  0.00   1.00  0.62 -0.44
 ## frac     0.59 -0.21   0.62  1.00 -0.89
 ## sat     -0.38  0.08  -0.44 -0.89  1.00</code></pre>
-<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="building-models-for-interpretation.html#cb588-1"></a><span class="kw">library</span>(corrplot)</span>
-<span id="cb588-2"><a href="building-models-for-interpretation.html#cb588-2"></a><span class="kw">corrplot</span>(C)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-464-1.png" width="672" /></p>
+<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="building-models-for-interpretation.html#cb571-1"></a><span class="kw">library</span>(corrplot)</span>
+<span id="cb571-2"><a href="building-models-for-interpretation.html#cb571-2"></a><span class="kw">corrplot</span>(C)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-457-1.png" width="672" /></p>
 </div>
 <div id="add-student-to-teacher-ratio" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.10</span> Add Student-to-Teacher Ratio<a href="building-models-for-interpretation.html#add-student-to-teacher-ratio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="building-models-for-interpretation.html#cb589-1"></a>SAT_M3 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>SAT, sat<span class="op">~</span>salary<span class="op">+</span>frac<span class="op">+</span>ratio)</span>
-<span id="cb589-2"><a href="building-models-for-interpretation.html#cb589-2"></a><span class="kw">summary</span>(SAT_M3)</span></code></pre></div>
+<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="building-models-for-interpretation.html#cb572-1"></a>SAT_M3 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>SAT, sat<span class="op">~</span>salary<span class="op">+</span>frac<span class="op">+</span>ratio)</span>
+<span id="cb572-2"><a href="building-models-for-interpretation.html#cb572-2"></a><span class="kw">summary</span>(SAT_M3)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = sat ~ salary + frac + ratio, data = SAT)
@@ -937,8 +778,8 @@ High = 49-81%</p>
 </div>
 <div id="add-expendatures" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.11</span> Add Expendatures<a href="building-models-for-interpretation.html#add-expendatures" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb591-1"><a href="building-models-for-interpretation.html#cb591-1"></a>SAT_M4 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>SAT, sat<span class="op">~</span>salary<span class="op">+</span>frac<span class="op">+</span>ratio<span class="op">+</span>expend)</span>
-<span id="cb591-2"><a href="building-models-for-interpretation.html#cb591-2"></a><span class="kw">summary</span>(SAT_M4)</span></code></pre></div>
+<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="building-models-for-interpretation.html#cb574-1"></a>SAT_M4 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>SAT, sat<span class="op">~</span>salary<span class="op">+</span>frac<span class="op">+</span>ratio<span class="op">+</span>expend)</span>
+<span id="cb574-2"><a href="building-models-for-interpretation.html#cb574-2"></a><span class="kw">summary</span>(SAT_M4)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = sat ~ salary + frac + ratio + expend, data = SAT)
@@ -964,14 +805,14 @@ High = 49-81%</p>
 <div id="confidence-intervals-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.12</span> Confidence Intervals<a href="building-models-for-interpretation.html#confidence-intervals-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Confidence intervals for model involving teacher salary, percentage taking the test, and student-to-teacher ratio.</p>
-<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="building-models-for-interpretation.html#cb593-1"></a><span class="kw">confint</span>(SAT_M3)</span></code></pre></div>
+<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="building-models-for-interpretation.html#cb576-1"></a><span class="kw">confint</span>(SAT_M3)</span></code></pre></div>
 <pre><code>##                   2.5 %       97.5 %
 ## (Intercept) 968.6691802 1147.1271438
 ## salary        0.5304797    4.5744605
 ## frac         -3.3727807   -2.4539197
 ## ratio        -8.9098147   -0.3690414</code></pre>
 <p>Confidence intervals for model with above variables plus expendature.</p>
-<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="building-models-for-interpretation.html#cb595-1"></a><span class="kw">confint</span>(SAT_M4)</span></code></pre></div>
+<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="building-models-for-interpretation.html#cb578-1"></a><span class="kw">confint</span>(SAT_M4)</span></code></pre></div>
 <pre><code>##                  2.5 %      97.5 %
 ## (Intercept) 939.486374 1152.456698
 ## salary       -3.170247    6.446081
@@ -984,27 +825,27 @@ High = 49-81%</p>
 <h3><span class="header-section-number">6.1.13</span> Residual Plots for SAT 3-variable Model<a href="building-models-for-interpretation.html#residual-plots-for-sat-3-variable-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s return to the model with salary, ratio, and fraction taking test.</p>
 <p>We use residual plots to assess model assumptions.</p>
-<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="building-models-for-interpretation.html#cb597-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>SAT_M3<span class="op">$</span>residuals, <span class="dt">x=</span>SAT_M3<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb597-2"><a href="building-models-for-interpretation.html#cb597-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">x=</span>SAT_M3<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
-<span id="cb597-3"><a href="building-models-for-interpretation.html#cb597-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(SAT_M3<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;QQ Plot&quot;</span>)</span>
-<span id="cb597-4"><a href="building-models-for-interpretation.html#cb597-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-469-1.png" width="864" /></p>
+<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="building-models-for-interpretation.html#cb580-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>SAT_M3<span class="op">$</span>residuals, <span class="dt">x=</span>SAT_M3<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb580-2"><a href="building-models-for-interpretation.html#cb580-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">x=</span>SAT_M3<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
+<span id="cb580-3"><a href="building-models-for-interpretation.html#cb580-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(SAT_M3<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;QQ Plot&quot;</span>)</span>
+<span id="cb580-4"><a href="building-models-for-interpretation.html#cb580-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-462-1.png" width="864" /></p>
 <p>There is some sign of a quadratic trend in the residual plot, creating concern about the linearity assumption.</p>
 </div>
 <div id="plots-of-residuals-against-predictors" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.14</span> Plots of Residuals Against Predictors<a href="building-models-for-interpretation.html#plots-of-residuals-against-predictors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can plot our residuals against the explanatory variables to see whether the model is properly accounting for relationships involving each variable. If we see nonlinear trends, we should consider adding a nonlinear function of that explanatory variable.</p>
-<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb598-1"><a href="building-models-for-interpretation.html#cb598-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>SAT_M3<span class="op">$</span>residuals, <span class="dt">x=</span>SAT_M3<span class="op">$</span>model<span class="op">$</span>salary)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predicted Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Salary&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
-<span id="cb598-2"><a href="building-models-for-interpretation.html#cb598-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>SAT_M3<span class="op">$</span>residuals, <span class="dt">x=</span>SAT_M3<span class="op">$</span>model<span class="op">$</span>frac)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predicted Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Fraction Taking Test&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb598-3"><a href="building-models-for-interpretation.html#cb598-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>SAT_M3<span class="op">$</span>residuals, <span class="dt">x=</span>SAT_M3<span class="op">$</span>model<span class="op">$</span>ratio)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predicted Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Student to Teach Ratio&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb598-4"><a href="building-models-for-interpretation.html#cb598-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-470-1.png" width="864" /></p>
+<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="building-models-for-interpretation.html#cb581-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>SAT_M3<span class="op">$</span>residuals, <span class="dt">x=</span>SAT_M3<span class="op">$</span>model<span class="op">$</span>salary)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predicted Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Salary&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
+<span id="cb581-2"><a href="building-models-for-interpretation.html#cb581-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>SAT_M3<span class="op">$</span>residuals, <span class="dt">x=</span>SAT_M3<span class="op">$</span>model<span class="op">$</span>frac)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predicted Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Fraction Taking Test&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb581-3"><a href="building-models-for-interpretation.html#cb581-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>SAT_M3<span class="op">$</span>residuals, <span class="dt">x=</span>SAT_M3<span class="op">$</span>model<span class="op">$</span>ratio)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predicted Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Student to Teach Ratio&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb581-4"><a href="building-models-for-interpretation.html#cb581-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-463-1.png" width="864" /></p>
 <p>There is also a quadratic trend in the plot involving the fraction variable.</p>
 </div>
 <div id="model-using-frac2" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.15</span> Model Using Frac^2<a href="building-models-for-interpretation.html#model-using-frac2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="building-models-for-interpretation.html#cb599-1"></a>SAT_M5 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>SAT, sat<span class="op">~</span>salary<span class="op">+</span>frac<span class="op">+</span><span class="kw">I</span>(frac<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span>ratio)</span>
-<span id="cb599-2"><a href="building-models-for-interpretation.html#cb599-2"></a><span class="kw">summary</span>(SAT_M5)</span></code></pre></div>
+<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="building-models-for-interpretation.html#cb582-1"></a>SAT_M5 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>SAT, sat<span class="op">~</span>salary<span class="op">+</span>frac<span class="op">+</span><span class="kw">I</span>(frac<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span>ratio)</span>
+<span id="cb582-2"><a href="building-models-for-interpretation.html#cb582-2"></a><span class="kw">summary</span>(SAT_M5)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = sat ~ salary + frac + I(frac^2) + ratio, data = SAT)
@@ -1029,15 +870,15 @@ High = 49-81%</p>
 </div>
 <div id="residual-plots-for-quadratic-sat-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.16</span> Residual Plots for Quadratic SAT Model<a href="building-models-for-interpretation.html#residual-plots-for-quadratic-sat-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="building-models-for-interpretation.html#cb601-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M4<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>SAT_M4<span class="op">$</span>residuals, <span class="dt">x=</span>SAT_M5<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb601-2"><a href="building-models-for-interpretation.html#cb601-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M5<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">x=</span>SAT_M5<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
-<span id="cb601-3"><a href="building-models-for-interpretation.html#cb601-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M5<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(SAT_M5<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;QQ Plot&quot;</span>)</span>
-<span id="cb601-4"><a href="building-models-for-interpretation.html#cb601-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-472-1.png" width="864" /></p>
+<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="building-models-for-interpretation.html#cb584-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M4<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>SAT_M4<span class="op">$</span>residuals, <span class="dt">x=</span>SAT_M5<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb584-2"><a href="building-models-for-interpretation.html#cb584-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M5<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">x=</span>SAT_M5<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
+<span id="cb584-3"><a href="building-models-for-interpretation.html#cb584-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M5<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(SAT_M5<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;QQ Plot&quot;</span>)</span>
+<span id="cb584-4"><a href="building-models-for-interpretation.html#cb584-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-465-1.png" width="864" /></p>
 </div>
 <div id="model-with-linear-term-on-frac" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.17</span> Model with Linear Term on Frac<a href="building-models-for-interpretation.html#model-with-linear-term-on-frac" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="building-models-for-interpretation.html#cb602-1"></a><span class="kw">summary</span>(SAT_M3)</span></code></pre></div>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="building-models-for-interpretation.html#cb585-1"></a><span class="kw">summary</span>(SAT_M3)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = sat ~ salary + frac + ratio, data = SAT)
@@ -1067,7 +908,7 @@ High = 49-81%</p>
 </div>
 <div id="model-with-quadratic-term-on-frac" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.19</span> Model with Quadratic Term on Frac<a href="building-models-for-interpretation.html#model-with-quadratic-term-on-frac" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="building-models-for-interpretation.html#cb604-1"></a><span class="kw">summary</span>(SAT_M5)</span></code></pre></div>
+<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="building-models-for-interpretation.html#cb587-1"></a><span class="kw">summary</span>(SAT_M5)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = sat ~ salary + frac + I(frac^2) + ratio, data = SAT)
@@ -1098,8 +939,8 @@ High = 49-81%</p>
 </div>
 <div id="plot-of-sat-and-frac" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.21</span> Plot of SAT and Frac<a href="building-models-for-interpretation.html#plot-of-sat-and-frac" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="building-models-for-interpretation.html#cb606-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>SAT, <span class="kw">aes</span>(<span class="dt">x=</span>frac, <span class="dt">y=</span>sat)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-475-1.png" width="672" /></p>
+<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="building-models-for-interpretation.html#cb589-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>SAT, <span class="kw">aes</span>(<span class="dt">x=</span>frac, <span class="dt">y=</span>sat)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-468-1.png" width="672" /></p>
 <p>We do see some possible quadratic trend, but we should be really careful about extrapolation.</p>
 </div>
 <div id="sat-model-summary" class="section level3 hasAnchor">
@@ -1118,8 +959,8 @@ High = 49-81%</p>
 <h3><span class="header-section-number">6.2.1</span> Model for Price of 2015 Cars<a href="building-models-for-interpretation.html#model-for-price-of-2015-cars" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>What factors contribute to the price of a car?</p>
 <p>We build a model for the price of a new 2015 car, in order to help us answer this question.</p>
-<div class="sourceCode" id="cb607"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb607-1"><a href="building-models-for-interpretation.html#cb607-1"></a><span class="kw">data</span>(Cars2015)</span>
-<span id="cb607-2"><a href="building-models-for-interpretation.html#cb607-2"></a><span class="kw">glimpse</span>(Cars2015)</span></code></pre></div>
+<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb590-1"><a href="building-models-for-interpretation.html#cb590-1"></a><span class="kw">data</span>(Cars2015)</span>
+<span id="cb590-2"><a href="building-models-for-interpretation.html#cb590-2"></a><span class="kw">glimpse</span>(Cars2015)</span></code></pre></div>
 <pre><code>## Rows: 110
 ## Columns: 20
 ## $ Make      &lt;fct&gt; Chevrolet, Hyundai, Kia, Mitsubishi, Nissan, Dodge, Chevrole…
@@ -1142,12 +983,12 @@ High = 49-81%</p>
 ## $ QtrMile   &lt;dbl&gt; 19.4, 17.8, 17.3, 19.0, 18.2, 17.2, 17.6, 17.4, 17.1, 18.3, …
 ## $ PageNum   &lt;int&gt; 123, 148, 163, 188, 196, 128, 119, 131, 136, 216, 179, 205, …
 ## $ Size      &lt;fct&gt; Small, Small, Small, Small, Small, Small, Small, Small, Smal…</code></pre>
-<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb609-1"><a href="building-models-for-interpretation.html#cb609-1"></a>Cars2015 &lt;-<span class="st"> </span>Cars2015 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>HighPrice)</span></code></pre></div>
+<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb592-1"><a href="building-models-for-interpretation.html#cb592-1"></a>Cars2015 &lt;-<span class="st"> </span>Cars2015 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>HighPrice)</span></code></pre></div>
 </div>
 <div id="categorical-variables" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.2.2</span> Categorical Variables<a href="building-models-for-interpretation.html#categorical-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="building-models-for-interpretation.html#cb610-1"></a>Cars_Cat &lt;-<span class="st"> </span><span class="kw">select_if</span>(Cars2015, is.factor)</span>
-<span id="cb610-2"><a href="building-models-for-interpretation.html#cb610-2"></a><span class="kw">summary</span>(Cars_Cat)</span></code></pre></div>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="building-models-for-interpretation.html#cb593-1"></a>Cars_Cat &lt;-<span class="st"> </span><span class="kw">select_if</span>(Cars2015, is.factor)</span>
+<span id="cb593-2"><a href="building-models-for-interpretation.html#cb593-2"></a><span class="kw">summary</span>(Cars_Cat)</span></code></pre></div>
 <pre><code>##         Make            Model            Type    Drive          Size   
 ##  Chevrolet: 8   CTS        :  2   7Pass    :15   AWD:25   Large   :29  
 ##  Ford     : 7   2 Touring  :  1   Hatchback:11   FWD:63   Midsized:34  
@@ -1160,9 +1001,9 @@ High = 49-81%</p>
 <div id="correlation-matrix" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.2.3</span> Correlation Matrix<a href="building-models-for-interpretation.html#correlation-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We examine the correlation matrix of quantitative variables.</p>
-<div class="sourceCode" id="cb612"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb612-1"><a href="building-models-for-interpretation.html#cb612-1"></a>Cars_Num &lt;-<span class="st"> </span><span class="kw">select_if</span>(Cars2015, is.numeric)</span>
-<span id="cb612-2"><a href="building-models-for-interpretation.html#cb612-2"></a>C &lt;-<span class="st"> </span><span class="kw">cor</span>(Cars_Num, <span class="dt">use =</span> <span class="st">&quot;pairwise.complete.obs&quot;</span>)</span>
-<span id="cb612-3"><a href="building-models-for-interpretation.html#cb612-3"></a><span class="kw">round</span>(C,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="building-models-for-interpretation.html#cb595-1"></a>Cars_Num &lt;-<span class="st"> </span><span class="kw">select_if</span>(Cars2015, is.numeric)</span>
+<span id="cb595-2"><a href="building-models-for-interpretation.html#cb595-2"></a>C &lt;-<span class="st"> </span><span class="kw">cor</span>(Cars_Num, <span class="dt">use =</span> <span class="st">&quot;pairwise.complete.obs&quot;</span>)</span>
+<span id="cb595-3"><a href="building-models-for-interpretation.html#cb595-3"></a><span class="kw">round</span>(C,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##           LowPrice CityMPG HwyMPG FuelCap Length Width Wheelbase Height UTurn
 ## LowPrice      1.00   -0.65  -0.59    0.57   0.47  0.48      0.46   0.02  0.40
 ## CityMPG      -0.65    1.00   0.93   -0.77  -0.72 -0.78     -0.69  -0.39 -0.73
@@ -1193,19 +1034,19 @@ High = 49-81%</p>
 ## Acc060     -0.43   0.95   1.00    0.99    0.26
 ## QtrMile    -0.39   0.95   0.99    1.00    0.26
 ## PageNum    -0.20   0.25   0.26    0.26    1.00</code></pre>
-<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb614-1"><a href="building-models-for-interpretation.html#cb614-1"></a><span class="kw">library</span>(corrplot)</span>
-<span id="cb614-2"><a href="building-models-for-interpretation.html#cb614-2"></a>C &lt;-<span class="st"> </span><span class="kw">corrplot</span>(C)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-480-1.png" width="1152" /></p>
+<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="building-models-for-interpretation.html#cb597-1"></a><span class="kw">library</span>(corrplot)</span>
+<span id="cb597-2"><a href="building-models-for-interpretation.html#cb597-2"></a>C &lt;-<span class="st"> </span><span class="kw">corrplot</span>(C)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-473-1.png" width="1152" /></p>
 <p>We’ll examine what happens when we include two highy-correlated explanatory variables in the same model, for example:</p>
 <p><code>Acc060</code> - time it takes to accelerate from 0 to 60 mph and<br />
 <code>QtrMile</code> - time it takes to drive a quarter mile</p>
-<div class="sourceCode" id="cb615"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb615-1"><a href="building-models-for-interpretation.html#cb615-1"></a><span class="kw">cor</span>(Cars2015<span class="op">$</span>Acc060, Cars2015<span class="op">$</span>QtrMile)</span></code></pre></div>
+<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb598-1"><a href="building-models-for-interpretation.html#cb598-1"></a><span class="kw">cor</span>(Cars2015<span class="op">$</span>Acc060, Cars2015<span class="op">$</span>QtrMile)</span></code></pre></div>
 <pre><code>## [1] 0.9916625</code></pre>
 </div>
 <div id="model-using-acceleration-time" class="section level3 smaller hasAnchor">
 <h3><span class="header-section-number">6.2.4</span> Model Using Acceleration Time<a href="building-models-for-interpretation.html#model-using-acceleration-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb617"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb617-1"><a href="building-models-for-interpretation.html#cb617-1"></a>Cars_M1 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(LowPrice) <span class="op">~</span><span class="st"> </span>Acc060)</span>
-<span id="cb617-2"><a href="building-models-for-interpretation.html#cb617-2"></a><span class="kw">summary</span>(Cars_M1)</span></code></pre></div>
+<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb600-1"><a href="building-models-for-interpretation.html#cb600-1"></a>Cars_M1 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(LowPrice) <span class="op">~</span><span class="st"> </span>Acc060)</span>
+<span id="cb600-2"><a href="building-models-for-interpretation.html#cb600-2"></a><span class="kw">summary</span>(Cars_M1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(LowPrice) ~ Acc060, data = Cars2015)
@@ -1225,7 +1066,7 @@ High = 49-81%</p>
 ## Multiple R-squared:  0.6359, Adjusted R-squared:  0.6325 
 ## F-statistic: 188.6 on 1 and 108 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <p>Confidence Interval for Effect of Acceleration Time:</p>
-<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="building-models-for-interpretation.html#cb619-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(Cars_M1))</span></code></pre></div>
+<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="building-models-for-interpretation.html#cb602-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(Cars_M1))</span></code></pre></div>
 <pre><code>##                   2.5 %     97.5 %
 ## (Intercept) 131.4610408 220.284693
 ## Acc060        0.7768669   0.827959</code></pre>
@@ -1233,8 +1074,8 @@ High = 49-81%</p>
 </div>
 <div id="model-using-quarter-mile-time" class="section level3 smaller hasAnchor">
 <h3><span class="header-section-number">6.2.5</span> Model Using Quarter Mile Time<a href="building-models-for-interpretation.html#model-using-quarter-mile-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="building-models-for-interpretation.html#cb621-1"></a>Cars_M2 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(LowPrice) <span class="op">~</span><span class="st"> </span>QtrMile)</span>
-<span id="cb621-2"><a href="building-models-for-interpretation.html#cb621-2"></a><span class="kw">summary</span>(Cars_M2)</span></code></pre></div>
+<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="building-models-for-interpretation.html#cb604-1"></a>Cars_M2 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(LowPrice) <span class="op">~</span><span class="st"> </span>QtrMile)</span>
+<span id="cb604-2"><a href="building-models-for-interpretation.html#cb604-2"></a><span class="kw">summary</span>(Cars_M2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(LowPrice) ~ QtrMile, data = Cars2015)
@@ -1254,7 +1095,7 @@ High = 49-81%</p>
 ## Multiple R-squared:  0.6385, Adjusted R-squared:  0.6351 
 ## F-statistic: 190.7 on 1 and 108 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <p>Confidence Interval for Effect of Quarter Mile Time:</p>
-<div class="sourceCode" id="cb623"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb623-1"><a href="building-models-for-interpretation.html#cb623-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(Cars_M2))</span></code></pre></div>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="building-models-for-interpretation.html#cb606-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(Cars_M2))</span></code></pre></div>
 <pre><code>##                    2.5 %      97.5 %
 ## (Intercept) 1355.8297704 4913.077313
 ## QtrMile        0.7279941    0.788385</code></pre>
@@ -1262,8 +1103,8 @@ High = 49-81%</p>
 </div>
 <div id="model-using-quarter-mile-time-and-acc.-time" class="section level3 smaller hasAnchor">
 <h3><span class="header-section-number">6.2.6</span> Model Using Quarter Mile Time and Acc. Time<a href="building-models-for-interpretation.html#model-using-quarter-mile-time-and-acc.-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb625-1"><a href="building-models-for-interpretation.html#cb625-1"></a>Cars_M3 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(LowPrice) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Acc060)</span>
-<span id="cb625-2"><a href="building-models-for-interpretation.html#cb625-2"></a><span class="kw">summary</span>(Cars_M3)</span></code></pre></div>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="building-models-for-interpretation.html#cb608-1"></a>Cars_M3 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(LowPrice) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Acc060)</span>
+<span id="cb608-2"><a href="building-models-for-interpretation.html#cb608-2"></a><span class="kw">summary</span>(Cars_M3)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(LowPrice) ~ QtrMile + Acc060, data = Cars2015)
@@ -1284,7 +1125,7 @@ High = 49-81%</p>
 ## Multiple R-squared:   0.64,  Adjusted R-squared:  0.6332 
 ## F-statistic:  95.1 on 2 and 107 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <p><strong>Confidence Intervals from 2-variable Model</strong></p>
-<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="building-models-for-interpretation.html#cb627-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(Cars_M3))</span></code></pre></div>
+<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="building-models-for-interpretation.html#cb610-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(Cars_M3))</span></code></pre></div>
 <pre><code>##                  2.5 %       97.5 %
 ## (Intercept) 43.8095999 19922.799158
 ## QtrMile      0.6168071     1.146686
@@ -1301,21 +1142,21 @@ High = 49-81%</p>
 <div id="impact-on-prediction" class="section level3 smaller hasAnchor">
 <h3><span class="header-section-number">6.2.8</span> Impact on Prediction<a href="building-models-for-interpretation.html#impact-on-prediction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Suppose we want to predict the price of a car that can accelerate from 0 to 60 mph in 9.5 seconds, and completes a quarter mile in 17.3 seconds.</p>
-<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb629-1"><a href="building-models-for-interpretation.html#cb629-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M1, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="fl">9.5</span>, <span class="dt">QtrMile=</span><span class="fl">17.3</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb612"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb612-1"><a href="building-models-for-interpretation.html#cb612-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M1, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="fl">9.5</span>, <span class="dt">QtrMile=</span><span class="fl">17.3</span>)))</span></code></pre></div>
 <pre><code>##        1 
 ## 20.92084</code></pre>
-<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb631-1"><a href="building-models-for-interpretation.html#cb631-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M2, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="fl">9.5</span>, <span class="dt">QtrMile=</span><span class="fl">17.3</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb614-1"><a href="building-models-for-interpretation.html#cb614-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M2, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="fl">9.5</span>, <span class="dt">QtrMile=</span><span class="fl">17.3</span>)))</span></code></pre></div>
 <pre><code>##        1 
 ## 21.18223</code></pre>
-<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb633-1"><a href="building-models-for-interpretation.html#cb633-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M3, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="fl">9.5</span>, <span class="dt">QtrMile=</span><span class="fl">17.3</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb616"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb616-1"><a href="building-models-for-interpretation.html#cb616-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M3, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="fl">9.5</span>, <span class="dt">QtrMile=</span><span class="fl">17.3</span>)))</span></code></pre></div>
 <pre><code>##        1 
 ## 21.05489</code></pre>
 <p>The predicted values are similar. Multicollinearity does not hurt predictions, only interpretations.</p>
 </div>
 <div id="adding-weight-to-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.2.9</span> Adding Weight to Model<a href="building-models-for-interpretation.html#adding-weight-to-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb635-1"><a href="building-models-for-interpretation.html#cb635-1"></a>Cars_M4 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(LowPrice) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Weight)</span>
-<span id="cb635-2"><a href="building-models-for-interpretation.html#cb635-2"></a><span class="kw">summary</span>(Cars_M4)</span></code></pre></div>
+<div class="sourceCode" id="cb618"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb618-1"><a href="building-models-for-interpretation.html#cb618-1"></a>Cars_M4 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(LowPrice) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Weight)</span>
+<span id="cb618-2"><a href="building-models-for-interpretation.html#cb618-2"></a><span class="kw">summary</span>(Cars_M4)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(LowPrice) ~ QtrMile + Weight, data = Cars2015)
@@ -1339,8 +1180,8 @@ High = 49-81%</p>
 </div>
 <div id="add-interaction-term" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.2.10</span> Add Interaction Term?<a href="building-models-for-interpretation.html#add-interaction-term" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb637-1"><a href="building-models-for-interpretation.html#cb637-1"></a>Cars_M5 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(LowPrice) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">*</span><span class="st"> </span>Weight)</span>
-<span id="cb637-2"><a href="building-models-for-interpretation.html#cb637-2"></a><span class="kw">summary</span>(Cars_M5)</span></code></pre></div>
+<div class="sourceCode" id="cb620"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb620-1"><a href="building-models-for-interpretation.html#cb620-1"></a>Cars_M5 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(LowPrice) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">*</span><span class="st"> </span>Weight)</span>
+<span id="cb620-2"><a href="building-models-for-interpretation.html#cb620-2"></a><span class="kw">summary</span>(Cars_M5)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(LowPrice) ~ QtrMile * Weight, data = Cars2015)
@@ -1365,8 +1206,8 @@ High = 49-81%</p>
 </div>
 <div id="add-hwy-mpg" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.2.11</span> Add HWY MPG?<a href="building-models-for-interpretation.html#add-hwy-mpg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb639-1"><a href="building-models-for-interpretation.html#cb639-1"></a>Cars_M6 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(LowPrice) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Weight <span class="op">+</span><span class="st"> </span>HwyMPG)</span>
-<span id="cb639-2"><a href="building-models-for-interpretation.html#cb639-2"></a><span class="kw">summary</span>(Cars_M6)</span></code></pre></div>
+<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="building-models-for-interpretation.html#cb622-1"></a>Cars_M6 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(LowPrice) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Weight <span class="op">+</span><span class="st"> </span>HwyMPG)</span>
+<span id="cb622-2"><a href="building-models-for-interpretation.html#cb622-2"></a><span class="kw">summary</span>(Cars_M6)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(LowPrice) ~ QtrMile + Weight + HwyMPG, data = Cars2015)
@@ -1392,16 +1233,16 @@ High = 49-81%</p>
 <div id="categorical-variables-to-consider" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.2.12</span> Categorical Variables to Consider<a href="building-models-for-interpretation.html#categorical-variables-to-consider" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Relationship between Price, Size, and Drive</p>
-<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="building-models-for-interpretation.html#cb641-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">log</span>(LowPrice), <span class="dt">y=</span>Size)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Price by Size&quot;</span>)</span>
-<span id="cb641-2"><a href="building-models-for-interpretation.html#cb641-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">log</span>(LowPrice), <span class="dt">y=</span>Drive)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Price by Drive&quot;</span>)</span>
-<span id="cb641-3"><a href="building-models-for-interpretation.html#cb641-3"></a><span class="kw">grid.arrange</span>(P1, P2, <span class="dt">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-494-1.png" width="672" /></p>
+<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb624-1"><a href="building-models-for-interpretation.html#cb624-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">log</span>(LowPrice), <span class="dt">y=</span>Size)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Price by Size&quot;</span>)</span>
+<span id="cb624-2"><a href="building-models-for-interpretation.html#cb624-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">log</span>(LowPrice), <span class="dt">y=</span>Drive)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Price by Drive&quot;</span>)</span>
+<span id="cb624-3"><a href="building-models-for-interpretation.html#cb624-3"></a><span class="kw">grid.arrange</span>(P1, P2, <span class="dt">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-487-1.png" width="672" /></p>
 <p>Information about size is already included, through the weight variable. Let’s add drive type to the model.</p>
 </div>
 <div id="model-with-qtrmile-weight-and-drive" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.2.13</span> Model with QtrMile, Weight, and Drive<a href="building-models-for-interpretation.html#model-with-qtrmile-weight-and-drive" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb642-1"><a href="building-models-for-interpretation.html#cb642-1"></a>Cars_M7 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(LowPrice) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Weight <span class="op">+</span><span class="st"> </span>Drive)</span>
-<span id="cb642-2"><a href="building-models-for-interpretation.html#cb642-2"></a><span class="kw">summary</span>(Cars_M7)</span></code></pre></div>
+<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb625-1"><a href="building-models-for-interpretation.html#cb625-1"></a>Cars_M7 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(LowPrice) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Weight <span class="op">+</span><span class="st"> </span>Drive)</span>
+<span id="cb625-2"><a href="building-models-for-interpretation.html#cb625-2"></a><span class="kw">summary</span>(Cars_M7)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(LowPrice) ~ QtrMile + Weight + Drive, data = Cars2015)
@@ -1426,8 +1267,8 @@ High = 49-81%</p>
 </div>
 <div id="add-size" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.2.14</span> Add Size<a href="building-models-for-interpretation.html#add-size" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb644"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb644-1"><a href="building-models-for-interpretation.html#cb644-1"></a>Cars_M8 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(LowPrice) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Weight <span class="op">+</span><span class="st"> </span>Drive <span class="op">+</span><span class="st"> </span>Size)</span>
-<span id="cb644-2"><a href="building-models-for-interpretation.html#cb644-2"></a><span class="kw">summary</span>(Cars_M8)</span></code></pre></div>
+<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="building-models-for-interpretation.html#cb627-1"></a>Cars_M8 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(LowPrice) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Weight <span class="op">+</span><span class="st"> </span>Drive <span class="op">+</span><span class="st"> </span>Size)</span>
+<span id="cb627-2"><a href="building-models-for-interpretation.html#cb627-2"></a><span class="kw">summary</span>(Cars_M8)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(LowPrice) ~ QtrMile + Weight + Drive + Size, 
@@ -1459,34 +1300,34 @@ High = 49-81%</p>
 </div>
 <div id="check-of-model-assumptions" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.2.15</span> Check of Model Assumptions<a href="building-models-for-interpretation.html#check-of-model-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb646"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb646-1"><a href="building-models-for-interpretation.html#cb646-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M7<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M7<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb646-2"><a href="building-models-for-interpretation.html#cb646-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">x=</span>Cars_M7<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
-<span id="cb646-3"><a href="building-models-for-interpretation.html#cb646-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(Cars_M7<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;QQ Plot&quot;</span>)</span>
-<span id="cb646-4"><a href="building-models-for-interpretation.html#cb646-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-497-1.png" width="864" /></p>
+<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb629-1"><a href="building-models-for-interpretation.html#cb629-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M7<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M7<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb629-2"><a href="building-models-for-interpretation.html#cb629-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">x=</span>Cars_M7<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
+<span id="cb629-3"><a href="building-models-for-interpretation.html#cb629-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(Cars_M7<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;QQ Plot&quot;</span>)</span>
+<span id="cb629-4"><a href="building-models-for-interpretation.html#cb629-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-490-1.png" width="864" /></p>
 <p>There is slight concern about constant variance, but otherwise, the model assumptions look good.</p>
 </div>
 <div id="residual-by-predictor-plots" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.2.16</span> Residual by Predictor Plots<a href="building-models-for-interpretation.html#residual-by-predictor-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="building-models-for-interpretation.html#cb647-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M7<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M7<span class="op">$</span>model<span class="op">$</span>QtrMile)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predicted Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;QtrMile&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
-<span id="cb647-2"><a href="building-models-for-interpretation.html#cb647-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M7<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M7<span class="op">$</span>model<span class="op">$</span>Weight)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predicted Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Weight&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
-<span id="cb647-3"><a href="building-models-for-interpretation.html#cb647-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M7<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M7<span class="op">$</span>model<span class="op">$</span>Drive)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predicted Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Drive&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
-<span id="cb647-4"><a href="building-models-for-interpretation.html#cb647-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-498-1.png" width="864" /></p>
+<div class="sourceCode" id="cb630"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb630-1"><a href="building-models-for-interpretation.html#cb630-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M7<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M7<span class="op">$</span>model<span class="op">$</span>QtrMile)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predicted Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;QtrMile&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
+<span id="cb630-2"><a href="building-models-for-interpretation.html#cb630-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M7<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M7<span class="op">$</span>model<span class="op">$</span>Weight)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predicted Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Weight&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
+<span id="cb630-3"><a href="building-models-for-interpretation.html#cb630-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M7<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M7<span class="op">$</span>model<span class="op">$</span>Drive)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predicted Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Drive&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
+<span id="cb630-4"><a href="building-models-for-interpretation.html#cb630-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-491-1.png" width="864" /></p>
 <p>These plots don’t raise any concerns.</p>
 </div>
 <div id="coefficients-and-exponentiation" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.2.17</span> Coefficients and Exponentiation<a href="building-models-for-interpretation.html#coefficients-and-exponentiation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb648-1"><a href="building-models-for-interpretation.html#cb648-1"></a>Cars_M7<span class="op">$</span>coefficients</span></code></pre></div>
+<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb631-1"><a href="building-models-for-interpretation.html#cb631-1"></a>Cars_M7<span class="op">$</span>coefficients</span></code></pre></div>
 <pre><code>##   (Intercept)       QtrMile        Weight      DriveFWD      DriveRWD 
 ##  5.8140678915 -0.1900743859  0.0002049586 -0.2240322171 -0.1388439916</code></pre>
-<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="building-models-for-interpretation.html#cb650-1"></a><span class="kw">exp</span>(Cars_M7<span class="op">$</span>coefficients)</span></code></pre></div>
+<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb633-1"><a href="building-models-for-interpretation.html#cb633-1"></a><span class="kw">exp</span>(Cars_M7<span class="op">$</span>coefficients)</span></code></pre></div>
 <pre><code>## (Intercept)     QtrMile      Weight    DriveFWD    DriveRWD 
 ## 334.9790161   0.8268976   1.0002050   0.7992894   0.8703638</code></pre>
 </div>
 <div id="interpretation-of-coefficients" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.2.18</span> Interpretation of Coefficients<a href="building-models-for-interpretation.html#interpretation-of-coefficients" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb652-1"><a href="building-models-for-interpretation.html#cb652-1"></a><span class="kw">exp</span>(Cars_M7<span class="op">$</span>coefficients)</span></code></pre></div>
+<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb635-1"><a href="building-models-for-interpretation.html#cb635-1"></a><span class="kw">exp</span>(Cars_M7<span class="op">$</span>coefficients)</span></code></pre></div>
 <pre><code>## (Intercept)     QtrMile      Weight    DriveFWD    DriveRWD 
 ## 334.9790161   0.8268976   1.0002050   0.7992894   0.8703638</code></pre>
 <p>The price of a car is expected to decrease by 17% for each additional second it takes to drive a quartermile, assuming weight, and drive type are held constant.</p>
@@ -1538,8 +1379,8 @@ High = 49-81%</p>
           </div>
         </div>
       </div>
-<a href="normal-error-regression-model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="predictive-modeling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="normal-error-regression-model.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
