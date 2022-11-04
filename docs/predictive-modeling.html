@@ -1305,436 +1305,215 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb654-2"><a href="predictive-modeling.html#cb654-2"></a>samp &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(ames_raw), <span class="dv">1000</span>)</span>
 <span id="cb654-3"><a href="predictive-modeling.html#cb654-3"></a>Train_Data &lt;-<span class="st"> </span>ames_raw[samp,]</span></code></pre></div>
 <div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="predictive-modeling.html#cb655-1"></a>M_OLS &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Train_Data, SalePrice <span class="op">~</span><span class="st"> </span>.)</span>
-<span id="cb655-2"><a href="predictive-modeling.html#cb655-2"></a><span class="kw">summary</span>(M_OLS)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = SalePrice ~ ., data = Train_Data)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -158158   -8892     213    9496  158158 
-## 
-## Coefficients:
-##                               Estimate     Std. Error t value
-## (Intercept)             -14136063.8945  19081301.5981  -0.741
-## `Overall Qual`               6975.9250      1187.4137   5.875
-## `Year Built`                  494.5820       107.1664   4.615
-## `Mas Vnr Area`                 33.3817         6.4707   5.159
-## `Central Air`Y              -3745.3629      4857.8749  -0.771
-## `Gr Liv Area`                  37.2290        18.5297   2.009
-## `Lot Frontage`                -14.9594        60.3992  -0.248
-## `1st Flr SF`                   13.3690        19.2561   0.694
-## `Bedroom AbvGr`             -2353.0379      1675.4799  -1.404
-## `TotRms AbvGrd`               914.5595      1112.3776   0.822
-## Order                           9.0730        15.1005   0.601
-## PID                             0.7939         4.3378   0.183
-## `MS SubClass`030             1747.3878      6199.3466   0.282
-## `MS SubClass`040             5867.2885     18051.4432   0.325
-## `MS SubClass`045             7182.7066     10431.2913   0.689
-## `MS SubClass`050            -1330.0097      5044.6915  -0.264
-## `MS SubClass`060            -7400.8589      5261.2795  -1.407
-## `MS SubClass`070             -953.7000      7122.4627  -0.134
-## `MS SubClass`075           -10585.7403     12375.9825  -0.855
-## `MS SubClass`080            -6516.1315      4515.3606  -1.443
-## `MS SubClass`085            -6527.2338      6376.7201  -1.024
-## `MS SubClass`090           -21891.2260      9761.2969  -2.243
-## `MS SubClass`120           -20296.4700      4678.1426  -4.339
-## `MS SubClass`160           -34837.6664      7079.2626  -4.921
-## `MS SubClass`180           -18822.1874     12977.3945  -1.450
-## `MS SubClass`190           -12421.4283      7938.1494  -1.565
-## `MS Zoning`C (all)         -38785.6865     33604.3855  -1.154
-## `MS Zoning`FV              -23114.7183     29478.1257  -0.784
-## `MS Zoning`I (all)         -17213.3332     41603.5670  -0.414
-## `MS Zoning`RH              -13306.2220     29844.8659  -0.446
-## `MS Zoning`RL              -17643.5479     28756.2363  -0.614
-## `MS Zoning`RM              -24783.4465     29226.7175  -0.848
-## `Lot Area`                      0.7408         0.1658   4.468
-## StreetPave                  37262.6394     17051.5092   2.185
-## AlleyPave                    2527.1840      7354.5945   0.344
-## AlleyNA                        29.0268      5198.4814   0.006
-## `Lot Shape`IR2               8575.5874      5485.4669   1.563
-## `Lot Shape`IR3              10397.8002     12598.2284   0.825
-## `Lot Shape`Reg               2676.2691      2031.2908   1.318
-## `Land Contour`HLS           11318.1617      6089.7012   1.859
-## `Land Contour`Low          -22452.1871     11524.1454  -1.948
-## `Land Contour`Lvl           12230.7110      4699.3902   2.603
-## `Lot Config`CulDSac         10427.6522      5333.0392   1.955
-## `Lot Config`FR2            -12317.5424      5422.2301  -2.272
-## `Lot Config`FR3            -14557.2814     11621.4721  -1.253
-## `Lot Config`Inside          -1168.2308      2362.0973  -0.495
-## `Land Slope`Mod             10550.3767      4611.9960   2.288
-## `Land Slope`Sev            -24213.7594     18971.9679  -1.276
-## NeighborhoodBlueste         19001.1402     15359.2081   1.237
-## NeighborhoodBrDale          20558.0541     14183.6972   1.449
-## NeighborhoodBrkSide         14314.5790     12163.1858   1.177
-## NeighborhoodClearCr          7379.3466     15007.2726   0.492
-## NeighborhoodCollgCr           -46.6308     10100.6076  -0.005
-## NeighborhoodCrawfor         28775.4385     11758.9005   2.447
-## NeighborhoodEdwards         -7491.2919     10588.5901  -0.707
-## NeighborhoodGilbert          1951.6205      9311.2407   0.210
-## NeighborhoodGreens           4667.7593     24819.3716   0.188
-## NeighborhoodIDOTRR          12473.1493     13394.5390   0.931
-## NeighborhoodMeadowV         18891.1265     14852.3899   1.272
-## NeighborhoodMitchel         -9274.3206     11674.4738  -0.794
-## NeighborhoodNAmes            1781.9099      9557.5827   0.186
-## NeighborhoodNoRidge         32109.4882     10208.1864   3.145
-## NeighborhoodNPkVill         19601.4138     12568.2771   1.560
-## NeighborhoodNridgHt         34407.2004      9268.6339   3.712
-## NeighborhoodNWAmes          -3367.8476      9915.0330  -0.340
-## NeighborhoodOldTown          9857.0795     11660.0353   0.845
-## NeighborhoodSawyer           6761.6510     10233.7204   0.661
-## NeighborhoodSawyerW          3945.8509      9472.8485   0.417
-## NeighborhoodSomerst         20453.1723      9940.5448   2.058
-## NeighborhoodStoneBr         44556.0799     10407.7868   4.281
-## NeighborhoodSWISU            8518.9311     12621.7640   0.675
-## NeighborhoodTimber           1455.9164     11778.9617   0.124
-## NeighborhoodVeenker          5759.5517     11938.6907   0.482
-## `Condition 1`Feedr           -315.5373      6556.3195  -0.048
-## `Condition 1`Norm           10041.9750      5463.8941   1.838
-## `Condition 1`PosA           49498.8746     23721.3107   2.087
-## `Condition 1`PosN           15873.9314      9869.5060   1.608
-## `Condition 1`RRAe          -11599.3285      9309.0850  -1.246
-## `Condition 1`RRAn            7894.0461      8747.5548   0.902
-## `Condition 1`RRNn            6045.1254     14793.6446   0.409
-## `Condition 2`Feedr           7639.7933     31157.3993   0.245
-## `Condition 2`Norm            6804.6579     27562.1927   0.247
-## `Condition 2`PosA            1496.1297     39927.8279   0.037
-## `Condition 2`PosN         -224695.9130     33982.6831  -6.612
-## `Condition 2`RRNn           20826.2553     37187.7025   0.560
-## `Overall Cond`               5652.4500      1110.9628   5.088
-## `Year Remod/Add`              115.1030        67.4315   1.707
-## `Roof Style`Gable            -983.4966     21461.8852  -0.046
-## `Roof Style`Gambrel         -3775.4699     23821.0554  -0.158
-## `Roof Style`Hip             -1020.9768     21560.9811  -0.047
-## `Roof Style`Mansard         18711.8071     32901.5367   0.569
-## `Roof Style`Shed            -9552.0309     40823.6097  -0.234
-## `Roof Matl`CompShg         671041.0671     49405.0627  13.582
-## `Roof Matl`Membran         738250.2085     60710.0732  12.160
-## `Roof Matl`Tar&amp;Grv         653237.7171     51651.9656  12.647
-## `Roof Matl`WdShngl         757954.9463     51602.0280  14.688
-## `Mas Vnr Type`BrkFace      -14297.1434     10170.9970  -1.406
-## `Mas Vnr Type`None          -5178.2754     10178.9123  -0.509
-## `Mas Vnr Type`Stone        -11764.3736     10522.7000  -1.118
-## `Exter Qual`Fa             -21903.6214     14605.4913  -1.500
-## `Exter Qual`Gd             -37435.0319      5548.9279  -6.746
-## `Exter Qual`TA             -40396.2769      6354.0424  -6.358
-## `Exter Cond`Fa              -2499.1726     12458.9295  -0.201
-## `Exter Cond`Gd               9625.5182     10138.4484   0.949
-## `Exter Cond`Po              -9090.3356     27937.9324  -0.325
-## `Exter Cond`TA              10976.5040      9966.7706   1.101
-## FoundationCBlock             2136.6597      3877.0143   0.551
-## FoundationPConc              4341.3771      4362.7304   0.995
-## FoundationSlab              -8011.2101     13611.4882  -0.589
-## FoundationStone              5209.4079     17623.6756   0.296
-## FoundationWood             -21499.8677     15486.8933  -1.388
-## `Bsmt Qual`Fa              -19118.1142      7414.2132  -2.579
-## `Bsmt Qual`Gd              -13338.1127      3835.2102  -3.478
-## `Bsmt Qual`Po               58476.8071     51564.9674   1.134
-## `Bsmt Qual`TA              -14904.6825      5075.8325  -2.936
-## `Bsmt Qual`NA               29237.6695     26500.2573   1.103
-## `Bsmt Exposure`Gd            8445.8558      3569.0548   2.366
-## `Bsmt Exposure`Mn           -5636.1528      3589.6788  -1.570
-## `Bsmt Exposure`No           -5726.8656      2630.3304  -2.177
-## `Bsmt Exposure`NA          -28286.6797     22803.9493  -1.240
-## `BsmtFin SF 1`                 33.8128         5.9187   5.713
-## `BsmtFin SF 2`                 24.9525         7.4967   3.328
-## `Bsmt Unf SF`                  13.2018         5.7763   2.286
-## HeatingGasW                  3554.5996      9352.0654   0.380
-## HeatingWall                 16477.8270     25523.1969   0.646
-## `Heating QC`Fa              -7277.0668      5802.5586  -1.254
-## `Heating QC`Gd               -760.5325      2379.1850  -0.320
-## `Heating QC`Po             -17982.8274     20110.2913  -0.894
-## `Heating QC`TA              -5710.2836      2478.7220  -2.304
-## ElectricalFuseF               728.4352      8127.3798   0.090
-## ElectricalFuseP             25345.9011     20610.3725   1.230
-## ElectricalMix               51715.0816     52375.4236   0.987
-## ElectricalSBrkr             -2872.3538      3735.6385  -0.769
-## `2nd Flr SF`                   12.4887        18.3682   0.680
-## `Bsmt Full Bath`             -498.4666      2188.6038  -0.228
-## `Bsmt Half Bath`             3026.8853      3865.0541   0.783
-## `Full Bath`                  3781.8172      2857.0874   1.324
-## `Half Bath`                  3333.8342      2530.9936   1.317
-## `Kitchen AbvGr`            -12956.8476      9020.3081  -1.436
-## `Kitchen Qual`Fa            -7789.8981      8251.1512  -0.944
-## `Kitchen Qual`Gd           -13554.1557      4309.1256  -3.145
-## `Kitchen Qual`TA           -13298.5376      4825.6842  -2.756
-## FunctionalMaj2             -24570.4189     29046.5460  -0.846
-## FunctionalMin1              -8664.3164     13350.1102  -0.649
-## FunctionalMin2             -12709.0599     13033.9665  -0.975
-## FunctionalMod              -14394.7177     14722.7551  -0.978
-## FunctionalTyp                4206.1036     12139.0145   0.346
-## Fireplaces                  11467.2013      3016.6825   3.801
-## `Fireplace Qu`Fa           -12766.1233      8228.9993  -1.551
-## `Fireplace Qu`Gd           -14204.2309      6274.3681  -2.264
-## `Fireplace Qu`Po           -23140.9430      9267.6637  -2.497
-## `Fireplace Qu`TA           -17684.2618      6494.6717  -2.723
-## `Fireplace Qu`NA            -5555.0116      7184.2516  -0.773
-## `Garage Type`Attchd         -1098.5464     10410.7828  -0.106
-## `Garage Type`Basment         -698.4291     12956.4102  -0.054
-## `Garage Type`BuiltIn        -4596.8780     11028.1180  -0.417
-## `Garage Type`CarPort       -10478.5628     14668.5208  -0.714
-## `Garage Type`Detchd          -138.9775     10352.7490  -0.013
-## `Garage Yr Blt`               -61.6634        71.0809  -0.868
-## `Garage Finish`RFn          -4343.2684      2324.3495  -1.869
-## `Garage Finish`Unf          -1482.5096      2761.9889  -0.537
-## `Garage Cars`                2990.4178      2575.0518   1.161
-## `Garage Area`                  24.3014         8.4310   2.882
-## `Garage Qual`Fa            -70420.9028     34399.0827  -2.047
-## `Garage Qual`Gd            -51114.4969     34997.4461  -1.461
-## `Garage Qual`Po           -134052.9765     53225.9619  -2.519
-## `Garage Qual`TA            -67768.2608     34050.0303  -1.990
-## `Garage Cond`Fa             73986.1047     38135.5692   1.940
-## `Garage Cond`Gd             64104.4269     44282.0927   1.448
-## `Garage Cond`Po            112712.4021     42502.3108   2.652
-## `Garage Cond`TA             71259.2489     37706.9633   1.890
-## `Paved Drive`P               5257.0318      6578.8847   0.799
-## `Paved Drive`Y               2077.1864      4637.9411   0.448
-## `Wood Deck SF`                  7.6415         7.1551   1.068
-## `Open Porch SF`               -16.2882        14.7710  -1.103
-## `Enclosed Porch`              -11.3738        15.5858  -0.730
-## `3Ssn Porch`                   16.1217        25.0628   0.643
-## `Screen Porch`                 38.2573        13.2698   2.883
-## `Pool Area`                  -106.8683       172.5566  -0.619
-## `Pool QC`TA                 24551.0372     50543.0049   0.486
-## `Pool QC`NA               -100661.2222    115845.2657  -0.869
-## FenceGdWo                       3.7226      6004.9653   0.001
-## FenceMnPrv                   1567.2382      5154.5417   0.304
-## FenceMnWw                    -880.4036     11445.7271  -0.077
-## FenceNA                      1297.2149      4799.1348   0.270
-## `Misc Feature`Gar2         545161.5428     41606.6518  13.103
-## `Misc Feature`Othr         569599.2024     49966.9781  11.400
-## `Misc Feature`Shed         551469.2570     55133.8721  10.002
-## `Misc Feature`NA           547892.2455     57027.5502   9.608
-## `Misc Val`                      1.6361         2.9165   0.561
-## `Mo Sold`                    -262.1973       301.1296  -0.871
-## `Yr Sold`                    5937.2903      9495.7730   0.625
-## `Sale Type`Con               7985.9754     14377.6833   0.555
-## `Sale Type`ConLD            23972.1097     12356.7468   1.940
-## `Sale Type`ConLI             9525.1931     14763.1370   0.645
-## `Sale Type`ConLw            11056.3865     17164.1972   0.644
-## `Sale Type`CWD              -9551.0936     15096.9006  -0.633
-## `Sale Type`New              23118.1311     16568.0832   1.395
-## `Sale Type`Oth              39733.0338     17369.1737   2.288
-## `Sale Type`VWD             -11729.6976     24093.7246  -0.487
-## `Sale Type`WD                4819.9398      4886.0362   0.986
-## `Sale Condition`AdjLand     41276.9513     18154.2390   2.274
-## `Sale Condition`Alloca      24461.6278     10762.9224   2.273
-## `Sale Condition`Family        404.8499      6776.3642   0.060
-## `Sale Condition`Normal       1592.2626      3745.5754   0.425
-## `Sale Condition`Partial     -4641.7581     15793.5170  -0.294
-##                                     Pr(&gt;|t|)    
-## (Intercept)                         0.459014    
-## `Overall Qual`               0.0000000062218 ***
-## `Year Built`                 0.0000045805578 ***
-## `Mas Vnr Area`               0.0000003140313 ***
-## `Central Air`Y                      0.440943    
-## `Gr Liv Area`                       0.044859 *  
-## `Lot Frontage`                      0.804449    
-## `1st Flr SF`                        0.487714    
-## `Bedroom AbvGr`                     0.160592    
-## `TotRms AbvGrd`                     0.411229    
-## Order                               0.548117    
-## PID                                 0.854835    
-## `MS SubClass`030                    0.778119    
-## `MS SubClass`040                    0.745243    
-## `MS SubClass`045                    0.491293    
-## `MS SubClass`050                    0.792122    
-## `MS SubClass`060                    0.159918    
-## `MS SubClass`070                    0.893515    
-## `MS SubClass`075                    0.392618    
-## `MS SubClass`080                    0.149386    
-## `MS SubClass`085                    0.306334    
-## `MS SubClass`090                    0.025194 *  
-## `MS SubClass`120             0.0000161908290 ***
-## `MS SubClass`160             0.0000010467637 ***
-## `MS SubClass`180                    0.147347    
-## `MS SubClass`190                    0.118034    
-## `MS Zoning`C (all)                  0.248771    
-## `MS Zoning`FV                       0.433197    
-## `MS Zoning`I (all)                  0.679171    
-## `MS Zoning`RH                       0.655830    
-## `MS Zoning`RL                       0.539685    
-## `MS Zoning`RM                       0.396709    
-## `Lot Area`                   0.0000090257776 ***
-## StreetPave                          0.029159 *  
-## AlleyPave                           0.731223    
-## AlleyNA                             0.995546    
-## `Lot Shape`IR2                      0.118374    
-## `Lot Shape`IR3                      0.409427    
-## `Lot Shape`Reg                      0.188044    
-## `Land Contour`HLS                   0.063457 .  
-## `Land Contour`Low                   0.051734 .  
-## `Land Contour`Lvl                   0.009424 ** 
-## `Lot Config`CulDSac                 0.050899 .  
-## `Lot Config`FR2                     0.023373 *  
-## `Lot Config`FR3                     0.210713    
-## `Lot Config`Inside                  0.621038    
-## `Land Slope`Mod                     0.022423 *  
-## `Land Slope`Sev                     0.202226    
-## NeighborhoodBlueste                 0.216409    
-## NeighborhoodBrDale                  0.147617    
-## NeighborhoodBrkSide                 0.239597    
-## NeighborhoodClearCr                 0.623055    
-## NeighborhoodCollgCr                 0.996318    
-## NeighborhoodCrawfor                 0.014616 *  
-## NeighborhoodEdwards                 0.479471    
-## NeighborhoodGilbert                 0.834035    
-## NeighborhoodGreens                  0.850870    
-## NeighborhoodIDOTRR                  0.352027    
-## NeighborhoodMeadowV                 0.203772    
-## NeighborhoodMitchel                 0.427194    
-## NeighborhoodNAmes                   0.852148    
-## NeighborhoodNoRidge                 0.001720 ** 
-## NeighborhoodNPkVill                 0.119254    
-## NeighborhoodNridgHt                 0.000220 ***
-## NeighborhoodNWAmes                  0.734194    
-## NeighborhoodOldTown                 0.398157    
-## NeighborhoodSawyer                  0.508982    
-## NeighborhoodSawyerW                 0.677125    
-## NeighborhoodSomerst                 0.039959 *  
-## NeighborhoodStoneBr          0.0000208772751 ***
-## NeighborhoodSWISU                   0.499910    
-## NeighborhoodTimber                  0.901661    
-## NeighborhoodVeenker                 0.629635    
-## `Condition 1`Feedr                  0.961627    
-## `Condition 1`Norm                   0.066454 .  
-## `Condition 1`PosA                   0.037235 *  
-## `Condition 1`PosN                   0.108149    
-## `Condition 1`RRAe                   0.213124    
-## `Condition 1`RRAn                   0.367103    
-## `Condition 1`RRNn                   0.682921    
-## `Condition 2`Feedr                  0.806365    
-## `Condition 2`Norm                   0.805062    
-## `Condition 2`PosA                   0.970119    
-## `Condition 2`PosN            0.0000000000695 ***
-## `Condition 2`RRNn                   0.575616    
-## `Overall Cond`               0.0000004522273 ***
-## `Year Remod/Add`                    0.088220 .  
-## `Roof Style`Gable                   0.963461    
-## `Roof Style`Gambrel                 0.874109    
-## `Roof Style`Hip                     0.962244    
-## `Roof Style`Mansard                 0.569706    
-## `Roof Style`Shed                    0.815058    
-## `Roof Matl`CompShg      &lt; 0.0000000000000002 ***
-## `Roof Matl`Membran      &lt; 0.0000000000000002 ***
-## `Roof Matl`Tar&amp;Grv      &lt; 0.0000000000000002 ***
-## `Roof Matl`WdShngl      &lt; 0.0000000000000002 ***
-## `Mas Vnr Type`BrkFace               0.160211    
-## `Mas Vnr Type`None                  0.611086    
-## `Mas Vnr Type`Stone                 0.263905    
-## `Exter Qual`Fa                      0.134094    
-## `Exter Qual`Gd               0.0000000000292 ***
-## `Exter Qual`TA               0.0000000003455 ***
-## `Exter Cond`Fa                      0.841068    
-## `Exter Cond`Gd                      0.342702    
-## `Exter Cond`Po                      0.744982    
-## `Exter Cond`TA                      0.271096    
-## FoundationCBlock                    0.581714    
-## FoundationPConc                     0.319988    
-## FoundationSlab                      0.556322    
-## FoundationStone                     0.767619    
-## FoundationWood                      0.165447    
-## `Bsmt Qual`Fa                       0.010100 *  
-## `Bsmt Qual`Gd                       0.000533 ***
-## `Bsmt Qual`Po                       0.257119    
-## `Bsmt Qual`TA                       0.003416 ** 
-## `Bsmt Qual`NA                       0.270232    
-## `Bsmt Exposure`Gd                   0.018201 *  
-## `Bsmt Exposure`Mn                   0.116790    
-## `Bsmt Exposure`No                   0.029756 *  
-## `Bsmt Exposure`NA                   0.215183    
-## `BsmtFin SF 1`               0.0000000157066 ***
-## `BsmtFin SF 2`                      0.000913 ***
-## `Bsmt Unf SF`                       0.022545 *  
-## HeatingGasW                         0.703982    
-## HeatingWall                         0.518724    
-## `Heating QC`Fa                      0.210170    
-## `Heating QC`Gd                      0.749309    
-## `Heating QC`Po                      0.371480    
-## `Heating QC`TA                      0.021496 *  
-## ElectricalFuseF                     0.928606    
-## ElectricalFuseP                     0.219150    
-## ElectricalMix                       0.323751    
-## ElectricalSBrkr                     0.442178    
-## `2nd Flr SF`                        0.496762    
-## `Bsmt Full Bath`                    0.819895    
-## `Bsmt Half Bath`                    0.433777    
-## `Full Bath`                         0.185996    
-## `Half Bath`                         0.188150    
-## `Kitchen AbvGr`                     0.151280    
-## `Kitchen Qual`Fa                    0.345407    
-## `Kitchen Qual`Gd                    0.001720 ** 
-## `Kitchen Qual`TA                    0.005989 ** 
-## FunctionalMaj2                      0.397864    
-## FunctionalMin1                      0.516521    
-## FunctionalMin2                      0.329821    
-## FunctionalMod                       0.328511    
-## FunctionalTyp                       0.729063    
-## Fireplaces                          0.000155 ***
-## `Fireplace Qu`Fa                    0.121214    
-## `Fireplace Qu`Gd                    0.023852 *  
-## `Fireplace Qu`Po                    0.012728 *  
-## `Fireplace Qu`TA                    0.006613 ** 
-## `Fireplace Qu`NA                    0.439622    
-## `Garage Type`Attchd                 0.915990    
-## `Garage Type`Basment                0.957024    
-## `Garage Type`BuiltIn                0.676914    
-## `Garage Type`CarPort                0.475216    
-## `Garage Type`Detchd                 0.989293    
-## `Garage Yr Blt`                     0.385925    
-## `Garage Finish`RFn                  0.062047 .  
-## `Garage Finish`Unf                  0.591588    
-## `Garage Cars`                       0.245867    
-## `Garage Area`                       0.004053 ** 
-## `Garage Qual`Fa                     0.040970 *  
-## `Garage Qual`Gd                     0.144543    
-## `Garage Qual`Po                     0.011979 *  
-## `Garage Qual`TA                     0.046905 *  
-## `Garage Cond`Fa                     0.052724 .  
-## `Garage Cond`Gd                     0.148113    
-## `Garage Cond`Po                     0.008163 ** 
-## `Garage Cond`TA                     0.059147 .  
-## `Paved Drive`P                      0.424485    
-## `Paved Drive`Y                      0.654370    
-## `Wood Deck SF`                      0.285852    
-## `Open Porch SF`                     0.270485    
-## `Enclosed Porch`                    0.465753    
-## `3Ssn Porch`                        0.520245    
-## `Screen Porch`                      0.004045 ** 
-## `Pool Area`                         0.535881    
-## `Pool QC`TA                         0.627282    
-## `Pool QC`NA                         0.385149    
-## FenceGdWo                           0.999506    
-## FenceMnPrv                          0.761169    
-## FenceMnWw                           0.938707    
-## FenceNA                             0.786998    
-## `Misc Feature`Gar2      &lt; 0.0000000000000002 ***
-## `Misc Feature`Othr      &lt; 0.0000000000000002 ***
-## `Misc Feature`Shed      &lt; 0.0000000000000002 ***
-## `Misc Feature`NA        &lt; 0.0000000000000002 ***
-## `Misc Val`                          0.574961    
-## `Mo Sold`                           0.384174    
-## `Yr Sold`                           0.531983    
-## `Sale Type`Con                      0.578749    
-## `Sale Type`ConLD                    0.052733 .  
-## `Sale Type`ConLI                    0.518983    
-## `Sale Type`ConLw                    0.519662    
-## `Sale Type`CWD                      0.527143    
-## `Sale Type`New                      0.163303    
-## `Sale Type`Oth                      0.022425 *  
-## `Sale Type`VWD                      0.626509    
-## `Sale Type`WD                       0.324202    
-## `Sale Condition`AdjLand             0.023251 *  
-## `Sale Condition`Alloca              0.023307 *  
-## `Sale Condition`Family              0.952374    
-## `Sale Condition`Normal              0.670875    
-## `Sale Condition`Partial             0.768909    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 21710 on 794 degrees of freedom
-## Multiple R-squared:  0.943,  Adjusted R-squared:  0.9283 
-## F-statistic: 64.08 on 205 and 794 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<span id="cb655-2"><a href="predictive-modeling.html#cb655-2"></a><span class="kw">data.frame</span>(<span class="kw">summary</span>(M_OLS)<span class="op">$</span>coefficients) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb655-3"><a href="predictive-modeling.html#cb655-3"></a><span class="st"> </span><span class="kw">mutate_if</span>(is.numeric, round, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##                              Estimate   Std..Error t.value Pr...t..
+## (Intercept)             -14136063.894 19081301.598  -0.741    0.459
+## `Overall Qual`               6975.925     1187.414   5.875    0.000
+## `Year Built`                  494.582      107.166   4.615    0.000
+## `Mas Vnr Area`                 33.382        6.471   5.159    0.000
+## `Central Air`Y              -3745.363     4857.875  -0.771    0.441
+## `Gr Liv Area`                  37.229       18.530   2.009    0.045
+## `Lot Frontage`                -14.959       60.399  -0.248    0.804
+## `1st Flr SF`                   13.369       19.256   0.694    0.488
+## `Bedroom AbvGr`             -2353.038     1675.480  -1.404    0.161
+## `TotRms AbvGrd`               914.559     1112.378   0.822    0.411
+## Order                           9.073       15.101   0.601    0.548
+## PID                             0.794        4.338   0.183    0.855
+## `MS SubClass`030             1747.388     6199.347   0.282    0.778
+## `MS SubClass`040             5867.289    18051.443   0.325    0.745
+## `MS SubClass`045             7182.707    10431.291   0.689    0.491
+## `MS SubClass`050            -1330.010     5044.692  -0.264    0.792
+## `MS SubClass`060            -7400.859     5261.280  -1.407    0.160
+## `MS SubClass`070             -953.700     7122.463  -0.134    0.894
+## `MS SubClass`075           -10585.740    12375.983  -0.855    0.393
+## `MS SubClass`080            -6516.131     4515.361  -1.443    0.149
+## `MS SubClass`085            -6527.234     6376.720  -1.024    0.306
+## `MS SubClass`090           -21891.226     9761.297  -2.243    0.025
+## `MS SubClass`120           -20296.470     4678.143  -4.339    0.000
+## `MS SubClass`160           -34837.666     7079.263  -4.921    0.000
+## `MS SubClass`180           -18822.187    12977.394  -1.450    0.147
+## `MS SubClass`190           -12421.428     7938.149  -1.565    0.118
+## `MS Zoning`C (all)         -38785.687    33604.385  -1.154    0.249
+## `MS Zoning`FV              -23114.718    29478.126  -0.784    0.433
+## `MS Zoning`I (all)         -17213.333    41603.567  -0.414    0.679
+## `MS Zoning`RH              -13306.222    29844.866  -0.446    0.656
+## `MS Zoning`RL              -17643.548    28756.236  -0.614    0.540
+## `MS Zoning`RM              -24783.447    29226.717  -0.848    0.397
+## `Lot Area`                      0.741        0.166   4.468    0.000
+## StreetPave                  37262.639    17051.509   2.185    0.029
+## AlleyPave                    2527.184     7354.595   0.344    0.731
+## AlleyNA                        29.027     5198.481   0.006    0.996
+## `Lot Shape`IR2               8575.587     5485.467   1.563    0.118
+## `Lot Shape`IR3              10397.800    12598.228   0.825    0.409
+## `Lot Shape`Reg               2676.269     2031.291   1.318    0.188
+## `Land Contour`HLS           11318.162     6089.701   1.859    0.063
+## `Land Contour`Low          -22452.187    11524.145  -1.948    0.052
+## `Land Contour`Lvl           12230.711     4699.390   2.603    0.009
+## `Lot Config`CulDSac         10427.652     5333.039   1.955    0.051
+## `Lot Config`FR2            -12317.542     5422.230  -2.272    0.023
+## `Lot Config`FR3            -14557.281    11621.472  -1.253    0.211
+## `Lot Config`Inside          -1168.231     2362.097  -0.495    0.621
+## `Land Slope`Mod             10550.377     4611.996   2.288    0.022
+## `Land Slope`Sev            -24213.759    18971.968  -1.276    0.202
+## NeighborhoodBlueste         19001.140    15359.208   1.237    0.216
+## NeighborhoodBrDale          20558.054    14183.697   1.449    0.148
+## NeighborhoodBrkSide         14314.579    12163.186   1.177    0.240
+## NeighborhoodClearCr          7379.347    15007.273   0.492    0.623
+## NeighborhoodCollgCr           -46.631    10100.608  -0.005    0.996
+## NeighborhoodCrawfor         28775.438    11758.900   2.447    0.015
+## NeighborhoodEdwards         -7491.292    10588.590  -0.707    0.479
+## NeighborhoodGilbert          1951.621     9311.241   0.210    0.834
+## NeighborhoodGreens           4667.759    24819.372   0.188    0.851
+## NeighborhoodIDOTRR          12473.149    13394.539   0.931    0.352
+## NeighborhoodMeadowV         18891.126    14852.390   1.272    0.204
+## NeighborhoodMitchel         -9274.321    11674.474  -0.794    0.427
+## NeighborhoodNAmes            1781.910     9557.583   0.186    0.852
+## NeighborhoodNoRidge         32109.488    10208.186   3.145    0.002
+## NeighborhoodNPkVill         19601.414    12568.277   1.560    0.119
+## NeighborhoodNridgHt         34407.200     9268.634   3.712    0.000
+## NeighborhoodNWAmes          -3367.848     9915.033  -0.340    0.734
+## NeighborhoodOldTown          9857.079    11660.035   0.845    0.398
+## NeighborhoodSawyer           6761.651    10233.720   0.661    0.509
+## NeighborhoodSawyerW          3945.851     9472.848   0.417    0.677
+## NeighborhoodSomerst         20453.172     9940.545   2.058    0.040
+## NeighborhoodStoneBr         44556.080    10407.787   4.281    0.000
+## NeighborhoodSWISU            8518.931    12621.764   0.675    0.500
+## NeighborhoodTimber           1455.916    11778.962   0.124    0.902
+## NeighborhoodVeenker          5759.552    11938.691   0.482    0.630
+## `Condition 1`Feedr           -315.537     6556.319  -0.048    0.962
+## `Condition 1`Norm           10041.975     5463.894   1.838    0.066
+## `Condition 1`PosA           49498.875    23721.311   2.087    0.037
+## `Condition 1`PosN           15873.931     9869.506   1.608    0.108
+## `Condition 1`RRAe          -11599.328     9309.085  -1.246    0.213
+## `Condition 1`RRAn            7894.046     8747.555   0.902    0.367
+## `Condition 1`RRNn            6045.125    14793.645   0.409    0.683
+## `Condition 2`Feedr           7639.793    31157.399   0.245    0.806
+## `Condition 2`Norm            6804.658    27562.193   0.247    0.805
+## `Condition 2`PosA            1496.130    39927.828   0.037    0.970
+## `Condition 2`PosN         -224695.913    33982.683  -6.612    0.000
+## `Condition 2`RRNn           20826.255    37187.702   0.560    0.576
+## `Overall Cond`               5652.450     1110.963   5.088    0.000
+## `Year Remod/Add`              115.103       67.432   1.707    0.088
+## `Roof Style`Gable            -983.497    21461.885  -0.046    0.963
+## `Roof Style`Gambrel         -3775.470    23821.055  -0.158    0.874
+## `Roof Style`Hip             -1020.977    21560.981  -0.047    0.962
+## `Roof Style`Mansard         18711.807    32901.537   0.569    0.570
+## `Roof Style`Shed            -9552.031    40823.610  -0.234    0.815
+## `Roof Matl`CompShg         671041.067    49405.063  13.582    0.000
+## `Roof Matl`Membran         738250.209    60710.073  12.160    0.000
+## `Roof Matl`Tar&amp;Grv         653237.717    51651.966  12.647    0.000
+## `Roof Matl`WdShngl         757954.946    51602.028  14.688    0.000
+## `Mas Vnr Type`BrkFace      -14297.143    10170.997  -1.406    0.160
+## `Mas Vnr Type`None          -5178.275    10178.912  -0.509    0.611
+## `Mas Vnr Type`Stone        -11764.374    10522.700  -1.118    0.264
+## `Exter Qual`Fa             -21903.621    14605.491  -1.500    0.134
+## `Exter Qual`Gd             -37435.032     5548.928  -6.746    0.000
+## `Exter Qual`TA             -40396.277     6354.042  -6.358    0.000
+## `Exter Cond`Fa              -2499.173    12458.929  -0.201    0.841
+## `Exter Cond`Gd               9625.518    10138.448   0.949    0.343
+## `Exter Cond`Po              -9090.336    27937.932  -0.325    0.745
+## `Exter Cond`TA              10976.504     9966.771   1.101    0.271
+## FoundationCBlock             2136.660     3877.014   0.551    0.582
+## FoundationPConc              4341.377     4362.730   0.995    0.320
+## FoundationSlab              -8011.210    13611.488  -0.589    0.556
+## FoundationStone              5209.408    17623.676   0.296    0.768
+## FoundationWood             -21499.868    15486.893  -1.388    0.165
+## `Bsmt Qual`Fa              -19118.114     7414.213  -2.579    0.010
+## `Bsmt Qual`Gd              -13338.113     3835.210  -3.478    0.001
+## `Bsmt Qual`Po               58476.807    51564.967   1.134    0.257
+## `Bsmt Qual`TA              -14904.683     5075.833  -2.936    0.003
+## `Bsmt Qual`NA               29237.669    26500.257   1.103    0.270
+## `Bsmt Exposure`Gd            8445.856     3569.055   2.366    0.018
+## `Bsmt Exposure`Mn           -5636.153     3589.679  -1.570    0.117
+## `Bsmt Exposure`No           -5726.866     2630.330  -2.177    0.030
+## `Bsmt Exposure`NA          -28286.680    22803.949  -1.240    0.215
+## `BsmtFin SF 1`                 33.813        5.919   5.713    0.000
+## `BsmtFin SF 2`                 24.952        7.497   3.328    0.001
+## `Bsmt Unf SF`                  13.202        5.776   2.286    0.023
+## HeatingGasW                  3554.600     9352.065   0.380    0.704
+## HeatingWall                 16477.827    25523.197   0.646    0.519
+## `Heating QC`Fa              -7277.067     5802.559  -1.254    0.210
+## `Heating QC`Gd               -760.532     2379.185  -0.320    0.749
+## `Heating QC`Po             -17982.827    20110.291  -0.894    0.371
+## `Heating QC`TA              -5710.284     2478.722  -2.304    0.021
+## ElectricalFuseF               728.435     8127.380   0.090    0.929
+## ElectricalFuseP             25345.901    20610.373   1.230    0.219
+## ElectricalMix               51715.082    52375.424   0.987    0.324
+## ElectricalSBrkr             -2872.354     3735.638  -0.769    0.442
+## `2nd Flr SF`                   12.489       18.368   0.680    0.497
+## `Bsmt Full Bath`             -498.467     2188.604  -0.228    0.820
+## `Bsmt Half Bath`             3026.885     3865.054   0.783    0.434
+## `Full Bath`                  3781.817     2857.087   1.324    0.186
+## `Half Bath`                  3333.834     2530.994   1.317    0.188
+## `Kitchen AbvGr`            -12956.848     9020.308  -1.436    0.151
+## `Kitchen Qual`Fa            -7789.898     8251.151  -0.944    0.345
+## `Kitchen Qual`Gd           -13554.156     4309.126  -3.145    0.002
+## `Kitchen Qual`TA           -13298.538     4825.684  -2.756    0.006
+## FunctionalMaj2             -24570.419    29046.546  -0.846    0.398
+## FunctionalMin1              -8664.316    13350.110  -0.649    0.517
+## FunctionalMin2             -12709.060    13033.967  -0.975    0.330
+## FunctionalMod              -14394.718    14722.755  -0.978    0.329
+## FunctionalTyp                4206.104    12139.015   0.346    0.729
+## Fireplaces                  11467.201     3016.683   3.801    0.000
+## `Fireplace Qu`Fa           -12766.123     8228.999  -1.551    0.121
+## `Fireplace Qu`Gd           -14204.231     6274.368  -2.264    0.024
+## `Fireplace Qu`Po           -23140.943     9267.664  -2.497    0.013
+## `Fireplace Qu`TA           -17684.262     6494.672  -2.723    0.007
+## `Fireplace Qu`NA            -5555.012     7184.252  -0.773    0.440
+## `Garage Type`Attchd         -1098.546    10410.783  -0.106    0.916
+## `Garage Type`Basment         -698.429    12956.410  -0.054    0.957
+## `Garage Type`BuiltIn        -4596.878    11028.118  -0.417    0.677
+## `Garage Type`CarPort       -10478.563    14668.521  -0.714    0.475
+## `Garage Type`Detchd          -138.978    10352.749  -0.013    0.989
+## `Garage Yr Blt`               -61.663       71.081  -0.868    0.386
+## `Garage Finish`RFn          -4343.268     2324.350  -1.869    0.062
+## `Garage Finish`Unf          -1482.510     2761.989  -0.537    0.592
+## `Garage Cars`                2990.418     2575.052   1.161    0.246
+## `Garage Area`                  24.301        8.431   2.882    0.004
+## `Garage Qual`Fa            -70420.903    34399.083  -2.047    0.041
+## `Garage Qual`Gd            -51114.497    34997.446  -1.461    0.145
+## `Garage Qual`Po           -134052.976    53225.962  -2.519    0.012
+## `Garage Qual`TA            -67768.261    34050.030  -1.990    0.047
+## `Garage Cond`Fa             73986.105    38135.569   1.940    0.053
+## `Garage Cond`Gd             64104.427    44282.093   1.448    0.148
+## `Garage Cond`Po            112712.402    42502.311   2.652    0.008
+## `Garage Cond`TA             71259.249    37706.963   1.890    0.059
+## `Paved Drive`P               5257.032     6578.885   0.799    0.424
+## `Paved Drive`Y               2077.186     4637.941   0.448    0.654
+## `Wood Deck SF`                  7.641        7.155   1.068    0.286
+## `Open Porch SF`               -16.288       14.771  -1.103    0.270
+## `Enclosed Porch`              -11.374       15.586  -0.730    0.466
+## `3Ssn Porch`                   16.122       25.063   0.643    0.520
+## `Screen Porch`                 38.257       13.270   2.883    0.004
+## `Pool Area`                  -106.868      172.557  -0.619    0.536
+## `Pool QC`TA                 24551.037    50543.005   0.486    0.627
+## `Pool QC`NA               -100661.222   115845.266  -0.869    0.385
+## FenceGdWo                       3.723     6004.965   0.001    1.000
+## FenceMnPrv                   1567.238     5154.542   0.304    0.761
+## FenceMnWw                    -880.404    11445.727  -0.077    0.939
+## FenceNA                      1297.215     4799.135   0.270    0.787
+## `Misc Feature`Gar2         545161.543    41606.652  13.103    0.000
+## `Misc Feature`Othr         569599.202    49966.978  11.400    0.000
+## `Misc Feature`Shed         551469.257    55133.872  10.002    0.000
+## `Misc Feature`NA           547892.245    57027.550   9.608    0.000
+## `Misc Val`                      1.636        2.916   0.561    0.575
+## `Mo Sold`                    -262.197      301.130  -0.871    0.384
+## `Yr Sold`                    5937.290     9495.773   0.625    0.532
+## `Sale Type`Con               7985.975    14377.683   0.555    0.579
+## `Sale Type`ConLD            23972.110    12356.747   1.940    0.053
+## `Sale Type`ConLI             9525.193    14763.137   0.645    0.519
+## `Sale Type`ConLw            11056.387    17164.197   0.644    0.520
+## `Sale Type`CWD              -9551.094    15096.901  -0.633    0.527
+## `Sale Type`New              23118.131    16568.083   1.395    0.163
+## `Sale Type`Oth              39733.034    17369.174   2.288    0.022
+## `Sale Type`VWD             -11729.698    24093.725  -0.487    0.627
+## `Sale Type`WD                4819.940     4886.036   0.986    0.324
+## `Sale Condition`AdjLand     41276.951    18154.239   2.274    0.023
+## `Sale Condition`Alloca      24461.628    10762.922   2.273    0.023
+## `Sale Condition`Family        404.850     6776.364   0.060    0.952
+## `Sale Condition`Normal       1592.263     3745.575   0.425    0.671
+## `Sale Condition`Partial     -4641.758    15793.517  -0.294    0.769</code></pre>
 </div>
 <div id="housing-model--some-exp.-vars." class="section level3 hasAnchor">
 <h3><span class="header-section-number">7.4.3</span> Housing Model- Some Exp. Vars.<a href="predictive-modeling.html#housing-model--some-exp.-vars." class="anchor-section" aria-label="Anchor link to header"></a></h3>

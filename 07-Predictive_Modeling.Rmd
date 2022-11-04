@@ -588,7 +588,8 @@ Train_Data <- ames_raw[samp,]
 
 ```{r}
 M_OLS <- lm(data=Train_Data, SalePrice ~ .)
-summary(M_OLS)
+data.frame(summary(M_OLS)$coefficients) %>% 
+ mutate_if(is.numeric, round, 3)
 ```
 
 ### Housing Model- Some Exp. Vars. 
