@@ -641,7 +641,7 @@ $$
 * As $\lambda$ increases, $|b_j|$'s shrink toward 0. The model becomes less complex, thus bias increases, but variance decreases.     
 * We can use cross validation to determine the optimal value of $\lambda$
 
-```{r, echo=FALSE, fig.height=4, fig.width=10}
+```{r, echo=FALSE, fig.height=4, fig.width=10, cache=FALSE}
 x <- seq(from=1, to=3, by=0.01)
 Var <- x^2/10
 Bias <- 1/x
