@@ -174,6 +174,7 @@ summary(SAT_M3)
 SAT_M4 <- lm(data=SAT, sat~salary+frac+ratio+expend)
 summary(SAT_M4)
 ```
+
 ### Confidence Intervals 
 
 Confidence intervals for model involving teacher salary, percentage taking the test, and student-to-teacher ratio.  
@@ -212,9 +213,9 @@ There is some sign of a quadratic trend in the residual plot, creating concern a
 We can plot our residuals against the explanatory variables to see whether the model is properly accounting for relationships involving each variable. If we see nonlinear trends, we should consider adding a nonlinear function of that explanatory variable.  
 
 ```{r,  fig.width=9}
-P1 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$salary)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("Salary") + ylab("Residuals") 
-P2 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$frac)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("Fraction Taking Test") + ylab("Residuals")
-P3 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$ratio)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("Student to Teach Ratio") + ylab("Residuals")
+P1 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$salary)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("Salary") + ylab("Residuals") 
+P2 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$frac)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("Fraction Taking Test") + ylab("Residuals")
+P3 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$ratio)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("Student to Teach Ratio") + ylab("Residuals")
 grid.arrange(P1, P2, P3, ncol=3)
 ```
 
@@ -488,9 +489,9 @@ There is slight concern about constant variance, but otherwise, the model assump
 
 
 ```{r,  fig.width=9}
-P1 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$QtrMile)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("QtrMile") + ylab("Residuals") 
-P2 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$Weight)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("Weight") + ylab("Residuals") 
-P3 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$Drive)) + geom_point() + ggtitle("Residual by Predicted Plot") + xlab("Drive") + ylab("Residuals") 
+P1 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$QtrMile)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("QtrMile") + ylab("Residuals") 
+P2 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$Weight)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("Weight") + ylab("Residuals") 
+P3 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$Drive)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("Drive") + ylab("Residuals") 
 grid.arrange(P1, P2, P3, ncol=3)
 ```
 
