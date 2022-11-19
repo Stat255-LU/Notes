@@ -245,7 +245,7 @@ Consider the odds ratio for a case $j$ with explanatory variable $x + 1$, compar
 That is $\text{log}\left(\frac{\pi_i}{1-\pi_i}\right) = \beta_0+\beta_1x$, and
 $\text{log}\left(\frac{\pi_j}{1-\pi_j}\right) = \beta_0+\beta_1(x+1)$.  
 
-$\text{log}\left(\frac{\frac{\pi_j}{1-\pi_j}}{\frac{\pi_i}{1-\pi_i}}\right)=\text{log}\left(\frac{\pi_j}{1-\pi_j}\right)-\text{log}\left(\frac{\pi_i}{1-\pi_j}\right)=\beta_0+\beta_1(x+1)-(\beta_0+\beta_1(x))=\beta_1.$
+$\text{log}\left(\frac{\frac{\pi_j}{1-\pi_j}}{\frac{\pi_i}{1-\pi_i}}\right)=\text{log}\left(\frac{\pi_j}{1-\pi_j}\right)-\text{log}\left(\frac{\pi_i}{1-\pi_i}\right)=\beta_0+\beta_1(x+1)-(\beta_0+\beta_1(x))=\beta_1.$
 
 For every 1-unit increase in $x$ we expect the log odds of "success" to multiply by a factor of $\beta_1$. 
 

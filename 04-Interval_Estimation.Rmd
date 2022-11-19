@@ -1059,14 +1059,14 @@ LakesSample30 <- sample_n(FloridaLakes, 30, replace=TRUE)
 Lakes_Hist10 <- ggplot(data=LakesSample10, aes(x=AvgMercury)) + 
   geom_histogram(color="white", fill="lightblue", binwidth = 0.2) + 
   ggtitle("n=10") + 
-  xlab("Mercury Level") + ylab("Frequency") + xlim(c(0,2))
+  xlab("Mercury Level") + ylab("Frequency") + xlim(c(-0.2,2))
 
 Lakes_Hist30 <- ggplot(data=LakesSample30, aes(x=AvgMercury)) + 
   geom_histogram(color="white", fill="lightblue", binwidth = 0.2) + 
   ggtitle("n=30") + 
-  xlab("Mercury Level") + ylab("Frequency") + xlim(c(0,2))
+  xlab("Mercury Level") + ylab("Frequency") + xlim(c(-0.2,2))
 
-Lakes_Hist53 <- Lakes_Hist + ggtitle("n=53") + xlim(c(0,2))
+Lakes_Hist53 <- Lakes_Hist + ggtitle("n=53") + xlim(c(-0.2,2))
 
 grid.arrange(Lakes_Hist10, Lakes_Hist30, Lakes_Hist53, ncol=3)
 ```
