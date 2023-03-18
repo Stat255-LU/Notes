@@ -1155,11 +1155,10 @@ In special cases, there are mathematical formulas for standard errors associated
 
 |Scenario| Standard Error | 
 |---------|-----|     
-| One Sample Mean | $SE(\bar{x})=\frac{s}{\sqrt{n}}$ |   
-| Difference in Sample Means | $SE(\bar{x}_1-\bar{x}_2)=s\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}$ |    
-| Intercept in Simple Linear Regression | $SE(b_0)=s\sqrt{\frac{1}{n}+\frac{\bar{x}^2}{\sum(x_i-\bar{x})^2}}$ |    
-| Slope in Simple Linear Regression | $SE(b_1)=\sqrt{\frac{s^2}{\sum(x_i-\bar{x})^2}}$ | 
-
+| Intercept for baseline category of categorical variable | $SE(b_0)=\frac{\hat{\sigma}}{\sqrt{n}}$ |   
+| Estimated difference between two groups | $SE(b_j)=\hat{\sigma}\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}$ |    
+| Intercept in Simple Linear Regression | $SE(b_0)=\hat{\sigma}\sqrt{\frac{1}{n}+\frac{\bar{x}^2}{\sum(x_i-\bar{x})^2}}$ |    
+| Slope in Simple Linear Regression | $SE(b_1)=\sqrt{\frac{\hat{\sigma}^2}{\sum(x_i-\bar{x})^2}}=\sqrt{\frac{1}{n-2}\frac{{\sum(\hat{y}_i-\bar{y})^2}}{\sum(x_i-\bar{x})^2}}$ | 
 
 * $s=\sqrt{\frac{\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2}{(n-(p+1))}}$, (p is number of regression coefficients not including $b_0$) is sample standard deviation     
 
