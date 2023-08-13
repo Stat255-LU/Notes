@@ -11,7 +11,7 @@
 
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=TRUE)
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=FALSE)
 library(ggformula)
 library(moderndive)
 library(gridExtra)
@@ -23,172 +23,39 @@ library(knitr)
 library(caret)
 library(MASS)
 library(tidyverse)
+library(KingCountyHouses)
 options(scipen=999)
 set.seed(07302020)
 ```
 
 
-## Exploring Data Visualizations
 
-
-### COVID-19 Data
-
-The following data were contained in a UK technical report on the Delta Variant on August 2, 2021
-
-| Vaccination Status      | Deaths  |   Total Cases | Fatality Rate |
-| ------- | ------- | ----------| -----|  
-| Fully Vax | 402 | 47,008 | 0.86% | 
-| Unvax | 253 | 151,054 | 0.17 % | 
-
-```{r, echo=FALSE}
-Vac_Status <- c(rep("Fully Vax", 47008), c(rep("Unvax", 151054)))
-Outcome <- c(rep("Death", 402), rep("Survival", 47008-402), rep("Death", 253), rep("Survival", 151054-253))
-Age <- c(rep("<50", 13), rep(">50", 389), rep("<50", 25536-13), rep(">50", 21472-389), 
-         rep("<50", 48), rep(">50", 205), rep("<50", 147614-48), rep(">50", 3440-205))
-Covid_Data <- data.frame(Vac_Status, Outcome, Age)
-```
-
-
-```{r}
-ggplot(data=Covid_Data, aes(x=Vac_Status, fill=Outcome)) + geom_bar(position="fill")
-```
-
-One explanation would be that vaccines don't work, and even cause harm.  
-
-Can you think of another explanation?  
-
-
-
-### Breakdown by Age < 50
-
-We break down the cases based on whether the patient was older or younger than 50. 
-
-Under 50
-
-| Vaccination Status      | Deaths  |   Total Cases | Fatality Rate |
-| ------- | ------- | ----------|------|   
-| Fully Vax | 13 | 25,536 | 0.05% | 
-| Unvax | 48 | 147, 612 | 0.03 % | 
-
-
-50 or Older
-
-| Vaccination Status      | Deaths  |   Total Cases | Fatality Rate |
-| ------- | ------- | ----------| ----- |   
-| Fully Vax | 389 | 21,472 | 1.81% | 
-| Unvax | 205 | 3,440 | 5.96 % | 
-
-
-```{r}
-ggplot(data=Covid_Data, aes(x=Vac_Status, fill=Outcome)) + geom_bar(position="fill") + facet_wrap(~Age)
-```
-
-
-Before accounting for age, vaccinated people appear to be 5 times MORE likely to die from covid than unvaccinated people.   
-
-After accounting for age, vaccinated young people appear to be about 1.5 times more likely to die from covid (though death rates are very low) overall, and vaccinated older people appear to be more than 3 times LESS likely.   
-
-### Vaccination by Age Breakdown
-
-
-```{r}
-ggplot(data=Covid_Data, aes(x=Vac_Status, fill=Age)) + geom_bar(position="fill") 
-```
-
-Since almost all of the unvaccinated people were from the lower risk category, the death rate among unvaccinated people appears lower. 
-
-We should account for age when comparing survival rates.  
-
-
-### Simpson's Paradox
-
-**Simpson's Paradox** refers to a situation where an apparent trend either disappears or reverses when one or more additional variables are accounted for. These additional variables are called **confounding variables.**
-
-In this situation, age is a counfouding variable. Older people are more likely to be vaccinated, and also more likely to die of covid (regardless of vaccination status), thus it appears that vaccinated people are more likely to die from covid, unless we account for age.   
-
-When we build statistical models, it will be important to account for potential confounding variables in our data, otherwise a model will give misleading results.  
-
-
-Final note: Subsequent data has shown that among people under 50, vaccinated people also had lower death rates (though death rates remained very low for both vaccinated and unvaccinated people). The slightly higher death rate for vaccinated people under 50, seen in these early data, is likely due to young people with other risk conditions being vaccinated first. 
-
-[Data Source](https://www.covid-datascience.com/post/simpson-s-paradox-strikes-again-refuting-reports-vaxxed-have-5x-case-fatality-rate-than-untaxed)
-
-
-### Exploring Diamond Prices
-
-The following data come from a dataset with information on over 53,940 diamonds. We'll explore the relationship between price (in $ US) and quality of the cut of the diamond (ideal, premium, very good, good, fair." 
-
-```{r, echo=FALSE}
-library(tidyverse)
-data(diamonds)
-
-diamonds$cut <- factor(x = diamonds$cut, levels = c("Fair",
-                                        "Good",
-                                        "Very Good",
-                                        "Premium",
-                                        "Ideal"), ordered = TRUE)
-```
-
-Consider the following plots:
-
-```{r}
-ggplot(data=diamonds, aes(x=price, y=cut, fill=cut)) + 
-  geom_boxplot(outlier.size=0.01, outlier.alpha = 0.1) + 
-    stat_summary(fun=mean, geom="point", shape=4, color="red", size=3) + ggtitle("Price by Quality of Cut")
-```
-
-Diamonds come in different carat sizes, so we should consider information about that as well. 
-
-We examine a histogram, displaying the number of diamonds with each cut, and carat size.  
-
-```{r}
-ggplot(data=diamonds, aes(x=carat, fill=cut)) + geom_histogram() + ggtitle("Diamonds by Carat Size and Cut Quality")
-```
-The table shows the number of diamonds of each cut, as well as the average carat size and price of each diamond.  
-
-
-```{r}
-diamonds %>% group_by(cut) %>% summarize(N=n(), 
-                                         Avg_carat=mean(carat), 
-                                         Avg_price=mean(price) ) 
-
-```
-
-Finally, we use a scatterplot to visualize cut, price, and carat size. 
-
-```{r}
-ggplot(data=diamonds, aes(x=carat, y=price, color=cut)) + geom_point() + ggtitle("Price by Carat Size and Cut")
-```
-
-**Question:**   
-How is Simpson's paradox present in the diamonds data? What is the confounding variable? What conclusion should we draw about the relationship between the price of a diamond and the quality of the cut?  
-
-
-## Exploratory Analysis in R
+## Getting Started in R
 
 This section provides examples of how to read data into R, create graphics, like those in the previous section, and calculate summary statistics. 
 
-We'll work with data on movies released in Hollywood between 2012 and 2018.  
+We'll work with data on houses that sold in King County, WA, (home of Seattle) between 2014 and 2015.   
 
-### Loading the Data
-
-We'll begin by loading the `tidyverse` package, which can be used to create professional graphics, and wrangle (or manipulate) data into forms that are informative and easy to work with. 
+We begin by loading the `tidyverse` package which can be used to create professional data graphics and summaries.  
 
 ```{r}
 library(tidyverse)
 ```
 
 ```{r, echo=FALSE}
-select <- dplyr::select
+library(KingCountyHouses)
+data(home_prices)
+Houses <- home_prices
+Houses <- Houses %>% mutate(price = 10^price) # price is given in log10, convert to thousands
+Houses <- Houses %>% mutate(waterfront= ifelse(waterfront==1, "Yes", "No") %>% as.factor()) %>% mutate(price=price/1000)
+Houses <- Houses %>% select(date_sold, price, bedrooms, bathrooms, sqft_living, sqft_lot, condition, waterfront, yr_built)
+W <- Houses %>% filter(waterfront=="Yes") 
+NW <- Houses %>% filter(waterfront=="No") 
+Houses <- rbind(W[1:15,], NW[1:85,]) 
+Houses <- Houses %>% arrange(date_sold) %>% select(-c(date_sold))
+Houses$Id <- 1:nrow(Houses)
+Houses <- Houses %>% select(Id, everything())
 ```
-
-
-Next, we read in the data itself, from the website where it is stored. 
-
-```{r}
-HollywoodMovies <- read_csv("https://www.lock5stat.com/datasets3e/HollywoodMovies.csv")
-```
-
 
 ### Previewing the Data
 
@@ -197,13 +64,13 @@ HollywoodMovies <- read_csv("https://www.lock5stat.com/datasets3e/HollywoodMovie
 The `head()` function displays the first 5 rows of the dataset. 
 
 ```{r}
-head(HollywoodMovies)
+head(Houses)
 ```
 
 
-The rows of the dataset are called **observations.** In this case, the observations are the movies.   
+The rows of the dataset are called **observations.** In this case, the observations are the houses.    
 
-The columns of the dataset, which contain information about the movies, are called **variables.**
+The columns of the dataset, which contain information about the houses, are called **variables.**
 
 
 
@@ -215,92 +82,72 @@ The `glimpse()` command shows the number of observations (rows), and the number 
   
 * **Quantitative variables**, which take on meaningful numeric values. These include numeric `<num>`, integer `<int>`, and double `<dbl>`.   
 
+* **Date and time variables** take on values that are dates and times, and are denoted `<dttm>`
+
 ```{r}
-glimpse(HollywoodMovies)
+glimpse(Houses)
 ```
 
-There are 1,295 movies in the dataset, and 15 variables for each film.   
+There are 100 houses in the dataset, and 9 variables on each house.   
 
 **`summary`**
 
-`summary` displays the mean, minimum, first quartile, median, third quartile, and maximum for each numeric variable. 
+`summary` displays the mean, minimum, first quartile, median, third quartile, and maximum for each numeric variable, and the number of observations in each category, for categorical variables.   
+
 
 ```{r}
-summary(HollywoodMovies)
+summary(Houses)
 ```
 
-Notice that 239 films have missing information on some of the variables, recorded as NA's. 
+### Modifying the Data
 
-### Adding a New Variable 
+Next we'll look at how to manipulate the data and create new variables.   
+
+
+#### Adding a New Variable {-}
 
 We can use the `mutate()` function to create a new variable based on variables already in the dataset. 
 
-In the data description, the variable `Profitability` is defined as *WorldGross as a percentage of Budget*. Thus, films for which `Profitability` exceeds 100 were profitable. 
-
-We create a variable to tell whether or not a film was profitable. Note that in R, a variable defined as a condition, such as `Profitability>100` will return values of either `TRUE` or `FALSE`.   
+Let's add a variable giving the age of the house, as of 2015.  
 
 ```{r}
-HollywoodMovies <- HollywoodMovies %>% mutate(Profitable = Profitability > 100)
-```
-
-```{r}
-summary(HollywoodMovies$Profitable)
+Houses <- Houses %>% mutate(age = 2015-yr_built)
+head(Houses)
 ```
 
 
-### Selecting Columns
+
+#### Selecting Columns {-}
 
 If the dataset contains a large number of variables, narrow down to the ones you are interested in working with. This can be done with the `select()` command.  If there are not very many variables to begin with, or you are interested in all of them, then you may skip this step.
 
-Let's narrow the dataset down to the variables `Movie`, `RottenTomatoes`, `AudienceScore`, `Genre`, `WorldGross`, `Budget`, "Profitable", and `Year`.  
+Let's create a smaller version of the dataset, with only the columns price, sqft_living, and waterfront. We'll call this `Houses_3var.`
 
 
 ```{r}
-MoviesSubset <- HollywoodMovies %>% select(Movie, RottenTomatoes, AudienceScore, 
-                                           Genre, WorldGross, Budget, Profitable, 
-                                           Year)
+Houses_3var <- Houses %>% select(price, sqft_living, waterfront)
+head(Houses_3var)
 ```
 
 
-### Filtering by Row
+#### Filtering by Row
 
 The `filter()` command narrows a dataset down to rows that meet specified conditions.
 
-
-**Filtering by a Categorical Variable**
-
-Let's filter the data to only include action movies, comedies, dramas, and horror movies. 
-
-We'll also keep only those films whose budget was listed, excluding the 239 NA's. The command `!is.na()` returns only values that are not NA's. 
-
+We'll filter the data to include only houses built after 2000.
+  
+```{r}
+New_Houses <- Houses %>% filter(yr_built>=2000)
+head(New_Houses)
+```
+Now, we'll filter the data to include only houses on the waterfront. 
 
 ```{r}
-MoviesSubset1 <- MoviesSubset %>% 
-  filter(Genre %in% c("Action", "Comedy", "Drama", "Horror")) %>%  filter(!is.na(Budget))
+New_Houses <- Houses %>% filter(waterfront == "Yes")
+head(New_Houses)
 ```
 
-In R, the `!` operator means "not". 
-
-
-```{r}
-glimpse(MoviesSubset1)
-```
-
-**Filtering by a Quantitative Variable**
-
-Let's filter the data to only include films whose world gross exceeds 100 million dollars. 
-
-```{r}
-MoviesSubset2 <- MoviesSubset %>% filter(WorldGross >100)
-```
-
-Now, let's preview the data again. 
-
-```{r}
-glimpse(MoviesSubset2)
-```
-
-We'll use MoviesSubset1 from this point forward. 
+## Data Visualization   
 
 
 ### Histogram 
@@ -308,7 +155,7 @@ We'll use MoviesSubset1 from this point forward.
 Next, we'll create graphics to help us visualize the distributions and relationships between variables. We'll use the `ggplot()` function, which is part of the `tidyverse` package. 
 
 
-Histograms are useful for displaying the distribution of a single quantitative variable    
+Histograms are useful for displaying the distribution of a single quantitative variable. In a histogram, the x-axis breaks the variable into ranges of values, and the y-axis displays the number of observations with a value falling in that category (frequency).     
 
 **General Template for Histogram**
 
@@ -320,19 +167,21 @@ ggplot(data=DatasetName, aes(x=VariableName)) +
   ylab("y-axis label")
 ```
 
-**Histogram of Audience Scores**
+**Histogram of House Prices**
 
 ```{r}
-ggplot(data=MoviesSubset1, aes(x=AudienceScore)) + 
+ggplot(data=Houses, aes(x=price)) + 
   geom_histogram(fill="lightblue", color="white") + 
-  ggtitle("Distribution of Audience Scores") +
-  xlab("Audience Score") + 
+  ggtitle("Distribution of House Prices") +
+  xlab("Price (in thousands)") + 
   ylab("Frequency")
 ```
 
-### Density Plots
+We see that the distribution of house prices is right-skewed. Most houses cost less than \$1,000,000, though there are a few houses that are much more expensive. The most common price range is around \$400,000 to \$500,000. 
 
-Density plots show the distribution for a quantitative variable like audience score. Scores can be compared across categories, like genre.   
+### Density Plot
+
+Density plots show the distribution for a quantitative variable price. Scores can be compared across categories, like whether or not the house is on a waterfront.      
 
 **General Template for Density Plot**
 
@@ -347,19 +196,21 @@ ggplot(data=DatasetName, aes(x=QuantitativeVariable,
 
 `alpha`, ranging from 0 to 1 dictates transparency. 
 
-**Density Plot of Audience Scores**
+**Density Plot of House Prices**
 
 ```{r}
-ggplot(data=MoviesSubset1, aes(x=AudienceScore, color=Genre, fill=Genre)) + 
+ggplot(data=Houses, aes(x=price, color=waterfront, fill=waterfront)) + 
   geom_density(alpha=0.2) + 
-  ggtitle("Distribution of Audience Scores") +
-  xlab("Audience Score") + 
+  ggtitle("Distribution of Prices") +
+  xlab("House price (in thousands)") + 
   ylab("Frequency") 
 ```
 
-###  Boxplot
+We see that on average, houses on the waterfront tend to be more expensive and have a greater price range than houses not on the waterfront. 
 
-Boxplots can be used to compare a quantitative variable with a categorical variable
+### Boxplot
+
+Boxplots can be used to compare a quantitative variable with a categorical variable. The middle 50% of observations are contained in the "box", with the upper and lower 25% of the observations in each tail. 
 
 **General Template for Boxplot**
 
@@ -373,14 +224,18 @@ ggplot(data=DatasetName, aes(x=CategoricalVariable,
 
 You can make the plot horizontal by adding `+ coordflip()`. You can turn the axis text vertical by adding `theme(axis.text.x = element_text(angle = 90))`. 
 
-**Boxplot Comparing Scores for Genres**
+**Boxplot Comparing Price by Waterfront Status**
 
 ```{r}
-ggplot(data=MoviesSubset1, aes(x=Genre, y=AudienceScore)) + geom_boxplot() + 
-  ggtitle("Audience Score by Genre") + 
-  xlab("Genre") + ylab("Audience Score") + 
-  theme(axis.text.x = element_text(angle = 90))
+ggplot(data=Houses, aes(x=waterfront, y=price)) + geom_boxplot() + 
+  ggtitle("House Price by Waterfront Status") + 
+  xlab("Waterfront") + ylab("Price (in thousands)") + coord_flip()
 ```
+
+For houses not on the waterfront, the median price is about \$400,000, and the middle 50% of prices range from about \$300,000 to $600,000.  
+
+For waterfront houses, the median price is about \$1,500,000, and the middle 50% of prices range from about \$900,000 to $1,900,000.   
+
 
 ### Violin Plot
 
@@ -396,19 +251,19 @@ ggplot(data=DatasetName, aes(x=CategoricalVariable, y=QuantitativeVariable,
   xlab("Variable Name") + ylab("Variable Name") 
 ```
 
-**Violin Plot Comparing Scores for Genres**
+**Violin Plot Comparing Prices by Waterfront**
 
 ```{r}
-ggplot(data=MoviesSubset1, aes(x=Genre, y=AudienceScore, fill=Genre)) + 
+ggplot(data=Houses, aes(x=waterfront, y=price, fill=waterfront)) + 
   geom_violin() + 
-  ggtitle("Audience Score by Genre") + 
-  xlab("Genre") + ylab("Audience Score") + 
+  ggtitle("Price by Waterfront Status") + 
+  xlab("Waterfront") + ylab("Price (in thousands)") + 
   theme(axis.text.x = element_text(angle = 90))
 ```
 
-We can view the boxplot and violin plot together. 
+Again, we see that houses on the waterfront tend to be more expensive than those not on the waterfront, and have a wider range in prices. 
 
-### Scatterplots   
+### Scatterplot   
 
 Scatterplots are used to visualize the relationship between two quantitative variables.  
 
@@ -423,44 +278,38 @@ ggplot(data=DatasetName, aes(x=CategoricalVariable, y=QuantitativeVariable)) +
 ```
 
 
-**Scatterplot Comparing Audience Score and Rotten Tomatoes Score**
+**Scatterplot Comparing Price and Square Feet of Living Space**
 
 ```{r}
-ggplot(data=MoviesSubset1, aes(x=RottenTomatoes, y=AudienceScore)) + 
+ggplot(data=Houses, aes(x=sqft_living, y=price)) + 
   geom_point() +
-  ggtitle("Audience and Critics Ratings") + 
-  ylab("Audience Rating") + 
-  xlab("Critics' Rating")
+  ggtitle("Price and Living Space") + 
+  ylab("Price (in thousands)") + 
+  xlab("Living Space in sq. ft. ")
 ```
 
-We see that there is an upward trend, indicating a positive association between critics scores (RottenTomatoes), and audience scores. However, there is a lot of variability, and the relationship is moderately strong at best.   
+We see that there is an upward trend, indicating that houses with more living space tend to, on average, be higher priced than those with less living space. The relationship appears to be roughly linear, though there might be some curvature, as living space gets very large. There are some exceptions to this trend, most notably a house with more than 7,000 square feet, priced just over \$1,000,000. 
+
 
 We can also add color, size, and shape to the scatterplot to display information about other variables. 
 
-```{r}
-ggplot(data=MoviesSubset1, 
-       aes(x=RottenTomatoes, y=AudienceScore, color=Genre, size=WorldGross)) + 
-  geom_point() +
-  ggtitle("Audience and Critics Ratings") + 
-  ylab("Audience Rating") + 
-  xlab("Critics' Rating")
-```
-
-We can add labels for points meeting certain conditions, using `geom_text()`. This should be done carefully, to avoid overlap. 
+We'll use color to illustrate whether the house is on the waterfront, and size to represent the square footage of the entire lot (including the yard and the house).  
 
 ```{r}
-ggplot(data=MoviesSubset1, 
-       aes(x=RottenTomatoes, y=AudienceScore, color=Genre, size=WorldGross)) + 
+ggplot(data=Houses, 
+       aes(x=sqft_living, y=price, color=waterfront, size=sqft_lot)) + 
   geom_point() +
-  ggtitle("Audience and Critics Ratings") + 
-  ylab("Audience Rating") + xlab("Critics' Rating") + 
-  geom_text(data = MoviesSubset1 %>% filter(WorldGross >800), aes(label = Movie), 
-            color="black", check_overlap = TRUE)
+  ggtitle("Price of King County Houses") + 
+  ylab("Price (in thousands)") + 
+  xlab("Living Space in sq. ft. ")
 ```
 
-### Bar Graphs  
+We notice that many of the largest and most expensive houses are on the waterfront. 
 
-Bar graphs can be used to visualize one or more categorical variables 
+
+### Bar Graph  
+
+Bar graphs can be used to visualize one or more categorical variables. A bar graph is similar to a histogram, in that the y-axis again displays frequency, but the x-axis displays categories, instead of ranges of values.    
 
 
 **Bar Graph Template**
@@ -473,16 +322,18 @@ ggplot(data=DatasetName, aes(x=CategoricalVariable)) +
   ylab("Frequency") 
 ```
 
-**Bar Graph by Genre**
+**Bar Graph by Condition**
 
 ```{r}
-ggplot(data=MoviesSubset1, aes(x=Genre)) + 
+ggplot(data=Houses, aes(x=condition)) + 
   geom_bar(fill="lightblue",color="white")  + 
-  ggtitle("Number of Films by Genre") + 
-  xlab("Genre") + 
-  ylab("Number of Films") +   
+  ggtitle("Number of Houses by Condition") + 
+  xlab("Condition") + 
+  ylab("Frequency") +   
   theme(axis.text.x = element_text(angle = 90))
 ```
+
+We see that the majority of houses are in average condition. Some are in good or very good condition, while very few are in poor or very poor condition. 
 
 ### Stacked and Side-by-Side Bar Graphs
 
@@ -501,17 +352,17 @@ ggplot(data = DatasetName, mapping = aes(x = CategoricalVariable1,
 
 **Stacked Bar Graph Example**
 
-The `stat_count(position="fill")` command creates a stacked bar graph, comparing two categorical variables.  Let's explore whether certain genres are more profitable than others, using the profitability variable. 
+The `stat_count(position="fill")` command creates a stacked bar graph, comparing two categorical variables.  Let's explore whether waterfront status is related to condition. 
 
 ```{r}
-ggplot(data = MoviesSubset1, mapping = aes(x = Genre, fill = Profitable)) +
+ggplot(data = Houses, mapping = aes(x = waterfront, fill = condition)) +
     stat_count(position="fill")  +
-  theme_bw() + ggtitle("Profitability by Genre") + 
-  xlab("Genre") + 
-  ylab("Proportion Profitable") +   
+  theme_bw() + ggtitle("Condition by Waterfront Status") + 
+  xlab("Waterfront Status") + 
+  ylab("Condition") +   
   theme(axis.text.x = element_text(angle = 90)) 
 ```
-
+We see that a higher proportion of waterfront houses are in good or excellent condition than non-waterfront houses. 
 
 **Side-by-side Bar Graph Template**
 
@@ -529,24 +380,26 @@ ggplot(data = DatasetName, mapping = aes(x = CategoricalVariable1,
 **Side-by-side Bar Graph Example**
 
 ```{r}
-ggplot(data = MoviesSubset1, mapping = aes(x = Genre, fill = Profitable)) +
+ggplot(data = Houses, mapping = aes(x = waterfront, fill = condition)) +
     geom_bar(position = "dodge") +
-  ggtitle("Number of Films by Genre") + 
-  xlab("Genre") + 
-  ylab("Number of Films") +   
+  ggtitle("Condition by Waterfront Status") + 
+  xlab("Waterfront Status") + 
+  ylab("Condition") +   
   theme(axis.text.x = element_text(angle = 90)) 
 ```
+In this case, since there are so few waterfront houses, the graph is hard to read and not very useful. 
 
+The stacked bar graph is a better way to convey information in this instance, though you may find that for a different dataset, the side-by-side bar graph could be a better choice. 
 
 ### Correlation Plot
 
-Correlation plots can be used to visualize relationships between quantitative variables. These can be helpful when we proceed to modeling. Explanatory variables that are highly correlated with the response are often strong predictors that should be included in a model. However, including two explanatory variables that are highly correlated with one another can create interpretation problems. 
+Correlation plots can be used to visualize relationships between quantitative variables. Correlation is a number between -1 and 1, describing the strength of the linear relationship between two variables. Variables with strong positive correlations will have correlation close to +1, while variables with strong negative correlations will have correlations close to -1. Variables with little to no relationship will have correlation close to 0.  
 
 The `cor()` function calculates correlations between quantitative variables. We'll use `select_if` to select only numeric variables. The `use="complete.obs" command tells R to ignore observations with missing data. 
 
 
 ```{r}
-cor(select_if(HollywoodMovies, is.numeric), use="complete.obs") %>% round(2)
+cor(select_if(Houses, is.numeric), use="complete.obs") %>% round(2)
 ```
 
 
@@ -555,17 +408,11 @@ The `corrplot()` function in the `corrplot()` package provides a visualization o
 
 ```{r, fig.height=12, fig.width=12}
 library(corrplot)
-Corr <- cor(select_if(HollywoodMovies, is.numeric), use="complete.obs")
+Corr <- cor(select_if(Houses, is.numeric), use="complete.obs")
 corrplot(Corr)
 ```
 
-We can also display a numeric version of the correlations by setting `method="number"`. 
-
-```{r, fig.height=12, fig.width=12}
-Corr <- cor(select_if(HollywoodMovies, is.numeric), use="complete.obs")
-corrplot(Corr, method="number")
-```
-
+We see that price has a strong positive correlation with square feet of living space, and is also positively correlated with number of bedrooms and bathrooms. Living space, bedrooms, and bathrooms are all positively correlated, which makes sense, since we would expect bigger houses to have more bedrooms and bathrooms. Price does not show much correlation with the other variables. We notice that bathrooms is negatively correlated with age, which means older houses tend to have fewer bathrooms than newer ones. Not surprisingly, age is very strongly correlated with year built.  
 
 
 ### Scatterplot Matrix
@@ -578,49 +425,65 @@ The scatterplot matrix shows us:
 2. Under the diagonal are plots showing the relationships between the variables in the corresponding row and column. Scatterplots are used when both variables are quantitative, bar graphs are used when both variables are categorical, and boxplots are used when one variable is categorical, and the other is quantitative.    
 3. Above the diagonal are correlations between quantitative variables. 
 
-We need to remove the column with the movie names. This is done using `select`. 
+Including too many variables can make these hard to read, so it's a good idea to use `select` to narrow down the number of variables. 
 
 
 ```{r, fig.height=12, fig.width=12}
 library(GGally)
-ggpairs(MoviesSubset1 %>% select(-Movie))
+ggpairs(Houses %>% select(price, sqft_living, condition, age))
 ```
 
 The scatterplot matrix is useful for helping us notice key trends in our data. However, the plot can hard to read as it is quite dense, especially when there are a large number of variables. These can help us look for trends from a distance, but we should then focus in on more specific plots. 
 
-### Summary Tables
-
-**`group_by()` and `summarize()`**
 
 
-The `group_by()` and `summarize()` commands are useful for breaking categorical variables down by category. For example, let's calculate number of films in each genre, and the mean,  median, and standard deviation in film `WorldGross` by genre. 
+## Summary Tables
+
+### Calculating Summary Statistics 
+
+**`summarize()`**
+
+The summarize command calculates summary statistics for variables in the data.  
+
+For a set of $n$ values $y_i, \ldots, y_n$:  
+    
+* mean ($\bar{y}$) is calculated by $\bar{y} =\frac{1}{n}\displaystyle\sum_{i=1}^n y_i$. 
+* standard deviation ($s$), a measure of the spread is calculated by $s =\sqrt{\displaystyle\sum_{i=1}^n \frac{(y_i-\bar{y})^2}{n-1}}$. The square of the standard deviation, called the variance is denoted $s^2$. 
+
+Let's calculate the mean, median, and standard deviation, in prices.
 
 ```{r}
-MoviesSubset1 %>% group_by(Genre) %>%
-  summarize(N = n(), 
-            Mean_Gross = mean(WorldGross, na.rm=TRUE), 
-            Median_Gross = median(WorldGross, na.rm=TRUE), 
-            StDev_Gross = sd(WorldGross, na.rm = TRUE)) %>%
-  arrange(desc(Mean_Gross))
+Houses_Summary <- Houses %>% summarize(Mean_Price = mean(price, na.rm=TRUE), 
+                                          Median_Price = median(price, na.rm=TRUE), 
+                                          StDev_Price = sd(price, na.rm = TRUE),
+                                          Number_of_Houses = n()) 
+Houses_Summary
 ```
 
 Notes:  
-1. The `n()` command calculates the number of observations in a category.    
-2. The `na.rm=TRUE` command removes missing values, so that summary statistics can be calculated.  
-3. `arrange(desc(Mean_Gross))` arranges the table in descending order of Mean_Gross. To arrange in ascending order, use `arrange(Mean_Gross)`. 
-
+1. The `n()` command calculates the number of observations.    
+2. The `na.rm=TRUE` command removes missing values, so that summary statistics can be calculated. It's not needed here, since this dataset doesn't include missing values, but if the dataset does include missing values, you will need to include this, in order to do the calculation.  
 
 The `kable()` function in the `knitr()` package creates tables with professional appearance. 
 
 ```{r}
 library(knitr)
-MoviesTable <- MoviesSubset1 %>% group_by(Genre) %>%
-  summarize(N = n(), 
-            Mean_Gross = mean(WorldGross, na.rm=TRUE), 
-            Median_Gross = median(WorldGross, na.rm=TRUE), 
-            StDev_Gross = sd(WorldGross, na.rm = TRUE)) %>%
-  arrange(desc(Mean_Gross))
-kable(MoviesTable)
+kable(Houses_Summary)
 ```
 
+### Grouped Summaries
 
+**`group_by()`**
+
+The `group_by()` command allows us to calculate summary statistics, with the data broken down by by category.We'll compare waterfront houses to non-waterfront houses.
+
+```{r}
+Houses_Grouped_Summary <- Houses %>% group_by(waterfront) %>% 
+                                      summarize(Mean_Price = mean(price, na.rm=TRUE),
+                                                Median_Price = median(price, na.rm=TRUE), 
+                                                StDev_Price = sd(price, na.rm = TRUE),
+                                                Number_of_Houses = n()) 
+kable(Houses_Grouped_Summary)
+```
+
+Note: `arrange(desc(Mean_Gross))` arranges the table in descending order of Mean_Gross. To arrange in ascending order, use `arrange(Mean_Gross)`. 

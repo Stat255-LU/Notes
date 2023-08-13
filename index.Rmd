@@ -18,7 +18,7 @@ The course's overarching learning outcomes are:
 1. Visualize and wrangle data using statistical software R.    
 2. Build and assess multivariate models to predict future outcomes.    
 3. Quantify uncertainty associated with estimates and predictions.    
-4. Explain the assumptions associated with statistical models, and evalate whether these assumptions are reasonably satisfied in context.   
+4. Explain the assumptions associated with statistical models, and evaluate whether these assumptions are reasonably satisfied in context.   
 5. Write reproducible analyses, using statistical software.    
 6. Work with data in an ethical and responsible manner.    
 
@@ -34,7 +34,7 @@ Stat 255 can serve as either:
 
 2. a second course in statistics, building on introductory topics taught in courses like Lawrence's Stat 107: Principles of Statistics, or AP Statistics.    
 
-At Lawrence, this course is required for the Statistics Track of the Mathematics Major, the Economics and Mathematics-Economics Majors, and the Statistics and Data Science Minor.  
+At Lawrence, this course is required for the Statistics Track of the Mathematics Major, the Economics and Mathematics-Economics Majors, the Business Analytics Track of the Business Major, and the Statistics and Data Science Minor.  
 
 The prerequisite for the course is either 1) a prior college-level course in statistics (i.e. STAT 107, BIOL 170 or 280, ANTH 207, AP Stats) OR 2) Calculus. (Math 140, AP Calculus, or equivalent).   
 
