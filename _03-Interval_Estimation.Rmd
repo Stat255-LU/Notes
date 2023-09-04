@@ -1,0 +1,555 @@
+# Interval Estimation
+
+**Learning Outcomes:**     
+
+1. State null and alternative hypotheses associated with models involving categorical and quantitative explanatory variables.   
+2. Explain how to use permutation tests for hypotheses involving means, medians, F-statistics, slopes, and other regression coefficients, as well as functions of these statistics.   
+3. Interpret p-values in context.    
+4. Explain the conclusions we should draw from from a hypothesis test, while accounting for   other information available in a dataset.   
+5. Explain how to simultaneously test for differences between multiple groups.    
+6. Distinguish between statistical significance and practical importance.    
+
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=TRUE)
+library(ggformula)
+library(moderndive)
+library(gridExtra)
+library(skimr)
+library(Bolstad)
+library(GGally)
+library(Lock5Data)
+library(knitr)
+library(caret)
+library(MASS)
+library(tidyverse)
+library(nycflights13)
+options(scipen=999)
+select <- dplyr::select
+set.seed(07302020)
+```
+
+## Sampling Distributions
+
+### Sampling From a Population
+
+In statistics, we often do not have the time, money, or means to collect data on all individuals or units on which we want to draw conclusions. Instead, we might collect data on only a subset of the individuals, and then make inferences about all individuals we are interested in, using the information we collected. 
+
+
+**Vocabulary:**      
+
+1. A **population** is the entire set of individuals that we want to draw conclusions about. 
+2. A **sample** is a subset of a population 
+3. A **parameter** is a numerical quantity pertaining to an entire population     
+4. A **statistic** is a numerical quantity calculated from a sample     
+
+
+We'll work with a dataset containing information on all 20,591 flights from New York to Chicago in 2013. Our population of interest is all 20,591 flights. 
+
+In this situation, we have information on the entire population, but suppose temporarily that we didn't. Instead, suppose we had only information on a random sample of 75 flights.
+
+The parameter of interest is the proportion of on-time arrivals out of all flights in the population of 20,591. When the parameter is proportion, we'll denote it with the letter $p$. 
+
+```{r, echo=FALSE}
+data(flights)
+Flights_NY_CHI <- flights %>% filter(dest %in% c("ORD", "MDW")) %>% filter(!is.na(arr_delay))
+Flights_NY_CHI <- Flights_NY_CHI %>% mutate(ontime = ifelse(arr_delay <= 0, "Y", "N")) %>% select(year, month, day, carrier, origin, dest, sched_dep_time,arr_delay, ontime)
+```
+
+We take a sample of 75 flights. The first 6 flights in the sample are shown below. The `ontime` variable tells whether or not the flight arrived on time. 
+
+```{r}
+set.seed(08082023)
+S1 <- sample_n(Flights_NY_CHI, 75)
+head(S1)
+```
+
+We'll calculate the number, and proportion of flights that arrived on time. 
+
+```{r}
+num_ontime <- sum(S1$ontime == "Y") # count number of on-time arrivals
+```
+
+Number of on-time arrivals in the sample.
+
+```{r}
+num_ontime
+```
+
+Proportion of on-time arrivals in the sample.  
+
+```{r}
+p_hat <- num_ontime/75
+p_hat
+```
+
+In out sample `r prop_ontime*100` percent of flights arrived on-time. We'll denote this quantity $\hat{p}$, keeping with our convention of using the $\hat{}$ symbol to represent a quantity that is calculated from data (like the predictions and estimates we saw in the previous chapter). The sample statistic $\hat{p}$ is an estimate of the population proportion $p$. 
+
+Of course, this was just one sample of 75 flights. We should not expect the proportion of on-time flights in our sample ($\hat{p}$) to exactly match the proportion of on-time flights in the entire population ($p$). Nevertheless we can use the sample to estimate the proportion of all flights in the population that arrive on time. Perhaps, we could say that we would expect between `r prop_ontime*100 -10` and `r prop_ontime*100 +10` percent of all 2013 flights from New York to arrive on time. Or, perhaps we could be more precise and estimate that the percentage of on-time flights to be between `r prop_ontime*100 -5` and `r prop_ontime*100 + 5`. 
+
+To summarize: 
+
+* The population is all 20,591 flights from New York to Chicago in 2013. 
+* The sample is the flights that we randomly selected.   
+* The parameter $p$ is the proportion of on-time arrivals among all 2013 flights from New York to Chicago, which we do not know (though in this particular example, we could find it, since we have data on all flights in the population.)        
+* The sample statistic is the proportion of flights in our sample that arrived on time, which we know to be $\hat{p}$ = `r prop_ontime`. 
+
+Now, let's take a different sample of 75 flights and see how the proportion of on-time arrivals compares. 
+
+```{r}
+S2 <- sample_n(Flights_NY_CHI, 75)
+num_ontime2 <- sum(S2$ontime == "Y") # count number of on-time arrivals
+p_hat2 <- num_ontime2/75
+p_hat2
+```
+
+By studying the behavior of the proportion of on-time arrivals in different samples we can gauge how close the proportion in a given sample is likely be to the unknown population parameter. If all of our samples produce very similar estimates, then it is likely that the population parameter is close to these estimates. If the sample proportion varies considerably from sample to sample, then it is possible that the proportion in any given sample might be very different than the population parameter.   
+
+Let's take 10,000 more random samples of 75 flights and record the proportion of on-time arrivals in each sample.   
+
+```{r}
+nreps <- 10000  # number of repetitions
+p_hat_val <- rep(NA, nreps) # create vector to hold proportion of on-time arrivals
+Sample <- 1:nreps
+
+for(i in 1:nreps){
+S <- sample_n(Flights_NY_CHI, 75) # take sample of 75
+N_ontime <- sum(S$ontime == "Y") # count number of on-time arrivals
+p_hat_val[i] <- N_ontime/75 # record proportion on-time
+}
+
+Samples_df <- data.frame(Sample, p_hat_val) # store results in a data frame
+```
+
+The table shows the proportion of on-time arrivals in the first 20 samples of 75 flights.  
+
+```{r}
+kable(head(Samples_df, 20))
+```
+
+The histogram below shows the distribution of the proportion of on-time arrivals in the 10,000 different samples.  
+
+```{r}
+Prop_Samp_Dist<- ggplot(data=Samples_df, aes(x=p_hat_val)) + geom_histogram(color="white", fill="blue") + ggtitle("Sampling Distribution for Proportion On Time") + 
+  xlab("Prop. on time in sample")
+Prop_Samp_Dist
+```
+
+We notice that most of our 10,000 samples yielded proportions of on-time arrivals between 0.5 and 0.7, The distribution of proportion of on-time arrivals is roughly symmetric and bell-shaped. 
+
+The distribution shown in this histogram is called  the **sampling distribution for $\hat{p}**. We can gauge how much the proportion of on-time arrivals varies between samples by calculating the standard deviation of this sampling distribution. The standard deviation of a sampling distribution for a statistic is also called the **standard error** of the statistic. In this case it represents the standard error $\hat{p}$ (the proportion of on-time arrivals), and is denoted $\text{SE}(\hat{p})$. This standard error is shown below.  
+
+```{r}
+SE_p_hat <- sd(Samples_df$p_hat_val)
+SE_p_hat
+```
+
+
+**Vocabulary*:*    
+* The **sampling distribution** of a statistic is the distribution of values the statistic takes on across many different samples of a given size.   
+* The **standard error** of a statistic is the standard deviation of that statistic's sampling distribution. It measures how much the statistic varies between different samples of a given size.  
+
+In this rare situation, we actually have data on all 20,591 flights from New York to Chicago in 2013 (our entire population), Let's calculate the true value of the population parameter $p$,  the proportion of flights that arrived on-time in our actual population. 
+
+```{r}
+p <- sum(Flights_NY_CHI$ontime == "Y")/20591
+p
+```
+
+In fact, just over 60% of all flights in the population arrived on time. 
+
+The sampling distribution for the proportion of on-time flights is shown again below. The true proportion of on-time flights is marked by the green dotted line. The gold bar at the bottom of the histogram represents the range of sample proportions that lie within $\pm 2$ standard errors of the true population proportion of flights that arrived on time. 
+
+`r Pop_prop` - 2(`r SE_prop`) to `r Pop_prop` + 2(`r SE_prop`)
+
+```{r}
+Prop_Samp_Dist+ geom_vline(xintercept=Pop_prop, color="green", linetype="dotted", linewidth=2) + geom_segment(aes(x=Pop_prop - 2*SE_prop,xend=Pop_prop + 2*SE_prop, y=50, yend=50), color="gold", size=10, alpha=0.01) 
+```
+
+We calculate the proportion of samples whose proportion of on-time arrivals lies within $\pm 2$ standard errors of the true proportion. 
+
+```{r}
+Lower <- p - 2*SE_p_hat
+Upper <- p + 2*SE_p_hat
+sum((Samples_df$p_hat_val >=Lower) & (Samples_df$p_hat_val <= Upper))
+```
+
+` r sum((Samples_df$Prop_ontime >=Lower) & (Samples_df$Prop_ontime <= Upper))` out of the 10,000 simulations (approximately 95%) of the samples produced proportions within $\pm 2$ standard errors of the true population proportion of on-time flights.   
+
+### Confidence Intervals
+
+In a real situation, we won't have access to the entire population of flights, only the flights in a single sample. For example, recall our original sample of 75 flights, in which we observed a proportion of on-time arrivals of $\hat{p}=$ `r prop_ontime`.
+
+Since we now know that 95% of all samples produce proportions that lie within two standard errors of the population proportion, we can obtain an estimate of the population proportion $p$ by adding and subtracting $2\times \text{SE}(\hat{p})$ from our observed sample proportion $\hat{p}$. Such an interval is called an approximate 95% **confidence interval** for the true population proportion $p$.
+
+**Approximate 95% Confidence Interval for $\hat{p}$**
+
+\[
+\hat{p} \pm 2\times \text{SE}(\hat{p})
+\]
+
+The confidence interval, based on our original sample, is calculated below. 
+
+```{r}
+c(prop_ontime - 2*SE_p_hat, prop_ontime + 2*SE_p_hat) 
+```
+
+Based on our sample of 75 flights, we can be 95% confident that the true proportion of on-time arrivals among all 2013 flights from New York to Chicago is between `r prop_ontime - 2*SE_p_hat` and `prop_ontime + 2*SE_p_hat`. 
+
+In fact, knowing what we do about the true value of the population parameter $p$, we can see that our confidence interval does indeed contain this value. Of course, in a real situaiton, we won't know the true value of the population parameter, so we won't know for sure whether or not our confidence interval contains this true parameter value.   
+
+A pertinent question at this stage would be ``What does 95% confidence mean?". To answer that, let's explore what happens when we calculate confidence intervals based on estimates many different samples. For each of our 10,000 different samples taken from our population, we'll add and subtract two standard errors from the sample proportion $\hat{p}$ corresponding to that sample. 
+
+The table below displays the value of $\hat{p}$, the lower and upper bounds of the confidence interval, and whether or not the confidence interval contains the true parameter value $p$ (either `TRUE` or `FALSE`). 
+
+```{r}
+Samples_df <- Samples_df %>% mutate( Lower = p_hat_val - 2*SE_p_hat, 
+                                     Upper = p_hat_val + 2*SE_p_hat,
+                                     Contains = p >= Lower & p <= Upper)
+kable(head(Samples_df, 10))
+```
+
+The graphic below visualizes the confidence intervals produced using the estimates from the first 100 samples. The green dotted line indicates the true value of $p$. The black dots indicate the value of $\hat{p}$ for each sample. Intervals that do in fact  contain the true value of $p$  are shown in blue, and intervals that do not contain the true value of $p$ are shown in green.   
+
+```{r, fig.height=15, fig.width=10}
+ggplot(data=Samples_df[1:100,], aes(y=Sample, x=p_hat_val)) +    
+  geom_point() +
+  geom_errorbar(aes(xmin = Lower, xmax = Upper, color=Contains))  + 
+  xlab("Confidence Interval") + 
+  ylab("Sample") + 
+  geom_vline(xintercept = p, color="green", linetype="dotted", size=2) + theme_bw()
+```
+
+Out of these 100 samples, `r sum(Samples_df$contains[1:100]==TRUE)` contain the true value of the population parameter $p$. This is close to the 95% confidence level. 
+
+The picture shows confidence intervals produced by the first 100 samples, but we actually took 10,000 different samples of 75 flights. Let's calculate how many of these samples produced confidence intervals that contain the true value of $p$. 
+
+```{r}
+sum(Samples_df$Contains == TRUE)
+```
+
+Again, notice that close to 95% of the samples produced confidence intervals contain the true population parameter $p$. Note that for the red intervals that do not contain $p$ nothing was done incorrectly. The sample was taken at random, and the confidence interval was calculated using the correct formula. It just happened that by chance, we obtained a sample proportion $\hat{p}$ that was unusually high or low, leading to an interval that did not capture the true population parameter. This, of course, happens rarely, and approximately 95% of the samples do, in fact, result in intervals that contain the true value of $p$. 
+
+This brings us back to the question "what does 95% confidence mean?". An approximate 95% confidence interval means that if we take a large number of samples and calculate confidence intervals from each of them, then approximately 95% of the samples will produce intervals containing the true population parameter. In reality, we'll only have on sample, and won't know whether or not our interval contains the true parameter value. Assuming we have taken the sample and calculated the interval correctly, we can rest assured in the knowledge that that 95% of all intervals taken would contain the true parameter value, and hope that ours is among that 95%.     
+
+We calculated the confidence interval by taking our sample statistic $\hat{p}$ plus/minus two standard errors. Confidence intervals that are calculated by adding and subtracting a certain number of standard errors from the sample statistic are called **standard error** confidence intervals. This approach will work as long as the sampling distribution is symmetric and bell-shaped. Probability theory tells us that in a symmetric and bell-shaped distribution, approximately 95% of the area lies within two standard errors of the center of the distribution, given by the true parameter value. We will, however, see that this approach will not work in all cases. Not all statistics produce sampling distributions that are symmetric and bell-shaped, and we will need an alternative way to calculate confidence intervals in these situations.   
+
+If we want to use a level of confidence that is different than 95%, we can adjust the value we multiply the standard error by. In general, a standard error confidence interval has the form 
+
+\[
+\text{Statistic } \pm m\times \text{Standard Error}, 
+\]
+
+where the value of $m$ depends on the desired level of confidence. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r, include=FALSE}
+library(usdata)
+data("county")
+county <- county %>% mutate(residents = pop2017/1000, # make population be in thousands
+                            median_hh_income = median_hh_income )    
+county <- county %>% filter(!is.na(pop2017) & !is.na(unemployment_rate)) %>% 
+  select(name, state, residents, unemployment_rate, metro)
+head(county, 6)
+```
+
+
+```{r, include=FALSE}
+options(scipen=999)
+P1 <- ggplot(data=county, aes(x=unemployment_rate)) + geom_histogram(fill="blue", color="white") + geom_point(aes(x=mean(county$unemployment_rate), y=0), color="red", shape=24, fill="red") + ylab("Frequency") + xlab("Unemoloyment Rate") + xlim(c(0,20))
+P2 <- ggplot(data=county, aes(x=residents)) + geom_histogram(fill="blue", color="white") + xlim(c(-1,1000)) + geom_point(aes(x=mean(county$residents), y=0), color="red", shape=24, fill="red") + ylab("Frequency") + xlab("Residents (thousands)") + xlim(c(0,1000))
+P3 <- ggplot(data=county, aes(x=metro)) + geom_bar(fill="blue", color="white")+ ylab("Frequency") + xlab("Metro Counties")
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+
+
+```{r, include=FALSE}
+
+Unemp_Tab <- county %>% summarize(Mean_UnEmp = mean(unemployment_rate),
+                                  SD_UnEmp = sd(unemployment_rate),
+                                  Mean_Residents = mean(residents), 
+                                  SD_Resident = sd(residents), 
+                                  Prop_Metro = mean(metro=="yes"),
+                                  N = n()) %>% round(3)
+kable(Unemp_Tab)
+```
+
+
+
+
+```{r, include=FALSE}
+
+set.seed(07162023)
+SampSize <- 25
+S1 <- sample_n(county, size=SampSize, replace=FALSE)
+S2 <- sample_n(county, size=SampSize, replace=FALSE)
+S3 <- sample_n(county, size=SampSize, replace=FALSE)
+S4 <- sample_n(county, size=SampSize, replace=FALSE)
+S5 <- sample_n(county, size=SampSize, replace=FALSE)
+S6 <- sample_n(county, size=SampSize, replace=FALSE)
+S7 <- sample_n(county, size=SampSize, replace=FALSE)
+S8 <- sample_n(county, size=SampSize, replace=FALSE)
+S9 <- sample_n(county, size=SampSize, replace=FALSE)
+S10 <- sample_n(county, size=SampSize, replace=FALSE)
+```
+
+
+
+
+```{r, include=FALSE}
+
+S1
+```
+
+
+
+```{r, include=FALSE}
+
+options(scipen=999)
+P1S <- ggplot(data=S1, aes(x=unemployment_rate)) + geom_histogram(fill="blue", color="white") + geom_point(aes(x=mean(county$unemployment_rate), y=0), color="red", shape=24, fill="red") + ylab("Frequency") + xlab("Unemoloyment Rate") + xlim(c(0,20))
+P2S <- ggplot(data=S1, aes(x=residents)) + geom_histogram(fill="blue", color="white") + xlim(c(-1,1000)) + geom_point(aes(x=mean(county$residents), y=0), color="red", shape=24, fill="red") + ylab("Frequency") + xlab("Residents (thousands)") + xlim(c(0,1000))
+P3S <- ggplot(data=S1, aes(x=metro)) + geom_bar(fill="blue", color="white")+ ylab("Frequency") + xlab("Metro Counties")
+grid.arrange(P1 + ggtitle("Population"), P2 + ggtitle("Population"), P3 + ggtitle("Population"), 
+             P1S + ggtitle("Sample"), P2S+ ggtitle("Sample"), P3S+ ggtitle("Sample"), ncol=3)
+```
+
+
+```{r, include=FALSE}
+
+Unemp_Samp_Tab <- S1 %>% summarize(Mean_UnEmp = mean(unemployment_rate),
+                                  SD_UnEmp = sd(unemployment_rate),
+                                  Mean_Residents = mean(residents), 
+                                  SD_Resident = sd(residents), 
+                                  Prop_Metro = mean(metro=="yes"),
+                                  N = n()) %>% round(3)
+```
+
+
+```{r, include=FALSE}
+
+kable(Unemp_Tab)
+```
+
+
+```{r, include=FALSE}
+
+kable(Unemp_Samp_Tab)
+```
+
+
+
+
+
+
+```{r, include=FALSE}
+
+Sample_Num <- c(1:10)
+
+Sample_Mean_UnEmp <- c(mean(S1$unemployment_rate), 
+                 mean(S2$unemployment_rate),
+                 mean(S3$unemployment_rate),
+                 mean(S4$unemployment_rate),
+                 mean(S5$unemployment_rate),
+                 mean(S6$unemployment_rate),
+                 mean(S7$unemployment_rate),
+                 mean(S8$unemployment_rate),
+                 mean(S9$unemployment_rate),
+                 mean(S10$unemployment_rate))
+
+Sample_SD_UnEmp <- c(sd(S1$unemployment_rate), 
+                 sd(S2$unemployment_rate),
+                 sd(S3$unemployment_rate),
+                 sd(S4$unemployment_rate),
+                 sd(S5$unemployment_rate),
+                 sd(S6$unemployment_rate),
+                 sd(S7$unemployment_rate),
+                 sd(S8$unemployment_rate),
+                 sd(S9$unemployment_rate), 
+                 sd(S10$unemployment_rate))
+
+Sample_Mean_Res <- c(mean(S1$residents), 
+                 mean(S2$residents),
+                 mean(S3$residents),
+                 mean(S4$residents),
+                 mean(S5$residents),
+                 mean(S6$residents),
+                 mean(S7$residents),
+                 mean(S8$residents),
+                 mean(S9$residents),
+                 mean(S10$residents))
+
+Sample_SD_Res<- c(sd(S1$residents), 
+                 sd(S2$residents),
+                 sd(S3$residents),
+                 sd(S4$residents),
+                 sd(S5$residents),
+                 sd(S6$residents),
+                 sd(S7$residents),
+                 sd(S8$residents),
+                 sd(S9$residents), 
+                 sd(S10$residents))
+p1 <- mean(S1$metro=="yes")
+p2 <- mean(S2$metro=="yes")
+p3 <- mean(S3$metro=="yes")
+p4 <- mean(S4$metro=="yes")
+p5 <- mean(S5$metro=="yes")
+p6 <- mean(S6$metro=="yes")
+p7 <- mean(S7$metro=="yes")
+p8 <- mean(S8$metro=="yes")
+p9 <- mean(S9$metro=="yes")
+p10 <- mean(S10$metro=="yes")
+
+
+Sample_PropMetro <- c(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
+
+N <- rep(SampSize, 10)
+
+Samplesdf25 <- data.frame(Sample_Num, Sample_Mean_UnEmp, Sample_SD_UnEmp, Sample_Mean_Res, Sample_SD_Res , Sample_PropMetro, N)
+```
+
+
+```{r, include=FALSE}
+
+set.seed(07162023)
+nreps <- 10000
+Prop_Metro <- Mean_Res <-  Mean_UnEmp <- rep(NA, nreps)
+
+SamplingDistFunc <- function(data, SampSize){
+for(i in 1:nreps){
+Sample <- sample_n(data, size=SampSize, replace=FALSE) 
+Mean_UnEmp[i] <- mean(Sample$unemployment_rate)
+Mean_Res[i] <- mean(Sample$residents)
+Prop_Metro[i] <- mean(Sample$metro=="yes")
+}
+
+SampDist <- data.frame( Mean_UnEmp, Mean_Res, Prop_Metro)
+return(SampDist)
+}
+```
+
+```{r, include=FALSE}
+
+SampDist25 <- SamplingDistFunc(data=county, SampSize=25)
+```
+
+
+
+
+
+
+```{r, include=FALSE}
+
+Income_Sample_Tab <- S1 %>% summarize(Mean_HHInc = mean(unemployment_rate),
+                                  SD_HHInc = sd(unemployment_rate),
+                                  N = n()) %>% round(3)
+kable(Income_Sample_Tab)
+```
+
+
+
+```{r, include=FALSE}
+
+SP1 <- ggplot(data=S1, aes(x=unemployment_rate)) + geom_histogram(fill="blue", color="white") + geom_point(aes(x=mean(unemployment_rate), y=0), color="red", shape=24, fill="red") + xlim(c(0,10)) + ylab("Frequency")
+SP2 <- ggplot(data=S2, aes(x=unemployment_rate)) + geom_histogram(fill="blue", color="white") + geom_point(aes(x=mean(S2$unemployment_rate), y=0), color="red", shape=24, fill="red")+ xlim(c(0,10))+ ylab("Frequency")
+SP3 <- ggplot(data=S3, aes(x=unemployment_rate)) + geom_histogram(fill="blue", color="white") + geom_point(aes(x=mean(S3$unemployment_rate), y=0), color="red", shape=24, fill="red")+ xlim(c(0,10))+ ylab("Frequency")
+SP4 <- ggplot(data=S4, aes(x=unemployment_rate)) + geom_histogram(fill="blue", color="white") + geom_point(aes(x=mean(S4$unemployment_rate), y=0), color="red", shape=24, fill="red")+ xlim(c(0,10))+ ylab("Frequency")
+SP5 <- ggplot(data=S5, aes(x=unemployment_rate)) + geom_histogram(fill="blue", color="white") + geom_point(aes(x=mean(S5$unemployment_rate), y=0), color="red", shape=24, fill="red")+ xlim(c(0,10))+ ylab("Frequency")
+SP6 <- ggplot(data=S6, aes(x=unemployment_rate)) + geom_histogram(fill="blue", color="white") + geom_point(aes(x=mean(S6$unemployment_rate), y=0), color="red", shape=24, fill="red")+ xlim(c(0,10))+ ylab("Frequency")
+SP7 <- ggplot(data=S7, aes(x=unemployment_rate)) + geom_histogram(fill="blue", color="white") + geom_point(aes(x=mean(S7$unemployment_rate), y=0), color="red", shape=24, fill="red")+ xlim(c(0,10))+ ylab("Frequency")
+SP8 <- ggplot(data=S8, aes(x=unemployment_rate)) + geom_histogram(fill="blue", color="white") + geom_point(aes(x=mean(S8$unemployment_rate), y=0), color="red", shape=24, fill="red")+ xlim(c(0,10))+ ylab("Frequency")
+SP9 <- ggplot(data=S9, aes(x=unemployment_rate)) + geom_histogram(fill="blue", color="white") + geom_point(aes(x=mean(S9$unemployment_rate), y=0), color="red", shape=24, fill="red")+ xlim(c(0,10))+ ylab("Frequency")
+SP10 <- ggplot(data=S10, aes(x=unemployment_rate)) + geom_histogram(fill="blue", color="white") + geom_point(aes(x=mean(S10$unemployment_rate), y=0), color="red", shape=24, fill="red")+ xlim(c(0,10))+ ylab("Frequency")
+grid.arrange(SP1, SP2, SP3, SP4, SP5, SP6, SP7, SP8, SP9, ncol=3)
+```
+
+```{r, include=FALSE}
+
+kable(Samplesdf25  %>% select(Sample_Num, Sample_Mean_UnEmp, Sample_SD_UnEmp, N))
+```
+
+
+
+```{r, include=FALSE}
+
+PopMean_UnEmp <- mean(county$unemployment_rate)
+q.025 <- quantile(SampDist25$Mean_UnEmp, 0.025)
+q.975 <- quantile(SampDist25$Mean_UnEmp, 0.975)
+SampDistPlot <- ggplot(data=SampDist25, aes(x=Mean_UnEmp)) + geom_histogram(fill="blue", color="white") +xlab("Mean Unemployment in Sample")+ ggtitle("Sampling Distribution of Mean Unemployment (n=25)") + geom_vline(xintercept=PopMean_UnEmp, color="green", linetype="dotted", linewidth=2) + geom_segment(aes(x=3.95,xend=5.25, y=50, yend=50), color="gold", size=10, alpha=0.01) 
+```
+
+
+```{r, include=FALSE}
+
+Umemp_SE_Tab <- SampDist25 %>% summarize(Mean = mean(Mean_UnEmp), 
+                         SE_Mean = sd(Mean_UnEmp),
+                         N=n())
+kable(Umemp_SE_Tab)
+```
+
+
+
+```{r, include=FALSE}
+
+grid.arrange(SP1 + ggtitle("Sample of 25 Counties") + xlim(c(2,8)), SampDistPlot+ xlim(c(2,8)) + ggtitle("Sampling Distribution of Mean"), ncol=2)
+```
+
+
+```{r, include=FALSE}
+
+kable(Income_Sample_Tab, caption="summary statistics for sample")
+```
+
+
+```{r, include=FALSE}
+
+kable(Umemp_SE_Tab,caption = "summary statistics for sampling distribution of the mean")
+```
+
+
+
