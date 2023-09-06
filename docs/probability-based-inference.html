@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Probability-Based Inference | Stat 255: Statistics for Data Science Notes</title>
+  <meta name="description" content="Chapter 5 Probability-Based Inference | Stat 255: Statistics for Data Science Notes" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Probability-Based Inference | Stat 255: Statistics for Data Science Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Probability-Based Inference | Stat 255: Statistics for Data Science Notes" />
+  
+  
+  
+
+<meta name="author" content="Andrew Sage - Lawrence University" />
+
+
+<meta name="date" content="2023-09-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="interval-estimation.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">STAT 255 Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#getting-started-in-r"><i class="fa fa-check"></i><b>1.1</b> Getting Started in R</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#previewing-the-data"><i class="fa fa-check"></i><b>1.1.1</b> Previewing the Data</a></li>
+<li class="chapter" data-level="1.1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#modifying-the-data"><i class="fa fa-check"></i><b>1.1.2</b> Modifying the Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-visualization"><i class="fa fa-check"></i><b>1.2</b> Data Visualization</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#histogram"><i class="fa fa-check"></i><b>1.2.1</b> Histogram</a></li>
+<li class="chapter" data-level="1.2.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#density-plot"><i class="fa fa-check"></i><b>1.2.2</b> Density Plot</a></li>
+<li class="chapter" data-level="1.2.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#boxplot"><i class="fa fa-check"></i><b>1.2.3</b> Boxplot</a></li>
+<li class="chapter" data-level="1.2.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#violin-plot"><i class="fa fa-check"></i><b>1.2.4</b> Violin Plot</a></li>
+<li class="chapter" data-level="1.2.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#scatterplot"><i class="fa fa-check"></i><b>1.2.5</b> Scatterplot</a></li>
+<li class="chapter" data-level="1.2.6" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#bar-graph"><i class="fa fa-check"></i><b>1.2.6</b> Bar Graph</a></li>
+<li class="chapter" data-level="1.2.7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#stacked-and-side-by-side-bar-graphs"><i class="fa fa-check"></i><b>1.2.7</b> Stacked and Side-by-Side Bar Graphs</a></li>
+<li class="chapter" data-level="1.2.8" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#correlation-plot"><i class="fa fa-check"></i><b>1.2.8</b> Correlation Plot</a></li>
+<li class="chapter" data-level="1.2.9" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#scatterplot-matrix"><i class="fa fa-check"></i><b>1.2.9</b> Scatterplot Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#summary-tables"><i class="fa fa-check"></i><b>1.3</b> Summary Tables</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#calculating-summary-statistics"><i class="fa fa-check"></i><b>1.3.1</b> Calculating Summary Statistics</a></li>
+<li class="chapter" data-level="1.3.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#grouped-summaries"><i class="fa fa-check"></i><b>1.3.2</b> Grouped Summaries</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html"><i class="fa fa-check"></i><b>2</b> Introduction to Statistical Models</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#fitting-models-to-data"><i class="fa fa-check"></i><b>2.1</b> Fitting Models to Data</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#terminology"><i class="fa fa-check"></i><b>2.1.1</b> Terminology</a></li>
+<li class="chapter" data-level="2.1.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-quantitative-explanatory-variable"><i class="fa fa-check"></i><b>2.1.2</b> Model with Quantitative Explanatory Variable</a></li>
+<li class="chapter" data-level="2.1.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-categorical-variable"><i class="fa fa-check"></i><b>2.1.3</b> Model with Categorical Variable</a></li>
+<li class="chapter" data-level="2.1.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-multiple-explanatory-variables"><i class="fa fa-check"></i><b>2.1.4</b> Model with Multiple Explanatory Variables</a></li>
+<li class="chapter" data-level="2.1.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-no-explanatory-variable"><i class="fa fa-check"></i><b>2.1.5</b> Model with No Explanatory Variable</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variability-explained-by-a-model"><i class="fa fa-check"></i><b>2.2</b> Variability Explained by a Model</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#quantifying-variability"><i class="fa fa-check"></i><b>2.2.1</b> Quantifying Variability</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#total-variability"><i class="fa fa-check"></i><b>2.2.2</b> Total Variability</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#residuals"><i class="fa fa-check"></i><b>2.2.3</b> Residuals</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variability-explained-by-sq.-ft.-model"><i class="fa fa-check"></i><b>2.2.4</b> Variability Explained by Sq. Ft. Model</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#linear-correlation-coefficient"><i class="fa fa-check"></i><b>2.2.5</b> Linear Correlation Coefficient</a></li>
+<li class="chapter" data-level="2.2.6" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variability-explained-by-waterfront-model"><i class="fa fa-check"></i><b>2.2.6</b> Variability Explained by Waterfront Model</a></li>
+<li class="chapter" data-level="2.2.7" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variability-explained-by-multiple-regression-model"><i class="fa fa-check"></i><b>2.2.7</b> Variability Explained by Multiple Regression Model</a></li>
+<li class="chapter" data-level="2.2.8" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#summary-sst-ssr-ssm-r2"><i class="fa fa-check"></i><b>2.2.8</b> Summary: SST, SSR, SSM, <span class="math inline">\(R^2\)</span></a></li>
+<li class="chapter" data-level="2.2.9" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#r2-visually"><i class="fa fa-check"></i><b>2.2.9</b> <span class="math inline">\(R^2\)</span> Visually</a></li>
+<li class="chapter" data-level="2.2.10" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-comparison-summary"><i class="fa fa-check"></i><b>2.2.10</b> Model Comparison Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#models-with-interaction"><i class="fa fa-check"></i><b>2.3</b> Models with Interaction</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#definition-of-interaction"><i class="fa fa-check"></i><b>2.3.1</b> Definition of Interaction</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-term"><i class="fa fa-check"></i><b>2.3.2</b> Interaction Term</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-models-in-r"><i class="fa fa-check"></i><b>2.3.3</b> Interaction Models in R</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#r2-for-interaction-model"><i class="fa fa-check"></i><b>2.3.4</b> <span class="math inline">\(R^2\)</span> for Interaction Model</a></li>
+<li class="chapter" data-level="2.3.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#considerations-for-using-interactions"><i class="fa fa-check"></i><b>2.3.5</b> Considerations for Using Interactions</a></li>
+<li class="chapter" data-level="2.3.6" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-vs-correlation"><i class="fa fa-check"></i><b>2.3.6</b> Interaction vs Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#least-squares-estimation-lse"><i class="fa fa-check"></i><b>2.4</b> Least Squares Estimation (LSE)</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#line-of-best-fit"><i class="fa fa-check"></i><b>2.4.1</b> Line of Best Fit</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#lse-in-simple-linear-regression"><i class="fa fa-check"></i><b>2.4.2</b> LSE in Simple Linear Regression</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#lse-for-categorical-variable"><i class="fa fa-check"></i><b>2.4.3</b> LSE for Categorical Variable</a></li>
+<li class="chapter" data-level="2.4.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#lse-more-generally"><i class="fa fa-check"></i><b>2.4.4</b> LSE More Generally</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>2.5</b> ANalysis Of VAriance</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#submodels"><i class="fa fa-check"></i><b>2.5.1</b> Submodels</a></li>
+<li class="chapter" data-level="2.5.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#f-statistics"><i class="fa fa-check"></i><b>2.5.2</b> F-Statistics</a></li>
+<li class="chapter" data-level="2.5.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#comparing-3-or-more-categories"><i class="fa fa-check"></i><b>2.5.3</b> Comparing 3 or More Categories</a></li>
+<li class="chapter" data-level="2.5.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#f-statistic-illustration"><i class="fa fa-check"></i><b>2.5.4</b> F-Statistic Illustration</a></li>
+<li class="chapter" data-level="2.5.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#alternative-f-statistic-formula"><i class="fa fa-check"></i><b>2.5.5</b> Alternative F-Statistic Formula</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html"><i class="fa fa-check"></i><b>3</b> Hypothesis Testing via Permutation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#test-for-difference-in-means"><i class="fa fa-check"></i><b>3.1</b> Test for Difference in Means</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#mercury-levels-in-florida-lakes"><i class="fa fa-check"></i><b>3.1.1</b> Mercury Levels in Florida Lakes</a></li>
+<li class="chapter" data-level="3.1.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#model-for-mercury-level"><i class="fa fa-check"></i><b>3.1.2</b> Model for Mercury Level</a></li>
+<li class="chapter" data-level="3.1.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#hypotheses-and-key-question"><i class="fa fa-check"></i><b>3.1.3</b> Hypotheses and Key Question</a></li>
+<li class="chapter" data-level="3.1.4" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#permutation-test-for-difference-in-means"><i class="fa fa-check"></i><b>3.1.4</b> Permutation Test for Difference in Means</a></li>
+<li class="chapter" data-level="3.1.5" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#five-permutations-in-r"><i class="fa fa-check"></i><b>3.1.5</b> Five Permutations in R</a></li>
+<li class="chapter" data-level="3.1.6" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#r-code-for-permutation-test"><i class="fa fa-check"></i><b>3.1.6</b> R Code for Permutation Test</a></li>
+<li class="chapter" data-level="3.1.7" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#p-values"><i class="fa fa-check"></i><b>3.1.7</b> p-values</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#more-permutation-tests"><i class="fa fa-check"></i><b>3.2</b> More Permutation Tests</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#other-test-statistics"><i class="fa fa-check"></i><b>3.2.1</b> Other Test Statistics</a></li>
+<li class="chapter" data-level="3.2.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#general-permutation-test-procedure"><i class="fa fa-check"></i><b>3.2.2</b> General Permutation Test Procedure</a></li>
+<li class="chapter" data-level="3.2.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#difference-in-standard-deviation"><i class="fa fa-check"></i><b>3.2.3</b> Difference in Standard Deviation</a></li>
+<li class="chapter" data-level="3.2.4" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#permutation-test-for-slope"><i class="fa fa-check"></i><b>3.2.4</b> Permutation Test for Slope</a></li>
+<li class="chapter" data-level="3.2.5" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#f-statistic"><i class="fa fa-check"></i><b>3.2.5</b> F-Statistic</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#hypothesis-testing-cautions"><i class="fa fa-check"></i><b>3.3</b> Hypothesis Testing Cautions</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>4</b> Interval Estimation</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="interval-estimation.html"><a href="interval-estimation.html#sampling-distributions"><i class="fa fa-check"></i><b>4.1</b> Sampling Distributions</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="interval-estimation.html"><a href="interval-estimation.html#sampling-from-a-population"><i class="fa fa-check"></i><b>4.1.1</b> Sampling From a Population</a></li>
+<li class="chapter" data-level="4.1.2" data-path="interval-estimation.html"><a href="interval-estimation.html#confidence-intervals"><i class="fa fa-check"></i><b>4.1.2</b> Confidence Intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrapping"><i class="fa fa-check"></i><b>4.2</b> Bootstrapping</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="interval-estimation.html"><a href="interval-estimation.html#mercury-levels-in-florida-lakes-1"><i class="fa fa-check"></i><b>4.2.1</b> Mercury Levels in Florida Lakes</a></li>
+<li class="chapter" data-level="4.2.2" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrap-sampling"><i class="fa fa-check"></i><b>4.2.2</b> Bootstrap Sampling</a></li>
+<li class="chapter" data-level="4.2.3" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrap-samples-of-lakes"><i class="fa fa-check"></i><b>4.2.3</b> Bootstrap Samples of Lakes</a></li>
+<li class="chapter" data-level="4.2.4" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrap-distribution"><i class="fa fa-check"></i><b>4.2.4</b> Bootstrap Distribution</a></li>
+<li class="chapter" data-level="4.2.5" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrap-se-confidence-interval"><i class="fa fa-check"></i><b>4.2.5</b> Bootstrap SE Confidence Interval</a></li>
+<li class="chapter" data-level="4.2.6" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrap-distribution-vs-sampling-distribution"><i class="fa fa-check"></i><b>4.2.6</b> Bootstrap Distribution vs Sampling Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrap-confidence-interval-example"><i class="fa fa-check"></i><b>4.3</b> Bootstrap Confidence Interval Example</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrapping-other-statistics"><i class="fa fa-check"></i><b>4.3.1</b> Bootstrapping Other Statistics</a></li>
+<li class="chapter" data-level="4.3.2" data-path="interval-estimation.html"><a href="interval-estimation.html#ci-for-mean"><i class="fa fa-check"></i><b>4.3.2</b> CI for Mean</a></li>
+<li class="chapter" data-level="4.3.3" data-path="interval-estimation.html"><a href="interval-estimation.html#ci-for-standard-deviation"><i class="fa fa-check"></i><b>4.3.3</b> CI for Standard Deviation</a></li>
+<li class="chapter" data-level="4.3.4" data-path="interval-estimation.html"><a href="interval-estimation.html#ci-for-median"><i class="fa fa-check"></i><b>4.3.4</b> CI for Median</a></li>
+<li class="chapter" data-level="4.3.5" data-path="interval-estimation.html"><a href="interval-estimation.html#ci-for-difference-in-means"><i class="fa fa-check"></i><b>4.3.5</b> CI for Difference in Means</a></li>
+<li class="chapter" data-level="4.3.6" data-path="interval-estimation.html"><a href="interval-estimation.html#ci-for-regression-slope"><i class="fa fa-check"></i><b>4.3.6</b> CI for Regression Slope</a></li>
+<li class="chapter" data-level="4.3.7" data-path="interval-estimation.html"><a href="interval-estimation.html#ci-for-regression-response"><i class="fa fa-check"></i><b>4.3.7</b> CI for Regression Response</a></li>
+<li class="chapter" data-level="4.3.8" data-path="interval-estimation.html"><a href="interval-estimation.html#more-cis-in-regression"><i class="fa fa-check"></i><b>4.3.8</b> More CI’s in Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrapping-cautions"><i class="fa fa-check"></i><b>4.4</b> Bootstrapping Cautions</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="probability-based-inference.html"><a href="probability-based-inference.html"><i class="fa fa-check"></i><b>5</b> Probability-Based Inference</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="probability-based-inference.html"><a href="probability-based-inference.html#standard-error"><i class="fa fa-check"></i><b>5.1</b> Standard Error</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="probability-based-inference.html"><a href="probability-based-inference.html#standard-error-vs-standard-deviation"><i class="fa fa-check"></i><b>5.1.1</b> Standard Error vs Standard Deviation</a></li>
+<li class="chapter" data-level="5.1.2" data-path="probability-based-inference.html"><a href="probability-based-inference.html#sample-size-and-standard-error"><i class="fa fa-check"></i><b>5.1.2</b> Sample Size and Standard Error</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="probability-based-inference.html"><a href="probability-based-inference.html#theory-based-standard-error"><i class="fa fa-check"></i><b>5.2</b> Theory-Based Standard Error</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="probability-based-inference.html"><a href="probability-based-inference.html#standard-error-formulas"><i class="fa fa-check"></i><b>5.2.1</b> Standard Error Formulas</a></li>
+<li class="chapter" data-level="5.2.2" data-path="probability-based-inference.html"><a href="probability-based-inference.html#one-sample-mean-example"><i class="fa fa-check"></i><b>5.2.2</b> One-Sample Mean Example</a></li>
+<li class="chapter" data-level="5.2.3" data-path="probability-based-inference.html"><a href="probability-based-inference.html#difference-in-means-example"><i class="fa fa-check"></i><b>5.2.3</b> Difference in Means Example</a></li>
+<li class="chapter" data-level="5.2.4" data-path="probability-based-inference.html"><a href="probability-based-inference.html#regression-example"><i class="fa fa-check"></i><b>5.2.4</b> Regression Example</a></li>
+<li class="chapter" data-level="5.2.5" data-path="probability-based-inference.html"><a href="probability-based-inference.html#theory-based-confidence-intervals"><i class="fa fa-check"></i><b>5.2.5</b> Theory-Based Confidence Intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="probability-based-inference.html"><a href="probability-based-inference.html#intervals-and-tests-in-normal-error-regression-model"><i class="fa fa-check"></i><b>5.3</b> Intervals and Tests in Normal Error Regression Model</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="probability-based-inference.html"><a href="probability-based-inference.html#hypothesis-tests-in-r-output"><i class="fa fa-check"></i><b>5.3.1</b> Hypothesis Tests in R Output</a></li>
+<li class="chapter" data-level="5.3.2" data-path="probability-based-inference.html"><a href="probability-based-inference.html#coefficients-table-in-r-output"><i class="fa fa-check"></i><b>5.3.2</b> Coefficients Table in R Output</a></li>
+<li class="chapter" data-level="5.3.3" data-path="probability-based-inference.html"><a href="probability-based-inference.html#t-distribution"><i class="fa fa-check"></i><b>5.3.3</b> t-distribution</a></li>
+<li class="chapter" data-level="5.3.4" data-path="probability-based-inference.html"><a href="probability-based-inference.html#t-distribution-for-regression-coefficients"><i class="fa fa-check"></i><b>5.3.4</b> t-Distribution for Regression Coefficients</a></li>
+<li class="chapter" data-level="5.3.5" data-path="probability-based-inference.html"><a href="probability-based-inference.html#hypothesis-test-for-lakes-in-north-and-south-florida"><i class="fa fa-check"></i><b>5.3.5</b> Hypothesis Test for Lakes in North and South Florida</a></li>
+<li class="chapter" data-level="5.3.6" data-path="probability-based-inference.html"><a href="probability-based-inference.html#t-statistic-and-p-value"><i class="fa fa-check"></i><b>5.3.6</b> t-statistic and p-value</a></li>
+<li class="chapter" data-level="5.3.7" data-path="probability-based-inference.html"><a href="probability-based-inference.html#comparison-to-simulation"><i class="fa fa-check"></i><b>5.3.7</b> Comparison to Simulation</a></li>
+<li class="chapter" data-level="5.3.8" data-path="probability-based-inference.html"><a href="probability-based-inference.html#theory-based-ci-for-beta_1-in-florida-lakes"><i class="fa fa-check"></i><b>5.3.8</b> Theory-Based CI for <span class="math inline">\(\beta_1\)</span> in Florida Lakes</a></li>
+<li class="chapter" data-level="5.3.9" data-path="probability-based-inference.html"><a href="probability-based-inference.html#when-to-use-theory-based-inference"><i class="fa fa-check"></i><b>5.3.9</b> When to Use “Theory-Based Inference”</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Stat 255: Statistics for Data Science Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="probability-based-inference" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Probability-Based Inference<a href="probability-based-inference.html#probability-based-inference" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>Learning Outcomes:</strong></p>
+<div id="standard-error" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Standard Error<a href="probability-based-inference.html#standard-error" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="standard-error-vs-standard-deviation" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Standard Error vs Standard Deviation<a href="probability-based-inference.html#standard-error-vs-standard-deviation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Recall that standard error is the standard deviation of the distribution of a statistic (sample mean, proportion, regression coefficient, etc.). It describes the amount of variability in this statistic between samples of a given size.</p>
+<p>This is different than the sample standard deviation, which pertains to the amount of variability between individuals in the sample.</p>
+<p>For example, the histogram displays the distribution of mercury levels in our sample of 53 lakes in Florida.</p>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="probability-based-inference.html#cb462-1" aria-hidden="true" tabindex="-1"></a>Lakes_Hist</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-329-1.png" width="672" /></p>
+<p>Standard Deviation of Mercury Levels Between Lakes:</p>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="probability-based-inference.html#cb463-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(FloridaLakes<span class="sc">$</span>Mercury)</span></code></pre></div>
+<pre><code>## [1] 0.3410356</code></pre>
+<p>The standard deviation in mercury levels between individual lakes is 0.341 ppm. This describes the amount of variability in mercury levels between individual lakes.</p>
+<p>Bootstrap Distribution for Mean Mercury Level (<span class="math inline">\(n=53\)</span>)</p>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="probability-based-inference.html#cb465-1" aria-hidden="true" tabindex="-1"></a>Lakes_Bootstrap_Mean_Plot <span class="sc">+</span> <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">1.5</span>))</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-331-1.png" width="672" /></p>
+<p>Standard Error for Mean:</p>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="probability-based-inference.html#cb466-1" aria-hidden="true" tabindex="-1"></a>SE <span class="ot">&lt;-</span> <span class="fu">sd</span>(Lakes_Bootstrap_Results_Mean<span class="sc">$</span>Bootstrap_Mean); SE</span></code></pre></div>
+<pre><code>## [1] 0.04655744</code></pre>
+<p>The standard deviation in the distribution for mean mercury levels between different samples of 53 lakes is approximately 0.0465574 ppm. This describes the amount of variability in mean mercury levels between different samples of 53 lakes.</p>
+<p>There is less variability in average among samples of size 53, than there is between mercury levels of individual lakes. Although mercury levels might vary quite a bit between individual lakes, in a sample of size 53, the higher and lower levels tend to average out to something in the middle, resulting in less variability associated with the average than with individual lakes.</p>
+</div>
+<div id="sample-size-and-standard-error" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Sample Size and Standard Error<a href="probability-based-inference.html#sample-size-and-standard-error" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Question:</strong></p>
+<p>Suppose the sample consisted of 10 lakes, or 30 lakes, or 100 lakes, instead of 53, and that the distribution of the lakes in the sample was otherwise similar to that of the original 53. Would you expect the mercury level of individual lakes to increase, decrease, or stay about the same? What about the standard error of the mean mercury level?</p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-334-1.png" width="1152" /></p>
+<p>The table shows the standard deviation in each of the samples.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Sample_Size</th>
+<th align="right">SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">10</td>
+<td align="right">0.3831797</td>
+</tr>
+<tr class="even">
+<td align="right">30</td>
+<td align="right">0.3198103</td>
+</tr>
+<tr class="odd">
+<td align="right">53</td>
+<td align="right">0.3410356</td>
+</tr>
+<tr class="even">
+<td align="right">100</td>
+<td align="right">0.3352758</td>
+</tr>
+</tbody>
+</table>
+<p>Sample size does not impact the amount of variability between individual lakes. Standard deviation in mercury levels between individual lakes does not systematically increase or decrease based on sample size (of course it varies a little based on the lakes randomly chosen in the sample).</p>
+<p>Now, we’ll examine what happens to the standard error of the mean as the sample size changes.</p>
+<p><strong>Distributions of Mean Between Different Samples</strong></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-337-1.png" width="1152" /></p>
+<p>The table shows the standard error of the mean for samples of different size:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Sample_Size</th>
+<th align="right">SE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">10</td>
+<td align="right">0.1166601</td>
+</tr>
+<tr class="even">
+<td align="right">30</td>
+<td align="right">0.0579587</td>
+</tr>
+<tr class="odd">
+<td align="right">53</td>
+<td align="right">0.0465574</td>
+</tr>
+<tr class="even">
+<td align="right">100</td>
+<td align="right">0.0331806</td>
+</tr>
+</tbody>
+</table>
+<p>As sample size increases, variability between means of different samples decreases. Standard error of the mean decreases. This is also true of standard errors for other statistics (i.e. difference in means, regression slopes, etc.)</p>
+</div>
+</div>
+<div id="theory-based-standard-error" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Theory-Based Standard Error<a href="probability-based-inference.html#theory-based-standard-error" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="standard-error-formulas" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Standard Error Formulas<a href="probability-based-inference.html#standard-error-formulas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>So far, we’ve used simulation (permutation tests and bootstrap intervals) to determine the amount of variability associated with a test statistic or estimate, in order to perform hypotheses tests and create confidence intervals. In special situations, there are mathematical formulas, based on probability theory, that can be used to approximate the amount of variability without having to perform the simulations.</p>
+<p>These approximations only exist for certain kinds of statistics, and they are only valid when the sampling distribution for the statistic is symmetric and bell-shaped. Thus, they cannot be used in all situations, and we should be careful to check whether they are appropriate before applying them. Nevertheless, when appropriate, they can allow us to bypass the computation required in a simulation.</p>
+<p><strong>Theory-Based Standard Error Formulas</strong></p>
+<table>
+<colgroup>
+<col width="64%" />
+<col width="35%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Scenario</th>
+<th>Standard Error</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Single Mean</td>
+<td><span class="math inline">\(SE(b_0)=\frac{s}{\sqrt{n}}\)</span></td>
+</tr>
+<tr class="even">
+<td>Difference in Means</td>
+<td><span class="math inline">\(SE(b_j)=s\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Single Proportion</td>
+<td><span class="math inline">\(SE(\hat{p}) = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\)</span></td>
+</tr>
+<tr class="even">
+<td>Difference in Proportions</td>
+<td><span class="math inline">\(SE(\hat{p}) = \sqrt{\left(\frac{\hat{p_1}(1-\hat{p}_1)}{n_1}+\frac{\hat{p_2}(1-\hat{p_2})}{n_2}\right)}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Intercept in Simple Linear Regression</td>
+<td><span class="math inline">\(SE(b_0)=s\sqrt{\frac{1}{n}+\frac{\bar{x}^2}{\sum(x_i-\bar{x})^2}}\)</span></td>
+</tr>
+<tr class="even">
+<td>Slope in Simple Linear Regression</td>
+<td><span class="math inline">\(SE(b_1)=\sqrt{\frac{s^2}{\sum(x_i-\bar{x})^2}}=\sqrt{\frac{1}{n-2}\frac{{\sum(\hat{y}_i-y_i)^2}}{\sum(x_i-\bar{x})^2}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p><span class="math inline">\(s=\sqrt{\frac{\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2}{(n-(p+1))}}\)</span>, (p is number of regression coefficients not including <span class="math inline">\(b_0\)</span>) is sample standard deviation. Note that in the one-sample case, this simplifies to the standard deviation formula we’ve seen previously.</p></li>
+<li><p>In the 2nd formula, the standard error estimate <span class="math inline">\(s\sqrt{\frac{1}{n_1+n_2}}\)</span> is called a “pooled” estimate since it combines information from all groups. When there is reason to believe standard deviation differs between groups, we often use an “unpooled” standard error estimate of <span class="math inline">\(\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}\)</span>, where <span class="math inline">\(s_1, s_2\)</span> represent the standard deviation for groups 1 and 2.</p></li>
+</ul>
+<p>There is no theory-based formula for standard error associated with the median or standard deviation. For these, and many other statistics, we rely on simulation to estimate variability between samples.</p>
+<p>There are formulas for standard errors associated with coefficients in multiple regression, but these require mathematics beyond what is assumed in this class. They involve linear algebra and matrix inversion, which you can read about <a href="https://web.stanford.edu/~mrosenfe/soc_meth_proj3/matrix_OLS_NYU_notes.pdf">here</a> if you are interested.</p>
+</div>
+<div id="one-sample-mean-example" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> One-Sample Mean Example<a href="probability-based-inference.html#one-sample-mean-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We use the first formula to calculate the standard error of the mean mercury concentration associated with samples of 53 lakes.</p>
+<p><span class="math inline">\(SE(\bar{x})=\frac{s}{\sqrt{n}} = \frac{0.341}{\sqrt{53}}=0.04684\)</span></p>
+<p>The calculation in R is shown below.</p>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="probability-based-inference.html#cb468-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(FloridaLakes<span class="sc">$</span>Mercury)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">53</span>)</span></code></pre></div>
+<pre><code>## [1] 0.04684485</code></pre>
+<p>The standard error column in the R summary output is calculated using the theory-based formulas.</p>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="probability-based-inference.html#cb470-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>FloridaLakes, Mercury<span class="sc">~</span><span class="dv">1</span>)</span>
+<span id="cb470-2"><a href="probability-based-inference.html#cb470-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Mercury ~ 1, data = FloridaLakes)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.48717 -0.25717 -0.04717  0.24283  0.80283 
+## 
+## Coefficients:
+##             Estimate Std. Error t value            Pr(&gt;|t|)    
+## (Intercept)  0.52717    0.04684   11.25 0.00000000000000151 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.341 on 52 degrees of freedom</code></pre>
+<p>Let’s compare this to the standard error we obtained using 10,000 bootstrap simulations.</p>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="probability-based-inference.html#cb472-1" aria-hidden="true" tabindex="-1"></a>Lakes_Bootstrap_Mean_Plot</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-341-1.png" width="672" /></p>
+<p>Bootstrap standard error:</p>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="probability-based-inference.html#cb473-1" aria-hidden="true" tabindex="-1"></a>SE <span class="ot">&lt;-</span> <span class="fu">sd</span>(Lakes_Bootstrap_Results_Mean<span class="sc">$</span>Bootstrap_Mean); SE</span></code></pre></div>
+<pre><code>## [1] 0.04655744</code></pre>
+<p>The theory-based formula gives a standard error estimate very close to the one we obtained via bootstrap simulation.</p>
+</div>
+<div id="difference-in-means-example" class="section level3 hasAnchor" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Difference in Means Example<a href="probability-based-inference.html#difference-in-means-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We use the probability-based formula to calculate the standard error for difference in means between 33 lakes in North Florida, and 20 lakes in South Florida</p>
+<p><span class="math display">\[
+SE(\bar{x}_1-\bar{x}_2)=s\sqrt{\frac{1}{n_1}+\frac{1}{n_2}},
+\]</span></p>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="probability-based-inference.html#cb475-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(Lakes_M<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">53-2</span>))</span>
+<span id="cb475-2"><a href="probability-based-inference.html#cb475-2" aria-hidden="true" tabindex="-1"></a>SE <span class="ot">&lt;-</span> s<span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">20</span><span class="sc">+</span><span class="dv">1</span><span class="sc">/</span><span class="dv">33</span>); SE</span></code></pre></div>
+<pre><code>## [1] 0.08984774</code></pre>
+<p>R model summary output:</p>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="probability-based-inference.html#cb477-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>FloridaLakes, Mercury<span class="sc">~</span>Location)</span>
+<span id="cb477-2"><a href="probability-based-inference.html#cb477-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Mercury ~ Location, data = FloridaLakes)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.65650 -0.23455 -0.08455  0.24350  0.67545 
+## 
+## Coefficients:
+##             Estimate Std. Error t value       Pr(&gt;|t|)    
+## (Intercept)  0.42455    0.05519   7.692 0.000000000441 ***
+## LocationS    0.27195    0.08985   3.027        0.00387 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3171 on 51 degrees of freedom
+## Multiple R-squared:  0.1523, Adjusted R-squared:  0.1357 
+## F-statistic: 9.162 on 1 and 51 DF,  p-value: 0.003868</code></pre>
+<p>Comparison to Bootstrap standard error:</p>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="probability-based-inference.html#cb479-1" aria-hidden="true" tabindex="-1"></a>NS_Lakes_Bootstrap_Plot_b1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>NS_Lakes_Bootstrap_Results, <span class="fu">aes</span>(<span class="at">x=</span>Bootstrap_b1)) <span class="sc">+</span>  </span>
+<span id="cb479-2"><a href="probability-based-inference.html#cb479-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color=</span><span class="st">&quot;white&quot;</span>, <span class="at">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb479-3"><a href="probability-based-inference.html#cb479-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;b1 in Bootstrap Sample&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-4"><a href="probability-based-inference.html#cb479-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Northern vs Southern Lakes: Bootstrap Distribution for b1&quot;</span>) </span>
+<span id="cb479-5"><a href="probability-based-inference.html#cb479-5" aria-hidden="true" tabindex="-1"></a>NS_Lakes_Bootstrap_Plot_b1 </span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-345-1.png" width="672" /></p>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="probability-based-inference.html#cb480-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(NS_Lakes_Bootstrap_Results<span class="sc">$</span>Bootstrap_b1)</span></code></pre></div>
+<pre><code>## [1] 0.09620419</code></pre>
+</div>
+<div id="regression-example" class="section level3 hasAnchor" number="5.2.4">
+<h3><span class="header-section-number">5.2.4</span> Regression Example<a href="probability-based-inference.html#regression-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We use the theory-based approach to calculate standard error associated with the slope of the regression line relating mercury level and pH in Florida lakes.</p>
+<p><span class="math inline">\(SE(b_1)=\sqrt{\frac{s^2}{\sum(x_i-\bar{x})^2}}=\sqrt{\frac{1}{n-2}\frac{{\sum(\hat{y}_i-y_i)^2}}{\sum(x_i-\bar{x})^2}}\)</span></p>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="probability-based-inference.html#cb482-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>FloridaLakes, Mercury<span class="sc">~</span>pH) <span class="co"># fit model</span></span>
+<span id="cb482-2"><a href="probability-based-inference.html#cb482-2" aria-hidden="true" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(M<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">53-2</span>) <span class="co">#calculate s^2</span></span>
+<span id="cb482-3"><a href="probability-based-inference.html#cb482-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> FloridaLakes<span class="sc">$</span>pH</span>
+<span id="cb482-4"><a href="probability-based-inference.html#cb482-4" aria-hidden="true" tabindex="-1"></a>SSx <span class="ot">&lt;-</span> <span class="fu">sum</span>((x<span class="sc">-</span><span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>) <span class="co">#calculate denominator</span></span>
+<span id="cb482-5"><a href="probability-based-inference.html#cb482-5" aria-hidden="true" tabindex="-1"></a>SE <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(s2<span class="sc">/</span>SSx) <span class="co"># calculate SE</span></span>
+<span id="cb482-6"><a href="probability-based-inference.html#cb482-6" aria-hidden="true" tabindex="-1"></a>SE</span></code></pre></div>
+<pre><code>## [1] 0.03031326</code></pre>
+<p>R model summary output:</p>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="probability-based-inference.html#cb484-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>FloridaLakes, Mercury<span class="sc">~</span>pH)</span>
+<span id="cb484-2"><a href="probability-based-inference.html#cb484-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Mercury ~ pH, data = FloridaLakes)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.48895 -0.19188 -0.05774  0.09456  0.71134 
+## 
+## Coefficients:
+##             Estimate Std. Error t value       Pr(&gt;|t|)    
+## (Intercept)  1.53092    0.20349   7.523 0.000000000814 ***
+## pH          -0.15230    0.03031  -5.024 0.000006572811 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.2816 on 51 degrees of freedom
+## Multiple R-squared:  0.3311, Adjusted R-squared:  0.318 
+## F-statistic: 25.24 on 1 and 51 DF,  p-value: 0.000006573</code></pre>
+<p>Comparison to bootstrap standard error:</p>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="probability-based-inference.html#cb486-1" aria-hidden="true" tabindex="-1"></a>Lakes_Bootstrap_Plot_Slope</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-349-1.png" width="672" /></p>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="probability-based-inference.html#cb487-1" aria-hidden="true" tabindex="-1"></a>SE_b1 <span class="ot">&lt;-</span> <span class="fu">sd</span>(Lakes_Bootstrap_Slope_Results<span class="sc">$</span>Bootstrap_b1)</span>
+<span id="cb487-2"><a href="probability-based-inference.html#cb487-2" aria-hidden="true" tabindex="-1"></a>SE_b1</span></code></pre></div>
+<pre><code>## [1] 0.02676588</code></pre>
+</div>
+<div id="theory-based-confidence-intervals" class="section level3 hasAnchor" number="5.2.5">
+<h3><span class="header-section-number">5.2.5</span> Theory-Based Confidence Intervals<a href="probability-based-inference.html#theory-based-confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If the sampling distribution for a statistic is symmetric and bell-shaped, we can obtain an approximate 95% confidence interval using the formula:</p>
+<p><span class="math display">\[
+\text{Statistic} \pm 2\times{\text{Standard Error}},
+\]</span></p>
+<p>where the standard error is calculated by formula, rather than via bootstrap simulations.</p>
+<p>We’ve now seen 3 different ways to obtain confidence intervals based on statistics calculated from data.</p>
+<p>The table below tells us what must be true of the sampling distribution for a statistic in order to use each technique.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Technique</th>
+<th>No Gaps</th>
+<th>Bell-Shaped</th>
+<th>Known Formula for SE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bootstrap Percentile</td>
+<td>x</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Bootstrap Standard Error</td>
+<td>x</td>
+<td>x</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Theory-Based</td>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="intervals-and-tests-in-normal-error-regression-model" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Intervals and Tests in Normal Error Regression Model<a href="probability-based-inference.html#intervals-and-tests-in-normal-error-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="hypothesis-tests-in-r-output" class="section level3 hasAnchor" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Hypothesis Tests in R Output<a href="probability-based-inference.html#hypothesis-tests-in-r-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="probability-based-inference.html#cb489-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Lakes_M)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Mercury ~ Location, data = FloridaLakes)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.65650 -0.23455 -0.08455  0.24350  0.67545 
+## 
+## Coefficients:
+##             Estimate Std. Error t value       Pr(&gt;|t|)    
+## (Intercept)  0.42455    0.05519   7.692 0.000000000441 ***
+## LocationS    0.27195    0.08985   3.027        0.00387 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3171 on 51 degrees of freedom
+## Multiple R-squared:  0.1523, Adjusted R-squared:  0.1357 
+## F-statistic: 9.162 on 1 and 51 DF,  p-value: 0.003868</code></pre>
+<p>p-values for each line in the R-output are associated with the null hypothesis <span class="math inline">\(\beta_j=0\)</span>.</p>
+<p><strong>Hypothesis Test for line (intercept)</strong></p>
+<p><strong>Null Hypothesis:</strong> The average mercury level among all lakes in North Florida is 0 (<span class="math inline">\(\beta_0=0\)</span>).</p>
+<p><strong>Alternative Hypothesis:</strong> The average mercury level among all lakes in Northern Florida is not 0 (<span class="math inline">\(\beta_0\neq 0\)</span>).</p>
+<p>We already know the average mercury level among all lakes in North Florida is not 0, so this is a silly test.</p>
+<p><strong>Hypothesis Test for line LocationS</strong></p>
+<p><strong>Null Hypothesis:</strong> There is no difference in average mercury levels between Northern and Southern Florida (<span class="math inline">\(\beta_1=0\)</span>).</p>
+<p><strong>Alternative Hypothesis:</strong> There is a difference in average mercury levels in Northern and Southern Florida (<span class="math inline">\(\beta_1\neq 0\)</span>).</p>
+<p>This test is relevant to us.</p>
+</div>
+<div id="coefficients-table-in-r-output" class="section level3 hasAnchor" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Coefficients Table in R Output<a href="probability-based-inference.html#coefficients-table-in-r-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p><strong>Estimate</strong> gives the least-squares estimates <span class="math inline">\(b_0, b_1, \ldots, b_p\)</span></p></li>
+<li><p><strong>Standard Error</strong> gives estimates of the standard deviation in the sampling distribution for estimate. (i.e. how much uncertainty is there about the estimate?) These are computed using the formulas in Section 4.7.</p></li>
+<li><p><strong>t value</strong> is the estimate divided by its standard error.</p></li>
+<li><p><strong>Pr(&gt;|t|)</strong> is a p-value for the hypothesis test of whether quantity represented <span class="math inline">\(b_j\)</span> could plausibly be 0.</p></li>
+</ul>
+<p>R does not obtain these p-values through simulation, but rather by using the symmetric and bell-shaped t-distribution approximate the distribution of these statistics. This is appropriate when the assumptions of the normal error regression model are reasonably satisfied.</p>
+</div>
+<div id="t-distribution" class="section level3 hasAnchor" number="5.3.3">
+<h3><span class="header-section-number">5.3.3</span> t-distribution<a href="probability-based-inference.html#t-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A t-distribution is a symmetric, bell-shaped curve, with thicker tails (hence more variability), than a <span class="math inline">\(\mathcal{N}(0,1)\)</span> distribution.</p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-354-1.png" width="768" /></p>
+</div>
+<div id="t-distribution-for-regression-coefficients" class="section level3 hasAnchor" number="5.3.4">
+<h3><span class="header-section-number">5.3.4</span> t-Distribution for Regression Coefficients<a href="probability-based-inference.html#t-distribution-for-regression-coefficients" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When the distribution of a regression coefficient <span class="math inline">\(b_j\)</span> is reasonably symmetric, then we can use a t-distribution to approximate the distribution of the statistic:</p>
+<p><span class="math display">\[
+t= \frac{{b_j}}{\text{SE}(b_j)}  
+\]</span></p>
+</div>
+<div id="hypothesis-test-for-lakes-in-north-and-south-florida" class="section level3 hasAnchor" number="5.3.5">
+<h3><span class="header-section-number">5.3.5</span> Hypothesis Test for Lakes in North and South Florida<a href="probability-based-inference.html#hypothesis-test-for-lakes-in-north-and-south-florida" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Null Hypothesis:</strong> There is no difference in average mercury levels between Northern and Southern Florida (<span class="math inline">\(\beta_1=0\)</span>).</p>
+<p><strong>Alternative Hypothesis:</strong> There is a difference in average mercury levels in Northern and Southern Florida (<span class="math inline">\(\beta_1\neq 0\)</span>).</p>
+<p><strong>Test Statistic</strong>: <span class="math inline">\(t=\frac{{b_j}}{\text{SE}(b_j)} = \frac{0.27195}{0.08985} = 3.027\)</span></p>
+<p><strong>Key Question:</strong> What is the probability of getting a t-statistic as extreme as 3.027 if <span class="math inline">\(\beta_1=0\)</span> (i.e. there is no difference in mercury levels between northern and southern lakes).</p>
+</div>
+<div id="t-statistic-and-p-value" class="section level3 hasAnchor" number="5.3.6">
+<h3><span class="header-section-number">5.3.6</span> t-statistic and p-value<a href="probability-based-inference.html#t-statistic-and-p-value" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="probability-based-inference.html#cb491-1" aria-hidden="true" tabindex="-1"></a>ts<span class="ot">=</span><span class="fl">3.027</span></span>
+<span id="cb491-2"><a href="probability-based-inference.html#cb491-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gf_dist</span>(<span class="st">&quot;t&quot;</span>, <span class="at">df=</span><span class="dv">51</span>, <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">fill =</span> <span class="sc">~</span> (<span class="fu">abs</span>(x)<span class="sc">&lt;</span> <span class="fu">abs</span>(ts)), <span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(ts, <span class="sc">-</span>ts), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)  <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;t&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-355-1.png" width="768" /></p>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="probability-based-inference.html#cb492-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(ts), <span class="at">df=</span><span class="dv">51</span>)</span></code></pre></div>
+<pre><code>## [1] 0.003866374</code></pre>
+<p>The low p-value gives us strong evidence of a difference in average mercury levels between lakes in Northern and Southern Florida.</p>
+</div>
+<div id="comparison-to-simulation" class="section level3 hasAnchor" number="5.3.7">
+<h3><span class="header-section-number">5.3.7</span> Comparison to Simulation<a href="probability-based-inference.html#comparison-to-simulation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s compare these results to those given by the permutation test and bootstrap confidence interval.</p>
+<p><strong>Permutation Test</strong></p>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="probability-based-inference.html#cb494-1" aria-hidden="true" tabindex="-1"></a>NSLakes_SimulationResultsPlot</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-357-1.png" width="672" /></p>
+<p>p-value:</p>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="probability-based-inference.html#cb495-1" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> Lakes_M<span class="sc">$</span>coef[<span class="dv">2</span>] <span class="do">## record value of b1 from actual data</span></span>
+<span id="cb495-2"><a href="probability-based-inference.html#cb495-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb495-3"><a href="probability-based-inference.html#cb495-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(NSLakes_SimulationResults<span class="sc">$</span>b1Sim) <span class="sc">&gt;</span> <span class="fu">abs</span>(b1))</span></code></pre></div>
+<pre><code>## [1] 0.0039</code></pre>
+</div>
+<div id="theory-based-ci-for-beta_1-in-florida-lakes" class="section level3 hasAnchor" number="5.3.8">
+<h3><span class="header-section-number">5.3.8</span> Theory-Based CI for <span class="math inline">\(\beta_1\)</span> in Florida Lakes<a href="probability-based-inference.html#theory-based-ci-for-beta_1-in-florida-lakes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>95% confidence interval for <span class="math inline">\(\beta_1\)</span>:</strong></p>
+<p><span class="math display">\[
+\text{Statistic} \pm 2\times\text{Standard Error}
+\]</span></p>
+<p><span class="math display">\[
+0.27195 \pm 2(0.08985)
+\]</span></p>
+<p>We can be 95% confident that average mercury level is between 0.09 and 0.45 ppm higher in Southern Florida, than Northern Florida.</p>
+<p>The <code>confint</code> command returns confidence intervals for all model parameters.</p>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="probability-based-inference.html#cb497-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(Lakes_M)</span></code></pre></div>
+<pre><code>##                  2.5 %    97.5 %
+## (Intercept) 0.31374083 0.5353501
+## LocationS   0.09157768 0.4523314</code></pre>
+<p>We can be 95% confident that average mercury level in lakes in North Florida is between 0.31 and 0.54 ppm.</p>
+<p>We can be 95% confident that average mercury level is between 0.09 and 0.45 ppm higher in Southern Florida, than Northern Florida.</p>
+<p><strong>Percentile Bootstrap Confidence Interval</strong></p>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="probability-based-inference.html#cb499-1" aria-hidden="true" tabindex="-1"></a>q<span class="fl">.025</span> <span class="ot">&lt;-</span> <span class="fu">quantile</span>(NS_Lakes_Bootstrap_Results<span class="sc">$</span>b1, <span class="fl">0.025</span>)</span>
+<span id="cb499-2"><a href="probability-based-inference.html#cb499-2" aria-hidden="true" tabindex="-1"></a>q<span class="fl">.975</span> <span class="ot">&lt;-</span> <span class="fu">quantile</span>(NS_Lakes_Bootstrap_Results<span class="sc">$</span>b1, <span class="fl">0.975</span>)</span>
+<span id="cb499-3"><a href="probability-based-inference.html#cb499-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(q<span class="fl">.025</span>, q<span class="fl">.975</span>)</span></code></pre></div>
+<pre><code>##  2.5% 97.5% 
+##    NA    NA</code></pre>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="probability-based-inference.html#cb501-1" aria-hidden="true" tabindex="-1"></a>NS_Lakes_Bootstrap_Plot_b1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>NS_Lakes_Bootstrap_Results, <span class="fu">aes</span>(<span class="at">x=</span>b1)) <span class="sc">+</span>  </span>
+<span id="cb501-2"><a href="probability-based-inference.html#cb501-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color=</span><span class="st">&quot;white&quot;</span>, <span class="at">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb501-3"><a href="probability-based-inference.html#cb501-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;b1 in Bootstrap Sample&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span></span>
+<span id="cb501-4"><a href="probability-based-inference.html#cb501-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Northern vs Southern Lakes: Bootstrap Distribution for b1&quot;</span>) </span>
+<span id="cb501-5"><a href="probability-based-inference.html#cb501-5" aria-hidden="true" tabindex="-1"></a>NS_Lakes_Bootstrap_Plot_b1 <span class="sc">+</span> <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x=</span>q<span class="fl">.025</span>,<span class="at">xend=</span>q<span class="fl">.975</span>, <span class="at">y=</span><span class="dv">50</span>, <span class="at">yend=</span><span class="dv">50</span>), <span class="at">color=</span><span class="st">&quot;gold&quot;</span>, <span class="at">size=</span><span class="dv">10</span>, <span class="at">alpha=</span><span class="fl">0.01</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-361-1.png" width="672" /></p>
+<p>We are 95% confident the average mercury level in Southern Lakes is between NA and NA ppm higher than in Northern Florida.</p>
+</div>
+<div id="when-to-use-theory-based-inference" class="section level3 hasAnchor" number="5.3.9">
+<h3><span class="header-section-number">5.3.9</span> When to Use “Theory-Based Inference”<a href="probability-based-inference.html#when-to-use-theory-based-inference" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Probability theory (such as the Central Limit Theorem), tells us that when sample sizes are large enough, the distributions of model parameters are approximately symmetric and bell-shaped.</p>
+<p>How big the sample size needs to be varies. People sometimes use <span class="math inline">\(n\geq 30\)</span> as a guide, but this is context dependent.</p>
+<p>The more skeweness there is in the original data, the larger the sample size needs to be, in order to use “theory-based” inference.</p>
+<p>In the next chapter, we’ll look into more ways to check the appropriateness of “theory-based” tests and intervals.</p>
+<p>If in doubt, check your p-values and confidence intervals against those obtained using simulation. (Or just use simulation!)</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="interval-estimation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/Stat255-LU/Notes/edit/master/05-Probability_Based_Inference.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/Stat255-LU/Notes/blob/master/05-Probability_Based_Inference.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

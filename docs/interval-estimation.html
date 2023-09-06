@@ -23,7 +23,7 @@
 <meta name="author" content="Andrew Sage - Lawrence University" />
 
 
-<meta name="date" content="2023-09-03" />
+<meta name="date" content="2023-09-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="hypothesis-testing-via-permutation.html"/>
-
+<link rel="next" href="normal-error-regression-model.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -260,6 +260,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.8" data-path="interval-estimation.html"><a href="interval-estimation.html#more-cis-in-regression"><i class="fa fa-check"></i><b>4.3.8</b> More CI’s in Regression</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrapping-cautions"><i class="fa fa-check"></i><b>4.4</b> Bootstrapping Cautions</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html"><i class="fa fa-check"></i><b>5</b> Normal Error Regression Model</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#estimating-standard-error"><i class="fa fa-check"></i><b>5.1</b> Estimating Standard Error</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#standard-error-vs-standard-deviation"><i class="fa fa-check"></i><b>5.1.1</b> Standard Error vs Standard Deviation</a></li>
+<li class="chapter" data-level="5.1.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#sample-size-and-standard-error"><i class="fa fa-check"></i><b>5.1.2</b> Sample Size and Standard Error</a></li>
+<li class="chapter" data-level="5.1.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#standard-error-formulas"><i class="fa fa-check"></i><b>5.1.3</b> Standard Error Formulas</a></li>
+<li class="chapter" data-level="5.1.4" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#one-sample-mean-example"><i class="fa fa-check"></i><b>5.1.4</b> One-Sample Mean Example</a></li>
+<li class="chapter" data-level="5.1.5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#difference-in-means-example"><i class="fa fa-check"></i><b>5.1.5</b> Difference in Means Example</a></li>
+<li class="chapter" data-level="5.1.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#regression-example"><i class="fa fa-check"></i><b>5.1.6</b> Regression Example</a></li>
+<li class="chapter" data-level="5.1.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#theory-based-confidence-intervals"><i class="fa fa-check"></i><b>5.1.7</b> Theory-Based Confidence Intervals</a></li>
+<li class="chapter" data-level="5.1.8" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#ci-method-comparison"><i class="fa fa-check"></i><b>5.1.8</b> CI Method Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#theory-based-hypothesis-tests"><i class="fa fa-check"></i><b>5.2</b> Theory-Based Hypothesis Tests</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#lm-summary-output"><i class="fa fa-check"></i><b>5.2.1</b> <code>lm</code> <code>summary</code> Output</a></li>
+<li class="chapter" data-level="5.2.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#n-vs-s-florida-lakes"><i class="fa fa-check"></i><b>5.2.2</b> N vs S Florida Lakes</a></li>
+<li class="chapter" data-level="5.2.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#recall-permuation-test"><i class="fa fa-check"></i><b>5.2.3</b> Recall Permuation Test</a></li>
+<li class="chapter" data-level="5.2.4" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#t-distribution"><i class="fa fa-check"></i><b>5.2.4</b> t-distribution</a></li>
+<li class="chapter" data-level="5.2.5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#t-test-for-n-vs-s-lakes"><i class="fa fa-check"></i><b>5.2.5</b> t-test for N vs S Lakes</a></li>
+<li class="chapter" data-level="5.2.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#t-test-for-ph-vs-mercury"><i class="fa fa-check"></i><b>5.2.6</b> t-test for pH vs Mercury</a></li>
+<li class="chapter" data-level="5.2.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#t-test-on-intercept-line"><i class="fa fa-check"></i><b>5.2.7</b> t-test on Intercept Line</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#f-distributions"><i class="fa fa-check"></i><b>5.3</b> F-Distributions</a></li>
+<li class="chapter" data-level="5.4" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#theory-based-inference-cautions"><i class="fa fa-check"></i><b>5.4</b> Theory-Based Inference Cautions</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html"><i class="fa fa-check"></i><b>6</b> Normal Error Regression Model</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#the-normal-error-regression-model"><i class="fa fa-check"></i><b>6.1</b> The Normal Error Regression Model</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#example-ice-cream-dispensor"><i class="fa fa-check"></i><b>6.1.1</b> Example: Ice Cream Dispensor</a></li>
+<li class="chapter" data-level="6.1.2" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#signal-and-noise"><i class="fa fa-check"></i><b>6.1.2</b> Signal and Noise</a></li>
+<li class="chapter" data-level="6.1.3" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#normal-distribution"><i class="fa fa-check"></i><b>6.1.3</b> Normal Distribution</a></li>
+<li class="chapter" data-level="6.1.4" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#signal-and-noise-in-icecream-example"><i class="fa fa-check"></i><b>6.1.4</b> Signal and Noise in Icecream Example</a></li>
+<li class="chapter" data-level="6.1.5" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#general-mathematical-form"><i class="fa fa-check"></i><b>6.1.5</b> General Mathematical Form</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#inference-in-llsr-model"><i class="fa fa-check"></i><b>6.2</b> Inference in LLSR Model</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#lm-summary-output-1"><i class="fa fa-check"></i><b>6.2.1</b> <code>lm</code> <code>summary</code> Output</a></li>
+<li class="chapter" data-level="6.2.2" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#example-florida-lakes-hypothesis"><i class="fa fa-check"></i><b>6.2.2</b> Example: Florida Lakes Hypothesis</a></li>
+<li class="chapter" data-level="6.2.3" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#t-distribution-1"><i class="fa fa-check"></i><b>6.2.3</b> t-distribution</a></li>
+<li class="chapter" data-level="6.2.4" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#t-test"><i class="fa fa-check"></i><b>6.2.4</b> t-test</a></li>
+<li class="chapter" data-level="6.2.5" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#t-test-for-n-vs-s-lakes-1"><i class="fa fa-check"></i><b>6.2.5</b> t-test for N vs S Lakes</a></li>
+<li class="chapter" data-level="6.2.6" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#comparison-to-simulation"><i class="fa fa-check"></i><b>6.2.6</b> Comparison to Simulation</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -2186,8 +2232,8 @@ We’ll use bootstrapping again, this time using the sample mean, rather than th
           </div>
         </div>
       </div>
-<a href="hypothesis-testing-via-permutation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="hypothesis-testing-via-permutation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="normal-error-regression-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

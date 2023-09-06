@@ -529,6 +529,7 @@ Note that we have avoided the fallacy of using 0.05 as a strict cutoff for rejec
 
 Although the difference in standard deviations is statistically discernible, it is hard to say whether it is practically meaningful. Without knowing a lot about mercury levels, and their impact on the ecosystem, it's harder to tell whether an estimated difference in standard deviations of 0.11 ppm is meaningful or not. It would be good to consult a biologist before making any decisions based on these results.   
 
+### Permutation Test for Slope
 
 In addition to the mercury levels of the Florida lakes, we have data on the pH level of each lake. pH level measures the acidity of a lake, ranging from 0 to 14, with 7 being neutral, and lower levels indicating more acidity. We plot the pH level against the mercury level in our sample of 53 lakes.  
 
@@ -577,7 +578,7 @@ ggplot(data=df, aes(x=pH, y=Hg, color=InSample)) + geom_point() + ylab("Mercury"
 **Alternative Hypothesis:** Among all Florida lakes, there is a relationship between mercury level and pH.      
 
 
-### Permutation Test for Slope
+
 
 **Procedure:**
 
@@ -638,7 +639,7 @@ kable(head(Shuffle2df))
 
 
 ```{r}
-ggplot(data=Shuffle1df, aes(x=Shuffled_pH, y=Mercury)) + 
+ggplot(data=Shuffle2df, aes(x=Shuffled_pH, y=Mercury)) + 
   geom_point() + stat_smooth(method="lm", se=FALSE) + 
   xlim(c(3, 10)) + ylim(c(0,1.5)) + 
   geom_abline(slope=-0.1523, intercept=1.5309, color="red")
@@ -648,7 +649,7 @@ Slope of regression line from permuted data:
 
  
 ```{r}
-M_Lakes_Shuffle <- lm(data=Shuffle1df, Mercury~Shuffled_pH)
+M_Lakes_Shuffle <- lm(data=Shuffle2df, Mercury~Shuffled_pH)
 summary(M_Lakes_Shuffle)$coef[2]
 ```
 
@@ -676,7 +677,7 @@ Slope of regression line from permuted data:
 
  
 ```{r}
-M_Lakes_Shuffle <- lm(data=Shuffle1df, Mercury~Shuffled_pH)
+M_Lakes_Shuffle <- lm(data=Shuffle3df, Mercury~Shuffled_pH)
 summary(M_Lakes_Shuffle)$coef[2]
 ```
 
@@ -725,6 +726,9 @@ It is extremely unlikely that we would observe a value of $b_1$ as extreme as -0
 There is very strong evidence of a relationship mercury level and pH.    
 
 A low p-value tells us only that there is evidence of a relationship, not that it is practically meaningful. We have seen that for each one-unit increase in pH, mercury level is expected to decrease by 0.15 ppm on average, which seems like a pretty meaningful decrease, especially considering that mercury levels typically stay between 0 and 1.  
+
+
+We used the slope as our test statistic to measure the evidence of the relationship between the explanatory and response variables. In fact, we could have also used the correlation coefficient $r$ as our test statistic, and we would have gotten the same p-value. Either slope or correlation may be used for a hypothesis test involving two quantitative variables, but we will use slope in this class.  
 
 
 ### F-Statistic
@@ -857,8 +861,6 @@ M1_Shuffled_Houses <- lm(data=ShuffledHouses, price~condition)
 M0_Shuffled_Houses <- lm(data=ShuffledHouses, price~1)
 anova(M1_Shuffled_Houses, M0_Shuffled_Houses)$F[2]
 ```
-
-Notice that we're already seeing F-statistics more extreme (bigger) than the 0.60 F-statistic we saw in our actual data. 
 
 
 We'll simulate 10,000 permutations and record the F-statistic for each set of permuted data.  

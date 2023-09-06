@@ -43,7 +43,7 @@ set.seed(07302020)
 knitr::include_graphics("Ice_Cream.png")
 ```
 
-Suppose an ice cream machine is manufacturered to dispense 2 oz. of ice cream per second, on average. If each person using the machine got exactly 2 oz. per second, the relationship between time and amount dispensed would look like this:
+Suppose an ice cream machine is manufactured to dispense 2 oz. of ice cream per second, on average. If each person using the machine got exactly 2 oz. per second, the relationship between time and amount dispensed would look like this:
 
 ```{r, echo=FALSE, fig.height=2.5}
 set.seed(10082020)
@@ -85,8 +85,6 @@ We assume that there are two components that contribute to our response variable
 2. Random, unexplained, variability that results in an individual response $Y_i$ differing from $E(Y_i)$.   
 
 The first component is often referred to as **signal**. The second is referred to as **noise**. 
-
-
 
 ### Normal Distribution 
 
@@ -131,55 +129,75 @@ Note that for standard deviation $\sigma$, $\sigma^2$ is called the variance. So
 
 ### Signal and Noise in Icecream Example
 
-In this example, I simulated the amount of ice cream dispensed by adding a random number from a normal distribution with mean 0 and standard deviation 0.5 to the expected amount dispensed, which is given by $2x$, where $x$ represents time pressing the dispenser.  
+In this example, we'll simulate the amount of ice cream dispensed by adding a random number from a normal distribution with mean 0 and standard deviation 0.5 to the expected amount dispensed, which is given by $2x$, where $x$ represents time pressing the dispenser.  
 
 Thus, amount dispensed for person $i$ is given by
 
 \[Y_i = 2x_i+\epsilon_i, \text{ where } \epsilon_i\sim\mathcal{N}(0, 0.5)
 \]
 
-
+The amount dispensed for a sample of 15 people is shown below. 
 
 ```{r, fig.height=2.5}
 set.seed(10082020)
 time <- c(1, 1.2, 1.5, 1.8, 2.1, 2.1, 2.3, 2.5, 2.6, 2.8, 2.9, 2.9, 3.1, 3.2, 3.6)
-signal <- 2*time
-noise <-rnorm(15, 0, 0.5)
+expected <- 2*time
+noise <-rnorm(15, 0, 0.5) %>% round(2)
 amount <- 2*time + noise
 Icecream <- data.frame(time, signal, noise, amount)
-kable(head(Icecream))
+kable((Icecream))
 ```
 
-### What We Actually Get to See
-
-In reality, we do not see the signal and noise columns, we only see time and amount. From this, we need to estimate signal, without being thrown off by noise.   
-
-```{r, fig.height=4, fig.width = 7}
-ggplot(data=Icecream1, aes(x=time, y=amount)) + geom_point() + ggtitle("Icecream Dispensed") + xlab("Time Pressing Dispensor") + ylab("Amount Dispensed")
-```
-
-The red line represents the "true" relationship between time and average amount dispensed.  
-
-The blue line represents the least squares regression line, fit from the data. The blue line is an approximation of the red line.   
-
+The scatterplot displays the amount dispensed, compared to the time pressing the dispenser. The red line indicates the line $y=2x$. If there was no random noise, then each person's amount dispensed would lie exactly on this line. The blue line represents the location of the least squares regression line fit to the amounts observed.   
 
 ```{r, fig.height=4, fig.width = 7}
 ggplot(data=Icecream1, aes(x=time, y=amount)) + geom_point() + ggtitle("Icecream Dispensed") + xlab("Time Pressing Dispensor") + ylab("Amount Dispensed") + stat_smooth(method="lm", se=FALSE) + geom_abline(slope=2, intercept=0, color="red") + 
   annotate("text", label="y=2x", x= 3.5, y=6.5, size=10, color="red")
 ```
 
+In a real situation, we would not see the signal and noise columns or the red line that represents the "true", relationship. We would only see the time and amount, and the blue line that is estimated based on them.  
 
-### IceCream Model From Simulated Data
+We use the blue line, estimated from our observed data, to estimate the location of the red line, which represents the underlying true signal, which we do not know.   
 
+The equation of the red line is given by:
+
+$Y_i = \beta_0 + \beta_1X_{i} + \epsilon_i$, where $\epsilon_i\sim\mathcal{N}(0,\sigma)$,
+
+where $Y_i$ represents amount dispensed, and $X_i$ represents time. $\beta_0, \beta_1,$, and $\sigma$ are the unknown model parameters associated with the ice cream machine's process.  
+
+We estimate $\beta_0$ and $\beta_1$, using our regression line estimates $b_0$ and $b_1$, shown below. 
 
 ```{r}
 IC_Model <- lm(data=Icecream1, lm(amount~time))
-summary(IC_Model)
+IC_Model
+```
+
+The estimated regression equation is 
+
+\[Y_i = b_0 + b_1X_i + \epsilon_i = `r IC_Model$coefficients[1]` + `r IC_Model$coefficients[2]`X_i + \epsilon_i
+\]
+
+where $\epsilon_i\sim\mathcal{N}(0,\sigma)$.
+
+An estimate for $\sigma$ is given by 
+
+$s = \sqrt{\frac{\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2}{(n-(p+1))}}$.
+
+Estimate of $\hat{\sigma}$:
+
+```{r}
+s <- sqrt(sum(IC_Model$residuals^2)/(15-2))
+s
 ```
 
 
+The estimates of $b_0 = `r IC_Model$coefficients[1]`$, $b_1=`r IC_Model$coefficients[2]`$, and $s = `r sig`$ are resonably close estimates to the values $\beta_0=0, \beta_1=2$, and $\sigma = 0.5$, that we used to generate the data.  
 
-### Mathematical Form of Normal Error Regression Model
+In a real situation, we'll have only statistics $b_0$, $b_1$, and $s$, and we'll need to use them to draw conclusions about parameters $\beta_0=0, \beta_1=2$, and $\sigma = 0.5$. 
+
+### General Mathematical Form
+
+In the ice cream example, the relationship between time and amount was given by a linear equation. We can generalize this to situations with multiple explanatory variable.
 
 The mathematical form of a normal error linear regression model is
 
@@ -188,26 +206,75 @@ $Y_i = \beta_0 + \beta_1X_{i1}+ \ldots + \beta_pX_{ip} + \epsilon_i$, with $\eps
 Note that in place of $X_{ip}$, we could have indicators for categories, or functions of $X_{ip}$, such as $X_{ip}^2$, $\text{log}(X_{ip})$, or $\text{sin}(X_{ip})$. 
 
 
-### Parameters and Statistics
+* The quantities $\beta_0, \beta_1, \ldots, \beta_p$ are parameters, pertaining to the true but unknown data generating mechanism.   
 
-* We call the quantities $\beta_0, \beta_1, \ldots, \beta_p$ **parameters.** They pertain to the true but unknown data generating mechanism.   
+* The estimates $b_0, b_1, \ldots, b_p$, are statistics, calculated from our observed data.   
+* We use confidence intervals and hypothesis tests to make statements about parameters, based on information provided by statistics. 
 
-* We call the estimates $b_0, b_1, \ldots, b_p$, **statistics**. They are calculated from our observed data.   
+We close the section by presenting a philosophical question: 
 
-* We use confidence intervals and hypothesis tests make statements about parameters, based on information provided by statistics. 
+Do data really come about from processes like the normal error regression model? That is, do you think it is reasonable to believe that data we see in the real world (perhaps the amount of ice cream dispensed by an ice cream machine) is a combination of some true, but unknown equation involving the explanatory and response variables, and some unexplained noise, coming from a normal distribution? 
 
-In reality, data almost never truly come from normal distributions, but the normal distributions are often useful in approximating real data distributions. 
-
-As statistician George Box said, *"All models are wrong, but some are useful."*    
+We won't attempt to answer that question here, but it is worth thinking about as we delve deeper into the normal error regression model. After all, it is the assumption on which much  statistical inference is based.  
 
 ## Inference in Normal Error Regression Model    
 
-### Distribution of $t= \frac{{b_j}}{\text{SE}(b_j)}$
+### t-distribution
 
-We've already seen that we can use t-distributions to perform inference on regression model parameters ($b_j$'s)when sample sizes are large enough.  
+You've probably noticed that the sampling distributions in our permutation-based hypothesis tests, and our bootstrap distributions for regression coefficients have been roughly symmetric and bell-shaped. When this happens, we can use a symmetric and bell-shaped distribution to model the distribution of a test statistic when the null hypothesis is true, bypassing the need to use simulation. 
 
-When our data can reasonably be assumed to follow a normal error regression model, then we can use these t-distributions regardless of sample size.   
+There is statistical theory which shows that if data really do come from the normal error regression model process, like the ice cream dispenser in the previous section, then the ratio of regression coefficients (means, differences in means, slopes) divided by their standard error, will follow a symmetric bell-shaped distribution called a t-distribution.   
 
+A t-distribution is a symmetric, bell-shaped curve, with thicker tails (hence more variability), than a $\mathcal{N}(0,1)$ distribution.   
+
+```{r, fig.height=5, fig.width=10, warning=FALSE, message=FALSE, include=FALSE}
+gf_dist("t", df=3, color = ~ "3 df", kind = "density")  %>%
+gf_dist("t", df=10, color = ~ "10 df", kind = "density") %>%
+gf_dist("t", df=20, color = ~ "20 df", kind = "density") %>%
+gf_dist("t", df=30, color = ~ "30 df", kind = "density") %>%
+gf_dist("norm", color = ~ "N(0,1)", kind = "density") + xlim(c(-3,3))
+```
+
+```{r, echo=FALSE, fig.height=5, fig.width=10}
+dt1 <- function(x){
+  dt(x, df=3)
+}
+dt2 <- function(x){
+  dt(x, df=10)
+}
+dt3 <- function(x){
+  dt(x, df=20)
+}
+dt4 <- function(x){
+  dt(x, df=30)
+}
+
+```
+
+```{r, echo=FALSE, fig.height=6, fig.width=8}
+df <- data.frame(x = seq(from=-3, to=3, by=0.1), y = dnorm(seq(from=-3, to=3, by=0.1), 0,1/sqrt(3)))
+p <- ggplot(df, aes(x = x, y = y)) +
+  stat_function(fun=dnorm,geom="line",color=scales::hue_pal()(5)[1]) + 
+  annotate(geom="text", x=0.5, y=0.4, label="N(0,1)",
+              color=scales::hue_pal()(5)[1]) +
+    stat_function(fun=dt1, geom="line",color=scales::hue_pal()(5)[2]) +
+   annotate(geom="text", x=0, y=0.35, label="t with 3 df",
+              color=scales::hue_pal()(5)[2]) +
+    stat_function(fun=dt2, geom="line",color=scales::hue_pal()(5)[3]) +
+    annotate(geom="text", x=0, y=0.37, label="t with 10 df",
+              color=scales::hue_pal()(5)[3]) +
+      stat_function(fun=dt3, geom="line",color=scales::hue_pal()(5)[4]) +
+   annotate(geom="text", x=0.5, y=0.38, label="t with 20 df",
+              color=scales::hue_pal()(5)[4]) +
+     stat_function(fun=dt, geom="line",color=scales::hue_pal()(5)[5]) +
+   annotate(geom="text", x=0.5, y=0.39, label="t with 30 df",
+              color=scales::hue_pal()(5)[5]) 
+p
+```
+
+### t-test
+
+For data that come from a normal error regression model, we can use a t-distribution to approximate the sampling distribution used in our hypothesis tests, when the null hypothesis is assumed to be true. 
 
 **Important Fact:** If $Y_i = \beta_0 + \beta_1X_{i1}+ \ldots + \beta_pX_{ip} + \epsilon_i$, with $\epsilon_i\sim\mathcal{N}(0,\sigma)$,  then   
 
@@ -215,10 +282,114 @@ When our data can reasonably be assumed to follow a normal error regression mode
 t= \frac{{b_j}}{\text{SE}(b_j)}  
 \]
 
-follows a t-distribution.  
+follows a t-distribution.
+
+The $t=\frac{{b_j}}{\text{SE}(b_j)}$ is called a **t-statistic**.   
+
+We'll use this t-statistic as the test statistic in our hypothesis test.  
+
+
+###  Hypothesis Test for Lakes in North and South Florida
+
+Recall the hypothesis test we performed to investigate whether there is a difference in average mercury level between lakes in Northern Florida and Southern Florida.   
+
+
+**Null Hypothesis:** There is no difference in average mercury levels between Northern and Southern Florida ($\beta_1=0$).   
+
+**Alternative Hypothesis:** There is a difference in average mercury levels in Northern and Southern Florida ($\beta_1\neq 0$).  
+
+**Test Statistic**: $t=\frac{{b_j}}{\text{SE}(b_j)} = \frac{0.27195}{0.08985} = 3.027$ 
+
+**Key Question:** What is the probability of getting a t-statistic as extreme as 3.027 if $\beta_1=0$ (i.e. there is no difference in mercury levels between northern and southern lakes).  
+
+### t-statistic and p-value
+
+```{r, fig.height=4, fig.width=8}
+ts=3.027
+gf_dist("t", df=51, geom = "area", fill = ~ (abs(x)< abs(ts)), show.legend=FALSE) + geom_vline(xintercept=c(ts, -ts), color="red")  + xlab("t")
+```
+
+```{r}
+2*pt(-abs(ts), df=51)
+```
+
+The low p-value gives us strong evidence of a difference in average mercury levels between lakes in Northern and Southern Florida.  
+
+### Comparison to Simulation
+
+Let's compare these results to those given by the permutation test and bootstrap confidence interval.
+
+
+**Permutation Test**
+
+```{r}
+NSLakes_SimulationResultsPlot
+```
+
+p-value:
+
+```{r}
+b1 <- Lakes_M$coef[2] ## record value of b1 from actual data
+
+mean(abs(NSLakes_SimulationResults$b1Sim) > abs(b1))
+```
+
+
+
+
+
+### Hypothesis Tests in R Output
+
+```{r}
+summary(Lakes_M)
+```
+
+p-values for each line in the R-output are associated with the null hypothesis $\beta_j=0$.   
+
+**Hypothesis Test for line (intercept)**
+
+**Null Hypothesis:** The average mercury level among all lakes in North Florida is 0 ($\beta_0=0$).   
+
+**Alternative Hypothesis:** The average mercury level among all lakes in Northern Florida is not 0 ($\beta_0\neq 0$).  
+
+We already know the average mercury level among all lakes in North Florida is not 0, so this is a silly test. 
+
+
+**Hypothesis Test for line LocationS**
+
+**Null Hypothesis:** There is no difference in average mercury levels between Northern and Southern Florida ($\beta_1=0$).   
+
+**Alternative Hypothesis:** There is a difference in average mercury levels in Northern and Southern Florida ($\beta_1\neq 0$).  
+
+This test is relevant to us.  
+
+
+
+### Coefficients Table in R Output
+
+
+* **Estimate** gives the least-squares estimates $b_0, b_1, \ldots, b_p$     
+
+* **Standard Error** gives estimates of the standard deviation in the sampling distribution for estimate. (i.e. how much uncertainty is there about the estimate?) These are computed using the formulas in Section 4.7.   
+
+* **t value** is the estimate divided by its standard error.     
+
+* **Pr(>|t|)** is a p-value for the hypothesis test of whether quantity represented $b_j$ could plausibly be 0.   
+
+R does not obtain these p-values through simulation, but rather by using the  symmetric and bell-shaped t-distribution approximate the distribution of these statistics. This is appropriate when the assumptions of the normal error regression model are reasonably satisfied.   
+
+
+
+### t-distribution
+
+
+
+
+
+
+
 
 **Confidence Interval for $\beta_j$**
-
 
 A 95% confidence interval for $\beta_j$ is given by
 
@@ -229,16 +400,62 @@ where $t^*$ is chosen to achieve the desired confidence level.
 * For a 95% confidence interval, use $t^*=2$.   
 
 
-**Hypothesis test for $\beta_j=0$**
+### Theory-Based CI for $\beta_1$ in Florida Lakes
 
-*  If $Y_i = \beta_0 + \beta_1X_{i1}+ \ldots + \beta_pX_{ip} + \epsilon_i$, with $\epsilon_i\sim\mathcal{N}(0,\sigma)$,  then a test statistic for the null hypothesis: $\beta_j = 0$ is given by:
+**95% confidence interval for $\beta_1$:**     
 
 \[
-t=\frac{{b_j}}{\text{SE}(b_j)}, 
+\text{Statistic} \pm 2\times\text{Standard Error}
 \]
 
-and calculate a p-value using a t-distribution.   
+\[
+0.27195 \pm 2(0.08985)
+\]
 
+We can be 95% confident that average mercury level is between 0.09 and 0.45 ppm higher in Southern Florida, than Northern Florida.  
+
+The `confint` command returns confidence intervals for all model parameters.  
+
+
+```{r}
+confint(Lakes_M)
+```
+
+We can be 95% confident that average mercury level in lakes in North Florida is between 0.31 and 0.54 ppm.  
+
+We can be 95% confident that average mercury level is between 0.09 and 0.45 ppm higher in Southern Florida, than Northern Florida.  
+
+
+
+**Percentile Bootstrap Confidence Interval**
+
+```{r}
+q.025 <- quantile(NS_Lakes_Bootstrap_Results$b1, 0.025)
+q.975 <- quantile(NS_Lakes_Bootstrap_Results$b1, 0.975)
+c(q.025, q.975)
+```
+
+```{r}
+NS_Lakes_Bootstrap_Plot_b1 <- ggplot(data=NS_Lakes_Bootstrap_Results, aes(x=b1)) +  
+  geom_histogram(color="white", fill="lightblue") + 
+  xlab("b1 in Bootstrap Sample") + ylab("Frequency") +
+  ggtitle("Northern vs Southern Lakes: Bootstrap Distribution for b1") 
+NS_Lakes_Bootstrap_Plot_b1 + geom_segment(aes(x=q.025,xend=q.975, y=50, yend=50), color="gold", size=10, alpha=0.01)
+```
+
+We are 95% confident the average mercury level in Southern Lakes is between `r round(q.025,2)` and `r round(q.975,2)` ppm higher than in Northern Florida. 
+
+### When to Use "Theory-Based Inference"    
+
+Probability theory (such as the Central Limit Theorem), tells us that when sample sizes are large enough, the distributions of model parameters are approximately symmetric and bell-shaped. 
+
+How big the sample size needs to be varies. People sometimes use $n\geq 30$ as a guide, but this is context dependent.    
+
+The more skeweness there is in the original data, the larger the sample size needs to be, in order to use "theory-based" inference.   
+
+In the next chapter, we'll look into more ways to check the appropriateness of "theory-based" tests and intervals.    
+
+If in doubt, check your p-values and confidence intervals against those obtained using simulation. (Or just use simulation!)    
 
 
 ### F-Distribution
