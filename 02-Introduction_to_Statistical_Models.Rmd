@@ -45,6 +45,13 @@ In a statistical model,
 
 * Variable(s) we use to help us make the prediction is(are) called **explanatory variables** (denoted $X$). These are also referred to as **predictor variables** or **covariates**.
 
+In this section, we'll attempt to predict the price of a house, using information about its size (in square feet), and whether or not it is on the waterfront. The price is our response variable, while size and waterfront location are explanatory variables.  
+
+
+* **Categorical variables**, are variables that take on groups or categories, rather than numeric values, for example, whether or not the house is on the waterfront.   
+  
+* **Quantitative variables**, take on meaningful numeric values, for example the number of square feet in the house.  
+
 
 ### Model with Quantitative Explanatory Variable
 
@@ -64,7 +71,7 @@ ggplot(data=Houses, aes(x=sqft_living, y=price)) +
 The model equation is 
 
 \[
-\widehat{\text{Price}} = b_0 + b_1\text{Sq.Ft.}
+\widehat{\text{Price}} = b_0 + b_1\times\text{Sq.Ft.}
 \]
 
 Note, the symbol over the response variable (Price) is read as "hat", and means "predicted price". 
@@ -144,7 +151,7 @@ kable(Houses_Grouped_Summary)
 The model equation is 
 
 \[
-\widehat{\text{Price}} = b_0 + b_1\text{Waterfront}
+\widehat{\text{Price}} = b_0 + b_1\times\text{Waterfront}
 \]
 
 The waterfront variable takes on value of 1 if the house is on the waterfront, and 0 otherwise.  
@@ -164,7 +171,7 @@ The model equation is
 
 **Interpretations**   
 
-The intercept $_0$ represents the expected (or average) value of the response variable in the "baseline" category (in this case non-waterfront).    
+The intercept $b_0$ represents the expected (or average) value of the response variable in the "baseline" category (in this case non-waterfront).    
 
 The coefficient $b_1$ represents the expected (or average) difference in response between the a category and the "baseline" category.     
 
