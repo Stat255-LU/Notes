@@ -48,9 +48,9 @@ In a statistical model,
 In this section, we'll attempt to predict the price of a house, using information about its size (in square feet), and whether or not it is on the waterfront. The price is our response variable, while size and waterfront location are explanatory variables.  
 
 
-* **Categorical variables**, are variables that take on groups or categories, rather than numeric values, for example, whether or not the house is on the waterfront.   
+* **Categorical variables** are variables that take on groups or categories, rather than numeric values, for example, whether or not the house is on the waterfront.   
   
-* **Quantitative variables**, take on meaningful numeric values, for example the number of square feet in the house.  
+* **Quantitative variables** take on meaningful numeric values, for example the number of square feet in the house.  
 
 
 ### Model with Quantitative Explanatory Variable
