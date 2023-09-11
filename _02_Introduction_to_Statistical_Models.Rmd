@@ -37,7 +37,7 @@ set.seed(07302020)
 
 ### Terminology
 
-In this section, we'll use statistical models to predict the prices of houses in King County, WA. The data come from a sample of 100 houses that sold in King County, in 2014 and 2015.  
+In this section, we'll use statistical models to predict the prices of houses in King County, WA.
 
 In a statistical model, 
 
@@ -113,8 +113,6 @@ We can calculate this directly in R using the `predict` command.
 predict(M_House_sqft, newdata=data.frame(sqft_living=1500))
 ```
 
-We should only try to make predictions on houses within the range of the observed data. Since the largest house in the dataset is 8,000 square feet we should not try to predict the price of house with 10,000 square feet. 
-
 
 ### Model with Categorical Variable
 
@@ -128,7 +126,6 @@ ggplot(data=Houses, aes(x=waterfront, y=price)) + geom_boxplot() +
   xlab("Waterfront") + ylab("Price") + coord_flip() + 
   stat_summary(fun.y=mean, geom="point", shape=20, color="red", fill="red")
 ```
-
 The table displays the price summary by waterfront status. 
 
 ```{r}
@@ -173,8 +170,6 @@ The coefficient $b_1$ represents the expected (or average) difference in respons
 * On average a house that is not on the waterfront is expected to cost 1410.6 thousand (or 1.4 million) dollars more than a house that is not on the waterfront.   
 
 
-
-
 **Prediction**
 
 We can predict the price of a house with a given number of square feet by plugging in either 1 or 0 for the waterfront variable.
@@ -201,9 +196,6 @@ predict(M_House_wf, newdata=data.frame(waterfront="Yes"))
 predict(M_House_wf, newdata=data.frame(waterfront="No"))
 ```
 
-Notice that the predicted prices for each category correspond to the average price for that category.    
-
-
 ### Model with Multiple Explanatory Variables
 
 We've used square feet and waterfront status as explanatory variables individually. We can also build a model that uses both of these variables at the same time. 
@@ -213,7 +205,7 @@ A model with two or more explanatory variables is called a **multiple regression
 The model equation is 
 
 \[
-\widehat{\text{Price}} = b_0 + b_1\times\text{Sq. Ft} + b_2\times\text{Waterfront}
+\widehat{\text{Price}} = b_0 + b_1\text{Sq. Ft} + b_2\text{Waterfront}
 \]
 
 For a house not on the waterfront, $b_2=0$, so the model equation is: 
@@ -225,7 +217,7 @@ For a house not on the waterfront, $b_2=0$, so the model equation is:
 For a house on the waterfront, $b_2=1$, so the model equation is: 
 
 \[
-\widehat{\text{Price}} = (b_0 + b_2) + b_1\times\text{Sq. Ft} 
+\widehat{\text{Price}} = (b_0 + b_2) + b_1\text{Sq. Ft} 
 \]
 
 Notice that the slope is the same, regardless of whether the house is on the waterfront ($b_1$). The intercept, however, is different ($b_0$ for houses not on the waterfront, and $b_0 + b_2$ for houses on the waterfront). Thus, the model assumes that price increases at the same rate, with respect to square feet, regardless of whether or not it is on the waterfront, but allows the predicted price for a waterfront house to differ from a non-waterfront house of the same size.  
@@ -241,21 +233,21 @@ equation3  <- function(x){coef(M_wf_SqFt)[2]*x+coef(M_wf_SqFt)[1]+coef(M_wf_SqFt
 ```{r, echo=FALSE, fig.height=4, fig.width=8}
 PM3 <- ggplot(data=Houses, aes(x=sqft_living, y=price, color=waterfront)) + geom_point()+
         stat_function(fun=equation1,geom="line",color="red") +
-        stat_function(fun=equation2,geom="line",color="turquoise") +theme_bw()
+        stat_function(fun=equation2,geom="line",color="turquoise") 
 PM3
 ```
 
 We fit the model in R. 
 
 ```{r}
-M_wf_sqft <- lm(data=Houses, price~sqft_living+waterfront)
-M_wf_sqft
+M_wf_SqFt <- lm(data=Houses, price~sqft_living+waterfront)
+M_wf_SqFt
 ```
 
 The model equation is 
 
 \[
-\widehat{\text{Price}} = -407.7 + 0.4457\times\text{Sq. Ft} + 814.36\times\text{Waterfront}
+\widehat{\text{Price}} = -407.7 + 0.4457\text{Sq. Ft} + 814.36\text{Waterfront}
 \]
 
 
@@ -278,31 +270,35 @@ We interpret coefficients $b_j$ for categorical or quantitative variables, the s
 The predicted price of a 1,500 square foot house on the waterfront is:  
 
 \[
-\widehat{\text{Price}} = -407.7 + 0.4457\times1500 + 814.36\times1 = \$1075{ \text{ thousand (or 1.075 million)}}
+\widehat{\text{Price}} = 523.8 + 1410.6\times 1 = \$1934.6{ \text{ thousand (or 1.9 million)}}
 \]
 
 The predicted price of a 1,500 square foot not on the waterfront is:  
 
 \[
-\widehat{\text{Price}} = -407.7 + 0.4457\times1500 = \$260.9{ \text{ thousand}}
+\widehat{\text{Price}} = 523.8 + 1410.6\times 0 = \$523.8{ \text{ thousand}}
 \]
 
 Calculations in R:
 
 ```{r}
-predict(M_wf_sqft, newdata=data.frame(waterfront="Yes", sqft_living=1500))
+predict(M_House_wf, newdata=data.frame(waterfront="Yes"))
 ```
 
 ```{r}
-predict(M_wf_sqft, newdata=data.frame(waterfront="No", sqft_living=1500))
+predict(M_House_wf, newdata=data.frame(waterfront="No"))
 ```
+
+
+
+
+
+
 
 
 ### Model with No Explanatory Variable
 
-Finally, we'll consider a model that makes use of no explanatory variables at all. Although this might seem silly, its relevance will be seen in the next section.  
-
-The histogram shows the distribution of prices, without any information about explanatory variables. The mean price is indicated in red.  
+The boxplot displays the distribution of prices for the 100 King County Houses in our dataset.
 
 ```{r}
 ggplot(data=Houses, aes(x=price)) + 
@@ -310,7 +306,6 @@ ggplot(data=Houses, aes(x=price)) +
   ggtitle("Distribution of House Prices") + xlab("Price") + ylab("Frequency") + 
   geom_point(aes(x=mean(Houses$price), y=0), color="red", shape=24, fill="red")
 ```
-
 The mean, median, and standard deviation in prices is shown below. 
 
 ```{r}
@@ -329,7 +324,7 @@ The model equation is
 \]
 
 
-We fit a statistical model in R using the `lm` command.
+We fit a statistical model in R using the `lm` command, which stands for "linear model."
 
 ```{r}
 # syntax for lm command
@@ -338,250 +333,385 @@ We fit a statistical model in R using the `lm` command.
 M0_House <- lm(data=Houses, price ~ 1) # when there are no explanatory variables, use ~1
 M0_House
 ```
-The model equation is 
-
-\[
-\widehat{\text{Price}} = 735.4
-\]
-
-**Interpretation**
-
-The expected price of a house in King County is 735.4 thousand dollars.  
-
-**Predictions**
-
-Without knowing anything about any explanatory variables, we would predict the price of any house sold in King County, WA to cost 735.4 thousand dollars. 
 
 
-## Variability Explained by a Model
 
-### Quantifying Variability
 
-We've seen four different models for predicting house price. It would be nice to have a way to assess how well the models are predicting prices, and determine which model appears to be the best. 
 
-Of course we won't know the price of the house we are trying to predict, so we can't be sure how close or far our prediction is. We do, however, know the prices of the original 100 houses in our dataset. We can assess the models by measuring how far the actual prices of the 100 houses differ from the predicted (mean) price, and by calculating the proportion  of total variation in sale price explained by each model.  
 
-### Total Variability 
 
-Let's start with our most basic model, which uses no explanatory variables and predicts the price of each simply using the average of all houses in the dataset.  
 
-We measure the total variability in the response variable by calculating the square difference between each individual response value and the overall average. This quantity is called the total sum of squares (SST). 
 
-\[
-\text{SST} = \displaystyle\sum_{i=1}^n (y_i - \bar{y})^2
-\]
 
-The plot below shows a horizontal line at the mean sale price (785 thousand). The points represent prices of individual houses, and the red lines represent the differences between the price of each house and the overall average.   
 
-```{r, fig.height=3, fig.width=8, echo=FALSE}
-Residplot_M0 <-ggplot(data=Houses, aes(x = 1:nrow(Houses), y = price)) +geom_point() + 
-  geom_segment(aes(xend = 1:nrow(Houses), yend = M0_House$fitted.values), color="red") + 
-  geom_abline(slope=0, intercept=mean(M0_House$fitted.values)) + xlab("")  + theme_bw() + theme(axis.text.x = element_blank()) + ylim(c(0,5500))
 
-Residplot_M0
-```
 
-The first three houses in the dataset are shown below. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Shown below are the prices of 10 King County Houses, along with whether they are on the waterfront 
+
 
 ```{r}
-First3Houses <- Houses %>% select(price, waterfront, sqft_living) %>% head(3)
-kable(First3Houses)
+head(Houses %>% select(price, waterfront, sqft_living), 10)
 ```
 
-$$
-\begin{aligned}
-\text{SST} & = \displaystyle\sum_{i=1}^{100} (y_i - \bar{y})^2 \\
-& = (1225-785)^2 + (885-785)^2 + (385-785)^2 + \ldots 
-\end{aligned}
-$$
-
-We could calculate SST by hand for small datasets. For larger datasets, we'll use R to perform the calculation. 
-
-```{r}
-meanprice <- mean(Houses$price)  #calculate mean price
-SST <- sum((Houses$price - meanprice)^2)  ## calculate SST
-SST
-```
-
-By itself, the size of SST does not have much meaning. We cannot say whether a SST value like the one we see here is large or small, since it depends on the size and scale of the variable being measured. An SST value that is very large in one context might be very small in another. 
-
-SST does, however, give us a baseline measure of the total variability in the response variable. We'll assess the performance of a model with a given explanatory variable by measuring how much of this variability the model accounts for.  
-
-
-### Residuals
-
-Now let's consider our model that uses the size of the house in square feet as the explanatory variable. The figure on the left shows difference between actual and predicted prices, using this linear model. We compare the size of the differences to those resulting from the basic model that does not use any explanatory variables, and predicts each price using the overall average (shown on the right).  
-
-```{r,  fig.height=3.5, fig.width=8}
-Residplot_sqft <- ggplot(data=Houses, aes(x = sqft_living, y = price)) +  geom_point() +
-                geom_segment(aes(xend = sqft_living, yend = M_House_sqft$fitted.values), color="red") +
-                geom_point(aes(y = M_House_sqft$fitted.values), shape = 1) +
-                stat_smooth(method="lm", se=FALSE) + ylim(c(0,5500)) +
-                theme_bw() 
-```
-
-```{r, echo=FALSE}
-grid.arrange(Residplot_sqft+ ggtitle("Model with Sq. Ft."), Residplot_M0 + ggtitle("Model with no Exp. Vars"), ncol=2)
-```
-
-Notice that the red lines are shorter in the figure on the left, indicating the predictions are closer to the actual values.   
-
-The difference between the actual and predicted values is called the **residual**. The residual for the $ith$ case is 
-
-\[
-r_i = (y_i-\hat{y}_i)^2
-\]
-
-We'll calculate the residuals for the first three houses in the dataset, shown below.
-
-```{r}
-kable(First3Houses)
-```
-
-The model equation is
-
-\[
-\widehat{\text{Price}} = -484.9575 + 0.5328\times \text{Sq. Ft} 
-\]
-
-The predicted prices for these three houses are: 
-
-\[
-\widehat{\text{Price}_1} = -484.9575 + 0.5328\times 5420 = 2402.6 \text{ thousand dollars}
-\]
-
-\[
-\widehat{\text{Price}_2} = -484.9575 + 0.5328\times 2830 = 1022.7 \text{ thousand dollars}
-\]
-
-\[
-\widehat{\text{Price}_3} = -484.9575 + 0.5328\times 1620 = 378.1 \text{ thousand dollars}
-\]
-
-To calculate the residuals, we subtract the predicted price from the actual price. 
-
-
-\[r_1 = y_1-\hat{y}_1 = 1225 - 2402.6 = -1177.6 \text{ thousand dollars}\]
-
-\[r_2 = y_2-\hat{y}_2 = 885 - 1022.7 = -137.7 \text{ thousand dollars}\]
-
-\[r_2 = y_2-\hat{y}_2 = 385 - 378.1 = 6.9 \text{ thousand dollars}\]
-
-The fact that the first two residuals are negative indicates that these houses sold for less than the model predicts.  
-
-The predicted values and residuals from a model can be calculated automatically in R. The predicted values and residuals for the first 5 houses are shown below.
-
-```{r}
-Predicted <- predict(M_House_sqft)
-head(Predicted, 3)
+```{r, fig.height=4.5, fig.width=12}
+ggplot(data=Houses, aes(x=price)) + geom_histogram(fill="blue", color="white") + xlab("Price") + ylab("Frequency")+ theme_bw() + ggtitle("House Prices in King County, WA")
 ```
 
 ```{r}
-Residual <- M_House_sqft$residuals
-head(Residual, 3)
+summary(Houses$price)
 ```
 
 
-### Variability Explained by Sq. Ft. Model
+**Question:** Suppose we know that a particular house sold in Ames during this time period, but know nothing else about the house. Based on this estimation, how might we predict the price of the house? How confident are you in this prediction?   
 
-The **sum of squared residuals (SSR)** measures the amount of unexplained variability in the response variable after accounting for all explanatory variables in the model.   
+### Prices by Waterfront Status
 
-\[
-\text{SSR} = \displaystyle\sum_{i=1}^{n}(y_i-\hat{y}_i)^2.  
-\]
+* Now, suppose that the houses are in one of three waterfronts (College Creek, Edwards, North Ames). Prices of the houses in each waterfront are shown below.   
 
-Note that SSR is similar to SST, except we subtract the model's predicted values, rather than the overall average. In the special case of a model with no explanatory variables, the predicted values are equal to the overall average, so SSR is equal to SST. 
+```{r, fig.height=4.5, fig.width=12}
+p_House_WF <- ggplot(data=Houses, aes(x=waterfront, y=price)) +geom_point()  + theme_bw() + ggtitle("Houses by waterfront")
+p_House_WF
+```
 
-We calculate SSR for the model using square feet as the explanatory variable. 
-
-$$
-\begin{aligned}
-\text{SSR} & = \displaystyle\sum_{i=1}^{n}(y_i-\hat{y}_i)^2.  \\
- & = (1225 - 2402.6)^2 + (885 - 1022.7)^2 + (385 - 378.1)^2 + \ldots
-\end{aligned}
-$$
-
-
-We can calculate the model's SSR directly in R. 
 
 ```{r}
-SSR_sqft <- sum(M_House_sqft$residuals^2)
-SSR_sqft
+kable(Houses %>% select(waterfront, price))
 ```
 
-SSR represents the amount of total variability in saleprice remaining after accounting for the house's size in square feet. 
 
-The SSR=23,767,290 value is about one third of the SST value of 69,045,634. This means that about 2/3 of the total variability in sale price is explained by the model that accounts for sale price.   
-
-The difference (SST-SSR) represents the variability in the response variable that is explained by the model. This quantity is called the **model sum of squares (SSM)**.  
+**Question:** Suppose we know that a house sold in the College Creek waterfront. How might we predict the price of the house? How confident are you in this prediction?    
 
 
-\[ \text{SSM} = \text{SST} - \text{SSR} \]
 
-It can be shown that $\text{SSM}=\displaystyle\sum_{i=1}^n(\hat{y}_i-\bar{y})^2$.
+### House Prices by Size
 
-The proportion of total variability in the response variable explained by the model is called the **coefficient of determination**, denoted $R^2$. We calculate this by dividing SSM by SST.     
+The scatterplot shows the relationship between the size of a house in square feet, and its price. 
 
-\[
-R^2=\frac{SSM}{SST}= \frac{SST-SSR}{SST}
-\]
-
-
-**Example:** For the model with square feet as the explanatory variable,
-
-\[
-SSM = SST-SSR = 69,045,634 - 23,767,290 =45,278,344.
-\]
-
-\[
-R^2 = \frac{45,278,344}{69,045,634}=0.6557.
-\]
-
-Approximately 65.6% of the total variability in sale price is explained by the model using square feet as the explanatory variable.   
-
-```{r, echo=FALSE}
-slices <- c(round(SSR_sqft,0), round(SST-SSR_sqft,0))
-lbls <- c("SSR", "SSM")
-lbls <- paste(lbls, slices) ## add percents to labels
-pie(slices,labels = lbls, col=rainbow(length(lbls)),
-   main="Total Variability in House Prices (SST)", radius=1)
+```{r, fig.height=3, fig.width=6}
+ggplot(data=Houses, aes(x=sqft_living, y=price)) + geom_point() 
 ```
-We calculate $R^2$ directly in R. 
+
+**Question:** Suppose we know that another house, not in the original data, had 1200 square feet. How might we predict the price of the house? How confident are you in this prediction?   
+
+
+   
+
+### Prediction with No Explanatory Variables
+
+If we have the prices of $n$ houses, $y_i, y_2, \ldots, y_n$, and want to predict the price of a new house, without information about any explanatory variables the ``statistically optimal" prediction is the overall average price of all houses in the dataset.  
+
+\[
+\widehat{\text{Price}} = \bar{y},  \text{where } \bar{y}=\frac{\displaystyle\sum_{i=1}^ny_i}{n}\]. 
+
+* The symbol $\widehat{\text{Price}}$, represents the predicted, or expected, price.  
+
+```{r, fig.height=4.5, fig.width=12}
+ggplot(data=Houses, aes(x=1, y=price)) + geom_point() + ylab("Price in thousands") + 
+  xlab("")+ theme(axis.text.x = element_blank()) + 
+  stat_summary(fun = mean, geom = "errorbar", aes(ymax = ..y.., ymin = ..y..), color="red") + 
+  annotate("text", y=145, x=1.25, label="sample mean", color="red") + theme_bw() + ggtitle("All 10 Houses")
+```
 
 ```{r}
-summary(M_House_sqft)$r.squared
+mean(Houses$price)
 ```
 
 
-### Linear Correlation Coefficient
+Without information about any explanatory variables, we would predict the price of a house sold in Ames, IA during this time to be about 148 thousand dollars. 
 
-For models with a single quantiative explanatory varible, the coefficient of determination is equal to the square of the correlation coefficient $r$, discussed in Chapter 1.  
+
+### Simple Model in R
+
+```{r}
+M0 <- lm(data=Houses, price~1)
+summary(M0)
+```
+Without information about any explanatory variables, we would predict the price of a house sold in Ames, IA during this time to be about 148 thousand dollars. 
+
+
+### Prediction for a Categorical Explanatory Variable
+
+When we have a categorical explanatory variable (e.g. waterfront), the "statistically optimal" prediction is the average response among all observations in the given category.  
+
+```{r, fig.height=4.5, fig.width=12}
+p_House_WF
+```
+
+
+
+```{r}
+NbhdTbl <- Houses %>% group_by(waterfront) %>% 
+  summarize(AveragePrice=mean(price))
+kable(NbhdTbl)
+```
+
+We predict the price of a house in College Creek to be 195.33 thousand dollars, compared with 102.63 thousand dollars in Edwards, and 146.62 thousand dollars in Edwards.  
+
+
+### Model by waterfront in R
+
+```{r}
+M_WF <- lm(data=Houses, price ~ waterfront)
+summary(M_WF)
+```
+
+* For categorical explanatory variables, R treats the category that comes first alphabetically (in this case CCreek), as a baseline. The intercept gives the prediction for this category.   
+    - We would expect a house in College Creek to cost 195.33 thousand dollars.
+
+* Each of the other rows in the coefficients table represent the difference between the expected response (price) for that category (waterfront), compared to the baseline.     
+     - We would expect a house in Edwards to cost 92.70 thousand less than a house in College Creek. (hence costing 102.63 thousand)     
+     - We would expect a house in North Ames to cost 48.71 thousand less than a house in College Creek. (hence costing 146.62 thousand)   
+
+### Model Notation for Houses by waterfront     
+    
+The model can be expressed in the form:
+
+```{r, include=FALSE}
+b0 <- round(coef(M_Nbhd)[1],2)
+b1 <- round(coef(M_Nbhd)[2],2)
+b2 <- round(coef(M_Nbhd)[3],2)
+```
+$\widehat{\text{Price}}= b_0+  b_1 \times\text{I}_{\text{Edwards}} +b_2 \times\text{I}_{\text{NAmes}}$
+
+$\widehat{\text{Price}}= `r b0`+  `r b1` \times\text{I}_{\text{Edwards}} +`r b2` \times\text{I}_{\text{NAmes}}$, where 
+
+\text{I} represents an indicator variables, taking on values 0 or 1.     
+    - Example: \[ \text{I}_{\text{Edwards}} =\begin{cases} 
+      1 & \text{if house is in Edwards waterfront} \\
+      0 & \text{otherwise}
+       \end{cases}
+      \]
+
+
+**Predicted Prices:**
+
+College Creek:  $\widehat{\text{Price}}= `r b0`+  `r b1` \times0 +`r b2` \times0 = 195.33$ thousand. 
+
+
+Edwards:  $\widehat{\text{Price}}= `r b0`+  `r b1` \times1 +`r b2` \times0 = 102.63$ thousand.    
+
+North Ames: $\widehat{\text{Price}}= `r b0`+  `r b1` \times0 +`r b2` \times1 = 146.62$ thousand.
+
+### Prediction for Quantitative Explanatory Variable
+
+For a quantitative explanatory variable like square feet, the "statistically optimal" prediction is found by fitting a "line of best fit" to the data (more details to come.)  
 
 ```{r, fig.height=3, fig.width=6}
 ggplot(data=Houses, aes(x=sqft_living, y=price)) + geom_point() + 
   stat_smooth(method="lm", se=FALSE)
 ```
 
-* For linear models with a single quantitative variable, the **linear correlation coefficient** $r=\sqrt{R^2}$, or $r=-\sqrt{R^2}$ (with sign matching the sign on the slope of the line), provides information about the strength and direction of the linear relationship between the variables. 
+* For a house with 1200 square feet, predicted price is about $150 thousand.    
+    
 
-* $-1 \leq r \leq 1$, and $r$ close to $\pm1$ provides evidence of strong linear relationship, while $r$ close to 0 suggests linear relationship is weak.    
+### Model using Square Feet
 
 ```{r}
-cor(Houses$price,Houses$sqft_living)
+M_SqFt <- lm(data=Houses, price~sqft_living) 
+summary(M_SqFt)
 ```
 
-* $r$ is only relevant for models with a single quantitative explanatory variable and a quantitative response variable, while $R^2$ is relevant for any linear model with a quantitative response variable.  
+### Model for sqft_living and Interpretations
+
+In the model using both square feet and waterfront, the regression equation is
+
+```{r, include=FALSE}
+b0 <- round(coef(M_SqFt)[1],3)
+b1 <- round(coef(M_SqFt)[2],3)
+```
+$\widehat{\text{Price}}= b_0+ b_1 \times\text{sqft_living}$
+
+$\widehat{\text{Price}}= `r b0`+ `r b1` \times\text{sqft_living}$
+
+* $\widehat{\text{Price}}$ represents the expected, or predicted, price.  
+
+* The slope, $b_1$ represents the expected change in price (in thousands) per one-unit increase in square feet.   
+     - The price of a house is expected to increase by `r b1*1000` dollars for each additional square foot.     
+     
+* The intercept, $b_0$ represents the expected price of a house with 0 square feet.      
+      - In this situation, this is not a meaningful interpretation.       
+
+### Calculating Predicted Prices 
+
+$\widehat{\text{Price}}= `r b0`+ `r b1` \times\text{sqft_living}$
+
+* Predicted price for a house with 1200 square feet:     
+
+$\widehat{\text{Price}}= `r b0`+ `r b1` \times 1200 = 151.8$ thousand dollars. 
 
 
-### Variability Explained by Waterfront Model
+## Variability Explained by a Model
 
-We can similarly calculate the proportion of variability explained by the model using waterfront as an explanatory variable. 
+### Quantifying Variability
 
-Recall that in this model, the predicted price of a house with a waterfront is given by the average price of all waterfront houses, and the predicted price of a non-waterfront house is given by the average price of all non-waterfront houses. 
+We've seen the "statistically optimal" way to make predictions for data with categorical and quantitative explanatory variables, but we shouldn't expect these predictions to be exact. We see that prices of individual houses vary from one another, even if they are in the same waterfront or have the same size.  
 
-We can calculate residuals using these predicted values, and compare them to the residuals resulting from a model with no explanatory variables, which uses the overall average price for all predictions.   
+We can get a sense of how much variability we should expect in our prediction by looking at how much the values in our dataset differ from the predicted (mean) price.   
 
-The left two figures show the residuals resulting from a model that accounts for waterfront status. The figure on the right shows the residuals resulting from the model with no explanatory variables.   
+* The difference between the true and predicted values ($y_i - \hat{y}_i$) is called the $ith$ **residual**.   
+
+
+### Residuals for Three Models
+
+**Model with No Explanatory Variables**
+
+```{r, fig.height=3, fig.width=8}
+M0Resid <-ggplot(data=Houses, aes(x = 1:nrow(Houses), y = price)) +geom_point() + 
+  geom_segment(aes(xend = 1:nrow(Houses), yend = M0$fitted.values), color="red") + 
+  geom_abline(slope=0, intercept=mean(M0$fitted.values)) + xlab("")  + theme_bw() + theme(axis.text.x = element_blank()) + ylim(c(0,5500))
+M0Resid
+```
+**Model with waterfront as Explanatory Variable**
 
 ```{r,  echo=FALSE}
 Houses_WF <- Houses %>% filter(waterfront=="Yes")
@@ -594,102 +724,127 @@ M1aResid <-ggplot(data=Houses_NWF, aes(x = 1:nrow(Houses_NWF), y = price)) +geom
   geom_abline(slope=0, intercept=mean(MNWF$fitted.values)) + xlab("")  + theme_bw() + theme(axis.text.x = element_blank()) + ylim(c(0,5500)) + ggtitle("NonWaterfront")
 M1bResid <-ggplot(data=Houses_WF, aes(x = 1:nrow(Houses_WF), y = price)) +geom_point() + geom_segment(aes(xend = 1:nrow(Houses_WF), yend = MWF$fitted.values), color="red") + 
   geom_abline(slope=0, intercept=mean(MWF$fitted.values)) + xlab("")  + theme_bw() + theme(axis.text.x = element_blank())+ ylim(c(0,5500)) + ylab("") + theme(axis.text.y = element_blank()) + ggtitle("Waterfront")
+grid.arrange(arrangeGrob(M1aResid,M1bResid, ncol=2, nrow=1, widths=c(4,1))) 
+```
+
+
+**Model with Square Feet as Explanatory Variable**
+
+```{r,  fig.height=3.5, fig.width=8}
+ggplot(data=Houses, aes(x = sqft_living, y = price)) +  geom_point() +
+  geom_segment(aes(xend = sqft_living, yend = M_SqFt$fitted.values), color="red") +
+  geom_point(aes(y = M_SqFt$fitted.values), shape = 1) +
+  stat_smooth(method="lm", se=FALSE)+
+  theme_bw()
+```
+
+### Quantifying Unexplained Variablility
+
+The residuals tell us how much variability in the response variable (sale price) is left unexplained by a model.   
+
+For a model with given explanatory variable(s), we can calculate the proportion of variability in the response variable explained by the model by comparing the size of the residuals to those of a model with no explanatory variables.  
+* $\displaystyle\sum_{i=1}^n (y_i - \hat{y})=0$, so this is not a helpful measure, but we can instead use: 
+
+\[
+\displaystyle\sum_{i=1}^n (y_i - \hat{y}_i)^2
+\]
+
+
+
+### Total Sum of Squares (SST)
+
+We call the sum of squared residuals for the model with no explanatory variables the total sum of squares, abbreviated SST. In this model, $\hat{y}_i = \bar{y}$.   
+
+\[SST = \displaystyle\sum_{i=1}^n (y_i - \bar{y})^2
+\]
+
+
+
+```{r}
+price <- Houses$price
+Predicted <- M0$fitted.values
+sqft_living <- Houses$sqft_living
+Residual <- M0$residuals  
+ResidSq <- Residual^2
+Residdf <- data.frame(sqft_living, price, Predicted, Residual, ResidSq)
+Residdf
 ```
 
 ```{r}
-grid.arrange(arrangeGrob(M1aResid,M1bResid, Residplot_M0 + ggtitle("Model with no Exp. Vars"), ncol=3, nrow=1, widths=c(3, 2,5))) 
+sum(Houses$price - mean(Houses$price))
 ```
-
-Notice that after accounting for waterfront status, the differences between observed and predicted values are bigger than they were in the model that accounted for square feet, though not as big as for the model that doesn't use any explanatory variables.   
-
-We use R to calculate SSR for the waterfront model.  
 
 ```{r}
-SSR_wf <- sum(M_House_wf$residuals^2)
-SSR_wf
+sum((Houses$price - mean(Houses$price))^2)
 ```
 
-\[
-SSM = SST-SSR = 69,045,634 - 43,675,043 =25,370,591.
-\]
+
+```{r,  out.width= '80%' }
+knitr::include_graphics("SST.png")
+```
+
+SST represents the total amount of variability in sale price (without accounting for any explanatory variables). 
+
+### SSR and SSM
+
+When we fit a model with an explanatory variable (such as waterfront), we can see how much the sum of squared residuals decreases, based on information introduced by that explanatory variable. 
+
+```{r}
+price <- Houses$price
+Predicted <- M_Nbhd$fitted.values
+Residual <- M_Nbhd$residuals   
+ResidSq <- Residual^2
+waterfront <- Houses$waterfront
+Residdf <- data.frame(waterfront, price, Predicted, Residual, ResidSq)
+Residdf
+```
+
+```{r}
+sum(M_Nbhd$residuals^2)
+```
+
+
+* the variability in sale price remaining unexplained even after accounting for waterfront is given by the sum of squared residuals. We abbreviate this SSR, for sum of squared residuals.    
 
 \[
-R^2 = \frac{25,370,591}{69,045,634}=0.3674.
+\text{SSR} = \text{Variability Remaining}=\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2
 \]
 
-Approximately 36.7% of the total variability in sale price is explained by the model using waterfront status as the explanatory variable.   
+* the difference, $\text{SST} - \text{SSR} = 17558.52 - 4656.188 = 12902.33$ tells us how much variability in sale price is explained by the model using waterfront as an explanatory variable. We call this quantity the **sum of squares explained by the model**, abbreviated SSM. 
+
+* The proportion of variability in sale price explained by the model using waterfronts as an explanatory variable is 
+
+\[\frac{SSM}{SST}=\frac{12902.33}{17558.52} = 0.7348
+\]
+
+
+* 73.5% of the variation in house price is explained by the model using waterfront as an explanatory variable.  
+
 
 ```{r, echo=FALSE}
-slices <- c( round(SSR_wf,0), round(SST-SSR_wf,0))
-lbls <- c("SSR", "SSM")
+slices <- c(12901.81, 4656.188)
+lbls <- c("SSM", "SSR")
 lbls <- paste(lbls, slices) ## add percents to labels
 pie(slices,labels = lbls, col=rainbow(length(lbls)),
    main="Total Variability in House Prices (SST)", radius=1)
 ```
 
-We calculate $R^2$ directly in R. 
+The proportion of variability in the response variable explained by a model with given explanatory variables is called **the coefficient of determination**, and is given the symbol $R^2$. 
+
+* Our value matches the value of "Multiple R-squared" in the 2nd last line of the R model summary. 
 
 ```{r}
-summary(M_House_wf)$r.squared
+summary(M_Nbhd)
 ```
 
-### Variability Explained by Multiple Regression Model
-
-We've seen at the model using square feet accounts for about 2/3 of the total variability in house prices, while the model using waterfront status accounts for about 1/3 of the total variability. Let's see if we can do better by using both variables together. 
-
-The left figure shows the residuals resulting from a model that accounts for both waterfront status and square feet. The figure on the right shows the residuals resulting from the model with no explanatory variables.   
-
-```{r, echo=FALSE, fig.height=5, fig.width=8}
-Residplot_MR <- ggplot(data=Houses, aes(x=sqft_living, y=price, color=waterfront)) + geom_point()+
-              stat_function(fun=equation1,geom="line",color="red") +
-              stat_function(fun=equation2,geom="line",color="turquoise")+
-              geom_segment(aes(xend = sqft_living, yend = M_Nbhd_SqFt$fitted.values), color="red")+theme_bw()  + theme(legend.position = "none")
-```
-
-```{r}
-grid.arrange(Residplot_MR + ggtitle("Multiple Regression Model") , Residplot_M0 + ggtitle("Model with no Exp. Vars"), ncol=2)
-```
-
-We use R to calculate SSR for the waterfront model.  
-
-```{r}
-SSR_wf_sqft <- sum(M_wf_sqft$residuals^2)
-SSR_wf_sqft
-```
-
-\[
-SSM = SST-SSR = 69,045,634 - 16,521,296 =52,524,338.
-\]
-
-\[
-R^2 = \frac{52,524,338}{69,045,634}=0.761.
-\]
-
-Approximately 76.1% of the total variability in sale price is explained by the model using square feet and waterfront status as the explanatory variables.   
-
-```{r, echo=FALSE}
-slices <- c( round(SSR_wf_sqft,0), round(SST-SSR_wf_sqft,0))
-lbls <- c("SSR", "SSM")
-lbls <- paste(lbls, slices) ## add percents to labels
-pie(slices,labels = lbls, col=rainbow(length(lbls)),
-   main="Total Variability in House Prices (SST)", radius=1)
-```
-
-We calculate $R^2$ directly in R. 
-
-```{r}
-summary(M_wf_sqft)$r.squared
-```
-
-Including both square feet and waterfront status allows us to explain more variability in sale price than models that include one but not both of these variables. 
 
 ### Summary: SST, SSR, SSM, $R^2$
 
-* the total variability in the response variable is the sum of the squared differences between the observed values and the overall average.   
+* the total variability in house prices is the sum of the squared differences between price and average price.   
 
-\[\text{Total Variability in Response Var.}= \text{SST} =\displaystyle\sum_{i=1}^n(y_i-\bar{y})^2\]
+\[\text{Total Variability in Price}= \text{SST} =\displaystyle\sum_{i=1}^n(y_i-\bar{y})^2\]
 
-* the variability remaining unexplained even after accounting for explanatory variable(s) in a model is given by the sum of squared residuals. We abbreviate this SSR, for sum of squared residuals.    
+* the variability remaining unexplained even after accounting for waterfront is given by the sum of squared residuals. We abbreviate this SSR, for sum of squared residuals.    
 
 \[
 \text{SSR} = \text{Variability Remaining}=\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2
@@ -699,21 +854,14 @@ Including both square feet and waterfront status allows us to explain more varia
 
 \[ \text{SSM} = \text{SST} - \text{SSR} \]
 
+It can be shown that $\text{SSM}=\displaystyle\sum_{i=1}^n(\hat{y}_i-\bar{y})^2$. These abbreviations here vary across texts. Be careful!
 
 * The coefficient of determination (abbreviated $R^2$) is defined as    
 
 \[R^2=\frac{\text{Variability Explained by Model}}{\text{Total Variability}}=\frac{\text{SSM}}{\text{SST}} =\frac{\displaystyle\sum_{i=1}^n(\hat{y}_i-\bar{y})^2}{\displaystyle\sum_{i=1}^n(y_i-\bar{y})^2}\]
 
-Note that some texts use different abbreviations than the ones used here. When working with resources outside this class, be sure to carefully check the notation being used.  
 
 ### $R^2$ Visually
-
-Model with a single quantitative explanatory variable:
-
-```{r, echo=FALSE, out.width = '100%'}
-knitr::include_graphics("Rsq.png")
-```
-Model with a single categorical explanatory variable with 3 categories:
 
 ```{r, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("Rsq2.png")
@@ -729,6 +877,252 @@ knitr::include_graphics("Rsq2.png")
 
 
 
+### Residuals for Square Feet Model
+
+
+```{r, fig.height=3.5, fig.width=8}
+ggplot(data=Houses, aes(x = sqft_living, y = price)) +
+  geom_segment(aes(xend = sqft_living, yend = M_SqFt$fitted.values), color="red") +
+  geom_point() +
+  geom_point(aes(y = M_SqFt$fitted.values), shape = 1) +
+  stat_smooth(method="lm", se=FALSE)+
+  theme_bw()
+```
+
+
+```{r}
+price <- Houses$price
+Predicted <- M_SqFt$fitted.values
+Residual <- M_SqFt$residuals   
+ResidSq <- Residual^2
+sqft_living <- Houses$sqft_living
+Residdf <- data.frame(sqft_living, price, Predicted, Residual, ResidSq)
+Residdf
+```
+
+
+```{r}
+sum(M_SqFt$residuals^2)
+```
+
+
+### Variation Explained by sqft_living Model
+
+```{r, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("Rsq.png")
+```
+
+Created at http://www.rossmanchance.com/applets/RegShuffle.htm.  
+
+
+* Blue Area = Total Variability (SST)    
+
+* Red Area = Variability Remaining Unexplained by Model (SSR)   
+
+* Blue Area - Red Area = Variability Explained by Model (SSM)     
+
+* $R^2 = \frac{\text{Area of Blue Squares} - \text{Area of Red Squares}}{\text{Area of Blue Squares}} = \frac{\text{SST}-\text{SSR}}{\text{SST}}= \frac{\text{SSM}}{\text{SST}}$
+
+
+### Variation Explained by Square Feet Model 
+
+
+* Total variability in house prices SST = 17,558.52    
+* Variability remaining unexplained after accounting for square feet is SSR = 5,859.07     
+* Variation explained by model accounting for square feet is \[ \text{SSM} = 17,558.52 - 5,859.07 = 11,699.45 \]
+* Proportion of variation explained by model accounting for square feet is \[ R^2=\frac{11,699.45}{17,558.52}\approx0.6663\]
+
+* 66.6% of the variation in house price is explained by the model using square feet as an explanatory variable.  
+
+
+```{r, echo=FALSE}
+slices <- c(11699.45, 5859.07)
+lbls <- c("SSM", "SSR")
+lbls <- paste(lbls, slices) ## add percents to labels
+pie(slices,labels = lbls, col=rainbow(length(lbls)),
+   main="Total Variability in House Prices (SST)", radius=1)
+```
+
+
+```{r}
+summary(M_SqFt)
+```
+
+### Linear Correlation Coefficient
+
+```{r, fig.height=3, fig.width=6}
+ggplot(data=Houses, aes(x=sqft_living, y=price)) + geom_point() + 
+  stat_smooth(method="lm", se=FALSE)
+```
+
+* For linear models with a single quantitative variable, the **linear correlation coefficient** $r=\sqrt{R^2}$, or $r=-\sqrt{R^2}$ (with sign matching the sign on the slope of the line), provides information about the strength and direction of the linear relationship between the variables. 
+
+* $-1 \leq r \leq 1$, and $r$ close to $\pm1$ provides evidence of strong linear relationship, while $r$ close to 0 suggests linear relationship is weak.    
+
+* $r$ is only relevant for models with a single quantitative explanatory variable and a quantitative response variable, while $R^2$ is relevant for any linear model with a quantitative response variable.  
+
+```{r}
+cor(Houses$price,Houses$sqft_living)
+```
+
+
+## Multiple Regression Model
+
+### Multiple Regression Model
+
+Suppose we have information on both the waterfront and square feet in the houses. We can account for both of these together using a **multiple regression model**, i.e. a model with more than one explanatory variable. 
+
+```{r}
+kable(Houses)
+```
+
+How can we predict the price of a:  
+
+* 848 square foot house in College Creek?   
+* 1200 square foot house in North Ames?    
+* 2314 square foot house in Edwards?    
+
+
+### 2-Variable Model Different Slopes
+
+We could try to lines to the houses in each waterfront, independent of the other waterfronts. 
+
+```{r}
+ggplot(data=Houses, aes(x=sqft_living, y=price, color=waterfront)) + geom_point() + stat_smooth(method="lm", se=FALSE) 
+```
+
+Since there are only 3-4 houses per neighbhorhood, though, this isn't a lot of information to go on.  
+
+
+### 2-Variable Model with Constant Slope  
+
+
+Instead, we'll assume the rate of increase wrt. square feet (i.e. slope) is the same in each waterfront, but that some waterfronts are more expensive than others. 
+
+This allows us to use all 10 houses to estimate slope, while allowing intercepts to differ between waterfronts.  
+
+```{r, echo=FALSE}
+M_Nbhd_SqFt <- lm(data=Houses, price~sqft_living + waterfront)
+equation1 <- function(x){coef(M_Nbhd_SqFt)[2]*x+coef(M_Nbhd_SqFt)[1]}
+equation2  <- function(x){coef(M_Nbhd_SqFt)[2]*x+coef(M_Nbhd_SqFt)[1]+coef(M_Nbhd_SqFt)[3]}
+equation3  <- function(x){coef(M_Nbhd_SqFt)[2]*x+coef(M_Nbhd_SqFt)[1]+coef(M_Nbhd_SqFt)[4]}
+```
+
+```{r, echo=FALSE, fig.height=4, fig.width=8}
+PM3 <- ggplot(data=Houses, aes(x=sqft_living, y=price, color=waterfront)) + geom_point()+
+        stat_function(fun=equation1,geom="line",color=scales::hue_pal()(3)[1]) +
+        stat_function(fun=equation2,geom="line",color=scales::hue_pal()(3)[2]) +  
+        stat_function(fun=equation3,geom="line",color=scales::hue_pal()(3)[3])   
+PM3
+```
+
+### House Price 2-Variable Model Summary 
+
+```{r}
+M_Nbhd_SqFt <- lm(data=Houses, price~sqft_living+waterfront)
+summary(M_Nbhd_SqFt)
+```
+
+### MR Model for sqft_living and waterfront
+
+In the model using both square feet and waterfront, the regression equation is
+
+```{r, include=FALSE}
+b0 <- round(coef(M_Nbhd_SqFt)[1],2)
+b1 <- round(coef(M_Nbhd_SqFt)[2],2)
+b2 <- round(coef(M_Nbhd_SqFt)[3],2)
+b3 <- round(coef(M_Nbhd_SqFt)[4],2)
+```
+
+$\widehat{\text{Price}}= b_0+ b_1 \times\text{sqft_living}+ b_2\times\text{I}_{Edwards} + b_3 \times\text{I}_{NAmes}$
+
+$\widehat{\text{Price}}= `r b0`+ `r b1` \times\text{sqft_living}+ `r b2` \times\text{I}_{Edwards} +`r b3` \times\text{I}_{NAmes}$
+
+* The intercept $b_0$ represents the expected price of a house in College Creek with 0 square feet.    
+     - the intercept has no meaningful interpretation in this context
+* $b_1$ represents the expected change in price (in thousands) per one-unit increase in square feet, assuming waterfront is the same.    
+     - on average, we expect the price of a house to increase by $0.05933 thousand (i.e. $59.33) for each additional square foot, assuming the houses are in the same waterfront.    
+* $b_2$ and $b_3$ represent the expected difference in price between a house in the Edwards (or North Ames) waterfront, compared to the College Creek waterfront, assuming square footage is the same.       
+    - We expect a house in the Edwards waterfront to cost $59.094 less than a house in the College Creek waterfront, assuming the houses are the same size.    
+    - We expect a house in the North Ames waterfront to cost $25.812 less than a house in the College Creek waterfront, assuming the houses are the same size.   
+    
+    
+### Predicting Price in MR Model 
+
+$\widehat{\text{Price}}= `r b0`+ `r b1` \times\text{sqft_living}+ `r b2` \times\text{I}_{Edwards} +`r b3` \times\text{I}_{NAmes}$
+
+* 848 square foot house in College Creek
+
+$\widehat{\text{Price}}= `r b0`+ `r b1` \times848+ `r b2` \times0 +`r b3` \times 0 =157.0378$ thousand
+
+* 1200 square foot house in North Ames   
+
+$\widehat{\text{Price}}= `r b0`+ `r b1` \times1200+ `r b2` \times0 +`r b3` \times1 = 152.1096$ thousand
+
+
+* 2314 square foot house in Edwards
+
+$\widehat{\text{Price}}= `r b0`+ `r b1` \times\text{sqft_living}+ `r b2` \times1 +`r b3` \times 0 =184.9212$ thousand
+
+
+### Risk of Extrapolation
+
+Note that 2314 square feet is well outside the range of our observed data. We should treat this prediction with caution, since we don't know whether the trend we see in our data will continue.  
+
+
+```{r, echo=FALSE, fig.width=8, fig.height=5}
+PM3
+```
+
+
+### Residuals for 2-Variable Model
+
+```{r, echo=FALSE, fig.height=5, fig.width=8}
+ggplot(data=Houses, aes(x=sqft_living, y=price, color=waterfront)) + geom_point()+
+        stat_function(fun=equation1,geom="line",color=scales::hue_pal()(3)[1]) +
+        stat_function(fun=equation2,geom="line",color=scales::hue_pal()(3)[2]) +  
+        stat_function(fun=equation3,geom="line",color=scales::hue_pal()(3)[3]) +   
+geom_segment(aes(xend = sqft_living, yend = M_Nbhd_SqFt$fitted.values), color="red") 
+
+```
+
+### Residuals for 2-Variable Model  (cont.)
+
+```{r}
+price <- Houses$price
+Predicted <- M_Nbhd_SqFt$fitted.values
+Residual <- M_Nbhd_SqFt$residuals   
+ResidSq <- M_Nbhd_SqFt$residuals^2
+Residdf <- data.frame(price, Predicted, Residual, ResidSq)
+Residdf
+```
+
+```{r}
+sum(M_Nbhd_SqFt$residuals^2)
+```
+
+
+### Variation Explained by 2-Variable Model   
+
+
+* Total Variation in house prices: SST=17,558.52    
+* Variation remaining unexplained after accounting for square feet is SSR=3,616.139     
+* Variation explained by model accounting for square feet is 
+\[SSM=SST-SSR=17,558.52 - 3,616.139 = 13,942.38\]
+
+* Proportion of variation in house prices explained by model is:
+
+\[ R^2 = \frac{13,942.38}{17,558.52}\approx0.794 \]
+
+* 79.4% of the variation in house price is explained by the model using square feet and waterfront as an explanatory variables.  
+
+```{r, echo=FALSE}
+slices <- c(13942.38, 3616.139)
+lbls <- c("SSM", "SSR")
+lbls <- paste(lbls, slices) ## add percents to labels
+pie(slices,labels = lbls, col=rainbow(length(lbls)),
+   main="Total Variability in House Prices (SST)", radius=1)
+```
 
 
 ### Model Comparison Summary
@@ -743,10 +1137,10 @@ R3 <- sum(M_Nbhd_SqFt$residuals^2)
 
 | Model | Variables | Unexplained Variability | Variability Explained |  $R^2$ |    
 |------ | ---------- | -----------| -----------|-----------|
-| 0 | None |`r SST` | 0 | 0 | 
-| 1 | Sq. Ft. |`r SSR_sqft` | `r SST-SSR_sqft` | `r (SST-SSR_sqft)/SST` | 
-| 2 | Waterfront |`r SSR_wf` | `r SST-SSR_wf` | `r (SST-SSR_wf)/SST` |
-| 3 | Sq. Ft. and Waterfront |`r SSR_wf_sqft` | `r SST-SSR_wf_sqft` | `r (SST-SSR_wf_sqft)/SST` |
+| 0 | None |`r R0` | 0 | 0 | 
+| 1 | Nbhd |`r R1` | `r R0-R1` | `r (R0-R1)/R0` |
+| 2 | Sq. Ft. |`r R2` | `r R0-R2` | `r (R0-R2)/R0` | 
+| 3 | Nbhd, Sq. Ft. |`r R3` | `r R0-R3` | `r (R0-R3)/R0` |
 
 
 **Comments on $R^2$:**   
@@ -758,9 +1152,9 @@ R3 <- sum(M_Nbhd_SqFt$residuals^2)
 
 * On some datasets, there is a lot of "natural" variability in the response variable, and no model will achieve a high $R^2$. That's okay. Even a model with $R^2 = 0.10$ or less can provide useful information.   
 
-* The goal is not to achieve a model that makes perfect predictions, but rather to be able to quantify the amount of uncertainty associated with the predictions we make.   
+* The task of a statistician is not to achieve a model that makes perfect predictions, but rather to be able to quantify the amount of uncertainty associated with the predictions we make.   
 
-<!---
+
 ## Least-Squares Estimation
 
 
@@ -1770,4 +2164,3 @@ For example, we might expect that bigger cars will get lower gas mileage. This i
 
 In the example, there would only be an interaction, if the effect of gas mileage on a response variable (say price) depends on the size of the car. If for example, better gas mileage was associated with higher price for small cars, but had no impact on price for large cars, then this would be an example of an interaction between size and gas mileage.   
 
---->
