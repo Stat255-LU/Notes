@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Normal Error Regression Model | Stat 255: Statistics for Data Science Notes</title>
   <meta name="description" content="Chapter 5 Normal Error Regression Model | Stat 255: Statistics for Data Science Notes" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Normal Error Regression Model | Stat 255: Statistics for Data Science Notes" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Andrew Sage - Lawrence University" />
 
 
-<meta name="date" content="2023-09-10" />
+<meta name="date" content="2023-09-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -49,24 +49,25 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -86,13 +87,13 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -137,15 +138,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Exploratory Data Analysis</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#getting-started-in-r"><i class="fa fa-check"></i><b>1.1</b> Getting Started in R</a>
-<ul>
+<li class="chapter" data-level="1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Exploratory Data Analysis</a><ul>
+<li class="chapter" data-level="1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#getting-started-in-r"><i class="fa fa-check"></i><b>1.1</b> Getting Started in R</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#previewing-the-data"><i class="fa fa-check"></i><b>1.1.1</b> Previewing the Data</a></li>
 <li class="chapter" data-level="1.1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#modifying-the-data"><i class="fa fa-check"></i><b>1.1.2</b> Modifying the Data</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-visualization"><i class="fa fa-check"></i><b>1.2</b> Data Visualization</a>
-<ul>
+<li class="chapter" data-level="1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-visualization"><i class="fa fa-check"></i><b>1.2</b> Data Visualization</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#histogram"><i class="fa fa-check"></i><b>1.2.1</b> Histogram</a></li>
 <li class="chapter" data-level="1.2.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#density-plot"><i class="fa fa-check"></i><b>1.2.2</b> Density Plot</a></li>
 <li class="chapter" data-level="1.2.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#boxplot"><i class="fa fa-check"></i><b>1.2.3</b> Boxplot</a></li>
@@ -156,24 +154,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2.8" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#correlation-plot"><i class="fa fa-check"></i><b>1.2.8</b> Correlation Plot</a></li>
 <li class="chapter" data-level="1.2.9" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#scatterplot-matrix"><i class="fa fa-check"></i><b>1.2.9</b> Scatterplot Matrix</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#summary-tables"><i class="fa fa-check"></i><b>1.3</b> Summary Tables</a>
-<ul>
+<li class="chapter" data-level="1.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#summary-tables"><i class="fa fa-check"></i><b>1.3</b> Summary Tables</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#calculating-summary-statistics"><i class="fa fa-check"></i><b>1.3.1</b> Calculating Summary Statistics</a></li>
 <li class="chapter" data-level="1.3.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#grouped-summaries"><i class="fa fa-check"></i><b>1.3.2</b> Grouped Summaries</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html"><i class="fa fa-check"></i><b>2</b> Introduction to Statistical Models</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#fitting-models-to-data"><i class="fa fa-check"></i><b>2.1</b> Fitting Models to Data</a>
-<ul>
+<li class="chapter" data-level="2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html"><i class="fa fa-check"></i><b>2</b> Introduction to Statistical Models</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#fitting-models-to-data"><i class="fa fa-check"></i><b>2.1</b> Fitting Models to Data</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#terminology"><i class="fa fa-check"></i><b>2.1.1</b> Terminology</a></li>
 <li class="chapter" data-level="2.1.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-quantitative-explanatory-variable"><i class="fa fa-check"></i><b>2.1.2</b> Model with Quantitative Explanatory Variable</a></li>
 <li class="chapter" data-level="2.1.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-categorical-variable"><i class="fa fa-check"></i><b>2.1.3</b> Model with Categorical Variable</a></li>
 <li class="chapter" data-level="2.1.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-multiple-explanatory-variables"><i class="fa fa-check"></i><b>2.1.4</b> Model with Multiple Explanatory Variables</a></li>
 <li class="chapter" data-level="2.1.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-no-explanatory-variable"><i class="fa fa-check"></i><b>2.1.5</b> Model with No Explanatory Variable</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variability-explained-by-a-model"><i class="fa fa-check"></i><b>2.2</b> Variability Explained by a Model</a>
-<ul>
+<li class="chapter" data-level="2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variability-explained-by-a-model"><i class="fa fa-check"></i><b>2.2</b> Variability Explained by a Model</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#quantifying-variability"><i class="fa fa-check"></i><b>2.2.1</b> Quantifying Variability</a></li>
 <li class="chapter" data-level="2.2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#total-variability"><i class="fa fa-check"></i><b>2.2.2</b> Total Variability</a></li>
 <li class="chapter" data-level="2.2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#residuals"><i class="fa fa-check"></i><b>2.2.3</b> Residuals</a></li>
@@ -185,8 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.9" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#r2-visually"><i class="fa fa-check"></i><b>2.2.9</b> <span class="math inline">\(R^2\)</span> Visually</a></li>
 <li class="chapter" data-level="2.2.10" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-comparison-summary"><i class="fa fa-check"></i><b>2.2.10</b> Model Comparison Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#models-with-interaction"><i class="fa fa-check"></i><b>2.3</b> Models with Interaction</a>
-<ul>
+<li class="chapter" data-level="2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#models-with-interaction"><i class="fa fa-check"></i><b>2.3</b> Models with Interaction</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#definition-of-interaction"><i class="fa fa-check"></i><b>2.3.1</b> Definition of Interaction</a></li>
 <li class="chapter" data-level="2.3.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-term"><i class="fa fa-check"></i><b>2.3.2</b> Interaction Term</a></li>
 <li class="chapter" data-level="2.3.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-models-in-r"><i class="fa fa-check"></i><b>2.3.3</b> Interaction Models in R</a></li>
@@ -194,15 +187,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#considerations-for-using-interactions"><i class="fa fa-check"></i><b>2.3.5</b> Considerations for Using Interactions</a></li>
 <li class="chapter" data-level="2.3.6" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-vs-correlation"><i class="fa fa-check"></i><b>2.3.6</b> Interaction vs Correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#least-squares-estimation-lse"><i class="fa fa-check"></i><b>2.4</b> Least Squares Estimation (LSE)</a>
-<ul>
+<li class="chapter" data-level="2.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#least-squares-estimation-lse"><i class="fa fa-check"></i><b>2.4</b> Least Squares Estimation (LSE)</a><ul>
 <li class="chapter" data-level="2.4.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#line-of-best-fit"><i class="fa fa-check"></i><b>2.4.1</b> Line of Best Fit</a></li>
 <li class="chapter" data-level="2.4.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#lse-in-simple-linear-regression"><i class="fa fa-check"></i><b>2.4.2</b> LSE in Simple Linear Regression</a></li>
 <li class="chapter" data-level="2.4.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#lse-for-categorical-variable"><i class="fa fa-check"></i><b>2.4.3</b> LSE for Categorical Variable</a></li>
 <li class="chapter" data-level="2.4.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#lse-more-generally"><i class="fa fa-check"></i><b>2.4.4</b> LSE More Generally</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>2.5</b> ANalysis Of VAriance</a>
-<ul>
+<li class="chapter" data-level="2.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>2.5</b> ANalysis Of VAriance</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#submodels"><i class="fa fa-check"></i><b>2.5.1</b> Submodels</a></li>
 <li class="chapter" data-level="2.5.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#f-statistics"><i class="fa fa-check"></i><b>2.5.2</b> F-Statistics</a></li>
 <li class="chapter" data-level="2.5.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#comparing-3-or-more-categories"><i class="fa fa-check"></i><b>2.5.3</b> Comparing 3 or More Categories</a></li>
@@ -210,10 +201,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#alternative-f-statistic-formula"><i class="fa fa-check"></i><b>2.5.5</b> Alternative F-Statistic Formula</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html"><i class="fa fa-check"></i><b>3</b> Hypothesis Testing via Permutation</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#test-for-difference-in-means"><i class="fa fa-check"></i><b>3.1</b> Test for Difference in Means</a>
-<ul>
+<li class="chapter" data-level="3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html"><i class="fa fa-check"></i><b>3</b> Hypothesis Testing via Permutation</a><ul>
+<li class="chapter" data-level="3.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#test-for-difference-in-means"><i class="fa fa-check"></i><b>3.1</b> Test for Difference in Means</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#mercury-levels-in-florida-lakes"><i class="fa fa-check"></i><b>3.1.1</b> Mercury Levels in Florida Lakes</a></li>
 <li class="chapter" data-level="3.1.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#model-for-mercury-level"><i class="fa fa-check"></i><b>3.1.2</b> Model for Mercury Level</a></li>
 <li class="chapter" data-level="3.1.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#hypotheses-and-key-question"><i class="fa fa-check"></i><b>3.1.3</b> Hypotheses and Key Question</a></li>
@@ -222,8 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.6" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#r-code-for-permutation-test"><i class="fa fa-check"></i><b>3.1.6</b> R Code for Permutation Test</a></li>
 <li class="chapter" data-level="3.1.7" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#p-values"><i class="fa fa-check"></i><b>3.1.7</b> p-values</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#more-permutation-tests"><i class="fa fa-check"></i><b>3.2</b> More Permutation Tests</a>
-<ul>
+<li class="chapter" data-level="3.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#more-permutation-tests"><i class="fa fa-check"></i><b>3.2</b> More Permutation Tests</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#other-test-statistics"><i class="fa fa-check"></i><b>3.2.1</b> Other Test Statistics</a></li>
 <li class="chapter" data-level="3.2.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#general-permutation-test-procedure"><i class="fa fa-check"></i><b>3.2.2</b> General Permutation Test Procedure</a></li>
 <li class="chapter" data-level="3.2.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#difference-in-standard-deviation"><i class="fa fa-check"></i><b>3.2.3</b> Difference in Standard Deviation</a></li>
@@ -232,15 +220,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#hypothesis-testing-cautions"><i class="fa fa-check"></i><b>3.3</b> Hypothesis Testing Cautions</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>4</b> Interval Estimation</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="interval-estimation.html"><a href="interval-estimation.html#sampling-distributions"><i class="fa fa-check"></i><b>4.1</b> Sampling Distributions</a>
-<ul>
+<li class="chapter" data-level="4" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>4</b> Interval Estimation</a><ul>
+<li class="chapter" data-level="4.1" data-path="interval-estimation.html"><a href="interval-estimation.html#sampling-distributions"><i class="fa fa-check"></i><b>4.1</b> Sampling Distributions</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="interval-estimation.html"><a href="interval-estimation.html#sampling-from-a-population"><i class="fa fa-check"></i><b>4.1.1</b> Sampling From a Population</a></li>
 <li class="chapter" data-level="4.1.2" data-path="interval-estimation.html"><a href="interval-estimation.html#confidence-intervals"><i class="fa fa-check"></i><b>4.1.2</b> Confidence Intervals</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrapping"><i class="fa fa-check"></i><b>4.2</b> Bootstrapping</a>
-<ul>
+<li class="chapter" data-level="4.2" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrapping"><i class="fa fa-check"></i><b>4.2</b> Bootstrapping</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="interval-estimation.html"><a href="interval-estimation.html#mercury-levels-in-florida-lakes-1"><i class="fa fa-check"></i><b>4.2.1</b> Mercury Levels in Florida Lakes</a></li>
 <li class="chapter" data-level="4.2.2" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrap-sampling"><i class="fa fa-check"></i><b>4.2.2</b> Bootstrap Sampling</a></li>
 <li class="chapter" data-level="4.2.3" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrap-samples-of-lakes"><i class="fa fa-check"></i><b>4.2.3</b> Bootstrap Samples of Lakes</a></li>
@@ -248,8 +233,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.5" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrap-se-confidence-interval"><i class="fa fa-check"></i><b>4.2.5</b> Bootstrap SE Confidence Interval</a></li>
 <li class="chapter" data-level="4.2.6" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrap-distribution-vs-sampling-distribution"><i class="fa fa-check"></i><b>4.2.6</b> Bootstrap Distribution vs Sampling Distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrap-confidence-interval-example"><i class="fa fa-check"></i><b>4.3</b> Bootstrap Confidence Interval Example</a>
-<ul>
+<li class="chapter" data-level="4.3" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrap-confidence-interval-example"><i class="fa fa-check"></i><b>4.3</b> Bootstrap Confidence Interval Example</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrapping-other-statistics"><i class="fa fa-check"></i><b>4.3.1</b> Bootstrapping Other Statistics</a></li>
 <li class="chapter" data-level="4.3.2" data-path="interval-estimation.html"><a href="interval-estimation.html#ci-for-mean"><i class="fa fa-check"></i><b>4.3.2</b> CI for Mean</a></li>
 <li class="chapter" data-level="4.3.3" data-path="interval-estimation.html"><a href="interval-estimation.html#ci-for-standard-deviation"><i class="fa fa-check"></i><b>4.3.3</b> CI for Standard Deviation</a></li>
@@ -261,10 +245,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrapping-cautions"><i class="fa fa-check"></i><b>4.4</b> Bootstrapping Cautions</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html"><i class="fa fa-check"></i><b>5</b> Normal Error Regression Model</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#estimating-standard-error"><i class="fa fa-check"></i><b>5.1</b> Estimating Standard Error</a>
-<ul>
+<li class="chapter" data-level="5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html"><i class="fa fa-check"></i><b>5</b> Normal Error Regression Model</a><ul>
+<li class="chapter" data-level="5.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#estimating-standard-error"><i class="fa fa-check"></i><b>5.1</b> Estimating Standard Error</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#standard-error-vs-standard-deviation"><i class="fa fa-check"></i><b>5.1.1</b> Standard Error vs Standard Deviation</a></li>
 <li class="chapter" data-level="5.1.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#sample-size-and-standard-error"><i class="fa fa-check"></i><b>5.1.2</b> Sample Size and Standard Error</a></li>
 <li class="chapter" data-level="5.1.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#standard-error-formulas"><i class="fa fa-check"></i><b>5.1.3</b> Standard Error Formulas</a></li>
@@ -274,8 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#theory-based-confidence-intervals"><i class="fa fa-check"></i><b>5.1.7</b> Theory-Based Confidence Intervals</a></li>
 <li class="chapter" data-level="5.1.8" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#ci-method-comparison"><i class="fa fa-check"></i><b>5.1.8</b> CI Method Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#theory-based-hypothesis-tests"><i class="fa fa-check"></i><b>5.2</b> Theory-Based Hypothesis Tests</a>
-<ul>
+<li class="chapter" data-level="5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#theory-based-hypothesis-tests"><i class="fa fa-check"></i><b>5.2</b> Theory-Based Hypothesis Tests</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#lm-summary-output"><i class="fa fa-check"></i><b>5.2.1</b> <code>lm</code> <code>summary</code> Output</a></li>
 <li class="chapter" data-level="5.2.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#n-vs-s-florida-lakes"><i class="fa fa-check"></i><b>5.2.2</b> N vs S Florida Lakes</a></li>
 <li class="chapter" data-level="5.2.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#recall-permuation-test"><i class="fa fa-check"></i><b>5.2.3</b> Recall Permuation Test</a></li>
@@ -287,18 +268,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#f-distributions"><i class="fa fa-check"></i><b>5.3</b> F-Distributions</a></li>
 <li class="chapter" data-level="5.4" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#theory-based-inference-cautions"><i class="fa fa-check"></i><b>5.4</b> Theory-Based Inference Cautions</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html"><i class="fa fa-check"></i><b>6</b> Normal Error Regression Model</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#the-normal-error-regression-model"><i class="fa fa-check"></i><b>6.1</b> The Normal Error Regression Model</a>
-<ul>
+<li class="chapter" data-level="6" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html"><i class="fa fa-check"></i><b>6</b> Normal Error Regression Model</a><ul>
+<li class="chapter" data-level="6.1" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#the-normal-error-regression-model"><i class="fa fa-check"></i><b>6.1</b> The Normal Error Regression Model</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#example-ice-cream-dispensor"><i class="fa fa-check"></i><b>6.1.1</b> Example: Ice Cream Dispensor</a></li>
 <li class="chapter" data-level="6.1.2" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#signal-and-noise"><i class="fa fa-check"></i><b>6.1.2</b> Signal and Noise</a></li>
 <li class="chapter" data-level="6.1.3" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#normal-distribution"><i class="fa fa-check"></i><b>6.1.3</b> Normal Distribution</a></li>
 <li class="chapter" data-level="6.1.4" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#signal-and-noise-in-icecream-example"><i class="fa fa-check"></i><b>6.1.4</b> Signal and Noise in Icecream Example</a></li>
 <li class="chapter" data-level="6.1.5" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#general-mathematical-form"><i class="fa fa-check"></i><b>6.1.5</b> General Mathematical Form</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#inference-in-llsr-model"><i class="fa fa-check"></i><b>6.2</b> Inference in LLSR Model</a>
-<ul>
+<li class="chapter" data-level="6.2" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#inference-in-llsr-model"><i class="fa fa-check"></i><b>6.2</b> Inference in LLSR Model</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#lm-summary-output-1"><i class="fa fa-check"></i><b>6.2.1</b> <code>lm</code> <code>summary</code> Output</a></li>
 <li class="chapter" data-level="6.2.2" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#example-florida-lakes-hypothesis"><i class="fa fa-check"></i><b>6.2.2</b> Example: Florida Lakes Hypothesis</a></li>
 <li class="chapter" data-level="6.2.3" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#t-distribution-1"><i class="fa fa-check"></i><b>6.2.3</b> t-distribution</a></li>
@@ -326,7 +304,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="normal-error-regression-model" class="section level1 hasAnchor" number="5">
+<div id="normal-error-regression-model" class="section level1 hasAnchor">
 <h1><span class="header-section-number">Chapter 5</span> Normal Error Regression Model<a href="normal-error-regression-model.html#normal-error-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><strong>Learning Outcomes:</strong></p>
 <ol style="list-style-type: decimal">
@@ -351,29 +329,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </p></li>
 <li><p>Explain the regression effect.</p></li>
 </ol>
-<div id="estimating-standard-error" class="section level2 hasAnchor" number="5.1">
+<div id="estimating-standard-error" class="section level2 hasAnchor">
 <h2><span class="header-section-number">5.1</span> Estimating Standard Error<a href="normal-error-regression-model.html#estimating-standard-error" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="standard-error-vs-standard-deviation" class="section level3 hasAnchor" number="5.1.1">
+<div id="standard-error-vs-standard-deviation" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.1</span> Standard Error vs Standard Deviation<a href="normal-error-regression-model.html#standard-error-vs-standard-deviation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Recall that standard error is the standard deviation of the distribution of a statistic (sample mean, proportion, regression coefficient, etc.). It describes the amount of variability in this statistic between samples of a given size.</p>
 <p>This is different than the sample standard deviation, which pertains to the amount of variability between individuals in the sample.</p>
 <p>For example, the histogram displays the distribution of mercury levels in our sample of 53 lakes in Florida.</p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="normal-error-regression-model.html#cb462-1" aria-hidden="true" tabindex="-1"></a>Lakes_Hist</span></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="normal-error-regression-model.html#cb462-1"></a>Lakes_Hist</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-329-1.png" width="672" /></p>
 <p>Standard Deviation of Mercury Levels Between Lakes:</p>
-<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="normal-error-regression-model.html#cb463-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(FloridaLakes<span class="sc">$</span>Mercury)</span></code></pre></div>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="normal-error-regression-model.html#cb463-1"></a><span class="kw">sd</span>(FloridaLakes<span class="op">$</span>Mercury)</span></code></pre></div>
 <pre><code>## [1] 0.3410356</code></pre>
 <p>The standard deviation in mercury levels between individual lakes is 0.341 ppm. This describes the amount of variability in mercury levels between individual lakes.</p>
 <p>Bootstrap Distribution for Mean Mercury Level (<span class="math inline">\(n=53\)</span>)</p>
-<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="normal-error-regression-model.html#cb465-1" aria-hidden="true" tabindex="-1"></a>Lakes_Bootstrap_Mean_Plot <span class="sc">+</span> <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">1.5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="normal-error-regression-model.html#cb465-1"></a>Lakes_Bootstrap_Mean_Plot <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">1.5</span>))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-331-1.png" width="672" /></p>
 <p>Standard Error for Mean:</p>
-<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="normal-error-regression-model.html#cb466-1" aria-hidden="true" tabindex="-1"></a>SE <span class="ot">&lt;-</span> <span class="fu">sd</span>(Lakes_Bootstrap_Results_Mean<span class="sc">$</span>Bootstrap_Mean); SE</span></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="normal-error-regression-model.html#cb466-1"></a>SE &lt;-<span class="st"> </span><span class="kw">sd</span>(Lakes_Bootstrap_Results_Mean<span class="op">$</span>Bootstrap_Mean); SE</span></code></pre></div>
 <pre><code>## [1] 0.04655744</code></pre>
 <p>The standard deviation in the distribution for mean mercury levels between different samples of 53 lakes is approximately 0.0465574 ppm. This describes the amount of variability in mean mercury levels between different samples of 53 lakes.</p>
 <p>There is less variability in average among samples of size 53, than there is between mercury levels of individual lakes. Although mercury levels might vary quite a bit between individual lakes, in a sample of size 53, the higher and lower levels tend to average out to something in the middle, resulting in less variability associated with the average than with individual lakes.</p>
 </div>
-<div id="sample-size-and-standard-error" class="section level3 hasAnchor" number="5.1.2">
+<div id="sample-size-and-standard-error" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.2</span> Sample Size and Standard Error<a href="normal-error-regression-model.html#sample-size-and-standard-error" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Question:</strong></p>
 <p>Suppose the sample consisted of 10 lakes, or 30 lakes, or 100 lakes, instead of 53, and that the distribution of the lakes in the sample was otherwise similar to that of the original 53. Would you expect the mercury level of individual lakes to increase, decrease, or stay about the same? What about the standard error of the mean mercury level?</p>
@@ -438,7 +416,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p>As sample size increases, variability between means of different samples decreases. Standard error of the mean decreases. This is also true of standard errors for other statistics (i.e. difference in means, regression slopes, etc.)</p>
 </div>
-<div id="standard-error-formulas" class="section level3 hasAnchor" number="5.1.3">
+<div id="standard-error-formulas" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.3</span> Standard Error Formulas<a href="normal-error-regression-model.html#standard-error-formulas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>So far, we’ve used simulation (permutation tests and bootstrap intervals) to determine the amount of variability associated with a test statistic or estimate, in order to perform hypotheses tests and create confidence intervals. In special situations, there are mathematical formulas, based on probability theory, that can be used to approximate the amount of variability without having to perform the simulations.</p>
 <p>These approximations only exist for certain kinds of statistics, and they are only valid when the sampling distribution for the statistic is symmetric and bell-shaped. Thus, they cannot be used in all situations, and we should be careful to check whether they are appropriate before applying them. Nevertheless, when appropriate, they can allow us to bypass the computation required in a simulation.</p>
@@ -488,16 +466,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>There is no theory-based formula for standard error associated with the median or standard deviation. For these, and many other statistics, we rely on simulation to estimate variability between samples.</p>
 <p>There are formulas for standard errors associated with coefficients in multiple regression, but these require mathematics beyond what is assumed in this class. They involve linear algebra and matrix inversion, which you can read about <a href="https://web.stanford.edu/~mrosenfe/soc_meth_proj3/matrix_OLS_NYU_notes.pdf">here</a> if you are interested.</p>
 </div>
-<div id="one-sample-mean-example" class="section level3 hasAnchor" number="5.1.4">
+<div id="one-sample-mean-example" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.4</span> One-Sample Mean Example<a href="normal-error-regression-model.html#one-sample-mean-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We use the first formula to calculate the standard error of the mean mercury concentration associated with samples of 53 lakes.</p>
 <p><span class="math inline">\(SE(\bar{x})=\frac{s}{\sqrt{n}} = \frac{0.341}{\sqrt{53}}=0.04684\)</span></p>
 <p>The calculation in R is shown below.</p>
-<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="normal-error-regression-model.html#cb468-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(FloridaLakes<span class="sc">$</span>Mercury)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">53</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="normal-error-regression-model.html#cb468-1"></a><span class="kw">sd</span>(FloridaLakes<span class="op">$</span>Mercury)<span class="op">/</span><span class="kw">sqrt</span>(<span class="dv">53</span>)</span></code></pre></div>
 <pre><code>## [1] 0.04684485</code></pre>
 <p>The standard error column in the R summary output is calculated using the theory-based formulas.</p>
-<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="normal-error-regression-model.html#cb470-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>FloridaLakes, Mercury<span class="sc">~</span><span class="dv">1</span>)</span>
-<span id="cb470-2"><a href="normal-error-regression-model.html#cb470-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M)</span></code></pre></div>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="normal-error-regression-model.html#cb470-1"></a>M &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>FloridaLakes, Mercury<span class="op">~</span><span class="dv">1</span>)</span>
+<span id="cb470-2"><a href="normal-error-regression-model.html#cb470-2"></a><span class="kw">summary</span>(M)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Mercury ~ 1, data = FloridaLakes)
@@ -514,25 +492,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Residual standard error: 0.341 on 52 degrees of freedom</code></pre>
 <p>Let’s compare this to the standard error we obtained using 10,000 bootstrap simulations.</p>
-<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="normal-error-regression-model.html#cb472-1" aria-hidden="true" tabindex="-1"></a>Lakes_Bootstrap_Mean_Plot</span></code></pre></div>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="normal-error-regression-model.html#cb472-1"></a>Lakes_Bootstrap_Mean_Plot</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-341-1.png" width="672" /></p>
 <p>Bootstrap standard error:</p>
-<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="normal-error-regression-model.html#cb473-1" aria-hidden="true" tabindex="-1"></a>SE <span class="ot">&lt;-</span> <span class="fu">sd</span>(Lakes_Bootstrap_Results_Mean<span class="sc">$</span>Bootstrap_Mean); SE</span></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="normal-error-regression-model.html#cb473-1"></a>SE &lt;-<span class="st"> </span><span class="kw">sd</span>(Lakes_Bootstrap_Results_Mean<span class="op">$</span>Bootstrap_Mean); SE</span></code></pre></div>
 <pre><code>## [1] 0.04655744</code></pre>
 <p>The theory-based formula gives a standard error estimate very close to the one we obtained via bootstrap simulation.</p>
 </div>
-<div id="difference-in-means-example" class="section level3 hasAnchor" number="5.1.5">
+<div id="difference-in-means-example" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.5</span> Difference in Means Example<a href="normal-error-regression-model.html#difference-in-means-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We use the probability-based formula to calculate the standard error for difference in means between 33 lakes in North Florida, and 20 lakes in South Florida</p>
 <p><span class="math display">\[
-SE(\bar{x}_1-\bar{x}_2)=s\sqrt{\frac{1}{n_1}+\frac{1}{n_2}},
+SE(\bar{x}_1-\bar{x}_2)=s\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}, 
 \]</span></p>
-<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="normal-error-regression-model.html#cb475-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(Lakes_M<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">53-2</span>))</span>
-<span id="cb475-2"><a href="normal-error-regression-model.html#cb475-2" aria-hidden="true" tabindex="-1"></a>SE <span class="ot">&lt;-</span> s<span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">20</span><span class="sc">+</span><span class="dv">1</span><span class="sc">/</span><span class="dv">33</span>); SE</span></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="normal-error-regression-model.html#cb475-1"></a>s &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">sum</span>(Lakes_M<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(<span class="dv">53-2</span>))</span>
+<span id="cb475-2"><a href="normal-error-regression-model.html#cb475-2"></a>SE &lt;-<span class="st"> </span>s<span class="op">*</span><span class="kw">sqrt</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">20</span><span class="op">+</span><span class="dv">1</span><span class="op">/</span><span class="dv">33</span>); SE</span></code></pre></div>
 <pre><code>## [1] 0.08984774</code></pre>
 <p>R model summary output:</p>
-<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="normal-error-regression-model.html#cb477-1" aria-hidden="true" tabindex="-1"></a>Lakes_M <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>FloridaLakes, Mercury<span class="sc">~</span>Location)</span>
-<span id="cb477-2"><a href="normal-error-regression-model.html#cb477-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Lakes_M)</span></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="normal-error-regression-model.html#cb477-1"></a>Lakes_M &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>FloridaLakes, Mercury<span class="op">~</span>Location)</span>
+<span id="cb477-2"><a href="normal-error-regression-model.html#cb477-2"></a><span class="kw">summary</span>(Lakes_M)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Mercury ~ Location, data = FloridaLakes)
@@ -552,30 +530,30 @@ SE(\bar{x}_1-\bar{x}_2)=s\sqrt{\frac{1}{n_1}+\frac{1}{n_2}},
 ## Multiple R-squared:  0.1523, Adjusted R-squared:  0.1357 
 ## F-statistic: 9.162 on 1 and 51 DF,  p-value: 0.003868</code></pre>
 <p>Comparison to Bootstrap standard error:</p>
-<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="normal-error-regression-model.html#cb479-1" aria-hidden="true" tabindex="-1"></a>NS_Lakes_Bootstrap_Plot_b1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>NS_Lakes_Bootstrap_Results, <span class="fu">aes</span>(<span class="at">x=</span>Bootstrap_b1)) <span class="sc">+</span>  </span>
-<span id="cb479-2"><a href="normal-error-regression-model.html#cb479-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color=</span><span class="st">&quot;white&quot;</span>, <span class="at">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb479-3"><a href="normal-error-regression-model.html#cb479-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;b1 in Bootstrap Sample&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span></span>
-<span id="cb479-4"><a href="normal-error-regression-model.html#cb479-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Northern vs Southern Lakes: Bootstrap Distribution for b1&quot;</span>) </span>
-<span id="cb479-5"><a href="normal-error-regression-model.html#cb479-5" aria-hidden="true" tabindex="-1"></a>NS_Lakes_Bootstrap_Plot_b1 </span></code></pre></div>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="normal-error-regression-model.html#cb479-1"></a>NS_Lakes_Bootstrap_Plot_b1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>NS_Lakes_Bootstrap_Results, <span class="kw">aes</span>(<span class="dt">x=</span>Bootstrap_b1)) <span class="op">+</span><span class="st">  </span></span>
+<span id="cb479-2"><a href="normal-error-regression-model.html#cb479-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">color=</span><span class="st">&quot;white&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb479-3"><a href="normal-error-regression-model.html#cb479-3"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;b1 in Bootstrap Sample&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="op">+</span></span>
+<span id="cb479-4"><a href="normal-error-regression-model.html#cb479-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Northern vs Southern Lakes: Bootstrap Distribution for b1&quot;</span>) </span>
+<span id="cb479-5"><a href="normal-error-regression-model.html#cb479-5"></a>NS_Lakes_Bootstrap_Plot_b1 </span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-345-1.png" width="672" /></p>
-<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="normal-error-regression-model.html#cb480-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(NS_Lakes_Bootstrap_Results<span class="sc">$</span>Bootstrap_b1)</span></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="normal-error-regression-model.html#cb480-1"></a><span class="kw">sd</span>(NS_Lakes_Bootstrap_Results<span class="op">$</span>Bootstrap_b1)</span></code></pre></div>
 <pre><code>## [1] 0.09620419</code></pre>
 <p>The mathematical standard error approximation is close to the one observed in our simulation, though not exact.</p>
 </div>
-<div id="regression-example" class="section level3 hasAnchor" number="5.1.6">
+<div id="regression-example" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.6</span> Regression Example<a href="normal-error-regression-model.html#regression-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We use the theory-based approach to calculate standard error associated with the slope of the regression line relating mercury level and pH in Florida lakes.</p>
 <p><span class="math inline">\(SE(b_1)=\sqrt{\frac{s^2}{\sum(x_i-\bar{x})^2}}=\sqrt{\frac{1}{n-2}\frac{{\sum(\hat{y}_i-y_i)^2}}{\sum(x_i-\bar{x})^2}}\)</span></p>
-<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="normal-error-regression-model.html#cb482-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>FloridaLakes, Mercury<span class="sc">~</span>pH) <span class="co"># fit model</span></span>
-<span id="cb482-2"><a href="normal-error-regression-model.html#cb482-2" aria-hidden="true" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(M<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">53-2</span>) <span class="co">#calculate s^2</span></span>
-<span id="cb482-3"><a href="normal-error-regression-model.html#cb482-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> FloridaLakes<span class="sc">$</span>pH</span>
-<span id="cb482-4"><a href="normal-error-regression-model.html#cb482-4" aria-hidden="true" tabindex="-1"></a>SSx <span class="ot">&lt;-</span> <span class="fu">sum</span>((x<span class="sc">-</span><span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>) <span class="co">#calculate denominator</span></span>
-<span id="cb482-5"><a href="normal-error-regression-model.html#cb482-5" aria-hidden="true" tabindex="-1"></a>SE <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(s2<span class="sc">/</span>SSx) <span class="co"># calculate SE</span></span>
-<span id="cb482-6"><a href="normal-error-regression-model.html#cb482-6" aria-hidden="true" tabindex="-1"></a>SE</span></code></pre></div>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="normal-error-regression-model.html#cb482-1"></a>M &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>FloridaLakes, Mercury<span class="op">~</span>pH) <span class="co"># fit model</span></span>
+<span id="cb482-2"><a href="normal-error-regression-model.html#cb482-2"></a>s2 &lt;-<span class="st"> </span><span class="kw">sum</span>(M<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(<span class="dv">53-2</span>) <span class="co">#calculate s^2</span></span>
+<span id="cb482-3"><a href="normal-error-regression-model.html#cb482-3"></a>x &lt;-<span class="st"> </span>FloridaLakes<span class="op">$</span>pH</span>
+<span id="cb482-4"><a href="normal-error-regression-model.html#cb482-4"></a>SSx &lt;-<span class="st"> </span><span class="kw">sum</span>((x<span class="op">-</span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span>) <span class="co">#calculate denominator</span></span>
+<span id="cb482-5"><a href="normal-error-regression-model.html#cb482-5"></a>SE &lt;-<span class="st"> </span><span class="kw">sqrt</span>(s2<span class="op">/</span>SSx) <span class="co"># calculate SE</span></span>
+<span id="cb482-6"><a href="normal-error-regression-model.html#cb482-6"></a>SE</span></code></pre></div>
 <pre><code>## [1] 0.03031326</code></pre>
 <p>R model summary output:</p>
-<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="normal-error-regression-model.html#cb484-1" aria-hidden="true" tabindex="-1"></a>Lakes_M_pH <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>FloridaLakes, Mercury<span class="sc">~</span>pH)</span>
-<span id="cb484-2"><a href="normal-error-regression-model.html#cb484-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Lakes_M_pH)</span></code></pre></div>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="normal-error-regression-model.html#cb484-1"></a>Lakes_M_pH &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>FloridaLakes, Mercury<span class="op">~</span>pH)</span>
+<span id="cb484-2"><a href="normal-error-regression-model.html#cb484-2"></a><span class="kw">summary</span>(Lakes_M_pH)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Mercury ~ pH, data = FloridaLakes)
@@ -595,14 +573,14 @@ SE(\bar{x}_1-\bar{x}_2)=s\sqrt{\frac{1}{n_1}+\frac{1}{n_2}},
 ## Multiple R-squared:  0.3311, Adjusted R-squared:  0.318 
 ## F-statistic: 25.24 on 1 and 51 DF,  p-value: 0.000006573</code></pre>
 <p>Comparison to bootstrap standard error:</p>
-<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="normal-error-regression-model.html#cb486-1" aria-hidden="true" tabindex="-1"></a>Lakes_Bootstrap_Plot_Slope</span></code></pre></div>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="normal-error-regression-model.html#cb486-1"></a>Lakes_Bootstrap_Plot_Slope</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-349-1.png" width="672" /></p>
-<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="normal-error-regression-model.html#cb487-1" aria-hidden="true" tabindex="-1"></a>SE_b1 <span class="ot">&lt;-</span> <span class="fu">sd</span>(Lakes_Bootstrap_Slope_Results<span class="sc">$</span>Bootstrap_b1)</span>
-<span id="cb487-2"><a href="normal-error-regression-model.html#cb487-2" aria-hidden="true" tabindex="-1"></a>SE_b1</span></code></pre></div>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="normal-error-regression-model.html#cb487-1"></a>SE_b1 &lt;-<span class="st"> </span><span class="kw">sd</span>(Lakes_Bootstrap_Slope_Results<span class="op">$</span>Bootstrap_b1)</span>
+<span id="cb487-2"><a href="normal-error-regression-model.html#cb487-2"></a>SE_b1</span></code></pre></div>
 <pre><code>## [1] 0.02676588</code></pre>
 <p>The mathematical standard error approximation is again close to the one observed in our simulation.</p>
 </div>
-<div id="theory-based-confidence-intervals" class="section level3 hasAnchor" number="5.1.7">
+<div id="theory-based-confidence-intervals" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.7</span> Theory-Based Confidence Intervals<a href="normal-error-regression-model.html#theory-based-confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If the sampling distribution for a statistic is symmetric and bell-shaped, we can obtain an approximate 95% confidence interval using the formula:</p>
 <p><span class="math display">\[
@@ -611,7 +589,7 @@ SE(\bar{x}_1-\bar{x}_2)=s\sqrt{\frac{1}{n_1}+\frac{1}{n_2}},
 <p>where the standard error is calculated by formula, rather than via bootstrap simulations.</p>
 <p>The <code>confint</code> command in R provides confidence intervals associate with each of the model parameters, which are calculated using the theory-based standard errors</p>
 <p><strong>Confidence Intervals for N vs S Florida Lakes</strong></p>
-<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="normal-error-regression-model.html#cb489-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(Lakes_M)</span></code></pre></div>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="normal-error-regression-model.html#cb489-1"></a><span class="kw">confint</span>(Lakes_M)</span></code></pre></div>
 <pre><code>##                  2.5 %    97.5 %
 ## (Intercept) 0.31374083 0.5353501
 ## LocationS   0.09157768 0.4523314</code></pre>
@@ -623,7 +601,7 @@ SE(\bar{x}_1-\bar{x}_2)=s\sqrt{\frac{1}{n_1}+\frac{1}{n_2}},
 <p>We are 95% confident that the average mercury level among all lakes in South Florida is between 0.09 and 0.45 ppm higher than the average mercury concentration among all lakes in North Florida.</p>
 <p>Note that the use of 2 in the confidence interval formula is an approximation, though one that is reasonable and widely used. Rather than using 2, R uses a value very close to 2, which varies depending on the sample size. Thus R’s calculations will not exactly match the formulas shown, but are similar enough for practical purposes. Remember that in statistics, everything is an approximation.</p>
 <p><strong>Confidence Intervals for pH and Mercury in Florida Lakes</strong></p>
-<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="normal-error-regression-model.html#cb491-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(Lakes_M_pH)</span></code></pre></div>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="normal-error-regression-model.html#cb491-1"></a><span class="kw">confint</span>(Lakes_M_pH)</span></code></pre></div>
 <pre><code>##                  2.5 %      97.5 %
 ## (Intercept)  1.1223897  1.93944769
 ## pH          -0.2131573 -0.09144445</code></pre>
@@ -634,7 +612,7 @@ SE(\bar{x}_1-\bar{x}_2)=s\sqrt{\frac{1}{n_1}+\frac{1}{n_2}},
 <p><span class="math inline">\(\approx -0.15230 \pm 2\times 0.03031\)</span></p>
 <p>We are 95% confident that for each one-unit increase in pH, mercury level is expected to decrease between 0.09 and 0.21 ppm, on average.</p>
 </div>
-<div id="ci-method-comparison" class="section level3 hasAnchor" number="5.1.8">
+<div id="ci-method-comparison" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.8</span> CI Method Comparison<a href="normal-error-regression-model.html#ci-method-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ve now seen 3 different ways to obtain confidence intervals based on statistics calculated from data.</p>
 <p>The table below tells us what must be true of the sampling distribution for a statistic in order to use each technique.</p>
@@ -670,9 +648,9 @@ SE(\bar{x}_1-\bar{x}_2)=s\sqrt{\frac{1}{n_1}+\frac{1}{n_2}},
 </table>
 </div>
 </div>
-<div id="theory-based-hypothesis-tests" class="section level2 hasAnchor" number="5.2">
+<div id="theory-based-hypothesis-tests" class="section level2 hasAnchor">
 <h2><span class="header-section-number">5.2</span> Theory-Based Hypothesis Tests<a href="normal-error-regression-model.html#theory-based-hypothesis-tests" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="lm-summary-output" class="section level3 hasAnchor" number="5.2.1">
+<div id="lm-summary-output" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.1</span> <code>lm</code> <code>summary</code> Output<a href="normal-error-regression-model.html#lm-summary-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Recall our linear model for mercury levels of lakes in Northern Florida, compared to Southern Florida.</p>
 <p>The equation of the model is:</p>
@@ -680,7 +658,7 @@ SE(\bar{x}_1-\bar{x}_2)=s\sqrt{\frac{1}{n_1}+\frac{1}{n_2}},
 \widehat{\text{Mercury}} = \beta_0+\beta_1\times\text{South}
 \]</span></p>
 <p>We fit the model in R and display its summary output below.</p>
-<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="normal-error-regression-model.html#cb493-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Lakes_M)</span></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="normal-error-regression-model.html#cb493-1"></a><span class="kw">summary</span>(Lakes_M)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Mercury ~ Location, data = FloridaLakes)
@@ -714,7 +692,7 @@ SE(\bar{x}_1-\bar{x}_2)=s\sqrt{\frac{1}{n_1}+\frac{1}{n_2}},
 </ul>
 <p>R does not perform its hypothesis test using permutation. Instead, it relies on a mathematical approximation based on probability theory.</p>
 </div>
-<div id="n-vs-s-florida-lakes" class="section level3 hasAnchor" number="5.2.2">
+<div id="n-vs-s-florida-lakes" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.2</span> N vs S Florida Lakes<a href="normal-error-regression-model.html#n-vs-s-florida-lakes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Hypothesis Test for line (intercept)</strong></p>
 <p><strong>Null Hypothesis:</strong> The average mercury level among all lakes in North Florida is 0 (<span class="math inline">\(\beta_0=0\)</span>).</p>
@@ -725,20 +703,20 @@ SE(\bar{x}_1-\bar{x}_2)=s\sqrt{\frac{1}{n_1}+\frac{1}{n_2}},
 <p><strong>Alternative Hypothesis:</strong> There is a difference in average mercury levels in Northern and Southern Florida (<span class="math inline">\(\beta_1\neq 0\)</span>).</p>
 <p>This test is relevant to us.</p>
 </div>
-<div id="recall-permuation-test" class="section level3 hasAnchor" number="5.2.3">
+<div id="recall-permuation-test" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.3</span> Recall Permuation Test<a href="normal-error-regression-model.html#recall-permuation-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Recall our results when we performed this hypothesis test using permutation.</p>
 <p><strong>Permutation Test</strong></p>
-<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="normal-error-regression-model.html#cb495-1" aria-hidden="true" tabindex="-1"></a>NSLakes_SimulationResultsPlot</span></code></pre></div>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="normal-error-regression-model.html#cb495-1"></a>NSLakes_SimulationResultsPlot</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-354-1.png" width="672" /></p>
 <p>p-value:</p>
-<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="normal-error-regression-model.html#cb496-1" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> Lakes_M<span class="sc">$</span>coef[<span class="dv">2</span>] <span class="do">## record value of b1 from actual data</span></span>
-<span id="cb496-2"><a href="normal-error-regression-model.html#cb496-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb496-3"><a href="normal-error-regression-model.html#cb496-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(NSLakes_SimulationResults<span class="sc">$</span>b1Sim) <span class="sc">&gt;</span> <span class="fu">abs</span>(b1))</span></code></pre></div>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="normal-error-regression-model.html#cb496-1"></a>b1 &lt;-<span class="st"> </span>Lakes_M<span class="op">$</span>coef[<span class="dv">2</span>] <span class="co">## record value of b1 from actual data</span></span>
+<span id="cb496-2"><a href="normal-error-regression-model.html#cb496-2"></a></span>
+<span id="cb496-3"><a href="normal-error-regression-model.html#cb496-3"></a><span class="kw">mean</span>(<span class="kw">abs</span>(NSLakes_SimulationResults<span class="op">$</span>b1Sim) <span class="op">&gt;</span><span class="st"> </span><span class="kw">abs</span>(b1))</span></code></pre></div>
 <pre><code>## [1] 0.0039</code></pre>
 <p>Notice that the sampling distribution of our permutation test statistics, simulated under the assumption that the null hypothesis is true, was symmetric and bell-shaped.</p>
 </div>
-<div id="t-distribution" class="section level3 hasAnchor" number="5.2.4">
+<div id="t-distribution" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.4</span> t-distribution<a href="normal-error-regression-model.html#t-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>When the sampling distribution of a test statistic is symmetric and bell-shaped, it can be approximated by a symmetric, bell-shaped curve, called a t-distribution.</p>
 <p>The t-distribution is actually a family of symmetric and bell-shaped curves, each indexed by a parameter called it <em>degrees of freedom</em>. As the number of degrees of freedom increase, the t-distribution converges to a symmetric, bell-shaped curve called a normal distribution.</p>
@@ -752,47 +730,47 @@ t= \frac{{b_j}}{\text{SE}(b_j)}
 <p>The <span class="math inline">\(t=\frac{{b_j}}{\text{SE}(b_j)}\)</span> is called a <strong>t-statistic</strong>.</p>
 <p>We’ll use this t-statistic as the test statistic in our hypothesis test.</p>
 </div>
-<div id="t-test-for-n-vs-s-lakes" class="section level3 hasAnchor" number="5.2.5">
+<div id="t-test-for-n-vs-s-lakes" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.5</span> t-test for N vs S Lakes<a href="normal-error-regression-model.html#t-test-for-n-vs-s-lakes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Test Statistic for Northern vs Southern Lakes</strong></p>
 <p><span class="math inline">\(t=\frac{{b_j}}{\text{SE}(b_j)} = \frac{0.27195}{0.08985} = 3.027\)</span></p>
 <p><strong>Key Question:</strong> What is the probability of getting a t-statistic as extreme as 3.027 if <span class="math inline">\(\beta_1=0\)</span> (i.e. there is no difference in mercury levels between northern and southern lakes).</p>
 <p>We plot the t-statistic of 3.027 that we observed in our data and observe where it lies on a t-distribution.</p>
-<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="normal-error-regression-model.html#cb498-1" aria-hidden="true" tabindex="-1"></a>ts<span class="ot">=</span><span class="fl">3.027</span></span>
-<span id="cb498-2"><a href="normal-error-regression-model.html#cb498-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gf_dist</span>(<span class="st">&quot;t&quot;</span>, <span class="at">df=</span><span class="dv">51</span>, <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">fill =</span> <span class="sc">~</span> (<span class="fu">abs</span>(x)<span class="sc">&lt;</span> <span class="fu">abs</span>(ts)), <span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(ts, <span class="sc">-</span>ts), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)  <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;t&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="normal-error-regression-model.html#cb498-1"></a>ts=<span class="fl">3.027</span></span>
+<span id="cb498-2"><a href="normal-error-regression-model.html#cb498-2"></a><span class="kw">gf_dist</span>(<span class="st">&quot;t&quot;</span>, <span class="dt">df=</span><span class="dv">51</span>, <span class="dt">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="dt">fill =</span> <span class="op">~</span><span class="st"> </span>(<span class="kw">abs</span>(x)<span class="op">&lt;</span><span class="st"> </span><span class="kw">abs</span>(ts)), <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="kw">c</span>(ts, <span class="op">-</span>ts), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;t&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-359-1.png" width="768" /></p>
 <p>The following command calculates the area under the t-curve that is more extreme than our observed t-statistic of <span class="math inline">\(\pm 3.027\)</span>.</p>
 <p>The <code>df</code> value can be found in the “Residual Standard Error” line of the model summary output.</p>
 <p>Note: I will not actually ask you to calculate p-values this way, as we can get them directly from the R-output. This illustration is intended to show you what R is doing behind the scenes to obtain this value.</p>
-<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="normal-error-regression-model.html#cb499-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(ts), <span class="at">df=</span><span class="dv">51</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="normal-error-regression-model.html#cb499-1"></a><span class="dv">2</span><span class="op">*</span><span class="kw">pt</span>(<span class="op">-</span><span class="kw">abs</span>(ts), <span class="dt">df=</span><span class="dv">51</span>)</span></code></pre></div>
 <pre><code>## [1] 0.003866374</code></pre>
 <p>The low p-value gives us strong evidence of a difference in average mercury levels between lakes in Northern and Southern Florida.</p>
 <p>Notice that the t-statistic and p-value we calculated match the values seen on the <code>LocationS</code> line of the R summary output.</p>
 <p>The p-value provided by the t-test is also very similar to the one we obtained previously in the permutation test. This will generally be true, as long as the sampling distribution for our test statistic is symmetric and bell-shaped.</p>
 </div>
-<div id="t-test-for-ph-vs-mercury" class="section level3 hasAnchor" number="5.2.6">
+<div id="t-test-for-ph-vs-mercury" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.6</span> t-test for pH vs Mercury<a href="normal-error-regression-model.html#t-test-for-ph-vs-mercury" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Recall our test for evidence of a relationship between pH and mercury level in Florida lakes.</p>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="normal-error-regression-model.html#cb501-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>FloridaLakes, <span class="fu">aes</span>(<span class="at">y=</span>Mercury, <span class="at">x=</span>pH)) <span class="sc">+</span> </span>
-<span id="cb501-2"><a href="normal-error-regression-model.html#cb501-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb501-3"><a href="normal-error-regression-model.html#cb501-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">10</span>)) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">1.5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="normal-error-regression-model.html#cb501-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>FloridaLakes, <span class="kw">aes</span>(<span class="dt">y=</span>Mercury, <span class="dt">x=</span>pH)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb501-2"><a href="normal-error-regression-model.html#cb501-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb501-3"><a href="normal-error-regression-model.html#cb501-3"></a><span class="st">  </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">10</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">1.5</span>))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-361-1.png" width="672" /></p>
 <p><strong>Null Hypothesis:</strong> Among all Florida lakes, there is no relationship between mercury level and pH. (i.e. <span class="math inline">\(\beta_1=0\)</span>)</p>
 <p><strong>Alternative Hypothesis:</strong> Among all Florida lakes, there is a relationship between mercury level and pH. (i.e. <span class="math inline">\(\beta_1\neq 0\)</span>)</p>
 <p>The permutation distribution and p-value we obtained are shown below.</p>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="normal-error-regression-model.html#cb502-1" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> Lakes_M_pH<span class="sc">$</span>coef[<span class="dv">2</span>] <span class="do">## record value of b1 from actual data</span></span>
-<span id="cb502-2"><a href="normal-error-regression-model.html#cb502-2" aria-hidden="true" tabindex="-1"></a>Lakes_pHSimulationResultsPlot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>Lakes_pHSimulationResults, <span class="fu">aes</span>(<span class="at">x=</span>b1Sim)) <span class="sc">+</span> </span>
-<span id="cb502-3"><a href="normal-error-regression-model.html#cb502-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;lightblue&quot;</span>, <span class="at">color=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb502-4"><a href="normal-error-regression-model.html#cb502-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(b1, <span class="sc">-</span><span class="dv">1</span><span class="sc">*</span>b1), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb502-5"><a href="normal-error-regression-model.html#cb502-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Simulated Value of b1&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb502-6"><a href="normal-error-regression-model.html#cb502-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of b1 under assumption of no relationship&quot;</span>)</span>
-<span id="cb502-7"><a href="normal-error-regression-model.html#cb502-7" aria-hidden="true" tabindex="-1"></a>Lakes_pHSimulationResultsPlot</span></code></pre></div>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="normal-error-regression-model.html#cb502-1"></a>b1 &lt;-<span class="st"> </span>Lakes_M_pH<span class="op">$</span>coef[<span class="dv">2</span>] <span class="co">## record value of b1 from actual data</span></span>
+<span id="cb502-2"><a href="normal-error-regression-model.html#cb502-2"></a>Lakes_pHSimulationResultsPlot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Lakes_pHSimulationResults, <span class="kw">aes</span>(<span class="dt">x=</span>b1Sim)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb502-3"><a href="normal-error-regression-model.html#cb502-3"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>, <span class="dt">color=</span><span class="st">&quot;white&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb502-4"><a href="normal-error-regression-model.html#cb502-4"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="kw">c</span>(b1, <span class="dv">-1</span><span class="op">*</span>b1), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb502-5"><a href="normal-error-regression-model.html#cb502-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Simulated Value of b1&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb502-6"><a href="normal-error-regression-model.html#cb502-6"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Distribution of b1 under assumption of no relationship&quot;</span>)</span>
+<span id="cb502-7"><a href="normal-error-regression-model.html#cb502-7"></a>Lakes_pHSimulationResultsPlot</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-362-1.png" width="672" /></p>
 <p><strong>p-value:</strong> Proportion of simulations resulting in value of <span class="math inline">\(b_1\)</span> more extreme than -0.15</p>
-<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="normal-error-regression-model.html#cb503-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(b1Sim) <span class="sc">&gt;</span> <span class="fu">abs</span>(b1))</span></code></pre></div>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="normal-error-regression-model.html#cb503-1"></a><span class="kw">mean</span>(<span class="kw">abs</span>(b1Sim) <span class="op">&gt;</span><span class="st"> </span><span class="kw">abs</span>(b1))</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>The R output for the model summary is shown below.</p>
-<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="normal-error-regression-model.html#cb505-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Lakes_M_pH)</span></code></pre></div>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="normal-error-regression-model.html#cb505-1"></a><span class="kw">summary</span>(Lakes_M_pH)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Mercury ~ pH, data = FloridaLakes)
@@ -816,18 +794,18 @@ t= \frac{{b_j}}{\text{SE}(b_j)}
 <p><span class="math inline">\(t=\frac{{b_j}}{\text{SE}(b_j)} = \frac{-0.15230}{0.03031} = -5.024\)</span></p>
 <p><strong>Key Question:</strong> What is the probability of getting a t-statistic as extreme as -5.024 if <span class="math inline">\(\beta_1=0\)</span> (i.e. there is no relationship between mercury and pH among all Florida lakes).</p>
 <p>We plot the t-statistic of -5.024 that we observed in our data and observe where it lies on a t-distribution.</p>
-<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="normal-error-regression-model.html#cb507-1" aria-hidden="true" tabindex="-1"></a>ts<span class="ot">=</span><span class="sc">-</span><span class="fl">5.024</span></span>
-<span id="cb507-2"><a href="normal-error-regression-model.html#cb507-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gf_dist</span>(<span class="st">&quot;t&quot;</span>, <span class="at">df=</span><span class="dv">51</span>, <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">fill =</span> <span class="sc">~</span> (<span class="fu">abs</span>(x)<span class="sc">&lt;</span> <span class="fu">abs</span>(ts)), <span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(ts, <span class="sc">-</span>ts), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)  <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;t&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="normal-error-regression-model.html#cb507-1"></a>ts=<span class="op">-</span><span class="fl">5.024</span></span>
+<span id="cb507-2"><a href="normal-error-regression-model.html#cb507-2"></a><span class="kw">gf_dist</span>(<span class="st">&quot;t&quot;</span>, <span class="dt">df=</span><span class="dv">51</span>, <span class="dt">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="dt">fill =</span> <span class="op">~</span><span class="st"> </span>(<span class="kw">abs</span>(x)<span class="op">&lt;</span><span class="st"> </span><span class="kw">abs</span>(ts)), <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="kw">c</span>(ts, <span class="op">-</span>ts), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;t&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-365-1.png" width="768" /></p>
 <p>We calculate the area under the t-curve that is more extreme than our observed t-statistic of <span class="math inline">\(\pm 5.024\)</span>.</p>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="normal-error-regression-model.html#cb508-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(ts), <span class="at">df=</span><span class="dv">51</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="normal-error-regression-model.html#cb508-1"></a><span class="dv">2</span><span class="op">*</span><span class="kw">pt</span>(<span class="op">-</span><span class="kw">abs</span>(ts), <span class="dt">df=</span><span class="dv">51</span>)</span></code></pre></div>
 <pre><code>## [1] 0.000006578117</code></pre>
 <p>This matches the very small p-value seen in the R output, and is consistent with our simulation.</p>
 </div>
-<div id="t-test-on-intercept-line" class="section level3 hasAnchor" number="5.2.7">
+<div id="t-test-on-intercept-line" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.7</span> t-test on Intercept Line<a href="normal-error-regression-model.html#t-test-on-intercept-line" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ve talked about the hypothesis test associated with the line <code>pH</code>, in the model summary output. This line pertains to the slope of the line of best fit.</p>
-<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="normal-error-regression-model.html#cb510-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Lakes_M_pH)</span></code></pre></div>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="normal-error-regression-model.html#cb510-1"></a><span class="kw">summary</span>(Lakes_M_pH)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Mercury ~ pH, data = FloridaLakes)
@@ -856,10 +834,10 @@ The parameter associated with the line (Intercept) is <span class="math inline">
 <p>Not every p-value provided by R tells us anything meaningful. Some attempt to answer questions that no one would ever want to ask!</p>
 </div>
 </div>
-<div id="f-distributions" class="section level2 hasAnchor" number="5.3">
+<div id="f-distributions" class="section level2 hasAnchor">
 <h2><span class="header-section-number">5.3</span> F-Distributions<a href="normal-error-regression-model.html#f-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
-<div id="theory-based-inference-cautions" class="section level2 hasAnchor" number="5.4">
+<div id="theory-based-inference-cautions" class="section level2 hasAnchor">
 <h2><span class="header-section-number">5.4</span> Theory-Based Inference Cautions<a href="normal-error-regression-model.html#theory-based-inference-cautions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
@@ -930,7 +908,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

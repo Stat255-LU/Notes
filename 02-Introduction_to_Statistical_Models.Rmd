@@ -166,7 +166,7 @@ The estimates are $b_0=523.8$ and $b_1=1410.6$.
 The model equation is 
 
 \[
-\widehat{\text{Price}} = 523.8 + 1410.6\times \text{Sq.Ft.}
+\widehat{\text{Price}} = 523.8 + 1410.6\times \text{Waterfront}
 \]
 
 **Interpretations**   
@@ -177,7 +177,7 @@ The coefficient $b_1$ represents the expected (or average) difference in respons
 
 * On average, a house that is not on the waterfront is expected to cost 523.8 thousand dollars.  
 
-* On average a house that is not on the waterfront is expected to cost 1410.6 thousand (or 1.4 million) dollars more than a house that is not on the waterfront.   
+* On average a house that is on the waterfront is expected to cost 1410.6 thousand (or 1.4 million) dollars more than a house that is not on the waterfront.   
 
 
 
