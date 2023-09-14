@@ -436,7 +436,7 @@ Notice that the red lines are shorter in the figure on the left, indicating the 
 The difference between the actual and predicted values is called the **residual**. The residual for the $ith$ case is 
 
 \[
-r_i = (y_i-\hat{y}_i)^2
+r_i = (y_i-\hat{y}_i)
 \]
 
 We'll calculate the residuals for the first three houses in the dataset, shown below.
