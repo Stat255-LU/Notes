@@ -982,11 +982,39 @@ The fact that there is a correlation between explanatory variables is NOT a reas
 ## Least Squares Estimation (LSE)
 
 
-### Line of Best Fit
+### Estimating Regression Coefficients
 
-In this section, we'll discuss how the "line of best fit" and regression coefficients ($b_j$) we've seen are obtained. 
+We've already used R to determine the estimates of $b_0$, $b_1$, $b_2$, and $b_3$ in various kinds of linear models. At this point, it is natural to wonder where these estimates are come from. 
 
-Let's start with the model for predicting price of a house, using only size in square feet as an explanatory variable. 
+Regression coefficients $b_0, b_1, \ldots, b_p$ are chosen in a way that minimizes the sum of the squared differences between the observed and predicted values. That is, we minimize 
+
+\[
+\text{SSR} = \displaystyle\sum_{i=1}^{n} (y_i-\hat{y}_i)^2
+\]
+
+Because $\hat{y}_i$ is a function of $b_0, b_1, \ldots, b_p$, we can choose the values of $b_0, b_1, \ldots, b_p$ in a way that minimizes SSR. 
+
+\[\text{SSR} = \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  = \displaystyle\sum_{i=1}^n (y_i -(b_0 + b_1x_{i1} + b_2x_{i2} + \ldots + b_px_{ip}))^2 \]
+
+The process of estimating regression coefficients $b_0, b_1, \ldots, b_p$ in a way that minimizes SSR is called **least-squares estimation**. 
+
+**Example: Model with one quantitative variable**
+
+We start with an example of estimating the regression coefficients for a model with a single explanatory variable. This is easy to illustrate, since we can draw a scatter plot displaying our explanatory and response variable. 
+
+The figure below illustrates four possible trend lines that could be fit to a set of 10 points in a scatter plot. The first line is the line of best fit, in that it makes the sum of the squared residuals the smallest of all possible lines that could be drawn. The second through fourth plots all show examples of other trend lines that are not the line of best fit. The sum of squared residuals for each of these models is bigger than for the first one.  
+
+In the illustration, SSR is represented by the total area of the squares. The line of best fit is the one that make the intercept the smallest. 
+
+
+```{r, echo=FALSE, out.width = '75%'}
+knitr::include_graphics("LSE.png")
+```
+
+* This [Rossman-Chance applet](http://www.rossmanchance.com/applets/RegShuffle.htm) provides an illustration of the line of best fit.   
+
+
+Returning to the model for predicting price of a house, using only size in square feet as an explanatory variable, the scatter plot, along with the slope and intercept of the regression line are shown below.  
 
 ```{r, fig.height=2, fig.width=6}
 ggplot(data=Houses, aes(x=sqft_living, y=price)) + geom_point() + 
@@ -997,21 +1025,13 @@ ggplot(data=Houses, aes(x=sqft_living, y=price)) + geom_point() +
 M_House_sqft
 ```
 
-* The line $\text{Price} = -485 + 0.5328 \times \text{Square Feet}$ is considered the "line of best fit" in the sense that it minimizes the sum of the squared residuals. 
+The line $\text{Price} = -485 + 0.5328 \times \text{Square Feet}$ is the "line of best fit" in the sense that it minimizes the sum of the squared residuals (SSR). Any other choices for the slope or intercept of the regression line would result in larger SSR than this line.   
 
 
-```{r, echo=FALSE, out.width = '50%'}
-knitr::include_graphics("LSE.png")
-```
 
+### Mathematics of LSE for SLR
 
-* This [Rossman-Chance applet](http://www.rossmanchance.com/applets/RegShuffle.htm) provides an illustration of the line of best fit.   
-   
-
-
-### LSE in Simple Linear Regression
-
-* Consider a **simple linear regression(SLR)** model, which is one with a singe quantitative explanatory variable $x$.
+* Consider a **simple linear regression(SLR)** model, which is one with a singe quantitative explanatory variable $x$. 
 
 * $\hat{y}_i = b_0+b_1x_i$ 
 
@@ -1036,7 +1056,7 @@ $$
 \end{aligned}
 $$
 
-We need to find the values of $b_0$ and $b_1$ that minimize this expression. This is a 2-dimensional optimization problem that can be solved using multivariable calculus, or numerical or graphical methods.  
+We need to find the values of $b_0$ and $b_1$ that minimize this expression. This is a 2-dimensional optimization problem that can be solved using multivariable calculus or numerical or graphical methods.  
 
 
 Using calculus, it can be shown that this quantity is minimized when 
@@ -1069,7 +1089,7 @@ Using calculus, it can be shown that this quantity is minimized when
 
 \[ \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  = \displaystyle\sum_{i=1}^n (y_i -(b_0 + b_1x_{i1} + b_2x_{i2} + \ldots + b_px_{ip}))^2 \]
 
-* The mathematics, however are more complicated and require inverting a matrix. This goes beyond the scope of this class, so we will let R do the estimation and use the results.   
+* The mathematics, however, are more complicated and require inverting a matrix. This goes beyond the scope of this class, so we will let R do the estimation and use the results.   
 
 * More on least squares estimation in multiple regression can be found [here](http://www.math.chalmers.se/Stat/Grundutb/GU/MSG500/A10/lecture5.pdf). 
 
@@ -1084,11 +1104,11 @@ A model A is defined to be a **submodel** of another model B, if every term in m
 
 | Model | Variables | Unexplained Variability | Variability Explained |  $R^2$ |    
 |------ | ---------- | -----------| -----------|-----------|
-| 0 | None |`r SST` | 0 | 0 | 
-| 1 | Sq. Ft. |`r SSR_sqft` | `r SST-SSR_sqft` | `r (SST-SSR_sqft)/SST` | 
-| 2 | Waterfront |`r SSR_wf` | `r SST-SSR_wf` | `r (SST-SSR_wf)/SST` |
-| 3 | Sq. Ft. and Waterfront |`r SSR_wf_sqft` | `r SST-SSR_wf_sqft` | `r (SST-SSR_wf_sqft)/SST` |
-| 4 | Sq. Ft., Waterfront, and Interaction | `r SSR_int` | `r SST-SSR_int` | `r (SST-SSR_int)/SST` |
+| 0 | None |`r round(SST,0)` | 0 | 0 | 
+| 1 | Sq. Ft. |`r round(SSR_sqft,0)` | `r round(SST-SSR_sqft,0)` | `r round((SST-SSR_sqft)/SST,3)` | 
+| 2 | Waterfront |`r round(SSR_wf,0)` | `r round(SST-SSR_wf,0)` | `r round((SST-SSR_wf)/SST,3)` |
+| 3 | Sq. Ft. and Waterfront |`r round(SSR_wf_sqft,0)` | `r round(SST-SSR_wf_sqft,0)` | `r round((SST-SSR_wf_sqft)/SST,3)` |
+| 4 | Sq. Ft., Waterfront, and Interaction | `r round(SSR_int,0)` | `r round(SST-SSR_int,0)` | `r round((SST-SSR_int)/SST,3)` |
 
 * Model 1 is a submodel of Model 3, since all variables used in Model 1 are also used in Model 3.   
 

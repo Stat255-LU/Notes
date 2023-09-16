@@ -45,8 +45,8 @@ r2-for-interaction-model
 considerations-for-using-interactions
 interaction-vs-correlation
 least-squares-estimation-lse
-line-of-best-fit
-lse-in-simple-linear-regression
+estimating-regression-coefficients
+mathematics-of-lse-for-slr
 lse-for-categorical-variable
 lse-more-generally
 analysis-of-variance
