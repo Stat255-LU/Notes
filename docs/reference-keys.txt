@@ -64,13 +64,13 @@ permutation-test-for-difference-in-means
 five-permutations-in-r
 r-code-for-permutation-test
 p-values
-more-permutation-tests
+general-permutation-tests
 other-test-statistics
 general-permutation-test-procedure
 difference-in-standard-deviation
 permutation-test-for-slope
 f-statistic
-hypothesis-testing-cautions
+responsible-hypothesis-testing
 interval-estimation
 sampling-distributions
 sampling-from-a-population

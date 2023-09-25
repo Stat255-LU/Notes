@@ -90,7 +90,7 @@ We can use a statistical model to estimate a lake's mercury level, using its loc
 
 The model equation is
 
-$\widehat{\text{Hg}} = b_0 +b_1\text{I}_{\text{South}}$
+$\widehat{\text{Hg}} = b_0 +b_1\times\text{South}$
 
 
 * $b_0$ represents the mean mercury level for lakes in North Florida, and    
@@ -104,7 +104,7 @@ Lakes_M
 ```
 
 
-$\widehat{\text{Hg}} = `r Lakes_M$coef[1]` +`r Lakes_M$coef[2]`\text{I}_{\text{South}}$
+$\widehat{\text{Hg}} = `r Lakes_M$coef[1]` +`r Lakes_M$coef[2]`\times\text{South}$
 
 * $b_1 = 0.272= 0.6965 - 0.4245$ is equal to the difference in mean mercury levels between Northern and Southern lakes. (We've already seen that for categorical variables, the least-squares estimate is the mean, so this makes sense.)  
 
@@ -112,9 +112,9 @@ $\widehat{\text{Hg}} = `r Lakes_M$coef[1]` +`r Lakes_M$coef[2]`\text{I}_{\text{S
 
 ### Hypotheses and Key Question
 
-Since the lakes we observed are only a sample of 53 lakes out of more than 30,000, we cannot assume the difference in mercury concentration for all Northern vs Southern Florida lakes is exactly 0.272. Instead, we need to determine whether a difference of this size in our sample is large enough to provide evidence of a difference in average mercury level between Northern and Southern lakes in Florida. 
+Since the lakes we observed are only a sample of 53 lakes out of more than 30,000, we cannot assume the difference in mercury concentration for **all** Northern vs Southern Florida lakes is exactly 0.272. Instead, we need to determine whether a difference of this size in our sample is large enough to provide evidence of a difference in average mercury level between **all**  Northern and Southern lakes in Florida. 
 
-One possible explanation for us getting the results we did in our sample is that there really is no difference in average mercury levels between lakes in Northern and Southern Florida, and we just happened, by chance, to select more lakes with higher mercury concentrations in Southern Florida than in Northern Florida. A different possible explanation is that there really is a difference in average mercury level between lakes in Northern and Southern Florida.    
+One possible explanation for us getting the results we did in our sample is that there really is no difference in average mercury levels between all lakes in Northern and Southern Florida, and we just happened, by chance, to select more lakes with higher mercury concentrations in Southern Florida than in Northern Florida. A different possible explanation is that there really is a difference in average mercury level between lakes in Northern and Southern Florida.    
 
 In a statistical investigation, the **null hypothesis** is the one that says there is no difference between groups , or no relationship between variables in the larger population, and that any difference/relationship observed in our sample occurred merely by chance. The **alternative hypothesis** contradicts the null hypothesis, stating that there is a difference/relationship. 
 
@@ -148,9 +148,12 @@ We'll simulate situations where there is no relationship between location and me
 4. Analyze the distribution of the test statistic (mean difference), simulated under the assumption that there is no relationship between location and mercury level. Look whether the value of the test statistic we observed in the sample (0.272) is consistent with values simulated under the assumption that the null hypothesis is true.  
 
 
+This simulation can be performed using this [Rossman-Chance App](http://www.rossmanchance.com/applets/2021/anovashuffle/AnovaShuffle.htm?hideExtras=2).  
+
+
 ### Five Permutations in R
 
-We'll use R to perform permutation tests in the same manner as is done in the Art of Stat App.    
+We'll use R to perform permutation test.    
 
 **First Permutation**
 
@@ -372,47 +375,7 @@ knitr::include_graphics("pvals.png")
 
 
 
-**What to conclude from p-values and what not to:** 
-
-  - A low p-value provides evidence against the null hypothesis. It suggests the test statistic we observed is inconsistent with the null hypothesis.       
-       
-  - A low p-value does **not** tell us that the difference or relationship we observed is meaningful in a practical sense. Researchers should look at the size of the difference or strength of the relationship in the sample before deciding whether it merits being acted upon.  
-    
-  - A high p-value means that the data could have plausibly been obtained when the null hypothesis is true. The test statistic we observed is consistent with what we would have expected to see when the null hypothesis is true, and thus we cannot rule out the null hypothesis.     
-  
-  - A high p-value does **not** mean that the null hypothesis is true or probably true. A p-value can only tell us the strength of evidence against the null hypothesis, and should never be interpreted as support for the null hypothesis. 
-      
-Just because our result is consistent with the null hypothesis does not mean that we should believe that null hypothesis is true. Lack of evidence against a claim does not necessarily mean that the claim is true.  
-
-In this scenario, we got a small p-value, but we should also be aware of what we should conclude if the p-value is large. Remember that the p-value only measures the strength of evidence *against* the null hypothesis. A large p-value means we lack evidence against the null hypothesis. This does not mean, however, that we have evidence *supporting* null hypothesis.
-
-A hypothesis test can be thought of as being analogous to a courtroom trial, where the null hypothesis is that the defendant did not commit the crime. Suppose that after each side presents evidence, the jury remains unsure whether the defendant committed the crime. Since the jury does not have enough evidence to be sure, they must, under the law of the United States find the defendant "not guilty." This does not mean that the jury thinks the defendant is innocent, only that they do not have enough evidence to be sure they are guilty. Similarly in a hypothesis test, a large p-value indicates a lack of evidence against the null hypothesis, rather than evidence supporting it. As such, we should avoid statements suggesting we "support", "accept", or "believe" the null hypothesis, and simply state that we lack evidence against it. 
-
-
-**Things to say when the p-value is large:**  
-
-- The data are consistent with the null hypothesis.     
-- We do not have enough evidence against the null hypothesis.    
-- We cannot reject the null hypothesis.    
-- The null hypothesis is plausible.   
-
-
-**Things NOT to say when the p-value is large:**    
-
-- The data support the null hypothesis.   
-- The data provide evidence for the null hypothesis.    
-- We accept the null hypothesis.     
-- We conclude that the null hypothesis is true.      
-
-Thus, if we had obtained a large p-value in our study, the appropriate conclusion would be
-
-"We do not have evidence that the average mercury level differs between lakes in Northern Florida, compared to Southern Florida."
-
-Even if we got a large p-value it would be incorrect to say "There is no difference in average mercury levels between lakes in Northern Florida and Southern Florida."
-
-We would just be saying that given the size of our sample and the amount of variability on the date, we cannot rule out the possibility of observing a difference like we did by chance, when there really is no difference. 
-
-## More Permutation Tests
+## General Permutation Tests
 
 ### Other Test Statistics
 
@@ -912,10 +875,70 @@ It is important to note that we are not saying that we believe the average price
 
 
 
-## Hypothesis Testing Cautions
+## Responsible Hypothesis Testing
+
+While hypothesis tests are a powerful tool in statistics, they are also one that has been widely misused, to the detriment of scientific research. The hard caused by these misuses caused the American Statistical Association to release a [2016 statement](https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf), intended to provide guidance and clarification to scientists who use hypothesis testing and p-values in their research. 
+
+The statement provides the following six principles for responsible use of hypothesis tests and p-values.
+
+1. P-values can indicate how incompatible the data are with a specified statistical model.    
+
+2. P-values do not measure the probability that the studied hypothesis is true, or the probability that the data were produced by random chance alone.     
+
+3. Scientific conclusions and business or policy decisions should not be based only on whether a p-value passes a specific threshold.     
+
+4. Proper inference requires full reporting and transparency.     
+
+5. A p-value, or statistical significance, does not measure the size of an effect or the importance of a result.     
+
+6. By itself, a p-value does not provide a good measure of evidence regarding a model or hypothesis.
+
+
+The statement provides important guidance for us to consider as we work with hypothesis testing in this class, as well as in future classes and potentially in our own research.   
+
 
 * A hypothesis test can only tell us the strength of evidence against the null hypothesis. The absence of evidence against the null hypothesis should not be interpreted as evidence for the null hypothesis.  
 
 * We should never say that the data support/prove/confirm the null hypothesis. 
 
 * We can only say that the data do not provide evidence against the null hypothesis.     
+
+**What to conclude from p-values and what not to:** 
+
+  - A low p-value provides evidence against the null hypothesis. It suggests the test statistic we observed is inconsistent with the null hypothesis.       
+       
+  - A low p-value does **not** tell us that the difference or relationship we observed is meaningful in a practical sense. Researchers should look at the size of the difference or strength of the relationship in the sample before deciding whether it merits being acted upon.  
+    
+  - A high p-value means that the data could have plausibly been obtained when the null hypothesis is true. The test statistic we observed is consistent with what we would have expected to see when the null hypothesis is true, and thus we cannot rule out the null hypothesis.     
+  
+  - A high p-value does **not** mean that the null hypothesis is true or probably true. A p-value can only tell us the strength of evidence against the null hypothesis, and should never be interpreted as support for the null hypothesis. 
+      
+Just because our result is consistent with the null hypothesis does not mean that we should believe that null hypothesis is true. Lack of evidence against a claim does not necessarily mean that the claim is true.  
+
+In this scenario, we got a small p-value, but we should also be aware of what we should conclude if the p-value is large. Remember that the p-value only measures the strength of evidence *against* the null hypothesis. A large p-value means we lack evidence against the null hypothesis. This does not mean, however, that we have evidence *supporting* null hypothesis.
+
+A hypothesis test can be thought of as being analogous to a courtroom trial, where the null hypothesis is that the defendant did not commit the crime. Suppose that after each side presents evidence, the jury remains unsure whether the defendant committed the crime. Since the jury does not have enough evidence to be sure, they must, under the law of the United States find the defendant "not guilty." This does not mean that the jury thinks the defendant is innocent, only that they do not have enough evidence to be sure they are guilty. Similarly in a hypothesis test, a large p-value indicates a lack of evidence against the null hypothesis, rather than evidence supporting it. As such, we should avoid statements suggesting we "support", "accept", or "believe" the null hypothesis, and simply state that we lack evidence against it. 
+
+
+**Things to say when the p-value is large:**  
+
+- The data are consistent with the null hypothesis.     
+- We do not have enough evidence against the null hypothesis.    
+- We cannot reject the null hypothesis.    
+- The null hypothesis is plausible.   
+
+
+**Things NOT to say when the p-value is large:**    
+
+- The data support the null hypothesis.   
+- The data provide evidence for the null hypothesis.    
+- We accept the null hypothesis.     
+- We conclude that the null hypothesis is true.      
+
+Thus, if we had obtained a large p-value in the comparison in mercury levels between Northern and Southern lakes, the appropriate conclusion would be
+
+"We do not have evidence that the average mercury level differs between lakes in Northern Florida, compared to Southern Florida."
+
+Even if we got a large p-value it would be incorrect to say "There is no difference in average mercury levels between lakes in Northern Florida and Southern Florida."
+
+We would just be saying that given the size of our sample and the amount of variability on the date, we cannot rule out the possibility of observing a difference like we did by chance, when there really is no difference. 
