@@ -569,13 +569,13 @@ names(Shuffle1df) <- c("Lake", "Mercury", "pH", "Shuffled_pH")
 kable(head(Shuffle1df))
 ```
 
-A regression line is fit to the shuffled data, shown below. The blue line indicates the slope of the regression line. The red line indicates the regression line for the actual lakes in the sampe, which has a slope of -0.15.  
+The red line indicates the slope of the regression line fit to the shuffled data. The blue line indicates the regression line for the actual lakes in the sampe, which has a slope of -0.15.  
 
 ```{r}
 ggplot(data=Shuffle1df, aes(x=Shuffled_pH, y=Mercury)) + 
-  geom_point() + stat_smooth(method="lm", se=FALSE) + 
+  geom_point() + stat_smooth(method="lm", se=FALSE, color="red") + 
   xlim(c(3, 10)) + ylim(c(0,1.5)) + 
-  geom_abline(slope=-0.1523, intercept=1.5309, color="red")
+  geom_abline(slope=-0.1523, intercept=1.5309, color="blue")
 ```
 
 Slope of regression line from permuted data:   
@@ -603,9 +603,9 @@ kable(head(Shuffle2df))
 
 ```{r}
 ggplot(data=Shuffle2df, aes(x=Shuffled_pH, y=Mercury)) + 
-  geom_point() + stat_smooth(method="lm", se=FALSE) + 
+  geom_point() + stat_smooth(method="lm", se=FALSE, color="red") + 
   xlim(c(3, 10)) + ylim(c(0,1.5)) + 
-  geom_abline(slope=-0.1523, intercept=1.5309, color="red")
+  geom_abline(slope=-0.1523, intercept=1.5309, color="blue")
 ```
 
 Slope of regression line from permuted data:   
@@ -631,9 +631,9 @@ kable(head(Shuffle3df))
 
 ```{r}
 ggplot(data=Shuffle3df, aes(x=Shuffled_pH, y=Mercury)) + 
-  geom_point() + stat_smooth(method="lm", se=FALSE) + 
+  geom_point() + stat_smooth(method="lm", se=FALSE, color="red") + 
   xlim(c(3, 10)) + ylim(c(0,1.5)) + 
-  geom_abline(slope=-0.1523, intercept=1.5309, color="red")
+  geom_abline(slope=-0.1523, intercept=1.5309, color="blue")
 ```
 
 Slope of regression line from permuted data:   

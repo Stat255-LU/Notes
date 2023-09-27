@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Introduction to Statistical Models | Stat 255: Statistics for Data Science Notes</title>
   <meta name="description" content="Chapter 2 Introduction to Statistical Models | Stat 255: Statistics for Data Science Notes" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Introduction to Statistical Models | Stat 255: Statistics for Data Science Notes" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Andrew Sage - Lawrence University" />
 
 
-<meta name="date" content="2023-09-24" />
+<meta name="date" content="2023-09-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -49,24 +49,25 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -86,13 +87,13 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -137,15 +138,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Exploratory Data Analysis</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#getting-started-in-r"><i class="fa fa-check"></i><b>1.1</b> Getting Started in R</a>
-<ul>
+<li class="chapter" data-level="1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Exploratory Data Analysis</a><ul>
+<li class="chapter" data-level="1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#getting-started-in-r"><i class="fa fa-check"></i><b>1.1</b> Getting Started in R</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#previewing-the-data"><i class="fa fa-check"></i><b>1.1.1</b> Previewing the Data</a></li>
 <li class="chapter" data-level="1.1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#modifying-the-data"><i class="fa fa-check"></i><b>1.1.2</b> Modifying the Data</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-visualization"><i class="fa fa-check"></i><b>1.2</b> Data Visualization</a>
-<ul>
+<li class="chapter" data-level="1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-visualization"><i class="fa fa-check"></i><b>1.2</b> Data Visualization</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#histogram"><i class="fa fa-check"></i><b>1.2.1</b> Histogram</a></li>
 <li class="chapter" data-level="1.2.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#density-plot"><i class="fa fa-check"></i><b>1.2.2</b> Density Plot</a></li>
 <li class="chapter" data-level="1.2.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#boxplot"><i class="fa fa-check"></i><b>1.2.3</b> Boxplot</a></li>
@@ -156,24 +154,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2.8" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#correlation-plot"><i class="fa fa-check"></i><b>1.2.8</b> Correlation Plot</a></li>
 <li class="chapter" data-level="1.2.9" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#scatterplot-matrix"><i class="fa fa-check"></i><b>1.2.9</b> Scatterplot Matrix</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#summary-tables"><i class="fa fa-check"></i><b>1.3</b> Summary Tables</a>
-<ul>
+<li class="chapter" data-level="1.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#summary-tables"><i class="fa fa-check"></i><b>1.3</b> Summary Tables</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#calculating-summary-statistics"><i class="fa fa-check"></i><b>1.3.1</b> Calculating Summary Statistics</a></li>
 <li class="chapter" data-level="1.3.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#grouped-summaries"><i class="fa fa-check"></i><b>1.3.2</b> Grouped Summaries</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html"><i class="fa fa-check"></i><b>2</b> Introduction to Statistical Models</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#fitting-models-to-data"><i class="fa fa-check"></i><b>2.1</b> Fitting Models to Data</a>
-<ul>
+<li class="chapter" data-level="2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html"><i class="fa fa-check"></i><b>2</b> Introduction to Statistical Models</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#fitting-models-to-data"><i class="fa fa-check"></i><b>2.1</b> Fitting Models to Data</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#terminology"><i class="fa fa-check"></i><b>2.1.1</b> Terminology</a></li>
 <li class="chapter" data-level="2.1.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-quantitative-explanatory-variable"><i class="fa fa-check"></i><b>2.1.2</b> Model with Quantitative Explanatory Variable</a></li>
 <li class="chapter" data-level="2.1.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-categorical-variable"><i class="fa fa-check"></i><b>2.1.3</b> Model with Categorical Variable</a></li>
 <li class="chapter" data-level="2.1.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-multiple-explanatory-variables"><i class="fa fa-check"></i><b>2.1.4</b> Model with Multiple Explanatory Variables</a></li>
 <li class="chapter" data-level="2.1.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-no-explanatory-variable"><i class="fa fa-check"></i><b>2.1.5</b> Model with No Explanatory Variable</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variability-explained-by-a-model"><i class="fa fa-check"></i><b>2.2</b> Variability Explained by a Model</a>
-<ul>
+<li class="chapter" data-level="2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variability-explained-by-a-model"><i class="fa fa-check"></i><b>2.2</b> Variability Explained by a Model</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#quantifying-variability"><i class="fa fa-check"></i><b>2.2.1</b> Quantifying Variability</a></li>
 <li class="chapter" data-level="2.2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#total-variability"><i class="fa fa-check"></i><b>2.2.2</b> Total Variability</a></li>
 <li class="chapter" data-level="2.2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#residuals"><i class="fa fa-check"></i><b>2.2.3</b> Residuals</a></li>
@@ -185,8 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.9" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#r2-visually"><i class="fa fa-check"></i><b>2.2.9</b> <span class="math inline">\(R^2\)</span> Visually</a></li>
 <li class="chapter" data-level="2.2.10" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-comparison-summary"><i class="fa fa-check"></i><b>2.2.10</b> Model Comparison Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#models-with-interaction"><i class="fa fa-check"></i><b>2.3</b> Models with Interaction</a>
-<ul>
+<li class="chapter" data-level="2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#models-with-interaction"><i class="fa fa-check"></i><b>2.3</b> Models with Interaction</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#definition-of-interaction"><i class="fa fa-check"></i><b>2.3.1</b> Definition of Interaction</a></li>
 <li class="chapter" data-level="2.3.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-term"><i class="fa fa-check"></i><b>2.3.2</b> Interaction Term</a></li>
 <li class="chapter" data-level="2.3.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-models-in-r"><i class="fa fa-check"></i><b>2.3.3</b> Interaction Models in R</a></li>
@@ -194,15 +187,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#considerations-for-using-interactions"><i class="fa fa-check"></i><b>2.3.5</b> Considerations for Using Interactions</a></li>
 <li class="chapter" data-level="2.3.6" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-vs-correlation"><i class="fa fa-check"></i><b>2.3.6</b> Interaction vs Correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#least-squares-estimation-lse"><i class="fa fa-check"></i><b>2.4</b> Least Squares Estimation (LSE)</a>
-<ul>
+<li class="chapter" data-level="2.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#least-squares-estimation-lse"><i class="fa fa-check"></i><b>2.4</b> Least Squares Estimation (LSE)</a><ul>
 <li class="chapter" data-level="2.4.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#estimating-regression-coefficients"><i class="fa fa-check"></i><b>2.4.1</b> Estimating Regression Coefficients</a></li>
 <li class="chapter" data-level="2.4.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#mathematics-of-lse-for-slr"><i class="fa fa-check"></i><b>2.4.2</b> Mathematics of LSE for SLR</a></li>
 <li class="chapter" data-level="2.4.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#lse-for-categorical-variable"><i class="fa fa-check"></i><b>2.4.3</b> LSE for Categorical Variable</a></li>
 <li class="chapter" data-level="2.4.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#lse-more-generally"><i class="fa fa-check"></i><b>2.4.4</b> LSE More Generally</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>2.5</b> ANalysis Of VAriance</a>
-<ul>
+<li class="chapter" data-level="2.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>2.5</b> ANalysis Of VAriance</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#submodels"><i class="fa fa-check"></i><b>2.5.1</b> Submodels</a></li>
 <li class="chapter" data-level="2.5.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#f-statistics"><i class="fa fa-check"></i><b>2.5.2</b> F-Statistics</a></li>
 <li class="chapter" data-level="2.5.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#comparing-3-or-more-categories"><i class="fa fa-check"></i><b>2.5.3</b> Comparing 3 or More Categories</a></li>
@@ -210,10 +201,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#alternative-f-statistic-formula"><i class="fa fa-check"></i><b>2.5.5</b> Alternative F-Statistic Formula</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html"><i class="fa fa-check"></i><b>3</b> Hypothesis Testing via Permutation</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#test-for-difference-in-means"><i class="fa fa-check"></i><b>3.1</b> Test for Difference in Means</a>
-<ul>
+<li class="chapter" data-level="3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html"><i class="fa fa-check"></i><b>3</b> Hypothesis Testing via Permutation</a><ul>
+<li class="chapter" data-level="3.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#test-for-difference-in-means"><i class="fa fa-check"></i><b>3.1</b> Test for Difference in Means</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#mercury-levels-in-florida-lakes"><i class="fa fa-check"></i><b>3.1.1</b> Mercury Levels in Florida Lakes</a></li>
 <li class="chapter" data-level="3.1.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#model-for-mercury-level"><i class="fa fa-check"></i><b>3.1.2</b> Model for Mercury Level</a></li>
 <li class="chapter" data-level="3.1.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#hypotheses-and-key-question"><i class="fa fa-check"></i><b>3.1.3</b> Hypotheses and Key Question</a></li>
@@ -222,8 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.6" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#r-code-for-permutation-test"><i class="fa fa-check"></i><b>3.1.6</b> R Code for Permutation Test</a></li>
 <li class="chapter" data-level="3.1.7" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#p-values"><i class="fa fa-check"></i><b>3.1.7</b> p-values</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#general-permutation-tests"><i class="fa fa-check"></i><b>3.2</b> General Permutation Tests</a>
-<ul>
+<li class="chapter" data-level="3.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#general-permutation-tests"><i class="fa fa-check"></i><b>3.2</b> General Permutation Tests</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#other-test-statistics"><i class="fa fa-check"></i><b>3.2.1</b> Other Test Statistics</a></li>
 <li class="chapter" data-level="3.2.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#general-permutation-test-procedure"><i class="fa fa-check"></i><b>3.2.2</b> General Permutation Test Procedure</a></li>
 <li class="chapter" data-level="3.2.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#difference-in-standard-deviation"><i class="fa fa-check"></i><b>3.2.3</b> Difference in Standard Deviation</a></li>
@@ -232,15 +220,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#responsible-hypothesis-testing"><i class="fa fa-check"></i><b>3.3</b> Responsible Hypothesis Testing</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>4</b> Interval Estimation</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="interval-estimation.html"><a href="interval-estimation.html#sampling-distributions"><i class="fa fa-check"></i><b>4.1</b> Sampling Distributions</a>
-<ul>
+<li class="chapter" data-level="4" data-path="interval-estimation.html"><a href="interval-estimation.html"><i class="fa fa-check"></i><b>4</b> Interval Estimation</a><ul>
+<li class="chapter" data-level="4.1" data-path="interval-estimation.html"><a href="interval-estimation.html#sampling-distributions"><i class="fa fa-check"></i><b>4.1</b> Sampling Distributions</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="interval-estimation.html"><a href="interval-estimation.html#sampling-from-a-population"><i class="fa fa-check"></i><b>4.1.1</b> Sampling From a Population</a></li>
 <li class="chapter" data-level="4.1.2" data-path="interval-estimation.html"><a href="interval-estimation.html#confidence-intervals"><i class="fa fa-check"></i><b>4.1.2</b> Confidence Intervals</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrapping"><i class="fa fa-check"></i><b>4.2</b> Bootstrapping</a>
-<ul>
+<li class="chapter" data-level="4.2" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrapping"><i class="fa fa-check"></i><b>4.2</b> Bootstrapping</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="interval-estimation.html"><a href="interval-estimation.html#mercury-levels-in-florida-lakes-1"><i class="fa fa-check"></i><b>4.2.1</b> Mercury Levels in Florida Lakes</a></li>
 <li class="chapter" data-level="4.2.2" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrap-sampling"><i class="fa fa-check"></i><b>4.2.2</b> Bootstrap Sampling</a></li>
 <li class="chapter" data-level="4.2.3" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrap-samples-of-lakes"><i class="fa fa-check"></i><b>4.2.3</b> Bootstrap Samples of Lakes</a></li>
@@ -248,8 +233,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.5" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrap-se-confidence-interval"><i class="fa fa-check"></i><b>4.2.5</b> Bootstrap SE Confidence Interval</a></li>
 <li class="chapter" data-level="4.2.6" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrap-distribution-vs-sampling-distribution"><i class="fa fa-check"></i><b>4.2.6</b> Bootstrap Distribution vs Sampling Distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrap-confidence-interval-example"><i class="fa fa-check"></i><b>4.3</b> Bootstrap Confidence Interval Example</a>
-<ul>
+<li class="chapter" data-level="4.3" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrap-confidence-interval-example"><i class="fa fa-check"></i><b>4.3</b> Bootstrap Confidence Interval Example</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrapping-other-statistics"><i class="fa fa-check"></i><b>4.3.1</b> Bootstrapping Other Statistics</a></li>
 <li class="chapter" data-level="4.3.2" data-path="interval-estimation.html"><a href="interval-estimation.html#ci-for-mean"><i class="fa fa-check"></i><b>4.3.2</b> CI for Mean</a></li>
 <li class="chapter" data-level="4.3.3" data-path="interval-estimation.html"><a href="interval-estimation.html#ci-for-standard-deviation"><i class="fa fa-check"></i><b>4.3.3</b> CI for Standard Deviation</a></li>
@@ -261,10 +245,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="interval-estimation.html"><a href="interval-estimation.html#bootstrapping-cautions"><i class="fa fa-check"></i><b>4.4</b> Bootstrapping Cautions</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html"><i class="fa fa-check"></i><b>5</b> Normal Error Regression Model</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#estimating-standard-error"><i class="fa fa-check"></i><b>5.1</b> Estimating Standard Error</a>
-<ul>
+<li class="chapter" data-level="5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html"><i class="fa fa-check"></i><b>5</b> Normal Error Regression Model</a><ul>
+<li class="chapter" data-level="5.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#estimating-standard-error"><i class="fa fa-check"></i><b>5.1</b> Estimating Standard Error</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#standard-error-vs-standard-deviation"><i class="fa fa-check"></i><b>5.1.1</b> Standard Error vs Standard Deviation</a></li>
 <li class="chapter" data-level="5.1.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#sample-size-and-standard-error"><i class="fa fa-check"></i><b>5.1.2</b> Sample Size and Standard Error</a></li>
 <li class="chapter" data-level="5.1.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#standard-error-formulas"><i class="fa fa-check"></i><b>5.1.3</b> Standard Error Formulas</a></li>
@@ -274,8 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#theory-based-confidence-intervals"><i class="fa fa-check"></i><b>5.1.7</b> Theory-Based Confidence Intervals</a></li>
 <li class="chapter" data-level="5.1.8" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#ci-method-comparison"><i class="fa fa-check"></i><b>5.1.8</b> CI Method Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#theory-based-hypothesis-tests"><i class="fa fa-check"></i><b>5.2</b> Theory-Based Hypothesis Tests</a>
-<ul>
+<li class="chapter" data-level="5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#theory-based-hypothesis-tests"><i class="fa fa-check"></i><b>5.2</b> Theory-Based Hypothesis Tests</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#lm-summary-output"><i class="fa fa-check"></i><b>5.2.1</b> <code>lm</code> <code>summary</code> Output</a></li>
 <li class="chapter" data-level="5.2.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#n-vs-s-florida-lakes"><i class="fa fa-check"></i><b>5.2.2</b> N vs S Florida Lakes</a></li>
 <li class="chapter" data-level="5.2.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#recall-permuation-test"><i class="fa fa-check"></i><b>5.2.3</b> Recall Permuation Test</a></li>
@@ -287,18 +268,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#f-distributions"><i class="fa fa-check"></i><b>5.3</b> F-Distributions</a></li>
 <li class="chapter" data-level="5.4" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#theory-based-inference-cautions"><i class="fa fa-check"></i><b>5.4</b> Theory-Based Inference Cautions</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html"><i class="fa fa-check"></i><b>6</b> Normal Error Regression Model</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#the-normal-error-regression-model"><i class="fa fa-check"></i><b>6.1</b> The Normal Error Regression Model</a>
-<ul>
+<li class="chapter" data-level="6" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html"><i class="fa fa-check"></i><b>6</b> Normal Error Regression Model</a><ul>
+<li class="chapter" data-level="6.1" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#the-normal-error-regression-model"><i class="fa fa-check"></i><b>6.1</b> The Normal Error Regression Model</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#example-ice-cream-dispensor"><i class="fa fa-check"></i><b>6.1.1</b> Example: Ice Cream Dispensor</a></li>
 <li class="chapter" data-level="6.1.2" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#signal-and-noise"><i class="fa fa-check"></i><b>6.1.2</b> Signal and Noise</a></li>
 <li class="chapter" data-level="6.1.3" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#normal-distribution"><i class="fa fa-check"></i><b>6.1.3</b> Normal Distribution</a></li>
 <li class="chapter" data-level="6.1.4" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#signal-and-noise-in-icecream-example"><i class="fa fa-check"></i><b>6.1.4</b> Signal and Noise in Icecream Example</a></li>
 <li class="chapter" data-level="6.1.5" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#general-mathematical-form"><i class="fa fa-check"></i><b>6.1.5</b> General Mathematical Form</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#inference-in-llsr-model"><i class="fa fa-check"></i><b>6.2</b> Inference in LLSR Model</a>
-<ul>
+<li class="chapter" data-level="6.2" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#inference-in-llsr-model"><i class="fa fa-check"></i><b>6.2</b> Inference in LLSR Model</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#lm-summary-output-1"><i class="fa fa-check"></i><b>6.2.1</b> <code>lm</code> <code>summary</code> Output</a></li>
 <li class="chapter" data-level="6.2.2" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#example-florida-lakes-hypothesis"><i class="fa fa-check"></i><b>6.2.2</b> Example: Florida Lakes Hypothesis</a></li>
 <li class="chapter" data-level="6.2.3" data-path="normal-error-regression-model-1.html"><a href="normal-error-regression-model-1.html#t-distribution-1"><i class="fa fa-check"></i><b>6.2.3</b> t-distribution</a></li>
@@ -326,7 +304,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction-to-statistical-models" class="section level1 hasAnchor" number="2">
+<div id="introduction-to-statistical-models" class="section level1 hasAnchor">
 <h1><span class="header-section-number">Chapter 2</span> Introduction to Statistical Models<a href="introduction-to-statistical-models.html#introduction-to-statistical-models" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><strong>Learning Outcomes:</strong></p>
 <ol style="list-style-type: decimal">
@@ -350,9 +328,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
 <li>Determine slopes, intercepts, and other regression coefficients for specific categories or values of an explanatory variable in models that involve interaction.</li>
 </ol>
-<div id="fitting-models-to-data" class="section level2 hasAnchor" number="2.1">
+<div id="fitting-models-to-data" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.1</span> Fitting Models to Data<a href="introduction-to-statistical-models.html#fitting-models-to-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="terminology" class="section level3 hasAnchor" number="2.1.1">
+<div id="terminology" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.1.1</span> Terminology<a href="introduction-to-statistical-models.html#terminology" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In this section, we’ll use statistical models to predict the prices of houses in King County, WA.</p>
 <p>In a statistical model,</p>
@@ -366,16 +344,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><strong>Quantitative variables</strong> take on meaningful numeric values, for example the number of square feet in the house.</p></li>
 </ul>
 </div>
-<div id="model-with-quantitative-explanatory-variable" class="section level3 hasAnchor" number="2.1.2">
+<div id="model-with-quantitative-explanatory-variable" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.1.2</span> Model with Quantitative Explanatory Variable<a href="introduction-to-statistical-models.html#model-with-quantitative-explanatory-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ll first predict the price of the house, using the number of square feet of living space as our explanatory variable.</p>
 <p>We’ll assume that price changes linearly with square feet, and fit a trend line to the data.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="introduction-to-statistical-models.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Houses, <span class="fu">aes</span>(<span class="at">x=</span>sqft_living, <span class="at">y=</span>price)) <span class="sc">+</span></span>
-<span id="cb41-2"><a href="introduction-to-statistical-models.html#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb41-3"><a href="introduction-to-statistical-models.html#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb41-4"><a href="introduction-to-statistical-models.html#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Price and Living Space&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb41-5"><a href="introduction-to-statistical-models.html#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Price&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb41-6"><a href="introduction-to-statistical-models.html#cb41-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Living Space in sq. ft. &quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="introduction-to-statistical-models.html#cb41-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span>sqft_living, <span class="dt">y=</span>price)) <span class="op">+</span></span>
+<span id="cb41-2"><a href="introduction-to-statistical-models.html#cb41-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb41-3"><a href="introduction-to-statistical-models.html#cb41-3"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb41-4"><a href="introduction-to-statistical-models.html#cb41-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Price and Living Space&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb41-5"><a href="introduction-to-statistical-models.html#cb41-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Price&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb41-6"><a href="introduction-to-statistical-models.html#cb41-6"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Living Space in sq. ft. &quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <p>The model equation is</p>
 <p><span class="math display">\[
@@ -383,8 +361,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \]</span></p>
 <p>Note, the symbol over the response variable (Price) is read as “hat”, and means “predicted price”.</p>
 <p>We fit the model in R, using the <code>lm</code> (linear model) command. The output gives the estimates of <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span>.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="introduction-to-statistical-models.html#cb42-1" aria-hidden="true" tabindex="-1"></a>M_House_sqft <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Houses, price<span class="sc">~</span>sqft_living)</span>
-<span id="cb42-2"><a href="introduction-to-statistical-models.html#cb42-2" aria-hidden="true" tabindex="-1"></a>M_House_sqft</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="introduction-to-statistical-models.html#cb42-1"></a>M_House_sqft &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Houses, price<span class="op">~</span>sqft_living)</span>
+<span id="cb42-2"><a href="introduction-to-statistical-models.html#cb42-2"></a>M_House_sqft</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = price ~ sqft_living, data = Houses)
@@ -412,27 +390,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \widehat{\text{Price}} = -484.9575 + 0.5328\times 1500 = \$314{ \text{ thousand}}
 \]</span></p>
 <p>We can calculate this directly in R using the <code>predict</code> command.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="introduction-to-statistical-models.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(M_House_sqft, <span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">sqft_living=</span><span class="dv">1500</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="introduction-to-statistical-models.html#cb44-1"></a><span class="kw">predict</span>(M_House_sqft, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">sqft_living=</span><span class="dv">1500</span>))</span></code></pre></div>
 <pre><code>##        1 
 ## 314.1803</code></pre>
 <p>We should only try to make predictions on houses within the range of the observed data. Since the largest house in the dataset is 8,000 square feet we should not try to predict the price of house with 10,000 square feet.</p>
 </div>
-<div id="model-with-categorical-variable" class="section level3 hasAnchor" number="2.1.3">
+<div id="model-with-categorical-variable" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.1.3</span> Model with Categorical Variable<a href="introduction-to-statistical-models.html#model-with-categorical-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next, we’ll predict the price of a house based on whether or not it is on the waterfront.</p>
 <p>The boxplot shows the distribution of prices for waterfront and nonwaterfront houses. The red dots indicate the mean.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="introduction-to-statistical-models.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Houses, <span class="fu">aes</span>(<span class="at">x=</span>waterfront, <span class="at">y=</span>price)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb46-2"><a href="introduction-to-statistical-models.html#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;House Price by Waterfront Status&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb46-3"><a href="introduction-to-statistical-models.html#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Waterfront&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Price&quot;</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
-<span id="cb46-4"><a href="introduction-to-statistical-models.html#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.y=</span>mean, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">shape=</span><span class="dv">20</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">fill=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="introduction-to-statistical-models.html#cb46-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span>waterfront, <span class="dt">y=</span>price)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb46-2"><a href="introduction-to-statistical-models.html#cb46-2"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;House Price by Waterfront Status&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb46-3"><a href="introduction-to-statistical-models.html#cb46-3"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Waterfront&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Price&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb46-4"><a href="introduction-to-statistical-models.html#cb46-4"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y=</span>mean, <span class="dt">geom=</span><span class="st">&quot;point&quot;</span>, <span class="dt">shape=</span><span class="dv">20</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p>The table displays the price summary by waterfront status.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="introduction-to-statistical-models.html#cb47-1" aria-hidden="true" tabindex="-1"></a>Houses_Grouped_Summary <span class="ot">&lt;-</span> Houses <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(waterfront) <span class="sc">%&gt;%</span> </span>
-<span id="cb47-2"><a href="introduction-to-statistical-models.html#cb47-2" aria-hidden="true" tabindex="-1"></a>                                      <span class="fu">summarize</span>(<span class="at">Mean_Price =</span> <span class="fu">mean</span>(price, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb47-3"><a href="introduction-to-statistical-models.html#cb47-3" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">Median_Price =</span> <span class="fu">median</span>(price, <span class="at">na.rm=</span><span class="cn">TRUE</span>), </span>
-<span id="cb47-4"><a href="introduction-to-statistical-models.html#cb47-4" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">StDev_Price =</span> <span class="fu">sd</span>(price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb47-5"><a href="introduction-to-statistical-models.html#cb47-5" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">Number_of_Houses =</span> <span class="fu">n</span>()) </span>
-<span id="cb47-6"><a href="introduction-to-statistical-models.html#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(Houses_Grouped_Summary)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="introduction-to-statistical-models.html#cb47-1"></a>Houses_Grouped_Summary &lt;-<span class="st"> </span>Houses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(waterfront) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb47-2"><a href="introduction-to-statistical-models.html#cb47-2"></a><span class="st">                                      </span><span class="kw">summarize</span>(<span class="dt">Mean_Price =</span> <span class="kw">mean</span>(price, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),</span>
+<span id="cb47-3"><a href="introduction-to-statistical-models.html#cb47-3"></a>                                                <span class="dt">Median_Price =</span> <span class="kw">median</span>(price, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), </span>
+<span id="cb47-4"><a href="introduction-to-statistical-models.html#cb47-4"></a>                                                <span class="dt">StDev_Price =</span> <span class="kw">sd</span>(price, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb47-5"><a href="introduction-to-statistical-models.html#cb47-5"></a>                                                <span class="dt">Number_of_Houses =</span> <span class="kw">n</span>()) </span>
+<span id="cb47-6"><a href="introduction-to-statistical-models.html#cb47-6"></a><span class="kw">kable</span>(Houses_Grouped_Summary)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -465,8 +443,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \widehat{\text{Price}} = b_0 + b_1\times\text{Waterfront}
 \]</span></p>
 <p>The waterfront variable takes on value of 1 if the house is on the waterfront, and 0 otherwise.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="introduction-to-statistical-models.html#cb48-1" aria-hidden="true" tabindex="-1"></a>M_House_wf <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Houses, price<span class="sc">~</span>waterfront)</span>
-<span id="cb48-2"><a href="introduction-to-statistical-models.html#cb48-2" aria-hidden="true" tabindex="-1"></a>M_House_wf</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="introduction-to-statistical-models.html#cb48-1"></a>M_House_wf &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Houses, price<span class="op">~</span>waterfront)</span>
+<span id="cb48-2"><a href="introduction-to-statistical-models.html#cb48-2"></a>M_House_wf</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = price ~ waterfront, data = Houses)
@@ -497,15 +475,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \widehat{\text{Price}} = 523.8 + 1410.6\times 0 = \$523.8{ \text{ thousand}}
 \]</span></p>
 <p>Calculations in R:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="introduction-to-statistical-models.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(M_House_wf, <span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">waterfront=</span><span class="st">&quot;Yes&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="introduction-to-statistical-models.html#cb50-1"></a><span class="kw">predict</span>(M_House_wf, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">waterfront=</span><span class="st">&quot;Yes&quot;</span>))</span></code></pre></div>
 <pre><code>##       1 
 ## 1934.38</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="introduction-to-statistical-models.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(M_House_wf, <span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">waterfront=</span><span class="st">&quot;No&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="introduction-to-statistical-models.html#cb52-1"></a><span class="kw">predict</span>(M_House_wf, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">waterfront=</span><span class="st">&quot;No&quot;</span>))</span></code></pre></div>
 <pre><code>##        1 
 ## 523.7595</code></pre>
 <p>Notice that the predicted prices for each category correspond to the average price for that category.</p>
 </div>
-<div id="model-with-multiple-explanatory-variables" class="section level3 hasAnchor" number="2.1.4">
+<div id="model-with-multiple-explanatory-variables" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.1.4</span> Model with Multiple Explanatory Variables<a href="introduction-to-statistical-models.html#model-with-multiple-explanatory-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ve used square feet and waterfront status as explanatory variables individually. We can also build a model that uses both of these variables at the same time.</p>
 <p>A model with two or more explanatory variables is called a <strong>multiple regression model</strong>.</p>
@@ -515,17 +493,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \]</span></p>
 <p>For a house not on the waterfront, <span class="math inline">\(b_2=0\)</span>, so the model equation is:</p>
 <p><span class="math display">\[
-\widehat{\text{Price}} = b_0  + b_1\text{Sq. Ft}
+\widehat{\text{Price}} = b_0  + b_1\text{Sq. Ft} 
 \]</span></p>
 <p>For a house on the waterfront, <span class="math inline">\(b_2=1\)</span>, so the model equation is:</p>
 <p><span class="math display">\[
-\widehat{\text{Price}} = (b_0 + b_2) + b_1\times\text{Sq. Ft}
+\widehat{\text{Price}} = (b_0 + b_2) + b_1\times\text{Sq. Ft} 
 \]</span></p>
 <p>Notice that the slope is the same, regardless of whether the house is on the waterfront (<span class="math inline">\(b_1\)</span>). The intercept, however, is different (<span class="math inline">\(b_0\)</span> for houses not on the waterfront, and <span class="math inline">\(b_0 + b_2\)</span> for houses on the waterfront). Thus, the model assumes that price increases at the same rate, with respect to square feet, regardless of whether or not it is on the waterfront, but allows the predicted price for a waterfront house to differ from a non-waterfront house of the same size.</p>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-44-1.png" width="768" /></p>
 <p>We fit the model in R.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="introduction-to-statistical-models.html#cb54-1" aria-hidden="true" tabindex="-1"></a>M_wf_sqft <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Houses, price<span class="sc">~</span>sqft_living<span class="sc">+</span>waterfront)</span>
-<span id="cb54-2"><a href="introduction-to-statistical-models.html#cb54-2" aria-hidden="true" tabindex="-1"></a>M_wf_sqft</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="introduction-to-statistical-models.html#cb54-1"></a>M_wf_sqft &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Houses, price<span class="op">~</span>sqft_living<span class="op">+</span>waterfront)</span>
+<span id="cb54-2"><a href="introduction-to-statistical-models.html#cb54-2"></a>M_wf_sqft</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = price ~ sqft_living + waterfront, data = Houses)
@@ -556,25 +534,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \widehat{\text{Price}} = -407.7 + 0.4457\times1500 = \$260.9{ \text{ thousand}}
 \]</span></p>
 <p>Calculations in R:</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="introduction-to-statistical-models.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(M_wf_sqft, <span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">waterfront=</span><span class="st">&quot;Yes&quot;</span>, <span class="at">sqft_living=</span><span class="dv">1500</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="introduction-to-statistical-models.html#cb56-1"></a><span class="kw">predict</span>(M_wf_sqft, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">waterfront=</span><span class="st">&quot;Yes&quot;</span>, <span class="dt">sqft_living=</span><span class="dv">1500</span>))</span></code></pre></div>
 <pre><code>##        1 
 ## 1075.227</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="introduction-to-statistical-models.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(M_wf_sqft, <span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">waterfront=</span><span class="st">&quot;No&quot;</span>, <span class="at">sqft_living=</span><span class="dv">1500</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="introduction-to-statistical-models.html#cb58-1"></a><span class="kw">predict</span>(M_wf_sqft, <span class="dt">newdata=</span><span class="kw">data.frame</span>(<span class="dt">waterfront=</span><span class="st">&quot;No&quot;</span>, <span class="dt">sqft_living=</span><span class="dv">1500</span>))</span></code></pre></div>
 <pre><code>##        1 
 ## 260.8657</code></pre>
 </div>
-<div id="model-with-no-explanatory-variable" class="section level3 hasAnchor" number="2.1.5">
+<div id="model-with-no-explanatory-variable" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.1.5</span> Model with No Explanatory Variable<a href="introduction-to-statistical-models.html#model-with-no-explanatory-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Finally, we’ll consider a model that makes use of no explanatory variables at all. Although this might seem silly, its relevance will be seen in the next section.</p>
 <p>The histogram shows the distribution of prices, without any information about explanatory variables. The mean price is indicated in red.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="introduction-to-statistical-models.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Houses, <span class="fu">aes</span>(<span class="at">x=</span>price)) <span class="sc">+</span> </span>
-<span id="cb60-2"><a href="introduction-to-statistical-models.html#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;lightblue&quot;</span>, <span class="at">color=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb60-3"><a href="introduction-to-statistical-models.html#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of House Prices&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Price&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb60-4"><a href="introduction-to-statistical-models.html#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">mean</span>(Houses<span class="sc">$</span>price), <span class="at">y=</span><span class="dv">0</span>), <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">shape=</span><span class="dv">24</span>, <span class="at">fill=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="introduction-to-statistical-models.html#cb60-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span>price)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb60-2"><a href="introduction-to-statistical-models.html#cb60-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>, <span class="dt">color=</span><span class="st">&quot;white&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb60-3"><a href="introduction-to-statistical-models.html#cb60-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Distribution of House Prices&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Price&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb60-4"><a href="introduction-to-statistical-models.html#cb60-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">mean</span>(Houses<span class="op">$</span>price), <span class="dt">y=</span><span class="dv">0</span>), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>, <span class="dt">shape=</span><span class="dv">24</span>, <span class="dt">fill=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <p>The mean, median, and standard deviation in prices is shown below.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="introduction-to-statistical-models.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb61-2"><a href="introduction-to-statistical-models.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(Houses_Summary)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="introduction-to-statistical-models.html#cb61-1"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb61-2"><a href="introduction-to-statistical-models.html#cb61-2"></a><span class="kw">kable</span>(Houses_Summary)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -600,11 +578,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \widehat{\text{Price}} = b_0
 \]</span></p>
 <p>We fit a statistical model in R using the <code>lm</code> command.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="introduction-to-statistical-models.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># syntax for lm command</span></span>
-<span id="cb62-2"><a href="introduction-to-statistical-models.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="co"># lm(data=DatasetName, ResponseVariable~ExplanatoryVariable(s))</span></span>
-<span id="cb62-3"><a href="introduction-to-statistical-models.html#cb62-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-4"><a href="introduction-to-statistical-models.html#cb62-4" aria-hidden="true" tabindex="-1"></a>M0_House <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Houses, price <span class="sc">~</span> <span class="dv">1</span>) <span class="co"># when there are no explanatory variables, use ~1</span></span>
-<span id="cb62-5"><a href="introduction-to-statistical-models.html#cb62-5" aria-hidden="true" tabindex="-1"></a>M0_House</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="introduction-to-statistical-models.html#cb62-1"></a><span class="co"># syntax for lm command</span></span>
+<span id="cb62-2"><a href="introduction-to-statistical-models.html#cb62-2"></a><span class="co"># lm(data=DatasetName, ResponseVariable~ExplanatoryVariable(s))</span></span>
+<span id="cb62-3"><a href="introduction-to-statistical-models.html#cb62-3"></a></span>
+<span id="cb62-4"><a href="introduction-to-statistical-models.html#cb62-4"></a>M0_House &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Houses, price <span class="op">~</span><span class="st"> </span><span class="dv">1</span>) <span class="co"># when there are no explanatory variables, use ~1</span></span>
+<span id="cb62-5"><a href="introduction-to-statistical-models.html#cb62-5"></a>M0_House</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = price ~ 1, data = Houses)
@@ -622,14 +600,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Without knowing anything about any explanatory variables, we would predict the price of any house sold in King County, WA to cost 735.4 thousand dollars.</p>
 </div>
 </div>
-<div id="variability-explained-by-a-model" class="section level2 hasAnchor" number="2.2">
+<div id="variability-explained-by-a-model" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.2</span> Variability Explained by a Model<a href="introduction-to-statistical-models.html#variability-explained-by-a-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="quantifying-variability" class="section level3 hasAnchor" number="2.2.1">
+<div id="quantifying-variability" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.2.1</span> Quantifying Variability<a href="introduction-to-statistical-models.html#quantifying-variability" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ve seen four different models for predicting house price. It would be nice to have a way to assess how well the models are predicting prices, and determine which model appears to be the best.</p>
 <p>Of course we won’t know the price of the house we are trying to predict, so we can’t be sure how close or far our prediction is. We do, however, know the prices of the original 100 houses in our dataset. We can assess the models by measuring how far the actual prices of the 100 houses differ from the predicted (mean) price, and by calculating the proportion of total variation in sale price explained by each model.</p>
 </div>
-<div id="total-variability" class="section level3 hasAnchor" number="2.2.2">
+<div id="total-variability" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.2.2</span> Total Variability<a href="introduction-to-statistical-models.html#total-variability" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s start with our most basic model, which uses no explanatory variables and predicts the price of each simply using the average of all houses in the dataset.</p>
 <p>We measure the total variability in the response variable by calculating the square difference between each individual response value and the overall average. This quantity is called the total sum of squares (SST).</p>
@@ -639,8 +617,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The plot below shows a horizontal line at the mean sale price (785 thousand). The points represent prices of individual houses, and the red lines represent the differences between the price of each house and the overall average.</p>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-51-1.png" width="768" /></p>
 <p>The first three houses in the dataset are shown below.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="introduction-to-statistical-models.html#cb64-1" aria-hidden="true" tabindex="-1"></a>First3Houses <span class="ot">&lt;-</span> Houses <span class="sc">%&gt;%</span> <span class="fu">select</span>(Id, price, waterfront, sqft_living) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">3</span>)</span>
-<span id="cb64-2"><a href="introduction-to-statistical-models.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(First3Houses)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="introduction-to-statistical-models.html#cb64-1"></a>First3Houses &lt;-<span class="st"> </span>Houses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Id, price, waterfront, sqft_living) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)</span>
+<span id="cb64-2"><a href="introduction-to-statistical-models.html#cb64-2"></a><span class="kw">kable</span>(First3Houses)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -674,25 +652,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[
 \begin{aligned}
 \text{SST} &amp; = \displaystyle\sum_{i=1}^{100} (y_i - \bar{y})^2 \\
-&amp; = (1225-785)^2 + (885-785)^2 + (385-785)^2 + \ldots
+&amp; = (1225-785)^2 + (885-785)^2 + (385-785)^2 + \ldots 
 \end{aligned}
 \]</span></p>
 <p>We could calculate SST by hand for small datasets. For larger datasets, we’ll use R to perform the calculation.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="introduction-to-statistical-models.html#cb65-1" aria-hidden="true" tabindex="-1"></a>meanprice <span class="ot">&lt;-</span> <span class="fu">mean</span>(Houses<span class="sc">$</span>price)  <span class="co">#calculate mean price</span></span>
-<span id="cb65-2"><a href="introduction-to-statistical-models.html#cb65-2" aria-hidden="true" tabindex="-1"></a>SST <span class="ot">&lt;-</span> <span class="fu">sum</span>((Houses<span class="sc">$</span>price <span class="sc">-</span> meanprice)<span class="sc">^</span><span class="dv">2</span>)  <span class="do">## calculate SST</span></span>
-<span id="cb65-3"><a href="introduction-to-statistical-models.html#cb65-3" aria-hidden="true" tabindex="-1"></a>SST</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="introduction-to-statistical-models.html#cb65-1"></a>meanprice &lt;-<span class="st"> </span><span class="kw">mean</span>(Houses<span class="op">$</span>price)  <span class="co">#calculate mean price</span></span>
+<span id="cb65-2"><a href="introduction-to-statistical-models.html#cb65-2"></a>SST &lt;-<span class="st"> </span><span class="kw">sum</span>((Houses<span class="op">$</span>price <span class="op">-</span><span class="st"> </span>meanprice)<span class="op">^</span><span class="dv">2</span>)  <span class="co">## calculate SST</span></span>
+<span id="cb65-3"><a href="introduction-to-statistical-models.html#cb65-3"></a>SST</span></code></pre></div>
 <pre><code>## [1] 69045634</code></pre>
 <p>By itself, the size of SST does not have much meaning. We cannot say whether a SST value like the one we see here is large or small, since it depends on the size and scale of the variable being measured. An SST value that is very large in one context might be very small in another.</p>
 <p>SST does, however, give us a baseline measure of the total variability in the response variable. We’ll assess the performance of a model with a given explanatory variable by measuring how much of this variability the model accounts for.</p>
 </div>
-<div id="residuals" class="section level3 hasAnchor" number="2.2.3">
+<div id="residuals" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.2.3</span> Residuals<a href="introduction-to-statistical-models.html#residuals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now let’s consider our model that uses the size of the house in square feet as the explanatory variable. The figure on the left shows difference between actual and predicted prices, using this linear model. We compare the size of the differences to those resulting from the basic model that does not use any explanatory variables, and predicts each price using the overall average (shown on the right).</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="introduction-to-statistical-models.html#cb67-1" aria-hidden="true" tabindex="-1"></a>Residplot_sqft <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>Houses, <span class="fu">aes</span>(<span class="at">x =</span> sqft_living, <span class="at">y =</span> price)) <span class="sc">+</span>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb67-2"><a href="introduction-to-statistical-models.html#cb67-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">xend =</span> sqft_living, <span class="at">yend =</span> M_House_sqft<span class="sc">$</span>fitted.values), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb67-3"><a href="introduction-to-statistical-models.html#cb67-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> M_House_sqft<span class="sc">$</span>fitted.values), <span class="at">shape =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb67-4"><a href="introduction-to-statistical-models.html#cb67-4" aria-hidden="true" tabindex="-1"></a>                <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5500</span>)) <span class="sc">+</span></span>
-<span id="cb67-5"><a href="introduction-to-statistical-models.html#cb67-5" aria-hidden="true" tabindex="-1"></a>                <span class="fu">theme_bw</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="introduction-to-statistical-models.html#cb67-1"></a>Residplot_sqft &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x =</span> sqft_living, <span class="dt">y =</span> price)) <span class="op">+</span><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb67-2"><a href="introduction-to-statistical-models.html#cb67-2"></a><span class="st">                </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">xend =</span> sqft_living, <span class="dt">yend =</span> M_House_sqft<span class="op">$</span>fitted.values), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
+<span id="cb67-3"><a href="introduction-to-statistical-models.html#cb67-3"></a><span class="st">                </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> M_House_sqft<span class="op">$</span>fitted.values), <span class="dt">shape =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb67-4"><a href="introduction-to-statistical-models.html#cb67-4"></a><span class="st">                </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">5500</span>)) <span class="op">+</span></span>
+<span id="cb67-5"><a href="introduction-to-statistical-models.html#cb67-5"></a><span class="st">                </span><span class="kw">theme_bw</span>() </span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 <p>Notice that the red lines are shorter in the figure on the left, indicating the predictions are closer to the actual values.</p>
 <p>The difference between the actual and predicted values is called the <strong>residual</strong>. The residual for the <span class="math inline">\(ith\)</span> case is</p>
@@ -700,7 +678,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 r_i = (y_i-\hat{y}_i)
 \]</span></p>
 <p>We’ll calculate the residuals for the first three houses in the dataset, shown below.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="introduction-to-statistical-models.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(First3Houses)</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="introduction-to-statistical-models.html#cb68-1"></a><span class="kw">kable</span>(First3Houses)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -733,7 +711,7 @@ r_i = (y_i-\hat{y}_i)
 </table>
 <p>The model equation is</p>
 <p><span class="math display">\[
-\widehat{\text{Price}} = -484.9575 + 0.5328\times \text{Sq. Ft}
+\widehat{\text{Price}} = -484.9575 + 0.5328\times \text{Sq. Ft} 
 \]</span></p>
 <p>The predicted prices for these three houses are:</p>
 <p><span class="math display">\[
@@ -751,16 +729,16 @@ r_i = (y_i-\hat{y}_i)
 <p><span class="math display">\[r_2 = y_2-\hat{y}_2 = 385 - 378.1 = 6.9 \text{ thousand dollars}\]</span></p>
 <p>The fact that the first two residuals are negative indicates that these houses sold for less than the model predicts.</p>
 <p>The predicted values and residuals from a model can be calculated automatically in R. The predicted values and residuals for the first 5 houses are shown below.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="introduction-to-statistical-models.html#cb69-1" aria-hidden="true" tabindex="-1"></a>Predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(M_House_sqft)</span>
-<span id="cb69-2"><a href="introduction-to-statistical-models.html#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Predicted, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="introduction-to-statistical-models.html#cb69-1"></a>Predicted &lt;-<span class="st"> </span><span class="kw">predict</span>(M_House_sqft)</span>
+<span id="cb69-2"><a href="introduction-to-statistical-models.html#cb69-2"></a><span class="kw">head</span>(Predicted, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##         1         2         3 
 ## 2402.5937 1022.7491  378.1113</code></pre>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="introduction-to-statistical-models.html#cb71-1" aria-hidden="true" tabindex="-1"></a>Residual <span class="ot">&lt;-</span> M_House_sqft<span class="sc">$</span>residuals</span>
-<span id="cb71-2"><a href="introduction-to-statistical-models.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Residual, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="introduction-to-statistical-models.html#cb71-1"></a>Residual &lt;-<span class="st"> </span>M_House_sqft<span class="op">$</span>residuals</span>
+<span id="cb71-2"><a href="introduction-to-statistical-models.html#cb71-2"></a><span class="kw">head</span>(Residual, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##            1            2            3 
 ## -1177.593665  -137.749128     6.888668</code></pre>
 </div>
-<div id="variability-explained-by-sq.-ft.-model" class="section level3 hasAnchor" number="2.2.4">
+<div id="variability-explained-by-sq.-ft.-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.2.4</span> Variability Explained by Sq. Ft. Model<a href="introduction-to-statistical-models.html#variability-explained-by-sq.-ft.-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <strong>sum of squared residuals (SSR)</strong> measures the amount of unexplained variability in the response variable after accounting for all explanatory variables in the model.</p>
 <p><span class="math display">\[
@@ -771,12 +749,12 @@ r_i = (y_i-\hat{y}_i)
 <p><span class="math display">\[
 \begin{aligned}
 \text{SSR} &amp; = \displaystyle\sum_{i=1}^{n}(y_i-\hat{y}_i)^2.  \\
-&amp; = (1225 - 2402.6)^2 + (885 - 1022.7)^2 + (385 - 378.1)^2 + \ldots
+ &amp; = (1225 - 2402.6)^2 + (885 - 1022.7)^2 + (385 - 378.1)^2 + \ldots
 \end{aligned}
 \]</span></p>
 <p>We can calculate the model’s SSR directly in R.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="introduction-to-statistical-models.html#cb73-1" aria-hidden="true" tabindex="-1"></a>SSR_sqft <span class="ot">&lt;-</span> <span class="fu">sum</span>(M_House_sqft<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb73-2"><a href="introduction-to-statistical-models.html#cb73-2" aria-hidden="true" tabindex="-1"></a>SSR_sqft</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="introduction-to-statistical-models.html#cb73-1"></a>SSR_sqft &lt;-<span class="st"> </span><span class="kw">sum</span>(M_House_sqft<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb73-2"><a href="introduction-to-statistical-models.html#cb73-2"></a>SSR_sqft</span></code></pre></div>
 <pre><code>## [1] 23767280</code></pre>
 <p>SSR represents the amount of total variability in saleprice remaining after accounting for the house’s size in square feet.</p>
 <p>The SSR=23,767,290 value is about one third of the SST value of 69,045,634. This means that about 2/3 of the total variability in sale price is explained by the model that accounts for sale price.</p>
@@ -797,37 +775,37 @@ R^2 = \frac{45,278,344}{69,045,634}=0.6557.
 <p>Approximately 65.6% of the total variability in sale price is explained by the model using square feet as the explanatory variable.</p>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
 <p>We calculate <span class="math inline">\(R^2\)</span> directly in R.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="introduction-to-statistical-models.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M_House_sqft)<span class="sc">$</span>r.squared</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="introduction-to-statistical-models.html#cb75-1"></a><span class="kw">summary</span>(M_House_sqft)<span class="op">$</span>r.squared</span></code></pre></div>
 <pre><code>## [1] 0.6557743</code></pre>
 </div>
-<div id="linear-correlation-coefficient" class="section level3 hasAnchor" number="2.2.5">
+<div id="linear-correlation-coefficient" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.2.5</span> Linear Correlation Coefficient<a href="introduction-to-statistical-models.html#linear-correlation-coefficient" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For models with a single quantiative explanatory varible, the coefficient of determination is equal to the square of the correlation coefficient <span class="math inline">\(r\)</span>, discussed in Chapter 1.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="introduction-to-statistical-models.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Houses, <span class="fu">aes</span>(<span class="at">x=</span>sqft_living, <span class="at">y=</span>price)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb77-2"><a href="introduction-to-statistical-models.html#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="introduction-to-statistical-models.html#cb77-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span>sqft_living, <span class="dt">y=</span>price)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb77-2"><a href="introduction-to-statistical-models.html#cb77-2"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-62-1.png" width="576" /></p>
 <ul>
 <li><p>For linear models with a single quantitative variable, the <strong>linear correlation coefficient</strong> <span class="math inline">\(r=\sqrt{R^2}\)</span>, or <span class="math inline">\(r=-\sqrt{R^2}\)</span> (with sign matching the sign on the slope of the line), provides information about the strength and direction of the linear relationship between the variables.</p></li>
 <li><p><span class="math inline">\(-1 \leq r \leq 1\)</span>, and <span class="math inline">\(r\)</span> close to <span class="math inline">\(\pm1\)</span> provides evidence of strong linear relationship, while <span class="math inline">\(r\)</span> close to 0 suggests linear relationship is weak.</p></li>
 </ul>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="introduction-to-statistical-models.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(Houses<span class="sc">$</span>price,Houses<span class="sc">$</span>sqft_living)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="introduction-to-statistical-models.html#cb78-1"></a><span class="kw">cor</span>(Houses<span class="op">$</span>price,Houses<span class="op">$</span>sqft_living)</span></code></pre></div>
 <pre><code>## [1] 0.8097989</code></pre>
 <ul>
 <li><span class="math inline">\(r\)</span> is only relevant for models with a single quantitative explanatory variable and a quantitative response variable, while <span class="math inline">\(R^2\)</span> is relevant for any linear model with a quantitative response variable.</li>
 </ul>
 </div>
-<div id="variability-explained-by-waterfront-model" class="section level3 hasAnchor" number="2.2.6">
+<div id="variability-explained-by-waterfront-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.2.6</span> Variability Explained by Waterfront Model<a href="introduction-to-statistical-models.html#variability-explained-by-waterfront-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can similarly calculate the proportion of variability explained by the model using waterfront as an explanatory variable.</p>
 <p>Recall that in this model, the predicted price of a house with a waterfront is given by the average price of all waterfront houses, and the predicted price of a non-waterfront house is given by the average price of all non-waterfront houses.</p>
 <p>We can calculate residuals using these predicted values, and compare them to the residuals resulting from a model with no explanatory variables, which uses the overall average price for all predictions.</p>
 <p>The left two figures show the residuals resulting from a model that accounts for waterfront status. The figure on the right shows the residuals resulting from the model with no explanatory variables.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="introduction-to-statistical-models.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(<span class="fu">arrangeGrob</span>(M1aResid,M1bResid, Residplot_M0 <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Model with no Exp. Vars&quot;</span>), <span class="at">ncol=</span><span class="dv">3</span>, <span class="at">nrow=</span><span class="dv">1</span>, <span class="at">widths=</span><span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>,<span class="dv">5</span>))) </span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="introduction-to-statistical-models.html#cb80-1"></a><span class="kw">grid.arrange</span>(<span class="kw">arrangeGrob</span>(M1aResid,M1bResid, Residplot_M0 <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Model with no Exp. Vars&quot;</span>), <span class="dt">ncol=</span><span class="dv">3</span>, <span class="dt">nrow=</span><span class="dv">1</span>, <span class="dt">widths=</span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>,<span class="dv">5</span>))) </span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 <p>Notice that after accounting for waterfront status, the differences between observed and predicted values are bigger than they were in the model that accounted for square feet, though not as big as for the model that doesn’t use any explanatory variables.</p>
 <p>We use R to calculate SSR for the waterfront model.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="introduction-to-statistical-models.html#cb81-1" aria-hidden="true" tabindex="-1"></a>SSR_wf <span class="ot">&lt;-</span> <span class="fu">sum</span>(M_House_wf<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb81-2"><a href="introduction-to-statistical-models.html#cb81-2" aria-hidden="true" tabindex="-1"></a>SSR_wf</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="introduction-to-statistical-models.html#cb81-1"></a>SSR_wf &lt;-<span class="st"> </span><span class="kw">sum</span>(M_House_wf<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb81-2"><a href="introduction-to-statistical-models.html#cb81-2"></a>SSR_wf</span></code></pre></div>
 <pre><code>## [1] 43675043</code></pre>
 <p><span class="math display">\[
 SSM = SST-SSR = 69,045,634 - 43,675,043 =25,370,591.
@@ -838,18 +816,18 @@ R^2 = \frac{25,370,591}{69,045,634}=0.3674.
 <p>Approximately 36.7% of the total variability in sale price is explained by the model using waterfront status as the explanatory variable.</p>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 <p>We calculate <span class="math inline">\(R^2\)</span> directly in R.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="introduction-to-statistical-models.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M_House_wf)<span class="sc">$</span>r.squared</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="introduction-to-statistical-models.html#cb83-1"></a><span class="kw">summary</span>(M_House_wf)<span class="op">$</span>r.squared</span></code></pre></div>
 <pre><code>## [1] 0.3674467</code></pre>
 </div>
-<div id="variability-explained-by-multiple-regression-model" class="section level3 hasAnchor" number="2.2.7">
+<div id="variability-explained-by-multiple-regression-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.2.7</span> Variability Explained by Multiple Regression Model<a href="introduction-to-statistical-models.html#variability-explained-by-multiple-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ve seen at the model using square feet accounts for about 2/3 of the total variability in house prices, while the model using waterfront status accounts for about 1/3 of the total variability. Let’s see if we can do better by using both variables together.</p>
 <p>The left figure shows the residuals resulting from a model that accounts for both waterfront status and square feet. The figure on the right shows the residuals resulting from the model with no explanatory variables.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="introduction-to-statistical-models.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(Residplot_MR <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Multiple Regression Model&quot;</span>) , Residplot_M0 <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Model with no Exp. Vars&quot;</span>), <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="introduction-to-statistical-models.html#cb85-1"></a><span class="kw">grid.arrange</span>(Residplot_MR <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Multiple Regression Model&quot;</span>) , Residplot_M0 <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Model with no Exp. Vars&quot;</span>), <span class="dt">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
 <p>We use R to calculate SSR for the waterfront model.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="introduction-to-statistical-models.html#cb86-1" aria-hidden="true" tabindex="-1"></a>SSR_wf_sqft <span class="ot">&lt;-</span> <span class="fu">sum</span>(M_wf_sqft<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb86-2"><a href="introduction-to-statistical-models.html#cb86-2" aria-hidden="true" tabindex="-1"></a>SSR_wf_sqft</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="introduction-to-statistical-models.html#cb86-1"></a>SSR_wf_sqft &lt;-<span class="st"> </span><span class="kw">sum</span>(M_wf_sqft<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb86-2"><a href="introduction-to-statistical-models.html#cb86-2"></a>SSR_wf_sqft</span></code></pre></div>
 <pre><code>## [1] 16521296</code></pre>
 <p><span class="math display">\[
 SSM = SST-SSR = 69,045,634 - 16,521,296 =52,524,338.
@@ -860,11 +838,11 @@ R^2 = \frac{52,524,338}{69,045,634}=0.761.
 <p>Approximately 76.1% of the total variability in sale price is explained by the model using square feet and waterfront status as the explanatory variables.</p>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
 <p>We calculate <span class="math inline">\(R^2\)</span> directly in R.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="introduction-to-statistical-models.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M_wf_sqft)<span class="sc">$</span>r.squared</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="introduction-to-statistical-models.html#cb88-1"></a><span class="kw">summary</span>(M_wf_sqft)<span class="op">$</span>r.squared</span></code></pre></div>
 <pre><code>## [1] 0.7607192</code></pre>
 <p>Including both square feet and waterfront status allows us to explain more variability in sale price than models that include one but not both of these variables.</p>
 </div>
-<div id="summary-sst-ssr-ssm-r2" class="section level3 hasAnchor" number="2.2.8">
+<div id="summary-sst-ssr-ssm-r2" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.2.8</span> Summary: SST, SSR, SSM, <span class="math inline">\(R^2\)</span><a href="introduction-to-statistical-models.html#summary-sst-ssr-ssm-r2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>the total variability in the response variable is the sum of the squared differences between the observed values and the overall average.</li>
@@ -886,7 +864,7 @@ R^2 = \frac{52,524,338}{69,045,634}=0.761.
 <p><span class="math display">\[R^2=\frac{\text{Variability Explained by Model}}{\text{Total Variability}}=\frac{\text{SSM}}{\text{SST}} =\frac{\displaystyle\sum_{i=1}^n(\hat{y}_i-\bar{y})^2}{\displaystyle\sum_{i=1}^n(y_i-\bar{y})^2}\]</span></p>
 <p>Note that some texts use different abbreviations than the ones used here. When working with resources outside this class, be sure to carefully check the notation being used.</p>
 </div>
-<div id="r2-visually" class="section level3 hasAnchor" number="2.2.9">
+<div id="r2-visually" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.2.9</span> <span class="math inline">\(R^2\)</span> Visually<a href="introduction-to-statistical-models.html#r2-visually" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Model with a single quantitative explanatory variable:</p>
 <p><img src="Rsq.png" width="100%" /></p>
@@ -899,16 +877,9 @@ R^2 = \frac{52,524,338}{69,045,634}=0.761.
 <li><p><span class="math inline">\(R^2 = \frac{\text{Area of Blue Squares} - \text{Area of Red Squares}}{\text{Area of Blue Squares}} = \frac{\text{SST}-\text{SSR}}{\text{SST}}= \frac{\text{SSM}}{\text{SST}}\)</span></p></li>
 </ul>
 </div>
-<div id="model-comparison-summary" class="section level3 hasAnchor" number="2.2.10">
+<div id="model-comparison-summary" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.2.10</span> Model Comparison Summary<a href="introduction-to-statistical-models.html#model-comparison-summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <table>
-<colgroup>
-<col width="12%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
-<col width="22%" />
-</colgroup>
 <thead>
 <tr class="header">
 <th>Model</th>
@@ -922,7 +893,7 @@ R^2 = \frac{52,524,338}{69,045,634}=0.761.
 <tr class="odd">
 <td>0</td>
 <td>None</td>
-<td>69045634.1341747</td>
+<td>69045634.1341748</td>
 <td>0</td>
 <td>0</td>
 </tr>
@@ -963,25 +934,25 @@ R^2 = \frac{52,524,338}{69,045,634}=0.761.
 </ul>
 </div>
 </div>
-<div id="models-with-interaction" class="section level2 hasAnchor" number="2.3">
+<div id="models-with-interaction" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.3</span> Models with Interaction<a href="introduction-to-statistical-models.html#models-with-interaction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="definition-of-interaction" class="section level3 hasAnchor" number="2.3.1">
+<div id="definition-of-interaction" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.1</span> Definition of Interaction<a href="introduction-to-statistical-models.html#definition-of-interaction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We previously used a multiple regression model of the form</p>
 <p><span class="math display">\[
 \widehat{Price} = b_0 + b_1\times\text{SqFt} + b_2\times\text{Waterfront}
 \]</span></p>
 <p>Recall that this model assumes the slope relating price and square footage is the same (<span class="math inline">\(b_1\)</span>) for houses on the waterfront as for houses not on the waterfront. An illustration of the model is shown below.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="introduction-to-statistical-models.html#cb90-1" aria-hidden="true" tabindex="-1"></a>PM3</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="introduction-to-statistical-models.html#cb90-1"></a>PM3</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
 <p>This assumption of the rate of change in price with respect to living space being the same for waterfront houses, as for non-waterfront houses might be unrealistic.</p>
 <p>Let’s fit separate lines waterfront and non-waterfront houses, without requiring them to have the same slope.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="introduction-to-statistical-models.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Houses, <span class="fu">aes</span>(<span class="at">x=</span>sqft_living, <span class="at">y=</span>price, <span class="at">color=</span>waterfront)) <span class="sc">+</span> <span class="fu">geom_point</span>()<span class="sc">+</span><span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5500</span>)) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="introduction-to-statistical-models.html#cb91-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span>sqft_living, <span class="dt">y=</span>price, <span class="dt">color=</span>waterfront)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()<span class="op">+</span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">5500</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
 <p>It appears that the prices of the houses on the waterfront are increasing more rapidly, with respect to square feet of living space, than the non-waterfront houses. The effect of additional square feet on the price of the house appears to depend on whether or not the house is on the waterfront. This is an example of an <strong>interaction</strong> between square footage and waterfront status.</p>
 <p>An <strong>interaction</strong> between two explanatory variables occurs when the effect of one explanatory variable on the response depends on the other explanatory variable.</p>
 </div>
-<div id="interaction-term" class="section level3 hasAnchor" number="2.3.2">
+<div id="interaction-term" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.2</span> Interaction Term<a href="introduction-to-statistical-models.html#interaction-term" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If we want to allow for different slopes between waterfront and non-waterfront houses, we’ll need to change the mathematical equation of our model. To do that, we’ll add a coefficient <span class="math inline">\(b_3\)</span>, multiplied by the product of our two explanatory variables.</p>
 <p>The model equation is</p>
@@ -1004,14 +975,14 @@ For a house not on the waterfront (<span class="math inline">\(\text{waterfront}
 \end{aligned}
 \]</span></p>
 <p>The intercept is <span class="math inline">\(b_0\)</span> for non-waterfront houses, and <span class="math inline">\(b_0 + b_2\)</span> for waterfront houses.</p>
-<p>The slopse is <span class="math inline">\(b_1\)</span> for non-waterfront houses, and <span class="math inline">\(b_1 + b_3\)</span> for waterfront houses.</p>
+<p>The slope is <span class="math inline">\(b_1\)</span> for non-waterfront houses, and <span class="math inline">\(b_1 + b_3\)</span> for waterfront houses.</p>
 <p>Thus, the model allows both the slope and intercept to differ between waterfront and non-waterfront houses.</p>
 </div>
-<div id="interaction-models-in-r" class="section level3 hasAnchor" number="2.3.3">
+<div id="interaction-models-in-r" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.3</span> Interaction Models in R<a href="introduction-to-statistical-models.html#interaction-models-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To fit an interaction model in R, use <code>*</code> instead of <code>+</code></p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="introduction-to-statistical-models.html#cb92-1" aria-hidden="true" tabindex="-1"></a>M_House_Int <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Houses, price<span class="sc">~</span>sqft_living<span class="sc">*</span>waterfront)</span>
-<span id="cb92-2"><a href="introduction-to-statistical-models.html#cb92-2" aria-hidden="true" tabindex="-1"></a>M_House_Int</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="introduction-to-statistical-models.html#cb92-1"></a>M_House_Int &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Houses, price<span class="op">~</span>sqft_living<span class="op">*</span>waterfront)</span>
+<span id="cb92-2"><a href="introduction-to-statistical-models.html#cb92-2"></a>M_House_Int</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = price ~ sqft_living * waterfront, data = Houses)
@@ -1037,7 +1008,7 @@ For a house not on the waterfront (<span class="math inline">\(\text{waterfront}
 <p><span class="math display">\[
 \begin{aligned}
 \widehat{Price} &amp; = 67.4 + 0.2184\times\text{Sq. Ft.} -364.6 \times\text{0} + 0.4327\times\text{Sq.Ft}\times\text{0} \\
-&amp; = 67.4 0 + 0.2184\times{\text{Sq. Ft.}}
+&amp; = 67.4 0 + 0.2184\times{\text{Sq. Ft.}} 
 \end{aligned}
 \]</span>
 <strong>Interpretation</strong></p>
@@ -1057,7 +1028,7 @@ For a house not on the waterfront (<span class="math inline">\(\text{waterfront}
 </ul>
 <p><strong>Prediction</strong></p>
 <p>We calculate predicted prices for the following houses:</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="introduction-to-statistical-models.html#cb94-1" aria-hidden="true" tabindex="-1"></a>Houses[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">16</span>), ] <span class="sc">%&gt;%</span> <span class="fu">select</span>(Id, price, sqft_living, waterfront)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="introduction-to-statistical-models.html#cb94-1"></a>Houses[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">16</span>), ] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Id, price, sqft_living, waterfront)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 4
 ##      Id price sqft_living waterfront
 ##   &lt;int&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     
@@ -1070,12 +1041,12 @@ For a house not on the waterfront (<span class="math inline">\(\text{waterfront}
 \widehat{Price}_{16} = 67.4 + 0.2184\times4450  -364.6\times1 + 0.4327\times4450 \times 1 = 2600 \text{ thousand dollars}
 \]</span></p>
 </div>
-<div id="r2-for-interaction-model" class="section level3 hasAnchor" number="2.3.4">
+<div id="r2-for-interaction-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.4</span> <span class="math inline">\(R^2\)</span> for Interaction Model<a href="introduction-to-statistical-models.html#r2-for-interaction-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can calculate residuals, as well as SSR, SSM, SST, and <span class="math inline">\(R^2\)</span>, in the same manner we’ve seen previously.</p>
 <p>We’ll perform these calculations using R.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="introduction-to-statistical-models.html#cb96-1" aria-hidden="true" tabindex="-1"></a>SSR_int <span class="ot">&lt;-</span> <span class="fu">sum</span>(M_House_Int<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb96-2"><a href="introduction-to-statistical-models.html#cb96-2" aria-hidden="true" tabindex="-1"></a>SSR_int</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="introduction-to-statistical-models.html#cb96-1"></a>SSR_int &lt;-<span class="st"> </span><span class="kw">sum</span>(M_House_Int<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb96-2"><a href="introduction-to-statistical-models.html#cb96-2"></a>SSR_int</span></code></pre></div>
 <pre><code>## [1] 10139974</code></pre>
 <p><span class="math display">\[
 SSM = SST-SSR = 69,045,634 - 10,139,974 =58,905,660.
@@ -1086,11 +1057,11 @@ R^2 = \frac{58,905,660}{69,045,634}=0.8531.
 <p>Approximately 85.3% of the total variability in sale price is explained by the model using square feet and waterfront status, as well as an interaction between them as the explanatory variables.</p>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
 <p>We calculate <span class="math inline">\(R^2\)</span> directly in R.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="introduction-to-statistical-models.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M_House_Int)<span class="sc">$</span>r.squared</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="introduction-to-statistical-models.html#cb98-1"></a><span class="kw">summary</span>(M_House_Int)<span class="op">$</span>r.squared</span></code></pre></div>
 <pre><code>## [1] 0.853141</code></pre>
 <p>We see that adding an interaction term improved the proportion of variability in house price explained by the model from 0.76 to 0.85. This is a fairly notable increase.</p>
 </div>
-<div id="considerations-for-using-interactions" class="section level3 hasAnchor" number="2.3.5">
+<div id="considerations-for-using-interactions" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.5</span> Considerations for Using Interactions<a href="introduction-to-statistical-models.html#considerations-for-using-interactions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>It might be tempting to think we should always add an interaction term to a model when using two or more explanatory variables. Afterall, an interaction term is just another term added to the model, meaning that <span class="math inline">\(R^2\)</span> will never go down.</p>
 <p>Adding an interaction term is not always a good idea, though. We saw that doing so makes interpretations more complicated. Increasing the complexity of a model also increases the risk of overfitting, potentially hurting predictive performance on new data.</p>
@@ -1099,7 +1070,7 @@ R^2 = \frac{58,905,660}{69,045,634}=0.8531.
 <p>When examining a scatterplot, we should note that even if there is truly no interaction among all houses, the lines probably won’t be exactly parallel, due to random deviations among the sample of houses chosen. If the lines are reasonably close to parallel, then an interaction term is likely not needed.</p>
 <p>We’ll look more at criteria for determining whether to add an interaction term to a model in the coming sections.</p>
 </div>
-<div id="interaction-vs-correlation" class="section level3 hasAnchor" number="2.3.6">
+<div id="interaction-vs-correlation" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.6</span> Interaction vs Correlation<a href="introduction-to-statistical-models.html#interaction-vs-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>It is easy to confuse the concept of interaction with that of correlation. These are, in fact, very different concepts.</p>
 <p>A correlation between two variables means that as one increases, the other is more likely to increase or decrease. We only use the word correlation to describe two quantitative variables, but we could discuss the similar notion of a relationship between categorical variables.</p>
@@ -1119,9 +1090,9 @@ R^2 = \frac{58,905,660}{69,045,634}=0.8531.
 </ol>
 </div>
 </div>
-<div id="least-squares-estimation-lse" class="section level2 hasAnchor" number="2.4">
+<div id="least-squares-estimation-lse" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.4</span> Least Squares Estimation (LSE)<a href="introduction-to-statistical-models.html#least-squares-estimation-lse" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="estimating-regression-coefficients" class="section level3 hasAnchor" number="2.4.1">
+<div id="estimating-regression-coefficients" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.4.1</span> Estimating Regression Coefficients<a href="introduction-to-statistical-models.html#estimating-regression-coefficients" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ve already used R to determine the estimates of <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span>, <span class="math inline">\(b_2\)</span>, and <span class="math inline">\(b_3\)</span> in various kinds of linear models. At this point, it is natural to wonder where these estimates are come from.</p>
 <p>Regression coefficients <span class="math inline">\(b_0, b_1, \ldots, b_p\)</span> are chosen in a way that minimizes the sum of the squared differences between the observed and predicted values. That is, we minimize</p>
@@ -1140,10 +1111,10 @@ R^2 = \frac{58,905,660}{69,045,634}=0.8531.
 <li>This <a href="http://www.rossmanchance.com/applets/RegShuffle.htm">Rossman-Chance applet</a> provides an illustration of the line of best fit.</li>
 </ul>
 <p>Returning to the model for predicting price of a house, using only size in square feet as an explanatory variable, the scatter plot, along with the slope and intercept of the regression line are shown below.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="introduction-to-statistical-models.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Houses, <span class="fu">aes</span>(<span class="at">x=</span>sqft_living, <span class="at">y=</span>price)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb100-2"><a href="introduction-to-statistical-models.html#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="introduction-to-statistical-models.html#cb100-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span>sqft_living, <span class="dt">y=</span>price)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb100-2"><a href="introduction-to-statistical-models.html#cb100-2"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-84-1.png" width="576" /></p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="introduction-to-statistical-models.html#cb101-1" aria-hidden="true" tabindex="-1"></a>M_House_sqft</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="introduction-to-statistical-models.html#cb101-1"></a>M_House_sqft</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = price ~ sqft_living, data = Houses)
@@ -1153,7 +1124,7 @@ R^2 = \frac{58,905,660}{69,045,634}=0.8531.
 ##   -484.9575       0.5328</code></pre>
 <p>The line <span class="math inline">\(\text{Price} = -485 + 0.5328 \times \text{Square Feet}\)</span> is the “line of best fit” in the sense that it minimizes the sum of the squared residuals (SSR). Any other choices for the slope or intercept of the regression line would result in larger SSR than this line.</p>
 </div>
-<div id="mathematics-of-lse-for-slr" class="section level3 hasAnchor" number="2.4.2">
+<div id="mathematics-of-lse-for-slr" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.4.2</span> Mathematics of LSE for SLR<a href="introduction-to-statistical-models.html#mathematics-of-lse-for-slr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><p>Consider a <strong>simple linear regression(SLR)</strong> model, which is one with a singe quantitative explanatory variable <span class="math inline">\(x\)</span>.</p></li>
@@ -1165,7 +1136,7 @@ R^2 = \frac{58,905,660}{69,045,634}=0.8531.
 \]</span></p>
 <p>We setup the equation by substituting in the values of <span class="math inline">\(y_i\)</span> and <span class="math inline">\(x_i\)</span> seen in the data.</p>
 <p>Recall the first 3 houses in the dataset:</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="introduction-to-statistical-models.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(First3Houses)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="introduction-to-statistical-models.html#cb103-1"></a><span class="kw">kable</span>(First3Houses)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1209,7 +1180,7 @@ R^2 = \frac{58,905,660}{69,045,634}=0.8531.
 <li><p><span class="math inline">\(b_0=\bar{y}-b_1\bar{x}\)</span> (where <span class="math inline">\(\bar{y}=\frac{\displaystyle\sum_{i=1}^{n}{y_i}}{n}\)</span>, and <span class="math inline">\(\bar{x}=\frac{\displaystyle\sum_{i=1}^{n}{x_i}}{n}\)</span>).</p></li>
 </ul>
 </div>
-<div id="lse-for-categorical-variable" class="section level3 hasAnchor" number="2.4.3">
+<div id="lse-for-categorical-variable" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.4.3</span> LSE for Categorical Variable<a href="introduction-to-statistical-models.html#lse-for-categorical-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><p>Consider a model with a single categorical variable (such as waterfront), with G+1 categories, numbered <span class="math inline">\(g=0,2, \ldots, G\)</span></p></li>
@@ -1228,7 +1199,7 @@ R^2 = \frac{58,905,660}{69,045,634}=0.8531.
 </ul></li>
 </ul>
 </div>
-<div id="lse-more-generally" class="section level3 hasAnchor" number="2.4.4">
+<div id="lse-more-generally" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.4.4</span> LSE More Generally<a href="introduction-to-statistical-models.html#lse-more-generally" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>For multiple regression models, including those involving interaction, the logic is the same. We need to choose <span class="math inline">\(b_0, b_1, \ldots, b_p\)</span> in order to minimize</li>
@@ -1240,20 +1211,13 @@ R^2 = \frac{58,905,660}{69,045,634}=0.8531.
 </ul>
 </div>
 </div>
-<div id="analysis-of-variance" class="section level2 hasAnchor" number="2.5">
+<div id="analysis-of-variance" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.5</span> ANalysis Of VAriance<a href="introduction-to-statistical-models.html#analysis-of-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="submodels" class="section level3 hasAnchor" number="2.5.1">
+<div id="submodels" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.5.1</span> Submodels<a href="introduction-to-statistical-models.html#submodels" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ve seen 5 different models for predicting house price using some combination of square feet and waterfront status.</p>
 <p>A model A is defined to be a <strong>submodel</strong> of another model B, if every term in model A is also included in model B.</p>
 <table>
-<colgroup>
-<col width="12%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
-<col width="22%" />
-</colgroup>
 <thead>
 <tr class="header">
 <th>Model</th>
@@ -1309,7 +1273,7 @@ R^2 = \frac{58,905,660}{69,045,634}=0.8531.
 <li><p>Models 1 and 2 are not submodels of each other, since Model 1 contains a variable used in Model 2 and Model 2 contains a variable not used in Model 1.</p></li>
 </ul>
 </div>
-<div id="f-statistics" class="section level3 hasAnchor" number="2.5.2">
+<div id="f-statistics" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.5.2</span> F-Statistics<a href="introduction-to-statistical-models.html#f-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>When one model is a submodel of another, we can compare the amount of variability explained by the models, using a technique known as <strong>ANalysis Of VAriance (ANOVA)</strong>.</p>
 <p>Reduced Model: <span class="math inline">\(\hat{y}_i = b_0 + b_1x_{i1} + b_2x_{i2} + \ldots + b_qx_{iq}\)</span></p>
@@ -1341,10 +1305,10 @@ F &amp;= \frac{\frac{\text{SSR}_{\text{Reduced}}-\text{SSR}_{\text{Full}}}{p-q}}
 &amp;=\frac{\frac{23,767,280-16,521,296}{2-1}}{\frac{16,521,296}{100-(2+1)}} \\
 \end{aligned}
 \]</span></p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="introduction-to-statistical-models.html#cb104-1" aria-hidden="true" tabindex="-1"></a>((SSR_sqft<span class="sc">-</span>SSR_wf_sqft)<span class="sc">/</span>(<span class="dv">2-1</span>))<span class="sc">/</span>((SSR_wf_sqft)<span class="sc">/</span>(<span class="dv">100</span><span class="sc">-</span>(<span class="dv">2</span><span class="sc">+</span><span class="dv">1</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="introduction-to-statistical-models.html#cb104-1"></a>((SSR_sqft<span class="op">-</span>SSR_wf_sqft)<span class="op">/</span>(<span class="dv">2-1</span>))<span class="op">/</span>((SSR_wf_sqft)<span class="op">/</span>(<span class="dv">100</span><span class="op">-</span>(<span class="dv">2</span><span class="op">+</span><span class="dv">1</span>)))</span></code></pre></div>
 <pre><code>## [1] 42.54269</code></pre>
 <p>We can calculate the statistic directly in R, using the <code>anova</code> command.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="introduction-to-statistical-models.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(M_House_sqft, M_wf_SqFt)<span class="sc">$</span>F[<span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="introduction-to-statistical-models.html#cb106-1"></a><span class="kw">anova</span>(M_House_sqft, M_wf_SqFt)<span class="op">$</span>F[<span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] 42.54269</code></pre>
 <p>In the coming chapters, we’ll talk about what to conclude from an F-statistic of 42.5 Is this big enough to say that adding waterfront status to a model already including square feet helps better explain variability in sale price? (Spoiler alert: YES - an F-statistic of 42.5 is quite large and indicative that the full model is a better choice than the reduced model.) We previously saw that the model including both square feet and waterfront status had a <span class="math inline">\(R^2\)</span> value considerably higher than the one including only square feet. This large F-statistic is further evidence to the benefit of considering both variables in our model.</p>
 <p><strong>Example 2</strong></p>
@@ -1357,29 +1321,29 @@ F &amp;= \frac{\frac{\text{SSR}_{\text{Reduced}}-\text{SSR}_{\text{Full}}}{p-q}}
 &amp;=\frac{\frac{16,521,296-10,139,974}{3-2}}{\frac{10,139,974}{100-(3+1)}} \\
 \end{aligned}
 \]</span></p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="introduction-to-statistical-models.html#cb108-1" aria-hidden="true" tabindex="-1"></a>((SSR_wf_sqft<span class="sc">-</span>SSR_int)<span class="sc">/</span>(<span class="dv">3-2</span>))<span class="sc">/</span>((SSR_int)<span class="sc">/</span>(<span class="dv">100</span><span class="sc">-</span>(<span class="dv">3</span><span class="sc">+</span><span class="dv">1</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="introduction-to-statistical-models.html#cb108-1"></a>((SSR_wf_sqft<span class="op">-</span>SSR_int)<span class="op">/</span>(<span class="dv">3-2</span>))<span class="op">/</span>((SSR_int)<span class="op">/</span>(<span class="dv">100</span><span class="op">-</span>(<span class="dv">3</span><span class="op">+</span><span class="dv">1</span>)))</span></code></pre></div>
 <pre><code>## [1] 60.41505</code></pre>
 <p>We can calculate the statistic directly in R, using the <code>anova</code> command.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="introduction-to-statistical-models.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(M_wf_SqFt, M_House_Int)<span class="sc">$</span>F[<span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="introduction-to-statistical-models.html#cb110-1"></a><span class="kw">anova</span>(M_wf_SqFt, M_House_Int)<span class="op">$</span>F[<span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] 60.41505</code></pre>
 <p>We observe an F-statistic of 60, which is even bigger than the one seen previously! This suggests that adding the interaction term does indeed improve the model’s ability to account for variability in prices.</p>
 </div>
-<div id="comparing-3-or-more-categories" class="section level3 hasAnchor" number="2.5.3">
+<div id="comparing-3-or-more-categories" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.5.3</span> Comparing 3 or More Categories<a href="introduction-to-statistical-models.html#comparing-3-or-more-categories" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>F-statistics are commonly used when making comparisons involving categorical variables with 3 or more categories.</p>
 <p>One variable in the houses dataset, which we haven’t looked at yet, is the condition of the house at the time of sale. The table shows the number of houses in each condition listed.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="introduction-to-statistical-models.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Houses<span class="sc">$</span>condition)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="introduction-to-statistical-models.html#cb112-1"></a><span class="kw">summary</span>(Houses<span class="op">$</span>condition)</span></code></pre></div>
 <pre><code>##      poor      fair   average      good very_good 
 ##         1         1        59        30         9</code></pre>
-<p>We notice that there is only one house in poor condition and one house in fair condition. These sample sizes are too small to analyze. We’ll combine these two houses with those in the “average” category, creating a new category called “average or below).</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="introduction-to-statistical-models.html#cb114-1" aria-hidden="true" tabindex="-1"></a>Houses<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">fct_collapse</span>(Houses<span class="sc">$</span>condition, <span class="st">&quot;average or below&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;poor&quot;</span>,<span class="st">&quot;fair&quot;</span>, <span class="st">&quot;average&quot;</span>))</span></code></pre></div>
+<p>We notice that there is only one house in poor condition and one house in fair condition. These sample sizes are too small to analyze. We’ll combine these two houses with those in the “average” category, creating a new category called "average or below).</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="introduction-to-statistical-models.html#cb114-1"></a>Houses<span class="op">$</span>condition &lt;-<span class="st"> </span><span class="kw">fct_collapse</span>(Houses<span class="op">$</span>condition, <span class="st">&quot;average or below&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;poor&quot;</span>,<span class="st">&quot;fair&quot;</span>, <span class="st">&quot;average&quot;</span>))</span></code></pre></div>
 <p>The boxplot shows the distribution of houses in each category, and the table below it provides a numerical summary.</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="introduction-to-statistical-models.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Houses, <span class="fu">aes</span>(<span class="at">x=</span>condition, <span class="at">y=</span>price)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span><span class="fu">coord_flip</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="introduction-to-statistical-models.html#cb115-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span>condition, <span class="dt">y=</span>price)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="kw">coord_flip</span>()</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="introduction-to-statistical-models.html#cb116-1" aria-hidden="true" tabindex="-1"></a>Cond_Tab <span class="ot">&lt;-</span> Houses <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(condition) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">Mean_Price =</span> <span class="fu">mean</span>(price), </span>
-<span id="cb116-2"><a href="introduction-to-statistical-models.html#cb116-2" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">SD_Price=</span> <span class="fu">sd</span> (price), </span>
-<span id="cb116-3"><a href="introduction-to-statistical-models.html#cb116-3" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">N=</span> <span class="fu">n</span>())</span>
-<span id="cb116-4"><a href="introduction-to-statistical-models.html#cb116-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(Cond_Tab)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="introduction-to-statistical-models.html#cb116-1"></a>Cond_Tab &lt;-<span class="st"> </span>Houses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(condition) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">Mean_Price =</span> <span class="kw">mean</span>(price), </span>
+<span id="cb116-2"><a href="introduction-to-statistical-models.html#cb116-2"></a>                                             <span class="dt">SD_Price=</span> <span class="kw">sd</span> (price), </span>
+<span id="cb116-3"><a href="introduction-to-statistical-models.html#cb116-3"></a>                                             <span class="dt">N=</span> <span class="kw">n</span>())</span>
+<span id="cb116-4"><a href="introduction-to-statistical-models.html#cb116-4"></a><span class="kw">kable</span>(Cond_Tab)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1416,8 +1380,8 @@ F &amp;= \frac{\frac{\text{SSR}_{\text{Reduced}}-\text{SSR}_{\text{Full}}}{p-q}}
 <p>Full Model: <span class="math inline">\(\widehat{\text{Price}}= b_0+ b_1 \times\text{good condition}+ b_2\times\text{very good condition}\)</span></p>
 <p>Notice that the equation includes separate variables for the “good” and “very” good conditions. These variables take on value 0 if the house is not in that condition, and 1 if the house is in that condition. Here, houses in “average or below” condition are considered the “baseline” category.</p>
 <p>We’ll fit the model in R. The coefficient estimates for <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span> are shown below.</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="introduction-to-statistical-models.html#cb117-1" aria-hidden="true" tabindex="-1"></a>M_House_Cond <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Houses, price<span class="sc">~</span>condition)</span>
-<span id="cb117-2"><a href="introduction-to-statistical-models.html#cb117-2" aria-hidden="true" tabindex="-1"></a>M_House_Cond</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="introduction-to-statistical-models.html#cb117-1"></a>M_House_Cond &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Houses, price<span class="op">~</span>condition)</span>
+<span id="cb117-2"><a href="introduction-to-statistical-models.html#cb117-2"></a>M_House_Cond</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = price ~ condition, data = Houses)
@@ -1440,11 +1404,11 @@ F &amp;= \frac{\frac{\text{SSR}_{\text{Reduced}}-\text{SSR}_{\text{Full}}}{p-q}}
 <p>This last sentence is surprising and merits further investigation. We’ll leave that for future consideration.</p>
 <p>For now, we’ll calculate an F-statistic based on the models.</p>
 <p>Note that in this case, the reduced model does not include any explanatory variables, so SSR is equal to SST, which we calculate previously.</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="introduction-to-statistical-models.html#cb119-1" aria-hidden="true" tabindex="-1"></a>SST</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="introduction-to-statistical-models.html#cb119-1"></a>SST</span></code></pre></div>
 <pre><code>## [1] 69045634</code></pre>
 <p>We calculate SSR for the full model.</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="introduction-to-statistical-models.html#cb121-1" aria-hidden="true" tabindex="-1"></a>SSR_cond <span class="ot">&lt;-</span> <span class="fu">sum</span>(M_House_Cond<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb121-2"><a href="introduction-to-statistical-models.html#cb121-2" aria-hidden="true" tabindex="-1"></a>SSR_cond  </span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="introduction-to-statistical-models.html#cb121-1"></a>SSR_cond &lt;-<span class="st"> </span><span class="kw">sum</span>(M_House_Cond<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb121-2"><a href="introduction-to-statistical-models.html#cb121-2"></a>SSR_cond  </span></code></pre></div>
 <pre><code>## [1] 68195387</code></pre>
 <p><span class="math display">\[
 \begin{aligned}
@@ -1452,15 +1416,15 @@ F &amp;= \frac{\frac{\text{SSR}_{\text{Reduced}}-\text{SSR}_{\text{Full}}}{p-q}}
 &amp;=\frac{\frac{69,045,634-68,195,387}{2-0}}{\frac{68,195,387}{100-(2+1)}} \\
 \end{aligned}
 \]</span></p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="introduction-to-statistical-models.html#cb123-1" aria-hidden="true" tabindex="-1"></a>((SST <span class="sc">-</span> SSR_cond)<span class="sc">/</span>(<span class="dv">2-0</span>))<span class="sc">/</span>(SSR_cond<span class="sc">/</span>(<span class="dv">100</span><span class="sc">-</span>(<span class="dv">2</span><span class="sc">+</span><span class="dv">1</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="introduction-to-statistical-models.html#cb123-1"></a>((SST <span class="op">-</span><span class="st"> </span>SSR_cond)<span class="op">/</span>(<span class="dv">2-0</span>))<span class="op">/</span>(SSR_cond<span class="op">/</span>(<span class="dv">100</span><span class="op">-</span>(<span class="dv">2</span><span class="op">+</span><span class="dv">1</span>)))</span></code></pre></div>
 <pre><code>## [1] 0.6046888</code></pre>
 <p>We perform the calculation directly in R.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="introduction-to-statistical-models.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(M_House_Cond, M0_House)<span class="sc">$</span>F[<span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="introduction-to-statistical-models.html#cb125-1"></a><span class="kw">anova</span>(M_House_Cond, M0_House)<span class="op">$</span>F[<span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] 0.6046888</code></pre>
 <p>Notice that the F-statistic of 0.6 is considerably smaller than the F-statistics we’ve seen previously.</p>
 <p>This indicates that adding condition to a model with no other explanatory variables doesn’t seem to help improve the model’s ability to account for variation in price. Put another way, there doesn’t appear to be much evidence of difference in price between houses in the different conditions.</p>
 </div>
-<div id="f-statistic-illustration" class="section level3 hasAnchor" number="2.5.4">
+<div id="f-statistic-illustration" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.5.4</span> F-Statistic Illustration<a href="introduction-to-statistical-models.html#f-statistic-illustration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The figure below gives an illustration of data that would produce a large F-statistic (Scenario 1), and also data that would produce a small F-statistic (Scenario 2), like the one seen in the house condition data.</p>
 <p>An F-statistic compares the amount of variability between groups to the amount of variability within groups.</p>
@@ -1468,11 +1432,6 @@ F &amp;= \frac{\frac{\text{SSR}_{\text{Reduced}}-\text{SSR}_{\text{Full}}}{p-q}}
 <p>In scenario 2, there is little difference between the overall averages in each group, and more variability between individual observations within each group. In a scenario like this, knowing the group an observation lies in does little to help us predict the response. In this scenario, predictions from a model that includes group as an explantory variable would not be much better than those from a model that does not. Hence, we would obtain a small F-statistic.</p>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-101-1.png" width="864" /></p>
 <table>
-<colgroup>
-<col width="34%" />
-<col width="31%" />
-<col width="34%" />
-</colgroup>
 <thead>
 <tr class="header">
 <th></th>
@@ -1504,7 +1463,7 @@ F &amp;= \frac{\frac{\text{SSR}_{\text{Reduced}}-\text{SSR}_{\text{Full}}}{p-q}}
 </tbody>
 </table>
 </div>
-<div id="alternative-f-statistic-formula" class="section level3 hasAnchor" number="2.5.5">
+<div id="alternative-f-statistic-formula" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.5.5</span> Alternative F-Statistic Formula<a href="introduction-to-statistical-models.html#alternative-f-statistic-formula" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The above illustration suggests alternative (and mathematically equivalent) way to calculate the F-statistic. We calculate the ratio of variability between different groups, relative to the amount of variability within each group</p>
 <p>For a categorical variable with <span class="math inline">\(g\)</span> groups,</p>
@@ -1523,7 +1482,7 @@ F= \frac{\text{Variability between groups}}{\text{Variability within groups}}= \
 </ul>
 <p><strong>Example</strong></p>
 <p>Let’s recalculate the F-statistic for the conditions of the houses, using this alternate formula. The first 3 houses are shown.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="introduction-to-statistical-models.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(Houses <span class="sc">%&gt;%</span> <span class="fu">select</span>(Id, price, condition),<span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="introduction-to-statistical-models.html#cb127-1"></a><span class="kw">kable</span>(<span class="kw">head</span>(Houses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Id, price, condition),<span class="dv">3</span>))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1570,7 +1529,7 @@ F= \frac{\frac{\displaystyle\sum_{i=1}^g\sum_{j=1}^{n_i}n_i(y_{i\cdot}-\bar{y}_{
 <ul>
 <li>Note that the quantity in the the quantity in the third line is equivalent to the sum of the squared residuals using M2. Thus, we can calculate F using:</li>
 </ul>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="introduction-to-statistical-models.html#cb128-1" aria-hidden="true" tabindex="-1"></a>((<span class="dv">61</span><span class="sc">*</span>(<span class="fl">700.6349-735.3526</span>)<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span><span class="dv">30</span><span class="sc">*</span>(<span class="fl">861.0-735.3526</span>)<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span><span class="dv">9</span><span class="sc">*</span>(<span class="fl">551.8361-735.3526</span>)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">3-1</span>))<span class="sc">/</span>((SSR_cond)<span class="sc">/</span>(<span class="dv">100-3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="introduction-to-statistical-models.html#cb128-1"></a>((<span class="dv">61</span><span class="op">*</span>(<span class="fl">700.6349-735.3526</span>)<span class="op">^</span><span class="dv">2</span><span class="op">+</span><span class="dv">30</span><span class="op">*</span>(<span class="fl">861.0-735.3526</span>)<span class="op">^</span><span class="dv">2</span><span class="op">+</span><span class="dv">9</span><span class="op">*</span>(<span class="fl">551.8361-735.3526</span>)<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(<span class="dv">3-1</span>))<span class="op">/</span>((SSR_cond)<span class="op">/</span>(<span class="dv">100-3</span>))</span></code></pre></div>
 <pre><code>## [1] 0.6046889</code></pre>
 <p>For models with only one categorical explanatory variable, “variability within vs variability between” interpretation of an F-statistic is very popular. This statistic is often relevant in studies in the natural and social sciences. Such studies are often referred to as One-Way ANOVA’s. In fact, these are just a special case of the full vs reduced model interpretation of the F-statistic, which can be applied to any two models, as long as one is a submodel of the other.</p>
 
@@ -1643,7 +1602,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

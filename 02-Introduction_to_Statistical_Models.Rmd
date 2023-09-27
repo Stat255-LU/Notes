@@ -823,7 +823,7 @@ $$
 
 The intercept is $b_0$ for non-waterfront houses, and $b_0 + b_2$ for waterfront houses.
 
-The slopse is $b_1$ for non-waterfront houses, and $b_1 + b_3$ for waterfront houses. 
+The slope is $b_1$ for non-waterfront houses, and $b_1 + b_3$ for waterfront houses. 
 
 Thus, the model allows both the slope and intercept to differ between waterfront and non-waterfront houses.   
 
