@@ -859,7 +859,7 @@ House_Cond_SimulationResults_Plot
 The F-statistic in our actual we observed does not appear to be very extreme. 
 
 
-**p-value:** Proportion of simulations resulting in value of F more extreme than -0.15 
+**p-value:** Proportion of simulations resulting in value of F more extreme than 0.60.
 
 ```{r}
 mean(FSim > Fstat)
