@@ -1,16 +1,17 @@
-# Bootstrap Confindence Intervals
+# Interval Estimation
 
 **Learning Outcomes:**     
 
 1. Explain how to obtain a bootstrap distribution for a statistic (such as a sample mean, median, standard deviation, proportion, difference in means or proportions, or regression coefficient).   
 2. Explain the purpose of bootstrapping.    
 3. Interpret confidence intervals, or explain why it is inappropriate to do so.   
-4. Explain whether or not the results of a confidence interval are.   
-consistent with the conclusion of a hypothesis test. 
+4. Explain whether or not the results of a confidence interval are consistent with the conclusion of a hypothesis test. 
 5. Define standard error of a statistic and interpret it in context.      
 6. Explain how sample size and level of confidence impact the width of a confidence interval.    
 7. Explain how sample size impacts variability in individual observations, and the sampling distribution for a test statistic.   
-
+8. Define standard error of a statistic and interpret it in context.      
+9. Explain when it is appropriate to use "theory-based" standard error formulas.   
+10. Explain how sample size and level of confidence impact the width of a confidence interval.    
 
 
 
