@@ -145,7 +145,7 @@ Prop_Samp_Dist
 
 We notice that most of our 10,000 samples yielded proportions of on-time arrivals between 0.5 and 0.7, The distribution of proportion of on-time arrivals is roughly symmetric and bell-shaped. 
 
-The distribution shown in this histogram is called  the **sampling distribution for $\hat{p}**. We can gauge how much the proportion of on-time arrivals varies between samples by calculating the standard deviation of this sampling distribution. The standard deviation of a sampling distribution for a statistic is also called the **standard error** of the statistic. In this case it represents the standard error $\hat{p}$ (the proportion of on-time arrivals), and is denoted $\text{SE}(\hat{p})$. This standard error is shown below.  
+The distribution shown in this histogram is called  the **sampling distribution for $\hat{p}$**. We can gauge how much the proportion of on-time arrivals varies between samples by calculating the standard deviation of this sampling distribution. The standard deviation of a sampling distribution for a statistic is also called the **standard error** of the statistic. In this case it represents the standard error $\hat{p}$ (the proportion of on-time arrivals), and is denoted $\text{SE}(\hat{p})$. This standard error is shown below.  
 
 ```{r}
 SE_p_hat <- sd(Samples_df$p_hat_val)
@@ -183,7 +183,7 @@ Upper <- p + 2*SE_p_hat
 sum((Samples_df$p_hat_val >=Lower) & (Samples_df$p_hat_val <= Upper))
 ```
 
-` r sum((Samples_df$p_hat >=Lower) & (Samples_df$p_hat <= Upper))` out of the 10,000 simulations (approximately 95%) of the samples produced proportions within $\pm 2$ standard errors of the true population proportion of on-time flights.   
+Approximately 95% 10,000 samples produced proportions within $\pm 2$ standard errors of the true population proportion of on-time flights.   
 
 ### Confidence Intervals
 
@@ -205,7 +205,7 @@ c(p_hat - 2*SE_p_hat, p_hat + 2*SE_p_hat)
 
 Based on our sample of 75 flights, we can be 95% confident that the true proportion of on-time arrivals among all 2013 flights from New York to Chicago is between `r p_hat - 2*SE_p_hat` and `p_hat + 2*SE_p_hat`. 
 
-In fact, knowing what we do about the true value of the population parameter $p$, we can see that our confidence interval does indeed contain this value. Of course, in a real situaiton, we won't know the true value of the population parameter, so we won't know for sure whether or not our confidence interval contains this true parameter value.   
+In fact, knowing what we do about the true value of the population parameter $p$, we can see that our confidence interval does indeed contain this value. Of course, in a real situation, we won't know the true value of the population parameter, so we won't know for sure whether or not our confidence interval contains this true parameter value.   
 
 A pertinent question at this stage would be ``What does 95% confidence mean?". To answer that, let's explore what happens when we calculate confidence intervals based on estimates many different samples. For each of our 10,000 different samples taken from our population, we'll add and subtract two standard errors from the sample proportion $\hat{p}$ corresponding to that sample. 
 
@@ -369,7 +369,7 @@ We calculate the proportion of lakes with mercury levels exceeding 1 ppm in this
 sum(BootstrapSample1$Mercury > 1) / 53
 ```
 
-***Bootstrap Sample #2** 
+**Bootstrap Sample #2** 
 
 We take a second bootstrap sample. Notice that the lakes chosen and omitted differ from the first sample. 
 
