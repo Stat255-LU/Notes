@@ -649,7 +649,7 @@ Lakes_Bootstrap_Mean_Plot +
 
 We are 95% confident that the average mercury level among all Florida lakes is between `r mean - 2*SE_mean` and `r mean + 2*SE_mean` parts per million.  
 
-It is important to note that we are not saying that we are 95% confident that an individual lake lie in this range, or that 95% of all individual lakes lie in this range. We are only saying that we are confident that the *average* mercury level among all lakes lies in this range. A confidence interval is a statement about a population parameter (in this case the average mercury level), rather than about individual lakes in the population. Since there is more variability about individual lakes than overall averages, we'll need to make a wider interval when attempting talking about the mercury level for an individual lake. 
+It is important to note that we are not saying that we are 95% confident that an individual lake lie in this range, or that 95% of all individual lakes lie in this range. We are only saying that we are confident that the *average* mercury level among all lakes lies in this range. A confidence interval is a statement about a population parameter (in this case the average mercury level), rather than about individual lakes in the population. Since there is more variability about individual lakes than overall averages, we'll need to make a wider interval when talking about the mercury level for an individual lake. 
 
 
 ###  CI for Standard Deviation
