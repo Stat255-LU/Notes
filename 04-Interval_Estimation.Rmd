@@ -899,7 +899,7 @@ The standard error measures the amount of variability in median house price betw
 Note that this is different than the sample standard deviation, which represents the standard deviation in prices between the 100 different houses in the sample. 
 
 
-Notice that the bootstrap distribution for the median is not symmetric and bell-shaped. Thus, we cannot be assured that 95% of samples will produce a statistic within two standard errors of the mean, so the standard error confidence interval method is not appropriate here. Instead, we'll calculate a confidence interval by taking the middle 95% of the values in the bootstrap distribution.    
+Notice that the bootstrap distribution for the median is not symmetric and bell-shaped. Thus, we cannot be assured that 95% of samples will produce a statistic within two standard errors of the mean, so the standard error confidence interval method is not appropriate here. Instead, we'll calculate a confidence interval by taking the middle 95% of the values in the bootstrap distribution. A cionfidence interval calculated this way is called a **percentile bootstrap interval**.      
 
 We'll calculate the 0.025 quantile and the 0.975 quantile of this bootstrap distribution. These are the points below which lie 2.5% and 97.5% of the medians in the bootstrap distribution. Thus, the middle 95% of the medians lie between these values. 
 
