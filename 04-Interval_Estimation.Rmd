@@ -629,7 +629,7 @@ In this case, the statistic of interest is the sample mean $\bar{x}=0.527$. The 
 $$
 \begin{aligned}
 & \bar{x} \pm 2\times\text{SE}(\bar{x}) \\
-& = 0.527 \pm 2\times{0.458}
+& = 0.527 \pm 2\times\text{`r SE_mean`}
 \end{aligned}
 $$
 
@@ -961,7 +961,7 @@ In our sample of 33 Northern Lakes and 20 Southern Lakes, we saw a difference of
 
 We'll use a statistical model to calculate the average mercury levels in Northern and Southern Florida. 
 
-$\widehat{\text{Mercury}} = b_0 +b_1\text{I}_{\text{South}}$
+$\widehat{\text{Mercury}} = b_0 +b_1\times{\text{South}}$
 
 
 * $b_0$ represents the mean mercury level for lakes in North Florida, and    
