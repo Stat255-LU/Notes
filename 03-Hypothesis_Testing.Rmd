@@ -357,6 +357,8 @@ It is very unlikely that we would have gotten a difference as extreme as 0.272 b
 
 The **p-value** represents the probability of getting a test statistic as extreme or more extreme than we did in our sample when the null hypothesis is true. 
 
+In this situation, the p-value represents the probability of observing a difference in sample means as extreme or more extreme than 0.272 if there is actually no difference in average mercury level among all lakes in Northern Florida, compared to Southern Florida.   
+
 In our study, the p-value was `r sum(abs(b1Sim) > abs(b1))/10000`, which is very low. This provides strong evidence against the null hypothesis that there is no difference in average mercury levels between all Northern and Southern Florida lakes. 
 
 A low p-value tells us that the difference in average Mercury levels  that we saw in our sample is unlikely to have occurred by chance, providing evidence that there is indeed a difference in average Mercury levels between Northern and Southern lakes.   
