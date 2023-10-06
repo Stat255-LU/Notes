@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Normal Error Regression Model | Stat 255: Statistics for Data Science Notes</title>
   <meta name="description" content="Chapter 5 Normal Error Regression Model | Stat 255: Statistics for Data Science Notes" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Normal Error Regression Model | Stat 255: Statistics for Data Science Notes" />
   <meta property="og:type" content="book" />
@@ -49,25 +49,24 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,13 +86,13 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -138,12 +137,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Exploratory Data Analysis</a><ul>
-<li class="chapter" data-level="1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#getting-started-in-r"><i class="fa fa-check"></i><b>1.1</b> Getting Started in R</a><ul>
+<li class="chapter" data-level="1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#getting-started-in-r"><i class="fa fa-check"></i><b>1.1</b> Getting Started in R</a>
+<ul>
 <li class="chapter" data-level="1.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#previewing-the-data"><i class="fa fa-check"></i><b>1.1.1</b> Previewing the Data</a></li>
 <li class="chapter" data-level="1.1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#modifying-the-data"><i class="fa fa-check"></i><b>1.1.2</b> Modifying the Data</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-visualization"><i class="fa fa-check"></i><b>1.2</b> Data Visualization</a><ul>
+<li class="chapter" data-level="1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-visualization"><i class="fa fa-check"></i><b>1.2</b> Data Visualization</a>
+<ul>
 <li class="chapter" data-level="1.2.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#histogram"><i class="fa fa-check"></i><b>1.2.1</b> Histogram</a></li>
 <li class="chapter" data-level="1.2.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#density-plot"><i class="fa fa-check"></i><b>1.2.2</b> Density Plot</a></li>
 <li class="chapter" data-level="1.2.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#boxplot"><i class="fa fa-check"></i><b>1.2.3</b> Boxplot</a></li>
@@ -154,20 +156,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2.8" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#correlation-plot"><i class="fa fa-check"></i><b>1.2.8</b> Correlation Plot</a></li>
 <li class="chapter" data-level="1.2.9" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#scatterplot-matrix"><i class="fa fa-check"></i><b>1.2.9</b> Scatterplot Matrix</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#summary-tables"><i class="fa fa-check"></i><b>1.3</b> Summary Tables</a><ul>
+<li class="chapter" data-level="1.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#summary-tables"><i class="fa fa-check"></i><b>1.3</b> Summary Tables</a>
+<ul>
 <li class="chapter" data-level="1.3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#calculating-summary-statistics"><i class="fa fa-check"></i><b>1.3.1</b> Calculating Summary Statistics</a></li>
 <li class="chapter" data-level="1.3.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#grouped-summaries"><i class="fa fa-check"></i><b>1.3.2</b> Grouped Summaries</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html"><i class="fa fa-check"></i><b>2</b> Introduction to Statistical Models</a><ul>
-<li class="chapter" data-level="2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#fitting-models-to-data"><i class="fa fa-check"></i><b>2.1</b> Fitting Models to Data</a><ul>
+<li class="chapter" data-level="2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html"><i class="fa fa-check"></i><b>2</b> Introduction to Statistical Models</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#fitting-models-to-data"><i class="fa fa-check"></i><b>2.1</b> Fitting Models to Data</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#terminology"><i class="fa fa-check"></i><b>2.1.1</b> Terminology</a></li>
 <li class="chapter" data-level="2.1.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-quantitative-explanatory-variable"><i class="fa fa-check"></i><b>2.1.2</b> Model with Quantitative Explanatory Variable</a></li>
 <li class="chapter" data-level="2.1.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-categorical-variable"><i class="fa fa-check"></i><b>2.1.3</b> Model with Categorical Variable</a></li>
 <li class="chapter" data-level="2.1.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-multiple-explanatory-variables"><i class="fa fa-check"></i><b>2.1.4</b> Model with Multiple Explanatory Variables</a></li>
 <li class="chapter" data-level="2.1.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-no-explanatory-variable"><i class="fa fa-check"></i><b>2.1.5</b> Model with No Explanatory Variable</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variability-explained-by-a-model"><i class="fa fa-check"></i><b>2.2</b> Variability Explained by a Model</a><ul>
+<li class="chapter" data-level="2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variability-explained-by-a-model"><i class="fa fa-check"></i><b>2.2</b> Variability Explained by a Model</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#quantifying-variability"><i class="fa fa-check"></i><b>2.2.1</b> Quantifying Variability</a></li>
 <li class="chapter" data-level="2.2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#total-variability"><i class="fa fa-check"></i><b>2.2.2</b> Total Variability</a></li>
 <li class="chapter" data-level="2.2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#residuals"><i class="fa fa-check"></i><b>2.2.3</b> Residuals</a></li>
@@ -179,7 +185,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.9" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#r2-visually"><i class="fa fa-check"></i><b>2.2.9</b> <span class="math inline">\(R^2\)</span> Visually</a></li>
 <li class="chapter" data-level="2.2.10" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-comparison-summary"><i class="fa fa-check"></i><b>2.2.10</b> Model Comparison Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#models-with-interaction"><i class="fa fa-check"></i><b>2.3</b> Models with Interaction</a><ul>
+<li class="chapter" data-level="2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#models-with-interaction"><i class="fa fa-check"></i><b>2.3</b> Models with Interaction</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#definition-of-interaction"><i class="fa fa-check"></i><b>2.3.1</b> Definition of Interaction</a></li>
 <li class="chapter" data-level="2.3.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-term"><i class="fa fa-check"></i><b>2.3.2</b> Interaction Term</a></li>
 <li class="chapter" data-level="2.3.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-models-in-r"><i class="fa fa-check"></i><b>2.3.3</b> Interaction Models in R</a></li>
@@ -187,13 +194,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#considerations-for-using-interactions"><i class="fa fa-check"></i><b>2.3.5</b> Considerations for Using Interactions</a></li>
 <li class="chapter" data-level="2.3.6" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-vs-correlation"><i class="fa fa-check"></i><b>2.3.6</b> Interaction vs Correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#least-squares-estimation-lse"><i class="fa fa-check"></i><b>2.4</b> Least Squares Estimation (LSE)</a><ul>
+<li class="chapter" data-level="2.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#least-squares-estimation-lse"><i class="fa fa-check"></i><b>2.4</b> Least Squares Estimation (LSE)</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#estimating-regression-coefficients"><i class="fa fa-check"></i><b>2.4.1</b> Estimating Regression Coefficients</a></li>
 <li class="chapter" data-level="2.4.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#mathematics-of-lse-for-slr"><i class="fa fa-check"></i><b>2.4.2</b> Mathematics of LSE for SLR</a></li>
 <li class="chapter" data-level="2.4.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#lse-for-categorical-variable"><i class="fa fa-check"></i><b>2.4.3</b> LSE for Categorical Variable</a></li>
 <li class="chapter" data-level="2.4.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#lse-more-generally"><i class="fa fa-check"></i><b>2.4.4</b> LSE More Generally</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>2.5</b> ANalysis Of VAriance</a><ul>
+<li class="chapter" data-level="2.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>2.5</b> ANalysis Of VAriance</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#submodels"><i class="fa fa-check"></i><b>2.5.1</b> Submodels</a></li>
 <li class="chapter" data-level="2.5.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#f-statistics"><i class="fa fa-check"></i><b>2.5.2</b> F-Statistics</a></li>
 <li class="chapter" data-level="2.5.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#comparing-3-or-more-categories"><i class="fa fa-check"></i><b>2.5.3</b> Comparing 3 or More Categories</a></li>
@@ -201,8 +210,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#alternative-f-statistic-formula"><i class="fa fa-check"></i><b>2.5.5</b> Alternative F-Statistic Formula</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html"><i class="fa fa-check"></i><b>3</b> Hypothesis Testing via Permutation</a><ul>
-<li class="chapter" data-level="3.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#test-for-difference-in-means"><i class="fa fa-check"></i><b>3.1</b> Test for Difference in Means</a><ul>
+<li class="chapter" data-level="3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html"><i class="fa fa-check"></i><b>3</b> Hypothesis Testing via Permutation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#test-for-difference-in-means"><i class="fa fa-check"></i><b>3.1</b> Test for Difference in Means</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#mercury-levels-in-florida-lakes"><i class="fa fa-check"></i><b>3.1.1</b> Mercury Levels in Florida Lakes</a></li>
 <li class="chapter" data-level="3.1.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#model-for-mercury-level"><i class="fa fa-check"></i><b>3.1.2</b> Model for Mercury Level</a></li>
 <li class="chapter" data-level="3.1.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#hypotheses-and-key-question"><i class="fa fa-check"></i><b>3.1.3</b> Hypotheses and Key Question</a></li>
@@ -211,7 +222,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.6" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#r-code-for-permutation-test"><i class="fa fa-check"></i><b>3.1.6</b> R Code for Permutation Test</a></li>
 <li class="chapter" data-level="3.1.7" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#p-values"><i class="fa fa-check"></i><b>3.1.7</b> p-values</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#general-permutation-tests"><i class="fa fa-check"></i><b>3.2</b> General Permutation Tests</a><ul>
+<li class="chapter" data-level="3.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#general-permutation-tests"><i class="fa fa-check"></i><b>3.2</b> General Permutation Tests</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#other-test-statistics"><i class="fa fa-check"></i><b>3.2.1</b> Other Test Statistics</a></li>
 <li class="chapter" data-level="3.2.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#general-permutation-test-procedure"><i class="fa fa-check"></i><b>3.2.2</b> General Permutation Test Procedure</a></li>
 <li class="chapter" data-level="3.2.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#difference-in-standard-deviation"><i class="fa fa-check"></i><b>3.2.3</b> Difference in Standard Deviation</a></li>
@@ -220,12 +232,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#responsible-hypothesis-testing"><i class="fa fa-check"></i><b>3.3</b> Responsible Hypothesis Testing</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html"><i class="fa fa-check"></i><b>4</b> Bootstrap Interval Estimation</a><ul>
-<li class="chapter" data-level="4.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#sampling-distributions"><i class="fa fa-check"></i><b>4.1</b> Sampling Distributions</a><ul>
+<li class="chapter" data-level="4" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html"><i class="fa fa-check"></i><b>4</b> Bootstrap Interval Estimation</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#sampling-distributions"><i class="fa fa-check"></i><b>4.1</b> Sampling Distributions</a>
+<ul>
 <li class="chapter" data-level="4.1.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#sampling-from-a-population"><i class="fa fa-check"></i><b>4.1.1</b> Sampling From a Population</a></li>
 <li class="chapter" data-level="4.1.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#confidence-intervals"><i class="fa fa-check"></i><b>4.1.2</b> Confidence Intervals</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrapping"><i class="fa fa-check"></i><b>4.2</b> Bootstrapping</a><ul>
+<li class="chapter" data-level="4.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrapping"><i class="fa fa-check"></i><b>4.2</b> Bootstrapping</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#mercury-levels-in-florida-lakes-1"><i class="fa fa-check"></i><b>4.2.1</b> Mercury Levels in Florida Lakes</a></li>
 <li class="chapter" data-level="4.2.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-sampling"><i class="fa fa-check"></i><b>4.2.2</b> Bootstrap Sampling</a></li>
 <li class="chapter" data-level="4.2.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-samples-of-lakes"><i class="fa fa-check"></i><b>4.2.3</b> Bootstrap Samples of Lakes</a></li>
@@ -233,7 +248,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.5" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-se-confidence-interval"><i class="fa fa-check"></i><b>4.2.5</b> Bootstrap SE Confidence Interval</a></li>
 <li class="chapter" data-level="4.2.6" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-distribution-vs-sampling-distribution"><i class="fa fa-check"></i><b>4.2.6</b> Bootstrap Distribution vs Sampling Distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-confidence-interval-example"><i class="fa fa-check"></i><b>4.3</b> Bootstrap Confidence Interval Example</a><ul>
+<li class="chapter" data-level="4.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-confidence-interval-example"><i class="fa fa-check"></i><b>4.3</b> Bootstrap Confidence Interval Example</a>
+<ul>
 <li class="chapter" data-level="4.3.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrapping-other-statistics"><i class="fa fa-check"></i><b>4.3.1</b> Bootstrapping Other Statistics</a></li>
 <li class="chapter" data-level="4.3.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#ci-for-mean"><i class="fa fa-check"></i><b>4.3.2</b> CI for Mean</a></li>
 <li class="chapter" data-level="4.3.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#ci-for-standard-deviation"><i class="fa fa-check"></i><b>4.3.3</b> CI for Standard Deviation</a></li>
@@ -244,7 +260,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.8" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#more-cis-in-regression"><i class="fa fa-check"></i><b>4.3.8</b> More CI’s in Regression</a></li>
 <li class="chapter" data-level="4.3.9" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrapping-cautions"><i class="fa fa-check"></i><b>4.3.9</b> Bootstrapping Cautions</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#estimating-standard-error"><i class="fa fa-check"></i><b>4.4</b> Estimating Standard Error</a><ul>
+<li class="chapter" data-level="4.4" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#estimating-standard-error"><i class="fa fa-check"></i><b>4.4</b> Estimating Standard Error</a>
+<ul>
 <li class="chapter" data-level="4.4.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#standard-error-vs-standard-deviation"><i class="fa fa-check"></i><b>4.4.1</b> Standard Error vs Standard Deviation</a></li>
 <li class="chapter" data-level="4.4.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#sample-size-and-standard-error"><i class="fa fa-check"></i><b>4.4.2</b> Sample Size and Standard Error</a></li>
 <li class="chapter" data-level="4.4.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#standard-error-formulas"><i class="fa fa-check"></i><b>4.4.3</b> Standard Error Formulas</a></li>
@@ -255,15 +272,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.8" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#ci-method-comparison"><i class="fa fa-check"></i><b>4.4.8</b> CI Method Comparison</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html"><i class="fa fa-check"></i><b>5</b> Normal Error Regression Model</a><ul>
-<li class="chapter" data-level="5.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#the-normal-error-regression-model"><i class="fa fa-check"></i><b>5.1</b> The Normal Error Regression Model</a><ul>
+<li class="chapter" data-level="5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html"><i class="fa fa-check"></i><b>5</b> Normal Error Regression Model</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#the-normal-error-regression-model"><i class="fa fa-check"></i><b>5.1</b> The Normal Error Regression Model</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#example-ice-cream-dispensor"><i class="fa fa-check"></i><b>5.1.1</b> Example: Ice Cream Dispensor</a></li>
 <li class="chapter" data-level="5.1.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#signal-and-noise"><i class="fa fa-check"></i><b>5.1.2</b> Signal and Noise</a></li>
 <li class="chapter" data-level="5.1.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#normal-distribution"><i class="fa fa-check"></i><b>5.1.3</b> Normal Distribution</a></li>
 <li class="chapter" data-level="5.1.4" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#signal-and-noise-in-icecream-example"><i class="fa fa-check"></i><b>5.1.4</b> Signal and Noise in Icecream Example</a></li>
 <li class="chapter" data-level="5.1.5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#general-mathematical-form"><i class="fa fa-check"></i><b>5.1.5</b> General Mathematical Form</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#inference-in-llsr-model"><i class="fa fa-check"></i><b>5.2</b> Inference in LLSR Model</a><ul>
+<li class="chapter" data-level="5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#inference-in-llsr-model"><i class="fa fa-check"></i><b>5.2</b> Inference in LLSR Model</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#lm-summary-output"><i class="fa fa-check"></i><b>5.2.1</b> <code>lm</code> <code>summary</code> Output</a></li>
 <li class="chapter" data-level="5.2.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#example-florida-lakes-hypothesis"><i class="fa fa-check"></i><b>5.2.2</b> Example: Florida Lakes Hypothesis</a></li>
 <li class="chapter" data-level="5.2.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#t-distribution"><i class="fa fa-check"></i><b>5.2.3</b> t-distribution</a></li>
@@ -294,7 +314,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="normal-error-regression-model" class="section level1 hasAnchor">
+<div id="normal-error-regression-model" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Normal Error Regression Model<a href="normal-error-regression-model.html#normal-error-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><strong>Learning Outcomes:</strong></p>
 <ol style="list-style-type: decimal">
@@ -319,9 +339,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </p></li>
 <li><p>Explain the regression effect.</p></li>
 </ol>
-<div id="the-normal-error-regression-model" class="section level2 hasAnchor">
+<div id="the-normal-error-regression-model" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> The Normal Error Regression Model<a href="normal-error-regression-model.html#the-normal-error-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="example-ice-cream-dispensor" class="section level3 hasAnchor">
+<div id="example-ice-cream-dispensor" class="section level3 hasAnchor" number="5.1.1">
 <h3><span class="header-section-number">5.1.1</span> Example: Ice Cream Dispensor<a href="normal-error-regression-model.html#example-ice-cream-dispensor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="Ice_Cream.png" width="100%" /></p>
 <p>Suppose an ice cream machine is manufactured to dispense 2 oz. of ice cream per second, on average. If each person using the machine got exactly 2 oz. per second, the relationship between time and amount dispensed would look like this:</p>
@@ -339,7 +359,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Thus, the data will actually look like this:</p>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-355-1.png" width="672" /></p>
 </div>
-<div id="signal-and-noise" class="section level3 hasAnchor">
+<div id="signal-and-noise" class="section level3 hasAnchor" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> Signal and Noise<a href="normal-error-regression-model.html#signal-and-noise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We assume that there are two components that contribute to our response variable <span class="math inline">\(Y_i\)</span>. These are:</p>
 <ol style="list-style-type: decimal">
@@ -348,7 +368,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>The first component is often referred to as <strong>signal</strong>. The second is referred to as <strong>noise</strong>.</p>
 </div>
-<div id="normal-distribution" class="section level3 hasAnchor">
+<div id="normal-distribution" class="section level3 hasAnchor" number="5.1.3">
 <h3><span class="header-section-number">5.1.3</span> Normal Distribution<a href="normal-error-regression-model.html#normal-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In a linear regression model, we assume individual response values <span class="math inline">\(Y_i\)</span> deviate from their expectation, according to a <strong>normal distribution</strong>.</p>
 <p>A normal distribution is defined by two parameters:<br />
@@ -359,21 +379,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We can think of the curve as representing the area where the random noise value lies. When the standard deviation is small, noise tends to be close to 0, meaning the observed values will be close to their expectation. For example, if we randomly pick a point under the blue curve, the x-value, representing size of the noise is virtually never beyond <span class="math inline">\(\pm 1.5\)</span>. On the other hand, the green curve, which has higher standard deviation, would often produce noise values as extreme as <span class="math inline">\(\pm 2\)</span>.</p>
 <p>Note that for standard deviation <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(\sigma^2\)</span> is called the variance. Some books denote the normal distribution as <span class="math inline">\(\mathcal{N}(\mu, \sigma^2)\)</span>, instead of <span class="math inline">\(\mathcal{N}(\mu,\sigma)\)</span>.</p>
 </div>
-<div id="signal-and-noise-in-icecream-example" class="section level3 hasAnchor">
+<div id="signal-and-noise-in-icecream-example" class="section level3 hasAnchor" number="5.1.4">
 <h3><span class="header-section-number">5.1.4</span> Signal and Noise in Icecream Example<a href="normal-error-regression-model.html#signal-and-noise-in-icecream-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In this example, we’ll simulate the amount of ice cream dispensed by adding a random number from a normal distribution with mean 0 and standard deviation 0.5 to the expected amount dispensed, which is given by <span class="math inline">\(2x\)</span>, where <span class="math inline">\(x\)</span> represents time pressing the dispenser.</p>
 <p>Thus, amount dispensed for person <span class="math inline">\(i\)</span> is given by</p>
 <p><span class="math display">\[Y_i = 2x_i+\epsilon_i, \text{ where } \epsilon_i\sim\mathcal{N}(0, 0.5)
 \]</span></p>
 <p>The amount dispensed for a sample of 15 people is shown below.</p>
-<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="normal-error-regression-model.html#cb493-1"></a><span class="kw">set.seed</span>(<span class="dv">10082020</span>)</span>
-<span id="cb493-2"><a href="normal-error-regression-model.html#cb493-2"></a><span class="co"># set times </span></span>
-<span id="cb493-3"><a href="normal-error-regression-model.html#cb493-3"></a>time &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">1.2</span>, <span class="fl">1.5</span>, <span class="fl">1.8</span>, <span class="fl">2.1</span>, <span class="fl">2.1</span>, <span class="fl">2.3</span>, <span class="fl">2.5</span>, <span class="fl">2.6</span>, <span class="fl">2.8</span>, <span class="fl">2.9</span>, <span class="fl">2.9</span>, <span class="fl">3.1</span>, <span class="fl">3.2</span>, <span class="fl">3.6</span>)</span>
-<span id="cb493-4"><a href="normal-error-regression-model.html#cb493-4"></a>expected &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>time  <span class="co"># expected amount</span></span>
-<span id="cb493-5"><a href="normal-error-regression-model.html#cb493-5"></a>noise &lt;-<span class="kw">rnorm</span>(<span class="dv">15</span>, <span class="dv">0</span>, <span class="fl">0.5</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>)  <span class="co">#generate noise from normal distribution</span></span>
-<span id="cb493-6"><a href="normal-error-regression-model.html#cb493-6"></a>amount &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>time <span class="op">+</span><span class="st"> </span>noise  <span class="co"># calculate observed amounts</span></span>
-<span id="cb493-7"><a href="normal-error-regression-model.html#cb493-7"></a>Icecream &lt;-<span class="st"> </span><span class="kw">data.frame</span>(time, signal, noise, amount) <span class="co"># set up data table</span></span>
-<span id="cb493-8"><a href="normal-error-regression-model.html#cb493-8"></a><span class="kw">kable</span>((Icecream)) <span class="co">#display table</span></span></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="normal-error-regression-model.html#cb493-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10082020</span>)</span>
+<span id="cb493-2"><a href="normal-error-regression-model.html#cb493-2" aria-hidden="true" tabindex="-1"></a><span class="co"># set times </span></span>
+<span id="cb493-3"><a href="normal-error-regression-model.html#cb493-3" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">1.2</span>, <span class="fl">1.5</span>, <span class="fl">1.8</span>, <span class="fl">2.1</span>, <span class="fl">2.1</span>, <span class="fl">2.3</span>, <span class="fl">2.5</span>, <span class="fl">2.6</span>, <span class="fl">2.8</span>, <span class="fl">2.9</span>, <span class="fl">2.9</span>, <span class="fl">3.1</span>, <span class="fl">3.2</span>, <span class="fl">3.6</span>)</span>
+<span id="cb493-4"><a href="normal-error-regression-model.html#cb493-4" aria-hidden="true" tabindex="-1"></a>expected <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>time  <span class="co"># expected amount</span></span>
+<span id="cb493-5"><a href="normal-error-regression-model.html#cb493-5" aria-hidden="true" tabindex="-1"></a>noise <span class="ot">&lt;-</span><span class="fu">rnorm</span>(<span class="dv">15</span>, <span class="dv">0</span>, <span class="fl">0.5</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>)  <span class="co">#generate noise from normal distribution</span></span>
+<span id="cb493-6"><a href="normal-error-regression-model.html#cb493-6" aria-hidden="true" tabindex="-1"></a>amount <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>time <span class="sc">+</span> noise  <span class="co"># calculate observed amounts</span></span>
+<span id="cb493-7"><a href="normal-error-regression-model.html#cb493-7" aria-hidden="true" tabindex="-1"></a>Icecream <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(time, signal, noise, amount) <span class="co"># set up data table</span></span>
+<span id="cb493-8"><a href="normal-error-regression-model.html#cb493-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>((Icecream)) <span class="co">#display table</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -477,8 +497,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>The scatterplot displays the amount dispensed, compared to the time pressing the dispenser. The red line indicates the line <span class="math inline">\(y=2x\)</span>. If there was no random noise, then each person’s amount dispensed would lie exactly on this line. The blue line represents the location of the least squares regression line fit to the amounts observed.</p>
-<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="normal-error-regression-model.html#cb494-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Icecream1, <span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y=</span>amount)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Icecream Dispensed&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Time Pressing Dispensor&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Amount Dispensed&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">slope=</span><span class="dv">2</span>, <span class="dt">intercept=</span><span class="dv">0</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb494-2"><a href="normal-error-regression-model.html#cb494-2"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">label=</span><span class="st">&quot;y=2x&quot;</span>, <span class="dt">x=</span> <span class="fl">3.5</span>, <span class="dt">y=</span><span class="fl">6.5</span>, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="normal-error-regression-model.html#cb494-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Icecream1, <span class="fu">aes</span>(<span class="at">x=</span>time, <span class="at">y=</span>amount)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Icecream Dispensed&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Time Pressing Dispensor&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Amount Dispensed&quot;</span>) <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">slope=</span><span class="dv">2</span>, <span class="at">intercept=</span><span class="dv">0</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb494-2"><a href="normal-error-regression-model.html#cb494-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">label=</span><span class="st">&quot;y=2x&quot;</span>, <span class="at">x=</span> <span class="fl">3.5</span>, <span class="at">y=</span><span class="fl">6.5</span>, <span class="at">size=</span><span class="dv">10</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-359-1.png" width="672" /></p>
 <p>In a real situation, we would not see the signal and noise columns or the red line that represents the “true”, relationship. We would only see the time and amount, and the blue line that is estimated based on them.</p>
 <p>We use the blue line, estimated from our observed data, to estimate the location of the red line, which represents the underlying true signal, which we do not know.</p>
@@ -486,8 +506,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i} + \epsilon_i\)</span>, where <span class="math inline">\(\epsilon_i\sim\mathcal{N}(0,\sigma)\)</span>,</p>
 <p>where <span class="math inline">\(Y_i\)</span> represents amount dispensed, and <span class="math inline">\(X_i\)</span> represents time. <span class="math inline">\(\beta_0, \beta_1,\)</span>, and <span class="math inline">\(\sigma\)</span> are the unknown model parameters associated with the ice cream machine’s process.</p>
 <p>We estimate <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, using our regression line estimates <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span>, shown below.</p>
-<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="normal-error-regression-model.html#cb495-1"></a>IC_Model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Icecream1, <span class="kw">lm</span>(amount<span class="op">~</span>time))</span>
-<span id="cb495-2"><a href="normal-error-regression-model.html#cb495-2"></a>IC_Model</span></code></pre></div>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="normal-error-regression-model.html#cb495-1" aria-hidden="true" tabindex="-1"></a>IC_Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Icecream1, <span class="fu">lm</span>(amount<span class="sc">~</span>time))</span>
+<span id="cb495-2"><a href="normal-error-regression-model.html#cb495-2" aria-hidden="true" tabindex="-1"></a>IC_Model</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = lm(amount ~ time), data = Icecream1)
@@ -502,13 +522,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>An estimate for <span class="math inline">\(\sigma\)</span> is given by</p>
 <p><span class="math inline">\(s = \sqrt{\frac{\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2}{(n-(p+1))}}\)</span>.</p>
 <p>Estimate of <span class="math inline">\(\hat{\sigma}\)</span>:</p>
-<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="normal-error-regression-model.html#cb497-1"></a>s &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">sum</span>(IC_Model<span class="op">$</span>residuals<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(<span class="dv">15-2</span>))</span>
-<span id="cb497-2"><a href="normal-error-regression-model.html#cb497-2"></a>s</span></code></pre></div>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="normal-error-regression-model.html#cb497-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(IC_Model<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">15-2</span>))</span>
+<span id="cb497-2"><a href="normal-error-regression-model.html#cb497-2" aria-hidden="true" tabindex="-1"></a>s</span></code></pre></div>
 <pre><code>## [1] 0.4527185</code></pre>
 <p>The estimates of <span class="math inline">\(b_0 = -0.1299087\)</span>, <span class="math inline">\(b_1=2.0312489\)</span>, and <span class="math inline">\(s = 0.4527185\)</span> are resonably close estimates to the values <span class="math inline">\(\beta_0=0, \beta_1=2\)</span>, and <span class="math inline">\(\sigma = 0.5\)</span>, that we used to generate the data.</p>
 <p>In a real situation, we’ll have only statistics <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span>, and <span class="math inline">\(s\)</span>, and we’ll need to use them to draw conclusions about parameters <span class="math inline">\(\beta_0=0, \beta_1=2\)</span>, and <span class="math inline">\(\sigma = 0.5\)</span>.</p>
 </div>
-<div id="general-mathematical-form" class="section level3 hasAnchor">
+<div id="general-mathematical-form" class="section level3 hasAnchor" number="5.1.5">
 <h3><span class="header-section-number">5.1.5</span> General Mathematical Form<a href="normal-error-regression-model.html#general-mathematical-form" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In the ice cream example, the relationship between time and amount was given by a linear equation. We can generalize this to situations with multiple explanatory variable.</p>
 <p>The mathematical form of a normal error linear regression model is</p>
@@ -525,9 +545,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We won’t attempt to answer that question here, but it is worth thinking about as we delve deeper into the normal error regression model. After all, it is the assumption on which much statistical inference depends.</p>
 </div>
 </div>
-<div id="inference-in-llsr-model" class="section level2 hasAnchor">
+<div id="inference-in-llsr-model" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Inference in LLSR Model<a href="normal-error-regression-model.html#inference-in-llsr-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="lm-summary-output" class="section level3 hasAnchor">
+<div id="lm-summary-output" class="section level3 hasAnchor" number="5.2.1">
 <h3><span class="header-section-number">5.2.1</span> <code>lm</code> <code>summary</code> Output<a href="normal-error-regression-model.html#lm-summary-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Recall our linear model for mercury levels of lakes in Northern Florida, compared to Southern Florida.</p>
 <p>The equation of the model is:</p>
@@ -535,7 +555,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \widehat{\text{Mercury}} = \beta_0+\beta_1\times\text{South}
 \]</span></p>
 <p>We fit the model in R and display its summary output below.</p>
-<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="normal-error-regression-model.html#cb499-1"></a><span class="kw">summary</span>(Lakes_M)</span></code></pre></div>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="normal-error-regression-model.html#cb499-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Lakes_M)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Mercury ~ Location, data = FloridaLakes)
@@ -568,7 +588,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><strong>Pr(&gt;|t|)</strong> is a p-value for the hypothesis test of whether quantity represented <span class="math inline">\(b_j\)</span> could plausibly be 0.</p></li>
 </ul>
 </div>
-<div id="example-florida-lakes-hypothesis" class="section level3 hasAnchor">
+<div id="example-florida-lakes-hypothesis" class="section level3 hasAnchor" number="5.2.2">
 <h3><span class="header-section-number">5.2.2</span> Example: Florida Lakes Hypothesis<a href="normal-error-regression-model.html#example-florida-lakes-hypothesis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Hypothesis Test for line (intercept)</strong></p>
 <p><strong>Null Hypothesis:</strong> The average mercury level among all lakes in North Florida is 0 (<span class="math inline">\(\beta_0=0\)</span>).</p>
@@ -582,12 +602,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>You’ve probably noticed that the sampling distributions in our permutation-based hypothesis tests, and our bootstrap distributions for regression coefficients have been roughly symmetric and bell-shaped. When this happens, we can use a symmetric and bell-shaped distribution to model the distribution of a test statistic when the null hypothesis is true, bypassing the need to use simulation.</p>
 <p>There is statistical theory which shows that if data really do come from the normal error regression model process, like the ice cream dispenser in the previous section, then the ratio of regression coefficients (means, differences in means, slopes) divided by their standard error, will follow a symmetric bell-shaped distribution called a t-distribution.</p>
 </div>
-<div id="t-distribution" class="section level3 hasAnchor">
+<div id="t-distribution" class="section level3 hasAnchor" number="5.2.3">
 <h3><span class="header-section-number">5.2.3</span> t-distribution<a href="normal-error-regression-model.html#t-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A t-distribution is a symmetric, bell-shaped curve, with thicker tails (hence more variability), than a <span class="math inline">\(\mathcal{N}(0,1)\)</span> distribution.</p>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-365-1.png" width="768" /></p>
 </div>
-<div id="t-test" class="section level3 hasAnchor">
+<div id="t-test" class="section level3 hasAnchor" number="5.2.4">
 <h3><span class="header-section-number">5.2.4</span> t-test<a href="normal-error-regression-model.html#t-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For data that come from a normal error regression model, we can use a t-distribution to approximate the sampling distribution used in our hypothesis tests, when the null hypothesis is assumed to be true.</p>
 <p><strong>Important Fact:</strong> If <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots + \beta_pX_{ip} + \epsilon_i\)</span>, with <span class="math inline">\(\epsilon_i\sim\mathcal{N}(0,\sigma)\)</span>, then</p>
@@ -598,7 +618,7 @@ t= \frac{{b_j}}{\text{SE}(b_j)}
 <p>The <span class="math inline">\(t=\frac{{b_j}}{\text{SE}(b_j)}\)</span> is called a <strong>t-statistic</strong>.</p>
 <p>We’ll use this t-statistic as the test statistic in our hypothesis test.</p>
 </div>
-<div id="t-test-for-n-vs-s-lakes" class="section level3 hasAnchor">
+<div id="t-test-for-n-vs-s-lakes" class="section level3 hasAnchor" number="5.2.5">
 <h3><span class="header-section-number">5.2.5</span> t-test for N vs S Lakes<a href="normal-error-regression-model.html#t-test-for-n-vs-s-lakes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Recall the hypothesis test we performed to investigate whether there is a difference in average mercury level between lakes in Northern Florida and Southern Florida.</p>
 <p><strong>Null Hypothesis:</strong> There is no difference in average mercury levels between Northern and Southern Florida (<span class="math inline">\(\beta_1=0\)</span>).</p>
@@ -606,23 +626,23 @@ t= \frac{{b_j}}{\text{SE}(b_j)}
 <p><strong>Test Statistic</strong>: <span class="math inline">\(t=\frac{{b_j}}{\text{SE}(b_j)} = \frac{0.27195}{0.08985} = 3.027\)</span></p>
 <p><strong>Key Question:</strong> What is the probability of getting a t-statistic as extreme as 3.027 if <span class="math inline">\(\beta_1=0\)</span> (i.e. there is no difference in mercury levels between northern and southern lakes).</p>
 <p>We plot the t-statistic of 3.027 that we observed in our data and observe where it lies on a t-distribution.</p>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="normal-error-regression-model.html#cb501-1"></a>ts=<span class="fl">3.027</span></span>
-<span id="cb501-2"><a href="normal-error-regression-model.html#cb501-2"></a><span class="kw">gf_dist</span>(<span class="st">&quot;t&quot;</span>, <span class="dt">df=</span><span class="dv">51</span>, <span class="dt">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="dt">fill =</span> <span class="op">~</span><span class="st"> </span>(<span class="kw">abs</span>(x)<span class="op">&lt;</span><span class="st"> </span><span class="kw">abs</span>(ts)), <span class="dt">show.legend=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="kw">c</span>(ts, <span class="op">-</span>ts), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;t&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="normal-error-regression-model.html#cb501-1" aria-hidden="true" tabindex="-1"></a>ts<span class="ot">=</span><span class="fl">3.027</span></span>
+<span id="cb501-2"><a href="normal-error-regression-model.html#cb501-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gf_dist</span>(<span class="st">&quot;t&quot;</span>, <span class="at">df=</span><span class="dv">51</span>, <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">fill =</span> <span class="sc">~</span> (<span class="fu">abs</span>(x)<span class="sc">&lt;</span> <span class="fu">abs</span>(ts)), <span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(ts, <span class="sc">-</span>ts), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)  <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;t&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-366-1.png" width="768" /></p>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="normal-error-regression-model.html#cb502-1"></a><span class="dv">2</span><span class="op">*</span><span class="kw">pt</span>(<span class="op">-</span><span class="kw">abs</span>(ts), <span class="dt">df=</span><span class="dv">51</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="normal-error-regression-model.html#cb502-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(ts), <span class="at">df=</span><span class="dv">51</span>)</span></code></pre></div>
 <pre><code>## [1] 0.003866374</code></pre>
 <p>The low p-value gives us strong evidence of a difference in average mercury levels between lakes in Northern and Southern Florida.</p>
 </div>
-<div id="comparison-to-simulation" class="section level3 hasAnchor">
+<div id="comparison-to-simulation" class="section level3 hasAnchor" number="5.2.6">
 <h3><span class="header-section-number">5.2.6</span> Comparison to Simulation<a href="normal-error-regression-model.html#comparison-to-simulation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s compare these results to those given by the permutation test and bootstrap confidence interval.</p>
 <p><strong>Permutation Test</strong></p>
-<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="normal-error-regression-model.html#cb504-1"></a>NSLakes_SimulationResultsPlot</span></code></pre></div>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="normal-error-regression-model.html#cb504-1" aria-hidden="true" tabindex="-1"></a>NSLakes_SimulationResultsPlot</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-368-1.png" width="672" /></p>
 <p>p-value:</p>
-<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="normal-error-regression-model.html#cb505-1"></a>b1 &lt;-<span class="st"> </span>Lakes_M<span class="op">$</span>coef[<span class="dv">2</span>] <span class="co">## record value of b1 from actual data</span></span>
-<span id="cb505-2"><a href="normal-error-regression-model.html#cb505-2"></a></span>
-<span id="cb505-3"><a href="normal-error-regression-model.html#cb505-3"></a><span class="kw">mean</span>(<span class="kw">abs</span>(NSLakes_SimulationResults<span class="op">$</span>b1Sim) <span class="op">&gt;</span><span class="st"> </span><span class="kw">abs</span>(b1))</span></code></pre></div>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="normal-error-regression-model.html#cb505-1" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> Lakes_M<span class="sc">$</span>coef[<span class="dv">2</span>] <span class="do">## record value of b1 from actual data</span></span>
+<span id="cb505-2"><a href="normal-error-regression-model.html#cb505-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb505-3"><a href="normal-error-regression-model.html#cb505-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(NSLakes_SimulationResults<span class="sc">$</span>b1Sim) <span class="sc">&gt;</span> <span class="fu">abs</span>(b1))</span></code></pre></div>
 <pre><code>## [1] 0.0039</code></pre>
 
 </div>
@@ -694,7 +714,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

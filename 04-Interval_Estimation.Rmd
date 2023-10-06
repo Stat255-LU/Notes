@@ -609,7 +609,7 @@ SE_mean <- sd(Lakes_Bootstrap_Results_Mean$Bootstrap_Mean)
 SE_mean
 ```
 
-Notice that the standard error of the mean is much less than the sample standard deviation of 0.527. 
+Notice that the standard error of the mean is much less than the sample standard deviation of 0.341. 
 
 **Interpretations of sample standard deviation and standard error of the mean**    
 
