@@ -280,16 +280,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#signal-and-noise"><i class="fa fa-check"></i><b>5.1.2</b> Signal and Noise</a></li>
 <li class="chapter" data-level="5.1.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#normal-distribution"><i class="fa fa-check"></i><b>5.1.3</b> Normal Distribution</a></li>
 <li class="chapter" data-level="5.1.4" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#signal-and-noise-in-icecream-example"><i class="fa fa-check"></i><b>5.1.4</b> Signal and Noise in Icecream Example</a></li>
-<li class="chapter" data-level="5.1.5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#general-mathematical-form"><i class="fa fa-check"></i><b>5.1.5</b> General Mathematical Form</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#inference-in-llsr-model"><i class="fa fa-check"></i><b>5.2</b> Inference in LLSR Model</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#lm-summary-output"><i class="fa fa-check"></i><b>5.2.1</b> <code>lm</code> <code>summary</code> Output</a></li>
-<li class="chapter" data-level="5.2.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#example-florida-lakes-hypothesis"><i class="fa fa-check"></i><b>5.2.2</b> Example: Florida Lakes Hypothesis</a></li>
-<li class="chapter" data-level="5.2.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#t-distribution"><i class="fa fa-check"></i><b>5.2.3</b> t-distribution</a></li>
-<li class="chapter" data-level="5.2.4" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#t-test"><i class="fa fa-check"></i><b>5.2.4</b> t-test</a></li>
-<li class="chapter" data-level="5.2.5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#t-test-for-n-vs-s-lakes"><i class="fa fa-check"></i><b>5.2.5</b> t-test for N vs S Lakes</a></li>
-<li class="chapter" data-level="5.2.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#comparison-to-simulation"><i class="fa fa-check"></i><b>5.2.6</b> Comparison to Simulation</a></li>
+<li class="chapter" data-level="5.1.5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#normal-error-regression-model-1"><i class="fa fa-check"></i><b>5.1.5</b> Normal Error Regression Model</a></li>
+<li class="chapter" data-level="5.1.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#examples-of-normal-error-regression-model"><i class="fa fa-check"></i><b>5.1.6</b> Examples of Normal Error Regression Model</a></li>
+<li class="chapter" data-level="5.1.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#implications-of-normal-error-regresison-model"><i class="fa fa-check"></i><b>5.1.7</b> Implications of Normal Error Regresison Model</a></li>
+<li class="chapter" data-level="5.1.8" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#philosophical-question"><i class="fa fa-check"></i><b>5.1.8</b> Philosophical Question</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>6</b> Model Building</a></li>
@@ -341,10 +335,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <div id="the-normal-error-regression-model" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> The Normal Error Regression Model<a href="normal-error-regression-model.html#the-normal-error-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You’ve probably noticed that many (though not all) of the distributions of statistics associated with permutation-based hypothesis tests in Chapter 3 and bootstrap confidence intervals in Chapter 4 were symmetric and bell-shaped in nature. We also saw in Section 4.4 that certain statistics, such as differences in means, and regression coefficients have known standard error formulas, allowing us to approximate their standard errors without performing simulation.</p>
+<p>When working with statistics that have symmetric and bell-shaped distributions and know standard error formulas, it is possible to use well-known probability facts to obtain confidence intervals and perform hypothesis tests without actually performing the simulation seen in Chapters 3 and 4. In order to be able to use these facts, however, we must know that the sampling distribution of our statistic is in fact symmetric and bell-shaped. One way to know that would be to actually perform the simulations and check the shape of the distribution. This, of course, would defeat the purpose of bypassing the simulations, however.</p>
+<p>In this chapter, we’ll examine ways to check whether a statistic such as a mean, regression slope, or expected response will follow a symmetric and bell-shaped sampling distribution, without actually having to perform a simulation. For situations where the statistic does follow such a distribution, we’ll examine methods for obtaining confidence intervals and p-values, based on probability theory, rather than simulation.</p>
 <div id="example-ice-cream-dispensor" class="section level3 hasAnchor" number="5.1.1">
 <h3><span class="header-section-number">5.1.1</span> Example: Ice Cream Dispensor<a href="normal-error-regression-model.html#example-ice-cream-dispensor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="Ice_Cream.png" width="100%" /></p>
-<p>Suppose an ice cream machine is manufactured to dispense 2 oz. of ice cream per second, on average. If each person using the machine got exactly 2 oz. per second, the relationship between time and amount dispensed would look like this:</p>
+<p><img src="Ice_Cream.png" width="50%" /></p>
+<p>Suppose an ice cream machine is manufactured to dispense 2 oz. of ice cream per second, on average. If 15 people used the ice cream machine, holding the dispensor for different amounts of time, and each person got exactly 2 oz. per second, the relationship between time holding the dispensor and amount dispensed would look like this:</p>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-354-1.png" width="672" /></p>
 <p>In reality, however, the actual amount dispensed each time it is used will vary due to unknown factors like:</p>
 <ul>
@@ -356,36 +353,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
 <li>other unknown factors</li>
 </ul>
-<p>Thus, the data will actually look like this:</p>
+<p>Thus, if 15 real people held the dispenser and recorded the amount of ice cream they got, the scatter plot we would see would look something like this:</p>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-355-1.png" width="672" /></p>
 </div>
 <div id="signal-and-noise" class="section level3 hasAnchor" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> Signal and Noise<a href="normal-error-regression-model.html#signal-and-noise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We assume that there are two components that contribute to our response variable <span class="math inline">\(Y_i\)</span>. These are:</p>
-<ol style="list-style-type: decimal">
-<li><p>A function that relates the expected (or average) value of <span class="math inline">\(Y\)</span> to explanatory variables <span class="math inline">\(X_1, X_2, \ldots{X_p}\)</span>. That is, <span class="math inline">\(E(Y_i)= f(X_{i1}, X_{i2}, \ldots, X_{ip})\)</span>. This function is often assumed to be linear, that is <span class="math inline">\(E(Y_i)= \beta_0 + \beta_1X_{i1} + \beta_2X_{i2}+ \ldots+ \beta_pX_{ip}\)</span></p></li>
-<li><p>Random, unexplained, variability that results in an individual response <span class="math inline">\(Y_i\)</span> differing from <span class="math inline">\(E(Y_i)\)</span>.</p></li>
-</ol>
-<p>The first component is often referred to as <strong>signal</strong>. The second is referred to as <strong>noise</strong>.</p>
+<p>We can think of the amount of ice cream a person receives as being a result of two separate components, often referred to as <strong>signal</strong> and <strong>noise</strong>.</p>
+<p>Signal represents the average amount of ice cream a person is expected to receive based on the amount of time holding the dispenser. In this case, signal is given by the function <span class="math inline">\(\text{Expected Amount} = 2\times\text{Time}\)</span>. Everyone who holds the dispenser for <span class="math inline">\(t\)</span> seconds is expected to receive <span class="math inline">\(2t\)</span> ounces of ice cream.</p>
+<p>Noise represents how much each person’s actual amount of ice cream deviates from their expected amount. For example, a person who holds the dispenser for 1.5 seconds and receives 3.58 oz. of ice cream will have received 0.58 ounces more than expected due to noise (i.e. factors beyond time holding the dispenser).</p>
+<p>In a statistical model, we assume that the response value of a response variable we observe is the sum of the signal, or expected response, which is a function of the explanatory variables in the model, and noise, which results from deviations due to factos beyond those accounted for in the model.</p>
 </div>
 <div id="normal-distribution" class="section level3 hasAnchor" number="5.1.3">
 <h3><span class="header-section-number">5.1.3</span> Normal Distribution<a href="normal-error-regression-model.html#normal-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>In a linear regression model, we assume individual response values <span class="math inline">\(Y_i\)</span> deviate from their expectation, according to a <strong>normal distribution</strong>.</p>
+<p>It is common to model noise using a symmetric, bell-shaped distribution, known as a <strong>normal distribution</strong>.</p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-356-1.png" width="576" /></p>
+<p>We can think of the error term as a random draw from somewhere in the area below the bell-curve. For example, in the above illustration, most of the area under the curve lies between <span class="math inline">\(-1\leq x\leq 1\)</span>. If this curve represented the noise term in the ice cream example, it would mean that most people’s actual amount of ice cream dispensed would be within <span class="math inline">\(\pm 1\)</span> ounce of their expected amount (or signal). Notice that the normal distribution is centered at 0, indicating that on average, a person would be expected to get an amount exactly equal to their signal, but that they might deviate above or below this amount by unexplained factors, which can be modeled by random chance.</p>
 <p>A normal distribution is defined by two parameters:<br />
 - <span class="math inline">\(\mu\)</span> representing the center of the distribution<br />
 - <span class="math inline">\(\sigma\)</span> representing the standard deviation</p>
 <p>This distribution is denoted <span class="math inline">\(\mathcal{N}(\mu, \sigma)\)</span>.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-357-1.png" width="576" /></p>
-<p>We can think of the curve as representing the area where the random noise value lies. When the standard deviation is small, noise tends to be close to 0, meaning the observed values will be close to their expectation. For example, if we randomly pick a point under the blue curve, the x-value, representing size of the noise is virtually never beyond <span class="math inline">\(\pm 1.5\)</span>. On the other hand, the green curve, which has higher standard deviation, would often produce noise values as extreme as <span class="math inline">\(\pm 2\)</span>.</p>
-<p>Note that for standard deviation <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(\sigma^2\)</span> is called the variance. Some books denote the normal distribution as <span class="math inline">\(\mathcal{N}(\mu, \sigma^2)\)</span>, instead of <span class="math inline">\(\mathcal{N}(\mu,\sigma)\)</span>.</p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-358-1.png" width="576" /></p>
+<p>When the standard deviation is small, such as for the blue curve, noise tends to be close to 0, meaning the observed values will be close to their expectation. On the other hand, the green curve, which has higher standard deviation, would often produce noise values as extreme as <span class="math inline">\(\pm 2\)</span> or more.</p>
+<p>Note that the square of the standard deviation <span class="math inline">\(\sigma^2\)</span> is called the variance. Some books denote the normal distribution as <span class="math inline">\(\mathcal{N}(\mu, \sigma^2)\)</span>, instead of <span class="math inline">\(\mathcal{N}(\mu,\sigma)\)</span>. We will use the <span class="math inline">\(\mathcal{N}(\mu,\sigma)\)</span> here, which is consistent with R.</p>
 </div>
 <div id="signal-and-noise-in-icecream-example" class="section level3 hasAnchor" number="5.1.4">
 <h3><span class="header-section-number">5.1.4</span> Signal and Noise in Icecream Example<a href="normal-error-regression-model.html#signal-and-noise-in-icecream-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>In this example, we’ll simulate the amount of ice cream dispensed by adding a random number from a normal distribution with mean 0 and standard deviation 0.5 to the expected amount dispensed, which is given by <span class="math inline">\(2x\)</span>, where <span class="math inline">\(x\)</span> represents time pressing the dispenser.</p>
-<p>Thus, amount dispensed for person <span class="math inline">\(i\)</span> is given by</p>
+<p>In this example, we’ll simulate the amount of ice cream dispensed for each person by adding a random number from a normal distribution with mean 0 and standard deviation 0.5 to the expected amount dispensed, which is given by <span class="math inline">\(2x\)</span>, where <span class="math inline">\(x\)</span> represents time pressing the dispenser. We’ll let <span class="math inline">\(\epsilon_i\)</span> represent the random noise term for the <span class="math inline">\(i\)</span> person.</p>
+<p>Thus, amount dispensed (<span class="math inline">\(Y_i\)</span>) for person <span class="math inline">\(i\)</span> is given by</p>
 <p><span class="math display">\[Y_i = 2x_i+\epsilon_i, \text{ where } \epsilon_i\sim\mathcal{N}(0, 0.5)
 \]</span></p>
-<p>The amount dispensed for a sample of 15 people is shown below.</p>
+<p>We simulate the amount dispensed for a sample of 15 people below.</p>
 <div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="normal-error-regression-model.html#cb493-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10082020</span>)</span>
 <span id="cb493-2"><a href="normal-error-regression-model.html#cb493-2" aria-hidden="true" tabindex="-1"></a><span class="co"># set times </span></span>
 <span id="cb493-3"><a href="normal-error-regression-model.html#cb493-3" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">1.2</span>, <span class="fl">1.5</span>, <span class="fl">1.8</span>, <span class="fl">2.1</span>, <span class="fl">2.1</span>, <span class="fl">2.3</span>, <span class="fl">2.5</span>, <span class="fl">2.6</span>, <span class="fl">2.8</span>, <span class="fl">2.9</span>, <span class="fl">2.9</span>, <span class="fl">3.1</span>, <span class="fl">3.2</span>, <span class="fl">3.6</span>)</span>
@@ -496,18 +493,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>The scatterplot displays the amount dispensed, compared to the time pressing the dispenser. The red line indicates the line <span class="math inline">\(y=2x\)</span>. If there was no random noise, then each person’s amount dispensed would lie exactly on this line. The blue line represents the location of the least squares regression line fit to the amounts observed.</p>
-<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="normal-error-regression-model.html#cb494-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Icecream1, <span class="fu">aes</span>(<span class="at">x=</span>time, <span class="at">y=</span>amount)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Icecream Dispensed&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Time Pressing Dispensor&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Amount Dispensed&quot;</span>) <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">slope=</span><span class="dv">2</span>, <span class="at">intercept=</span><span class="dv">0</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<p>The scatterplot displays the amount dispensed, compared to the time pressing the dispenser. The red line indicates the line <span class="math inline">\(y=2x\)</span>. If there was no random noise, then each person’s amount dispensed would lie exactly on this line.</p>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="normal-error-regression-model.html#cb494-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Icecream1, <span class="fu">aes</span>(<span class="at">x=</span>time, <span class="at">y=</span>amount)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Icecream Dispensed&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Time Pressing Dispensor&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Amount Dispensed&quot;</span>) <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">slope=</span><span class="dv">2</span>, <span class="at">intercept=</span><span class="dv">0</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb494-2"><a href="normal-error-regression-model.html#cb494-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">label=</span><span class="st">&quot;y=2x&quot;</span>, <span class="at">x=</span> <span class="fl">3.5</span>, <span class="at">y=</span><span class="fl">6.5</span>, <span class="at">size=</span><span class="dv">10</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-359-1.png" width="672" /></p>
-<p>In a real situation, we would not see the signal and noise columns or the red line that represents the “true”, relationship. We would only see the time and amount, and the blue line that is estimated based on them.</p>
-<p>We use the blue line, estimated from our observed data, to estimate the location of the red line, which represents the underlying true signal, which we do not know.</p>
-<p>The equation of the red line is given by:</p>
-<p><span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i} + \epsilon_i\)</span>, where <span class="math inline">\(\epsilon_i\sim\mathcal{N}(0,\sigma)\)</span>,</p>
-<p>where <span class="math inline">\(Y_i\)</span> represents amount dispensed, and <span class="math inline">\(X_i\)</span> represents time. <span class="math inline">\(\beta_0, \beta_1,\)</span>, and <span class="math inline">\(\sigma\)</span> are the unknown model parameters associated with the ice cream machine’s process.</p>
-<p>We estimate <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, using our regression line estimates <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span>, shown below.</p>
-<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="normal-error-regression-model.html#cb495-1" aria-hidden="true" tabindex="-1"></a>IC_Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Icecream1, <span class="fu">lm</span>(amount<span class="sc">~</span>time))</span>
-<span id="cb495-2"><a href="normal-error-regression-model.html#cb495-2" aria-hidden="true" tabindex="-1"></a>IC_Model</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-360-1.png" width="672" /></p>
+<p>In a real situation, we would not see the signal and noise columns in the table or the red line on the graph. We would only see the time and amount, and points on the scatter plot. From these, we would need to estimate the location of the red line by fitting a least squares regression line to the data, as we’ve done before.</p>
+<p>The blue line represents the location of the least squares regression line fit to the time and amounts observed.</p>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="normal-error-regression-model.html#cb495-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Icecream1, <span class="fu">aes</span>(<span class="at">x=</span>time, <span class="at">y=</span>amount)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Icecream Dispensed&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Time Pressing Dispensor&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Amount Dispensed&quot;</span>) <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">slope=</span><span class="dv">2</span>, <span class="at">intercept=</span><span class="dv">0</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb495-2"><a href="normal-error-regression-model.html#cb495-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">label=</span><span class="st">&quot;y=2x&quot;</span>, <span class="at">x=</span> <span class="fl">3.5</span>, <span class="at">y=</span><span class="fl">6.5</span>, <span class="at">size=</span><span class="dv">10</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-361-1.png" width="672" />
+The blue line is close, but not identical to the red line, representing the true (usually unknown) signal.</p>
+<p>The slope and intercept of the blue line are given by:</p>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="normal-error-regression-model.html#cb496-1" aria-hidden="true" tabindex="-1"></a>IC_Model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Icecream1, <span class="fu">lm</span>(amount<span class="sc">~</span>time))</span>
+<span id="cb496-2"><a href="normal-error-regression-model.html#cb496-2" aria-hidden="true" tabindex="-1"></a>IC_Model</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = lm(amount ~ time), data = Icecream1)
@@ -515,22 +513,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Coefficients:
 ## (Intercept)         time  
 ##     -0.1299       2.0312</code></pre>
-<p>The estimated regression equation is</p>
+<p>Notice that these estimates are close, but not identical to the intercept and slope of the red line, which are 0 and 2, respectively.</p>
+<p>The equation of the red line is given by:</p>
+<p><span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i} + \epsilon_i\)</span>, where <span class="math inline">\(\epsilon_i\sim\mathcal{N}(0,\sigma)\)</span>,</p>
+<p>where <span class="math inline">\(Y_i\)</span> represents amount dispensed, and <span class="math inline">\(X_i\)</span> represents time. <span class="math inline">\(\beta_0, \beta_1,\)</span>, and <span class="math inline">\(\sigma\)</span> are the unknown model parameters associated with the ice cream machine’s process.</p>
+<p>Using the values of <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> obtained by fitting a model to our observed data as estimates of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, our estimated regression equation is</p>
 <p><span class="math display">\[Y_i = b_0 + b_1X_i + \epsilon_i = -0.1299087 + 2.0312489X_i + \epsilon_i
 \]</span></p>
 <p>where <span class="math inline">\(\epsilon_i\sim\mathcal{N}(0,\sigma)\)</span>.</p>
 <p>An estimate for <span class="math inline">\(\sigma\)</span> is given by</p>
-<p><span class="math inline">\(s = \sqrt{\frac{\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2}{(n-(p+1))}}\)</span>.</p>
-<p>Estimate of <span class="math inline">\(\hat{\sigma}\)</span>:</p>
-<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="normal-error-regression-model.html#cb497-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(IC_Model<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">15-2</span>))</span>
-<span id="cb497-2"><a href="normal-error-regression-model.html#cb497-2" aria-hidden="true" tabindex="-1"></a>s</span></code></pre></div>
+<p><span class="math inline">\(s =\sqrt{\frac{\text{SSR}}{n-(p+1)}} = \sqrt{\frac{\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2}{(n-(p+1))}}\)</span>.</p>
+<p>We calculate this estimate of <span class="math inline">\(\hat{\sigma}\)</span>, using R.</p>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="normal-error-regression-model.html#cb498-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(IC_Model<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">15-2</span>))</span>
+<span id="cb498-2"><a href="normal-error-regression-model.html#cb498-2" aria-hidden="true" tabindex="-1"></a>s</span></code></pre></div>
 <pre><code>## [1] 0.4527185</code></pre>
 <p>The estimates of <span class="math inline">\(b_0 = -0.1299087\)</span>, <span class="math inline">\(b_1=2.0312489\)</span>, and <span class="math inline">\(s = 0.4527185\)</span> are resonably close estimates to the values <span class="math inline">\(\beta_0=0, \beta_1=2\)</span>, and <span class="math inline">\(\sigma = 0.5\)</span>, that we used to generate the data.</p>
 <p>In a real situation, we’ll have only statistics <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span>, and <span class="math inline">\(s\)</span>, and we’ll need to use them to draw conclusions about parameters <span class="math inline">\(\beta_0=0, \beta_1=2\)</span>, and <span class="math inline">\(\sigma = 0.5\)</span>.</p>
 </div>
-<div id="general-mathematical-form" class="section level3 hasAnchor" number="5.1.5">
-<h3><span class="header-section-number">5.1.5</span> General Mathematical Form<a href="normal-error-regression-model.html#general-mathematical-form" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>In the ice cream example, the relationship between time and amount was given by a linear equation. We can generalize this to situations with multiple explanatory variable.</p>
+<div id="normal-error-regression-model-1" class="section level3 hasAnchor" number="5.1.5">
+<h3><span class="header-section-number">5.1.5</span> Normal Error Regression Model<a href="normal-error-regression-model.html#normal-error-regression-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the ice cream example, the relationship between expected amount and time holding the dispenser was given by a linear equation involving a single numeric explanatory variable. We can generalize this to situations with multiple explanatory variables, which might be numeric or categorical.</p>
+<p>Individual observations are then assumed to vary from their expectation in accordance with a normal distribution, representing random noise (or error).</p>
 <p>The mathematical form of a normal error linear regression model is</p>
 <p><span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots + \beta_pX_{ip} + \epsilon_i\)</span>, with <span class="math inline">\(\epsilon_i\sim\mathcal{N}(0,\sigma)\)</span>.</p>
 <p>Note that in place of <span class="math inline">\(X_{ip}\)</span>, we could have indicators for categories, or functions of <span class="math inline">\(X_{ip}\)</span>, such as <span class="math inline">\(X_{ip}^2\)</span>, <span class="math inline">\(\text{log}(X_{ip})\)</span>, or <span class="math inline">\(\text{sin}(X_{ip})\)</span>.</p>
@@ -540,23 +543,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </p></li>
 <li><p>We use confidence intervals and hypothesis tests to make statements about parameters, based on information provided by statistics.</p></li>
 </ul>
-<p>We close the section by presenting a philosophical question:</p>
+</div>
+<div id="examples-of-normal-error-regression-model" class="section level3 hasAnchor" number="5.1.6">
+<h3><span class="header-section-number">5.1.6</span> Examples of Normal Error Regression Model<a href="normal-error-regression-model.html#examples-of-normal-error-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can formulate all of the examples we’ve worked with so far in terms of the normal error regression model.</p>
+<p>In the house price example, consider the following models:</p>
+<p><strong>Model 1:</strong>
+<span class="math inline">\(\text{Price}_i = \beta_0 + \beta_1\text{Sq.Ft.}_{i} + \epsilon_i\)</span>, where <span class="math inline">\(\epsilon_i\sim\mathcal{N}(0,\sigma)\)</span>.
+If we use this model, we’re saying that we believe the expected price of a house is a linear function of its size, and that for any given size, the distribution of actual prices are normally distributed around their expected value of <span class="math inline">\(\beta_0 + \beta_1\text{Sq.Ft.}_{i}\)</span>.</p>
+<p><strong>Model 2:</strong></p>
+<p><span class="math inline">\(\text{Price}_i = \beta_0 + \beta_2\text{Waterfront}_{i}+ \epsilon_i\)</span>, where <span class="math inline">\(\epsilon_i\sim\mathcal{N}(0,\sigma)\)</span>.</p>
+<p>If we use this model, we’re saying that we believe the expected price of a house depends only on whether or not it is on the waterfront, and that prices of both waterfront and non-waterfront houses follow normal distributions, though these distributions may have different means (<span class="math inline">\(\beta_0\)</span> for non-waterfront houses, and <span class="math inline">\(\beta_1\)</span> for waterfront houses).</p>
+<p><strong>Model 3:</strong></p>
+<p><span class="math inline">\(\text{Price}_i = \beta_0 + \beta_1\text{Sq.Ft.}_{i}+ \beta_2\text{Waterfront}_{i}+ \beta_3\times\text{Sq.Ft.}_i\times\text{Waterfront}_{i} + \epsilon_i\)</span>, where <span class="math inline">\(\epsilon_i\sim\mathcal{N}(0,\sigma)\)</span>.</p>
+<p>and</p>
+<p><strong>Model 4:</strong>
+<span class="math inline">\(\text{Price}_i = \beta_0 + \beta_1\text{Sq.Ft.}_{i}+ \beta_2\text{Waterfront}_{i}+ \beta_3\times\text{Sq.Ft.}_i\times\text{Waterfront}_{i} + \epsilon_i\)</span>, where <span class="math inline">\(\epsilon_i\sim\mathcal{N}(0,\sigma)\)</span>.</p>
+<p>Both models assume that actual prices of houses with the same size and waterfront status are normally distributed, and that the mean of the normal distribution is a linear function of its size. Model 3 allows for the intercept of the lines to differ between waterfront and non-waterfront houses, while Model 4 allows both the intercept and slope to differ.</p>
+</div>
+<div id="implications-of-normal-error-regresison-model" class="section level3 hasAnchor" number="5.1.7">
+<h3><span class="header-section-number">5.1.7</span> Implications of Normal Error Regresison Model<a href="normal-error-regression-model.html#implications-of-normal-error-regresison-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If we really believe that data come about as the normal error regression model describes, then probability theory tells us that regression coefficients <span class="math inline">\(b_j\)</span>’s, representing differences between categories for categorical variables and rates of change for quantitative variables, follow symmetric and bell-shaped distributions. We can use this fact, along with the standard error formulas in Section 4.4 to create confidence intervals and perform hypothesis tests, without needing to perform simulation. This is, in fact what R does in it’s model summary output.</p>
+<p>These methods are only valid, however, if data can reasonably be thought of as having come the normal error regression model process. Thus, if we don’t believe that our observed data can be reasonably thought of terms representing underlying signal as a linear function of explanatory variables, and a normally distributed random error (or noise) term, then the confidence intervals and p-values produced by R, and other places that rely on probability-based methods will not be reliable.</p>
+</div>
+<div id="philosophical-question" class="section level3 hasAnchor" number="5.1.8">
+<h3><span class="header-section-number">5.1.8</span> Philosophical Question<a href="normal-error-regression-model.html#philosophical-question" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We close the section with a philosophical question:</p>
 <p>Do data really come about from processes like the normal error regression model? That is, do you think it is reasonable to believe that data we see in the real world (perhaps the amount of ice cream dispensed by an ice cream machine) is a combination of some true, but unknown equation involving the explanatory and response variables, and some unexplained noise, coming from a normal distribution?</p>
-<p>We won’t attempt to answer that question here, but it is worth thinking about as we delve deeper into the normal error regression model. After all, it is the assumption on which much statistical inference depends.</p>
-</div>
-</div>
-<div id="inference-in-llsr-model" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Inference in LLSR Model<a href="normal-error-regression-model.html#inference-in-llsr-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="lm-summary-output" class="section level3 hasAnchor" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> <code>lm</code> <code>summary</code> Output<a href="normal-error-regression-model.html#lm-summary-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Recall our linear model for mercury levels of lakes in Northern Florida, compared to Southern Florida.</p>
-<p>The equation of the model is:</p>
-<p><span class="math display">\[
+<p>We won’t attempt to answer that question here, but it is worth thinking about. After all, it is an assumption on which many frequently employed methods of statistical inference depends.</p>
+<!---
+
+## Inference in LLSR Model 
+
+### `lm` `summary` Output 
+
+Recall our linear model for mercury levels of lakes in Northern Florida, compared to Southern Florida. 
+
+The equation of the model is:
+
+\[
 \widehat{\text{Mercury}} = \beta_0+\beta_1\times\text{South}
-\]</span></p>
-<p>We fit the model in R and display its summary output below.</p>
-<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="normal-error-regression-model.html#cb499-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Lakes_M)</span></code></pre></div>
-<pre><code>## 
+\]
+
+We fit the model in R and display its summary output below.  
+
+
+```r
+summary(Lakes_M)
+```
+
+```
+## 
 ## Call:
 ## lm(formula = Mercury ~ Location, data = FloridaLakes)
 ## 
@@ -565,85 +602,152 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## -0.65650 -0.23455 -0.08455  0.24350  0.67545 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value       Pr(&gt;|t|)    
+##             Estimate Std. Error t value       Pr(>|t|)    
 ## (Intercept)  0.42455    0.05519   7.692 0.000000000441 ***
 ## LocationS    0.27195    0.08985   3.027        0.00387 ** 
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 0.3171 on 51 degrees of freedom
 ## Multiple R-squared:  0.1523, Adjusted R-squared:  0.1357 
-## F-statistic: 9.162 on 1 and 51 DF,  p-value: 0.003868</code></pre>
-<p>The estimated regression equation is</p>
-<p><span class="math display">\[
+## F-statistic: 9.162 on 1 and 51 DF,  p-value: 0.003868
+```
+
+The estimated regression equation is 
+
+\[
 \widehat{\text{Mercury}} = 0.42455+0.27195\times\text{South}
-\]</span></p>
-<p>We’ve seen how to obtain the first two columns of the summary table, labeled “Estimate” and “Std. Error”.</p>
-<p>The last column, labeled “Pr(&gt;|t|)” is, in fact a p-value associated with associated with the null hypothesis that the regression parameter on that line is zero. (i.e. <span class="math inline">\(\beta_j=0\)</span>).</p>
-<p><strong>Columns in Linear Model <code>summary()</code> Output</strong></p>
-<ul>
-<li><p><strong>Estimate</strong> gives the least-squares estimates <span class="math inline">\(b_0, b_1, \ldots, b_p\)</span></p></li>
-<li><p><strong>Standard Error</strong> gives estimates of the standard deviation in the sampling distribution for estimate. (i.e. how much uncertainty is there about the estimate?) These are computed using the formulas in Section 4.7.</p></li>
-<li><p><strong>t value</strong> is the estimate divided by its standard error.</p></li>
-<li><p><strong>Pr(&gt;|t|)</strong> is a p-value for the hypothesis test of whether quantity represented <span class="math inline">\(b_j\)</span> could plausibly be 0.</p></li>
-</ul>
-</div>
-<div id="example-florida-lakes-hypothesis" class="section level3 hasAnchor" number="5.2.2">
-<h3><span class="header-section-number">5.2.2</span> Example: Florida Lakes Hypothesis<a href="normal-error-regression-model.html#example-florida-lakes-hypothesis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Hypothesis Test for line (intercept)</strong></p>
-<p><strong>Null Hypothesis:</strong> The average mercury level among all lakes in North Florida is 0 (<span class="math inline">\(\beta_0=0\)</span>).</p>
-<p><strong>Alternative Hypothesis:</strong> The average mercury level among all lakes in Northern Florida is not 0 (<span class="math inline">\(\beta_0\neq 0\)</span>).</p>
-<p>We already know the average mercury level among all lakes in North Florida is not 0, so this is a silly test.</p>
-<p><strong>Hypothesis Test for line LocationS</strong></p>
-<p><strong>Null Hypothesis:</strong> There is no difference in average mercury levels between Northern and Southern Florida (<span class="math inline">\(\beta_1=0\)</span>).</p>
-<p><strong>Alternative Hypothesis:</strong> There is a difference in average mercury levels in Northern and Southern Florida (<span class="math inline">\(\beta_1\neq 0\)</span>).</p>
-<p>This test is relevant to us.</p>
-<p>R does not obtain these p-values through simulation, but rather by using the symmetric and bell-shaped t-distribution to approximate the distribution of these statistics. This is appropriate when the sampling distribution for our test statistic is reasonably symmetric and bell-shaped.</p>
-<p>You’ve probably noticed that the sampling distributions in our permutation-based hypothesis tests, and our bootstrap distributions for regression coefficients have been roughly symmetric and bell-shaped. When this happens, we can use a symmetric and bell-shaped distribution to model the distribution of a test statistic when the null hypothesis is true, bypassing the need to use simulation.</p>
-<p>There is statistical theory which shows that if data really do come from the normal error regression model process, like the ice cream dispenser in the previous section, then the ratio of regression coefficients (means, differences in means, slopes) divided by their standard error, will follow a symmetric bell-shaped distribution called a t-distribution.</p>
-</div>
-<div id="t-distribution" class="section level3 hasAnchor" number="5.2.3">
-<h3><span class="header-section-number">5.2.3</span> t-distribution<a href="normal-error-regression-model.html#t-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A t-distribution is a symmetric, bell-shaped curve, with thicker tails (hence more variability), than a <span class="math inline">\(\mathcal{N}(0,1)\)</span> distribution.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-365-1.png" width="768" /></p>
-</div>
-<div id="t-test" class="section level3 hasAnchor" number="5.2.4">
-<h3><span class="header-section-number">5.2.4</span> t-test<a href="normal-error-regression-model.html#t-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>For data that come from a normal error regression model, we can use a t-distribution to approximate the sampling distribution used in our hypothesis tests, when the null hypothesis is assumed to be true.</p>
-<p><strong>Important Fact:</strong> If <span class="math inline">\(Y_i = \beta_0 + \beta_1X_{i1}+ \ldots + \beta_pX_{ip} + \epsilon_i\)</span>, with <span class="math inline">\(\epsilon_i\sim\mathcal{N}(0,\sigma)\)</span>, then</p>
-<p><span class="math display">\[
+\]
+
+We've seen how to obtain the first two columns of the summary table, labeled "Estimate" and "Std. Error". 
+
+The last column, labeled "Pr(>|t|)" is, in fact a p-value associated with associated with the null hypothesis that the regression parameter on that line is zero. (i.e. $\beta_j=0$).    
+
+**Columns in Linear Model `summary()` Output**
+
+* **Estimate** gives the least-squares estimates $b_0, b_1, \ldots, b_p$     
+
+* **Standard Error** gives estimates of the standard deviation in the sampling distribution for estimate. (i.e. how much uncertainty is there about the estimate?) These are computed using the formulas in Section 4.7.   
+
+* **t value** is the estimate divided by its standard error.     
+
+* **Pr(>|t|)** is a p-value for the hypothesis test of whether quantity represented $b_j$ could plausibly be 0.   
+
+### Example: Florida Lakes Hypothesis
+
+**Hypothesis Test for line (intercept)**
+
+**Null Hypothesis:** The average mercury level among all lakes in North Florida is 0 ($\beta_0=0$).   
+
+**Alternative Hypothesis:** The average mercury level among all lakes in Northern Florida is not 0 ($\beta_0\neq 0$).  
+
+We already know the average mercury level among all lakes in North Florida is not 0, so this is a silly test. 
+
+**Hypothesis Test for line LocationS**
+
+**Null Hypothesis:** There is no difference in average mercury levels between Northern and Southern Florida ($\beta_1=0$).   
+
+**Alternative Hypothesis:** There is a difference in average mercury levels in Northern and Southern Florida ($\beta_1\neq 0$).  
+
+This test is relevant to us.  
+
+R does not obtain these p-values through simulation, but rather by using the  symmetric and bell-shaped t-distribution to approximate the distribution of these statistics. This is appropriate when the sampling distribution for our test statistic is reasonably symmetric and bell-shaped. 
+
+You've probably noticed that the sampling distributions in our permutation-based hypothesis tests, and our bootstrap distributions for regression coefficients have been roughly symmetric and bell-shaped. When this happens, we can use a symmetric and bell-shaped distribution to model the distribution of a test statistic when the null hypothesis is true, bypassing the need to use simulation. 
+
+There is statistical theory which shows that if data really do come from the normal error regression model process, like the ice cream dispenser in the previous section, then the ratio of regression coefficients (means, differences in means, slopes) divided by their standard error, will follow a symmetric bell-shaped distribution called a t-distribution.   
+
+### t-distribution
+
+A t-distribution is a symmetric, bell-shaped curve, with thicker tails (hence more variability), than a $\mathcal{N}(0,1)$ distribution.   
+
+
+
+
+
+<img src="bookdownproj_files/figure-html/unnamed-chunk-367-1.png" width="768" />
+
+### t-test
+
+For data that come from a normal error regression model, we can use a t-distribution to approximate the sampling distribution used in our hypothesis tests, when the null hypothesis is assumed to be true. 
+
+**Important Fact:** If $Y_i = \beta_0 + \beta_1X_{i1}+ \ldots + \beta_pX_{ip} + \epsilon_i$, with $\epsilon_i\sim\mathcal{N}(0,\sigma)$,  then   
+
+\[
 t= \frac{{b_j}}{\text{SE}(b_j)}  
-\]</span></p>
-<p>follows a t-distribution.</p>
-<p>The <span class="math inline">\(t=\frac{{b_j}}{\text{SE}(b_j)}\)</span> is called a <strong>t-statistic</strong>.</p>
-<p>We’ll use this t-statistic as the test statistic in our hypothesis test.</p>
-</div>
-<div id="t-test-for-n-vs-s-lakes" class="section level3 hasAnchor" number="5.2.5">
-<h3><span class="header-section-number">5.2.5</span> t-test for N vs S Lakes<a href="normal-error-regression-model.html#t-test-for-n-vs-s-lakes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Recall the hypothesis test we performed to investigate whether there is a difference in average mercury level between lakes in Northern Florida and Southern Florida.</p>
-<p><strong>Null Hypothesis:</strong> There is no difference in average mercury levels between Northern and Southern Florida (<span class="math inline">\(\beta_1=0\)</span>).</p>
-<p><strong>Alternative Hypothesis:</strong> There is a difference in average mercury levels in Northern and Southern Florida (<span class="math inline">\(\beta_1\neq 0\)</span>).</p>
-<p><strong>Test Statistic</strong>: <span class="math inline">\(t=\frac{{b_j}}{\text{SE}(b_j)} = \frac{0.27195}{0.08985} = 3.027\)</span></p>
-<p><strong>Key Question:</strong> What is the probability of getting a t-statistic as extreme as 3.027 if <span class="math inline">\(\beta_1=0\)</span> (i.e. there is no difference in mercury levels between northern and southern lakes).</p>
-<p>We plot the t-statistic of 3.027 that we observed in our data and observe where it lies on a t-distribution.</p>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="normal-error-regression-model.html#cb501-1" aria-hidden="true" tabindex="-1"></a>ts<span class="ot">=</span><span class="fl">3.027</span></span>
-<span id="cb501-2"><a href="normal-error-regression-model.html#cb501-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gf_dist</span>(<span class="st">&quot;t&quot;</span>, <span class="at">df=</span><span class="dv">51</span>, <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">fill =</span> <span class="sc">~</span> (<span class="fu">abs</span>(x)<span class="sc">&lt;</span> <span class="fu">abs</span>(ts)), <span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(ts, <span class="sc">-</span>ts), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)  <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;t&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-366-1.png" width="768" /></p>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="normal-error-regression-model.html#cb502-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(ts), <span class="at">df=</span><span class="dv">51</span>)</span></code></pre></div>
-<pre><code>## [1] 0.003866374</code></pre>
-<p>The low p-value gives us strong evidence of a difference in average mercury levels between lakes in Northern and Southern Florida.</p>
-</div>
-<div id="comparison-to-simulation" class="section level3 hasAnchor" number="5.2.6">
-<h3><span class="header-section-number">5.2.6</span> Comparison to Simulation<a href="normal-error-regression-model.html#comparison-to-simulation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Let’s compare these results to those given by the permutation test and bootstrap confidence interval.</p>
-<p><strong>Permutation Test</strong></p>
-<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="normal-error-regression-model.html#cb504-1" aria-hidden="true" tabindex="-1"></a>NSLakes_SimulationResultsPlot</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-368-1.png" width="672" /></p>
-<p>p-value:</p>
-<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="normal-error-regression-model.html#cb505-1" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> Lakes_M<span class="sc">$</span>coef[<span class="dv">2</span>] <span class="do">## record value of b1 from actual data</span></span>
-<span id="cb505-2"><a href="normal-error-regression-model.html#cb505-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb505-3"><a href="normal-error-regression-model.html#cb505-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(NSLakes_SimulationResults<span class="sc">$</span>b1Sim) <span class="sc">&gt;</span> <span class="fu">abs</span>(b1))</span></code></pre></div>
-<pre><code>## [1] 0.0039</code></pre>
+\]
+
+follows a t-distribution.
+
+The $t=\frac{{b_j}}{\text{SE}(b_j)}$ is called a **t-statistic**.   
+
+We'll use this t-statistic as the test statistic in our hypothesis test.  
+
+
+###  t-test for N vs S Lakes
+
+Recall the hypothesis test we performed to investigate whether there is a difference in average mercury level between lakes in Northern Florida and Southern Florida.   
+
+**Null Hypothesis:** There is no difference in average mercury levels between Northern and Southern Florida ($\beta_1=0$).   
+
+**Alternative Hypothesis:** There is a difference in average mercury levels in Northern and Southern Florida ($\beta_1\neq 0$).  
+
+**Test Statistic**: $t=\frac{{b_j}}{\text{SE}(b_j)} = \frac{0.27195}{0.08985} = 3.027$ 
+
+**Key Question:** What is the probability of getting a t-statistic as extreme as 3.027 if $\beta_1=0$ (i.e. there is no difference in mercury levels between northern and southern lakes).  
+
+We plot the t-statistic of 3.027 that we observed in our data and observe where it lies on a t-distribution.  
+
+
+```r
+ts=3.027
+gf_dist("t", df=51, geom = "area", fill = ~ (abs(x)< abs(ts)), show.legend=FALSE) + geom_vline(xintercept=c(ts, -ts), color="red")  + xlab("t")
+```
+
+<img src="bookdownproj_files/figure-html/unnamed-chunk-368-1.png" width="768" />
+
+
+
+
+```r
+2*pt(-abs(ts), df=51)
+```
+
+```
+## [1] 0.003866374
+```
+
+The low p-value gives us strong evidence of a difference in average mercury levels between lakes in Northern and Southern Florida.  
+
+### Comparison to Simulation
+
+Let's compare these results to those given by the permutation test and bootstrap confidence interval.
+
+
+**Permutation Test**
+
+
+```r
+NSLakes_SimulationResultsPlot
+```
+
+<img src="bookdownproj_files/figure-html/unnamed-chunk-370-1.png" width="672" />
+
+p-value:
+
+
+```r
+b1 <- Lakes_M$coef[2] ## record value of b1 from actual data
+
+mean(abs(NSLakes_SimulationResults$b1Sim) > abs(b1))
+```
+
+```
+## [1] 0.0039
+```
+
+
+--->
 
 </div>
 </div>

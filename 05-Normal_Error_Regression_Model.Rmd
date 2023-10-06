@@ -37,13 +37,20 @@ set.seed(07302020)
 
 ## The Normal Error Regression Model
 
+You've probably noticed that many (though not all) of the distributions of statistics associated with permutation-based hypothesis tests in Chapter 3 and bootstrap confidence intervals in Chapter 4 were symmetric and bell-shaped in nature. We also saw in Section 4.4 that certain statistics, such as differences in means, and regression coefficients have known standard error formulas, allowing us to approximate their standard errors without performing simulation.   
+
+When working with statistics that have symmetric and bell-shaped distributions and know standard error formulas, it is possible to use well-known probability facts to obtain confidence intervals and perform hypothesis tests without actually performing the simulation seen in Chapters 3 and 4. In order to be able to use these facts, however, we must know that the sampling distribution of our statistic is in fact symmetric and bell-shaped. One way to know that would be to actually perform the simulations and check the shape of the distribution. This, of course, would defeat the purpose of bypassing the simulations, however. 
+
+In this chapter, we'll examine ways to check whether a statistic such as a mean, regression slope, or expected response will follow a symmetric and bell-shaped sampling distribution, without actually having to perform a simulation. For situations where the statistic does follow such a distribution, we'll examine methods for obtaining confidence intervals and p-values, based on probability theory, rather than simulation.   
+
+
 ### Example: Ice Cream Dispensor
 
-```{r echo=FALSE, out.width = '100%'}
+```{r echo=FALSE, out.width = '50%'}
 knitr::include_graphics("Ice_Cream.png")
 ```
 
-Suppose an ice cream machine is manufactured to dispense 2 oz. of ice cream per second, on average. If each person using the machine got exactly 2 oz. per second, the relationship between time and amount dispensed would look like this:
+Suppose an ice cream machine is manufactured to dispense 2 oz. of ice cream per second, on average. If 15 people used the ice cream machine, holding the dispensor for different amounts of time, and each person got exactly 2 oz. per second, the relationship between time holding the dispensor and amount dispensed would look like this:
 
 ```{r, echo=FALSE, fig.height=4}
 set.seed(10082020)
@@ -67,7 +74,7 @@ In reality, however, the actual amount dispensed each time it is used will vary 
 * build-up of ice cream   
 * other unknown factors   
 
-Thus, the data will actually look like this:
+Thus, if 15 real people held the dispenser and recorded the amount of ice cream they got, the scatter plot we would see would look something like this:
 
 ```{r, echo=FALSE, fig.height=4}
 ICplot <- ggplot(data=Icecream1, aes(x=time, y=amount)) + geom_point() + ggtitle("Icecream Dispensed") + xlab("Time Pressing Dispensor") + ylab("Amount Dispensed") 
@@ -78,17 +85,32 @@ ICplot + geom_abline(slope=2, intercept=0, color="red") +
 
 ### Signal and Noise
 
-We assume that there are two components that contribute to our response variable $Y_i$. These are:    
+We can think of the amount of ice cream a person receives as being a result of two separate components, often referred to as **signal** and **noise**. 
 
-1. A function that relates the expected (or average) value of $Y$ to explanatory variables $X_1, X_2, \ldots{X_p}$. That is, $E(Y_i)= f(X_{i1}, X_{i2}, \ldots, X_{ip})$. This function is often assumed to be linear, that is $E(Y_i)= \beta_0 + \beta_1X_{i1} + \beta_2X_{i2}+ \ldots+ \beta_pX_{ip}$     
+Signal represents the average amount of ice cream a person is expected to receive based on the amount of time holding the dispenser. In this case, signal is given by the function $\text{Expected Amount} = 2\times\text{Time}$. Everyone who holds the dispenser for $t$ seconds is expected to receive $2t$ ounces of ice cream.     
 
-2. Random, unexplained, variability that results in an individual response $Y_i$ differing from $E(Y_i)$.   
+Noise represents how much each person's actual amount of ice cream deviates from their expected amount. For example, a person who holds the dispenser for 1.5 seconds and receives 3.58 oz. of ice cream will have received 0.58 ounces more than expected due to noise (i.e. factors beyond time holding the dispenser).   
 
-The first component is often referred to as **signal**. The second is referred to as **noise**. 
+In a statistical model, we assume that the response value of a response variable we observe is the sum of the signal, or expected response, which is a function of the explanatory variables in the model, and noise, which results from deviations due to factos beyond those accounted for in the model.   
 
-### Normal Distribution 
+### Normal Distribution
 
-In a linear regression model, we assume individual response values $Y_i$ deviate from their expectation, according to a **normal distribution**.   
+It is common to model noise using a symmetric, bell-shaped distribution, known as a **normal distribution**.  
+
+```{r, echo=FALSE, fig.height=2.5, fig.width=6}
+dnorm1 <- function(x){
+  dnorm(x, 0, 0.5)
+}
+df <- data.frame(x = seq(from=-4, to=4, by=0.1), y = dnorm(seq(from=-4, to=4, by=0.1), 0,1/sqrt(3)))
+p <- ggplot(df, aes(x = x, y = y)) +
+  stat_function(fun=dnorm1,geom="line",color=scales::hue_pal()(3)[3]) +
+    annotate(geom="text", x=0, y=0.41, label="N(0,0.5)",
+              color=scales::hue_pal()(3)[3]) 
+p
+```
+
+We can think of the error term as a random draw from somewhere in the area below the bell-curve. For example, in the above illustration, most of the area under the curve lies between $-1\leq x\leq 1$. If this curve represented the noise term in the ice cream example, it would mean that most people's actual amount of ice cream dispensed would be within $\pm 1$ ounce of their expected amount (or signal). Notice that the normal distribution is centered at 0, indicating that on average, a person would be expected to get an amount exactly equal to their signal, but that they might deviate above or below this amount by unexplained factors, which can be modeled by random chance.   
+
 
 A normal distribution is defined by two parameters:  
       - $\mu$ representing the center of the distribution    
@@ -125,21 +147,21 @@ p <- ggplot(df, aes(x = x, y = y)) +
 p
 ```
 
-We can think of the curve as representing the area where the random noise value lies. When the standard deviation is small, noise tends to be close to 0, meaning the observed values will be close to their expectation. For example, if we randomly pick a point under the blue curve, the x-value, representing size of the noise is virtually never beyond $\pm 1.5$. On the other hand, the green curve, which has higher standard deviation, would often produce noise values as extreme as $\pm 2$.
+When the standard deviation is small, such as for the blue curve, noise tends to be close to 0, meaning the observed values will be close to their expectation. On the other hand, the green curve, which has higher standard deviation, would often produce noise values as extreme as $\pm 2$ or more.
 
-Note that for standard deviation $\sigma$, $\sigma^2$ is called the variance. Some books denote the normal distribution as $\mathcal{N}(\mu, \sigma^2)$, instead of $\mathcal{N}(\mu,\sigma)$.  
+Note that the square of the standard deviation $\sigma^2$ is called the variance. Some books denote the normal distribution as $\mathcal{N}(\mu, \sigma^2)$, instead of $\mathcal{N}(\mu,\sigma)$. We will use the $\mathcal{N}(\mu,\sigma)$ here, which is consistent with R.  
 
 
 ### Signal and Noise in Icecream Example
 
-In this example, we'll simulate the amount of ice cream dispensed by adding a random number from a normal distribution with mean 0 and standard deviation 0.5 to the expected amount dispensed, which is given by $2x$, where $x$ represents time pressing the dispenser.  
+In this example, we'll simulate the amount of ice cream dispensed for each person by adding a random number from a normal distribution with mean 0 and standard deviation 0.5 to the expected amount dispensed, which is given by $2x$, where $x$ represents time pressing the dispenser. We'll let $\epsilon_i$ represent the random noise term for the $i$ person.      
 
-Thus, amount dispensed for person $i$ is given by
+Thus, amount dispensed ($Y_i$) for person $i$ is given by
 
 \[Y_i = 2x_i+\epsilon_i, \text{ where } \epsilon_i\sim\mathcal{N}(0, 0.5)
 \]
 
-The amount dispensed for a sample of 15 people is shown below. 
+We simulate the amount dispensed for a sample of 15 people below. 
 
 ```{r, fig.height=2.5}
 set.seed(10082020)
@@ -152,16 +174,32 @@ Icecream <- data.frame(time, signal, noise, amount) # set up data table
 kable((Icecream)) #display table
 ```
 
-The scatterplot displays the amount dispensed, compared to the time pressing the dispenser. The red line indicates the line $y=2x$. If there was no random noise, then each person's amount dispensed would lie exactly on this line. The blue line represents the location of the least squares regression line fit to the amounts observed.   
+The scatterplot displays the amount dispensed, compared to the time pressing the dispenser. The red line indicates the line $y=2x$. If there was no random noise, then each person's amount dispensed would lie exactly on this line. 
 
+```{r, fig.height=4, fig.width = 7}
+ggplot(data=Icecream1, aes(x=time, y=amount)) + geom_point() + ggtitle("Icecream Dispensed") + xlab("Time Pressing Dispensor") + ylab("Amount Dispensed") + geom_abline(slope=2, intercept=0, color="red") + 
+  annotate("text", label="y=2x", x= 3.5, y=6.5, size=10, color="red")
+```
+
+
+In a real situation, we would not see the signal and noise columns in the table or the red line on the graph. We would only see the time and amount, and points on the scatter plot. From these, we would need to estimate the location of the red line by fitting a least squares regression line to the data, as we've done before. 
+
+
+The blue line represents the location of the least squares regression line fit to the time and amounts observed.   
 ```{r, fig.height=4, fig.width = 7}
 ggplot(data=Icecream1, aes(x=time, y=amount)) + geom_point() + ggtitle("Icecream Dispensed") + xlab("Time Pressing Dispensor") + ylab("Amount Dispensed") + stat_smooth(method="lm", se=FALSE) + geom_abline(slope=2, intercept=0, color="red") + 
   annotate("text", label="y=2x", x= 3.5, y=6.5, size=10, color="red")
 ```
+The blue line is close, but not identical to the red line, representing the true (usually unknown) signal.   
 
-In a real situation, we would not see the signal and noise columns or the red line that represents the "true", relationship. We would only see the time and amount, and the blue line that is estimated based on them.  
+The slope and intercept of the blue line are given by:   
 
-We use the blue line, estimated from our observed data, to estimate the location of the red line, which represents the underlying true signal, which we do not know.   
+```{r}
+IC_Model <- lm(data=Icecream1, lm(amount~time))
+IC_Model
+```
+Notice that these estimates are close,  but not identical to the intercept and slope of the red line, which are 0 and 2, respectively.   
+
 
 The equation of the red line is given by:
 
@@ -169,14 +207,7 @@ $Y_i = \beta_0 + \beta_1X_{i} + \epsilon_i$, where $\epsilon_i\sim\mathcal{N}(0,
 
 where $Y_i$ represents amount dispensed, and $X_i$ represents time. $\beta_0, \beta_1,$, and $\sigma$ are the unknown model parameters associated with the ice cream machine's process.  
 
-We estimate $\beta_0$ and $\beta_1$, using our regression line estimates $b_0$ and $b_1$, shown below. 
-
-```{r}
-IC_Model <- lm(data=Icecream1, lm(amount~time))
-IC_Model
-```
-
-The estimated regression equation is 
+Using the values of $b_0$ and $b_1$ obtained by fitting a model to our observed data as estimates of $\beta_0$ and $\beta_1$, our estimated regression equation is 
 
 \[Y_i = b_0 + b_1X_i + \epsilon_i = `r IC_Model$coefficients[1]` + `r IC_Model$coefficients[2]`X_i + \epsilon_i
 \]
@@ -185,9 +216,9 @@ where $\epsilon_i\sim\mathcal{N}(0,\sigma)$.
 
 An estimate for $\sigma$ is given by 
 
-$s = \sqrt{\frac{\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2}{(n-(p+1))}}$.
+$s =\sqrt{\frac{\text{SSR}}{n-(p+1)}} = \sqrt{\frac{\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2}{(n-(p+1))}}$.
 
-Estimate of $\hat{\sigma}$:
+We calculate this estimate of $\hat{\sigma}$, using R. 
 
 ```{r}
 s <- sqrt(sum(IC_Model$residuals^2)/(15-2))
@@ -199,9 +230,12 @@ The estimates of $b_0 = `r IC_Model$coefficients[1]`$, $b_1=`r IC_Model$coeffici
 
 In a real situation, we'll have only statistics $b_0$, $b_1$, and $s$, and we'll need to use them to draw conclusions about parameters $\beta_0=0, \beta_1=2$, and $\sigma = 0.5$. 
 
-### General Mathematical Form
 
-In the ice cream example, the relationship between time and amount was given by a linear equation. We can generalize this to situations with multiple explanatory variable.
+### Normal Error Regression Model
+
+In the ice cream example, the relationship between expected amount and time holding the dispenser was given by a linear equation involving a single numeric explanatory variable. We can generalize this to situations with multiple explanatory variables, which might be numeric or categorical.
+
+Individual observations are then assumed to vary from their expectation in accordance with a normal distribution, representing random noise (or error).   
 
 The mathematical form of a normal error linear regression model is
 
@@ -209,17 +243,54 @@ $Y_i = \beta_0 + \beta_1X_{i1}+ \ldots + \beta_pX_{ip} + \epsilon_i$, with $\eps
 
 Note that in place of $X_{ip}$, we could have indicators for categories, or functions of $X_{ip}$, such as $X_{ip}^2$, $\text{log}(X_{ip})$, or $\text{sin}(X_{ip})$. 
 
-
 * The quantities $\beta_0, \beta_1, \ldots, \beta_p$ are parameters, pertaining to the true but unknown data generating mechanism.   
 
 * The estimates $b_0, b_1, \ldots, b_p$, are statistics, calculated from our observed data.   
 * We use confidence intervals and hypothesis tests to make statements about parameters, based on information provided by statistics. 
 
-We close the section by presenting a philosophical question: 
+### Examples of Normal Error Regression Model
+
+We can formulate all of the examples we've worked with so far in terms of the normal error regression model.   
+
+In the house price example, consider the following models:
+
+**Model 1:** 
+$\text{Price}_i = \beta_0 + \beta_1\text{Sq.Ft.}_{i} + \epsilon_i$, where $\epsilon_i\sim\mathcal{N}(0,\sigma)$. 
+If we use this model, we're saying that we believe the expected price of a house is a linear function of its size, and that for any given size, the distribution of actual prices are normally distributed around their expected value of $\beta_0 + \beta_1\text{Sq.Ft.}_{i}$. 
+
+**Model 2:**
+
+$\text{Price}_i = \beta_0 + \beta_2\text{Waterfront}_{i}+ \epsilon_i$, where $\epsilon_i\sim\mathcal{N}(0,\sigma)$. 
+
+If we use this model, we're saying that we believe the expected price of a house depends only on whether or not it is on the waterfront, and that prices of both waterfront and non-waterfront houses follow normal distributions, though these distributions may have different means ($\beta_0$ for non-waterfront houses, and $\beta_1$ for waterfront houses).   
+
+**Model 3:**
+
+$\text{Price}_i = \beta_0 + \beta_1\text{Sq.Ft.}_{i}+ \beta_2\text{Waterfront}_{i}+ \beta_3\times\text{Sq.Ft.}_i\times\text{Waterfront}_{i} + \epsilon_i$, where $\epsilon_i\sim\mathcal{N}(0,\sigma)$. 
+
+and 
+
+**Model 4:** 
+$\text{Price}_i = \beta_0 + \beta_1\text{Sq.Ft.}_{i}+ \beta_2\text{Waterfront}_{i}+ \beta_3\times\text{Sq.Ft.}_i\times\text{Waterfront}_{i} + \epsilon_i$, where $\epsilon_i\sim\mathcal{N}(0,\sigma)$. 
+
+Both models assume that actual prices of houses with the same size and waterfront status are normally distributed, and that the mean of the normal distribution is a linear function of its size. Model 3 allows for the intercept of the lines to differ between waterfront and non-waterfront houses, while Model 4 allows both the intercept and slope to differ.  
+
+### Implications of Normal Error Regresison Model
+
+If we really believe that data come about as the normal error regression model describes, then probability theory tells us that regression coefficients $b_j$'s, representing differences between categories for categorical variables and rates of change for quantitative variables, follow symmetric and bell-shaped distributions. We can use this fact, along with the standard error formulas in Section 4.4 to create confidence intervals and perform hypothesis tests, without needing to perform simulation. This is, in fact what R does in it's model summary output.   
+
+These methods are only valid, however, if data can reasonably be thought of as having come the normal error regression model process. Thus, if we don't believe that our observed data can be reasonably thought of terms representing underlying signal as a linear function of explanatory variables, and a normally distributed random error (or noise) term, then the confidence intervals and p-values produced by R, and other places that rely on probability-based methods will not be reliable.   
+
+
+### Philosophical Question
+
+We close the section with a philosophical question: 
 
 Do data really come about from processes like the normal error regression model? That is, do you think it is reasonable to believe that data we see in the real world (perhaps the amount of ice cream dispensed by an ice cream machine) is a combination of some true, but unknown equation involving the explanatory and response variables, and some unexplained noise, coming from a normal distribution? 
 
-We won't attempt to answer that question here, but it is worth thinking about as we delve deeper into the normal error regression model. After all, it is the assumption on which much  statistical inference depends.  
+We won't attempt to answer that question here, but it is worth thinking about. After all, it is an assumption on which many frequently employed methods of statistical inference depends.  
+
+<!---
 
 ## Inference in LLSR Model 
 
@@ -396,3 +467,4 @@ mean(abs(NSLakes_SimulationResults$b1Sim) > abs(b1))
 ```
 
 
+--->
