@@ -275,7 +275,7 @@ $\text{Price}_i = \beta_0 + \beta_1\text{Sq.Ft.}_{i}+ \beta_2\text{Waterfront}_{
 
 Both models assume that actual prices of houses with the same size and waterfront status are normally distributed, and that the mean of the normal distribution is a linear function of its size. Model 3 allows for the intercept of the lines to differ between waterfront and non-waterfront houses, while Model 4 allows both the intercept and slope to differ.  
 
-### Implications of Normal Error Regresison Model
+### Implications of Normal Error Regression Model
 
 If we really believe that data come about as the normal error regression model describes, then probability theory tells us that regression coefficients $b_j$'s, representing differences between categories for categorical variables and rates of change for quantitative variables, follow symmetric and bell-shaped distributions. We can use this fact, along with the standard error formulas in Section 4.4 to create confidence intervals and perform hypothesis tests, without needing to perform simulation. This is, in fact what R does in it's model summary output.   
 
@@ -290,11 +290,27 @@ Do data really come about from processes like the normal error regression model?
 
 We won't attempt to answer that question here, but it is worth thinking about. After all, it is an assumption on which many frequently employed methods of statistical inference depends.  
 
-<!---
 
-## Inference in LLSR Model 
+
+## Inference in Normal Error Regression Model 
+
+When data can reasonably be assumed to have come from a process consistent with the normal error regression model, we can perform hypothesis tests and make confidence intervals for regression coefficients $\beta_j$'s, (which represent slopes or differences in means), using probability-based methods rather than simulation. This is done in the R output for the `lm` `summary` command.  
 
 ### `lm` `summary` Output 
+
+The `summary` command for a linear model in R displays a table including 4 columns. 
+
+
+**Columns in Linear Model `summary()` Output**
+
+* **Estimate** gives the least-squares estimates $b_0, b_1, \ldots, b_p$     
+
+* **Standard Error** gives estimates of the standard deviation in the sampling distribution for estimate. (i.e. how much uncertainty is there about the estimate?) These are computed using the formulas in Section 4.4.   
+
+* **t value** is the estimate divided by its standard error.     
+
+* **Pr(>|t|)** is a p-value for the hypothesis test associated with the null hypothesis $\beta_j = 0$, where $\beta_j$ is the regression coefficient pertaining to the given line. Note that $\beta_j$ is the unknown population parameter estimated by $b_j$.   
+
 
 Recall our linear model for mercury levels of lakes in Northern Florida, compared to Southern Florida. 
 
@@ -307,6 +323,7 @@ The equation of the model is:
 We fit the model in R and display its summary output below.  
 
 ```{r}
+Lakes_M <- lm(data=FloridaLakes, Mercury~Location)
 summary(Lakes_M)
 ```
 
@@ -320,17 +337,8 @@ We've seen how to obtain the first two columns of the summary table, labeled "Es
 
 The last column, labeled "Pr(>|t|)" is, in fact a p-value associated with associated with the null hypothesis that the regression parameter on that line is zero. (i.e. $\beta_j=0$).    
 
-**Columns in Linear Model `summary()` Output**
 
-* **Estimate** gives the least-squares estimates $b_0, b_1, \ldots, b_p$     
-
-* **Standard Error** gives estimates of the standard deviation in the sampling distribution for estimate. (i.e. how much uncertainty is there about the estimate?) These are computed using the formulas in Section 4.7.   
-
-* **t value** is the estimate divided by its standard error.     
-
-* **Pr(>|t|)** is a p-value for the hypothesis test of whether quantity represented $b_j$ could plausibly be 0.   
-
-### Example: Florida Lakes Hypothesis
+**Example** Florida Lakes
 
 **Hypothesis Test for line (intercept)**
 
@@ -350,13 +358,13 @@ This test is relevant to us.
 
 R does not obtain these p-values through simulation, but rather by using the  symmetric and bell-shaped t-distribution to approximate the distribution of these statistics. This is appropriate when the sampling distribution for our test statistic is reasonably symmetric and bell-shaped. 
 
-You've probably noticed that the sampling distributions in our permutation-based hypothesis tests, and our bootstrap distributions for regression coefficients have been roughly symmetric and bell-shaped. When this happens, we can use a symmetric and bell-shaped distribution to model the distribution of a test statistic when the null hypothesis is true, bypassing the need to use simulation. 
+You've probably noticed that the sampling distributions in our permutation-based hypothesis tests, and our bootstrap distributions for regression coefficients have often been roughly symmetric and bell-shaped. When this happens, we can use a symmetric and bell-shaped distribution to model the distribution of a test statistic when the null hypothesis is true, bypassing the need to use simulation. 
 
 There is statistical theory which shows that if data really do come from the normal error regression model process, like the ice cream dispenser in the previous section, then the ratio of regression coefficients (means, differences in means, slopes) divided by their standard error, will follow a symmetric bell-shaped distribution called a t-distribution.   
 
 ### t-distribution
 
-A t-distribution is a symmetric, bell-shaped curve, with thicker tails (hence more variability), than a $\mathcal{N}(0,1)$ distribution.   
+A t-distribution is a symmetric, bell-shaped curve, with thicker tails (hence more variability), than a $\mathcal{N}(0,1)$ distribution. The t-distribution depends on a parameter called **degrees of freedom**, which determines the thickness of the distribution's tails.     
 
 ```{r, fig.height=5, fig.width=10, warning=FALSE, message=FALSE, include=FALSE}
 gf_dist("t", df=3, color = ~ "3 df", kind = "density")  %>%
@@ -403,7 +411,6 @@ p <- ggplot(df, aes(x = x, y = y)) +
 p
 ```
 
-### t-test
 
 For data that come from a normal error regression model, we can use a t-distribution to approximate the sampling distribution used in our hypothesis tests, when the null hypothesis is assumed to be true. 
 
@@ -419,8 +426,9 @@ The $t=\frac{{b_j}}{\text{SE}(b_j)}$ is called a **t-statistic**.
 
 We'll use this t-statistic as the test statistic in our hypothesis test.  
 
+The degrees of freedom are given by $n-(p+1)$, where $p$ represents the number of terms in the model, not including the intercept.  
 
-###  t-test for N vs S Lakes
+### Difference in Means Example
 
 Recall the hypothesis test we performed to investigate whether there is a difference in average mercury level between lakes in Northern Florida and Southern Florida.   
 
@@ -447,7 +455,11 @@ gf_dist("t", df=51, geom = "area", fill = ~ (abs(x)< abs(ts)), show.legend=FALSE
 
 The low p-value gives us strong evidence of a difference in average mercury levels between lakes in Northern and Southern Florida.  
 
-### Comparison to Simulation
+This is the p-value reported in R's `lm` `summary()` output.  
+
+A t-statistic more extreme than $\pm 2$ will roughly correspond to a p-value less than 0.05.   
+
+***Comparison to Simulation**
 
 Let's compare these results to those given by the permutation test and bootstrap confidence interval.
 
@@ -466,5 +478,514 @@ b1 <- Lakes_M$coef[2] ## record value of b1 from actual data
 mean(abs(NSLakes_SimulationResults$b1Sim) > abs(b1))
 ```
 
+### Simple Linear Regression Example
 
---->
+We examine the model summary output for the model predicting a lake's mercury level, using pH as the explanatory variable.  
+
+```{r}
+M_pH <- lm(data=FloridaLakes, Mercury~pH)
+summary(M_pH)
+```
+
+**Hypothesis Test for Intercept Line**
+
+**Null Hypothesis:** The average mercury level among all Florida lakes with pH = 0 is 0. ($\beta_0=0$).   
+
+**Alternative Hypothesis:** The average mercury level among all Florida lakes with pH = 0 not 0. ($\beta_0 \neq 0$).  
+
+Since there are no lakes with pH level 0, this  is not a meaningful test.   
+
+**Hypothesis Test for pH Line**
+
+**Null Hypothesis:** There is no relationship between mercury and pH level among all Florida lakes. ($\beta_1=0$).   
+
+**Alternative Hypothesis:** There is a relationship between mercury and pH level among all Florida lakes. ($\beta_1 \neq 0$).  
+
+**Test Statistic**: $t=\frac{{b_j}}{\text{SE}(b_j)} = \frac{-0.15230}{0.03031} = -5.024$ 
+
+```{r, fig.height=4, fig.width=8}
+ts=5.024
+gf_dist("t", df=51, geom = "area", fill = ~ (abs(x)< abs(ts)), show.legend=FALSE) + geom_vline(xintercept=c(ts, -ts), color="red")  + xlab("t")
+```
+
+
+
+```{r}
+2*pt(-abs(ts), df=51)
+```
+
+The p-value is extremely small, just as the simulation-based p-value we saw in Chapter 3.  
+
+### Multiple Regression Example
+
+We perform hypothesis tests on a model predicting house price using square feet and waterfront status as explanatory variables.   
+
+```{r}
+M_wf_sqft <- lm(data=Houses, price~sqft_living+waterfront)
+summary(M_wf_sqft)
+```
+
+**Intercept Line:**
+
+**Null Hypothesis** The average price among all non-waterfront houses with 0 square feet is 0 dollars. ($\beta_0=0$)
+
+This is not a sensible hypothesis to test.  
+
+**sqft_living Line:**
+
+**Null Hypothesis** There is no relationship between price and square feet in a house, after accounting for waterfront status. ($\beta_1=0$)  
+
+The large t-statistic (12.626) and small p-value provide strong evidence against this null hypothesis.   
+
+We know that a small p-value alone does not provide evidence of a relationship that is practically meaningful, but since our model estimates an expected 45 thousand dollar increase for each additional 100 square feet, this seems like a meaningful relationship.   
+
+
+**waterfrontYes Line:**
+
+**Null Hypothesis** On average, there is no difference between average price of waterfront and non-waterfront houses, assuming they are the same size. ($\beta_2=0$)  
+
+The large t-statistic (6.522) and small p-value provide strong evidence against this null hypothesis. Waterfront houses are estimated to cost 814 thousand dollars more, on average, than non-waterfront houses of the same size.   
+
+### MR with Interaction Example    
+
+```{r}
+M_House_Int <- lm(data=Houses, price ~ sqft_living * waterfront)
+summary(M_House_Int)
+```
+
+**Intercept Line:**
+
+**Null Hypothesis** The average price among all non-waterfront houses with 0 square feet is 0 dollars. ($\beta_0=0$)
+
+This is not a sensible hypothesis to test.  
+
+**sqft_living Line:**
+
+**Null Hypothesis** There is no relationship between price and square feet among non-waterfront houses. ($\beta_1=0$)   
+
+The large t-statistic (5.412) and small p-value provide strong evidence against this null hypothesis.   
+
+**waterfrontYes Line:**
+
+**Null Hypothesis** On average, there is no difference between average price of waterfront and non-waterfront houses with 0 square feet. ($\beta_2=0$)   
+
+This is not a sensible hypothesis to test.  
+
+**sqft_living:waterfrontYes**
+
+**Null Hypothesis**: There is no interaction between square feet and waterfront. ($\beta_3=0$)  (That is, the effect of size on price is the same for waterfront and non-waterfront houses).  
+
+
+The large t-statistic (7.773) and small p-value provide strong evidence against this null hypothesis. It appears there really is evidence of an interaction between price and waterfront status, as we previously suspected, based on graphical representation and background knowledge.  
+
+Note that if the interaction term had yielded a large p-value, indicating a lack of evidence of an interaction, we might have wanted to drop the interaction term from the model, in order to make the interpretations of the other estimates and hypothesis tests simpler.  
+
+### Limitations
+
+We've seen that in situations where the sampling distribution for a regression coefficient $b_j$ is symmetric and bell-shaped, we can create confidence intervals and perform hypothesis tests using the t-distribution without performing permutation for hypothesis tests, or bootstrapping for confidence intervals. 
+
+There are, however, limitations to this approach, which underscore the importance of the simulation-based approaches seen in Chapters 3 and 4.   
+
+These include:   
+
+1. There are lots of statistics, like medians and standard deviations, that do not have known standard error formulas, and do not follow symmetric bell-shaped distributions. In more advanced and complicated models, it is common to encounter statistics of interest with unknown sampling distributions. In these cases, we can estimate p-values and build confidence intervals via simulation, even if we cannot identify the distribution by name.   
+
+2. Even for statistics with known standard error formulas, the t-test is only appropriate when the sampling distribution for $b_j$ is symmetric and bell-shaped. While there is probability theory that shows this will happen when the sample size is "large enough," there is no set sample size that guarantees this. Datasets with heavier skewness in the response variable will require larger sample sizes than datasets with less skewness in the response.   
+
+3. The simulation-based approaches provide valuable insight to the logic behind hypothesis tests. When we permute values of an explanatory variable in a hypothesis test it is clear that we are simulating a situation where the null hypothesis is true. Likewise, when we simulate taking many samples in bootstrapping, it is clear that we are assessing the variability in a statistic across samples. Simply jumping to the t-based approximations of these distributions makes it easy to lose our sense of what they actually represent, and thus increases the likelihood of interpreting them incorrectly.   
+
+In fact prominent statistician R.A. Fisher wrote of simulation-based methods in 1936: 
+
+*``Actually, the statistician does not carry out this very simple and very tedious process, but his conclusions have no justification beyond the fact that they agree with those which could have been arrived at by this elementary method."* 
+
+Fisher's comment emphasizes the fact that probability-based tests, like the t-test are simply approximations to what we would obtain via simulation-based approaches, which were not possible in his day, but are now.   
+
+Proponents of simulation-based inference include Tim  Hesterberg, Senior Statistician at Instacart, and former Senior Statistician at Google, which heavily used simulation-based tests associated with computer experiments associated with their search settings. Hesterberg wrote a [2015 paper](https://browse.arxiv.org/pdf/1411.5279.pdf), arguing for the use and teaching of simulation-based techniques.   
+
+We will move forward by using probability-based inference where appropriate, while understanding that we are merely approximating what we would obtain via simulation. Meanwhile, we'll continue to employ simulation-based approaches where probability-based techniques are inappropriate or unavailable.   
+
+## F-Distributions
+
+Just as we've seen that the ratio of a regression statistic to its standard error follows a t-distribution when can be thought of as having come from a process that can be approximated with the normal error regression model, F-statistics also follow a known probability distribution under this assumption.   
+
+
+### F-Distribution
+
+An **F distribution** is a right-skewed distribution. It is defined by two parameters, $\nu_1, \nu_2$, called numerator and denominator degrees of freedom. 
+
+```{r, fig.height=5, fig.width=10, echo=FALSE, warning=FALSE, message=FALSE}
+gf_dist("f", df1=5, df2=5, color = ~ "5,5 df", kind = "density")  %>%
+gf_dist("f", df1=5, df2=20, color = ~ "5,20 df", kind = "density") %>%
+gf_dist("f", df1=20, df2=5, color = ~ "20,5 df", kind = "density") %>%
+gf_dist("f", df1=20, df2=20, color = ~ "20,20 df", kind = "density") + xlim(c(0,10)) + xlab("F")
+```
+
+**Important Fact:**
+
+If $Y_i = \beta_0 + \beta_1X_{i1} + \beta_2{X_i2} + \ldots + \beta_qX_{iq} + \epsilon_i$, with $\epsilon_i\sim\mathcal{N}(0,\sigma)$, 
+
+and   $Y_i = \beta_0 + \beta_1X_{i1} + \beta_2{X_i2} + \ldots + \beta_qX_{iq} + \beta_{q+1}X_{i{q+1}} \ldots + \beta_pX_{ip}+ \epsilon_i$, is another proposed model, then
+
+\[
+F=\frac{\frac{\text{Unexplained Variability in Reduced Model}-\text{Unexplained Variability in Full Model}}{p-q}}{\frac{\text{Unexplained Variability in Full Model}}{n-(p+1)}}
+\]
+
+follows an F-distribution.   
+
+The numerator and denominator degrees of freedom are given by $p-q$ and $n-(p+1)$, respectively. These are the same values we divided by when computing the F-statistic.  
+
+### House Condition Example
+
+Recall our F-statistic for comparing prices of houses in either very good, good, or average condition, calculated in Section 2.5.3 and the simulation-based F-test associated with this statistic that we performed in Section 3.2.5. 
+
+**Null Hypothesis:** There is no difference in average prices between houses of the three different conditions, among all houses in King County, WA.    
+
+**Alternative Hypothesis:** There is a difference in average prices between houses of the three different conditions, among all houses in King County, WA.
+
+Reduced Model: $\widehat{\text{Price}}= b_0$      
+
+Full Model: $\widehat{\text{Price}}= b_0+ b_1 \times\text{good condition}+ b_2\times\text{very good condition}$     
+
+$$
+\begin{aligned}
+F &= \frac{\frac{\text{SSR}_{\text{Reduced}}-\text{SSR}_{\text{Full}}}{p-q}}{\frac{\text{SSR}_{\text{Full}}}{n-(p+1)}} \\
+&=\frac{\frac{69,045,634-68,195,387}{2-0}}{\frac{68,195,387}{100-(2+1)}} \\
+\end{aligned}
+$$
+```{r}
+((SST - SSR_cond)/(2-0))/(SSR_cond/(100-(2+1)))
+```
+
+The results of the simulation-based hypothesis test are shown below. 
+
+```{r, fig.height=2}
+House_Cond_SimulationResults_Plot
+```
+
+**simulation-based p-value:** 
+
+```{r}
+mean(FSim > Fstat)
+```
+
+
+Now, we calculate the p-value using the probability-based F-distribution.  
+
+```{r, fig.height=4, fig.width=8}
+ts=0.605
+gf_dist("f", df1=2, df2=97, geom = "area", fill = ~ (abs(x)< abs(ts)), show.legend=FALSE) + geom_vline(xintercept=c(ts), color="red")  + xlab("F")
+```
+
+**p-value:**
+
+```{r}
+1-pf(ts, df1=2, df2=97)
+```
+
+The p-value we obtained is very similar to the one we obtained using the simulation-based test. 
+
+We can obtain this p-value directly using the `anova` command. 
+
+```{r}
+M_cond <- lm(data=Houses, price ~ condition)
+M0 <- lm(data=Houses, price ~ 1)
+anova(M0, M_cond)
+```
+### Interaction Example
+
+We can also use an F-test to compare a model predicting house prices with an interaction term to one without one. 
+
+Reduced Model: $\widehat{\text{Price}}= b_0+ b_1 \times\text{sqft_living} + b_2\times\text{Waterfront}$      
+
+Full Model: $\widehat{\text{Price}}= b_0+ b_1 \times\text{sqft_living}+ b_2\times\text{Waterfront} + b_3\times\text{sqft_living}\times\text{Waterfront}$     
+
+
+$$
+\begin{aligned}
+F &= \frac{\frac{\text{SSR}_{\text{Reduced}}-\text{SSR}_{\text{Full}}}{p-q}}{\frac{\text{SSR}_{\text{Full}}}{n-(p+1)}} \\
+&=\frac{\frac{16,521,296-10,139,974}{3-2}}{\frac{10,139,974}{100-(3+1)}} \\
+\end{aligned}
+$$
+
+```{r}
+((SSR_wf_sqft-SSR_int)/(3-2))/((SSR_int)/(100-(3+1)))
+```
+
+
+```{r, fig.height=4, fig.width=8}
+ts=60.41505
+gf_dist("f", df1=1, df2=96, geom = "area", fill = ~ (abs(x)>! abs(ts)), show.legend=FALSE) + geom_vline(xintercept=c(ts), color="red")  + xlab("F")
+```
+
+**p-value:**
+
+```{r}
+1-pf(ts, df1=1, df2=96)
+```
+
+The probability-based F-test is used in the `anova` command.   
+
+```{r}
+M_wf_SqFt <- lm(data=Houses, price~sqft_living + waterfront)
+M_House_Int <- lm(data=Houses, price~sqft_living * waterfront)
+anova(M_wf_SqFt, M_House_Int)
+```
+Notice that this p-value is identical to the one we obtained in the previous section, using the `lm` command.   
+
+## Regression Model Assumptions
+
+### Regression Assumptions
+
+Let's think carefully about what we are assuming in order to use the hypothesis tests and confidence intervals associated with the normal error regression model.  
+
+The statement $Y_i = \beta_0 + \beta_1X_{i1}+ \ldots + \beta_pX_{ip} + \epsilon_i$, with $\epsilon_i\sim\mathcal{N}(0,\sigma)$ implies the following:  
+
+1. Linearity: the expected value of $Y$ is a linear function of $X_1, X_2, \ldots, X_p$. (This assumption is only relevent for models including at least one quantitative explanatory variable.)    
+
+2. Normality: Given the values of $X_1, X_2, \ldots, X_p$, $Y$ follows a normal distribution.   
+
+3. Constant Variance: Regardless of the values of $X_1, X_2, \ldots, X_p$, the variance (or standard deviation) in the normal distribution for $Y$ is the same.   
+
+4. Independence: each observation is independent of the rest.    
+
+
+**Illustration of Model Assumptions**
+
+```{r echo=FALSE, out.width = '50%'}
+knitr::include_graphics("SLR_Model_Assumptions.png")
+```
+
+
+We know that these assumptions held true in the ice cream example, because we generated the data in a way that was consistent with these. 
+
+In practice, we will have only the data, without knowing the exact mechanism that produced it. We should only rely on the t-distribution based p-values and confidence intervals in the R output if these appear to be reasonable assumptions.  
+
+Of course, these assumptions will almost never be truly satisfied, but they should at least be a reasonable approximation if we are to draw meaningful conclusions.   
+
+### Checking Model Assumptions
+
+The following plots are useful when assessing the appropriateness of the normal error regression model.   
+
+1. Scatterplot of residuals against predicted values    
+
+2. Histogram of standardized residuals    
+     - heavy skewness indicates a problem with normality assumption     
+     
+3. Normal quantile plot
+      - severe departures from diagonal line indicate problem with normality assumption
+
+
+```{r, include=FALSE}
+set.seed(10102021)
+N <- 100
+time <- runif(N, 1,3)
+amount <- 2*time + rnorm(N, 0, 0.5)  ## no violation
+amount_lin_viol <- 2*time^2 + rnorm(N, 0, 0.5) ## linearity violation
+amount_norm_viol <- 2*time + 5*rexp(N, 1) -1
+amount_cvar_viol <- 2*time + rnorm(N,0,time^2)
+Violations <- data.frame(amount, amount_lin_viol, amount_norm_viol, amount_cvar_viol)
+no_viol_Model <- lm(data=Violations, amount ~ time)
+lin_viol_Model <- lm(data=Violations, amount_lin_viol~time)
+norm_viol_Model <- lm(data=Violations, amount_norm_viol~time)
+cvar_viol_Model <- lm(data=Violations, amount_cvar_viol~time)
+```
+
+
+**Residual vs Predicted Plots**
+
+A residual vs predicted plot is useful for detecting issues with the linearity or constant variance assumption. 
+
+* curvature indicates a problem with linearity assumption       
+* "funnel" or "megaphone" shape indicates problem with constant variance assumption      
+
+```{r, fig.height=4, fig.width=8}
+P1 <- ggplot(data=Violations, aes(y=no_viol_Model$residuals, x=no_viol_Model$fitted.values)) + geom_point() + ggtitle("No Violation") + xlab("Predicted Values") + ylab("Residuals")
+P2 <- ggplot(data=Violations, aes(y=lin_viol_Model$residuals, x=no_viol_Model$fitted.values)) + geom_point() + ggtitle("Violation of Linearity Assumption")+ xlab("Predicted Values") + ylab("Residuals")
+P3 <- ggplot(data=Violations, aes(y=cvar_viol_Model$residuals, x=no_viol_Model$fitted.values)) + geom_point() + ggtitle("Violation of Constant Variance Assumption")+ xlab("Predicted Values") + ylab("Residuals")
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+If there is only one explanatory variable, plotting the residuals against that variable reveals the same information as a residual vs predicted plot.    
+
+**Histogram of Residuals**
+
+A histogram of the residuals is useful for assessing the normality assumption. 
+
+* Severe skewness indicates violation of normality assumption
+
+```{r, fig.height=4, fig.width=8}
+P1 <- ggplot(data=Violations, aes(x=no_viol_Model$residuals)) + geom_histogram() + ggtitle("No Violation") +xlab("Residual")
+P2 <- ggplot(data=Violations, aes(x=norm_viol_Model$residuals)) + geom_histogram() + ggtitle("Violation of Normality Assumption") + xlab("Residual")
+grid.arrange(P1, P2, ncol=2)
+```
+
+**Normal Quantile-Quantile (QQ) Plot**
+
+Sometimes histograms can be inconclusive, especially when sample size is smaller. 
+
+A Normal quantile-quantile plot displays quantiles of the residuals against the expected quantiles of a normal distribution. 
+
+* Severe departures from diagonal line indicate a problem with normality assumption. 
+
+```{r, fig.height=4, fig.width=8}
+P1 <- ggplot(data=Violations, aes(sample = scale(no_viol_Model$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("No Violation") + xlim(c(-4,4)) + ylim(c(-4,4))
+P2 <- ggplot(data=Violations, aes(sample = scale(norm_viol_Model$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("Violation of Normality Assumption") + xlim(c(-4,4)) + ylim(c(-4,4))
+grid.arrange(P1, P2, ncol=2)
+```
+
+**Checking Model Assumptions - Independence**
+
+Independence is often difficult to assess through plots of data, but it is important to think about whether there were factors in the data collection that would cause some observations to be more highly correlated than others. 
+
+For example:
+
+1. People in the study who are related.   
+2. Some plants grown in the same greenhouse and others in different greenhouses.    
+3. Some observations taken in same time period and others at different times. 
+
+All of these require more complicated models that account for correlation using spatial and time structure. 
+
+
+
+### Summary of Checks for Model Assumptions
+
+|   Model assumption           | How to detect violation | 
+|-----------|----------|
+| Linearity | Curvature in residual plot |
+| Constant Variance | Funnel shape in residual plot |
+| Normality | Skewness in histogram of residuals or departure from diag. line in QQ plot |
+| Independence | No graphical check, carefully examine data collection |
+
+
+
+### Example: N v S Lakes  
+
+Recall our sample of 53 Florida Lakes, 33 in the north, and 20 in the south.
+
+$\text{Mercury}_i = \beta_0 + \beta_1\times\text{I}_{\text{South}_i} + \epsilon_i$, where $\epsilon_i\sim\mathcal{N}(0, \sigma)$. 
+
+```{r, fig.height=4, fig.width=8}
+LakesBP
+```
+
+
+When we use the normal error regression model, we are assuming the following:   
+
+1. Linearity: there is an expected mercury concentration for lakes in North Florida, and another for lakes in South Florida.     
+
+2. Normality: mercury concentrations of individual lakes in the north are normally distributed, and so are mercury concentrations in the south. These normal distributions might have different means. 
+
+3. Constant Variance: the normal distribution for mercury concentrations in North Florida has the same standard deviation as the normal distribution for mercury concentrations in South Florida 
+
+4. Independence: no two lakes are any more alike than any others, except for being in the north or south, which we account for in the model. We might have concerns about this, do to some lakes being geographically closer to each other than others.   
+
+We should only use the p-values and confidence intervals provided by R, which depend on the t-distribution approximation, if we believe these assumptions are reasonable. 
+
+A residual by predicted plot, histogram of residuals, and normal quantile-quantile plot are shown below. 
+
+```{r, fig.width=10}
+P1 <- ggplot(data=FloridaLakes, aes(y=Lakes_M$residuals, x=Lakes_M$fitted.values)) + geom_point() + ggtitle("Residual vs Predicted Plot") + xlab("Predicted Values") + ylab("Residuals")
+P2 <- ggplot(data=FloridaLakes, aes(x=Lakes_M$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
+P3 <- ggplot(data=FloridaLakes, aes(sample = scale(Lakes_M$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("Normal QQ Plot")
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+Notice that we see two lines of predicted values and residuals. This makes sense since all lakes in North Florida will have the same predicted value, as will all lakes in Southern Florida. 
+
+There appears to be a little more variability in residuals for Southern Florida (on the right), than Northern Florida, causing some concern about the constant variance assumption. 
+
+Overall, though, the assumptions seem mostly reasonable. 
+
+We shouldn't be concerned about using theory-based hypothesis tests or  confidence intervals for the mean mercury level or difference in mean mercury levels. There might be some concern that prediction intervals could be either too wide or too narrow, but this is not a major concern, since the constant variance assumption is not severe.   
+
+
+### Example: pH Model 
+
+Recall the regression line estimating the relationship between a lake's mercury level and pH.   
+
+
+$\text{Mercury}_i = \beta_0 + \beta_1\times\text{pH}_i + \epsilon_i$, where $\epsilon_i\sim\mathcal{N}(0, \sigma)$. 
+
+The model assumes:
+
+1. Linearity: the expected mercury level of a lake is a linear function of pH.    
+
+2. Normality: for any given pH, the mercury levels of lakes with that pH follow a normal distribution. For example, mercury levels for lakes with pH of 6 is are normally distributed, and  mercury levels for lakes with pH of 9 are normally distributed, though these normal distributions may have different means.   
+
+3. Constant Variance: the variance (or standard deviation) in the normal distribution for mercury level is the same for each pH. For example, there is the same amount of variability associated with lakes with pH level 6, as pH level 8.   
+
+4. Independence: no two lakes are any more alike than any others, except with respect to pH, which is accounted for in the model. This may not be a reasonable assumption, but it's unclear what the effects of such a violation would be.   
+
+We should only use the p-values and confidence intervals provided by R, which depend on the t-distribution approximation, if we believe these assumptions are reasonable. 
+
+The plots for checking these assumptions are shown below.  
+
+```{r, fig.width=10}
+P1 <- ggplot(data=FloridaLakes, aes(y=M_pH$residuals, x=M_pH$fitted.values)) + geom_point() + ggtitle("Residual vs Predicted Plot") + xlab("Predicted Values") + ylab("Residuals")
+P2 <- ggplot(data=FloridaLakes, aes(x=M_pH$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
+P3 <- ggplot(data=FloridaLakes, aes(sample = scale(M_pH$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("Normal QQ Plot")
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+The residual vs predicted plot does not show any linear trend, and variability appears to be about the same for low predicted values as for high ones. Thus, the linearity and constant variance assumptions appear reasonable.   
+
+The histogram shows some right-skewness, and the right-most points on the normal-qq plot are above the line, indicating a possible concern with the normality assumption. There is some evidence of right-skewness, which might impact the appropriatness of the normal error regression model.   
+
+Nevertheless, we obtained similar results using the simulation-based results as the normal error regression model, suggesting that the concern about normality did not have much impact on the estimation of $\beta_1$. It is possible that this concern could have implications for other kinds of inference, such as confidence intervals for an expected response, and prediction intervals, which we'll explore later in the chapter.
+
+
+### Example: House Prices
+
+Recall the model for estimating price of a house, using size, waterfront status, and an interaction term.     
+
+
+$\text{Price}_i = \beta_0 + \beta_1\text{Sq.Ft.}_{i}+ \beta_2\text{Waterfront}_{i}+ \beta_3\times\text{Sq.Ft.}_i\times\text{Waterfront}_{i} + \epsilon_i$, where $\epsilon_i\sim\mathcal{N}(0,\sigma)$. 
+
+The model assumes:
+
+1. Linearity: the expected price of a house is a linear function of its size. The slope and intercept of this function may be different for houses on the waterfront, compared to houses not on the waterfront.     
+
+2. Normality: prices of houses of a given size and waterfront status are normally distributed.   
+
+3. Constant Variance: the variance (or standard deviation) in the normal distribution for prices is the same for all sizes and waterfront statuses. 
+
+4. Independence: no two houses are any more alike than any others, except with respect to size and waterfront status.  
+
+We should only use the p-values and confidence intervals provided by R, which depend on the t-distribution approximation, if we believe these assumptions are reasonable. 
+
+Several reasons come to mind that might cause us to doubt the validity of these assumptions, but let's investigate them emperically, using our data on 100 houses. 
+
+The plots for checking these assumptions are shown below.  
+
+```{r, fig.width=10}
+P1 <- ggplot(data=Houses, aes(y=M_House_Int$residuals, x=M_House_Int$fitted.values)) + geom_point() + ggtitle("Residual vs Predicted Plot") + xlab("Predicted Values") + ylab("Residuals")
+P2 <- ggplot(data=Houses, aes(x=M_House_Int$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
+P3 <- ggplot(data=Houses, aes(sample = scale(M_House_Int$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("Normal QQ Plot")
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+Although we might have had some initial concerns about the model assumptions, the plots do not raise any serious concerns. There is no sign of a nonlinear relationship in the residual vs predicted plot, so the linearity assumption appears reasonable. 
+
+There is possibly more variability associated with prices or more expensive houses than less expensive ones, so we might have some concerns about constant variance, but since there are only a few very high-priced houses, and the increasing variance is not too severe, this may not be much of a concern.  
+
+There are a few houses on each end of the normal qq plot that deviate from their expected line, but not very many. It's not uncommon to have a few points deviate from the line on the end, so we do not have severe concerns about normality. The histogram of residuals is roughly symmetric.  
+
+Thus, the normal error regression model appears to be reasonable for these data.  
+
+
+### General Comments on Model Assumptions
+
+* We shouldn't think about model assumptions being satisfied as a yes/no question.     
+* In reality assumptions are never perfectly satisfied, so it's a question of how severe violations must be in order to impact results. This is context dependent.     
+* A model might be reasonable for certain purposes  (i.e. confidence interval for $\beta_1$) but not for others that we'll see soon (i.e. prediction of response value for new observation).   
+* When model assumptions are a concern, consider a using a transformation of the data or a more flexible technique, such as a nonparametric method or statistical machine learning algorithm. We'll talk more about these soon.   
+
+* Remember that all statistical techniques are approximations
+
+## Confidence and Prediction Intervals
+
+## Transformations
+
+## Responsible Statistical Inference
+
+
