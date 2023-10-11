@@ -23,7 +23,7 @@
 <meta name="author" content="Andrew Sage - Lawrence University" />
 
 
-<meta name="date" content="2023-10-08" />
+<meta name="date" content="2023-10-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1318,7 +1318,7 @@ We’ll use bootstrapping again, this time using the sample mean, rather than th
 <span id="cb307-2"><a href="bootstrap-interval-estimation.html#cb307-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x=</span>Sample_SD <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>SE_SD,<span class="at">xend=</span>Sample_SD <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>SE_SD, <span class="at">y=</span><span class="dv">50</span>, <span class="at">yend=</span><span class="dv">50</span>), </span>
 <span id="cb307-3"><a href="bootstrap-interval-estimation.html#cb307-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">color=</span><span class="st">&quot;gold&quot;</span>, <span class="at">size=</span><span class="dv">10</span>, <span class="at">alpha=</span><span class="fl">0.01</span>) </span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-237-1.png" width="672" /></p>
-<p>We are 95% confident that the standard deviation in mercury levels among all Florida lakes is between 0.4697784 and 0.5845612 parts per million.</p>
+<p>We are 95% confident that the standard deviation in mercury levels among all Florida lakes is between 0.2836442 and 0.3984271 parts per million.</p>
 </div>
 <div id="ci-for-median" class="section level3 hasAnchor" number="4.3.4">
 <h3><span class="header-section-number">4.3.4</span> CI for Median<a href="bootstrap-interval-estimation.html#ci-for-median" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -2518,7 +2518,7 @@ SE(\bar{x}_1-\bar{x}_2)=s\sqrt{\frac{1}{n_1}+\frac{1}{n_2}},
 <p><span class="math inline">\(\approx 0.42455 \pm 2\times0.05519\)</span></p>
 <p>We are 95% confident that the average mercury level among all lakes in North Florida is between 0.313 and 0.535 ppm.</p>
 <p><strong>LocationS Interpretation</strong></p>
-<p><span class="math inline">\(\approx -0.15230 \pm 0.03031\)</span></p>
+<p><span class="math inline">\(\approx -0.27195 \pm 2\times 0.08985\)</span></p>
 <p>We are 95% confident that the average mercury level among all lakes in South Florida is between 0.09 and 0.45 ppm higher than the average mercury concentration among all lakes in North Florida.</p>
 <p>Note that the use of 2 in the confidence interval formula is an approximation, though one that is reasonable and widely used. Rather than using 2, R uses a value very close to 2, which varies depending on the sample size. Thus R’s calculations will not exactly match the formulas shown, but are similar enough for practical purposes. Remember that in statistics, everything is an approximation.</p>
 <p><strong>Confidence Intervals for pH and Mercury in Florida Lakes</strong></p>

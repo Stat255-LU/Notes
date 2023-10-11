@@ -779,7 +779,7 @@ Lakes_Bootstrap_SD_Plot +
                color="gold", size=10, alpha=0.01) 
 ```
 
-We are 95% confident that the standard deviation in mercury levels among all Florida lakes is between `r mean - 2*SE_SD` and `r mean + 2*SE_SD` parts per million.  
+We are 95% confident that the standard deviation in mercury levels among all Florida lakes is between `r Sample_SD - 2*SE_SD` and `r Sample_SD + 2*SE_SD` parts per million.  
 
 
 ###  CI for Median     
@@ -2138,7 +2138,7 @@ We are 95% confident that the average mercury level among all lakes in North Flo
 
 **LocationS Interpretation**
 
-$\approx -0.15230  \pm  0.03031$
+$\approx -0.27195  \pm 2\times 0.08985$
 
 We are 95% confident that the average mercury level among all lakes in South Florida is between 0.09 and 0.45 ppm higher than the average mercury concentration among all lakes in North Florida.   
 
