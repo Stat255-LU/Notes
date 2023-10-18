@@ -23,7 +23,7 @@
 <meta name="author" content="Andrew Sage - Lawrence University" />
 
 
-<meta name="date" content="2023-10-16" />
+<meta name="date" content="2023-10-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -336,6 +336,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6.11" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#prediction-interval-comparison"><i class="fa fa-check"></i><b>5.6.11</b> Prediction Interval Comparison</a></li>
 <li class="chapter" data-level="5.6.12" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#log-model-visualization"><i class="fa fa-check"></i><b>5.6.12</b> Log Model Visualization</a></li>
 <li class="chapter" data-level="5.6.13" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#comments-on-transformations"><i class="fa fa-check"></i><b>5.6.13</b> Comments on Transformations</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#case-studies"><i class="fa fa-check"></i><b>5.7</b> Case Studies</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#flights-from-ny-to-chi"><i class="fa fa-check"></i><b>5.7.1</b> Flights from NY to CHI</a></li>
+<li class="chapter" data-level="5.7.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#smoking-during-pregnancy"><i class="fa fa-check"></i><b>5.7.2</b> Smoking During Pregnancy</a></li>
+<li class="chapter" data-level="5.7.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#exam-scores"><i class="fa fa-check"></i><b>5.7.3</b> Exam Scores</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>6</b> Model Building</a></li>
@@ -1533,7 +1539,272 @@ Note: these are confidence intervals for <span class="math inline">\(\beta_0\)</
 - <span class="math inline">\(e^{\beta_j}\)</span> represents the number of times larger the expected response in category <span class="math inline">\(j\)</span> is, compared to the baseline category.</p></li>
 <li><p>When working with multiple regression models, it is still important to mention holding other variables constant when interpreting parameters associated with one of the variables.</p></li>
 </ul>
+</div>
+</div>
+<div id="case-studies" class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> Case Studies<a href="normal-error-regression-model.html#case-studies" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section, we’ll examine three case studies and think about what we should or shouldn’t conclude in each situation.</p>
+<div id="flights-from-ny-to-chi" class="section level3 hasAnchor" number="5.7.1">
+<h3><span class="header-section-number">5.7.1</span> Flights from NY to CHI<a href="normal-error-regression-model.html#flights-from-ny-to-chi" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A traveler lives in New York and wants to fly to Chicago. They consider flying out of two New York airports:</p>
+<ul>
+<li>Newark (EWR)<br />
+</li>
+<li>LaGuardia (LGA)</li>
+</ul>
+<p>We have data on the times of flights from both airports to Chicago’s O’Hare airport from 2013 (more than 14,000 flights).</p>
+<p>Assuming these flights represent a random sample of all flights from these airports to Chicago, consider how the traveler might use this information to decide which airport to fly out of.</p>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="normal-error-regression-model.html#cb586-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span>
+<span id="cb586-2"><a href="normal-error-regression-model.html#cb586-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(flights)</span>
+<span id="cb586-3"><a href="normal-error-regression-model.html#cb586-3" aria-hidden="true" tabindex="-1"></a>flights<span class="sc">$</span>origin <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(flights<span class="sc">$</span>origin)</span>
+<span id="cb586-4"><a href="normal-error-regression-model.html#cb586-4" aria-hidden="true" tabindex="-1"></a>flights<span class="sc">$</span>dest <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(flights<span class="sc">$</span>dest)</span>
+<span id="cb586-5"><a href="normal-error-regression-model.html#cb586-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb586-6"><a href="normal-error-regression-model.html#cb586-6" aria-hidden="true" tabindex="-1"></a>Flights_NY_CHI <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
+<span id="cb586-7"><a href="normal-error-regression-model.html#cb586-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(origin <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;EWR&quot;</span>, <span class="st">&quot;LGA&quot;</span>) <span class="sc">&amp;</span> dest <span class="sc">==</span><span class="st">&quot;ORD&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb586-8"><a href="normal-error-regression-model.html#cb586-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(origin, dest, air_time)</span></code></pre></div>
+<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="normal-error-regression-model.html#cb587-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>Flights_NY_CHI, <span class="fu">aes</span>(<span class="at">x=</span>air_time, <span class="at">fill=</span>origin, <span class="at">color=</span>origin)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.2</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Flight Time&quot;</span>)</span>
+<span id="cb587-2"><a href="normal-error-regression-model.html#cb587-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>Flights_NY_CHI, <span class="fu">aes</span>(<span class="at">x=</span>air_time, <span class="at">y=</span>origin)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Flight Time&quot;</span>)</span>
+<span id="cb587-3"><a href="normal-error-regression-model.html#cb587-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-429-1.png" width="768" /></p>
+<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="normal-error-regression-model.html#cb588-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb588-2"><a href="normal-error-regression-model.html#cb588-2" aria-hidden="true" tabindex="-1"></a>T <span class="ot">&lt;-</span> Flights_NY_CHI <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(origin) <span class="sc">%&gt;%</span> </span>
+<span id="cb588-3"><a href="normal-error-regression-model.html#cb588-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Mean_Airtime =</span> <span class="fu">mean</span>(air_time, <span class="at">na.rm=</span><span class="cn">TRUE</span>), </span>
+<span id="cb588-4"><a href="normal-error-regression-model.html#cb588-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD =</span> <span class="fu">sd</span>(air_time, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">n=</span><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(air_time)))</span>
+<span id="cb588-5"><a href="normal-error-regression-model.html#cb588-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(T)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">origin</th>
+<th align="right">Mean_Airtime</th>
+<th align="right">SD</th>
+<th align="right">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">EWR</td>
+<td align="right">113.2603</td>
+<td align="right">9.987122</td>
+<td align="right">5828</td>
+</tr>
+<tr class="even">
+<td align="left">LGA</td>
+<td align="right">115.7998</td>
+<td align="right">9.865270</td>
+<td align="right">8507</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Model for Flights Data</strong></p>
+<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="normal-error-regression-model.html#cb589-1" aria-hidden="true" tabindex="-1"></a>M_Flights <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Flights_NY_CHI, air_time<span class="sc">~</span>origin)</span>
+<span id="cb589-2"><a href="normal-error-regression-model.html#cb589-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M_Flights)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = air_time ~ origin, data = Flights_NY_CHI)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -26.26  -7.26  -1.26   5.20  84.74 
+## 
+## Coefficients:
+##             Estimate Std. Error t value            Pr(&gt;|t|)    
+## (Intercept) 113.2603     0.1299  872.06 &lt;0.0000000000000002 ***
+## originLGA     2.5395     0.1686   15.06 &lt;0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 9.915 on 14333 degrees of freedom
+##   (622 observations deleted due to missingness)
+## Multiple R-squared:  0.01558,    Adjusted R-squared:  0.01551 
+## F-statistic: 226.9 on 1 and 14333 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p><strong>Confidence Interval</strong></p>
+<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb591-1"><a href="normal-error-regression-model.html#cb591-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(M_Flights)</span></code></pre></div>
+<pre><code>##                 2.5 %     97.5 %
+## (Intercept) 113.00572 113.514871
+## originLGA     2.20905   2.869984</code></pre>
+<p><strong>Question:</strong> If you were flying from New York to Chicago, would this information influence which airport you would fly out of? If so, which would you be more likely to choose?</p>
+</div>
+<div id="smoking-during-pregnancy" class="section level3 hasAnchor" number="5.7.2">
+<h3><span class="header-section-number">5.7.2</span> Smoking During Pregnancy<a href="normal-error-regression-model.html#smoking-during-pregnancy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Many studies have shown that a mother’s smoking during pregnancy puts a baby at risk of low birth weight.</p>
+<p>We have data on the from a sample of 80 babies born in North Carolina in 2004. Thirty of the mothers were smokers, and fifty were nonsmokers.</p>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="normal-error-regression-model.html#cb593-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>NCBirths, <span class="fu">aes</span>(<span class="at">x=</span>weight, <span class="at">fill=</span>habit, <span class="at">color=</span>habit)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.2</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Birthweight and Smoking&quot;</span>)</span>
+<span id="cb593-2"><a href="normal-error-regression-model.html#cb593-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>NCBirths, <span class="fu">aes</span>(<span class="at">x=</span>weight, <span class="at">y=</span>habit)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Birthweight and Smoking&quot;</span>)</span>
+<span id="cb593-3"><a href="normal-error-regression-model.html#cb593-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-434-1.png" width="768" /></p>
+<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="normal-error-regression-model.html#cb594-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb594-2"><a href="normal-error-regression-model.html#cb594-2" aria-hidden="true" tabindex="-1"></a>T <span class="ot">&lt;-</span> NCBirths <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(habit) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">Mean_Weight =</span> <span class="fu">mean</span>(weight), <span class="at">SD =</span> <span class="fu">sd</span>(weight), <span class="at">n=</span><span class="fu">n</span>())</span>
+<span id="cb594-3"><a href="normal-error-regression-model.html#cb594-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(T)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">habit</th>
+<th align="right">Mean_Weight</th>
+<th align="right">SD</th>
+<th align="right">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">nonsmoker</td>
+<td align="right">7.039200</td>
+<td align="right">1.709388</td>
+<td align="right">50</td>
+</tr>
+<tr class="even">
+<td align="left">smoker</td>
+<td align="right">6.616333</td>
+<td align="right">1.106418</td>
+<td align="right">30</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Model for Birth Weights Data</strong></p>
+<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="normal-error-regression-model.html#cb595-1" aria-hidden="true" tabindex="-1"></a>M_Birthwt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>NCBirths, weight<span class="sc">~</span>habit)</span>
+<span id="cb595-2"><a href="normal-error-regression-model.html#cb595-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M_Birthwt)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = weight ~ habit, data = NCBirths)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.0392 -0.6763  0.2372  0.8280  2.4437 
+## 
+## Coefficients:
+##             Estimate Std. Error t value            Pr(&gt;|t|)    
+## (Intercept)   7.0392     0.2140   32.89 &lt;0.0000000000000002 ***
+## habitsmoker  -0.4229     0.3495   -1.21                0.23    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.514 on 78 degrees of freedom
+## Multiple R-squared:  0.01842,    Adjusted R-squared:  0.005834 
+## F-statistic: 1.464 on 1 and 78 DF,  p-value: 0.23</code></pre>
+<p><strong>Confidence Interval</strong></p>
+<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="normal-error-regression-model.html#cb597-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(M_Birthwt)</span></code></pre></div>
+<pre><code>##                 2.5 %    97.5 %
+## (Intercept)  6.613070 7.4653303
+## habitsmoker -1.118735 0.2730012</code></pre>
+<p><strong>Question:</strong></p>
+<p>What should we conclude about the effect of smoking on birth weight based on these results?</p>
+<!--
+
+### Smoking During Pregnancy (cont)
+
+In fact, this sample of 80 babies is part of a larger dataset, consisting of 1,000 babies born in NC in 2004. When we consider the full dataset, notice that the difference between the groups is similar, but the p-value is much smaller, providing stronger evidence of a relationship between a mother's smoking and lower birthweight.  
+
+
+```r
+M_Birthwt_Full <- lm(data=ncbirths, weight~habit)
+summary(M_Birthwt_Full)
+```
+
+```
+## 
+## Call:
+## lm(formula = weight ~ habit, data = ncbirths)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.1443 -0.7043  0.1657  0.9157  4.6057 
+## 
+## Coefficients:
+##             Estimate Std. Error t value            Pr(>|t|)    
+## (Intercept)  7.14427    0.05086 140.472 <0.0000000000000002 ***
+## habitsmoker -0.31554    0.14321  -2.203              0.0278 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.503 on 997 degrees of freedom
+##   (1 observation deleted due to missingness)
+## Multiple R-squared:  0.004846,   Adjusted R-squared:  0.003848 
+## F-statistic: 4.855 on 1 and 997 DF,  p-value: 0.02779
+```
+
+-->
+</div>
+<div id="exam-scores" class="section level3 hasAnchor" number="5.7.3">
+<h3><span class="header-section-number">5.7.3</span> Exam Scores<a href="normal-error-regression-model.html#exam-scores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Exam 1 vs Exam 2 scores for intro stat students at another college.</p>
+<p>The blue line represents the least squares regression line, while the red line represents the line <span class="math inline">\(y=x\)</span>.</p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-439-1.png" width="768" /></p>
+<p>Notice that out of the seven highest scoring students on Exam 1 (above 90), only two improved on Exam 2. Meanwhile, out of the six students who score lowest (below 70) on Exam 1, five improved on Exam 2.</p>
+<p>One conclusion would be that the students who did best on Exam 1 didn’t study as hard and weren’t as prepared for Exam 2 as they were for Exam 1, while the students who scored lower worked harder and were better prepared for Exam 2 than they were for Exam 1.</p>
+<p>While the above explanation is plausible, there is another possible explanation for this behavior. Think about what it might be.</p>
 <!---
+
+### Simulating the Regression Effect
+
+We simulate test scores under the assumption that each person's score on an exam is a combination of their true level of understanding, and a "luck" factor, simulated from a normal distribution.
+
+We assume that each student's true level of understanding is exactly the same on the second exam as on the first.  
+
+The numbers on the graph indicate the student's true level of understanding.  
+
+
+```r
+set.seed(10172023)
+Understanding <-runif(50,55,95)
+Score1 <- Understanding + rnorm(50, 0, 5)
+Score2 <- Understanding + rnorm(50, 0, 5)
+Understanding <- round(Understanding,0)
+Score1 <- round(Score1,0)
+Score2 <- round(Score2,0)
+TestSim <- data.frame(Understanding, Score1, Score2)
+ggplot(data=TestSim, aes(y=Score2, x=Score1))+ geom_point() + stat_smooth(method="lm") +
+  geom_abline(slope=1, color="red") + geom_text(aes(label=Understanding), vjust = 0, nudge_y = 0.5) + 
+  xlim(c(50,105)) + ylim(c(50,105))
+```
+
+<img src="bookdownproj_files/figure-html/unnamed-chunk-440-1.png" width="768" />
+
+
+**Highest Exam 1 Scores**
+
+
+```r
+kable(head(TestSim%>%arrange(desc(Score1))))
+```
+
+
+
+| Understanding| Score1| Score2|
+|-------------:|------:|------:|
+|            93|     97|     92|
+|            90|     97|     85|
+|            88|     95|     85|
+|            93|     94|    103|
+|            95|     94|     93|
+|            79|     89|     81|
+
+**Lowest Exam 1 Scores**
+
+
+
+```r
+kable(head(TestSim%>%arrange(Score1)))
+```
+
+
+
+| Understanding| Score1| Score2|
+|-------------:|------:|------:|
+|            55|     49|     61|
+|            60|     54|     57|
+|            60|     56|     59|
+|            58|     57|     52|
+|            66|     60|     71|
+|            63|     61|     62|
+
+This phenomenon is called the **regression effect**.
+
+### NFL Wins
+
+Wins by NFL teams in 2021 and 2022
+
+<img src="bookdownproj_files/figure-html/unnamed-chunk-443-1.png" width="768" />
+
+
 
 
 ## The Regression Effect
@@ -1544,7 +1815,7 @@ You might be wondering how regression gets its name. It comes from a well known 
 
 Exam 1 vs Exam 2 scores for intro stat students at another college
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-428-1.png" width="768" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-444-1.png" width="768" />
 
 What is the relationship between scores on the two exams? 
 
@@ -1552,7 +1823,7 @@ What is the relationship between scores on the two exams?
 
 Exam 1 vs Exam 2 scores for intro stat students at another college
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-429-1.png" width="768" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-445-1.png" width="768" />
 
 How many of the 6 students who scored below 70 on Exam 1 improved their scores on Exam 2?
 
@@ -1583,7 +1854,7 @@ ggplot(data=TestSim, aes(y=Score2, x=Score1))+ geom_point() + stat_smooth(method
   geom_abline(slope=1) + geom_text(aes(label=Understanding), vjust = 0, nudge_y = 0.5)
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-430-1.png" width="768" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-446-1.png" width="768" />
 
 This phenomon is called the **regression effect**.
 
@@ -1631,9 +1902,9 @@ These students' lack of success on test 1 is due to a low understanding and poor
 
 ### Another Example
 
-Wins by NFL teams in 2017 and 2018
+Wins by NFL teams in 2021 and 2022
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-433-1.png" width="768" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-449-1.png" width="768" />
 
 ### Other Examples of Regression Effect {.smaller}
 
@@ -1675,7 +1946,7 @@ Performing responsible statistical inference requires understanding what p-value
 
 ### Flights from New York to Chicago
 
-A travelor lives in New York and wants to fly to Chicago. They consider flying out of two New York airports:   
+A traveler lives in New York and wants to fly to Chicago. They consider flying out of two New York airports:   
 
 * Newark (EWR)     
 * LaGuardia (LGA)    
@@ -1711,7 +1982,7 @@ p2 <- ggplot(data=Flights_NY_CHI, aes(x=air_time, y=origin)) + geom_boxplot() + 
 grid.arrange(p1, p2, ncol=2)
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-436-1.png" width="768" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-452-1.png" width="768" />
 
 
 ```r
@@ -1803,7 +2074,7 @@ p2 <- ggplot(data=NCBirths, aes(x=weight, y=habit)) + geom_boxplot() + ggtitle("
 grid.arrange(p1, p2, ncol=2)
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-441-1.png" width="768" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-457-1.png" width="768" />
 
 
 ```r

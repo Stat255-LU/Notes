@@ -153,6 +153,10 @@ confidence-interval-comparison
 prediction-interval-comparison
 log-model-visualization
 comments-on-transformations
+case-studies
+flights-from-ny-to-chi
+smoking-during-pregnancy
+exam-scores
 model-building
 classification-and-logistic-regression
 predictive-modeling
