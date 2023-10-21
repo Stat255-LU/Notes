@@ -156,7 +156,10 @@ comments-on-transformations
 case-studies
 flights-from-ny-to-chi
 smoking-during-pregnancy
+smoking-during-pregnancy-cont
 exam-scores
+simulating-the-regression-effect
+nfl-wins
 model-building
 classification-and-logistic-regression
 predictive-modeling

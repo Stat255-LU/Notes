@@ -303,7 +303,7 @@ When data can reasonably be assumed to have come from a process consistent with 
 The `summary` command for a linear model in R displays a table including 4 columns. 
 
 
-**Columns in Linear Model `summary()` Output**
+**Linear Model `summary()` Output in R**
 
 * **Estimate** gives the least-squares estimates $b_0, b_1, \ldots, b_p$     
 
@@ -313,6 +313,23 @@ The `summary` command for a linear model in R displays a table including 4 colum
 
 * **Pr(>|t|)** is a p-value for the hypothesis test associated with the null hypothesis $\beta_j = 0$, where $\beta_j$ is the regression coefficient pertaining to the given line. Note that $\beta_j$ is the unknown population parameter estimated by $b_j$.   
 
+* The **Residual Standard Error** is $s =\sqrt{\frac{\text{SSR}}{n-(p+1)}} = \sqrt{\frac{\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2}{(n-(p+1))}}$. This is an estimate of $\sigma$, which represents the standard deviation in the distribution of the response variable for given value(s) or category(ies) of explanatory variable(s).     
+
+* The **degrees of freedom** are $n-(p+1)$.     
+
+* The **Multiple R-Squared** value is the $R^2$ value seen in Chapter 2. $R^2 = \frac{\text{SST} -\text{SSR}}{\text{SST}} = \frac{\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2}{\displaystyle\sum_{i=1}^n(y_i-\bar{y}_i)^2}$
+
+* We know that $R^2$ can never decrease when additional variables are added to a model. The **Adjusted-R^2** value is an alternate version of $R^2$ that is designed to penalize adding variables that do little to explain variation in the response. Adjusted $R^2$ can decrease as additional variables are added to a model. We'll learn more about adjusted $R^2$ in Chapter 7.    
+
+* The F-statistic on the bottom line of the R-output corresponds to an F-test of the given model against a reduced model that include no explanatory variables. The p-value on this line is associated with the test of the null hypothesis that there is no relationship between the response variable and any of the explanatory variables. Since SSR for this reduced model is equal to SST, the F-statistic calculation simplifies to:   
+
+\[
+F=\frac{\frac{SSR - SST}{p}}{\frac{SSR}{n-(n+1)}}
+\]
+
+The degrees of freedom associated with the F-statistic are given by $p$ and $(n-(p+1))$. 
+
+**Example:** Northern vs Southern Florida Lakes
 
 Recall our linear model for mercury levels of lakes in Northern Florida, compared to Southern Florida. 
 
@@ -335,12 +352,57 @@ The estimated regression equation is
 \text{Mercury} = 0.42455+0.27195\times\text{South}, \text{where } \epsilon_i\sim\mathcal{N}(0, \sigma)
 \]
 
-We've seen how to obtain the first two columns of the summary table, labeled "Estimate" and "Std. Error". 
+* SSR is:
+
+```{r}
+sum(Lakes_M$residuals^2)
+```
+
+* SST is:
+
+```{r}
+sum((FloridaLakes$Mercury - mean(FloridaLakes$Mercury))^2)
+```
+
+* The residual standard error $s$ is our estimate of $\sigma$, the standard deviation among lakes in the same location (either Northern or Southern Florida).  
+
+\[
+s =\sqrt{\frac{\text{SSR}}{n-(p+1)}} = \sqrt{\frac{\text{SSR}}{n-(p+1)}} = \sqrt{\frac{5.126873}{53-(1+1)}}=0.3171
+\]
+
+The degrees of freedom associated with this estimate is $53-(1+1) = 51$.
+
+* The Multiple R-Squared is:    
+
+\[
+R^2 = \frac{6.047875 - 5.126873}{6.047875} = 0.1523
+\]
+
+* The F-statistic is
+
+\[
+F=\frac{\frac{SST - SSR}{p}}{\frac{SSR}{n-(n+1)}} = \frac{\frac{6.047875 - 5.126873}{1}}{\frac{5.126873}{53-(1+1)}} = 9.162
+\]
+
+This F-statistic is associated with 1 and 51 degrees of freedom.   
+
+
+Using formulas in Section 4.4.3, we obtain the standard error estimates for $b_0$ and $b_1$, given in the second column of the table.   
+
+\[
+SE(b_0) = SE(\bar{x}_N)=s\frac{1}{\sqrt{n_{\text{North}}}} = \frac{0.3171}{\sqrt{33}} =0.0552
+\]
+
+
+\[
+SE(b_1) = SE(\bar{x}_{South}-\bar{x}_{North})=s\sqrt{\frac{1}{n_{North}}+\frac{1}{n_{South}}} = 0.3171\sqrt{\frac{1}{20} + \frac{1}{33}} =0.0898  
+\]
+
+
 
 The last column, labeled "Pr(>|t|)" is, in fact a p-value associated with associated with the null hypothesis that the regression parameter on that line is zero. (i.e. $\beta_j=0$).    
 
 
-**Example** Florida Lakes
 
 **Hypothesis Test for line (intercept)**
 
@@ -489,6 +551,73 @@ M_pH <- lm(data=FloridaLakes, Mercury~pH)
 summary(M_pH)
 ```
 
+
+The estimated regression equation is 
+
+\[
+\text{Mercury} = 1.53 - 0.15 \times\text{pH}, \text{where } \epsilon_i\sim\mathcal{N}(0, \sigma)
+\]
+
+* SSR is:
+
+```{r}
+sum(M_pH$residuals^2)
+```
+
+* SST is:
+
+```{r}
+sum((FloridaLakes$Mercury - mean(FloridaLakes$Mercury))^2)
+```
+
+
+* The residual standard error $s$ is our estimate of $\sigma$, the standard deviation among lakes with the same pH.  
+
+\[
+s =\sqrt{\frac{\text{SSR}}{n-(p+1)}} = \sqrt{\frac{\text{SSR}}{n-(p+1)}} = \sqrt{\frac{4.045513}{53-(1+1)}}=0.2816
+\]
+
+The degrees of freedom associated with this estimate is $53-(1+1) = 51$.
+
+* The Multiple R-Squared is:    
+
+\[
+R^2 = \frac{6.047875 - 4.045513}{6.047875} = 0.3311
+\]
+
+* The F-statistic is
+
+\[
+F=\frac{\frac{SST - SSR}{p}}{\frac{SSR}{n-(n+1)}} = \frac{\frac{6.047875 - 4.045513}{1}}{\frac{4.045513}{53-(1+1)}} = 25.24
+\]
+
+This F-statistic is associated with 1 and 51 degrees of freedom.   
+
+
+Using formulas in Section 4.4.3, we obtain the standard error estimates for $b_0$ and $b_1$, given in the second column of the table.   
+
+To do this, we need to calculate $\bar{x}$ and $\sum(x_i-\bar{x})^2$, where $x$ represents the explanatory variable, $pH$. 
+
+```{r}
+mean(FloridaLakes$pH)
+```
+
+```{r}
+sum((FloridaLakes$pH-mean(FloridaLakes$pH))^2)
+```
+
+
+
+\[
+SE(b_0)=s\sqrt{\frac{1}{n}+\frac{\bar{x}^2}{\sum(x_i-\bar{x})^2}} = 0.2816\sqrt{\frac{1}{53} + \frac{6.59^2}{86.32528} } = 0.2034
+\]
+
+
+\[
+SE(b_1)=\sqrt{\frac{s^2}{\sum(x_i-\bar{x})^2}}=\sqrt{\frac{0.2816^2}{86.32528}} = 0.0303
+\]
+
+
 **Hypothesis Test for Intercept Line**
 
 **Null Hypothesis:** The average mercury level among all Florida lakes with pH = 0 is 0. ($\beta_0=0$).   
@@ -526,6 +655,8 @@ We perform hypothesis tests on a model predicting house price using square feet 
 M_wf_sqft <- lm(data=Houses, price~sqft_living+waterfront)
 summary(M_wf_sqft)
 ```
+
+We won't go through the standard error calculations here, though the details are given in the link provided in Section 4.4.   
 
 **Intercept Line:**
 
@@ -1646,7 +1777,7 @@ confint(M_Birthwt)
 
 What should we conclude about the effect of smoking on birth weight based on these results?   
   
-<!--
+
 
 ### Smoking During Pregnancy (cont)
 
@@ -1657,7 +1788,7 @@ M_Birthwt_Full <- lm(data=ncbirths, weight~habit)
 summary(M_Birthwt_Full)
 ```
 
--->
+
 
 ### Exam Scores
 
@@ -1678,7 +1809,7 @@ One conclusion would be that the students who did best on Exam 1 didn't study as
 While the above explanation is plausible, there is another possible explanation for this behavior.  Think about what it might be.   
 
 
-<!---
+
 
 ### Simulating the Regression Effect
 
@@ -1737,7 +1868,7 @@ gf_point(Wins2022~Wins2021, data=NFL) %>% gf_lm %>% gf_function(fun=identity, co
 ```
 
 
-
+<!---
 
 ## The Regression Effect
 
