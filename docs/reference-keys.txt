@@ -130,7 +130,6 @@ summary-of-checks-for-model-assumptions
 example-n-v-s-lakes
 example-ph-model
 example-house-prices
-general-comments-on-model-assumptions
 intervals-for-expected-response
 parameter-values-and-expected-responses
 estimation-and-prediction
@@ -160,6 +159,7 @@ smoking-during-pregnancy-cont
 exam-scores
 simulating-the-regression-effect
 nfl-wins
+impact-of-model-assumption-violations
 model-building
 classification-and-logistic-regression
 predictive-modeling

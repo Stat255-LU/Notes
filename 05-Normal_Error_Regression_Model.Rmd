@@ -393,11 +393,13 @@ Using formulas in Section 4.4.3, we obtain the standard error estimates for $b_0
 SE(b_0) = SE(\bar{x}_N)=s\frac{1}{\sqrt{n_{\text{North}}}} = \frac{0.3171}{\sqrt{33}} =0.0552
 \]
 
+$SE(b_0)$ represents the variability in average mercury levels between different samples of 33 Northern Florida lakes.  
 
 \[
 SE(b_1) = SE(\bar{x}_{South}-\bar{x}_{North})=s\sqrt{\frac{1}{n_{North}}+\frac{1}{n_{South}}} = 0.3171\sqrt{\frac{1}{20} + \frac{1}{33}} =0.0898  
 \]
 
+$SE(b_1)$ represents the variability in average difference in mercury levels between northern and southern lakes between different samples of 33 Northern Florida lakes and 20 Southern Florida lakes.  
 
 
 The last column, labeled "Pr(>|t|)" is, in fact a p-value associated with associated with the null hypothesis that the regression parameter on that line is zero. (i.e. $\beta_j=0$).    
@@ -606,18 +608,20 @@ mean(FloridaLakes$pH)
 sum((FloridaLakes$pH-mean(FloridaLakes$pH))^2)
 ```
 
-
+ 
 
 \[
 SE(b_0)=s\sqrt{\frac{1}{n}+\frac{\bar{x}^2}{\sum(x_i-\bar{x})^2}} = 0.2816\sqrt{\frac{1}{53} + \frac{6.59^2}{86.32528} } = 0.2034
 \]
+
+$SE(b_0)$ represents the variability in mercury levels among lakes with pH of 0 between different samples of size 53. Since we don't have any lakes with pH of 0, this is not a meaningful calculation.  
 
 
 \[
 SE(b_1)=\sqrt{\frac{s^2}{\sum(x_i-\bar{x})^2}}=\sqrt{\frac{0.2816^2}{86.32528}} = 0.0303
 \]
 
-
+$SE(b_1)$ represents the variability in rate of change in mercury level for each additional one unit increase in pH, between different samples of size 53. 
 **Hypothesis Test for Intercept Line**
 
 **Null Hypothesis:** The average mercury level among all Florida lakes with pH = 0 is 0. ($\beta_0=0$).   
@@ -1108,14 +1112,6 @@ There are a few houses on each end of the normal qq plot that deviate from their
 Thus, the normal error regression model appears to be reasonable for these data.  
 
 
-### General Comments on Model Assumptions
-
-* We shouldn't think about model assumptions being satisfied as a yes/no question.     
-* In reality assumptions are never perfectly satisfied, so it's a question of how severe violations must be in order to impact results. This is context dependent.     
-* A model might be reasonable for certain purposes  (i.e. confidence interval for $\beta_1$) but not for others that we'll see soon (i.e. prediction of response value for new observation).   
-* When model assumptions are a concern, consider a using a transformation of the data or a more flexible technique, such as a nonparametric method or statistical machine learning algorithm. We'll talk more about these soon.   
-
-* Remember that all statistical techniques are approximations
 
 ## Intervals for Expected Response
 
@@ -1866,6 +1862,28 @@ gf_point(Wins2022~Wins2021, data=NFL) %>% gf_lm %>% gf_function(fun=identity, co
   gf_labs(title="NFL Wins 2021-2022")
 
 ```
+
+
+## Impact of Model Assumption Violations
+
+In this chapter, we've studied the normal error regression model and its underlying assumptions. We've seen that when these assumptions are realistic, we can use distributions derived from probability theory, such as t and F distributions to approximate sampling distributions, in place of the simulation-based methods seen in Chapters 3 and 4. 
+
+Of course, real data don't come exactly from processes like the fictional ice cream dispenser described in Section 5.1, so it's really a question of whether this model is a realistic approximation (or simplification) of the true mechanism that led to the data we observe. We can use diagnostics like residual and Normal-QQ plots, as well as our intuition and background knowledge to assess whether the normal error regression model is a reasonable approximation.   
+
+The p-values provided by the `lm` summary output, and `anova` commands, and the and intervals produced by the `confint`, and `predict` command, as well as many other R commands, depend on the assumptions of the normal error regression model, and should only be used when these assumptions are reasonable.  
+
+In situations where some model assumptions appear to be violated, we might be okay using certain tests/intervals, but not others. In general, we should proceed with caution in these situations.   
+
+The table below provides guidance on the potential impact of model assumption violation on predicted values, confidence intervals, and prediction intervals.     
+
+|   Model assumption  Violated         | Predicted Values | Confidence Intervals |  Prediction Intervals | 
+|-----------|----------|--------------------------------------|--------------------------|
+| Linearity | Unreliable | Unreliable | Unreliable |
+| Constant Variance | Reliable | Somewhat unreliable - Some too wide, others too narrow | Very unreliable - Some too wide, others too narrow |
+| Normality | Reliable | Possibly unreliable - might be symmetric when they shouldn't be. Might be okay when skewness isn't bad and sample size is large. | Very unreliable - will be symmetric when they shouldn't be | 
+| Independence | might be reliable | unreliable - either too wide or too narrow | unreliable - either too wide or too narrow | 
+
+When model assumptions are a concern, consider a using a transformation of the data, a more advanced model, or a more flexible technique, such as a nonparametric approach or statistical machine learning algorithm.  
 
 
 <!---
