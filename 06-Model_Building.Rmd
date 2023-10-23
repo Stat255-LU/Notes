@@ -31,14 +31,12 @@ set.seed(07302020)
 
 ## Model Building
 
-### Overview 
+### Modeling for Interpretation 
 
 So far, we've dealt with models with 2 or fewer variables. Some real questions require accounting for more than two variables. In these situations, we'll need to develop a model that is complex enough to capture the important aspects of the mechanism we're modeling, but also simple enough for us to be able to explain and interpret. We'll need to decide how many variables to include in the model, and whether to use transformations, or to include interaction terms. 
 
 We'll examine strategies for modeling in two different contexts. In this chapter, we'll focus on building models for situations when we want to make interpretations and draw conclusions about relationships between variables. In Chapter 7, we focus on modeling solely for the purpose of prediction, when we are not interested in making interpretations or conclusions about relationships between variables.
 
-
-### Modeling for Interpretation
 
 When building a model for the purpose of interpretation, we are typically interested in investigating a research question pertaining to relationships between explanatory and response variables. We'll need to think about things like:
 
@@ -86,7 +84,7 @@ SAT
 
 Note that the dataset is quite old (from 1994-95), so the financial information may be out of date. Nevertheless, it is useful for exploring relationships between SAT scores and other variables.    
 
-### Developing a Research Question
+###  Research Question
 
 A good statistical research question should be one that has practical implications that people would care about. It should be complex enough to be worth investigating. If the answer is obvious, then there would be no need to use statistics, or scientific reasoning in general.   
 
@@ -118,7 +116,7 @@ summary(SAT_M1)
 On average, SAT score is expected to decrease by about 5.5 points for each additional one thousand dollars in average teacher salary in the state. The low p-value suggests a relationship like this is unlikely to occur by chance, though the practical importance of a 5-point decrease in SAT score (out of 1600) seems minimal. Furthermore, only 19% of the total variation in SAT score is explained by teaching salary. Nevertheless, a person looking to argue against raising teacher salaries might use the negative estimate and low p-value as a justification for their position. 
 
 
-### A Further Investigation 
+### A Deeper Investigation 
 
 Notice that there are large discrepancies in the `frac` variable, representing the percentage of students taking the SAT. In Connecticut, 81% of high school students took the SAT, compared to only 6% in Arkansas.   
 
@@ -160,7 +158,7 @@ Adding percentage of students taking the exam increased the $R^2$ value substant
 
 We see that the relationship between SAT score and salary appears to reverse when we account for percentage of students taking the test. States with low percentages of people taking the SAT tend to get higher scores, as the people taking the test tend to be those who are best prepared and have strong incentive for taking it, perhaps because they are trying to get into an elite college. At the same time, states that pay their teachers more tend to have higher percentages of people taking the SAT. This may be because states that prioritize education are more likely to cover the cost of students taking the test, or even to require it. It may also be that many of the states that require the SAT are coastal states, where cost of living, and thus teacher salaries, tend to be higher in general. Thus, it appears initially that teacher salaries are negatively correlated with SAT scores, but after accounting for percentage taking the test, the trend reverses. Situations where an apparent trend disappears or reverses after accounting for another variable are called **Simpson's Paradox.**    
 
-### Add Student-to-Teacher Ratio
+### Student-to-Teacher Ratio
 
 Let's see what other possible explanatory variables we might want to add to the model. Keep in mind that our goal is to understand the relationship between teacher salary and SAT scores in the state, so we should only use variables that help us understand this relationship.   
 In addition to teacher salaries, student-to-teacher ratio might be an indication of a state's investment in education. We'll add student-to-teacher ratio to the model and explore whether there is evidence that hiring enough teachers to keep student-to-teacher ratio low has a benefit, in terms of SAT score. 
@@ -169,6 +167,15 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 SAT_M3 <- lm(data=SAT, sat~salary+frac+ratio)
 summary(SAT_M3)
 ```
+
+**Interpretations**
+
+On average, a $1,000 dollar increase in average teacher salary is associated with a 2.5 point increase in average SAT score assuming fraction of students taking the SAT, and student to teacher ratio are held constant.
+
+On average, a 1% increase in percentage of students taking the SAT is associated with a 2.9 point decrease in average SAT score assuming average teacher salary, and student to teacher ratio are held constant. 
+
+On average, a 1 student per teacher increase in student to teacher ratio is associated with a 4.6 point from in average SAT score, assuming average teacher salary, and percentage of students taking the SAT are held constant. 
+
 
 We see that student to teacher ratio is negatively associated with SAT score, with an expected drop of about 4.6 points in average SAT score for each additional student per teacher, assuming average teacher salary and percentage of students taking the exam are held constant. This suggests that states should try to keep student to teacher ratios low. We see teacher salary remains positively correlated with SAT score and percentage taking the test remains negatively correlated, after accounting for student to teacher ratio. 
 
@@ -216,7 +223,9 @@ confint(SAT_M4)
 
 Models with highly correlated explanatory variables suffer from **multicollinearity**, which increases standard errors, making the effect of variables harder to discern. When we have explanatory variables that are highly correlated (usually with correlation greater than 0.8), we should pick out just one to include in the model. In this case, we'll stick with teacher salary.    
 
-### Residual Plots for SAT 3-variable Model
+
+
+### Check Model Assumptions
 
 Let's return to the model with salary, ratio, and fraction taking test. We use residual plots to assess model assumptions. 
 
@@ -229,7 +238,7 @@ grid.arrange(P1, P2, P3, ncol=3)
 
 There is some sign of a quadratic trend in the residual plot, creating concern about the linearity assumption. 
 
-We can also plot our residuals against the explanatory variables to see whether the model is properly accounting for relationships involving each variable. If we see nonlinear trends, we should consider adding a nonlinear function of that explanatory variable.  
+In models with multiple explanatory variables, it is helpful to also plot our residuals against the explanatory variables to see whether the model is properly accounting for relationships involving each variable. If we see nonlinear trends, we should consider adding a nonlinear function of that explanatory variable.  
 
 ```{r,  fig.width=9}
 P1 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$salary)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("Salary") + ylab("Residuals") 
@@ -240,13 +249,16 @@ grid.arrange(P1, P2, P3, ncol=3)
 
 There is also a quadratic trend in the plot involving the fraction variable. We might account for this by adding a quadratic term for `frac` to the model. 
 
+## Model with Quadratic Term
+
 ```{r}
 SAT_M5 <- lm(data=SAT, sat~salary+frac+I(frac^2)+ratio )
 summary(SAT_M5)
 ```
 
+We notice a small p-value associated with the quadratic term, indicating SAT scores do indeed show evidence of a quadratic trend with respect to the percentage of students taking the test. 
 
-  
+We now examine residual plots for the model that includes the quadratic term for `frac`.  
 
 ```{r, fig.width=9}
 P1 <- ggplot(data=data.frame(SAT_M5$residuals), aes(y=SAT_M5$residuals, x=SAT_M5$fitted.values)) + geom_point() + ggtitle("Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
@@ -255,28 +267,21 @@ P3 <- ggplot(data=data.frame(SAT_M5$residuals), aes(sample = scale(SAT_M5$residu
 grid.arrange(P1, P2, P3, ncol=3)
 ```
 
-### Model with Linear Term on Frac
 
-```{r}
-summary(SAT_M3)
+```{r,  fig.width=9}
+P1 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M5$residuals, x=SAT_M5$model$salary)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("Salary") + ylab("Residuals") 
+P2 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M5$residuals, x=SAT_M5$model$frac)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("Fraction Taking Test") + ylab("Residuals")
+P3 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M5$residuals, x=SAT_M5$model$ratio)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("Student to Teach Ratio") + ylab("Residuals")
+grid.arrange(P1, P2, P3, ncol=3)
 ```
 
-### Interpretations for Model with Linear Terms
-
-On average, a $1,000 dollar increase in average teacher salary is associated with a 2.5 point increase in average SAT score assuming fraction of students taking the SAT, and student to teacher ratio are held constant.
-
-On average, a 1% increase in percentage of students taking the SAT is associated with a 2.9 point decrease in average SAT score assuming average teacher salary, and student to teacher ratio are held constant. 
-
-On average, a 1 student per teacher increase in student to teacher ratio is associated with a 4.6 point from in average SAT score, assuming average teacher salary, and percentage of students taking the SAT are held constant. 
+The quadratic trend in the residual by predicted plot and second residual by fraction plot appear to have disappeared, suggesting this model has properly accounted for the quadratic trend.   
 
 
-### Model with Quadratic Term on Frac
 
-```{r}
-summary(SAT_M5)
-```
 
-### Interpretations for Model with Quadratic Terms
+
+**Interpretations for Model with Quadratic Term**
 
 On average, a $1,000 dollar increase in average teacher salary is associated with a 1.8 point increase in average SAT score assuming fraction of students taking the SAT, and student to teacher ratio are held constant.
 
@@ -284,23 +289,37 @@ On average, a 1 student per teacher increase in student to teacher ratio is asso
 
 We cannot give a clear interpretation of the fraction variable, since it occurs in both linear and quadratic terms. In fact, the vertex of the parabola given by $y=-6.64x + 0.05x^2$ occurs at $x=\frac{6.64}{2(0.05)}\approx 66$. So the model estimates that SAT score decreases in a quadratic fashion with respect to fraction taking the test, until that fraction reaches 66 percent of student, then is expected to increase. 
 
-### Plot of SAT and Frac
 
 ```{r}
 ggplot(data=SAT, aes(x=frac, y=sat)) + geom_point() + stat_smooth(se=FALSE)
 ```
 
-We do see some possible quadratic trend, but we should be really careful about extrapolation.  
+We do see some possible quadratic trend, but we should be really careful about extrapolation. Although the trend does seem to level off in a quadratic way, we wouldn't expect SAT scores to start to increase if more than 80 percent of students took the exam!   
 
-### SAT Model Summary
 
-* Modeling SAT scores based on teacher salary alone led to misleading results, due to Simpson's Paradox. This is corrected by adding percentage of students taking the test to the model. 
+### Account for Region?   
 
-* Modeling two highly correlated variables like average teacher salary and expenditure on education inflates the width of confidence intervals associated with both variables, preventing us from drawing meaningful conclusions about either variable. This issue is called **multicollinearity**.  
+So far, we've considered only quantitative explanatory variables. What if we add region of the country to the model.   
 
-* Including a quadratic term on the proportion taking the test improves the model fit, and validity of model assumptions, but also makes the model harder to interpret. We need to use judgement when deciding whether or not to include quadratic or higher power terms.   
+```{r}
+SAT_M6 <- lm(data=SAT, sat~salary+frac+I(frac^2)+ratio + region )
+summary(SAT_M6)
+```
 
-* There is no clear reason to expect an interaction between these variables, so we did not include an interaction effect in the model.  
+We find that on average, SAT scores were lower in the NE, S, and W regions, compared to the baseline region of MW, though only in the S is the difference large enough to yield a small p-value.    
+
+Notice that the effect of teacher salary and student-to-teacher ratio are no longer statistically significant. This happens because now we are only comparing states in the same region of the country. The p-value associated with teacher salary is now testing the null hypothesis "There is no relationship between average teacher salary and SAT score among states in the same region of the country, with the same percentage of students taking the test, and same student to teacher ratio."  
+
+Because we only have 50 states to begin with, breaking down by region results in small sample sizes, which contributes to the large p-values. Furthermore, it is unclear why we would need to account for region here. If our goal is to assess the impact of educational spending on SAT scores, it is probably okay to compare states in different regions of the country. Unless we have some reason for wanting to compare states in the same region, we shouldn't include region as an explanatory variable (even though including it did raise our $R^2$ value above 0.9). In general, we should only include variables if they help us address our research question. In this case, it's not clear that accounting for region helps us better understand the relationship between a state's investment in education, and its students average SAT scores.    
+
+It is important to note that we **should not** decide whether to include a variable based on whether or not it yielded a small p-value. Adding or deleting variables from a model until we get a desired p-value on a variable we're interested in can lead to **Confirmation bias** (that is choosing our model in a way that intentionally confirms what we expected or hoped to be true), and to detecting spurious correlations that will not be replicable in future studies. This phenomenon, known as **p-hacking** has led to incorrect and unethical conclusions. We should make modeling decisions about which variables to include in a model before looking at the p-values and then draw conclusions based on the results we see, keeping in mind that p-values are only a part of the picture.   
+
+
+
+
+
+
+<!---
 
 
 ## Modeling Car Price
