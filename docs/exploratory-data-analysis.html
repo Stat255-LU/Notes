@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 Exploratory Data Analysis | Stat 255: Statistics for Data Science Notes</title>
   <meta name="description" content="Chapter 1 Exploratory Data Analysis | Stat 255: Statistics for Data Science Notes" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 Exploratory Data Analysis | Stat 255: Statistics for Data Science Notes" />
   <meta property="og:type" content="book" />
@@ -49,24 +49,25 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -86,13 +87,13 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -137,15 +138,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Exploratory Data Analysis</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#getting-started-in-r"><i class="fa fa-check"></i><b>1.1</b> Getting Started in R</a>
-<ul>
+<li class="chapter" data-level="1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Exploratory Data Analysis</a><ul>
+<li class="chapter" data-level="1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#getting-started-in-r"><i class="fa fa-check"></i><b>1.1</b> Getting Started in R</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#previewing-the-data"><i class="fa fa-check"></i><b>1.1.1</b> Previewing the Data</a></li>
 <li class="chapter" data-level="1.1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#modifying-the-data"><i class="fa fa-check"></i><b>1.1.2</b> Modifying the Data</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-visualization"><i class="fa fa-check"></i><b>1.2</b> Data Visualization</a>
-<ul>
+<li class="chapter" data-level="1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-visualization"><i class="fa fa-check"></i><b>1.2</b> Data Visualization</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#histogram"><i class="fa fa-check"></i><b>1.2.1</b> Histogram</a></li>
 <li class="chapter" data-level="1.2.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#density-plot"><i class="fa fa-check"></i><b>1.2.2</b> Density Plot</a></li>
 <li class="chapter" data-level="1.2.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#boxplot"><i class="fa fa-check"></i><b>1.2.3</b> Boxplot</a></li>
@@ -156,24 +154,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2.8" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#correlation-plot"><i class="fa fa-check"></i><b>1.2.8</b> Correlation Plot</a></li>
 <li class="chapter" data-level="1.2.9" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#scatterplot-matrix"><i class="fa fa-check"></i><b>1.2.9</b> Scatterplot Matrix</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#summary-tables"><i class="fa fa-check"></i><b>1.3</b> Summary Tables</a>
-<ul>
+<li class="chapter" data-level="1.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#summary-tables"><i class="fa fa-check"></i><b>1.3</b> Summary Tables</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#calculating-summary-statistics"><i class="fa fa-check"></i><b>1.3.1</b> Calculating Summary Statistics</a></li>
 <li class="chapter" data-level="1.3.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#grouped-summaries"><i class="fa fa-check"></i><b>1.3.2</b> Grouped Summaries</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html"><i class="fa fa-check"></i><b>2</b> Introduction to Statistical Models</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#fitting-models-to-data"><i class="fa fa-check"></i><b>2.1</b> Fitting Models to Data</a>
-<ul>
+<li class="chapter" data-level="2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html"><i class="fa fa-check"></i><b>2</b> Introduction to Statistical Models</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#fitting-models-to-data"><i class="fa fa-check"></i><b>2.1</b> Fitting Models to Data</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#terminology"><i class="fa fa-check"></i><b>2.1.1</b> Terminology</a></li>
 <li class="chapter" data-level="2.1.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-quantitative-explanatory-variable"><i class="fa fa-check"></i><b>2.1.2</b> Model with Quantitative Explanatory Variable</a></li>
 <li class="chapter" data-level="2.1.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-categorical-variable"><i class="fa fa-check"></i><b>2.1.3</b> Model with Categorical Variable</a></li>
 <li class="chapter" data-level="2.1.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-multiple-explanatory-variables"><i class="fa fa-check"></i><b>2.1.4</b> Model with Multiple Explanatory Variables</a></li>
 <li class="chapter" data-level="2.1.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-no-explanatory-variable"><i class="fa fa-check"></i><b>2.1.5</b> Model with No Explanatory Variable</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variability-explained-by-a-model"><i class="fa fa-check"></i><b>2.2</b> Variability Explained by a Model</a>
-<ul>
+<li class="chapter" data-level="2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variability-explained-by-a-model"><i class="fa fa-check"></i><b>2.2</b> Variability Explained by a Model</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#quantifying-variability"><i class="fa fa-check"></i><b>2.2.1</b> Quantifying Variability</a></li>
 <li class="chapter" data-level="2.2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#total-variability"><i class="fa fa-check"></i><b>2.2.2</b> Total Variability</a></li>
 <li class="chapter" data-level="2.2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#residuals"><i class="fa fa-check"></i><b>2.2.3</b> Residuals</a></li>
@@ -185,8 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.9" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#r2-visually"><i class="fa fa-check"></i><b>2.2.9</b> <span class="math inline">\(R^2\)</span> Visually</a></li>
 <li class="chapter" data-level="2.2.10" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-comparison-summary"><i class="fa fa-check"></i><b>2.2.10</b> Model Comparison Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#models-with-interaction"><i class="fa fa-check"></i><b>2.3</b> Models with Interaction</a>
-<ul>
+<li class="chapter" data-level="2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#models-with-interaction"><i class="fa fa-check"></i><b>2.3</b> Models with Interaction</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#definition-of-interaction"><i class="fa fa-check"></i><b>2.3.1</b> Definition of Interaction</a></li>
 <li class="chapter" data-level="2.3.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-term"><i class="fa fa-check"></i><b>2.3.2</b> Interaction Term</a></li>
 <li class="chapter" data-level="2.3.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-models-in-r"><i class="fa fa-check"></i><b>2.3.3</b> Interaction Models in R</a></li>
@@ -194,15 +187,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#considerations-for-using-interactions"><i class="fa fa-check"></i><b>2.3.5</b> Considerations for Using Interactions</a></li>
 <li class="chapter" data-level="2.3.6" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-vs-correlation"><i class="fa fa-check"></i><b>2.3.6</b> Interaction vs Correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#least-squares-estimation-lse"><i class="fa fa-check"></i><b>2.4</b> Least Squares Estimation (LSE)</a>
-<ul>
+<li class="chapter" data-level="2.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#least-squares-estimation-lse"><i class="fa fa-check"></i><b>2.4</b> Least Squares Estimation (LSE)</a><ul>
 <li class="chapter" data-level="2.4.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#estimating-regression-coefficients"><i class="fa fa-check"></i><b>2.4.1</b> Estimating Regression Coefficients</a></li>
 <li class="chapter" data-level="2.4.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#mathematics-of-lse-for-slr"><i class="fa fa-check"></i><b>2.4.2</b> Mathematics of LSE for SLR</a></li>
 <li class="chapter" data-level="2.4.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#lse-for-categorical-variable"><i class="fa fa-check"></i><b>2.4.3</b> LSE for Categorical Variable</a></li>
 <li class="chapter" data-level="2.4.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#lse-more-generally"><i class="fa fa-check"></i><b>2.4.4</b> LSE More Generally</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>2.5</b> ANalysis Of VAriance</a>
-<ul>
+<li class="chapter" data-level="2.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>2.5</b> ANalysis Of VAriance</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#submodels"><i class="fa fa-check"></i><b>2.5.1</b> Submodels</a></li>
 <li class="chapter" data-level="2.5.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#f-statistics"><i class="fa fa-check"></i><b>2.5.2</b> F-Statistics</a></li>
 <li class="chapter" data-level="2.5.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#comparing-3-or-more-categories"><i class="fa fa-check"></i><b>2.5.3</b> Comparing 3 or More Categories</a></li>
@@ -210,10 +201,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#alternative-f-statistic-formula"><i class="fa fa-check"></i><b>2.5.5</b> Alternative F-Statistic Formula</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html"><i class="fa fa-check"></i><b>3</b> Hypothesis Testing via Permutation</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#test-for-difference-in-means"><i class="fa fa-check"></i><b>3.1</b> Test for Difference in Means</a>
-<ul>
+<li class="chapter" data-level="3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html"><i class="fa fa-check"></i><b>3</b> Hypothesis Testing via Permutation</a><ul>
+<li class="chapter" data-level="3.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#test-for-difference-in-means"><i class="fa fa-check"></i><b>3.1</b> Test for Difference in Means</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#mercury-levels-in-florida-lakes"><i class="fa fa-check"></i><b>3.1.1</b> Mercury Levels in Florida Lakes</a></li>
 <li class="chapter" data-level="3.1.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#model-for-mercury-level"><i class="fa fa-check"></i><b>3.1.2</b> Model for Mercury Level</a></li>
 <li class="chapter" data-level="3.1.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#hypotheses-and-key-question"><i class="fa fa-check"></i><b>3.1.3</b> Hypotheses and Key Question</a></li>
@@ -222,8 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.6" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#r-code-for-permutation-test"><i class="fa fa-check"></i><b>3.1.6</b> R Code for Permutation Test</a></li>
 <li class="chapter" data-level="3.1.7" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#p-values"><i class="fa fa-check"></i><b>3.1.7</b> p-values</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#general-permutation-tests"><i class="fa fa-check"></i><b>3.2</b> General Permutation Tests</a>
-<ul>
+<li class="chapter" data-level="3.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#general-permutation-tests"><i class="fa fa-check"></i><b>3.2</b> General Permutation Tests</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#other-test-statistics"><i class="fa fa-check"></i><b>3.2.1</b> Other Test Statistics</a></li>
 <li class="chapter" data-level="3.2.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#general-permutation-test-procedure"><i class="fa fa-check"></i><b>3.2.2</b> General Permutation Test Procedure</a></li>
 <li class="chapter" data-level="3.2.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#difference-in-standard-deviation"><i class="fa fa-check"></i><b>3.2.3</b> Difference in Standard Deviation</a></li>
@@ -232,15 +220,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#responsible-hypothesis-testing"><i class="fa fa-check"></i><b>3.3</b> Responsible Hypothesis Testing</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html"><i class="fa fa-check"></i><b>4</b> Bootstrap Interval Estimation</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#sampling-distributions"><i class="fa fa-check"></i><b>4.1</b> Sampling Distributions</a>
-<ul>
+<li class="chapter" data-level="4" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html"><i class="fa fa-check"></i><b>4</b> Bootstrap Interval Estimation</a><ul>
+<li class="chapter" data-level="4.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#sampling-distributions"><i class="fa fa-check"></i><b>4.1</b> Sampling Distributions</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#sampling-from-a-population"><i class="fa fa-check"></i><b>4.1.1</b> Sampling From a Population</a></li>
 <li class="chapter" data-level="4.1.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#confidence-intervals"><i class="fa fa-check"></i><b>4.1.2</b> Confidence Intervals</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrapping"><i class="fa fa-check"></i><b>4.2</b> Bootstrapping</a>
-<ul>
+<li class="chapter" data-level="4.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrapping"><i class="fa fa-check"></i><b>4.2</b> Bootstrapping</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#mercury-levels-in-florida-lakes-1"><i class="fa fa-check"></i><b>4.2.1</b> Mercury Levels in Florida Lakes</a></li>
 <li class="chapter" data-level="4.2.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-sampling"><i class="fa fa-check"></i><b>4.2.2</b> Bootstrap Sampling</a></li>
 <li class="chapter" data-level="4.2.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-samples-of-lakes"><i class="fa fa-check"></i><b>4.2.3</b> Bootstrap Samples of Lakes</a></li>
@@ -248,8 +233,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.5" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-se-confidence-interval"><i class="fa fa-check"></i><b>4.2.5</b> Bootstrap SE Confidence Interval</a></li>
 <li class="chapter" data-level="4.2.6" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-distribution-vs-sampling-distribution"><i class="fa fa-check"></i><b>4.2.6</b> Bootstrap Distribution vs Sampling Distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-confidence-interval-example"><i class="fa fa-check"></i><b>4.3</b> Bootstrap Confidence Interval Example</a>
-<ul>
+<li class="chapter" data-level="4.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-confidence-interval-example"><i class="fa fa-check"></i><b>4.3</b> Bootstrap Confidence Interval Example</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrapping-other-statistics"><i class="fa fa-check"></i><b>4.3.1</b> Bootstrapping Other Statistics</a></li>
 <li class="chapter" data-level="4.3.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#ci-for-mean"><i class="fa fa-check"></i><b>4.3.2</b> CI for Mean</a></li>
 <li class="chapter" data-level="4.3.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#ci-for-standard-deviation"><i class="fa fa-check"></i><b>4.3.3</b> CI for Standard Deviation</a></li>
@@ -260,8 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.8" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#more-cis-in-regression"><i class="fa fa-check"></i><b>4.3.8</b> More CI’s in Regression</a></li>
 <li class="chapter" data-level="4.3.9" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrapping-cautions"><i class="fa fa-check"></i><b>4.3.9</b> Bootstrapping Cautions</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#estimating-standard-error"><i class="fa fa-check"></i><b>4.4</b> Estimating Standard Error</a>
-<ul>
+<li class="chapter" data-level="4.4" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#estimating-standard-error"><i class="fa fa-check"></i><b>4.4</b> Estimating Standard Error</a><ul>
 <li class="chapter" data-level="4.4.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#standard-error-vs-standard-deviation"><i class="fa fa-check"></i><b>4.4.1</b> Standard Error vs Standard Deviation</a></li>
 <li class="chapter" data-level="4.4.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#sample-size-and-standard-error"><i class="fa fa-check"></i><b>4.4.2</b> Sample Size and Standard Error</a></li>
 <li class="chapter" data-level="4.4.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#standard-error-formulas"><i class="fa fa-check"></i><b>4.4.3</b> Standard Error Formulas</a></li>
@@ -272,10 +255,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.8" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#ci-method-comparison"><i class="fa fa-check"></i><b>4.4.8</b> CI Method Comparison</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html"><i class="fa fa-check"></i><b>5</b> Normal Error Regression Model</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#the-normal-error-regression-model"><i class="fa fa-check"></i><b>5.1</b> The Normal Error Regression Model</a>
-<ul>
+<li class="chapter" data-level="5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html"><i class="fa fa-check"></i><b>5</b> Normal Error Regression Model</a><ul>
+<li class="chapter" data-level="5.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#the-normal-error-regression-model"><i class="fa fa-check"></i><b>5.1</b> The Normal Error Regression Model</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#example-ice-cream-dispenser"><i class="fa fa-check"></i><b>5.1.1</b> Example: Ice Cream dispenser</a></li>
 <li class="chapter" data-level="5.1.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#signal-and-noise"><i class="fa fa-check"></i><b>5.1.2</b> Signal and Noise</a></li>
 <li class="chapter" data-level="5.1.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#normal-distribution"><i class="fa fa-check"></i><b>5.1.3</b> Normal Distribution</a></li>
@@ -285,8 +266,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#implications-of-normal-error-regression-model"><i class="fa fa-check"></i><b>5.1.7</b> Implications of Normal Error Regression Model</a></li>
 <li class="chapter" data-level="5.1.8" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#philosophical-question"><i class="fa fa-check"></i><b>5.1.8</b> Philosophical Question</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#inference-in-normal-error-regression-model"><i class="fa fa-check"></i><b>5.2</b> Inference in Normal Error Regression Model</a>
-<ul>
+<li class="chapter" data-level="5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#inference-in-normal-error-regression-model"><i class="fa fa-check"></i><b>5.2</b> Inference in Normal Error Regression Model</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#lm-summary-output"><i class="fa fa-check"></i><b>5.2.1</b> <code>lm</code> <code>summary</code> Output</a></li>
 <li class="chapter" data-level="5.2.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#t-distribution"><i class="fa fa-check"></i><b>5.2.2</b> t-distribution</a></li>
 <li class="chapter" data-level="5.2.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#difference-in-means-example-1"><i class="fa fa-check"></i><b>5.2.3</b> Difference in Means Example</a></li>
@@ -295,14 +275,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#mr-with-interaction-example"><i class="fa fa-check"></i><b>5.2.6</b> MR with Interaction Example</a></li>
 <li class="chapter" data-level="5.2.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#limitations"><i class="fa fa-check"></i><b>5.2.7</b> Limitations</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#f-distributions"><i class="fa fa-check"></i><b>5.3</b> F-Distributions</a>
-<ul>
+<li class="chapter" data-level="5.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#f-distributions"><i class="fa fa-check"></i><b>5.3</b> F-Distributions</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#f-distribution"><i class="fa fa-check"></i><b>5.3.1</b> F-Distribution</a></li>
 <li class="chapter" data-level="5.3.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#house-condition-example"><i class="fa fa-check"></i><b>5.3.2</b> House Condition Example</a></li>
 <li class="chapter" data-level="5.3.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#interaction-example"><i class="fa fa-check"></i><b>5.3.3</b> Interaction Example</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#regression-model-assumptions"><i class="fa fa-check"></i><b>5.4</b> Regression Model Assumptions</a>
-<ul>
+<li class="chapter" data-level="5.4" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#regression-model-assumptions"><i class="fa fa-check"></i><b>5.4</b> Regression Model Assumptions</a><ul>
 <li class="chapter" data-level="5.4.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#regression-assumptions"><i class="fa fa-check"></i><b>5.4.1</b> Regression Assumptions</a></li>
 <li class="chapter" data-level="5.4.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#checking-model-assumptions"><i class="fa fa-check"></i><b>5.4.2</b> Checking Model Assumptions</a></li>
 <li class="chapter" data-level="5.4.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#summary-of-checks-for-model-assumptions"><i class="fa fa-check"></i><b>5.4.3</b> Summary of Checks for Model Assumptions</a></li>
@@ -310,8 +288,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4.5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#example-ph-model"><i class="fa fa-check"></i><b>5.4.5</b> Example: pH Model</a></li>
 <li class="chapter" data-level="5.4.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#example-house-prices"><i class="fa fa-check"></i><b>5.4.6</b> Example: House Prices</a></li>
 </ul></li>
-<li class="chapter" data-level="5.5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#intervals-for-expected-response"><i class="fa fa-check"></i><b>5.5</b> Intervals for Expected Response</a>
-<ul>
+<li class="chapter" data-level="5.5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#intervals-for-expected-response"><i class="fa fa-check"></i><b>5.5</b> Intervals for Expected Response</a><ul>
 <li class="chapter" data-level="5.5.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#parameter-values-and-expected-responses"><i class="fa fa-check"></i><b>5.5.1</b> Parameter Values and Expected Responses</a></li>
 <li class="chapter" data-level="5.5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#estimation-and-prediction"><i class="fa fa-check"></i><b>5.5.2</b> Estimation and Prediction</a></li>
 <li class="chapter" data-level="5.5.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#estimation-and-prediction-in-slr"><i class="fa fa-check"></i><b>5.5.3</b> Estimation and Prediction in SLR</a></li>
@@ -320,8 +297,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#car-price-and-acceleration-time"><i class="fa fa-check"></i><b>5.5.6</b> Car Price and Acceleration Time</a></li>
 <li class="chapter" data-level="5.5.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#florida-lakes-est.-and-pred."><i class="fa fa-check"></i><b>5.5.7</b> Florida Lakes Est. and Pred.</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#transformations"><i class="fa fa-check"></i><b>5.6</b> Transformations</a>
-<ul>
+<li class="chapter" data-level="5.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#transformations"><i class="fa fa-check"></i><b>5.6</b> Transformations</a><ul>
 <li class="chapter" data-level="5.6.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#cars-assumptions-check"><i class="fa fa-check"></i><b>5.6.1</b> Cars Assumptions Check</a></li>
 <li class="chapter" data-level="5.6.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#log-transformation"><i class="fa fa-check"></i><b>5.6.2</b> Log Transformation</a></li>
 <li class="chapter" data-level="5.6.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#log-transform-for-car-prices"><i class="fa fa-check"></i><b>5.6.3</b> Log Transform for Car Prices</a></li>
@@ -336,8 +312,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6.12" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#log-model-visualization"><i class="fa fa-check"></i><b>5.6.12</b> Log Model Visualization</a></li>
 <li class="chapter" data-level="5.6.13" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#comments-on-transformations"><i class="fa fa-check"></i><b>5.6.13</b> Comments on Transformations</a></li>
 </ul></li>
-<li class="chapter" data-level="5.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#case-studies"><i class="fa fa-check"></i><b>5.7</b> Case Studies</a>
-<ul>
+<li class="chapter" data-level="5.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#case-studies"><i class="fa fa-check"></i><b>5.7</b> Case Studies</a><ul>
 <li class="chapter" data-level="5.7.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#flights-from-ny-to-chi"><i class="fa fa-check"></i><b>5.7.1</b> Flights from NY to CHI</a></li>
 <li class="chapter" data-level="5.7.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#smoking-during-pregnancy"><i class="fa fa-check"></i><b>5.7.2</b> Smoking During Pregnancy</a></li>
 <li class="chapter" data-level="5.7.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#smoking-during-pregnancy-cont"><i class="fa fa-check"></i><b>5.7.3</b> Smoking During Pregnancy (cont)</a></li>
@@ -347,10 +322,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.8" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#impact-of-model-assumption-violations"><i class="fa fa-check"></i><b>5.8</b> Impact of Model Assumption Violations</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html"><i class="fa fa-check"></i><b>6</b> Building Models for Interpretation</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-building"><i class="fa fa-check"></i><b>6.1</b> Model Building</a>
-<ul>
+<li class="chapter" data-level="6" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html"><i class="fa fa-check"></i><b>6</b> Building Models for Interpretation</a><ul>
+<li class="chapter" data-level="6.1" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-building"><i class="fa fa-check"></i><b>6.1</b> Model Building</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#modeling-for-interpretation"><i class="fa fa-check"></i><b>6.1.1</b> Modeling for Interpretation</a></li>
 <li class="chapter" data-level="6.1.2" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#sat-scores-dataset"><i class="fa fa-check"></i><b>6.1.2</b> SAT Scores Dataset</a></li>
 <li class="chapter" data-level="6.1.3" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#research-question"><i class="fa fa-check"></i><b>6.1.3</b> Research Question</a></li>
@@ -359,10 +332,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.6" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#student-to-teacher-ratio"><i class="fa fa-check"></i><b>6.1.6</b> Student-to-Teacher Ratio</a></li>
 <li class="chapter" data-level="6.1.7" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#multicollinearity"><i class="fa fa-check"></i><b>6.1.7</b> Multicollinearity</a></li>
 <li class="chapter" data-level="6.1.8" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#check-model-assumptions"><i class="fa fa-check"></i><b>6.1.8</b> Check Model Assumptions</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-with-quadratic-term"><i class="fa fa-check"></i><b>6.2</b> Model with Quadratic Term</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#account-for-region"><i class="fa fa-check"></i><b>6.2.1</b> Account for Region?</a></li>
+<li class="chapter" data-level="6.1.9" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#quadratic-term"><i class="fa fa-check"></i><b>6.1.9</b> Quadratic Term</a></li>
+<li class="chapter" data-level="6.1.10" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#account-for-region"><i class="fa fa-check"></i><b>6.1.10</b> Account for Region?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="predictive-modeling.html"><a href="predictive-modeling.html"><i class="fa fa-check"></i><b>7</b> Predictive Modeling</a></li>
@@ -386,7 +357,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exploratory-data-analysis" class="section level1 hasAnchor" number="1">
+<div id="exploratory-data-analysis" class="section level1 hasAnchor">
 <h1><span class="header-section-number">Chapter 1</span> Exploratory Data Analysis<a href="exploratory-data-analysis.html#exploratory-data-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><strong>Learning Outcomes:</strong></p>
 <ol style="list-style-type: decimal">
@@ -402,17 +373,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
 <li>Create reproducible documents using R Markdown.</li>
 </ol>
-<div id="getting-started-in-r" class="section level2 hasAnchor" number="1.1">
+<div id="getting-started-in-r" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.1</span> Getting Started in R<a href="exploratory-data-analysis.html#getting-started-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This section provides examples of how to read data into R, create graphics, like those in the previous section, and calculate summary statistics.</p>
 <p>We’ll work with data on houses that sold in King County, WA, (home of Seattle) between 2014 and 2015.</p>
 <p>We begin by loading the <code>tidyverse</code> package which can be used to create professional data graphics and summaries.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="exploratory-data-analysis.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<div id="previewing-the-data" class="section level3 hasAnchor" number="1.1.1">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="exploratory-data-analysis.html#cb1-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<div id="previewing-the-data" class="section level3 hasAnchor">
 <h3><span class="header-section-number">1.1.1</span> Previewing the Data<a href="exploratory-data-analysis.html#previewing-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong><code>head()</code></strong></p>
 <p>The <code>head()</code> function displays the first 5 rows of the dataset.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="exploratory-data-analysis.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Houses)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="exploratory-data-analysis.html#cb2-1"></a><span class="kw">head</span>(Houses)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 9
 ##      Id price bedrooms bathrooms sqft_living sqft_lot condition waterfront
 ##   &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;     
@@ -422,7 +393,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4     4  253.        2      1.5         1070     9643 average   No        
 ## 5     5  468.        2      1           1160     6000 good      No        
 ## 6     6  310.        3      1           1430    19901 good      No        
-## # ℹ 1 more variable: yr_built &lt;dbl&gt;</code></pre>
+## # … with 1 more variable: yr_built &lt;dbl&gt;</code></pre>
 <p>The rows of the dataset are called <strong>observations.</strong> In this case, the observations are the houses.</p>
 <p>The columns of the dataset, which contain information about the houses, are called <strong>variables.</strong></p>
 <p><strong><code>glimpse</code></strong></p>
@@ -432,7 +403,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><strong>Quantitative variables</strong>, which take on meaningful numeric values. These include numeric <code>&lt;num&gt;</code>, integer <code>&lt;int&gt;</code>, and double <code>&lt;dbl&gt;</code>.</p></li>
 <li><p><strong>Date and time variables</strong> take on values that are dates and times, and are denoted <code>&lt;dttm&gt;</code></p></li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="exploratory-data-analysis.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(Houses)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="exploratory-data-analysis.html#cb4-1"></a><span class="kw">glimpse</span>(Houses)</span></code></pre></div>
 <pre><code>## Rows: 100
 ## Columns: 9
 ## $ Id          &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,…
@@ -447,7 +418,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>There are 100 houses in the dataset, and 9 variables on each house.</p>
 <p><strong><code>summary</code></strong></p>
 <p><code>summary</code> displays the mean, minimum, first quartile, median, third quartile, and maximum for each numeric variable, and the number of observations in each category, for categorical variables.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="exploratory-data-analysis.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Houses)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="exploratory-data-analysis.html#cb6-1"></a><span class="kw">summary</span>(Houses)</span></code></pre></div>
 <pre><code>##        Id             price           bedrooms      bathrooms    
 ##  Min.   :  1.00   Min.   : 180.0   Min.   :1.00   Min.   :0.750  
 ##  1st Qu.: 25.75   1st Qu.: 322.9   1st Qu.:3.00   1st Qu.:1.500  
@@ -463,15 +434,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  3rd Qu.:2735   3rd Qu.: 12246   very_good: 9              3rd Qu.:1991  
 ##  Max.   :8010   Max.   :101930                             Max.   :2014</code></pre>
 </div>
-<div id="modifying-the-data" class="section level3 hasAnchor" number="1.1.2">
+<div id="modifying-the-data" class="section level3 hasAnchor">
 <h3><span class="header-section-number">1.1.2</span> Modifying the Data<a href="exploratory-data-analysis.html#modifying-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next we’ll look at how to manipulate the data and create new variables.</p>
 <div id="adding-a-new-variable" class="section level4 unnumbered hasAnchor">
 <h4>Adding a New Variable<a href="exploratory-data-analysis.html#adding-a-new-variable" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>We can use the <code>mutate()</code> function to create a new variable based on variables already in the dataset.</p>
 <p>Let’s add a variable giving the age of the house, as of 2015.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="exploratory-data-analysis.html#cb8-1" aria-hidden="true" tabindex="-1"></a>Houses <span class="ot">&lt;-</span> Houses <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age =</span> <span class="dv">2015</span><span class="sc">-</span>yr_built)</span>
-<span id="cb8-2"><a href="exploratory-data-analysis.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Houses)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="exploratory-data-analysis.html#cb8-1"></a>Houses &lt;-<span class="st"> </span>Houses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">age =</span> <span class="dv">2015</span><span class="op">-</span>yr_built)</span>
+<span id="cb8-2"><a href="exploratory-data-analysis.html#cb8-2"></a><span class="kw">head</span>(Houses)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 10
 ##      Id price bedrooms bathrooms sqft_living sqft_lot condition waterfront
 ##   &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;     
@@ -481,14 +452,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4     4  253.        2      1.5         1070     9643 average   No        
 ## 5     5  468.        2      1           1160     6000 good      No        
 ## 6     6  310.        3      1           1430    19901 good      No        
-## # ℹ 2 more variables: yr_built &lt;dbl&gt;, age &lt;dbl&gt;</code></pre>
+## # … with 2 more variables: yr_built &lt;dbl&gt;, age &lt;dbl&gt;</code></pre>
 </div>
 <div id="selecting-columns" class="section level4 unnumbered hasAnchor">
 <h4>Selecting Columns<a href="exploratory-data-analysis.html#selecting-columns" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>If the dataset contains a large number of variables, narrow down to the ones you are interested in working with. This can be done with the <code>select()</code> command. If there are not very many variables to begin with, or you are interested in all of them, then you may skip this step.</p>
 <p>Let’s create a smaller version of the dataset, with only the columns price, sqft_living, and waterfront. We’ll call this <code>Houses_3var.</code></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="exploratory-data-analysis.html#cb10-1" aria-hidden="true" tabindex="-1"></a>Houses_3var <span class="ot">&lt;-</span> Houses <span class="sc">%&gt;%</span> <span class="fu">select</span>(price, sqft_living, waterfront)</span>
-<span id="cb10-2"><a href="exploratory-data-analysis.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Houses_3var)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="exploratory-data-analysis.html#cb10-1"></a>Houses_3var &lt;-<span class="st"> </span>Houses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(price, sqft_living, waterfront)</span>
+<span id="cb10-2"><a href="exploratory-data-analysis.html#cb10-2"></a><span class="kw">head</span>(Houses_3var)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 3
 ##   price sqft_living waterfront
 ##   &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     
@@ -499,12 +470,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5  468.        1160 No        
 ## 6  310.        1430 No</code></pre>
 </div>
-<div id="filtering-by-row" class="section level4 hasAnchor" number="1.1.2.1">
+<div id="filtering-by-row" class="section level4 hasAnchor">
 <h4><span class="header-section-number">1.1.2.1</span> Filtering by Row<a href="exploratory-data-analysis.html#filtering-by-row" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The <code>filter()</code> command narrows a dataset down to rows that meet specified conditions.</p>
 <p>We’ll filter the data to include only houses built after 2000.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="exploratory-data-analysis.html#cb12-1" aria-hidden="true" tabindex="-1"></a>New_Houses <span class="ot">&lt;-</span> Houses <span class="sc">%&gt;%</span> <span class="fu">filter</span>(yr_built<span class="sc">&gt;=</span><span class="dv">2000</span>)</span>
-<span id="cb12-2"><a href="exploratory-data-analysis.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(New_Houses)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="exploratory-data-analysis.html#cb12-1"></a>New_Houses &lt;-<span class="st"> </span>Houses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(yr_built<span class="op">&gt;=</span><span class="dv">2000</span>)</span>
+<span id="cb12-2"><a href="exploratory-data-analysis.html#cb12-2"></a><span class="kw">head</span>(New_Houses)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 10
 ##      Id price bedrooms bathrooms sqft_living sqft_lot condition waterfront
 ##   &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;     
@@ -514,10 +485,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4    24  360.        4      2.5         2380     5000 average   No        
 ## 5    25  625.        4      2.5         2570     5520 average   No        
 ## 6    27  488.        3      2.5         3160    13603 average   No        
-## # ℹ 2 more variables: yr_built &lt;dbl&gt;, age &lt;dbl&gt;</code></pre>
+## # … with 2 more variables: yr_built &lt;dbl&gt;, age &lt;dbl&gt;</code></pre>
 <p>Now, we’ll filter the data to include only houses on the waterfront.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="exploratory-data-analysis.html#cb14-1" aria-hidden="true" tabindex="-1"></a>New_Houses <span class="ot">&lt;-</span> Houses <span class="sc">%&gt;%</span> <span class="fu">filter</span>(waterfront <span class="sc">==</span> <span class="st">&quot;Yes&quot;</span>)</span>
-<span id="cb14-2"><a href="exploratory-data-analysis.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(New_Houses)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="exploratory-data-analysis.html#cb14-1"></a>New_Houses &lt;-<span class="st"> </span>Houses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(waterfront <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)</span>
+<span id="cb14-2"><a href="exploratory-data-analysis.html#cb14-2"></a><span class="kw">head</span>(New_Houses)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 10
 ##      Id price bedrooms bathrooms sqft_living sqft_lot condition waterfront
 ##   &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt;     
@@ -527,178 +498,178 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4    40 2400.        4      2.5         3650     8354 average   Yes       
 ## 5    42  290.        2      0.75         440     8313 good      Yes       
 ## 6    46 5111.        5      5.25        8010    45517 average   Yes       
-## # ℹ 2 more variables: yr_built &lt;dbl&gt;, age &lt;dbl&gt;</code></pre>
+## # … with 2 more variables: yr_built &lt;dbl&gt;, age &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </div>
-<div id="data-visualization" class="section level2 hasAnchor" number="1.2">
+<div id="data-visualization" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.2</span> Data Visualization<a href="exploratory-data-analysis.html#data-visualization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="histogram" class="section level3 hasAnchor" number="1.2.1">
+<div id="histogram" class="section level3 hasAnchor">
 <h3><span class="header-section-number">1.2.1</span> Histogram<a href="exploratory-data-analysis.html#histogram" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next, we’ll create graphics to help us visualize the distributions and relationships between variables. We’ll use the <code>ggplot()</code> function, which is part of the <code>tidyverse</code> package.</p>
 <p>Histograms are useful for displaying the distribution of a single quantitative variable. In a histogram, the x-axis breaks the variable into ranges of values, and the y-axis displays the number of observations with a value falling in that category (frequency).</p>
 <p><strong>General Template for Histogram</strong></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="exploratory-data-analysis.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>DatasetName, <span class="fu">aes</span>(<span class="at">x=</span>VariableName)) <span class="sc">+</span> </span>
-<span id="cb16-2"><a href="exploratory-data-analysis.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;colorchoice&quot;</span>, <span class="at">color=</span><span class="st">&quot;colorchoice&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb16-3"><a href="exploratory-data-analysis.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="sc">+</span></span>
-<span id="cb16-4"><a href="exploratory-data-analysis.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;x-axis label&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb16-5"><a href="exploratory-data-analysis.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;y-axis label&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="exploratory-data-analysis.html#cb16-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>DatasetName, <span class="kw">aes</span>(<span class="dt">x=</span>VariableName)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb16-2"><a href="exploratory-data-analysis.html#cb16-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">fill=</span><span class="st">&quot;colorchoice&quot;</span>, <span class="dt">color=</span><span class="st">&quot;colorchoice&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb16-3"><a href="exploratory-data-analysis.html#cb16-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="op">+</span></span>
+<span id="cb16-4"><a href="exploratory-data-analysis.html#cb16-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;x-axis label&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb16-5"><a href="exploratory-data-analysis.html#cb16-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;y-axis label&quot;</span>)</span></code></pre></div>
 <p><strong>Histogram of House Prices</strong></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="exploratory-data-analysis.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Houses, <span class="fu">aes</span>(<span class="at">x=</span>price)) <span class="sc">+</span> </span>
-<span id="cb17-2"><a href="exploratory-data-analysis.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;lightblue&quot;</span>, <span class="at">color=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb17-3"><a href="exploratory-data-analysis.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of House Prices&quot;</span>) <span class="sc">+</span></span>
-<span id="cb17-4"><a href="exploratory-data-analysis.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Price (in thousands)&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb17-5"><a href="exploratory-data-analysis.html#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="exploratory-data-analysis.html#cb17-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span>price)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb17-2"><a href="exploratory-data-analysis.html#cb17-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>, <span class="dt">color=</span><span class="st">&quot;white&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb17-3"><a href="exploratory-data-analysis.html#cb17-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Distribution of House Prices&quot;</span>) <span class="op">+</span></span>
+<span id="cb17-4"><a href="exploratory-data-analysis.html#cb17-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Price (in thousands)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb17-5"><a href="exploratory-data-analysis.html#cb17-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>We see that the distribution of house prices is right-skewed. Most houses cost less than $1,000,000, though there are a few houses that are much more expensive. The most common price range is around $400,000 to $500,000.</p>
 </div>
-<div id="density-plot" class="section level3 hasAnchor" number="1.2.2">
+<div id="density-plot" class="section level3 hasAnchor">
 <h3><span class="header-section-number">1.2.2</span> Density Plot<a href="exploratory-data-analysis.html#density-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Density plots show the distribution for a quantitative variable price. Scores can be compared across categories, like whether or not the house is on a waterfront.</p>
 <p><strong>General Template for Density Plot</strong></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="exploratory-data-analysis.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>DatasetName, <span class="fu">aes</span>(<span class="at">x=</span>QuantitativeVariable,</span>
-<span id="cb18-2"><a href="exploratory-data-analysis.html#cb18-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">color=</span>CategoricalVariable, <span class="at">fill=</span>CategoricalVariable)) <span class="sc">+</span> </span>
-<span id="cb18-3"><a href="exploratory-data-analysis.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.2</span>) <span class="sc">+</span> </span>
-<span id="cb18-4"><a href="exploratory-data-analysis.html#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="sc">+</span></span>
-<span id="cb18-5"><a href="exploratory-data-analysis.html#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Axis Label&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb18-6"><a href="exploratory-data-analysis.html#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="exploratory-data-analysis.html#cb18-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>DatasetName, <span class="kw">aes</span>(<span class="dt">x=</span>QuantitativeVariable,</span>
+<span id="cb18-2"><a href="exploratory-data-analysis.html#cb18-2"></a>                             <span class="dt">color=</span>CategoricalVariable, <span class="dt">fill=</span>CategoricalVariable)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb18-3"><a href="exploratory-data-analysis.html#cb18-3"></a><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb18-4"><a href="exploratory-data-analysis.html#cb18-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="op">+</span></span>
+<span id="cb18-5"><a href="exploratory-data-analysis.html#cb18-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Axis Label&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb18-6"><a href="exploratory-data-analysis.html#cb18-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) </span></code></pre></div>
 <p><code>alpha</code>, ranging from 0 to 1 dictates transparency.</p>
 <p><strong>Density Plot of House Prices</strong></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="exploratory-data-analysis.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Houses, <span class="fu">aes</span>(<span class="at">x=</span>price, <span class="at">color=</span>waterfront, <span class="at">fill=</span>waterfront)) <span class="sc">+</span> </span>
-<span id="cb19-2"><a href="exploratory-data-analysis.html#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.2</span>) <span class="sc">+</span> </span>
-<span id="cb19-3"><a href="exploratory-data-analysis.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of Prices&quot;</span>) <span class="sc">+</span></span>
-<span id="cb19-4"><a href="exploratory-data-analysis.html#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;House price (in thousands)&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb19-5"><a href="exploratory-data-analysis.html#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="exploratory-data-analysis.html#cb19-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span>price, <span class="dt">color=</span>waterfront, <span class="dt">fill=</span>waterfront)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb19-2"><a href="exploratory-data-analysis.html#cb19-2"></a><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb19-3"><a href="exploratory-data-analysis.html#cb19-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Distribution of Prices&quot;</span>) <span class="op">+</span></span>
+<span id="cb19-4"><a href="exploratory-data-analysis.html#cb19-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;House price (in thousands)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb19-5"><a href="exploratory-data-analysis.html#cb19-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) </span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>We see that on average, houses on the waterfront tend to be more expensive and have a greater price range than houses not on the waterfront.</p>
 </div>
-<div id="boxplot" class="section level3 hasAnchor" number="1.2.3">
+<div id="boxplot" class="section level3 hasAnchor">
 <h3><span class="header-section-number">1.2.3</span> Boxplot<a href="exploratory-data-analysis.html#boxplot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Boxplots can be used to compare a quantitative variable with a categorical variable. The middle 50% of observations are contained in the “box”, with the upper and lower 25% of the observations in each tail.</p>
 <p><strong>General Template for Boxplot</strong></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="exploratory-data-analysis.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>DatasetName, <span class="fu">aes</span>(<span class="at">x=</span>CategoricalVariable, </span>
-<span id="cb20-2"><a href="exploratory-data-analysis.html#cb20-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">y=</span>QuantitativeVariable)) <span class="sc">+</span> </span>
-<span id="cb20-3"><a href="exploratory-data-analysis.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb20-4"><a href="exploratory-data-analysis.html#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb20-5"><a href="exploratory-data-analysis.html#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Variable Name&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Variable Name&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="exploratory-data-analysis.html#cb20-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>DatasetName, <span class="kw">aes</span>(<span class="dt">x=</span>CategoricalVariable, </span>
+<span id="cb20-2"><a href="exploratory-data-analysis.html#cb20-2"></a>                             <span class="dt">y=</span>QuantitativeVariable)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb20-3"><a href="exploratory-data-analysis.html#cb20-3"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb20-4"><a href="exploratory-data-analysis.html#cb20-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb20-5"><a href="exploratory-data-analysis.html#cb20-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Variable Name&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Variable Name&quot;</span>) </span></code></pre></div>
 <p>You can make the plot horizontal by adding <code>+ coordflip()</code>. You can turn the axis text vertical by adding <code>theme(axis.text.x = element_text(angle = 90))</code>.</p>
 <p><strong>Boxplot Comparing Price by Waterfront Status</strong></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="exploratory-data-analysis.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Houses, <span class="fu">aes</span>(<span class="at">x=</span>waterfront, <span class="at">y=</span>price)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb21-2"><a href="exploratory-data-analysis.html#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;House Price by Waterfront Status&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb21-3"><a href="exploratory-data-analysis.html#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Waterfront&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Price (in thousands)&quot;</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="exploratory-data-analysis.html#cb21-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span>waterfront, <span class="dt">y=</span>price)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb21-2"><a href="exploratory-data-analysis.html#cb21-2"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;House Price by Waterfront Status&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb21-3"><a href="exploratory-data-analysis.html#cb21-3"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Waterfront&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Price (in thousands)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>For houses not on the waterfront, the median price is about $400,000, and the middle 50% of prices range from about $300,000 to $600,000.</p>
 <p>For waterfront houses, the median price is about $1,500,000, and the middle 50% of prices range from about $900,000 to $1,900,000.</p>
 </div>
-<div id="violin-plot" class="section level3 hasAnchor" number="1.2.4">
+<div id="violin-plot" class="section level3 hasAnchor">
 <h3><span class="header-section-number">1.2.4</span> Violin Plot<a href="exploratory-data-analysis.html#violin-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Violin plots are an alternative to boxplots. The width of the violin tells us the density of observations in a given range.</p>
 <p><strong>General Template for Violin Plot</strong></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="exploratory-data-analysis.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>DatasetName, <span class="fu">aes</span>(<span class="at">x=</span>CategoricalVariable, <span class="at">y=</span>QuantitativeVariable, </span>
-<span id="cb22-2"><a href="exploratory-data-analysis.html#cb22-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">fill=</span>CategoricalVariable)) <span class="sc">+</span> </span>
-<span id="cb22-3"><a href="exploratory-data-analysis.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span> </span>
-<span id="cb22-4"><a href="exploratory-data-analysis.html#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb22-5"><a href="exploratory-data-analysis.html#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Variable Name&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Variable Name&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="exploratory-data-analysis.html#cb22-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>DatasetName, <span class="kw">aes</span>(<span class="dt">x=</span>CategoricalVariable, <span class="dt">y=</span>QuantitativeVariable, </span>
+<span id="cb22-2"><a href="exploratory-data-analysis.html#cb22-2"></a>                             <span class="dt">fill=</span>CategoricalVariable)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb22-3"><a href="exploratory-data-analysis.html#cb22-3"></a><span class="st">  </span><span class="kw">geom_violin</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb22-4"><a href="exploratory-data-analysis.html#cb22-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb22-5"><a href="exploratory-data-analysis.html#cb22-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Variable Name&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Variable Name&quot;</span>) </span></code></pre></div>
 <p><strong>Violin Plot Comparing Prices by Waterfront</strong></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="exploratory-data-analysis.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Houses, <span class="fu">aes</span>(<span class="at">x=</span>waterfront, <span class="at">y=</span>price, <span class="at">fill=</span>waterfront)) <span class="sc">+</span> </span>
-<span id="cb23-2"><a href="exploratory-data-analysis.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span> </span>
-<span id="cb23-3"><a href="exploratory-data-analysis.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Price by Waterfront Status&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb23-4"><a href="exploratory-data-analysis.html#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Waterfront&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Price (in thousands)&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb23-5"><a href="exploratory-data-analysis.html#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="exploratory-data-analysis.html#cb23-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span>waterfront, <span class="dt">y=</span>price, <span class="dt">fill=</span>waterfront)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb23-2"><a href="exploratory-data-analysis.html#cb23-2"></a><span class="st">  </span><span class="kw">geom_violin</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb23-3"><a href="exploratory-data-analysis.html#cb23-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Price by Waterfront Status&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb23-4"><a href="exploratory-data-analysis.html#cb23-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Waterfront&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Price (in thousands)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb23-5"><a href="exploratory-data-analysis.html#cb23-5"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Again, we see that houses on the waterfront tend to be more expensive than those not on the waterfront, and have a wider range in prices.</p>
 </div>
-<div id="scatterplot" class="section level3 hasAnchor" number="1.2.5">
+<div id="scatterplot" class="section level3 hasAnchor">
 <h3><span class="header-section-number">1.2.5</span> Scatterplot<a href="exploratory-data-analysis.html#scatterplot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Scatterplots are used to visualize the relationship between two quantitative variables.</p>
 <p><strong>Scatterplot Template</strong></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="exploratory-data-analysis.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>DatasetName, <span class="fu">aes</span>(<span class="at">x=</span>CategoricalVariable, <span class="at">y=</span>QuantitativeVariable)) <span class="sc">+</span> </span>
-<span id="cb24-2"><a href="exploratory-data-analysis.html#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb24-3"><a href="exploratory-data-analysis.html#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb24-4"><a href="exploratory-data-analysis.html#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Axis Label&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb24-5"><a href="exploratory-data-analysis.html#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Axis Label&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="exploratory-data-analysis.html#cb24-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>DatasetName, <span class="kw">aes</span>(<span class="dt">x=</span>CategoricalVariable, <span class="dt">y=</span>QuantitativeVariable)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb24-2"><a href="exploratory-data-analysis.html#cb24-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb24-3"><a href="exploratory-data-analysis.html#cb24-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb24-4"><a href="exploratory-data-analysis.html#cb24-4"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Axis Label&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb24-5"><a href="exploratory-data-analysis.html#cb24-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Axis Label&quot;</span>)</span></code></pre></div>
 <p><strong>Scatterplot Comparing Price and Square Feet of Living Space</strong></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="exploratory-data-analysis.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Houses, <span class="fu">aes</span>(<span class="at">x=</span>sqft_living, <span class="at">y=</span>price)) <span class="sc">+</span> </span>
-<span id="cb25-2"><a href="exploratory-data-analysis.html#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb25-3"><a href="exploratory-data-analysis.html#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Price and Living Space&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb25-4"><a href="exploratory-data-analysis.html#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Price (in thousands)&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb25-5"><a href="exploratory-data-analysis.html#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Living Space in sq. ft. &quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="exploratory-data-analysis.html#cb25-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span>sqft_living, <span class="dt">y=</span>price)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb25-2"><a href="exploratory-data-analysis.html#cb25-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb25-3"><a href="exploratory-data-analysis.html#cb25-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Price and Living Space&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb25-4"><a href="exploratory-data-analysis.html#cb25-4"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Price (in thousands)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb25-5"><a href="exploratory-data-analysis.html#cb25-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Living Space in sq. ft. &quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>We see that there is an upward trend, indicating that houses with more living space tend to, on average, be higher priced than those with less living space. The relationship appears to be roughly linear, though there might be some curvature, as living space gets very large. There are some exceptions to this trend, most notably a house with more than 7,000 square feet, priced just over $1,000,000.</p>
 <p>We can also add color, size, and shape to the scatterplot to display information about other variables.</p>
 <p>We’ll use color to illustrate whether the house is on the waterfront, and size to represent the square footage of the entire lot (including the yard and the house).</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="exploratory-data-analysis.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Houses, </span>
-<span id="cb26-2"><a href="exploratory-data-analysis.html#cb26-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span>sqft_living, <span class="at">y=</span>price, <span class="at">color=</span>waterfront, <span class="at">size=</span>sqft_lot)) <span class="sc">+</span> </span>
-<span id="cb26-3"><a href="exploratory-data-analysis.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb26-4"><a href="exploratory-data-analysis.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Price of King County Houses&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb26-5"><a href="exploratory-data-analysis.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Price (in thousands)&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb26-6"><a href="exploratory-data-analysis.html#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Living Space in sq. ft. &quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="exploratory-data-analysis.html#cb26-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, </span>
+<span id="cb26-2"><a href="exploratory-data-analysis.html#cb26-2"></a>       <span class="kw">aes</span>(<span class="dt">x=</span>sqft_living, <span class="dt">y=</span>price, <span class="dt">color=</span>waterfront, <span class="dt">size=</span>sqft_lot)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb26-3"><a href="exploratory-data-analysis.html#cb26-3"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb26-4"><a href="exploratory-data-analysis.html#cb26-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Price of King County Houses&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb26-5"><a href="exploratory-data-analysis.html#cb26-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Price (in thousands)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb26-6"><a href="exploratory-data-analysis.html#cb26-6"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Living Space in sq. ft. &quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>We notice that many of the largest and most expensive houses are on the waterfront.</p>
 </div>
-<div id="bar-graph" class="section level3 hasAnchor" number="1.2.6">
+<div id="bar-graph" class="section level3 hasAnchor">
 <h3><span class="header-section-number">1.2.6</span> Bar Graph<a href="exploratory-data-analysis.html#bar-graph" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Bar graphs can be used to visualize one or more categorical variables. A bar graph is similar to a histogram, in that the y-axis again displays frequency, but the x-axis displays categories, instead of ranges of values.</p>
 <p><strong>Bar Graph Template</strong></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="exploratory-data-analysis.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>DatasetName, <span class="fu">aes</span>(<span class="at">x=</span>CategoricalVariable)) <span class="sc">+</span> </span>
-<span id="cb27-2"><a href="exploratory-data-analysis.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill=</span><span class="st">&quot;colorchoice&quot;</span>,<span class="at">color=</span><span class="st">&quot;colorchoice&quot;</span>)  <span class="sc">+</span> </span>
-<span id="cb27-3"><a href="exploratory-data-analysis.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb27-4"><a href="exploratory-data-analysis.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Variable Name&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb27-5"><a href="exploratory-data-analysis.html#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="exploratory-data-analysis.html#cb27-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>DatasetName, <span class="kw">aes</span>(<span class="dt">x=</span>CategoricalVariable)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb27-2"><a href="exploratory-data-analysis.html#cb27-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">fill=</span><span class="st">&quot;colorchoice&quot;</span>,<span class="dt">color=</span><span class="st">&quot;colorchoice&quot;</span>)  <span class="op">+</span><span class="st"> </span></span>
+<span id="cb27-3"><a href="exploratory-data-analysis.html#cb27-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb27-4"><a href="exploratory-data-analysis.html#cb27-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Variable Name&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb27-5"><a href="exploratory-data-analysis.html#cb27-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) </span></code></pre></div>
 <p><strong>Bar Graph by Condition</strong></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="exploratory-data-analysis.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Houses, <span class="fu">aes</span>(<span class="at">x=</span>condition)) <span class="sc">+</span> </span>
-<span id="cb28-2"><a href="exploratory-data-analysis.html#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill=</span><span class="st">&quot;lightblue&quot;</span>,<span class="at">color=</span><span class="st">&quot;white&quot;</span>)  <span class="sc">+</span> </span>
-<span id="cb28-3"><a href="exploratory-data-analysis.html#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Number of Houses by Condition&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb28-4"><a href="exploratory-data-analysis.html#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Condition&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb28-5"><a href="exploratory-data-analysis.html#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span>   </span>
-<span id="cb28-6"><a href="exploratory-data-analysis.html#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="exploratory-data-analysis.html#cb28-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Houses, <span class="kw">aes</span>(<span class="dt">x=</span>condition)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb28-2"><a href="exploratory-data-analysis.html#cb28-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">fill=</span><span class="st">&quot;lightblue&quot;</span>,<span class="dt">color=</span><span class="st">&quot;white&quot;</span>)  <span class="op">+</span><span class="st"> </span></span>
+<span id="cb28-3"><a href="exploratory-data-analysis.html#cb28-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Number of Houses by Condition&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb28-4"><a href="exploratory-data-analysis.html#cb28-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Condition&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb28-5"><a href="exploratory-data-analysis.html#cb28-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="op">+</span><span class="st">   </span></span>
+<span id="cb28-6"><a href="exploratory-data-analysis.html#cb28-6"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>We see that the majority of houses are in average condition. Some are in good or very good condition, while very few are in poor or very poor condition.</p>
 </div>
-<div id="stacked-and-side-by-side-bar-graphs" class="section level3 hasAnchor" number="1.2.7">
+<div id="stacked-and-side-by-side-bar-graphs" class="section level3 hasAnchor">
 <h3><span class="header-section-number">1.2.7</span> Stacked and Side-by-Side Bar Graphs<a href="exploratory-data-analysis.html#stacked-and-side-by-side-bar-graphs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Stacked Bar Graph Template</strong></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="exploratory-data-analysis.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> DatasetName, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> CategoricalVariable1, </span>
-<span id="cb29-2"><a href="exploratory-data-analysis.html#cb29-2" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">fill =</span> CategoricalVariable2)) <span class="sc">+</span></span>
-<span id="cb29-3"><a href="exploratory-data-analysis.html#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_count</span>(<span class="at">position=</span><span class="st">&quot;fill&quot;</span>)  <span class="sc">+</span></span>
-<span id="cb29-4"><a href="exploratory-data-analysis.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb29-5"><a href="exploratory-data-analysis.html#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Variable 1&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb29-6"><a href="exploratory-data-analysis.html#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Proportion of Variable 2&quot;</span>) <span class="sc">+</span>   </span>
-<span id="cb29-7"><a href="exploratory-data-analysis.html#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) </span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="exploratory-data-analysis.html#cb29-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> DatasetName, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> CategoricalVariable1, </span>
+<span id="cb29-2"><a href="exploratory-data-analysis.html#cb29-2"></a>                                         <span class="dt">fill =</span> CategoricalVariable2)) <span class="op">+</span></span>
+<span id="cb29-3"><a href="exploratory-data-analysis.html#cb29-3"></a><span class="st">    </span><span class="kw">stat_count</span>(<span class="dt">position=</span><span class="st">&quot;fill&quot;</span>)  <span class="op">+</span></span>
+<span id="cb29-4"><a href="exploratory-data-analysis.html#cb29-4"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb29-5"><a href="exploratory-data-analysis.html#cb29-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Variable 1&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb29-6"><a href="exploratory-data-analysis.html#cb29-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Proportion of Variable 2&quot;</span>) <span class="op">+</span><span class="st">   </span></span>
+<span id="cb29-7"><a href="exploratory-data-analysis.html#cb29-7"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) </span></code></pre></div>
 <p><strong>Stacked Bar Graph Example</strong></p>
 <p>The <code>stat_count(position="fill")</code> command creates a stacked bar graph, comparing two categorical variables. Let’s explore whether waterfront status is related to condition.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="exploratory-data-analysis.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Houses, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> waterfront, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
-<span id="cb30-2"><a href="exploratory-data-analysis.html#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_count</span>(<span class="at">position=</span><span class="st">&quot;fill&quot;</span>)  <span class="sc">+</span></span>
-<span id="cb30-3"><a href="exploratory-data-analysis.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Condition by Waterfront Status&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb30-4"><a href="exploratory-data-analysis.html#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Waterfront Status&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb30-5"><a href="exploratory-data-analysis.html#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Condition&quot;</span>) <span class="sc">+</span>   </span>
-<span id="cb30-6"><a href="exploratory-data-analysis.html#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) </span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="exploratory-data-analysis.html#cb30-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> Houses, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> waterfront, <span class="dt">fill =</span> condition)) <span class="op">+</span></span>
+<span id="cb30-2"><a href="exploratory-data-analysis.html#cb30-2"></a><span class="st">    </span><span class="kw">stat_count</span>(<span class="dt">position=</span><span class="st">&quot;fill&quot;</span>)  <span class="op">+</span></span>
+<span id="cb30-3"><a href="exploratory-data-analysis.html#cb30-3"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Condition by Waterfront Status&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb30-4"><a href="exploratory-data-analysis.html#cb30-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Waterfront Status&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb30-5"><a href="exploratory-data-analysis.html#cb30-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Condition&quot;</span>) <span class="op">+</span><span class="st">   </span></span>
+<span id="cb30-6"><a href="exploratory-data-analysis.html#cb30-6"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) </span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 We see that a higher proportion of waterfront houses are in good or excellent condition than non-waterfront houses.</p>
 <p><strong>Side-by-side Bar Graph Template</strong></p>
 <p>We can create a side-by-side bar graph, using <code>position=dodge</code>.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="exploratory-data-analysis.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> DatasetName, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> CategoricalVariable1, </span>
-<span id="cb31-2"><a href="exploratory-data-analysis.html#cb31-2" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">fill =</span> CategoricalVariable2)) <span class="sc">+</span></span>
-<span id="cb31-3"><a href="exploratory-data-analysis.html#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
-<span id="cb31-4"><a href="exploratory-data-analysis.html#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb31-5"><a href="exploratory-data-analysis.html#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Genre&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb31-6"><a href="exploratory-data-analysis.html#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="exploratory-data-analysis.html#cb31-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> DatasetName, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> CategoricalVariable1, </span>
+<span id="cb31-2"><a href="exploratory-data-analysis.html#cb31-2"></a>                                         <span class="dt">fill =</span> CategoricalVariable2)) <span class="op">+</span></span>
+<span id="cb31-3"><a href="exploratory-data-analysis.html#cb31-3"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></span>
+<span id="cb31-4"><a href="exploratory-data-analysis.html#cb31-4"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Plot Title&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb31-5"><a href="exploratory-data-analysis.html#cb31-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Genre&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb31-6"><a href="exploratory-data-analysis.html#cb31-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) </span></code></pre></div>
 <p><strong>Side-by-side Bar Graph Example</strong></p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="exploratory-data-analysis.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Houses, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> waterfront, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
-<span id="cb32-2"><a href="exploratory-data-analysis.html#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
-<span id="cb32-3"><a href="exploratory-data-analysis.html#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Condition by Waterfront Status&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb32-4"><a href="exploratory-data-analysis.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Waterfront Status&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb32-5"><a href="exploratory-data-analysis.html#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Condition&quot;</span>) <span class="sc">+</span>   </span>
-<span id="cb32-6"><a href="exploratory-data-analysis.html#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)) </span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="exploratory-data-analysis.html#cb32-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> Houses, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> waterfront, <span class="dt">fill =</span> condition)) <span class="op">+</span></span>
+<span id="cb32-2"><a href="exploratory-data-analysis.html#cb32-2"></a><span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></span>
+<span id="cb32-3"><a href="exploratory-data-analysis.html#cb32-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Condition by Waterfront Status&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb32-4"><a href="exploratory-data-analysis.html#cb32-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Waterfront Status&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb32-5"><a href="exploratory-data-analysis.html#cb32-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Condition&quot;</span>) <span class="op">+</span><span class="st">   </span></span>
+<span id="cb32-6"><a href="exploratory-data-analysis.html#cb32-6"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) </span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-27-1.png" width="672" />
 In this case, since there are so few waterfront houses, the graph is hard to read and not very useful.</p>
 <p>The stacked bar graph is a better way to convey information in this instance, though you may find that for a different dataset, the side-by-side bar graph could be a better choice.</p>
 </div>
-<div id="correlation-plot" class="section level3 hasAnchor" number="1.2.8">
+<div id="correlation-plot" class="section level3 hasAnchor">
 <h3><span class="header-section-number">1.2.8</span> Correlation Plot<a href="exploratory-data-analysis.html#correlation-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Correlation plots can be used to visualize relationships between quantitative variables. Correlation is a number between -1 and 1, describing the strength of the linear relationship between two variables. Variables with strong positive correlations will have correlation close to +1, while variables with strong negative correlations will have correlations close to -1. Variables with little to no relationship will have correlation close to 0.</p>
 <p>The <code>cor()</code> function calculates correlations between quantitative variables. We’ll use <code>select_if</code> to select only numeric variables. The `use=“complete.obs” command tells R to ignore observations with missing data.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="exploratory-data-analysis.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="fu">select_if</span>(Houses, is.numeric), <span class="at">use=</span><span class="st">&quot;complete.obs&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="exploratory-data-analysis.html#cb33-1"></a><span class="kw">cor</span>(<span class="kw">select_if</span>(Houses, is.numeric), <span class="dt">use=</span><span class="st">&quot;complete.obs&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##                Id price bedrooms bathrooms sqft_living sqft_lot yr_built   age
 ## Id           1.00  0.03    -0.06     -0.01       -0.03    -0.07    -0.02  0.02
 ## price        0.03  1.00     0.40      0.67        0.81     0.42     0.17 -0.17
@@ -709,13 +680,13 @@ In this case, since there are so few waterfront houses, the graph is hard to rea
 ## yr_built    -0.02  0.17     0.26      0.50        0.36     0.14     1.00 -1.00
 ## age          0.02 -0.17    -0.26     -0.50       -0.36    -0.14    -1.00  1.00</code></pre>
 <p>The <code>corrplot()</code> function in the <code>corrplot()</code> package provides a visualization of the correlations. Larger, thicker circles indicate stronger correlations.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="exploratory-data-analysis.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
-<span id="cb35-2"><a href="exploratory-data-analysis.html#cb35-2" aria-hidden="true" tabindex="-1"></a>Corr <span class="ot">&lt;-</span> <span class="fu">cor</span>(<span class="fu">select_if</span>(Houses, is.numeric), <span class="at">use=</span><span class="st">&quot;complete.obs&quot;</span>)</span>
-<span id="cb35-3"><a href="exploratory-data-analysis.html#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(Corr)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="exploratory-data-analysis.html#cb35-1"></a><span class="kw">library</span>(corrplot)</span>
+<span id="cb35-2"><a href="exploratory-data-analysis.html#cb35-2"></a>Corr &lt;-<span class="st"> </span><span class="kw">cor</span>(<span class="kw">select_if</span>(Houses, is.numeric), <span class="dt">use=</span><span class="st">&quot;complete.obs&quot;</span>)</span>
+<span id="cb35-3"><a href="exploratory-data-analysis.html#cb35-3"></a><span class="kw">corrplot</span>(Corr)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-29-1.png" width="1152" /></p>
 <p>We see that price has a strong positive correlation with square feet of living space, and is also positively correlated with number of bedrooms and bathrooms. Living space, bedrooms, and bathrooms are all positively correlated, which makes sense, since we would expect bigger houses to have more bedrooms and bathrooms. Price does not show much correlation with the other variables. We notice that bathrooms is negatively correlated with age, which means older houses tend to have fewer bathrooms than newer ones. Not surprisingly, age is very strongly correlated with year built.</p>
 </div>
-<div id="scatterplot-matrix" class="section level3 hasAnchor" number="1.2.9">
+<div id="scatterplot-matrix" class="section level3 hasAnchor">
 <h3><span class="header-section-number">1.2.9</span> Scatterplot Matrix<a href="exploratory-data-analysis.html#scatterplot-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A scatterplot matrix is a grid of plots. It can be created using the <code>ggpairs()</code> function in the <code>GGally</code> package.</p>
 <p>The scatterplot matrix shows us:</p>
@@ -727,15 +698,15 @@ In this case, since there are so few waterfront houses, the graph is hard to rea
 <li>Above the diagonal are correlations between quantitative variables.</li>
 </ol>
 <p>Including too many variables can make these hard to read, so it’s a good idea to use <code>select</code> to narrow down the number of variables.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="exploratory-data-analysis.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
-<span id="cb36-2"><a href="exploratory-data-analysis.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(Houses <span class="sc">%&gt;%</span> <span class="fu">select</span>(price, sqft_living, condition, age))</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="exploratory-data-analysis.html#cb36-1"></a><span class="kw">library</span>(GGally)</span>
+<span id="cb36-2"><a href="exploratory-data-analysis.html#cb36-2"></a><span class="kw">ggpairs</span>(Houses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(price, sqft_living, condition, age))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-30-1.png" width="1152" /></p>
 <p>The scatterplot matrix is useful for helping us notice key trends in our data. However, the plot can hard to read as it is quite dense, especially when there are a large number of variables. These can help us look for trends from a distance, but we should then focus in on more specific plots.</p>
 </div>
 </div>
-<div id="summary-tables" class="section level2 hasAnchor" number="1.3">
+<div id="summary-tables" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.3</span> Summary Tables<a href="exploratory-data-analysis.html#summary-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="calculating-summary-statistics" class="section level3 hasAnchor" number="1.3.1">
+<div id="calculating-summary-statistics" class="section level3 hasAnchor">
 <h3><span class="header-section-number">1.3.1</span> Calculating Summary Statistics<a href="exploratory-data-analysis.html#calculating-summary-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong><code>summarize()</code></strong></p>
 <p>The summarize command calculates summary statistics for variables in the data.</p>
@@ -745,11 +716,11 @@ In this case, since there are so few waterfront houses, the graph is hard to rea
 <li>standard deviation (<span class="math inline">\(s\)</span>), a measure of the spread is calculated by <span class="math inline">\(s =\sqrt{\displaystyle\sum_{i=1}^n \frac{(y_i-\bar{y})^2}{n-1}}\)</span>. The square of the standard deviation, called the variance is denoted <span class="math inline">\(s^2\)</span>.</li>
 </ul>
 <p>Let’s calculate the mean, median, and standard deviation, in prices.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="exploratory-data-analysis.html#cb37-1" aria-hidden="true" tabindex="-1"></a>Houses_Summary <span class="ot">&lt;-</span> Houses <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">Mean_Price =</span> <span class="fu">mean</span>(price, <span class="at">na.rm=</span><span class="cn">TRUE</span>), </span>
-<span id="cb37-2"><a href="exploratory-data-analysis.html#cb37-2" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">Median_Price =</span> <span class="fu">median</span>(price, <span class="at">na.rm=</span><span class="cn">TRUE</span>), </span>
-<span id="cb37-3"><a href="exploratory-data-analysis.html#cb37-3" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">StDev_Price =</span> <span class="fu">sd</span>(price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb37-4"><a href="exploratory-data-analysis.html#cb37-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">Number_of_Houses =</span> <span class="fu">n</span>()) </span>
-<span id="cb37-5"><a href="exploratory-data-analysis.html#cb37-5" aria-hidden="true" tabindex="-1"></a>Houses_Summary</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="exploratory-data-analysis.html#cb37-1"></a>Houses_Summary &lt;-<span class="st"> </span>Houses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">Mean_Price =</span> <span class="kw">mean</span>(price, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), </span>
+<span id="cb37-2"><a href="exploratory-data-analysis.html#cb37-2"></a>                                          <span class="dt">Median_Price =</span> <span class="kw">median</span>(price, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), </span>
+<span id="cb37-3"><a href="exploratory-data-analysis.html#cb37-3"></a>                                          <span class="dt">StDev_Price =</span> <span class="kw">sd</span>(price, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb37-4"><a href="exploratory-data-analysis.html#cb37-4"></a>                                          <span class="dt">Number_of_Houses =</span> <span class="kw">n</span>()) </span>
+<span id="cb37-5"><a href="exploratory-data-analysis.html#cb37-5"></a>Houses_Summary</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##   Mean_Price Median_Price StDev_Price Number_of_Houses
 ##        &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;            &lt;int&gt;
@@ -758,8 +729,8 @@ In this case, since there are so few waterfront houses, the graph is hard to rea
 1. The <code>n()</code> command calculates the number of observations.<br />
 2. The <code>na.rm=TRUE</code> command removes missing values, so that summary statistics can be calculated. It’s not needed here, since this dataset doesn’t include missing values, but if the dataset does include missing values, you will need to include this, in order to do the calculation.</p>
 <p>The <code>kable()</code> function in the <code>knitr()</code> package creates tables with professional appearance.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="exploratory-data-analysis.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb39-2"><a href="exploratory-data-analysis.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(Houses_Summary)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="exploratory-data-analysis.html#cb39-1"></a><span class="kw">library</span>(knitr)</span>
+<span id="cb39-2"><a href="exploratory-data-analysis.html#cb39-2"></a><span class="kw">kable</span>(Houses_Summary)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -779,16 +750,16 @@ In this case, since there are so few waterfront houses, the graph is hard to rea
 </tbody>
 </table>
 </div>
-<div id="grouped-summaries" class="section level3 hasAnchor" number="1.3.2">
+<div id="grouped-summaries" class="section level3 hasAnchor">
 <h3><span class="header-section-number">1.3.2</span> Grouped Summaries<a href="exploratory-data-analysis.html#grouped-summaries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong><code>group_by()</code></strong></p>
 <p>The <code>group_by()</code> command allows us to calculate summary statistics, with the data broken down by by category.We’ll compare waterfront houses to non-waterfront houses.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="exploratory-data-analysis.html#cb40-1" aria-hidden="true" tabindex="-1"></a>Houses_Grouped_Summary <span class="ot">&lt;-</span> Houses <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(waterfront) <span class="sc">%&gt;%</span> </span>
-<span id="cb40-2"><a href="exploratory-data-analysis.html#cb40-2" aria-hidden="true" tabindex="-1"></a>                                      <span class="fu">summarize</span>(<span class="at">Mean_Price =</span> <span class="fu">mean</span>(price, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb40-3"><a href="exploratory-data-analysis.html#cb40-3" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">Median_Price =</span> <span class="fu">median</span>(price, <span class="at">na.rm=</span><span class="cn">TRUE</span>), </span>
-<span id="cb40-4"><a href="exploratory-data-analysis.html#cb40-4" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">StDev_Price =</span> <span class="fu">sd</span>(price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb40-5"><a href="exploratory-data-analysis.html#cb40-5" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">Number_of_Houses =</span> <span class="fu">n</span>()) </span>
-<span id="cb40-6"><a href="exploratory-data-analysis.html#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(Houses_Grouped_Summary)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="exploratory-data-analysis.html#cb40-1"></a>Houses_Grouped_Summary &lt;-<span class="st"> </span>Houses <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(waterfront) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb40-2"><a href="exploratory-data-analysis.html#cb40-2"></a><span class="st">                                      </span><span class="kw">summarize</span>(<span class="dt">Mean_Price =</span> <span class="kw">mean</span>(price, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),</span>
+<span id="cb40-3"><a href="exploratory-data-analysis.html#cb40-3"></a>                                                <span class="dt">Median_Price =</span> <span class="kw">median</span>(price, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), </span>
+<span id="cb40-4"><a href="exploratory-data-analysis.html#cb40-4"></a>                                                <span class="dt">StDev_Price =</span> <span class="kw">sd</span>(price, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb40-5"><a href="exploratory-data-analysis.html#cb40-5"></a>                                                <span class="dt">Number_of_Houses =</span> <span class="kw">n</span>()) </span>
+<span id="cb40-6"><a href="exploratory-data-analysis.html#cb40-6"></a><span class="kw">kable</span>(Houses_Grouped_Summary)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -887,7 +858,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

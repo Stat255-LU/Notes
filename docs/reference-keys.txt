@@ -170,7 +170,7 @@ a-deeper-investigation
 student-to-teacher-ratio
 multicollinearity
 check-model-assumptions
-model-with-quadratic-term
+quadratic-term
 account-for-region
 predictive-modeling
 classification-and-logistic-regression

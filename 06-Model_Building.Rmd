@@ -249,7 +249,7 @@ grid.arrange(P1, P2, P3, ncol=3)
 
 There is also a quadratic trend in the plot involving the fraction variable. We might account for this by adding a quadratic term for `frac` to the model. 
 
-## Model with Quadratic Term
+### Quadratic Term
 
 ```{r}
 SAT_M5 <- lm(data=SAT, sat~salary+frac+I(frac^2)+ratio )
