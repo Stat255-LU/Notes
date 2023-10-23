@@ -17,7 +17,7 @@
 11. Explain the regression effect.   
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=TRUE)
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=FALSE)
 library(ggformula)
 library(moderndive)
 library(gridExtra)
@@ -1638,7 +1638,7 @@ Notice that the transformed interval is not symmetric and allows for a longer "t
 
 ### Log Model Visualization
 
-```{r, fig.height=5, fig.width=10, echo=FALSE}
+```{r, fig.height=3, fig.width=10, echo=FALSE}
 temp_var <- data.frame(exp(predict(Cars_M_Log, interval="prediction")))
 temp_var2 <- data.frame(exp(predict(Cars_M_Log, interval="confidence")))
 new_df <- cbind(Cars2015, temp_var, temp_var2[,2:3])
