@@ -1,1 +1,575 @@
-# Model Building 
+# Building Models for Interpretation
+
+
+**Learning Outcomes:**     
+
+1. Explain the differences in the ways we construct statistical models when we are focused primarily on interpretation.   
+2. Describe the ways that multicollinearity influences the interpretability of regression models.    
+3. Recognize situations where confounding and Simpson's paradox might influence conclusions we draw from a model, and make appropriate interpretations in these situations.   
+4. Evaluate the appropriateness of models using plots of residuals vs explanatory variables.    
+5. Recognize when it is appropriate to use polynomials or other nonlinear functions in a statistical model, and interpret corresponding estimates of regression coefficients.    
+6. Decide which variables to include in a statistical model, and justify your decision.   
+
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=TRUE)
+library(ggformula)
+library(moderndive)
+library(gridExtra)
+library(skimr)
+library(Bolstad)
+library(GGally)
+library(Lock5Data)
+library(knitr)
+library(caret)
+library(MASS)
+library(tidyverse)
+options(scipen=999)
+set.seed(07302020)
+```
+
+
+## Model Building
+
+### Overview 
+
+So far, we've dealt with models with 2 or fewer variables. Some real questions require accounting for more than two variables. In these situations, we'll need to develop a model that is complex enough to capture the important aspects of the mechanism we're modeling, but also simple enough for us to be able to explain and interpret. We'll need to decide how many variables to include in the model, and whether to use transformations, or to include interaction terms. 
+
+We'll examine strategies for modeling in two different contexts. In this chapter, we'll focus on building models for situations when we want to make interpretations and draw conclusions about relationships between variables. In Chapter 7, we focus on modeling solely for the purpose of prediction, when we are not interested in making interpretations or conclusions about relationships between variables.
+
+
+### Modeling for Interpretation
+
+When building a model for the purpose of interpretation, we are typically interested in investigating a research question pertaining to relationships between explanatory and response variables. We'll need to think about things like:
+
+* which explanatory variables should we include in the model, and how many?    
+* should we include any interaction terms?    
+* should we use any nonlinear terms?    
+* should we use a transformation of the response variable?    
+
+We'll go through a couple example to see how we can address these questions in building a model. 
+
+Keep in mind, there is no single correct model, but there are common characteristics of a good model. While two statisticians might use different models for a given set of data, they will hopefully lead to reasonably similar conclusions if constructed carefully. 
+
+
+### SAT Scores Dataset
+
+We'll now look at a dataset containing education data on all 50 states. It includes the following variables. 
+
+`state` - a factor with names of each state
+
+`expend` - expenditure per pupil in average daily attendance in public elementary and secondary schools, 1994-95 (in thousands of US dollars)
+
+`ratio` - average pupil/teacher ratio in public elementary and secondary schools, Fall 1994
+
+`salary` - estimated average annual salary of teachers in public elementary and secondary schools, 1994-95 (in thousands of US dollars)
+
+`frac` - percentage of all eligible students taking the SAT, 1994-95  
+
+`sat` - average total SAT score, 1994-95
+
+`region` - region of the country
+
+
+```{r, fig.height=2.5, fig.width=5}
+library(mosaicData)
+data(SAT)
+SAT <- SAT %>% select(-c(verbal, math))
+library(Lock5Data)
+data("USStates")
+SAT <- SAT %>% left_join(USStates %>% select(State, Region), by=c("state"="State")) %>% rename(region = Region)
+```
+
+```{r}
+SAT
+```
+
+Note that the dataset is quite old (from 1994-95), so the financial information may be out of date. Nevertheless, it is useful for exploring relationships between SAT scores and other variables.    
+
+### Developing a Research Question
+
+A good statistical research question should be one that has practical implications that people would care about. It should be complex enough to be worth investigating. If the answer is obvious, then there would be no need to use statistics, or scientific reasoning in general.   
+
+For the SAT score dataset, we'll focus on the question:
+
+**Do students in states that prioritize education spending achieve better SAT scores?**    
+
+While this may seem like a straightforward question, we'll see that answering it properly requires careful thought and analysis.   
+
+
+### Teacher Salary and SAT score
+
+One way to measure a state's investment in education is in how much it pays its teachers. The plot displays average SAT score against average teacher salary for all 50 US states.
+
+```{r, fig.height=4, fig.width=6}
+ggplot(data=SAT, aes(y=sat, x=salary)) + geom_point() +
+  stat_smooth(method="lm", se=FALSE) + 
+  ggtitle("Average SAT score vs Average Teacher Salary") + 
+  xlab("Average Teacher Salary in Thousands") 
+```
+
+Fitting a simple linear regression model to the data, we obtain the following:
+
+```{r}
+SAT_M1 <- lm(data=SAT, sat~salary)
+summary(SAT_M1)
+```
+
+On average, SAT score is expected to decrease by about 5.5 points for each additional one thousand dollars in average teacher salary in the state. The low p-value suggests a relationship like this is unlikely to occur by chance, though the practical importance of a 5-point decrease in SAT score (out of 1600) seems minimal. Furthermore, only 19% of the total variation in SAT score is explained by teaching salary. Nevertheless, a person looking to argue against raising teacher salaries might use the negative estimate and low p-value as a justification for their position. 
+
+
+### A Further Investigation 
+
+Notice that there are large discrepancies in the `frac` variable, representing the percentage of students taking the SAT. In Connecticut, 81% of high school students took the SAT, compared to only 6% in Arkansas.   
+
+Let's break the data down by the percentage of students who take the SAT. We'll (somewhat arbitrarily), divide the states into 
+
+Low = 0%-22%   
+Medium = 22-49%    
+High = 49-81%
+
+```{r}
+SAT <- mutate(SAT, fracgrp = cut(frac, 
+      breaks=c(0, 22, 49, 81), 
+      labels=c("low", "medium", "high")))
+```
+
+Plotting SAT score against average teacher salary in each state, we see that the picture changes.   
+
+```{r, fig.height=2.5, fig.width=9}
+ggplot(data=SAT, aes( y=sat, x=salary )) +geom_point() + facet_wrap(facets = ~fracgrp) +
+stat_smooth(method="lm", se=FALSE) + xlab("Average Teacher Salary in Thousands")
+```
+
+There appears to be a slight positive relationship between teacher salary and SAT score in each state.   
+
+While breaking up the data into these three groups helps us visualize, we'll simply add the `frac` variable to the model as a quantitative variable, rather than breaking it into these arbitrary categories.   
+
+```{r}
+SAT_M2 <- lm(data=SAT, sat~salary+frac)
+summary(SAT_M2)
+```
+
+For each one thousand dollar increase in average teacher salary, a state's average SAT score is expected to increase by 2.18 points, assuming percentage of students taking the test is the same.   
+
+For each one percent increase in percentage of students taking the SAT, a state's average score is expected to decrease by 2.78 points, assuming average teacher salary is the same.  
+
+Both of these estimates are associated with low p-values. While the effect of a 2 point increase per $1,000 in average teacher salary might seem small, the ~3 point decrease for each percentage point of students taking the exam is quite meaningful. According to the model, if the percentage of students taking the SAT is 10 percentage points higher than another, and the states pay their teachers the same, then the state with more people taking the exam is expected to have an average score almost 30 points lower.   
+
+Adding percentage of students taking the exam increased the $R^2$ value substantially. 
+
+We see that the relationship between SAT score and salary appears to reverse when we account for percentage of students taking the test. States with low percentages of people taking the SAT tend to get higher scores, as the people taking the test tend to be those who are best prepared and have strong incentive for taking it, perhaps because they are trying to get into an elite college. At the same time, states that pay their teachers more tend to have higher percentages of people taking the SAT. This may be because states that prioritize education are more likely to cover the cost of students taking the test, or even to require it. It may also be that many of the states that require the SAT are coastal states, where cost of living, and thus teacher salaries, tend to be higher in general. Thus, it appears initially that teacher salaries are negatively correlated with SAT scores, but after accounting for percentage taking the test, the trend reverses. Situations where an apparent trend disappears or reverses after accounting for another variable are called **Simpson's Paradox.**    
+
+### Add Student-to-Teacher Ratio
+
+Let's see what other possible explanatory variables we might want to add to the model. Keep in mind that our goal is to understand the relationship between teacher salary and SAT scores in the state, so we should only use variables that help us understand this relationship.   
+In addition to teacher salaries, student-to-teacher ratio might be an indication of a state's investment in education. We'll add student-to-teacher ratio to the model and explore whether there is evidence that hiring enough teachers to keep student-to-teacher ratio low has a benefit, in terms of SAT score. 
+
+```{r}
+SAT_M3 <- lm(data=SAT, sat~salary+frac+ratio)
+summary(SAT_M3)
+```
+
+We see that student to teacher ratio is negatively associated with SAT score, with an expected drop of about 4.6 points in average SAT score for each additional student per teacher, assuming average teacher salary and percentage of students taking the exam are held constant. This suggests that states should try to keep student to teacher ratios low. We see teacher salary remains positively correlated with SAT score and percentage taking the test remains negatively correlated, after accounting for student to teacher ratio. 
+
+
+### Multicollinearity
+
+Next, let's add the variable `expend`, which measures the state's expenditure per pupil. 
+
+```{r}
+SAT_M4 <- lm(data=SAT, sat~salary+frac+ratio+expend)
+summary(SAT_M4)
+```
+
+It may be surprising to see that after accounting for expenditure per student, teacher salary is still positively correlated with SAT score, but that the p-value associated with teacher salary is quite large. Likewise, while student-to-teacher ratio is still negatively associated, it too has a large p-value. Also notice that $R^2$ barely increased when accounting for total expenditures.  
+
+This happens because expenditures are highly correlated with teacher salary. States that pay their teacher more also spend more on education per pupil.  The scatterplot matrix below shows a strong correlation of 0.87 between teacher salary and expenditures. 
+
+
+```{r}
+SAT_Num <- select_if(SAT, is.numeric)
+C <- cor(SAT_Num, use = "pairwise.complete.obs")
+round(C,2)
+```
+
+```{r}
+library(corrplot)
+corrplot(C)
+```
+
+Because these variables are highly correlated, it doesn't make sense to talk about the effect of increasing teacher salary, while holding expenditure constant, or vice-versa. Notice the standard error on the `salary` line in model `SAT_M4` (which includes expenditures) is more than twice as high as in `SAT_M3`, which did not. This happens because the model is not able to separate the effect of salary from the effect of expenditure, and thus becomes very uncertain of the effect of both, resulting in high standard errors. In addition to reducing the t-statistic, and increasing the p-value, this leads to much wider and less informative confidence intervals associated with the effect of teacher salary. 
+
+
+**Confidence intervals for model involving teacher salary, percentage taking the test, and student-to-teacher ratio.**  
+
+```{r}
+confint(SAT_M3)
+```
+
+**Confidence intervals for model with above variables plus expenditure.** 
+
+
+```{r}
+confint(SAT_M4)
+```
+
+Models with highly correlated explanatory variables suffer from **multicollinearity**, which increases standard errors, making the effect of variables harder to discern. When we have explanatory variables that are highly correlated (usually with correlation greater than 0.8), we should pick out just one to include in the model. In this case, we'll stick with teacher salary.    
+
+### Residual Plots for SAT 3-variable Model
+
+Let's return to the model with salary, ratio, and fraction taking test. We use residual plots to assess model assumptions. 
+
+```{r, fig.width=9}
+P1 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$fitted.values)) + geom_point() + ggtitle("Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
+P2 <- ggplot(data=data.frame(SAT_M3$residuals), aes(x=SAT_M3$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
+P3 <- ggplot(data=data.frame(SAT_M3$residuals), aes(sample = scale(SAT_M3$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("QQ Plot")
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+There is some sign of a quadratic trend in the residual plot, creating concern about the linearity assumption. 
+
+We can also plot our residuals against the explanatory variables to see whether the model is properly accounting for relationships involving each variable. If we see nonlinear trends, we should consider adding a nonlinear function of that explanatory variable.  
+
+```{r,  fig.width=9}
+P1 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$salary)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("Salary") + ylab("Residuals") 
+P2 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$frac)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("Fraction Taking Test") + ylab("Residuals")
+P3 <- ggplot(data=data.frame(SAT_M3$residuals), aes(y=SAT_M3$residuals, x=SAT_M3$model$ratio)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("Student to Teach Ratio") + ylab("Residuals")
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+There is also a quadratic trend in the plot involving the fraction variable. We might account for this by adding a quadratic term for `frac` to the model. 
+
+```{r}
+SAT_M5 <- lm(data=SAT, sat~salary+frac+I(frac^2)+ratio )
+summary(SAT_M5)
+```
+
+
+  
+
+```{r, fig.width=9}
+P1 <- ggplot(data=data.frame(SAT_M5$residuals), aes(y=SAT_M5$residuals, x=SAT_M5$fitted.values)) + geom_point() + ggtitle("Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
+P2 <- ggplot(data=data.frame(SAT_M5$residuals), aes(x=SAT_M5$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
+P3 <- ggplot(data=data.frame(SAT_M5$residuals), aes(sample = scale(SAT_M5$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("QQ Plot")
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+### Model with Linear Term on Frac
+
+```{r}
+summary(SAT_M3)
+```
+
+### Interpretations for Model with Linear Terms
+
+On average, a $1,000 dollar increase in average teacher salary is associated with a 2.5 point increase in average SAT score assuming fraction of students taking the SAT, and student to teacher ratio are held constant.
+
+On average, a 1% increase in percentage of students taking the SAT is associated with a 2.9 point decrease in average SAT score assuming average teacher salary, and student to teacher ratio are held constant. 
+
+On average, a 1 student per teacher increase in student to teacher ratio is associated with a 4.6 point from in average SAT score, assuming average teacher salary, and percentage of students taking the SAT are held constant. 
+
+
+### Model with Quadratic Term on Frac
+
+```{r}
+summary(SAT_M5)
+```
+
+### Interpretations for Model with Quadratic Terms
+
+On average, a $1,000 dollar increase in average teacher salary is associated with a 1.8 point increase in average SAT score assuming fraction of students taking the SAT, and student to teacher ratio are held constant.
+
+On average, a 1 student per teacher increase in student to teacher ratio is associated with a 0.05 point from in average SAT score, assuming average teacher salary, and percentage of students taking the SAT are held constant. 
+
+We cannot give a clear interpretation of the fraction variable, since it occurs in both linear and quadratic terms. In fact, the vertex of the parabola given by $y=-6.64x + 0.05x^2$ occurs at $x=\frac{6.64}{2(0.05)}\approx 66$. So the model estimates that SAT score decreases in a quadratic fashion with respect to fraction taking the test, until that fraction reaches 66 percent of student, then is expected to increase. 
+
+### Plot of SAT and Frac
+
+```{r}
+ggplot(data=SAT, aes(x=frac, y=sat)) + geom_point() + stat_smooth(se=FALSE)
+```
+
+We do see some possible quadratic trend, but we should be really careful about extrapolation.  
+
+### SAT Model Summary
+
+* Modeling SAT scores based on teacher salary alone led to misleading results, due to Simpson's Paradox. This is corrected by adding percentage of students taking the test to the model. 
+
+* Modeling two highly correlated variables like average teacher salary and expenditure on education inflates the width of confidence intervals associated with both variables, preventing us from drawing meaningful conclusions about either variable. This issue is called **multicollinearity**.  
+
+* Including a quadratic term on the proportion taking the test improves the model fit, and validity of model assumptions, but also makes the model harder to interpret. We need to use judgement when deciding whether or not to include quadratic or higher power terms.   
+
+* There is no clear reason to expect an interaction between these variables, so we did not include an interaction effect in the model.  
+
+
+## Modeling Car Price
+
+### Model for Price of 2015 Cars
+
+What factors contribute to the price of a car?
+
+We build a model for the price of a new 2015 car, in order to help us answer this question.  
+
+```{r}
+data(Cars2015)
+glimpse(Cars2015)
+```
+
+```{r}
+Cars2015 <- Cars2015 %>% select(-HighPrice)
+```
+
+### Categorical Variables
+
+```{r, fig.height=4, fig.width=6}
+Cars_Cat <- select_if(Cars2015, is.factor)
+summary(Cars_Cat)
+```
+
+### Correlation Matrix 
+
+We examine the correlation matrix of quantitative variables.  
+
+
+```{r}
+Cars_Num <- select_if(Cars2015, is.numeric)
+C <- cor(Cars_Num, use = "pairwise.complete.obs")
+round(C,2)
+```
+
+```{r, fig.height=12, fig.width=12}
+library(corrplot)
+C <- corrplot(C)
+```
+
+We'll examine what happens when we include two highy-correlated explanatory variables in the same model, for example:
+
+`Acc060` - time it takes to accelerate from 0 to 60 mph and   
+`QtrMile` - time it takes to drive a quarter mile   
+
+
+```{r}
+cor(Cars2015$Acc060, Cars2015$QtrMile)
+```
+
+### Model Using Acceleration Time {.smaller}
+
+```{r}
+Cars_M1 <- lm(data=Cars2015, log(LowPrice) ~ Acc060)
+summary(Cars_M1)
+```
+
+Confidence Interval for Effect of Acceleration Time:
+
+```{r}
+exp(confint(Cars_M1))
+```
+
+We are 95% confident that a 1-second increase in acceleration time is associated with an average price decrease betweeen 17% and 22.5%. 
+
+### Model Using Quarter Mile Time {.smaller}
+
+```{r}
+Cars_M2 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile)
+summary(Cars_M2)
+```
+
+Confidence Interval for Effect of Quarter Mile Time:   
+
+
+```{r}
+exp(confint(Cars_M2))
+```
+
+We are 95% confident that a 1-second increase in quarter mile time is associated with a price decrease between 21% and 27%, on average.   
+
+
+### Model Using Quarter Mile Time and Acc. Time {.smaller}
+
+```{r}
+Cars_M3 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile + Acc060)
+summary(Cars_M3)
+```
+
+**Confidence Intervals from 2-variable Model**   
+
+```{r}
+exp(confint(Cars_M3))
+```
+
+It does not make sense to talk about holding QtrMile constant as Acc060 increases, or vice-versa. Trying to do so leads to nonsensical answers. 
+
+We are 95% confident that a 1-second increase in quarter mile time is associated with  an average price change between a 38% decrease and 15% increase, assuming acceleration time is held constant.   
+
+We are 95% confident that a 1-second increase in acceleration time is associated with  an average price change between a 28% decrease and 18% increase, assuming quarter mile time is held constant. 
+
+### Problems with Multicollinearity in Modeling
+
+Because these variables are so highly correlated, it the model cannot separate the effect of one from the other, and thus is uncertain about both. Notice the very large standard errors associated with both regression coefficients, which lead to very wide confidence intervals.  
+
+In fact, if two variables are perfectly correlated, it will be impossible to fit them both in a model, and you will get an error message. 
+
+
+### Impact on Prediction {.smaller}
+
+Suppose we want to predict the price of a car that can accelerate from 0 to 60 mph in 9.5 seconds, and completes a quarter mile in 17.3 seconds.  
+
+```{r}
+exp(predict(Cars_M1, newdata = data.frame(Acc060=9.5, QtrMile=17.3)))
+```
+
+```{r}
+exp(predict(Cars_M2, newdata = data.frame(Acc060=9.5, QtrMile=17.3)))
+```
+
+```{r}
+exp(predict(Cars_M3, newdata = data.frame(Acc060=9.5, QtrMile=17.3)))
+```
+
+The predicted values are similar. Multicollinearity does not hurt predictions, only interpretations.   
+
+
+### Adding Weight to Model
+
+```{r}
+Cars_M4 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile + Weight)
+summary(Cars_M4)
+```
+
+$R^2$ went up from 0.64 to 0.76! 
+
+### Add Interaction Term?
+
+```{r}
+Cars_M5 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile * Weight)
+summary(Cars_M5)
+```
+
+p-value on interaction is not that small. $R^2$ didn't go up much. Let's not use it. 
+
+### Add HWY MPG?
+
+```{r}
+Cars_M6 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile + Weight + HwyMPG)
+summary(Cars_M6)
+```
+
+HwyMPG doesn't make change $R^2$ much, and has a high correlation with weight. Let's not include it. 
+
+### Categorical Variables to Consider      
+
+Relationship between Price, Size, and Drive
+
+```{r}
+P1 <- ggplot(data=Cars2015, aes(x=log(LowPrice), y=Size)) + geom_boxplot() + ggtitle("Price by Size")
+P2 <- ggplot(data=Cars2015, aes(x=log(LowPrice), y=Drive)) + geom_boxplot() + ggtitle("Price by Drive")
+grid.arrange(P1, P2, ncol=2)
+```
+
+Information about size is already included, through the weight variable. Let's add drive type to the model.  
+
+### Model with QtrMile, Weight, and Drive
+
+```{r}
+Cars_M7 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile + Weight + Drive)
+summary(Cars_M7)
+```
+
+### Add Size
+
+```{r}
+Cars_M8 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile + Weight + Drive + Size)
+summary(Cars_M8)
+```
+Adding size barely increased $R^2$ at all. We find no evidence of differences in price between the three sizes, after accounting for the other variables.   
+
+Note: Information about car size is already being taken into account through the `Weight` variable.   
+
+We could keep looking at other variables to add, but at this point, we have a model that gives us a good sense of the factors related to price of a car, capturing 80% of total variability in car price, and is still easy to interpret.  
+
+For our research purposes, this model is good enough.   
+
+
+
+### Check of Model Assumptions
+
+```{r, fig.width=9}
+P1 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$fitted.values)) + geom_point() + ggtitle("Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
+P2 <- ggplot(data=data.frame(Cars_M7$residuals), aes(x=Cars_M7$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
+P3 <- ggplot(data=data.frame(Cars_M7$residuals), aes(sample = scale(Cars_M7$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("QQ Plot")
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+There is slight concern about constant variance, but otherwise, the model assumptions look good. 
+
+### Residual by Predictor Plots
+
+
+```{r,  fig.width=9}
+P1 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$QtrMile)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("QtrMile") + ylab("Residuals") 
+P2 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$Weight)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("Weight") + ylab("Residuals") 
+P3 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$Drive)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("Drive") + ylab("Residuals") 
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+These plots don't raise any concerns. 
+
+### Coefficients and Exponentiation
+
+```{r}
+Cars_M7$coefficients
+```
+
+```{r}
+exp(Cars_M7$coefficients)
+```
+
+
+### Interpretation of Coefficients
+
+```{r}
+exp(Cars_M7$coefficients)
+```
+
+The price of a car is expected to decrease by 17% for each additional second it takes to drive a quartermile, assuming weight, and drive type are held constant.    
+
+The price of a car is expected to increase by 0.02% for each additional pound, assuming quarter mile time, and drive type are held constant. Thus, a 100 lb increase is assocated with an expected 2% increase in price, assuming quarter mile time, and drive type are held constant.     
+
+FWD cars are expected to cost 20% less than AWD cars, assuming quarter mile time and weight are held constant. 
+
+RWD cars are expected to cost 13% less than AWD cars, assuming quarter mile time and weight are held constant. 
+
+
+### Adjusted $R^2$, AIC, BIC
+
+When additional variables are added to a model, SSR never increases, hence $R^2$ never decreases. 
+
+Other diagnostics have been introduced to decrease when a term is added to a model and does little to help explain variability. 
+
+These include:   
+
+* Adjusted $R^2$
+* Akaike Information Criterion (AIC)    
+* Bayesian Information Criterion (BIC)    
+
+These are intended to help guide us in deciding whether or not to include a variable in a model.They can decrease (or increase) when an additional variables is added if it doesn't contain much useful information.   
+
+
+These are mostly ad-hoc approaches designed for specific situations. Although they might work well in certain contexts, none are meanth for general use. Furthermore, they can and often do disagree on the best model. I do not advise using these to choose a model, unless you have good reason to in your specific context. 
+
+
+### Model Building Summary   
+
+Consider the following when building a model for the purpose of interpreting parameters and understanding and drawing conclusions about a population or process. 
+
+* Model driven by research question
+* Include variables of interest    
+* Include potential confounders (like in SAT example)    
+* Avoid including highly correlated explanatory variables    
+* Avoid messy transformations and interactions where possible    
+* Use residual plots to assess appropriatness of model assumptions    
+* Aim for high $R^2$ but not highest     
+* Only use AIC, BIC, Adjusted $R^2$ in the other factors listed above (if you use them at all). Do not rely on these measures alone!  
+* Aim for model complex enough to capture nature of data, but simple enough to give clear interpretations     
+

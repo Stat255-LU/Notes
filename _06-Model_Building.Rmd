@@ -29,25 +29,18 @@ set.seed(07302020)
 ```
 
 
-## Modeling SAT Score  
+## Model Building
 
-### Overview of Model Building
+### Overview 
 
-* So far, we've dealt with models with 2 or fewer variables. Often, we want to use more complex models.       
+So far, we've dealt with models with 2 or fewer variables. Some real questions require accounting for more than two variables. In these situations, we'll need to develop a model that is complex enough to capture the important aspects of the mechanism we're modeling, but also simple enough for us to be able to explain and interpret. We'll need to decide how many variables to include in the model, and whether to use transformations, or to include interaction terms. 
 
-
-* We'll need to decide how many variables to include in the model. This is not an obvious decision, and will be different, depending on the purpose of the model.    
-
-
-* We'll also need to make other decisions, such as whether or not to use interaction terms, or transformations.     
-* In this chapter, we'll focus on building models for situations when we want to make interpretations and draw conclusions about  relationships between our explanatory and response variables. 
-
-* In Chapter 7, we focus on modeling for the purpose of prediction, when we are not interested in making interpretations or conclusions about relationships between variables.
+We'll examine strategies for modeling in two different contexts. In this chapter, we'll focus on building models for situations when we want to make interpretations and draw conclusions about relationships between variables. In Chapter 7, we focus on modeling solely for the purpose of prediction, when we are not interested in making interpretations or conclusions about relationships between variables.
 
 
-### Considerations in Modeling
+### Modeling for Interpretation
 
-When building a model for the purpose of consideration, we'll need to think about things like:
+When building a model for the purpose of interpretation, we are typically interested in investigating a research question pertaining to relationships between explanatory and response variables. We'll need to think about things like:
 
 * which explanatory variables should we include in the model, and how many?    
 * should we include any interaction terms?    
@@ -57,7 +50,6 @@ When building a model for the purpose of consideration, we'll need to think abou
 We'll go through a couple example to see how we can address these questions in building a model. 
 
 Keep in mind, there is no single correct model, but there are common characteristics of a good model. While two statisticians might use different models for a given set of data, they will hopefully lead to reasonably similar conclusions if constructed carefully. 
-
 
 
 ### SAT Scores Dataset
@@ -76,6 +68,8 @@ We'll now look at a dataset containing education data on all 50 states. It inclu
 
 `sat` - average total SAT score, 1994-95
 
+`region` - region of the country
+
 
 ```{r, fig.height=2.5, fig.width=5, include=FALSE}
 library(mosaicData)
@@ -87,6 +81,11 @@ SAT <- SAT %>% select(-c(verbal, math))
 glimpse(SAT)
 ```
 
+Note that the dataset is quite old (from 1994-95), so the financial information may be out of date. Neverthless, it is useful for exploring relationships between SAT scores and other variables.    
+
+### Research Question
+
+A good statistical research question should be one that has practical implications
 
 
 ### Teacher Salaries and SAT Scores 
@@ -100,9 +99,7 @@ ggplot(data=SAT, aes(y=sat, x=salary)) + geom_point() +
   xlab("Average Teacher Salary in Thousands") 
 ```
 
-What conclusion do you draw from the plot? 
-
-Are these results surprising?
+We notice that there is 
 
 ### Simple Linear Regression Model {.smaller}
 
@@ -141,6 +138,7 @@ Now what conclusions do you draw from the plots?
 SAT_M2 <- lm(data=SAT, sat~salary+frac)
 summary(SAT_M2)
 ```
+
 For each one thousand dollar increase in average teacher salary, a state's average SAT score is expected to increase by 2.18 points, assuming percentage of students taking the test is the same.   
 
 For each one percent increase in percentage of students taking the SAT, a state's average score is expected to decrease by 2.78 points, assuming average teacher salary is the same.  

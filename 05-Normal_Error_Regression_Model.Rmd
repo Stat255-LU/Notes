@@ -1427,7 +1427,19 @@ Note that the normality assumption, which allows for negative mercury levels lea
 
 ## Transformations
 
-### Model Assumptions for Cars Data
+In this section, we'll explore an approach we can sometimes use when model assumptions are not satisfied.   
+
+### Cars Assumptions Check
+
+```{r, fig.width=12}
+P1 <- ggplot(data=Cars2015, aes(y=Cars_M_A060$residuals, x=Cars_M_A060$fitted.values)) + geom_point() + ggtitle("Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
+P2 <- ggplot(data=Cars2015, aes(x=Cars_M_A060$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
+P3 <- ggplot(data=Cars2015, aes(sample = scale(Cars_M_A060$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("Normal QQ Plot")
+grid.arrange(P1, P2, P3, ncol=3)
+```
+
+There is a funnel-shape in the residual plot, indicating a concern about the constant variance assumption. There appears to be more variability in prices for more expensive cars than for cheaper cars. There is also some concern about the normality assumption, as the histogram and QQ plot indicate right-skew in the residuals.   
+
 
 
 ### Log Transformation
