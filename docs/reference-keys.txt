@@ -172,5 +172,15 @@ multicollinearity
 check-model-assumptions
 quadratic-term
 account-for-region
+predictions-and-intervals
+modeling-car-price
+model-for-price-of-2015-cars
+acc.-and-qrt.-mile-time
+adding-weight-to-model
+adding-more-variables
+check-of-model-assumptions
+coefficients-and-exponentiation
+confidence-and-prediction-intevals
+model-building-summary
 predictive-modeling
 classification-and-logistic-regression

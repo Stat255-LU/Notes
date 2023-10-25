@@ -24,6 +24,7 @@ library(knitr)
 library(caret)
 library(MASS)
 library(tidyverse)
+select <- dplyr::select
 options(scipen=999)
 set.seed(07302020)
 ```
@@ -72,7 +73,7 @@ We'll now look at a dataset containing education data on all 50 states. It inclu
 ```{r, fig.height=2.5, fig.width=5}
 library(mosaicData)
 data(SAT)
-SAT <- SAT %>% select(-c(verbal, math))
+SAT <- SAT %>% dplyr::select(-c(verbal, math))
 library(Lock5Data)
 data("USStates")
 SAT <- SAT %>% left_join(USStates %>% select(State, Region), by=c("state"="State")) %>% rename(region = Region)
@@ -314,39 +315,51 @@ Because we only have 50 states to begin with, breaking down by region results in
 
 It is important to note that we **should not** decide whether to include a variable based on whether or not it yielded a small p-value. Adding or deleting variables from a model until we get a desired p-value on a variable we're interested in can lead to **Confirmation bias** (that is choosing our model in a way that intentionally confirms what we expected or hoped to be true), and to detecting spurious correlations that will not be replicable in future studies. This phenomenon, known as **p-hacking** has led to incorrect and unethical conclusions. We should make modeling decisions about which variables to include in a model before looking at the p-values and then draw conclusions based on the results we see, keeping in mind that p-values are only a part of the picture.   
 
+### Predictions and Intervals
 
+Going back to Model M5, which did not include region, we can make confidence and predictions intervals corresponding to hypothetical states. 
 
+```{r}
+newstate <- data.frame(salary = 45, frac=0.5, ratio=15)
+```
 
+```{r}
+predict(SAT_M5, newdata = newstate, interval="confidence", conf.level=0.95)
+```
+We are 95% confident that the average of average SAT scores among all states with average teacher salary of 45 thousand dollars, where 50% of students take the SAT and having student-to-teacher ratio of 15 is between 1085 and 1147.   
 
+```{r}
+predict(SAT_M5, newdata = newstate, interval="prediction", conf.level=0.95)
+```
 
-<!---
+We are 95% confident that an individual state with average teacher salary of 45 thousand dollars, where 50% of students take the SAT and having student-to-teacher ratio of 15 will have an average SAT score between 1055 and 1178.   
+
 
 
 ## Modeling Car Price
 
 ### Model for Price of 2015 Cars
 
-What factors contribute to the price of a car?
-
-We build a model for the price of a new 2015 car, in order to help us answer this question.  
+We'll build a model for the price of a new 2015 car, to help us understand what factors are related to the price of a car. 
 
 ```{r}
-data(Cars2015)
+#data(Cars2015)
+#Cars2015 <- Cars2015 %>% rename(Price=LowPrice)
+Cars2015 <- Cars2015%>% select(-HighPrice)
 glimpse(Cars2015)
 ```
 
-```{r}
-Cars2015 <- Cars2015 %>% select(-HighPrice)
-```
 
-### Categorical Variables
+
+**Exploratory Analysis**
+
+We'll look at a summary of the categorical variables in the dataset. 
 
 ```{r, fig.height=4, fig.width=6}
 Cars_Cat <- select_if(Cars2015, is.factor)
 summary(Cars_Cat)
 ```
 
-### Correlation Matrix 
 
 We examine the correlation matrix of quantitative variables.  
 
@@ -362,20 +375,20 @@ library(corrplot)
 C <- corrplot(C)
 ```
 
-We'll examine what happens when we include two highy-correlated explanatory variables in the same model, for example:
+Note the high correlation between many variables in the dataset. We'll need to be careful about multicollinearity.   
 
-`Acc060` - time it takes to accelerate from 0 to 60 mph and   
-`QtrMile` - time it takes to drive a quarter mile   
 
+### Acc. and Qrt. Mile Time
+
+We saw in Section 5.6 that it was better to model log(Price) than price itself, so we'll continue modeling logprice here.   
+
+
+**Model Using Just Acceleration Time**
+
+First, we fit a model using only the time it takes to accelerate from 0 to 60 mph as an explanatory variable.  
 
 ```{r}
-cor(Cars2015$Acc060, Cars2015$QtrMile)
-```
-
-### Model Using Acceleration Time {.smaller}
-
-```{r}
-Cars_M1 <- lm(data=Cars2015, log(LowPrice) ~ Acc060)
+Cars_M1 <- lm(data=Cars2015, log(Price) ~ Acc060)
 summary(Cars_M1)
 ```
 
@@ -385,12 +398,14 @@ Confidence Interval for Effect of Acceleration Time:
 exp(confint(Cars_M1))
 ```
 
-We are 95% confident that a 1-second increase in acceleration time is associated with an average price decrease betweeen 17% and 22.5%. 
+We are 95% confident that a 1-second increase in acceleration time is associated with an average price decrease between 17% and 22.5%. 
 
-### Model Using Quarter Mile Time {.smaller}
+**Model Using Just Quarter Mile Time**
+
+Now, let's fit a different model using only the time it takes to drive a quarter mile as an explanatory variable.  
 
 ```{r}
-Cars_M2 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile)
+Cars_M2 <- lm(data=Cars2015, log(Price) ~ QtrMile)
 summary(Cars_M2)
 ```
 
@@ -404,10 +419,10 @@ exp(confint(Cars_M2))
 We are 95% confident that a 1-second increase in quarter mile time is associated with a price decrease between 21% and 27%, on average.   
 
 
-### Model Using Quarter Mile Time and Acc. Time {.smaller}
+**Model Using Both Acceleration and Quarter Mile Time**
 
 ```{r}
-Cars_M3 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile + Acc060)
+Cars_M3 <- lm(data=Cars2015, log(Price) ~ QtrMile + Acc060)
 summary(Cars_M3)
 ```
 
@@ -423,14 +438,11 @@ We are 95% confident that a 1-second increase in quarter mile time is associated
 
 We are 95% confident that a 1-second increase in acceleration time is associated with  an average price change between a 28% decrease and 18% increase, assuming quarter mile time is held constant. 
 
-### Problems with Multicollinearity in Modeling
-
 Because these variables are so highly correlated, it the model cannot separate the effect of one from the other, and thus is uncertain about both. Notice the very large standard errors associated with both regression coefficients, which lead to very wide confidence intervals.  
 
 In fact, if two variables are perfectly correlated, it will be impossible to fit them both in a model, and you will get an error message. 
 
-
-### Impact on Prediction {.smaller}
+**Impact on Prediction**
 
 Suppose we want to predict the price of a car that can accelerate from 0 to 60 mph in 9.5 seconds, and completes a quarter mile in 17.3 seconds.  
 
@@ -448,59 +460,61 @@ exp(predict(Cars_M3, newdata = data.frame(Acc060=9.5, QtrMile=17.3)))
 
 The predicted values are similar. Multicollinearity does not hurt predictions, only interpretations.   
 
-
 ### Adding Weight to Model
 
+We could use either quarter mile time or acceleration time as an explanatory variable, but we shouldn't use both. We'll proceed with quarter mile time.  
+
 ```{r}
-Cars_M4 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile + Weight)
+Cars_M4 <- lm(data=Cars2015, log(Price) ~ QtrMile + Weight)
 summary(Cars_M4)
 ```
 
 $R^2$ went up from 0.64 to 0.76! 
 
-### Add Interaction Term?
+We might consider adding an interaction term between quarter mile time and weight. This would mean that we think the effect of quarter mile time on price of a car is different for heavier cars than for lighter cars. It's not clear to me why that would be the case. 
 
 ```{r}
-Cars_M5 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile * Weight)
+Cars_M5 <- lm(data=Cars2015, log(Price) ~ QtrMile * Weight)
 summary(Cars_M5)
 ```
 
-p-value on interaction is not that small. $R^2$ didn't go up much. Let's not use it. 
+p-value on interaction is not that small. $R^2$ didn't go up much. There doesn't seem to be much reason to complicate the model by adding an interaction term.  
 
-### Add HWY MPG?
+### Adding More Variables
+
+We'll consider adding highway MPG to the model.  
 
 ```{r}
-Cars_M6 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile + Weight + HwyMPG)
+Cars_M6 <- lm(data=Cars2015, log(Price) ~ QtrMile + Weight + HwyMPG)
 summary(Cars_M6)
 ```
 
 HwyMPG doesn't make change $R^2$ much, and has a high correlation with weight. Let's not include it. 
 
-### Categorical Variables to Consider      
 
-Relationship between Price, Size, and Drive
+Next, we'll consider adding categorical explanatory variables Size, and Drive. 
 
 ```{r}
-P1 <- ggplot(data=Cars2015, aes(x=log(LowPrice), y=Size)) + geom_boxplot() + ggtitle("Price by Size")
-P2 <- ggplot(data=Cars2015, aes(x=log(LowPrice), y=Drive)) + geom_boxplot() + ggtitle("Price by Drive")
+P1 <- ggplot(data=Cars2015, aes(x=log(Price), y=Size)) + geom_boxplot() + ggtitle("Price by Size")
+P2 <- ggplot(data=Cars2015, aes(x=log(Price), y=Drive)) + geom_boxplot() + ggtitle("Price by Drive")
 grid.arrange(P1, P2, ncol=2)
 ```
 
 Information about size is already included, through the weight variable. Let's add drive type to the model.  
 
-### Model with QtrMile, Weight, and Drive
-
 ```{r}
-Cars_M7 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile + Weight + Drive)
+Cars_M7 <- lm(data=Cars2015, log(Price) ~ QtrMile + Weight + Drive)
 summary(Cars_M7)
 ```
+We found evidence of differences in price between front-wheel drive and rear-wheel drive, compared to all wheel drive cars.  
 
-### Add Size
+Next, we'll explore adding size to the model.
 
 ```{r}
-Cars_M8 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile + Weight + Drive + Size)
+Cars_M8 <- lm(data=Cars2015, log(Price) ~ QtrMile + Weight + Drive + Size)
 summary(Cars_M8)
 ```
+
 Adding size barely increased $R^2$ at all. We find no evidence of differences in price between the three sizes, after accounting for the other variables.   
 
 Note: Information about car size is already being taken into account through the `Weight` variable.   
@@ -510,8 +524,11 @@ We could keep looking at other variables to add, but at this point, we have a mo
 For our research purposes, this model is good enough.   
 
 
-
 ### Check of Model Assumptions
+
+We'll use residuals to check the model assumptions. 
+
+**Residual by Predicted Plot, Histogram of Residuals, and Normal Quantile-Quantile Plot**
 
 ```{r, fig.width=9}
 P1 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$fitted.values)) + geom_point() + ggtitle("Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
@@ -522,8 +539,7 @@ grid.arrange(P1, P2, P3, ncol=3)
 
 There is slight concern about constant variance, but otherwise, the model assumptions look good. 
 
-### Residual by Predictor Plots
-
+**Residual by Predictor Plots**
 
 ```{r,  fig.width=9}
 P1 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$QtrMile)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("QtrMile") + ylab("Residuals") 
@@ -536,16 +552,13 @@ These plots don't raise any concerns.
 
 ### Coefficients and Exponentiation
 
+The model coefficients are shown below. 
+
 ```{r}
 Cars_M7$coefficients
 ```
 
-```{r}
-exp(Cars_M7$coefficients)
-```
-
-
-### Interpretation of Coefficients
+Since we used a log transformation, we should interpret $e^{b_j}$ rather than $b_j$ itself.  
 
 ```{r}
 exp(Cars_M7$coefficients)
@@ -553,29 +566,40 @@ exp(Cars_M7$coefficients)
 
 The price of a car is expected to decrease by 17% for each additional second it takes to drive a quartermile, assuming weight, and drive type are held constant.    
 
-The price of a car is expected to increase by 0.02% for each additional pound, assuming quarter mile time, and drive type are held constant. Thus, a 100 lb increase is assocated with an expected 2% increase in price, assuming quarter mile time, and drive type are held constant.     
+The price of a car is expected to increase by 0.02% for each additional pound, assuming quarter mile time, and drive type are held constant. Thus, a 100 lb increase is associated with an expected 2% increase in price, assuming quarter mile time, and drive type are held constant.     
 
 FWD cars are expected to cost 20% less than AWD cars, assuming quarter mile time and weight are held constant. 
 
 RWD cars are expected to cost 13% less than AWD cars, assuming quarter mile time and weight are held constant. 
 
+### Confidence and Prediction Intevals
 
-### Adjusted $R^2$, AIC, BIC
+We'll use our model to estimate the average price with the following characteristics, and also to predict the price of a new car with the given characteristics.  
 
-When additional variables are added to a model, SSR never increases, hence $R^2$ never decreases. 
+```{r}
+newcar <- data.frame(QtrMile = 18, Weight=2400, Drive = "AWD")
+```
 
-Other diagnostics have been introduced to decrease when a term is added to a model and does little to help explain variability. 
+This is an interval for log(Price).
 
-These include:   
+```{r}
+predict(Cars_M7, newdata=newcar, interval="confidence", level=0.95)
+```
 
-* Adjusted $R^2$
-* Akaike Information Criterion (AIC)    
-* Bayesian Information Criterion (BIC)    
+Exponentiating, we obtain 
 
-These are intended to help guide us in deciding whether or not to include a variable in a model.They can decrease (or increase) when an additional variables is added if it doesn't contain much useful information.   
+```{r}
+exp(predict(Cars_M7, newdata=newcar, interval="confidence", level=0.95))
+```
+We are 95% Confident that the average price of all new 2015 cars that weigh 2400 lbs, drive a quarter mile in 18 seconds on a fast track, and have all wheel drive is between 15.5 thousand and 20.7 thousand dollars.  
 
+Next, we calculate a prediction interval for an individual car with these characteristics.  
 
-These are mostly ad-hoc approaches designed for specific situations. Although they might work well in certain contexts, none are meanth for general use. Furthermore, they can and often do disagree on the best model. I do not advise using these to choose a model, unless you have good reason to in your specific context. 
+```{r}
+exp(predict(Cars_M7, newdata=newcar, interval="prediction", level=0.95))
+```
+
+We are 95% Confident that the price of an individual new 2015 car that weighs 2400 lbs, drives a quarter mile in 18 seconds on a fast track, and has all wheel drive will be between 11.6 thousand and 27.7 thousand dollars.  
 
 
 ### Model Building Summary   
@@ -587,8 +611,7 @@ Consider the following when building a model for the purpose of interpreting par
 * Include potential confounders (like in SAT example)    
 * Avoid including highly correlated explanatory variables    
 * Avoid messy transformations and interactions where possible    
-* Use residual plots to assess appropriatness of model assumptions    
+* Use residual plots to assess appropriateness of model assumptions    
 * Aim for high $R^2$ but not highest     
-* Only use AIC, BIC, Adjusted $R^2$ in the other factors listed above (if you use them at all). Do not rely on these measures alone!  
 * Aim for model complex enough to capture nature of data, but simple enough to give clear interpretations     
 

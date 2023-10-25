@@ -1318,7 +1318,7 @@ We consider data from the Kelly Blue Book, pertaining to new cars, released in 2
 
 ```{r, echo=FALSE}
 data(Cars2015)
-Cars2015 <- Cars2015 %>% rename(Price=LowPrice)
+#Cars2015 <- Cars2015 %>% rename(Price=LowPrice)
 ```
 
 ```{r}

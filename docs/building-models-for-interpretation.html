@@ -23,7 +23,7 @@
 <meta name="author" content="Andrew Sage - Lawrence University" />
 
 
-<meta name="date" content="2023-10-23" />
+<meta name="date" content="2023-10-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -334,6 +334,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.8" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#check-model-assumptions"><i class="fa fa-check"></i><b>6.1.8</b> Check Model Assumptions</a></li>
 <li class="chapter" data-level="6.1.9" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#quadratic-term"><i class="fa fa-check"></i><b>6.1.9</b> Quadratic Term</a></li>
 <li class="chapter" data-level="6.1.10" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#account-for-region"><i class="fa fa-check"></i><b>6.1.10</b> Account for Region?</a></li>
+<li class="chapter" data-level="6.1.11" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#predictions-and-intervals"><i class="fa fa-check"></i><b>6.1.11</b> Predictions and Intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#modeling-car-price"><i class="fa fa-check"></i><b>6.2</b> Modeling Car Price</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-for-price-of-2015-cars"><i class="fa fa-check"></i><b>6.2.1</b> Model for Price of 2015 Cars</a></li>
+<li class="chapter" data-level="6.2.2" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#acc.-and-qrt.-mile-time"><i class="fa fa-check"></i><b>6.2.2</b> Acc. and Qrt. Mile Time</a></li>
+<li class="chapter" data-level="6.2.3" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#adding-weight-to-model"><i class="fa fa-check"></i><b>6.2.3</b> Adding Weight to Model</a></li>
+<li class="chapter" data-level="6.2.4" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#adding-more-variables"><i class="fa fa-check"></i><b>6.2.4</b> Adding More Variables</a></li>
+<li class="chapter" data-level="6.2.5" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#check-of-model-assumptions"><i class="fa fa-check"></i><b>6.2.5</b> Check of Model Assumptions</a></li>
+<li class="chapter" data-level="6.2.6" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#coefficients-and-exponentiation"><i class="fa fa-check"></i><b>6.2.6</b> Coefficients and Exponentiation</a></li>
+<li class="chapter" data-level="6.2.7" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#confidence-and-prediction-intevals"><i class="fa fa-check"></i><b>6.2.7</b> Confidence and Prediction Intevals</a></li>
+<li class="chapter" data-level="6.2.8" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-building-summary"><i class="fa fa-check"></i><b>6.2.8</b> Model Building Summary</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="predictive-modeling.html"><a href="predictive-modeling.html"><i class="fa fa-check"></i><b>7</b> Predictive Modeling</a></li>
@@ -404,7 +415,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>region</code> - region of the country</p>
 <div class="sourceCode" id="cb617"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb617-1"><a href="building-models-for-interpretation.html#cb617-1"></a><span class="kw">library</span>(mosaicData)</span>
 <span id="cb617-2"><a href="building-models-for-interpretation.html#cb617-2"></a><span class="kw">data</span>(SAT)</span>
-<span id="cb617-3"><a href="building-models-for-interpretation.html#cb617-3"></a>SAT &lt;-<span class="st"> </span>SAT <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(verbal, math))</span>
+<span id="cb617-3"><a href="building-models-for-interpretation.html#cb617-3"></a>SAT &lt;-<span class="st"> </span>SAT <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(verbal, math))</span>
 <span id="cb617-4"><a href="building-models-for-interpretation.html#cb617-4"></a><span class="kw">library</span>(Lock5Data)</span>
 <span id="cb617-5"><a href="building-models-for-interpretation.html#cb617-5"></a><span class="kw">data</span>(<span class="st">&quot;USStates&quot;</span>)</span>
 <span id="cb617-6"><a href="building-models-for-interpretation.html#cb617-6"></a>SAT &lt;-<span class="st"> </span>SAT <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(USStates <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(State, Region), <span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;state&quot;</span>=<span class="st">&quot;State&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">region =</span> Region)</span></code></pre></div>
@@ -730,102 +741,84 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 <p>Notice that the effect of teacher salary and student-to-teacher ratio are no longer statistically significant. This happens because now we are only comparing states in the same region of the country. The p-value associated with teacher salary is now testing the null hypothesis “There is no relationship between average teacher salary and SAT score among states in the same region of the country, with the same percentage of students taking the test, and same student to teacher ratio.”</p>
 <p>Because we only have 50 states to begin with, breaking down by region results in small sample sizes, which contributes to the large p-values. Furthermore, it is unclear why we would need to account for region here. If our goal is to assess the impact of educational spending on SAT scores, it is probably okay to compare states in different regions of the country. Unless we have some reason for wanting to compare states in the same region, we shouldn’t include region as an explanatory variable (even though including it did raise our <span class="math inline">\(R^2\)</span> value above 0.9). In general, we should only include variables if they help us address our research question. In this case, it’s not clear that accounting for region helps us better understand the relationship between a state’s investment in education, and its students average SAT scores.</p>
 <p>It is important to note that we <strong>should not</strong> decide whether to include a variable based on whether or not it yielded a small p-value. Adding or deleting variables from a model until we get a desired p-value on a variable we’re interested in can lead to <strong>Confirmation bias</strong> (that is choosing our model in a way that intentionally confirms what we expected or hoped to be true), and to detecting spurious correlations that will not be replicable in future studies. This phenomenon, known as <strong>p-hacking</strong> has led to incorrect and unethical conclusions. We should make modeling decisions about which variables to include in a model before looking at the p-values and then draw conclusions based on the results we see, keeping in mind that p-values are only a part of the picture.</p>
-<!---
-
-
-## Modeling Car Price
-
-### Model for Price of 2015 Cars
-
-What factors contribute to the price of a car?
-
-We build a model for the price of a new 2015 car, in order to help us answer this question.  
-
-
-```r
-data(Cars2015)
-glimpse(Cars2015)
-```
-
-```
-## Rows: 110
-## Columns: 20
-## $ Make      <fct> Chevrolet, Hyundai, Kia, Mitsubishi, Nissan, Dodge, Chevrole…
-## $ Model     <fct> Spark, Accent, Rio, Mirage, Versa Note, Dart, Cruze LS, 500L…
-## $ Type      <fct> Hatchback, Hatchback, Sedan, Hatchback, Hatchback, Sedan, Se…
-## $ LowPrice  <dbl> 12.270, 14.745, 13.990, 12.995, 14.180, 16.495, 16.170, 19.3…
-## $ HighPrice <dbl> 25.560, 17.495, 18.290, 15.395, 17.960, 23.795, 25.660, 24.6…
-## $ Drive     <fct> FWD, FWD, FWD, FWD, FWD, FWD, FWD, FWD, FWD, FWD, FWD, AWD, …
-## $ CityMPG   <int> 30, 28, 28, 37, 31, 23, 24, 24, 28, 30, 27, 27, 25, 27, 30, …
-## $ HwyMPG    <int> 39, 37, 36, 44, 40, 35, 36, 33, 38, 35, 33, 36, 36, 37, 39, …
-## $ FuelCap   <dbl> 9.0, 11.4, 11.3, 9.2, 10.9, 14.2, 15.6, 13.1, 12.4, 11.1, 11…
-## $ Length    <int> 145, 172, 172, 149, 164, 184, 181, 167, 179, 154, 156, 180, …
-## $ Width     <int> 63, 67, 68, 66, 67, 72, 71, 70, 72, 67, 68, 69, 70, 68, 69, …
-## $ Wheelbase <int> 94, 101, 101, 97, 102, 106, 106, 103, 104, 99, 98, 104, 104,…
-## $ Height    <int> 61, 57, 57, 59, 61, 58, 58, 66, 58, 59, 58, 58, 57, 58, 59, …
-## $ UTurn     <int> 34, 37, 37, 32, 37, 38, 38, 37, 39, 34, 35, 38, 37, 36, 37, …
-## $ Weight    <int> 2345, 2550, 2575, 2085, 2470, 3260, 3140, 3330, 2990, 2385, …
-## $ Acc030    <dbl> 4.4, 3.7, 3.5, 4.4, 4.0, 3.4, 3.7, 3.9, 3.4, 3.9, 3.9, 3.7, …
-## $ Acc060    <dbl> 12.8, 10.3, 9.5, 12.1, 10.9, 9.3, 9.8, 9.5, 9.2, 10.8, 11.1,…
-## $ QtrMile   <dbl> 19.4, 17.8, 17.3, 19.0, 18.2, 17.2, 17.6, 17.4, 17.1, 18.3, …
-## $ PageNum   <int> 123, 148, 163, 188, 196, 128, 119, 131, 136, 216, 179, 205, …
-## $ Size      <fct> Small, Small, Small, Small, Small, Small, Small, Small, Smal…
-```
-
-
-```r
-Cars2015 <- Cars2015 %>% select(-HighPrice)
-```
-
-### Categorical Variables
-
-
-```r
-Cars_Cat <- select_if(Cars2015, is.factor)
-summary(Cars_Cat)
-```
-
-```
-##         Make            Model            Type    Drive          Size   
+</div>
+<div id="predictions-and-intervals" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.1.11</span> Predictions and Intervals<a href="building-models-for-interpretation.html#predictions-and-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Going back to Model M5, which did not include region, we can make confidence and predictions intervals corresponding to hypothetical states.</p>
+<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="building-models-for-interpretation.html#cb647-1"></a>newstate &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">salary =</span> <span class="dv">45</span>, <span class="dt">frac=</span><span class="fl">0.5</span>, <span class="dt">ratio=</span><span class="dv">15</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb648-1"><a href="building-models-for-interpretation.html#cb648-1"></a><span class="kw">predict</span>(SAT_M5, <span class="dt">newdata =</span> newstate, <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="dt">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<pre><code>##        fit     lwr    upr
+## 1 1116.615 1085.93 1147.3</code></pre>
+<p>We are 95% confident that the average of average SAT scores among all states with average teacher salary of 45 thousand dollars, where 50% of students take the SAT and having student-to-teacher ratio of 15 is between 1085 and 1147.</p>
+<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="building-models-for-interpretation.html#cb650-1"></a><span class="kw">predict</span>(SAT_M5, <span class="dt">newdata =</span> newstate, <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>, <span class="dt">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<pre><code>##        fit      lwr      upr
+## 1 1116.615 1055.256 1177.973</code></pre>
+<p>We are 95% confident that an individual state with average teacher salary of 45 thousand dollars, where 50% of students take the SAT and having student-to-teacher ratio of 15 will have an average SAT score between 1055 and 1178.</p>
+</div>
+</div>
+<div id="modeling-car-price" class="section level2 hasAnchor">
+<h2><span class="header-section-number">6.2</span> Modeling Car Price<a href="building-models-for-interpretation.html#modeling-car-price" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="model-for-price-of-2015-cars" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.2.1</span> Model for Price of 2015 Cars<a href="building-models-for-interpretation.html#model-for-price-of-2015-cars" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We’ll build a model for the price of a new 2015 car, to help us understand what factors are related to the price of a car.</p>
+<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb652-1"><a href="building-models-for-interpretation.html#cb652-1"></a><span class="co">#data(Cars2015)</span></span>
+<span id="cb652-2"><a href="building-models-for-interpretation.html#cb652-2"></a><span class="co">#Cars2015 &lt;- Cars2015 %&gt;% rename(Price=LowPrice)</span></span>
+<span id="cb652-3"><a href="building-models-for-interpretation.html#cb652-3"></a>Cars2015 &lt;-<span class="st"> </span>Cars2015<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>HighPrice)</span>
+<span id="cb652-4"><a href="building-models-for-interpretation.html#cb652-4"></a><span class="kw">glimpse</span>(Cars2015)</span></code></pre></div>
+<pre><code>## Rows: 110
+## Columns: 19
+## $ Make      &lt;fct&gt; Chevrolet, Hyundai, Kia, Mitsubishi, Nissan, Dodge, Chevrole…
+## $ Model     &lt;fct&gt; Spark, Accent, Rio, Mirage, Versa Note, Dart, Cruze LS, 500L…
+## $ Type      &lt;fct&gt; Hatchback, Hatchback, Sedan, Hatchback, Hatchback, Sedan, Se…
+## $ Price     &lt;dbl&gt; 12.270, 14.745, 13.990, 12.995, 14.180, 16.495, 16.170, 19.3…
+## $ Drive     &lt;fct&gt; FWD, FWD, FWD, FWD, FWD, FWD, FWD, FWD, FWD, FWD, FWD, AWD, …
+## $ CityMPG   &lt;int&gt; 30, 28, 28, 37, 31, 23, 24, 24, 28, 30, 27, 27, 25, 27, 30, …
+## $ HwyMPG    &lt;int&gt; 39, 37, 36, 44, 40, 35, 36, 33, 38, 35, 33, 36, 36, 37, 39, …
+## $ FuelCap   &lt;dbl&gt; 9.0, 11.4, 11.3, 9.2, 10.9, 14.2, 15.6, 13.1, 12.4, 11.1, 11…
+## $ Length    &lt;int&gt; 145, 172, 172, 149, 164, 184, 181, 167, 179, 154, 156, 180, …
+## $ Width     &lt;int&gt; 63, 67, 68, 66, 67, 72, 71, 70, 72, 67, 68, 69, 70, 68, 69, …
+## $ Wheelbase &lt;int&gt; 94, 101, 101, 97, 102, 106, 106, 103, 104, 99, 98, 104, 104,…
+## $ Height    &lt;int&gt; 61, 57, 57, 59, 61, 58, 58, 66, 58, 59, 58, 58, 57, 58, 59, …
+## $ UTurn     &lt;int&gt; 34, 37, 37, 32, 37, 38, 38, 37, 39, 34, 35, 38, 37, 36, 37, …
+## $ Weight    &lt;int&gt; 2345, 2550, 2575, 2085, 2470, 3260, 3140, 3330, 2990, 2385, …
+## $ Acc030    &lt;dbl&gt; 4.4, 3.7, 3.5, 4.4, 4.0, 3.4, 3.7, 3.9, 3.4, 3.9, 3.9, 3.7, …
+## $ Acc060    &lt;dbl&gt; 12.8, 10.3, 9.5, 12.1, 10.9, 9.3, 9.8, 9.5, 9.2, 10.8, 11.1,…
+## $ QtrMile   &lt;dbl&gt; 19.4, 17.8, 17.3, 19.0, 18.2, 17.2, 17.6, 17.4, 17.1, 18.3, …
+## $ PageNum   &lt;int&gt; 123, 148, 163, 188, 196, 128, 119, 131, 136, 216, 179, 205, …
+## $ Size      &lt;fct&gt; Small, Small, Small, Small, Small, Small, Small, Small, Smal…</code></pre>
+<p><strong>Exploratory Analysis</strong></p>
+<p>We’ll look at a summary of the categorical variables in the dataset.</p>
+<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb654-1"><a href="building-models-for-interpretation.html#cb654-1"></a>Cars_Cat &lt;-<span class="st"> </span><span class="kw">select_if</span>(Cars2015, is.factor)</span>
+<span id="cb654-2"><a href="building-models-for-interpretation.html#cb654-2"></a><span class="kw">summary</span>(Cars_Cat)</span></code></pre></div>
+<pre><code>##         Make            Model            Type    Drive          Size   
 ##  Chevrolet: 8   CTS        :  2   7Pass    :15   AWD:25   Large   :29  
 ##  Ford     : 7   2 Touring  :  1   Hatchback:11   FWD:63   Midsized:34  
 ##  Hyundai  : 7   200        :  1   Sedan    :46   RWD:22   Small   :47  
 ##  Toyoto   : 7   3 i Touring:  1   Sporty   :11                         
 ##  Audi     : 6   3 Series GT:  1   SUV      :18                         
 ##  Nissan   : 6   300        :  1   Wagon    : 9                         
-##  (Other)  :69   (Other)    :103
-```
-
-### Correlation Matrix 
-
-We examine the correlation matrix of quantitative variables.  
-
-
-
-```r
-Cars_Num <- select_if(Cars2015, is.numeric)
-C <- cor(Cars_Num, use = "pairwise.complete.obs")
-round(C,2)
-```
-
-```
-##           LowPrice CityMPG HwyMPG FuelCap Length Width Wheelbase Height UTurn
-## LowPrice      1.00   -0.65  -0.59    0.57   0.47  0.48      0.46   0.02  0.40
-## CityMPG      -0.65    1.00   0.93   -0.77  -0.72 -0.78     -0.69  -0.39 -0.73
-## HwyMPG       -0.59    0.93   1.00   -0.75  -0.64 -0.75     -0.64  -0.54 -0.68
-## FuelCap       0.57   -0.77  -0.75    1.00   0.82  0.85      0.79   0.58  0.76
-## Length        0.47   -0.72  -0.64    0.82   1.00  0.81      0.92   0.46  0.84
-## Width         0.48   -0.78  -0.75    0.85   0.81  1.00      0.76   0.62  0.77
-## Wheelbase     0.46   -0.69  -0.64    0.79   0.92  0.76      1.00   0.49  0.81
-## Height        0.02   -0.39  -0.54    0.58   0.46  0.62      0.49   1.00  0.55
-## UTurn         0.40   -0.73  -0.68    0.76   0.84  0.77      0.81   0.55  1.00
-## Weight        0.55   -0.83  -0.84    0.91   0.82  0.91      0.81   0.71  0.80
-## Acc030       -0.76    0.64   0.51   -0.47  -0.38 -0.41     -0.31   0.21 -0.36
-## Acc060       -0.74    0.68   0.52   -0.49  -0.47 -0.46     -0.38   0.21 -0.41
-## QtrMile      -0.76    0.65   0.49   -0.45  -0.42 -0.41     -0.35   0.25 -0.37
-## PageNum      -0.23    0.28   0.15   -0.15  -0.23 -0.20     -0.24   0.06 -0.22
+##  (Other)  :69   (Other)    :103</code></pre>
+<p>We examine the correlation matrix of quantitative variables.</p>
+<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="building-models-for-interpretation.html#cb656-1"></a>Cars_Num &lt;-<span class="st"> </span><span class="kw">select_if</span>(Cars2015, is.numeric)</span>
+<span id="cb656-2"><a href="building-models-for-interpretation.html#cb656-2"></a>C &lt;-<span class="st"> </span><span class="kw">cor</span>(Cars_Num, <span class="dt">use =</span> <span class="st">&quot;pairwise.complete.obs&quot;</span>)</span>
+<span id="cb656-3"><a href="building-models-for-interpretation.html#cb656-3"></a><span class="kw">round</span>(C,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##           Price CityMPG HwyMPG FuelCap Length Width Wheelbase Height UTurn
+## Price      1.00   -0.65  -0.59    0.57   0.47  0.48      0.46   0.02  0.40
+## CityMPG   -0.65    1.00   0.93   -0.77  -0.72 -0.78     -0.69  -0.39 -0.73
+## HwyMPG    -0.59    0.93   1.00   -0.75  -0.64 -0.75     -0.64  -0.54 -0.68
+## FuelCap    0.57   -0.77  -0.75    1.00   0.82  0.85      0.79   0.58  0.76
+## Length     0.47   -0.72  -0.64    0.82   1.00  0.81      0.92   0.46  0.84
+## Width      0.48   -0.78  -0.75    0.85   0.81  1.00      0.76   0.62  0.77
+## Wheelbase  0.46   -0.69  -0.64    0.79   0.92  0.76      1.00   0.49  0.81
+## Height     0.02   -0.39  -0.54    0.58   0.46  0.62      0.49   1.00  0.55
+## UTurn      0.40   -0.73  -0.68    0.76   0.84  0.77      0.81   0.55  1.00
+## Weight     0.55   -0.83  -0.84    0.91   0.82  0.91      0.81   0.71  0.80
+## Acc030    -0.76    0.64   0.51   -0.47  -0.38 -0.41     -0.31   0.21 -0.36
+## Acc060    -0.74    0.68   0.52   -0.49  -0.47 -0.46     -0.38   0.21 -0.41
+## QtrMile   -0.76    0.65   0.49   -0.45  -0.42 -0.41     -0.35   0.25 -0.37
+## PageNum   -0.23    0.28   0.15   -0.15  -0.23 -0.20     -0.24   0.06 -0.22
 ##           Weight Acc030 Acc060 QtrMile PageNum
-## LowPrice    0.55  -0.76  -0.74   -0.76   -0.23
+## Price       0.55  -0.76  -0.74   -0.76   -0.23
 ## CityMPG    -0.83   0.64   0.68    0.65    0.28
 ## HwyMPG     -0.84   0.51   0.52    0.49    0.15
 ## FuelCap     0.91  -0.47  -0.49   -0.45   -0.15
@@ -838,382 +831,237 @@ round(C,2)
 ## Acc030     -0.41   1.00   0.95    0.95    0.25
 ## Acc060     -0.43   0.95   1.00    0.99    0.26
 ## QtrMile    -0.39   0.95   0.99    1.00    0.26
-## PageNum    -0.20   0.25   0.26    0.26    1.00
-```
-
-
-```r
-library(corrplot)
-C <- corrplot(C)
-```
-
-<img src="bookdownproj_files/figure-html/unnamed-chunk-494-1.png" width="1152" />
-
-We'll examine what happens when we include two highy-correlated explanatory variables in the same model, for example:
-
-`Acc060` - time it takes to accelerate from 0 to 60 mph and   
-`QtrMile` - time it takes to drive a quarter mile   
-
-
-
-```r
-cor(Cars2015$Acc060, Cars2015$QtrMile)
-```
-
-```
-## [1] 0.9916625
-```
-
-### Model Using Acceleration Time {.smaller}
-
-
-```r
-Cars_M1 <- lm(data=Cars2015, log(LowPrice) ~ Acc060)
-summary(Cars_M1)
-```
-
-```
-## 
+## PageNum    -0.20   0.25   0.26    0.26    1.00</code></pre>
+<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="building-models-for-interpretation.html#cb658-1"></a><span class="kw">library</span>(corrplot)</span>
+<span id="cb658-2"><a href="building-models-for-interpretation.html#cb658-2"></a>C &lt;-<span class="st"> </span><span class="kw">corrplot</span>(C)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-496-1.png" width="1152" /></p>
+<p>Note the high correlation between many variables in the dataset. We’ll need to be careful about multicollinearity.</p>
+</div>
+<div id="acc.-and-qrt.-mile-time" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.2.2</span> Acc. and Qrt. Mile Time<a href="building-models-for-interpretation.html#acc.-and-qrt.-mile-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We saw in Section 5.6 that it was better to model log(Price) than price itself, so we’ll continue modeling logprice here.</p>
+<p><strong>Model Using Just Acceleration Time</strong></p>
+<p>First, we fit a model using only the time it takes to accelerate from 0 to 60 mph as an explanatory variable.</p>
+<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb659-1"><a href="building-models-for-interpretation.html#cb659-1"></a>Cars_M1 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(Price) <span class="op">~</span><span class="st"> </span>Acc060)</span>
+<span id="cb659-2"><a href="building-models-for-interpretation.html#cb659-2"></a><span class="kw">summary</span>(Cars_M1)</span></code></pre></div>
+<pre><code>## 
 ## Call:
-## lm(formula = log(LowPrice) ~ Acc060, data = Cars2015)
+## lm(formula = log(Price) ~ Acc060, data = Cars2015)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
 ## -0.84587 -0.19396  0.00908  0.18615  0.53350 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value            Pr(>|t|)    
-## (Intercept)  5.13682    0.13021   39.45 <0.0000000000000002 ***
-## Acc060      -0.22064    0.01607  -13.73 <0.0000000000000002 ***
+##             Estimate Std. Error t value            Pr(&gt;|t|)    
+## (Intercept)  5.13682    0.13021   39.45 &lt;0.0000000000000002 ***
+## Acc060      -0.22064    0.01607  -13.73 &lt;0.0000000000000002 ***
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 0.276 on 108 degrees of freedom
 ## Multiple R-squared:  0.6359, Adjusted R-squared:  0.6325 
-## F-statistic: 188.6 on 1 and 108 DF,  p-value: < 0.00000000000000022
-```
-
-Confidence Interval for Effect of Acceleration Time:
-
-
-```r
-exp(confint(Cars_M1))
-```
-
-```
-##                   2.5 %     97.5 %
+## F-statistic: 188.6 on 1 and 108 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p>Confidence Interval for Effect of Acceleration Time:</p>
+<div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb661-1"><a href="building-models-for-interpretation.html#cb661-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(Cars_M1))</span></code></pre></div>
+<pre><code>##                   2.5 %     97.5 %
 ## (Intercept) 131.4610408 220.284693
-## Acc060        0.7768669   0.827959
-```
-
-We are 95% confident that a 1-second increase in acceleration time is associated with an average price decrease betweeen 17% and 22.5%. 
-
-### Model Using Quarter Mile Time {.smaller}
-
-
-```r
-Cars_M2 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile)
-summary(Cars_M2)
-```
-
-```
-## 
+## Acc060        0.7768669   0.827959</code></pre>
+<p>We are 95% confident that a 1-second increase in acceleration time is associated with an average price decrease between 17% and 22.5%.</p>
+<p><strong>Model Using Just Quarter Mile Time</strong></p>
+<p>Now, let’s fit a different model using only the time it takes to drive a quarter mile as an explanatory variable.</p>
+<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb663-1"><a href="building-models-for-interpretation.html#cb663-1"></a>Cars_M2 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(Price) <span class="op">~</span><span class="st"> </span>QtrMile)</span>
+<span id="cb663-2"><a href="building-models-for-interpretation.html#cb663-2"></a><span class="kw">summary</span>(Cars_M2)</span></code></pre></div>
+<pre><code>## 
 ## Call:
-## lm(formula = log(LowPrice) ~ QtrMile, data = Cars2015)
+## lm(formula = log(Price) ~ QtrMile, data = Cars2015)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
 ## -0.91465 -0.19501  0.02039  0.17538  0.60073 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value            Pr(>|t|)    
-## (Intercept)   7.8559     0.3248   24.19 <0.0000000000000002 ***
-## QtrMile      -0.2776     0.0201  -13.81 <0.0000000000000002 ***
+##             Estimate Std. Error t value            Pr(&gt;|t|)    
+## (Intercept)   7.8559     0.3248   24.19 &lt;0.0000000000000002 ***
+## QtrMile      -0.2776     0.0201  -13.81 &lt;0.0000000000000002 ***
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 0.275 on 108 degrees of freedom
 ## Multiple R-squared:  0.6385, Adjusted R-squared:  0.6351 
-## F-statistic: 190.7 on 1 and 108 DF,  p-value: < 0.00000000000000022
-```
-
-Confidence Interval for Effect of Quarter Mile Time:   
-
-
-
-```r
-exp(confint(Cars_M2))
-```
-
-```
-##                    2.5 %      97.5 %
+## F-statistic: 190.7 on 1 and 108 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p>Confidence Interval for Effect of Quarter Mile Time:</p>
+<div class="sourceCode" id="cb665"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb665-1"><a href="building-models-for-interpretation.html#cb665-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(Cars_M2))</span></code></pre></div>
+<pre><code>##                    2.5 %      97.5 %
 ## (Intercept) 1355.8297704 4913.077313
-## QtrMile        0.7279941    0.788385
-```
-
-We are 95% confident that a 1-second increase in quarter mile time is associated with a price decrease between 21% and 27%, on average.   
-
-
-### Model Using Quarter Mile Time and Acc. Time {.smaller}
-
-
-```r
-Cars_M3 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile + Acc060)
-summary(Cars_M3)
-```
-
-```
-## 
+## QtrMile        0.7279941    0.788385</code></pre>
+<p>We are 95% confident that a 1-second increase in quarter mile time is associated with a price decrease between 21% and 27%, on average.</p>
+<p><strong>Model Using Both Acceleration and Quarter Mile Time</strong></p>
+<div class="sourceCode" id="cb667"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb667-1"><a href="building-models-for-interpretation.html#cb667-1"></a>Cars_M3 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(Price) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Acc060)</span>
+<span id="cb667-2"><a href="building-models-for-interpretation.html#cb667-2"></a><span class="kw">summary</span>(Cars_M3)</span></code></pre></div>
+<pre><code>## 
 ## Call:
-## lm(formula = log(LowPrice) ~ QtrMile + Acc060, data = Cars2015)
+## lm(formula = log(Price) ~ QtrMile + Acc060, data = Cars2015)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
 ## -0.89124 -0.20030  0.01001  0.17576  0.57462 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value  Pr(>|t|)    
+##             Estimate Std. Error t value  Pr(&gt;|t|)    
 ## (Intercept)  6.83974    1.54354   4.431 0.0000227 ***
 ## QtrMile     -0.17316    0.15640  -1.107     0.271    
 ## Acc060      -0.08389    0.12455  -0.673     0.502    
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 0.2757 on 107 degrees of freedom
 ## Multiple R-squared:   0.64,  Adjusted R-squared:  0.6332 
-## F-statistic:  95.1 on 2 and 107 DF,  p-value: < 0.00000000000000022
-```
-
-**Confidence Intervals from 2-variable Model**   
-
-
-```r
-exp(confint(Cars_M3))
-```
-
-```
-##                  2.5 %       97.5 %
+## F-statistic:  95.1 on 2 and 107 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p><strong>Confidence Intervals from 2-variable Model</strong></p>
+<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="building-models-for-interpretation.html#cb669-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(Cars_M3))</span></code></pre></div>
+<pre><code>##                  2.5 %       97.5 %
 ## (Intercept) 43.8095999 19922.799158
 ## QtrMile      0.6168071     1.146686
-## Acc060       0.7183525     1.177065
-```
-
-It does not make sense to talk about holding QtrMile constant as Acc060 increases, or vice-versa. Trying to do so leads to nonsensical answers. 
-
-We are 95% confident that a 1-second increase in quarter mile time is associated with  an average price change between a 38% decrease and 15% increase, assuming acceleration time is held constant.   
-
-We are 95% confident that a 1-second increase in acceleration time is associated with  an average price change between a 28% decrease and 18% increase, assuming quarter mile time is held constant. 
-
-### Problems with Multicollinearity in Modeling
-
-Because these variables are so highly correlated, it the model cannot separate the effect of one from the other, and thus is uncertain about both. Notice the very large standard errors associated with both regression coefficients, which lead to very wide confidence intervals.  
-
-In fact, if two variables are perfectly correlated, it will be impossible to fit them both in a model, and you will get an error message. 
-
-
-### Impact on Prediction {.smaller}
-
-Suppose we want to predict the price of a car that can accelerate from 0 to 60 mph in 9.5 seconds, and completes a quarter mile in 17.3 seconds.  
-
-
-```r
-exp(predict(Cars_M1, newdata = data.frame(Acc060=9.5, QtrMile=17.3)))
-```
-
-```
-##        1 
-## 20.92084
-```
-
-
-```r
-exp(predict(Cars_M2, newdata = data.frame(Acc060=9.5, QtrMile=17.3)))
-```
-
-```
-##        1 
-## 21.18223
-```
-
-
-```r
-exp(predict(Cars_M3, newdata = data.frame(Acc060=9.5, QtrMile=17.3)))
-```
-
-```
-##        1 
-## 21.05489
-```
-
-The predicted values are similar. Multicollinearity does not hurt predictions, only interpretations.   
-
-
-### Adding Weight to Model
-
-
-```r
-Cars_M4 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile + Weight)
-summary(Cars_M4)
-```
-
-```
-## 
+## Acc060       0.7183525     1.177065</code></pre>
+<p>It does not make sense to talk about holding QtrMile constant as Acc060 increases, or vice-versa. Trying to do so leads to nonsensical answers.</p>
+<p>We are 95% confident that a 1-second increase in quarter mile time is associated with an average price change between a 38% decrease and 15% increase, assuming acceleration time is held constant.</p>
+<p>We are 95% confident that a 1-second increase in acceleration time is associated with an average price change between a 28% decrease and 18% increase, assuming quarter mile time is held constant.</p>
+<p>Because these variables are so highly correlated, it the model cannot separate the effect of one from the other, and thus is uncertain about both. Notice the very large standard errors associated with both regression coefficients, which lead to very wide confidence intervals.</p>
+<p>In fact, if two variables are perfectly correlated, it will be impossible to fit them both in a model, and you will get an error message.</p>
+<p><strong>Impact on Prediction</strong></p>
+<p>Suppose we want to predict the price of a car that can accelerate from 0 to 60 mph in 9.5 seconds, and completes a quarter mile in 17.3 seconds.</p>
+<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb671-1"><a href="building-models-for-interpretation.html#cb671-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M1, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="fl">9.5</span>, <span class="dt">QtrMile=</span><span class="fl">17.3</span>)))</span></code></pre></div>
+<pre><code>##        1 
+## 20.92084</code></pre>
+<div class="sourceCode" id="cb673"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb673-1"><a href="building-models-for-interpretation.html#cb673-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M2, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="fl">9.5</span>, <span class="dt">QtrMile=</span><span class="fl">17.3</span>)))</span></code></pre></div>
+<pre><code>##        1 
+## 21.18223</code></pre>
+<div class="sourceCode" id="cb675"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb675-1"><a href="building-models-for-interpretation.html#cb675-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M3, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="fl">9.5</span>, <span class="dt">QtrMile=</span><span class="fl">17.3</span>)))</span></code></pre></div>
+<pre><code>##        1 
+## 21.05489</code></pre>
+<p>The predicted values are similar. Multicollinearity does not hurt predictions, only interpretations.</p>
+</div>
+<div id="adding-weight-to-model" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.2.3</span> Adding Weight to Model<a href="building-models-for-interpretation.html#adding-weight-to-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We could use either quarter mile time or acceleration time as an explanatory variable, but we shouldn’t use both. We’ll proceed with quarter mile time.</p>
+<div class="sourceCode" id="cb677"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb677-1"><a href="building-models-for-interpretation.html#cb677-1"></a>Cars_M4 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(Price) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Weight)</span>
+<span id="cb677-2"><a href="building-models-for-interpretation.html#cb677-2"></a><span class="kw">summary</span>(Cars_M4)</span></code></pre></div>
+<pre><code>## 
 ## Call:
-## lm(formula = log(LowPrice) ~ QtrMile + Weight, data = Cars2015)
+## lm(formula = log(Price) ~ QtrMile + Weight, data = Cars2015)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
 ## -0.79365 -0.13931 -0.01368  0.15773  0.42234 
 ## 
 ## Coefficients:
-##                Estimate  Std. Error t value             Pr(>|t|)    
-## (Intercept)  6.21326823  0.33491778  18.552 < 0.0000000000000002 ***
-## QtrMile     -0.22482146  0.01748563 -12.858 < 0.0000000000000002 ***
+##                Estimate  Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)  6.21326823  0.33491778  18.552 &lt; 0.0000000000000002 ***
+## QtrMile     -0.22482146  0.01748563 -12.858 &lt; 0.0000000000000002 ***
 ## Weight       0.00020606  0.00002641   7.803      0.0000000000043 ***
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 0.2206 on 107 degrees of freedom
 ## Multiple R-squared:  0.7696, Adjusted R-squared:  0.7653 
-## F-statistic: 178.7 on 2 and 107 DF,  p-value: < 0.00000000000000022
-```
-
-$R^2$ went up from 0.64 to 0.76! 
-
-### Add Interaction Term?
-
-
-```r
-Cars_M5 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile * Weight)
-summary(Cars_M5)
-```
-
-```
-## 
+## F-statistic: 178.7 on 2 and 107 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p><span class="math inline">\(R^2\)</span> went up from 0.64 to 0.76!</p>
+<p>We might consider adding an interaction term between quarter mile time and weight. This would mean that we think the effect of quarter mile time on price of a car is different for heavier cars than for lighter cars. It’s not clear to me why that would be the case.</p>
+<div class="sourceCode" id="cb679"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb679-1"><a href="building-models-for-interpretation.html#cb679-1"></a>Cars_M5 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(Price) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">*</span><span class="st"> </span>Weight)</span>
+<span id="cb679-2"><a href="building-models-for-interpretation.html#cb679-2"></a><span class="kw">summary</span>(Cars_M5)</span></code></pre></div>
+<pre><code>## 
 ## Call:
-## lm(formula = log(LowPrice) ~ QtrMile * Weight, data = Cars2015)
+## lm(formula = log(Price) ~ QtrMile * Weight, data = Cars2015)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
 ## -0.82013 -0.12076 -0.01464  0.14717  0.41928 
 ## 
 ## Coefficients:
-##                  Estimate Std. Error t value Pr(>|t|)   
+##                  Estimate Std. Error t value Pr(&gt;|t|)   
 ## (Intercept)     4.1114189  1.3270870   3.098  0.00249 **
 ## QtrMile        -0.0963226  0.0804413  -1.197  0.23381   
 ## Weight          0.0008110  0.0003707   2.188  0.03089 * 
 ## QtrMile:Weight -0.0000373  0.0000228  -1.636  0.10482   
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 0.2188 on 106 degrees of freedom
 ## Multiple R-squared:  0.7752, Adjusted R-squared:  0.7689 
-## F-statistic: 121.9 on 3 and 106 DF,  p-value: < 0.00000000000000022
-```
-
-p-value on interaction is not that small. $R^2$ didn't go up much. Let's not use it. 
-
-### Add HWY MPG?
-
-
-```r
-Cars_M6 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile + Weight + HwyMPG)
-summary(Cars_M6)
-```
-
-```
-## 
+## F-statistic: 121.9 on 3 and 106 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p>p-value on interaction is not that small. <span class="math inline">\(R^2\)</span> didn’t go up much. There doesn’t seem to be much reason to complicate the model by adding an interaction term.</p>
+</div>
+<div id="adding-more-variables" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.2.4</span> Adding More Variables<a href="building-models-for-interpretation.html#adding-more-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We’ll consider adding highway MPG to the model.</p>
+<div class="sourceCode" id="cb681"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb681-1"><a href="building-models-for-interpretation.html#cb681-1"></a>Cars_M6 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(Price) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Weight <span class="op">+</span><span class="st"> </span>HwyMPG)</span>
+<span id="cb681-2"><a href="building-models-for-interpretation.html#cb681-2"></a><span class="kw">summary</span>(Cars_M6)</span></code></pre></div>
+<pre><code>## 
 ## Call:
-## lm(formula = log(LowPrice) ~ QtrMile + Weight + HwyMPG, data = Cars2015)
+## lm(formula = log(Price) ~ QtrMile + Weight + HwyMPG, data = Cars2015)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
 ## -0.82308 -0.14513 -0.01922  0.16732  0.41390 
 ## 
 ## Coefficients:
-##                Estimate  Std. Error t value             Pr(>|t|)    
-## (Intercept)  6.54954436  0.42196132  15.522 < 0.0000000000000002 ***
-## QtrMile     -0.21699008  0.01843615 -11.770 < 0.0000000000000002 ***
+##                Estimate  Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)  6.54954436  0.42196132  15.522 &lt; 0.0000000000000002 ***
+## QtrMile     -0.21699008  0.01843615 -11.770 &lt; 0.0000000000000002 ***
 ## Weight       0.00015922  0.00004456   3.573             0.000532 ***
 ## HwyMPG      -0.00961141  0.00737658  -1.303             0.195410    
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 0.2198 on 106 degrees of freedom
 ## Multiple R-squared:  0.7732, Adjusted R-squared:  0.7668 
-## F-statistic: 120.5 on 3 and 106 DF,  p-value: < 0.00000000000000022
-```
-
-HwyMPG doesn't make change $R^2$ much, and has a high correlation with weight. Let's not include it. 
-
-### Categorical Variables to Consider      
-
-Relationship between Price, Size, and Drive
-
-
-```r
-P1 <- ggplot(data=Cars2015, aes(x=log(LowPrice), y=Size)) + geom_boxplot() + ggtitle("Price by Size")
-P2 <- ggplot(data=Cars2015, aes(x=log(LowPrice), y=Drive)) + geom_boxplot() + ggtitle("Price by Drive")
-grid.arrange(P1, P2, ncol=2)
-```
-
-<img src="bookdownproj_files/figure-html/unnamed-chunk-508-1.png" width="672" />
-
-Information about size is already included, through the weight variable. Let's add drive type to the model.  
-
-### Model with QtrMile, Weight, and Drive
-
-
-```r
-Cars_M7 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile + Weight + Drive)
-summary(Cars_M7)
-```
-
-```
-## 
+## F-statistic: 120.5 on 3 and 106 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p>HwyMPG doesn’t make change <span class="math inline">\(R^2\)</span> much, and has a high correlation with weight. Let’s not include it.</p>
+<p>Next, we’ll consider adding categorical explanatory variables Size, and Drive.</p>
+<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb683-1"><a href="building-models-for-interpretation.html#cb683-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">log</span>(Price), <span class="dt">y=</span>Size)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Price by Size&quot;</span>)</span>
+<span id="cb683-2"><a href="building-models-for-interpretation.html#cb683-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">log</span>(Price), <span class="dt">y=</span>Drive)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Price by Drive&quot;</span>)</span>
+<span id="cb683-3"><a href="building-models-for-interpretation.html#cb683-3"></a><span class="kw">grid.arrange</span>(P1, P2, <span class="dt">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-509-1.png" width="672" /></p>
+<p>Information about size is already included, through the weight variable. Let’s add drive type to the model.</p>
+<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb684-1"><a href="building-models-for-interpretation.html#cb684-1"></a>Cars_M7 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(Price) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Weight <span class="op">+</span><span class="st"> </span>Drive)</span>
+<span id="cb684-2"><a href="building-models-for-interpretation.html#cb684-2"></a><span class="kw">summary</span>(Cars_M7)</span></code></pre></div>
+<pre><code>## 
 ## Call:
-## lm(formula = log(LowPrice) ~ QtrMile + Weight + Drive, data = Cars2015)
+## lm(formula = log(Price) ~ QtrMile + Weight + Drive, data = Cars2015)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
 ## -0.72386 -0.10882  0.01269  0.13306  0.45304 
 ## 
 ## Coefficients:
-##                Estimate  Std. Error t value             Pr(>|t|)    
-## (Intercept)  5.81406789  0.33961789  17.119 < 0.0000000000000002 ***
+##                Estimate  Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)  5.81406789  0.33961789  17.119 &lt; 0.0000000000000002 ***
 ## QtrMile     -0.19007439  0.01959554  -9.700 0.000000000000000289 ***
 ## Weight       0.00020496  0.00002583   7.936 0.000000000002420675 ***
 ## DriveFWD    -0.22403222  0.05704513  -3.927             0.000154 ***
 ## DriveRWD    -0.13884399  0.06227709  -2.229             0.027913 *  
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 0.2077 on 105 degrees of freedom
 ## Multiple R-squared:  0.7995, Adjusted R-squared:  0.7919 
-## F-statistic: 104.7 on 4 and 105 DF,  p-value: < 0.00000000000000022
-```
-
-### Add Size
-
-
-```r
-Cars_M8 <- lm(data=Cars2015, log(LowPrice) ~ QtrMile + Weight + Drive + Size)
-summary(Cars_M8)
-```
-
-```
-## 
+## F-statistic: 104.7 on 4 and 105 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p>We found evidence of differences in price between front-wheel drive and rear-wheel drive, compared to all wheel drive cars.</p>
+<p>Next, we’ll explore adding size to the model.</p>
+<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb686-1"><a href="building-models-for-interpretation.html#cb686-1"></a>Cars_M8 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(Price) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Weight <span class="op">+</span><span class="st"> </span>Drive <span class="op">+</span><span class="st"> </span>Size)</span>
+<span id="cb686-2"><a href="building-models-for-interpretation.html#cb686-2"></a><span class="kw">summary</span>(Cars_M8)</span></code></pre></div>
+<pre><code>## 
 ## Call:
-## lm(formula = log(LowPrice) ~ QtrMile + Weight + Drive + Size, 
-##     data = Cars2015)
+## lm(formula = log(Price) ~ QtrMile + Weight + Drive + Size, data = Cars2015)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
 ## -0.71092 -0.12126  0.01355  0.11831  0.44439 
 ## 
 ## Coefficients:
-##                 Estimate  Std. Error t value             Pr(>|t|)    
-## (Intercept)   5.66594310  0.37169625  15.243 < 0.0000000000000002 ***
+##                 Estimate  Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)   5.66594310  0.37169625  15.243 &lt; 0.0000000000000002 ***
 ## QtrMile      -0.19256547  0.02000711  -9.625 0.000000000000000505 ***
 ## Weight        0.00023978  0.00004101   5.847 0.000000059416930182 ***
 ## DriveFWD     -0.21598794  0.05780323  -3.737             0.000306 ***
@@ -1221,128 +1069,87 @@ summary(Cars_M8)
 ## SizeMidsized  0.04699095  0.06271499   0.749             0.455398    
 ## SizeSmall     0.08875861  0.08105810   1.095             0.276071    
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 0.2085 on 103 degrees of freedom
 ## Multiple R-squared:  0.8018, Adjusted R-squared:  0.7903 
-## F-statistic: 69.46 on 6 and 103 DF,  p-value: < 0.00000000000000022
-```
-Adding size barely increased $R^2$ at all. We find no evidence of differences in price between the three sizes, after accounting for the other variables.   
-
-Note: Information about car size is already being taken into account through the `Weight` variable.   
-
-We could keep looking at other variables to add, but at this point, we have a model that gives us a good sense of the factors related to price of a car, capturing 80% of total variability in car price, and is still easy to interpret.  
-
-For our research purposes, this model is good enough.   
-
-
-
-### Check of Model Assumptions
-
-
-```r
-P1 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$fitted.values)) + geom_point() + ggtitle("Residual Plot") + xlab("Predicted Values") + ylab("Residuals")
-P2 <- ggplot(data=data.frame(Cars_M7$residuals), aes(x=Cars_M7$residuals)) + geom_histogram() + ggtitle("Histogram of Residuals") + xlab("Residual")
-P3 <- ggplot(data=data.frame(Cars_M7$residuals), aes(sample = scale(Cars_M7$residuals))) + stat_qq() + stat_qq_line() + xlab("Normal Quantiles") + ylab("Residual Quantiles") + ggtitle("QQ Plot")
-grid.arrange(P1, P2, P3, ncol=3)
-```
-
-<img src="bookdownproj_files/figure-html/unnamed-chunk-511-1.png" width="864" />
-
-There is slight concern about constant variance, but otherwise, the model assumptions look good. 
-
-### Residual by Predictor Plots
-
-
-
-```r
-P1 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$QtrMile)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("QtrMile") + ylab("Residuals") 
-P2 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$Weight)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("Weight") + ylab("Residuals") 
-P3 <- ggplot(data=data.frame(Cars_M7$residuals), aes(y=Cars_M7$residuals, x=Cars_M7$model$Drive)) + geom_point() + ggtitle("Residual by Predictor Plot") + xlab("Drive") + ylab("Residuals") 
-grid.arrange(P1, P2, P3, ncol=3)
-```
-
-<img src="bookdownproj_files/figure-html/unnamed-chunk-512-1.png" width="864" />
-
-These plots don't raise any concerns. 
-
-### Coefficients and Exponentiation
-
-
-```r
-Cars_M7$coefficients
-```
-
-```
-##   (Intercept)       QtrMile        Weight      DriveFWD      DriveRWD 
-##  5.8140678915 -0.1900743859  0.0002049586 -0.2240322171 -0.1388439916
-```
-
-
-```r
-exp(Cars_M7$coefficients)
-```
-
-```
-## (Intercept)     QtrMile      Weight    DriveFWD    DriveRWD 
-## 334.9790161   0.8268976   1.0002050   0.7992894   0.8703638
-```
-
-
-### Interpretation of Coefficients
-
-
-```r
-exp(Cars_M7$coefficients)
-```
-
-```
-## (Intercept)     QtrMile      Weight    DriveFWD    DriveRWD 
-## 334.9790161   0.8268976   1.0002050   0.7992894   0.8703638
-```
-
-The price of a car is expected to decrease by 17% for each additional second it takes to drive a quartermile, assuming weight, and drive type are held constant.    
-
-The price of a car is expected to increase by 0.02% for each additional pound, assuming quarter mile time, and drive type are held constant. Thus, a 100 lb increase is assocated with an expected 2% increase in price, assuming quarter mile time, and drive type are held constant.     
-
-FWD cars are expected to cost 20% less than AWD cars, assuming quarter mile time and weight are held constant. 
-
-RWD cars are expected to cost 13% less than AWD cars, assuming quarter mile time and weight are held constant. 
-
-
-### Adjusted $R^2$, AIC, BIC
-
-When additional variables are added to a model, SSR never increases, hence $R^2$ never decreases. 
-
-Other diagnostics have been introduced to decrease when a term is added to a model and does little to help explain variability. 
-
-These include:   
-
-* Adjusted $R^2$
-* Akaike Information Criterion (AIC)    
-* Bayesian Information Criterion (BIC)    
-
-These are intended to help guide us in deciding whether or not to include a variable in a model.They can decrease (or increase) when an additional variables is added if it doesn't contain much useful information.   
-
-
-These are mostly ad-hoc approaches designed for specific situations. Although they might work well in certain contexts, none are meanth for general use. Furthermore, they can and often do disagree on the best model. I do not advise using these to choose a model, unless you have good reason to in your specific context. 
-
-
-### Model Building Summary   
-
-Consider the following when building a model for the purpose of interpreting parameters and understanding and drawing conclusions about a population or process. 
-
-* Model driven by research question
-* Include variables of interest    
-* Include potential confounders (like in SAT example)    
-* Avoid including highly correlated explanatory variables    
-* Avoid messy transformations and interactions where possible    
-* Use residual plots to assess appropriatness of model assumptions    
-* Aim for high $R^2$ but not highest     
-* Only use AIC, BIC, Adjusted $R^2$ in the other factors listed above (if you use them at all). Do not rely on these measures alone!  
-* Aim for model complex enough to capture nature of data, but simple enough to give clear interpretations     
-
-
+## F-statistic: 69.46 on 6 and 103 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p>Adding size barely increased <span class="math inline">\(R^2\)</span> at all. We find no evidence of differences in price between the three sizes, after accounting for the other variables.</p>
+<p>Note: Information about car size is already being taken into account through the <code>Weight</code> variable.</p>
+<p>We could keep looking at other variables to add, but at this point, we have a model that gives us a good sense of the factors related to price of a car, capturing 80% of total variability in car price, and is still easy to interpret.</p>
+<p>For our research purposes, this model is good enough.</p>
+</div>
+<div id="check-of-model-assumptions" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.2.5</span> Check of Model Assumptions<a href="building-models-for-interpretation.html#check-of-model-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We’ll use residuals to check the model assumptions.</p>
+<p><strong>Residual by Predicted Plot, Histogram of Residuals, and Normal Quantile-Quantile Plot</strong></p>
+<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb688-1"><a href="building-models-for-interpretation.html#cb688-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M7<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M7<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb688-2"><a href="building-models-for-interpretation.html#cb688-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">x=</span>Cars_M7<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
+<span id="cb688-3"><a href="building-models-for-interpretation.html#cb688-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(Cars_M7<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;QQ Plot&quot;</span>)</span>
+<span id="cb688-4"><a href="building-models-for-interpretation.html#cb688-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-512-1.png" width="864" /></p>
+<p>There is slight concern about constant variance, but otherwise, the model assumptions look good.</p>
+<p><strong>Residual by Predictor Plots</strong></p>
+<div class="sourceCode" id="cb689"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb689-1"><a href="building-models-for-interpretation.html#cb689-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M7<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M7<span class="op">$</span>model<span class="op">$</span>QtrMile)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;QtrMile&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
+<span id="cb689-2"><a href="building-models-for-interpretation.html#cb689-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M7<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M7<span class="op">$</span>model<span class="op">$</span>Weight)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Weight&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
+<span id="cb689-3"><a href="building-models-for-interpretation.html#cb689-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M7<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M7<span class="op">$</span>model<span class="op">$</span>Drive)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Drive&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
+<span id="cb689-4"><a href="building-models-for-interpretation.html#cb689-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-513-1.png" width="864" /></p>
+<p>These plots don’t raise any concerns.</p>
+</div>
+<div id="coefficients-and-exponentiation" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.2.6</span> Coefficients and Exponentiation<a href="building-models-for-interpretation.html#coefficients-and-exponentiation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The model coefficients are shown below.</p>
+<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb690-1"><a href="building-models-for-interpretation.html#cb690-1"></a>Cars_M7<span class="op">$</span>coefficients</span></code></pre></div>
+<pre><code>##   (Intercept)       QtrMile        Weight      DriveFWD      DriveRWD 
+##  5.8140678915 -0.1900743859  0.0002049586 -0.2240322171 -0.1388439916</code></pre>
+<p>Since we used a log transformation, we should interpret <span class="math inline">\(e^{b_j}\)</span> rather than <span class="math inline">\(b_j\)</span> itself.</p>
+<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb692-1"><a href="building-models-for-interpretation.html#cb692-1"></a><span class="kw">exp</span>(Cars_M7<span class="op">$</span>coefficients)</span></code></pre></div>
+<pre><code>## (Intercept)     QtrMile      Weight    DriveFWD    DriveRWD 
+## 334.9790161   0.8268976   1.0002050   0.7992894   0.8703638</code></pre>
+<p>The price of a car is expected to decrease by 17% for each additional second it takes to drive a quartermile, assuming weight, and drive type are held constant.</p>
+<p>The price of a car is expected to increase by 0.02% for each additional pound, assuming quarter mile time, and drive type are held constant. Thus, a 100 lb increase is associated with an expected 2% increase in price, assuming quarter mile time, and drive type are held constant.</p>
+<p>FWD cars are expected to cost 20% less than AWD cars, assuming quarter mile time and weight are held constant.</p>
+<p>RWD cars are expected to cost 13% less than AWD cars, assuming quarter mile time and weight are held constant.</p>
+</div>
+<div id="confidence-and-prediction-intevals" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.2.7</span> Confidence and Prediction Intevals<a href="building-models-for-interpretation.html#confidence-and-prediction-intevals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We’ll use our model to estimate the average price with the following characteristics, and also to predict the price of a new car with the given characteristics.</p>
+<div class="sourceCode" id="cb694"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb694-1"><a href="building-models-for-interpretation.html#cb694-1"></a>newcar &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">QtrMile =</span> <span class="dv">18</span>, <span class="dt">Weight=</span><span class="dv">2400</span>, <span class="dt">Drive =</span> <span class="st">&quot;AWD&quot;</span>)</span></code></pre></div>
+<p>This is an interval for log(Price).</p>
+<div class="sourceCode" id="cb695"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb695-1"><a href="building-models-for-interpretation.html#cb695-1"></a><span class="kw">predict</span>(Cars_M7, <span class="dt">newdata=</span>newcar, <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<pre><code>##        fit      lwr      upr
+## 1 2.884629 2.741423 3.027836</code></pre>
+<p>Exponentiating, we obtain</p>
+<div class="sourceCode" id="cb697"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb697-1"><a href="building-models-for-interpretation.html#cb697-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M7, <span class="dt">newdata=</span>newcar, <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>))</span></code></pre></div>
+<pre><code>##        fit      lwr      upr
+## 1 17.89693 15.50904 20.65249</code></pre>
+<p>We are 95% Confident that the average price of all new 2015 cars that weigh 2400 lbs, drive a quarter mile in 18 seconds on a fast track, and have all wheel drive is between 15.5 thousand and 20.7 thousand dollars.</p>
+<p>Next, we calculate a prediction interval for an individual car with these characteristics.</p>
+<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb699-1"><a href="building-models-for-interpretation.html#cb699-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M7, <span class="dt">newdata=</span>newcar, <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>))</span></code></pre></div>
+<pre><code>##        fit      lwr     upr
+## 1 17.89693 11.57309 27.6763</code></pre>
+<p>We are 95% Confident that the price of an individual new 2015 car that weighs 2400 lbs, drives a quarter mile in 18 seconds on a fast track, and has all wheel drive will be between 11.6 thousand and 27.7 thousand dollars.</p>
+</div>
+<div id="model-building-summary" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.2.8</span> Model Building Summary<a href="building-models-for-interpretation.html#model-building-summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Consider the following when building a model for the purpose of interpreting parameters and understanding and drawing conclusions about a population or process.</p>
+<ul>
+<li>Model driven by research question</li>
+<li>Include variables of interest<br />
+</li>
+<li>Include potential confounders (like in SAT example)<br />
+</li>
+<li>Avoid including highly correlated explanatory variables<br />
+</li>
+<li>Avoid messy transformations and interactions where possible<br />
+</li>
+<li>Use residual plots to assess appropriateness of model assumptions<br />
+</li>
+<li>Aim for high <span class="math inline">\(R^2\)</span> but not highest<br />
+</li>
+<li>Aim for model complex enough to capture nature of data, but simple enough to give clear interpretations</li>
+</ul>
 
 </div>
 </div>
