@@ -142,7 +142,6 @@ transformations
 cars-assumptions-check
 log-transformation
 log-transform-for-car-prices
-interpretations-in-log-model
 log-model-predictions
 log-model-interpretations
 log-model-ci-for-beta_0-beta_1

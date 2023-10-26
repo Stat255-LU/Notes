@@ -324,7 +324,7 @@ The `summary` command for a linear model in R displays a table including 4 colum
 * The F-statistic on the bottom line of the R-output corresponds to an F-test of the given model against a reduced model that include no explanatory variables. The p-value on this line is associated with the test of the null hypothesis that there is no relationship between the response variable and any of the explanatory variables. Since SSR for this reduced model is equal to SST, the F-statistic calculation simplifies to:   
 
 \[
-F=\frac{\frac{SSR - SST}{p}}{\frac{SSR}{n-(n+1)}}
+F=\frac{\frac{SST - SSR}{p}}{\frac{SSR}{n-(p+1)}}
 \]
 
 The degrees of freedom associated with the F-statistic are given by $p$ and $(n-(p+1))$. 
@@ -381,7 +381,7 @@ R^2 = \frac{6.047875 - 5.126873}{6.047875} = 0.1523
 * The F-statistic is
 
 \[
-F=\frac{\frac{SST - SSR}{p}}{\frac{SSR}{n-(n+1)}} = \frac{\frac{6.047875 - 5.126873}{1}}{\frac{5.126873}{53-(1+1)}} = 9.162
+F=\frac{\frac{SSR - SST}{p}}{\frac{SSR}{n-(p+1)}} = \frac{\frac{6.047875 - 5.126873}{1}}{\frac{5.126873}{53-(1+1)}} = 9.162
 \]
 
 This F-statistic is associated with 1 and 51 degrees of freedom.   
@@ -590,7 +590,7 @@ R^2 = \frac{6.047875 - 4.045513}{6.047875} = 0.3311
 * The F-statistic is
 
 \[
-F=\frac{\frac{SST - SSR}{p}}{\frac{SSR}{n-(n+1)}} = \frac{\frac{6.047875 - 4.045513}{1}}{\frac{4.045513}{53-(1+1)}} = 25.24
+F=\frac{\frac{SSR - SST}{p}}{\frac{SSR}{n-(p+1)}} = \frac{\frac{6.047875 - 4.045513}{1}}{\frac{4.045513}{53-(1+1)}} = 25.24
 \]
 
 This F-statistic is associated with 1 and 51 degrees of freedom.   
@@ -1318,7 +1318,7 @@ We consider data from the Kelly Blue Book, pertaining to new cars, released in 2
 
 ```{r, echo=FALSE}
 data(Cars2015)
-#Cars2015 <- Cars2015 %>% rename(Price=LowPrice)
+Cars2015 <- Cars2015 %>% rename(Price=LowPrice)
 ```
 
 ```{r}
@@ -1497,13 +1497,6 @@ grid.arrange(P1, P2, P3, ncol=3)
 There is still some concern about constant variance, though perhaps not as much. The normality assumption appears more reasonable. 
 
 
-### Interpretations in Log Model
-
-\[
-\text{Log Price} = \beta_0 + \beta_1\times \text{Acc060} + \epsilon_i , \text{ where } \epsilon_i\sim\mathcal{N}(0, \sigma)
-\]  
-
-Thus
 
 
 ### Log Model Predictions
@@ -1548,8 +1541,10 @@ A car that accelerates from 0 to 60 mph in 7 seconds is expected to cost 36.3 th
 
 ### Log Model Interpretations 
 
+
 $$
 \begin{aligned}
+\text{Log of Expected Price} & = \beta_0 + \beta_1\times \text{Acc060}\  \text{, Thus:} \\
 \text{ Expected Price} & = e^{\beta_0 + \beta_1\times \text{Acc060} } \\
  & e^{\beta_0}e^{\beta_1 \times \text{Acc060}} \\
  & e^{\beta_0}(e^{\beta_1})^\text{Acc060}
@@ -1560,6 +1555,12 @@ $$
 * $e^{\beta_0}$ is theoretically the expected price of a car that can accelerate from 0 to 60 mph in no time, but this is not a meaningful interpretation. 
 
 * For each additional second it takes a car to accelerate, price is expected to multiply by a factor of $e^{b_1}$. 
+
+Exponentiating the model coefficients gives:
+
+```{r}
+exp(Cars_M_Log$coefficients)
+```
 
 * For each additional second in acceleration time, price is expected to multiply by a a factor of $e^{-0.22} = 0.80$. Thus, each 1-second increase in acceleration time is estimated to be associated with a 20% drop in price, on average.     
 
