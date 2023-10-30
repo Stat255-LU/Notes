@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Building Models for Interpretation | Stat 255: Statistics for Data Science Notes</title>
   <meta name="description" content="Chapter 6 Building Models for Interpretation | Stat 255: Statistics for Data Science Notes" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Building Models for Interpretation | Stat 255: Statistics for Data Science Notes" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Andrew Sage - Lawrence University" />
 
 
-<meta name="date" content="2023-10-26" />
+<meta name="date" content="2023-10-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -49,25 +49,24 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,13 +86,13 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -138,12 +137,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Exploratory Data Analysis</a><ul>
-<li class="chapter" data-level="1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#getting-started-in-r"><i class="fa fa-check"></i><b>1.1</b> Getting Started in R</a><ul>
+<li class="chapter" data-level="1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#getting-started-in-r"><i class="fa fa-check"></i><b>1.1</b> Getting Started in R</a>
+<ul>
 <li class="chapter" data-level="1.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#previewing-the-data"><i class="fa fa-check"></i><b>1.1.1</b> Previewing the Data</a></li>
 <li class="chapter" data-level="1.1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#modifying-the-data"><i class="fa fa-check"></i><b>1.1.2</b> Modifying the Data</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-visualization"><i class="fa fa-check"></i><b>1.2</b> Data Visualization</a><ul>
+<li class="chapter" data-level="1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-visualization"><i class="fa fa-check"></i><b>1.2</b> Data Visualization</a>
+<ul>
 <li class="chapter" data-level="1.2.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#histogram"><i class="fa fa-check"></i><b>1.2.1</b> Histogram</a></li>
 <li class="chapter" data-level="1.2.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#density-plot"><i class="fa fa-check"></i><b>1.2.2</b> Density Plot</a></li>
 <li class="chapter" data-level="1.2.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#boxplot"><i class="fa fa-check"></i><b>1.2.3</b> Boxplot</a></li>
@@ -154,20 +156,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2.8" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#correlation-plot"><i class="fa fa-check"></i><b>1.2.8</b> Correlation Plot</a></li>
 <li class="chapter" data-level="1.2.9" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#scatterplot-matrix"><i class="fa fa-check"></i><b>1.2.9</b> Scatterplot Matrix</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#summary-tables"><i class="fa fa-check"></i><b>1.3</b> Summary Tables</a><ul>
+<li class="chapter" data-level="1.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#summary-tables"><i class="fa fa-check"></i><b>1.3</b> Summary Tables</a>
+<ul>
 <li class="chapter" data-level="1.3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#calculating-summary-statistics"><i class="fa fa-check"></i><b>1.3.1</b> Calculating Summary Statistics</a></li>
 <li class="chapter" data-level="1.3.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#grouped-summaries"><i class="fa fa-check"></i><b>1.3.2</b> Grouped Summaries</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html"><i class="fa fa-check"></i><b>2</b> Introduction to Statistical Models</a><ul>
-<li class="chapter" data-level="2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#fitting-models-to-data"><i class="fa fa-check"></i><b>2.1</b> Fitting Models to Data</a><ul>
+<li class="chapter" data-level="2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html"><i class="fa fa-check"></i><b>2</b> Introduction to Statistical Models</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#fitting-models-to-data"><i class="fa fa-check"></i><b>2.1</b> Fitting Models to Data</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#terminology"><i class="fa fa-check"></i><b>2.1.1</b> Terminology</a></li>
 <li class="chapter" data-level="2.1.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-quantitative-explanatory-variable"><i class="fa fa-check"></i><b>2.1.2</b> Model with Quantitative Explanatory Variable</a></li>
 <li class="chapter" data-level="2.1.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-categorical-variable"><i class="fa fa-check"></i><b>2.1.3</b> Model with Categorical Variable</a></li>
 <li class="chapter" data-level="2.1.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-multiple-explanatory-variables"><i class="fa fa-check"></i><b>2.1.4</b> Model with Multiple Explanatory Variables</a></li>
 <li class="chapter" data-level="2.1.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-no-explanatory-variable"><i class="fa fa-check"></i><b>2.1.5</b> Model with No Explanatory Variable</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variability-explained-by-a-model"><i class="fa fa-check"></i><b>2.2</b> Variability Explained by a Model</a><ul>
+<li class="chapter" data-level="2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variability-explained-by-a-model"><i class="fa fa-check"></i><b>2.2</b> Variability Explained by a Model</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#quantifying-variability"><i class="fa fa-check"></i><b>2.2.1</b> Quantifying Variability</a></li>
 <li class="chapter" data-level="2.2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#total-variability"><i class="fa fa-check"></i><b>2.2.2</b> Total Variability</a></li>
 <li class="chapter" data-level="2.2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#residuals"><i class="fa fa-check"></i><b>2.2.3</b> Residuals</a></li>
@@ -179,7 +185,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.9" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#r2-visually"><i class="fa fa-check"></i><b>2.2.9</b> <span class="math inline">\(R^2\)</span> Visually</a></li>
 <li class="chapter" data-level="2.2.10" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-comparison-summary"><i class="fa fa-check"></i><b>2.2.10</b> Model Comparison Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#models-with-interaction"><i class="fa fa-check"></i><b>2.3</b> Models with Interaction</a><ul>
+<li class="chapter" data-level="2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#models-with-interaction"><i class="fa fa-check"></i><b>2.3</b> Models with Interaction</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#definition-of-interaction"><i class="fa fa-check"></i><b>2.3.1</b> Definition of Interaction</a></li>
 <li class="chapter" data-level="2.3.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-term"><i class="fa fa-check"></i><b>2.3.2</b> Interaction Term</a></li>
 <li class="chapter" data-level="2.3.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-models-in-r"><i class="fa fa-check"></i><b>2.3.3</b> Interaction Models in R</a></li>
@@ -187,13 +194,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#considerations-for-using-interactions"><i class="fa fa-check"></i><b>2.3.5</b> Considerations for Using Interactions</a></li>
 <li class="chapter" data-level="2.3.6" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-vs-correlation"><i class="fa fa-check"></i><b>2.3.6</b> Interaction vs Correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#least-squares-estimation-lse"><i class="fa fa-check"></i><b>2.4</b> Least Squares Estimation (LSE)</a><ul>
+<li class="chapter" data-level="2.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#least-squares-estimation-lse"><i class="fa fa-check"></i><b>2.4</b> Least Squares Estimation (LSE)</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#estimating-regression-coefficients"><i class="fa fa-check"></i><b>2.4.1</b> Estimating Regression Coefficients</a></li>
 <li class="chapter" data-level="2.4.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#mathematics-of-lse-for-slr"><i class="fa fa-check"></i><b>2.4.2</b> Mathematics of LSE for SLR</a></li>
 <li class="chapter" data-level="2.4.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#lse-for-categorical-variable"><i class="fa fa-check"></i><b>2.4.3</b> LSE for Categorical Variable</a></li>
 <li class="chapter" data-level="2.4.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#lse-more-generally"><i class="fa fa-check"></i><b>2.4.4</b> LSE More Generally</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>2.5</b> ANalysis Of VAriance</a><ul>
+<li class="chapter" data-level="2.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>2.5</b> ANalysis Of VAriance</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#submodels"><i class="fa fa-check"></i><b>2.5.1</b> Submodels</a></li>
 <li class="chapter" data-level="2.5.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#f-statistics"><i class="fa fa-check"></i><b>2.5.2</b> F-Statistics</a></li>
 <li class="chapter" data-level="2.5.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#comparing-3-or-more-categories"><i class="fa fa-check"></i><b>2.5.3</b> Comparing 3 or More Categories</a></li>
@@ -201,8 +210,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#alternative-f-statistic-formula"><i class="fa fa-check"></i><b>2.5.5</b> Alternative F-Statistic Formula</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html"><i class="fa fa-check"></i><b>3</b> Hypothesis Testing via Permutation</a><ul>
-<li class="chapter" data-level="3.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#test-for-difference-in-means"><i class="fa fa-check"></i><b>3.1</b> Test for Difference in Means</a><ul>
+<li class="chapter" data-level="3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html"><i class="fa fa-check"></i><b>3</b> Hypothesis Testing via Permutation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#test-for-difference-in-means"><i class="fa fa-check"></i><b>3.1</b> Test for Difference in Means</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#mercury-levels-in-florida-lakes"><i class="fa fa-check"></i><b>3.1.1</b> Mercury Levels in Florida Lakes</a></li>
 <li class="chapter" data-level="3.1.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#model-for-mercury-level"><i class="fa fa-check"></i><b>3.1.2</b> Model for Mercury Level</a></li>
 <li class="chapter" data-level="3.1.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#hypotheses-and-key-question"><i class="fa fa-check"></i><b>3.1.3</b> Hypotheses and Key Question</a></li>
@@ -211,7 +222,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.6" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#r-code-for-permutation-test"><i class="fa fa-check"></i><b>3.1.6</b> R Code for Permutation Test</a></li>
 <li class="chapter" data-level="3.1.7" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#p-values"><i class="fa fa-check"></i><b>3.1.7</b> p-values</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#general-permutation-tests"><i class="fa fa-check"></i><b>3.2</b> General Permutation Tests</a><ul>
+<li class="chapter" data-level="3.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#general-permutation-tests"><i class="fa fa-check"></i><b>3.2</b> General Permutation Tests</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#other-test-statistics"><i class="fa fa-check"></i><b>3.2.1</b> Other Test Statistics</a></li>
 <li class="chapter" data-level="3.2.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#general-permutation-test-procedure"><i class="fa fa-check"></i><b>3.2.2</b> General Permutation Test Procedure</a></li>
 <li class="chapter" data-level="3.2.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#difference-in-standard-deviation"><i class="fa fa-check"></i><b>3.2.3</b> Difference in Standard Deviation</a></li>
@@ -220,12 +232,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#responsible-hypothesis-testing"><i class="fa fa-check"></i><b>3.3</b> Responsible Hypothesis Testing</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html"><i class="fa fa-check"></i><b>4</b> Bootstrap Interval Estimation</a><ul>
-<li class="chapter" data-level="4.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#sampling-distributions"><i class="fa fa-check"></i><b>4.1</b> Sampling Distributions</a><ul>
+<li class="chapter" data-level="4" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html"><i class="fa fa-check"></i><b>4</b> Bootstrap Interval Estimation</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#sampling-distributions"><i class="fa fa-check"></i><b>4.1</b> Sampling Distributions</a>
+<ul>
 <li class="chapter" data-level="4.1.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#sampling-from-a-population"><i class="fa fa-check"></i><b>4.1.1</b> Sampling From a Population</a></li>
 <li class="chapter" data-level="4.1.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#confidence-intervals"><i class="fa fa-check"></i><b>4.1.2</b> Confidence Intervals</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrapping"><i class="fa fa-check"></i><b>4.2</b> Bootstrapping</a><ul>
+<li class="chapter" data-level="4.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrapping"><i class="fa fa-check"></i><b>4.2</b> Bootstrapping</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#mercury-levels-in-florida-lakes-1"><i class="fa fa-check"></i><b>4.2.1</b> Mercury Levels in Florida Lakes</a></li>
 <li class="chapter" data-level="4.2.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-sampling"><i class="fa fa-check"></i><b>4.2.2</b> Bootstrap Sampling</a></li>
 <li class="chapter" data-level="4.2.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-samples-of-lakes"><i class="fa fa-check"></i><b>4.2.3</b> Bootstrap Samples of Lakes</a></li>
@@ -233,7 +248,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.5" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-se-confidence-interval"><i class="fa fa-check"></i><b>4.2.5</b> Bootstrap SE Confidence Interval</a></li>
 <li class="chapter" data-level="4.2.6" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-distribution-vs-sampling-distribution"><i class="fa fa-check"></i><b>4.2.6</b> Bootstrap Distribution vs Sampling Distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-confidence-interval-example"><i class="fa fa-check"></i><b>4.3</b> Bootstrap Confidence Interval Example</a><ul>
+<li class="chapter" data-level="4.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-confidence-interval-example"><i class="fa fa-check"></i><b>4.3</b> Bootstrap Confidence Interval Example</a>
+<ul>
 <li class="chapter" data-level="4.3.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrapping-other-statistics"><i class="fa fa-check"></i><b>4.3.1</b> Bootstrapping Other Statistics</a></li>
 <li class="chapter" data-level="4.3.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#ci-for-mean"><i class="fa fa-check"></i><b>4.3.2</b> CI for Mean</a></li>
 <li class="chapter" data-level="4.3.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#ci-for-standard-deviation"><i class="fa fa-check"></i><b>4.3.3</b> CI for Standard Deviation</a></li>
@@ -244,7 +260,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.8" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#more-cis-in-regression"><i class="fa fa-check"></i><b>4.3.8</b> More CI’s in Regression</a></li>
 <li class="chapter" data-level="4.3.9" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrapping-cautions"><i class="fa fa-check"></i><b>4.3.9</b> Bootstrapping Cautions</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#estimating-standard-error"><i class="fa fa-check"></i><b>4.4</b> Estimating Standard Error</a><ul>
+<li class="chapter" data-level="4.4" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#estimating-standard-error"><i class="fa fa-check"></i><b>4.4</b> Estimating Standard Error</a>
+<ul>
 <li class="chapter" data-level="4.4.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#standard-error-vs-standard-deviation"><i class="fa fa-check"></i><b>4.4.1</b> Standard Error vs Standard Deviation</a></li>
 <li class="chapter" data-level="4.4.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#sample-size-and-standard-error"><i class="fa fa-check"></i><b>4.4.2</b> Sample Size and Standard Error</a></li>
 <li class="chapter" data-level="4.4.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#standard-error-formulas"><i class="fa fa-check"></i><b>4.4.3</b> Standard Error Formulas</a></li>
@@ -255,8 +272,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.8" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#ci-method-comparison"><i class="fa fa-check"></i><b>4.4.8</b> CI Method Comparison</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html"><i class="fa fa-check"></i><b>5</b> Normal Error Regression Model</a><ul>
-<li class="chapter" data-level="5.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#the-normal-error-regression-model"><i class="fa fa-check"></i><b>5.1</b> The Normal Error Regression Model</a><ul>
+<li class="chapter" data-level="5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html"><i class="fa fa-check"></i><b>5</b> Normal Error Regression Model</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#the-normal-error-regression-model"><i class="fa fa-check"></i><b>5.1</b> The Normal Error Regression Model</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#example-ice-cream-dispenser"><i class="fa fa-check"></i><b>5.1.1</b> Example: Ice Cream dispenser</a></li>
 <li class="chapter" data-level="5.1.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#signal-and-noise"><i class="fa fa-check"></i><b>5.1.2</b> Signal and Noise</a></li>
 <li class="chapter" data-level="5.1.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#normal-distribution"><i class="fa fa-check"></i><b>5.1.3</b> Normal Distribution</a></li>
@@ -266,7 +285,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#implications-of-normal-error-regression-model"><i class="fa fa-check"></i><b>5.1.7</b> Implications of Normal Error Regression Model</a></li>
 <li class="chapter" data-level="5.1.8" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#philosophical-question"><i class="fa fa-check"></i><b>5.1.8</b> Philosophical Question</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#inference-in-normal-error-regression-model"><i class="fa fa-check"></i><b>5.2</b> Inference in Normal Error Regression Model</a><ul>
+<li class="chapter" data-level="5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#inference-in-normal-error-regression-model"><i class="fa fa-check"></i><b>5.2</b> Inference in Normal Error Regression Model</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#lm-summary-output"><i class="fa fa-check"></i><b>5.2.1</b> <code>lm</code> <code>summary</code> Output</a></li>
 <li class="chapter" data-level="5.2.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#t-distribution"><i class="fa fa-check"></i><b>5.2.2</b> t-distribution</a></li>
 <li class="chapter" data-level="5.2.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#difference-in-means-example-1"><i class="fa fa-check"></i><b>5.2.3</b> Difference in Means Example</a></li>
@@ -275,12 +295,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#mr-with-interaction-example"><i class="fa fa-check"></i><b>5.2.6</b> MR with Interaction Example</a></li>
 <li class="chapter" data-level="5.2.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#limitations"><i class="fa fa-check"></i><b>5.2.7</b> Limitations</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#f-distributions"><i class="fa fa-check"></i><b>5.3</b> F-Distributions</a><ul>
+<li class="chapter" data-level="5.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#f-distributions"><i class="fa fa-check"></i><b>5.3</b> F-Distributions</a>
+<ul>
 <li class="chapter" data-level="5.3.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#f-distribution"><i class="fa fa-check"></i><b>5.3.1</b> F-Distribution</a></li>
 <li class="chapter" data-level="5.3.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#house-condition-example"><i class="fa fa-check"></i><b>5.3.2</b> House Condition Example</a></li>
 <li class="chapter" data-level="5.3.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#interaction-example"><i class="fa fa-check"></i><b>5.3.3</b> Interaction Example</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#regression-model-assumptions"><i class="fa fa-check"></i><b>5.4</b> Regression Model Assumptions</a><ul>
+<li class="chapter" data-level="5.4" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#regression-model-assumptions"><i class="fa fa-check"></i><b>5.4</b> Regression Model Assumptions</a>
+<ul>
 <li class="chapter" data-level="5.4.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#regression-assumptions"><i class="fa fa-check"></i><b>5.4.1</b> Regression Assumptions</a></li>
 <li class="chapter" data-level="5.4.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#checking-model-assumptions"><i class="fa fa-check"></i><b>5.4.2</b> Checking Model Assumptions</a></li>
 <li class="chapter" data-level="5.4.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#summary-of-checks-for-model-assumptions"><i class="fa fa-check"></i><b>5.4.3</b> Summary of Checks for Model Assumptions</a></li>
@@ -288,7 +310,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4.5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#example-ph-model"><i class="fa fa-check"></i><b>5.4.5</b> Example: pH Model</a></li>
 <li class="chapter" data-level="5.4.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#example-house-prices"><i class="fa fa-check"></i><b>5.4.6</b> Example: House Prices</a></li>
 </ul></li>
-<li class="chapter" data-level="5.5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#intervals-for-expected-response"><i class="fa fa-check"></i><b>5.5</b> Intervals for Expected Response</a><ul>
+<li class="chapter" data-level="5.5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#intervals-for-expected-response"><i class="fa fa-check"></i><b>5.5</b> Intervals for Expected Response</a>
+<ul>
 <li class="chapter" data-level="5.5.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#parameter-values-and-expected-responses"><i class="fa fa-check"></i><b>5.5.1</b> Parameter Values and Expected Responses</a></li>
 <li class="chapter" data-level="5.5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#estimation-and-prediction"><i class="fa fa-check"></i><b>5.5.2</b> Estimation and Prediction</a></li>
 <li class="chapter" data-level="5.5.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#estimation-and-prediction-in-slr"><i class="fa fa-check"></i><b>5.5.3</b> Estimation and Prediction in SLR</a></li>
@@ -297,7 +320,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#car-price-and-acceleration-time"><i class="fa fa-check"></i><b>5.5.6</b> Car Price and Acceleration Time</a></li>
 <li class="chapter" data-level="5.5.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#florida-lakes-est.-and-pred."><i class="fa fa-check"></i><b>5.5.7</b> Florida Lakes Est. and Pred.</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#transformations"><i class="fa fa-check"></i><b>5.6</b> Transformations</a><ul>
+<li class="chapter" data-level="5.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#transformations"><i class="fa fa-check"></i><b>5.6</b> Transformations</a>
+<ul>
 <li class="chapter" data-level="5.6.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#cars-assumptions-check"><i class="fa fa-check"></i><b>5.6.1</b> Cars Assumptions Check</a></li>
 <li class="chapter" data-level="5.6.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#log-transformation"><i class="fa fa-check"></i><b>5.6.2</b> Log Transformation</a></li>
 <li class="chapter" data-level="5.6.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#log-transform-for-car-prices"><i class="fa fa-check"></i><b>5.6.3</b> Log Transform for Car Prices</a></li>
@@ -311,7 +335,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6.11" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#log-model-visualization"><i class="fa fa-check"></i><b>5.6.11</b> Log Model Visualization</a></li>
 <li class="chapter" data-level="5.6.12" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#comments-on-transformations"><i class="fa fa-check"></i><b>5.6.12</b> Comments on Transformations</a></li>
 </ul></li>
-<li class="chapter" data-level="5.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#case-studies"><i class="fa fa-check"></i><b>5.7</b> Case Studies</a><ul>
+<li class="chapter" data-level="5.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#case-studies"><i class="fa fa-check"></i><b>5.7</b> Case Studies</a>
+<ul>
 <li class="chapter" data-level="5.7.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#flights-from-ny-to-chi"><i class="fa fa-check"></i><b>5.7.1</b> Flights from NY to CHI</a></li>
 <li class="chapter" data-level="5.7.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#smoking-during-pregnancy"><i class="fa fa-check"></i><b>5.7.2</b> Smoking During Pregnancy</a></li>
 <li class="chapter" data-level="5.7.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#smoking-during-pregnancy-cont"><i class="fa fa-check"></i><b>5.7.3</b> Smoking During Pregnancy (cont)</a></li>
@@ -321,8 +346,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.8" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#impact-of-model-assumption-violations"><i class="fa fa-check"></i><b>5.8</b> Impact of Model Assumption Violations</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html"><i class="fa fa-check"></i><b>6</b> Building Models for Interpretation</a><ul>
-<li class="chapter" data-level="6.1" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-building"><i class="fa fa-check"></i><b>6.1</b> Model Building</a><ul>
+<li class="chapter" data-level="6" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html"><i class="fa fa-check"></i><b>6</b> Building Models for Interpretation</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-building---sat-scores"><i class="fa fa-check"></i><b>6.1</b> Model Building - SAT Scores</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#modeling-for-interpretation"><i class="fa fa-check"></i><b>6.1.1</b> Modeling for Interpretation</a></li>
 <li class="chapter" data-level="6.1.2" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#sat-scores-dataset"><i class="fa fa-check"></i><b>6.1.2</b> SAT Scores Dataset</a></li>
 <li class="chapter" data-level="6.1.3" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#research-question"><i class="fa fa-check"></i><b>6.1.3</b> Research Question</a></li>
@@ -335,7 +362,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.10" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#account-for-region"><i class="fa fa-check"></i><b>6.1.10</b> Account for Region?</a></li>
 <li class="chapter" data-level="6.1.11" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#predictions-and-intervals"><i class="fa fa-check"></i><b>6.1.11</b> Predictions and Intervals</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#modeling-car-price"><i class="fa fa-check"></i><b>6.2</b> Modeling Car Price</a><ul>
+<li class="chapter" data-level="6.2" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#modeling-car-price"><i class="fa fa-check"></i><b>6.2</b> Modeling Car Price</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-for-price-of-2015-cars"><i class="fa fa-check"></i><b>6.2.1</b> Model for Price of 2015 Cars</a></li>
 <li class="chapter" data-level="6.2.2" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#acc.-and-qrt.-mile-time"><i class="fa fa-check"></i><b>6.2.2</b> Acc. and Qrt. Mile Time</a></li>
 <li class="chapter" data-level="6.2.3" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#adding-weight-to-model"><i class="fa fa-check"></i><b>6.2.3</b> Adding Weight to Model</a></li>
@@ -346,7 +374,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2.8" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-building-summary"><i class="fa fa-check"></i><b>6.2.8</b> Model Building Summary</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="predictive-modeling.html"><a href="predictive-modeling.html"><i class="fa fa-check"></i><b>7</b> Predictive Modeling</a></li>
+<li class="chapter" data-level="7" data-path="predictive-modeling.html"><a href="predictive-modeling.html"><i class="fa fa-check"></i><b>7</b> Predictive Modeling</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#modeling-for-prediction"><i class="fa fa-check"></i><b>7.1</b> Modeling for Prediction</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#overview"><i class="fa fa-check"></i><b>7.1.1</b> Overview</a></li>
+<li class="chapter" data-level="7.1.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#illustration-of-predictive-modeling"><i class="fa fa-check"></i><b>7.1.2</b> Illustration of Predictive Modeling</a></li>
+<li class="chapter" data-level="7.1.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#predicting-new-data"><i class="fa fa-check"></i><b>7.1.3</b> Predicting New Data</a></li>
+<li class="chapter" data-level="7.1.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#evaluating-predictions---rmspe"><i class="fa fa-check"></i><b>7.1.4</b> Evaluating Predictions - RMSPE</a></li>
+<li class="chapter" data-level="7.1.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#training-data-error"><i class="fa fa-check"></i><b>7.1.5</b> Training Data Error</a></li>
+<li class="chapter" data-level="7.1.6" data-path="predictive-modeling.html"><a href="predictive-modeling.html#graph-of-rmspe"><i class="fa fa-check"></i><b>7.1.6</b> Graph of RMSPE</a></li>
+<li class="chapter" data-level="7.1.7" data-path="predictive-modeling.html"><a href="predictive-modeling.html#best-model"><i class="fa fa-check"></i><b>7.1.7</b> Best Model</a></li>
+<li class="chapter" data-level="7.1.8" data-path="predictive-modeling.html"><a href="predictive-modeling.html#model-complexity-training-error-and-test-error"><i class="fa fa-check"></i><b>7.1.8</b> Model Complexity, Training Error, and Test Error</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#variance-bias-tradeoff"><i class="fa fa-check"></i><b>7.2</b> Variance-Bias Tradeoff</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#what-contributes-to-prediction-error"><i class="fa fa-check"></i><b>7.2.1</b> What Contributes to Prediction Error?</a></li>
+<li class="chapter" data-level="7.2.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#variance-and-bias"><i class="fa fa-check"></i><b>7.2.2</b> Variance and Bias</a></li>
+<li class="chapter" data-level="7.2.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#variance-bias-tradeoff-1"><i class="fa fa-check"></i><b>7.2.3</b> Variance-Bias Tradeoff</a></li>
+<li class="chapter" data-level="7.2.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#modeling-for-prediction-1"><i class="fa fa-check"></i><b>7.2.4</b> Modeling for Prediction</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="classification-and-logistic-regression.html"><a href="classification-and-logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Classification and Logistic Regression</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -367,7 +415,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="building-models-for-interpretation" class="section level1 hasAnchor">
+<div id="building-models-for-interpretation" class="section level1 hasAnchor" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Building Models for Interpretation<a href="building-models-for-interpretation.html#building-models-for-interpretation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><strong>Learning Outcomes:</strong></p>
 <ol style="list-style-type: decimal">
@@ -383,9 +431,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
 <li>Decide which variables to include in a statistical model, and justify your decision.</li>
 </ol>
-<div id="model-building" class="section level2 hasAnchor">
-<h2><span class="header-section-number">6.1</span> Model Building<a href="building-models-for-interpretation.html#model-building" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="modeling-for-interpretation" class="section level3 hasAnchor">
+<div id="model-building---sat-scores" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Model Building - SAT Scores<a href="building-models-for-interpretation.html#model-building---sat-scores" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="modeling-for-interpretation" class="section level3 hasAnchor" number="6.1.1">
 <h3><span class="header-section-number">6.1.1</span> Modeling for Interpretation<a href="building-models-for-interpretation.html#modeling-for-interpretation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>So far, we’ve dealt with models with 2 or fewer variables. Some real questions require accounting for more than two variables. In these situations, we’ll need to develop a model that is complex enough to capture the important aspects of the mechanism we’re modeling, but also simple enough for us to be able to explain and interpret. We’ll need to decide how many variables to include in the model, and whether to use transformations, or to include interaction terms.</p>
 <p>We’ll examine strategies for modeling in two different contexts. In this chapter, we’ll focus on building models for situations when we want to make interpretations and draw conclusions about relationships between variables. In Chapter 7, we focus on modeling solely for the purpose of prediction, when we are not interested in making interpretations or conclusions about relationships between variables.</p>
@@ -402,7 +450,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We’ll go through a couple example to see how we can address these questions in building a model.</p>
 <p>Keep in mind, there is no single correct model, but there are common characteristics of a good model. While two statisticians might use different models for a given set of data, they will hopefully lead to reasonably similar conclusions if constructed carefully.</p>
 </div>
-<div id="sat-scores-dataset" class="section level3 hasAnchor">
+<div id="sat-scores-dataset" class="section level3 hasAnchor" number="6.1.2">
 <h3><span class="header-section-number">6.1.2</span> SAT Scores Dataset<a href="building-models-for-interpretation.html#sat-scores-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ll now look at a dataset containing education data on all 50 states. It includes the following variables.</p>
 <p><code>state</code> - a factor with names of each state</p>
@@ -412,13 +460,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>frac</code> - percentage of all eligible students taking the SAT, 1994-95</p>
 <p><code>sat</code> - average total SAT score, 1994-95</p>
 <p><code>region</code> - region of the country</p>
-<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="building-models-for-interpretation.html#cb619-1"></a><span class="kw">library</span>(mosaicData)</span>
-<span id="cb619-2"><a href="building-models-for-interpretation.html#cb619-2"></a><span class="kw">data</span>(SAT)</span>
-<span id="cb619-3"><a href="building-models-for-interpretation.html#cb619-3"></a>SAT &lt;-<span class="st"> </span>SAT <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(verbal, math))</span>
-<span id="cb619-4"><a href="building-models-for-interpretation.html#cb619-4"></a><span class="kw">library</span>(Lock5Data)</span>
-<span id="cb619-5"><a href="building-models-for-interpretation.html#cb619-5"></a><span class="kw">data</span>(<span class="st">&quot;USStates&quot;</span>)</span>
-<span id="cb619-6"><a href="building-models-for-interpretation.html#cb619-6"></a>SAT &lt;-<span class="st"> </span>SAT <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(USStates <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(State, Region), <span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;state&quot;</span>=<span class="st">&quot;State&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">region =</span> Region)</span></code></pre></div>
-<div class="sourceCode" id="cb620"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb620-1"><a href="building-models-for-interpretation.html#cb620-1"></a>SAT</span></code></pre></div>
+<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="building-models-for-interpretation.html#cb621-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mosaicData)</span>
+<span id="cb621-2"><a href="building-models-for-interpretation.html#cb621-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(SAT)</span>
+<span id="cb621-3"><a href="building-models-for-interpretation.html#cb621-3" aria-hidden="true" tabindex="-1"></a>SAT <span class="ot">&lt;-</span> SAT <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(verbal, math))</span>
+<span id="cb621-4"><a href="building-models-for-interpretation.html#cb621-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Lock5Data)</span>
+<span id="cb621-5"><a href="building-models-for-interpretation.html#cb621-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;USStates&quot;</span>)</span>
+<span id="cb621-6"><a href="building-models-for-interpretation.html#cb621-6" aria-hidden="true" tabindex="-1"></a>SAT <span class="ot">&lt;-</span> SAT <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(USStates <span class="sc">%&gt;%</span> <span class="fu">select</span>(State, Region), <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;state&quot;</span><span class="ot">=</span><span class="st">&quot;State&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">region =</span> Region)</span></code></pre></div>
+<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="building-models-for-interpretation.html#cb622-1" aria-hidden="true" tabindex="-1"></a>SAT</span></code></pre></div>
 <pre><code>##             state expend ratio salary frac  sat region
 ## 1         Alabama  4.405  17.2 31.144    8 1029      S
 ## 2          Alaska  8.963  17.6 47.951   47  934      W
@@ -472,24 +520,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 50        Wyoming  6.160  14.9 31.285   10 1001      W</code></pre>
 <p>Note that the dataset is quite old (from 1994-95), so the financial information may be out of date. Nevertheless, it is useful for exploring relationships between SAT scores and other variables.</p>
 </div>
-<div id="research-question" class="section level3 hasAnchor">
+<div id="research-question" class="section level3 hasAnchor" number="6.1.3">
 <h3><span class="header-section-number">6.1.3</span> Research Question<a href="building-models-for-interpretation.html#research-question" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A good statistical research question should be one that has practical implications that people would care about. It should be complex enough to be worth investigating. If the answer is obvious, then there would be no need to use statistics, or scientific reasoning in general.</p>
 <p>For the SAT score dataset, we’ll focus on the question:</p>
 <p><strong>Do students in states that prioritize education spending achieve better SAT scores?</strong></p>
 <p>While this may seem like a straightforward question, we’ll see that answering it properly requires careful thought and analysis.</p>
 </div>
-<div id="teacher-salary-and-sat-score" class="section level3 hasAnchor">
+<div id="teacher-salary-and-sat-score" class="section level3 hasAnchor" number="6.1.4">
 <h3><span class="header-section-number">6.1.4</span> Teacher Salary and SAT score<a href="building-models-for-interpretation.html#teacher-salary-and-sat-score" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>One way to measure a state’s investment in education is in how much it pays its teachers. The plot displays average SAT score against average teacher salary for all 50 US states.</p>
-<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="building-models-for-interpretation.html#cb622-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>SAT, <span class="kw">aes</span>(<span class="dt">y=</span>sat, <span class="dt">x=</span>salary)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb622-2"><a href="building-models-for-interpretation.html#cb622-2"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb622-3"><a href="building-models-for-interpretation.html#cb622-3"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Average SAT score vs Average Teacher Salary&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb622-4"><a href="building-models-for-interpretation.html#cb622-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Average Teacher Salary in Thousands&quot;</span>) </span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-473-1.png" width="576" /></p>
+<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb624-1"><a href="building-models-for-interpretation.html#cb624-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>SAT, <span class="fu">aes</span>(<span class="at">y=</span>sat, <span class="at">x=</span>salary)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb624-2"><a href="building-models-for-interpretation.html#cb624-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb624-3"><a href="building-models-for-interpretation.html#cb624-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Average SAT score vs Average Teacher Salary&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb624-4"><a href="building-models-for-interpretation.html#cb624-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Average Teacher Salary in Thousands&quot;</span>) </span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-474-1.png" width="576" /></p>
 <p>Fitting a simple linear regression model to the data, we obtain the following:</p>
-<div class="sourceCode" id="cb623"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb623-1"><a href="building-models-for-interpretation.html#cb623-1"></a>SAT_M1 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>SAT, sat<span class="op">~</span>salary)</span>
-<span id="cb623-2"><a href="building-models-for-interpretation.html#cb623-2"></a><span class="kw">summary</span>(SAT_M1)</span></code></pre></div>
+<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb625-1"><a href="building-models-for-interpretation.html#cb625-1" aria-hidden="true" tabindex="-1"></a>SAT_M1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>SAT, sat<span class="sc">~</span>salary)</span>
+<span id="cb625-2"><a href="building-models-for-interpretation.html#cb625-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(SAT_M1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = sat ~ salary, data = SAT)
@@ -510,24 +558,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## F-statistic: 11.52 on 1 and 48 DF,  p-value: 0.001391</code></pre>
 <p>On average, SAT score is expected to decrease by about 5.5 points for each additional one thousand dollars in average teacher salary in the state. The low p-value suggests a relationship like this is unlikely to occur by chance, though the practical importance of a 5-point decrease in SAT score (out of 1600) seems minimal. Furthermore, only 19% of the total variation in SAT score is explained by teaching salary. Nevertheless, a person looking to argue against raising teacher salaries might use the negative estimate and low p-value as a justification for their position.</p>
 </div>
-<div id="a-deeper-investigation" class="section level3 hasAnchor">
+<div id="a-deeper-investigation" class="section level3 hasAnchor" number="6.1.5">
 <h3><span class="header-section-number">6.1.5</span> A Deeper Investigation<a href="building-models-for-interpretation.html#a-deeper-investigation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Notice that there are large discrepancies in the <code>frac</code> variable, representing the percentage of students taking the SAT. In Connecticut, 81% of high school students took the SAT, compared to only 6% in Arkansas.</p>
 <p>Let’s break the data down by the percentage of students who take the SAT. We’ll (somewhat arbitrarily), divide the states into</p>
 <p>Low = 0%-22%<br />
 Medium = 22-49%<br />
 High = 49-81%</p>
-<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb625-1"><a href="building-models-for-interpretation.html#cb625-1"></a>SAT &lt;-<span class="st"> </span><span class="kw">mutate</span>(SAT, <span class="dt">fracgrp =</span> <span class="kw">cut</span>(frac, </span>
-<span id="cb625-2"><a href="building-models-for-interpretation.html#cb625-2"></a>      <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">22</span>, <span class="dv">49</span>, <span class="dv">81</span>), </span>
-<span id="cb625-3"><a href="building-models-for-interpretation.html#cb625-3"></a>      <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="building-models-for-interpretation.html#cb627-1" aria-hidden="true" tabindex="-1"></a>SAT <span class="ot">&lt;-</span> <span class="fu">mutate</span>(SAT, <span class="at">fracgrp =</span> <span class="fu">cut</span>(frac, </span>
+<span id="cb627-2"><a href="building-models-for-interpretation.html#cb627-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">22</span>, <span class="dv">49</span>, <span class="dv">81</span>), </span>
+<span id="cb627-3"><a href="building-models-for-interpretation.html#cb627-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;high&quot;</span>)))</span></code></pre></div>
 <p>Plotting SAT score against average teacher salary in each state, we see that the picture changes.</p>
-<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="building-models-for-interpretation.html#cb626-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>SAT, <span class="kw">aes</span>( <span class="dt">y=</span>sat, <span class="dt">x=</span>salary )) <span class="op">+</span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="dt">facets =</span> <span class="op">~</span>fracgrp) <span class="op">+</span></span>
-<span id="cb626-2"><a href="building-models-for-interpretation.html#cb626-2"></a><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Average Teacher Salary in Thousands&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-476-1.png" width="864" /></p>
+<div class="sourceCode" id="cb628"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb628-1"><a href="building-models-for-interpretation.html#cb628-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>SAT, <span class="fu">aes</span>( <span class="at">y=</span>sat, <span class="at">x=</span>salary )) <span class="sc">+</span><span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="at">facets =</span> <span class="sc">~</span>fracgrp) <span class="sc">+</span></span>
+<span id="cb628-2"><a href="building-models-for-interpretation.html#cb628-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Average Teacher Salary in Thousands&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-477-1.png" width="864" /></p>
 <p>There appears to be a slight positive relationship between teacher salary and SAT score in each state.</p>
 <p>While breaking up the data into these three groups helps us visualize, we’ll simply add the <code>frac</code> variable to the model as a quantitative variable, rather than breaking it into these arbitrary categories.</p>
-<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="building-models-for-interpretation.html#cb627-1"></a>SAT_M2 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>SAT, sat<span class="op">~</span>salary<span class="op">+</span>frac)</span>
-<span id="cb627-2"><a href="building-models-for-interpretation.html#cb627-2"></a><span class="kw">summary</span>(SAT_M2)</span></code></pre></div>
+<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb629-1"><a href="building-models-for-interpretation.html#cb629-1" aria-hidden="true" tabindex="-1"></a>SAT_M2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>SAT, sat<span class="sc">~</span>salary<span class="sc">+</span>frac)</span>
+<span id="cb629-2"><a href="building-models-for-interpretation.html#cb629-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(SAT_M2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = sat ~ salary + frac, data = SAT)
@@ -553,12 +601,12 @@ High = 49-81%</p>
 <p>Adding percentage of students taking the exam increased the <span class="math inline">\(R^2\)</span> value substantially.</p>
 <p>We see that the relationship between SAT score and salary appears to reverse when we account for percentage of students taking the test. States with low percentages of people taking the SAT tend to get higher scores, as the people taking the test tend to be those who are best prepared and have strong incentive for taking it, perhaps because they are trying to get into an elite college. At the same time, states that pay their teachers more tend to have higher percentages of people taking the SAT. This may be because states that prioritize education are more likely to cover the cost of students taking the test, or even to require it. It may also be that many of the states that require the SAT are coastal states, where cost of living, and thus teacher salaries, tend to be higher in general. Thus, it appears initially that teacher salaries are negatively correlated with SAT scores, but after accounting for percentage taking the test, the trend reverses. Situations where an apparent trend disappears or reverses after accounting for another variable are called <strong>Simpson’s Paradox.</strong></p>
 </div>
-<div id="student-to-teacher-ratio" class="section level3 hasAnchor">
+<div id="student-to-teacher-ratio" class="section level3 hasAnchor" number="6.1.6">
 <h3><span class="header-section-number">6.1.6</span> Student-to-Teacher Ratio<a href="building-models-for-interpretation.html#student-to-teacher-ratio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s see what other possible explanatory variables we might want to add to the model. Keep in mind that our goal is to understand the relationship between teacher salary and SAT scores in the state, so we should only use variables that help us understand this relationship.<br />
 In addition to teacher salaries, student-to-teacher ratio might be an indication of a state’s investment in education. We’ll add student-to-teacher ratio to the model and explore whether there is evidence that hiring enough teachers to keep student-to-teacher ratio low has a benefit, in terms of SAT score.</p>
-<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb629-1"><a href="building-models-for-interpretation.html#cb629-1"></a>SAT_M3 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>SAT, sat<span class="op">~</span>salary<span class="op">+</span>frac<span class="op">+</span>ratio)</span>
-<span id="cb629-2"><a href="building-models-for-interpretation.html#cb629-2"></a><span class="kw">summary</span>(SAT_M3)</span></code></pre></div>
+<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb631-1"><a href="building-models-for-interpretation.html#cb631-1" aria-hidden="true" tabindex="-1"></a>SAT_M3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>SAT, sat<span class="sc">~</span>salary<span class="sc">+</span>frac<span class="sc">+</span>ratio)</span>
+<span id="cb631-2"><a href="building-models-for-interpretation.html#cb631-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(SAT_M3)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = sat ~ salary + frac + ratio, data = SAT)
@@ -585,11 +633,11 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 <p>On average, a 1 student per teacher increase in student to teacher ratio is associated with a 4.6 point from in average SAT score, assuming average teacher salary, and percentage of students taking the SAT are held constant.</p>
 <p>We see that student to teacher ratio is negatively associated with SAT score, with an expected drop of about 4.6 points in average SAT score for each additional student per teacher, assuming average teacher salary and percentage of students taking the exam are held constant. This suggests that states should try to keep student to teacher ratios low. We see teacher salary remains positively correlated with SAT score and percentage taking the test remains negatively correlated, after accounting for student to teacher ratio.</p>
 </div>
-<div id="multicollinearity" class="section level3 hasAnchor">
+<div id="multicollinearity" class="section level3 hasAnchor" number="6.1.7">
 <h3><span class="header-section-number">6.1.7</span> Multicollinearity<a href="building-models-for-interpretation.html#multicollinearity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next, let’s add the variable <code>expend</code>, which measures the state’s expenditure per pupil.</p>
-<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb631-1"><a href="building-models-for-interpretation.html#cb631-1"></a>SAT_M4 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>SAT, sat<span class="op">~</span>salary<span class="op">+</span>frac<span class="op">+</span>ratio<span class="op">+</span>expend)</span>
-<span id="cb631-2"><a href="building-models-for-interpretation.html#cb631-2"></a><span class="kw">summary</span>(SAT_M4)</span></code></pre></div>
+<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb633-1"><a href="building-models-for-interpretation.html#cb633-1" aria-hidden="true" tabindex="-1"></a>SAT_M4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>SAT, sat<span class="sc">~</span>salary<span class="sc">+</span>frac<span class="sc">+</span>ratio<span class="sc">+</span>expend)</span>
+<span id="cb633-2"><a href="building-models-for-interpretation.html#cb633-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(SAT_M4)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = sat ~ salary + frac + ratio + expend, data = SAT)
@@ -613,28 +661,28 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 ## F-statistic: 52.88 on 4 and 45 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <p>It may be surprising to see that after accounting for expenditure per student, teacher salary is still positively correlated with SAT score, but that the p-value associated with teacher salary is quite large. Likewise, while student-to-teacher ratio is still negatively associated, it too has a large p-value. Also notice that <span class="math inline">\(R^2\)</span> barely increased when accounting for total expenditures.</p>
 <p>This happens because expenditures are highly correlated with teacher salary. States that pay their teacher more also spend more on education per pupil. The scatterplot matrix below shows a strong correlation of 0.87 between teacher salary and expenditures.</p>
-<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb633-1"><a href="building-models-for-interpretation.html#cb633-1"></a>SAT_Num &lt;-<span class="st"> </span><span class="kw">select_if</span>(SAT, is.numeric)</span>
-<span id="cb633-2"><a href="building-models-for-interpretation.html#cb633-2"></a>C &lt;-<span class="st"> </span><span class="kw">cor</span>(SAT_Num, <span class="dt">use =</span> <span class="st">&quot;pairwise.complete.obs&quot;</span>)</span>
-<span id="cb633-3"><a href="building-models-for-interpretation.html#cb633-3"></a><span class="kw">round</span>(C,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb635-1"><a href="building-models-for-interpretation.html#cb635-1" aria-hidden="true" tabindex="-1"></a>SAT_Num <span class="ot">&lt;-</span> <span class="fu">select_if</span>(SAT, is.numeric)</span>
+<span id="cb635-2"><a href="building-models-for-interpretation.html#cb635-2" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">cor</span>(SAT_Num, <span class="at">use =</span> <span class="st">&quot;pairwise.complete.obs&quot;</span>)</span>
+<span id="cb635-3"><a href="building-models-for-interpretation.html#cb635-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(C,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##        expend ratio salary  frac   sat
 ## expend   1.00 -0.37   0.87  0.59 -0.38
 ## ratio   -0.37  1.00   0.00 -0.21  0.08
 ## salary   0.87  0.00   1.00  0.62 -0.44
 ## frac     0.59 -0.21   0.62  1.00 -0.89
 ## sat     -0.38  0.08  -0.44 -0.89  1.00</code></pre>
-<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb635-1"><a href="building-models-for-interpretation.html#cb635-1"></a><span class="kw">library</span>(corrplot)</span>
-<span id="cb635-2"><a href="building-models-for-interpretation.html#cb635-2"></a><span class="kw">corrplot</span>(C)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-481-1.png" width="672" /></p>
+<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb637-1"><a href="building-models-for-interpretation.html#cb637-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb637-2"><a href="building-models-for-interpretation.html#cb637-2" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(C)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-482-1.png" width="672" /></p>
 <p>Because these variables are highly correlated, it doesn’t make sense to talk about the effect of increasing teacher salary, while holding expenditure constant, or vice-versa. Notice the standard error on the <code>salary</code> line in model <code>SAT_M4</code> (which includes expenditures) is more than twice as high as in <code>SAT_M3</code>, which did not. This happens because the model is not able to separate the effect of salary from the effect of expenditure, and thus becomes very uncertain of the effect of both, resulting in high standard errors. In addition to reducing the t-statistic, and increasing the p-value, this leads to much wider and less informative confidence intervals associated with the effect of teacher salary.</p>
 <p><strong>Confidence intervals for model involving teacher salary, percentage taking the test, and student-to-teacher ratio.</strong></p>
-<div class="sourceCode" id="cb636"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb636-1"><a href="building-models-for-interpretation.html#cb636-1"></a><span class="kw">confint</span>(SAT_M3)</span></code></pre></div>
+<div class="sourceCode" id="cb638"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb638-1"><a href="building-models-for-interpretation.html#cb638-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(SAT_M3)</span></code></pre></div>
 <pre><code>##                   2.5 %       97.5 %
 ## (Intercept) 968.6691802 1147.1271438
 ## salary        0.5304797    4.5744605
 ## frac         -3.3727807   -2.4539197
 ## ratio        -8.9098147   -0.3690414</code></pre>
 <p><strong>Confidence intervals for model with above variables plus expenditure.</strong></p>
-<div class="sourceCode" id="cb638"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb638-1"><a href="building-models-for-interpretation.html#cb638-1"></a><span class="kw">confint</span>(SAT_M4)</span></code></pre></div>
+<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="building-models-for-interpretation.html#cb640-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(SAT_M4)</span></code></pre></div>
 <pre><code>##                  2.5 %      97.5 %
 ## (Intercept) 939.486374 1152.456698
 ## salary       -3.170247    6.446081
@@ -643,27 +691,27 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 ## expend      -16.779204   25.704393</code></pre>
 <p>Models with highly correlated explanatory variables suffer from <strong>multicollinearity</strong>, which increases standard errors, making the effect of variables harder to discern. When we have explanatory variables that are highly correlated (usually with correlation greater than 0.8), we should pick out just one to include in the model. In this case, we’ll stick with teacher salary.</p>
 </div>
-<div id="check-model-assumptions" class="section level3 hasAnchor">
+<div id="check-model-assumptions" class="section level3 hasAnchor" number="6.1.8">
 <h3><span class="header-section-number">6.1.8</span> Check Model Assumptions<a href="building-models-for-interpretation.html#check-model-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s return to the model with salary, ratio, and fraction taking test. We use residual plots to assess model assumptions.</p>
-<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="building-models-for-interpretation.html#cb640-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>SAT_M3<span class="op">$</span>residuals, <span class="dt">x=</span>SAT_M3<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb640-2"><a href="building-models-for-interpretation.html#cb640-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">x=</span>SAT_M3<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
-<span id="cb640-3"><a href="building-models-for-interpretation.html#cb640-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(SAT_M3<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;QQ Plot&quot;</span>)</span>
-<span id="cb640-4"><a href="building-models-for-interpretation.html#cb640-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-484-1.png" width="864" /></p>
+<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb642-1"><a href="building-models-for-interpretation.html#cb642-1" aria-hidden="true" tabindex="-1"></a>P1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(SAT_M3<span class="sc">$</span>residuals), <span class="fu">aes</span>(<span class="at">y=</span>SAT_M3<span class="sc">$</span>residuals, <span class="at">x=</span>SAT_M3<span class="sc">$</span>fitted.values)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Residual Plot&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb642-2"><a href="building-models-for-interpretation.html#cb642-2" aria-hidden="true" tabindex="-1"></a>P2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(SAT_M3<span class="sc">$</span>residuals), <span class="fu">aes</span>(<span class="at">x=</span>SAT_M3<span class="sc">$</span>residuals)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
+<span id="cb642-3"><a href="building-models-for-interpretation.html#cb642-3" aria-hidden="true" tabindex="-1"></a>P3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(SAT_M3<span class="sc">$</span>residuals), <span class="fu">aes</span>(<span class="at">sample =</span> <span class="fu">scale</span>(SAT_M3<span class="sc">$</span>residuals))) <span class="sc">+</span> <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;QQ Plot&quot;</span>)</span>
+<span id="cb642-4"><a href="building-models-for-interpretation.html#cb642-4" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(P1, P2, P3, <span class="at">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-485-1.png" width="864" /></p>
 <p>There is some sign of a quadratic trend in the residual plot, creating concern about the linearity assumption.</p>
 <p>In models with multiple explanatory variables, it is helpful to also plot our residuals against the explanatory variables to see whether the model is properly accounting for relationships involving each variable. If we see nonlinear trends, we should consider adding a nonlinear function of that explanatory variable.</p>
-<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="building-models-for-interpretation.html#cb641-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>SAT_M3<span class="op">$</span>residuals, <span class="dt">x=</span>SAT_M3<span class="op">$</span>model<span class="op">$</span>salary)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Salary&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
-<span id="cb641-2"><a href="building-models-for-interpretation.html#cb641-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>SAT_M3<span class="op">$</span>residuals, <span class="dt">x=</span>SAT_M3<span class="op">$</span>model<span class="op">$</span>frac)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Fraction Taking Test&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb641-3"><a href="building-models-for-interpretation.html#cb641-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>SAT_M3<span class="op">$</span>residuals, <span class="dt">x=</span>SAT_M3<span class="op">$</span>model<span class="op">$</span>ratio)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Student to Teach Ratio&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb641-4"><a href="building-models-for-interpretation.html#cb641-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-485-1.png" width="864" /></p>
+<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="building-models-for-interpretation.html#cb643-1" aria-hidden="true" tabindex="-1"></a>P1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(SAT_M3<span class="sc">$</span>residuals), <span class="fu">aes</span>(<span class="at">y=</span>SAT_M3<span class="sc">$</span>residuals, <span class="at">x=</span>SAT_M3<span class="sc">$</span>model<span class="sc">$</span>salary)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Salary&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
+<span id="cb643-2"><a href="building-models-for-interpretation.html#cb643-2" aria-hidden="true" tabindex="-1"></a>P2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(SAT_M3<span class="sc">$</span>residuals), <span class="fu">aes</span>(<span class="at">y=</span>SAT_M3<span class="sc">$</span>residuals, <span class="at">x=</span>SAT_M3<span class="sc">$</span>model<span class="sc">$</span>frac)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Fraction Taking Test&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb643-3"><a href="building-models-for-interpretation.html#cb643-3" aria-hidden="true" tabindex="-1"></a>P3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(SAT_M3<span class="sc">$</span>residuals), <span class="fu">aes</span>(<span class="at">y=</span>SAT_M3<span class="sc">$</span>residuals, <span class="at">x=</span>SAT_M3<span class="sc">$</span>model<span class="sc">$</span>ratio)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Student to Teach Ratio&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb643-4"><a href="building-models-for-interpretation.html#cb643-4" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(P1, P2, P3, <span class="at">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-486-1.png" width="864" /></p>
 <p>There is also a quadratic trend in the plot involving the fraction variable. We might account for this by adding a quadratic term for <code>frac</code> to the model.</p>
 </div>
-<div id="quadratic-term" class="section level3 hasAnchor">
+<div id="quadratic-term" class="section level3 hasAnchor" number="6.1.9">
 <h3><span class="header-section-number">6.1.9</span> Quadratic Term<a href="building-models-for-interpretation.html#quadratic-term" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb642-1"><a href="building-models-for-interpretation.html#cb642-1"></a>SAT_M5 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>SAT, sat<span class="op">~</span>salary<span class="op">+</span>frac<span class="op">+</span><span class="kw">I</span>(frac<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span>ratio )</span>
-<span id="cb642-2"><a href="building-models-for-interpretation.html#cb642-2"></a><span class="kw">summary</span>(SAT_M5)</span></code></pre></div>
+<div class="sourceCode" id="cb644"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb644-1"><a href="building-models-for-interpretation.html#cb644-1" aria-hidden="true" tabindex="-1"></a>SAT_M5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>SAT, sat<span class="sc">~</span>salary<span class="sc">+</span>frac<span class="sc">+</span><span class="fu">I</span>(frac<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span>ratio )</span>
+<span id="cb644-2"><a href="building-models-for-interpretation.html#cb644-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(SAT_M5)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = sat ~ salary + frac + I(frac^2) + ratio, data = SAT)
@@ -687,30 +735,30 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 ## F-statistic: 87.28 on 4 and 45 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <p>We notice a small p-value associated with the quadratic term, indicating SAT scores do indeed show evidence of a quadratic trend with respect to the percentage of students taking the test.</p>
 <p>We now examine residual plots for the model that includes the quadratic term for <code>frac</code>.</p>
-<div class="sourceCode" id="cb644"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb644-1"><a href="building-models-for-interpretation.html#cb644-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M5<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>SAT_M5<span class="op">$</span>residuals, <span class="dt">x=</span>SAT_M5<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb644-2"><a href="building-models-for-interpretation.html#cb644-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M5<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">x=</span>SAT_M5<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
-<span id="cb644-3"><a href="building-models-for-interpretation.html#cb644-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M5<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(SAT_M5<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;QQ Plot&quot;</span>)</span>
-<span id="cb644-4"><a href="building-models-for-interpretation.html#cb644-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-487-1.png" width="864" /></p>
-<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="building-models-for-interpretation.html#cb645-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>SAT_M5<span class="op">$</span>residuals, <span class="dt">x=</span>SAT_M5<span class="op">$</span>model<span class="op">$</span>salary)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Salary&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
-<span id="cb645-2"><a href="building-models-for-interpretation.html#cb645-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>SAT_M5<span class="op">$</span>residuals, <span class="dt">x=</span>SAT_M5<span class="op">$</span>model<span class="op">$</span>frac)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Fraction Taking Test&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb645-3"><a href="building-models-for-interpretation.html#cb645-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(SAT_M3<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>SAT_M5<span class="op">$</span>residuals, <span class="dt">x=</span>SAT_M5<span class="op">$</span>model<span class="op">$</span>ratio)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Student to Teach Ratio&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb645-4"><a href="building-models-for-interpretation.html#cb645-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb646"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb646-1"><a href="building-models-for-interpretation.html#cb646-1" aria-hidden="true" tabindex="-1"></a>P1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(SAT_M5<span class="sc">$</span>residuals), <span class="fu">aes</span>(<span class="at">y=</span>SAT_M5<span class="sc">$</span>residuals, <span class="at">x=</span>SAT_M5<span class="sc">$</span>fitted.values)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Residual Plot&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb646-2"><a href="building-models-for-interpretation.html#cb646-2" aria-hidden="true" tabindex="-1"></a>P2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(SAT_M5<span class="sc">$</span>residuals), <span class="fu">aes</span>(<span class="at">x=</span>SAT_M5<span class="sc">$</span>residuals)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
+<span id="cb646-3"><a href="building-models-for-interpretation.html#cb646-3" aria-hidden="true" tabindex="-1"></a>P3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(SAT_M5<span class="sc">$</span>residuals), <span class="fu">aes</span>(<span class="at">sample =</span> <span class="fu">scale</span>(SAT_M5<span class="sc">$</span>residuals))) <span class="sc">+</span> <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;QQ Plot&quot;</span>)</span>
+<span id="cb646-4"><a href="building-models-for-interpretation.html#cb646-4" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(P1, P2, P3, <span class="at">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-488-1.png" width="864" /></p>
+<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="building-models-for-interpretation.html#cb647-1" aria-hidden="true" tabindex="-1"></a>P1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(SAT_M3<span class="sc">$</span>residuals), <span class="fu">aes</span>(<span class="at">y=</span>SAT_M5<span class="sc">$</span>residuals, <span class="at">x=</span>SAT_M5<span class="sc">$</span>model<span class="sc">$</span>salary)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Salary&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
+<span id="cb647-2"><a href="building-models-for-interpretation.html#cb647-2" aria-hidden="true" tabindex="-1"></a>P2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(SAT_M3<span class="sc">$</span>residuals), <span class="fu">aes</span>(<span class="at">y=</span>SAT_M5<span class="sc">$</span>residuals, <span class="at">x=</span>SAT_M5<span class="sc">$</span>model<span class="sc">$</span>frac)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Fraction Taking Test&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb647-3"><a href="building-models-for-interpretation.html#cb647-3" aria-hidden="true" tabindex="-1"></a>P3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(SAT_M3<span class="sc">$</span>residuals), <span class="fu">aes</span>(<span class="at">y=</span>SAT_M5<span class="sc">$</span>residuals, <span class="at">x=</span>SAT_M5<span class="sc">$</span>model<span class="sc">$</span>ratio)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Student to Teach Ratio&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb647-4"><a href="building-models-for-interpretation.html#cb647-4" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(P1, P2, P3, <span class="at">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-489-1.png" width="864" /></p>
 <p>The quadratic trend in the residual by predicted plot and second residual by fraction plot appear to have disappeared, suggesting this model has properly accounted for the quadratic trend.</p>
 <p><strong>Interpretations for Model with Quadratic Term</strong></p>
 <p>On average, a $1,000 dollar increase in average teacher salary is associated with a 1.8 point increase in average SAT score assuming fraction of students taking the SAT, and student to teacher ratio are held constant.</p>
 <p>On average, a 1 student per teacher increase in student to teacher ratio is associated with a 0.05 point from in average SAT score, assuming average teacher salary, and percentage of students taking the SAT are held constant.</p>
 <p>We cannot give a clear interpretation of the fraction variable, since it occurs in both linear and quadratic terms. In fact, the vertex of the parabola given by <span class="math inline">\(y=-6.64x + 0.05x^2\)</span> occurs at <span class="math inline">\(x=\frac{6.64}{2(0.05)}\approx 66\)</span>. So the model estimates that SAT score decreases in a quadratic fashion with respect to fraction taking the test, until that fraction reaches 66 percent of student, then is expected to increase.</p>
-<div class="sourceCode" id="cb646"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb646-1"><a href="building-models-for-interpretation.html#cb646-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>SAT, <span class="kw">aes</span>(<span class="dt">x=</span>frac, <span class="dt">y=</span>sat)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-489-1.png" width="672" /></p>
+<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb648-1"><a href="building-models-for-interpretation.html#cb648-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>SAT, <span class="fu">aes</span>(<span class="at">x=</span>frac, <span class="at">y=</span>sat)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-490-1.png" width="672" /></p>
 <p>We do see some possible quadratic trend, but we should be really careful about extrapolation. Although the trend does seem to level off in a quadratic way, we wouldn’t expect SAT scores to start to increase if more than 80 percent of students took the exam!</p>
 </div>
-<div id="account-for-region" class="section level3 hasAnchor">
+<div id="account-for-region" class="section level3 hasAnchor" number="6.1.10">
 <h3><span class="header-section-number">6.1.10</span> Account for Region?<a href="building-models-for-interpretation.html#account-for-region" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>So far, we’ve considered only quantitative explanatory variables. What if we add region of the country to the model.</p>
-<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="building-models-for-interpretation.html#cb647-1"></a>SAT_M6 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>SAT, sat<span class="op">~</span>salary<span class="op">+</span>frac<span class="op">+</span><span class="kw">I</span>(frac<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span>ratio <span class="op">+</span><span class="st"> </span>region )</span>
-<span id="cb647-2"><a href="building-models-for-interpretation.html#cb647-2"></a><span class="kw">summary</span>(SAT_M6)</span></code></pre></div>
+<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="building-models-for-interpretation.html#cb649-1" aria-hidden="true" tabindex="-1"></a>SAT_M6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>SAT, sat<span class="sc">~</span>salary<span class="sc">+</span>frac<span class="sc">+</span><span class="fu">I</span>(frac<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span>ratio <span class="sc">+</span> region )</span>
+<span id="cb649-2"><a href="building-models-for-interpretation.html#cb649-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(SAT_M6)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = sat ~ salary + frac + I(frac^2) + ratio + region, 
@@ -741,29 +789,29 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 <p>Because we only have 50 states to begin with, breaking down by region results in small sample sizes, which contributes to the large p-values. Furthermore, it is unclear why we would need to account for region here. If our goal is to assess the impact of educational spending on SAT scores, it is probably okay to compare states in different regions of the country. Unless we have some reason for wanting to compare states in the same region, we shouldn’t include region as an explanatory variable (even though including it did raise our <span class="math inline">\(R^2\)</span> value above 0.9). In general, we should only include variables if they help us address our research question. In this case, it’s not clear that accounting for region helps us better understand the relationship between a state’s investment in education, and its students average SAT scores.</p>
 <p>It is important to note that we <strong>should not</strong> decide whether to include a variable based on whether or not it yielded a small p-value. Adding or deleting variables from a model until we get a desired p-value on a variable we’re interested in can lead to <strong>Confirmation bias</strong> (that is choosing our model in a way that intentionally confirms what we expected or hoped to be true), and to detecting spurious correlations that will not be replicable in future studies. This phenomenon, known as <strong>p-hacking</strong> has led to incorrect and unethical conclusions. We should make modeling decisions about which variables to include in a model before looking at the p-values and then draw conclusions based on the results we see, keeping in mind that p-values are only a part of the picture.</p>
 </div>
-<div id="predictions-and-intervals" class="section level3 hasAnchor">
+<div id="predictions-and-intervals" class="section level3 hasAnchor" number="6.1.11">
 <h3><span class="header-section-number">6.1.11</span> Predictions and Intervals<a href="building-models-for-interpretation.html#predictions-and-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Going back to Model M5, which did not include region, we can make confidence and predictions intervals corresponding to hypothetical states.</p>
-<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="building-models-for-interpretation.html#cb649-1"></a>newstate &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">salary =</span> <span class="dv">45</span>, <span class="dt">frac=</span><span class="fl">0.5</span>, <span class="dt">ratio=</span><span class="dv">15</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="building-models-for-interpretation.html#cb650-1"></a><span class="kw">predict</span>(SAT_M5, <span class="dt">newdata =</span> newstate, <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="dt">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="building-models-for-interpretation.html#cb651-1" aria-hidden="true" tabindex="-1"></a>newstate <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">salary =</span> <span class="dv">45</span>, <span class="at">frac=</span><span class="fl">0.5</span>, <span class="at">ratio=</span><span class="dv">15</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb652-1"><a href="building-models-for-interpretation.html#cb652-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(SAT_M5, <span class="at">newdata =</span> newstate, <span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="at">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div>
 <pre><code>##        fit     lwr    upr
 ## 1 1116.615 1085.93 1147.3</code></pre>
 <p>We are 95% confident that the average of average SAT scores among all states with average teacher salary of 45 thousand dollars, where 50% of students take the SAT and having student-to-teacher ratio of 15 is between 1085 and 1147.</p>
-<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb652-1"><a href="building-models-for-interpretation.html#cb652-1"></a><span class="kw">predict</span>(SAT_M5, <span class="dt">newdata =</span> newstate, <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>, <span class="dt">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb654-1"><a href="building-models-for-interpretation.html#cb654-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(SAT_M5, <span class="at">newdata =</span> newstate, <span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>, <span class="at">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div>
 <pre><code>##        fit      lwr      upr
 ## 1 1116.615 1055.256 1177.973</code></pre>
 <p>We are 95% confident that an individual state with average teacher salary of 45 thousand dollars, where 50% of students take the SAT and having student-to-teacher ratio of 15 will have an average SAT score between 1055 and 1178.</p>
 </div>
 </div>
-<div id="modeling-car-price" class="section level2 hasAnchor">
+<div id="modeling-car-price" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Modeling Car Price<a href="building-models-for-interpretation.html#modeling-car-price" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="model-for-price-of-2015-cars" class="section level3 hasAnchor">
+<div id="model-for-price-of-2015-cars" class="section level3 hasAnchor" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> Model for Price of 2015 Cars<a href="building-models-for-interpretation.html#model-for-price-of-2015-cars" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ll build a model for the price of a new 2015 car, to help us understand what factors are related to the price of a car.</p>
-<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb654-1"><a href="building-models-for-interpretation.html#cb654-1"></a><span class="co">#data(Cars2015)</span></span>
-<span id="cb654-2"><a href="building-models-for-interpretation.html#cb654-2"></a><span class="co">#Cars2015 &lt;- Cars2015 %&gt;% rename(Price=LowPrice)</span></span>
-<span id="cb654-3"><a href="building-models-for-interpretation.html#cb654-3"></a>Cars2015 &lt;-<span class="st"> </span>Cars2015<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>HighPrice)</span>
-<span id="cb654-4"><a href="building-models-for-interpretation.html#cb654-4"></a><span class="kw">glimpse</span>(Cars2015)</span></code></pre></div>
+<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="building-models-for-interpretation.html#cb656-1" aria-hidden="true" tabindex="-1"></a><span class="co">#data(Cars2015)</span></span>
+<span id="cb656-2"><a href="building-models-for-interpretation.html#cb656-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Cars2015 &lt;- Cars2015 %&gt;% rename(Price=LowPrice)</span></span>
+<span id="cb656-3"><a href="building-models-for-interpretation.html#cb656-3" aria-hidden="true" tabindex="-1"></a>Cars2015 <span class="ot">&lt;-</span> Cars2015<span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>HighPrice)</span>
+<span id="cb656-4"><a href="building-models-for-interpretation.html#cb656-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(Cars2015)</span></code></pre></div>
 <pre><code>## Rows: 110
 ## Columns: 19
 ## $ Make      &lt;fct&gt; Chevrolet, Hyundai, Kia, Mitsubishi, Nissan, Dodge, Chevrole…
@@ -787,8 +835,8 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 ## $ Size      &lt;fct&gt; Small, Small, Small, Small, Small, Small, Small, Small, Smal…</code></pre>
 <p><strong>Exploratory Analysis</strong></p>
 <p>We’ll look at a summary of the categorical variables in the dataset.</p>
-<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="building-models-for-interpretation.html#cb656-1"></a>Cars_Cat &lt;-<span class="st"> </span><span class="kw">select_if</span>(Cars2015, is.factor)</span>
-<span id="cb656-2"><a href="building-models-for-interpretation.html#cb656-2"></a><span class="kw">summary</span>(Cars_Cat)</span></code></pre></div>
+<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="building-models-for-interpretation.html#cb658-1" aria-hidden="true" tabindex="-1"></a>Cars_Cat <span class="ot">&lt;-</span> <span class="fu">select_if</span>(Cars2015, is.factor)</span>
+<span id="cb658-2"><a href="building-models-for-interpretation.html#cb658-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Cars_Cat)</span></code></pre></div>
 <pre><code>##         Make            Model            Type    Drive          Size   
 ##  Chevrolet: 8   CTS        :  2   7Pass    :15   AWD:25   Large   :29  
 ##  Ford     : 7   2 Touring  :  1   Hatchback:11   FWD:63   Midsized:34  
@@ -798,9 +846,9 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 ##  Nissan   : 6   300        :  1   Wagon    : 9                         
 ##  (Other)  :69   (Other)    :103</code></pre>
 <p>We examine the correlation matrix of quantitative variables.</p>
-<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="building-models-for-interpretation.html#cb658-1"></a>Cars_Num &lt;-<span class="st"> </span><span class="kw">select_if</span>(Cars2015, is.numeric)</span>
-<span id="cb658-2"><a href="building-models-for-interpretation.html#cb658-2"></a>C &lt;-<span class="st"> </span><span class="kw">cor</span>(Cars_Num, <span class="dt">use =</span> <span class="st">&quot;pairwise.complete.obs&quot;</span>)</span>
-<span id="cb658-3"><a href="building-models-for-interpretation.html#cb658-3"></a><span class="kw">round</span>(C,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb660-1"><a href="building-models-for-interpretation.html#cb660-1" aria-hidden="true" tabindex="-1"></a>Cars_Num <span class="ot">&lt;-</span> <span class="fu">select_if</span>(Cars2015, is.numeric)</span>
+<span id="cb660-2"><a href="building-models-for-interpretation.html#cb660-2" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">cor</span>(Cars_Num, <span class="at">use =</span> <span class="st">&quot;pairwise.complete.obs&quot;</span>)</span>
+<span id="cb660-3"><a href="building-models-for-interpretation.html#cb660-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(C,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##           Price CityMPG HwyMPG FuelCap Length Width Wheelbase Height UTurn
 ## Price      1.00   -0.65  -0.59    0.57   0.47  0.48      0.46   0.02  0.40
 ## CityMPG   -0.65    1.00   0.93   -0.77  -0.72 -0.78     -0.69  -0.39 -0.73
@@ -831,18 +879,18 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 ## Acc060     -0.43   0.95   1.00    0.99    0.26
 ## QtrMile    -0.39   0.95   0.99    1.00    0.26
 ## PageNum    -0.20   0.25   0.26    0.26    1.00</code></pre>
-<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb660-1"><a href="building-models-for-interpretation.html#cb660-1"></a><span class="kw">library</span>(corrplot)</span>
-<span id="cb660-2"><a href="building-models-for-interpretation.html#cb660-2"></a>C &lt;-<span class="st"> </span><span class="kw">corrplot</span>(C)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-497-1.png" width="1152" /></p>
+<div class="sourceCode" id="cb662"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb662-1"><a href="building-models-for-interpretation.html#cb662-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb662-2"><a href="building-models-for-interpretation.html#cb662-2" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">corrplot</span>(C)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-498-1.png" width="1152" /></p>
 <p>Note the high correlation between many variables in the dataset. We’ll need to be careful about multicollinearity.</p>
 </div>
-<div id="acc.-and-qrt.-mile-time" class="section level3 hasAnchor">
+<div id="acc.-and-qrt.-mile-time" class="section level3 hasAnchor" number="6.2.2">
 <h3><span class="header-section-number">6.2.2</span> Acc. and Qrt. Mile Time<a href="building-models-for-interpretation.html#acc.-and-qrt.-mile-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We saw in Section 5.6 that it was better to model log(Price) than price itself, so we’ll continue modeling logprice here.</p>
 <p><strong>Model Using Just Acceleration Time</strong></p>
 <p>First, we fit a model using only the time it takes to accelerate from 0 to 60 mph as an explanatory variable.</p>
-<div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb661-1"><a href="building-models-for-interpretation.html#cb661-1"></a>Cars_M1 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(Price) <span class="op">~</span><span class="st"> </span>Acc060)</span>
-<span id="cb661-2"><a href="building-models-for-interpretation.html#cb661-2"></a><span class="kw">summary</span>(Cars_M1)</span></code></pre></div>
+<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb663-1"><a href="building-models-for-interpretation.html#cb663-1" aria-hidden="true" tabindex="-1"></a>Cars_M1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Cars2015, <span class="fu">log</span>(Price) <span class="sc">~</span> Acc060)</span>
+<span id="cb663-2"><a href="building-models-for-interpretation.html#cb663-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Cars_M1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(Price) ~ Acc060, data = Cars2015)
@@ -862,15 +910,15 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 ## Multiple R-squared:  0.6359, Adjusted R-squared:  0.6325 
 ## F-statistic: 188.6 on 1 and 108 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <p>Confidence Interval for Effect of Acceleration Time:</p>
-<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb663-1"><a href="building-models-for-interpretation.html#cb663-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(Cars_M1))</span></code></pre></div>
+<div class="sourceCode" id="cb665"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb665-1"><a href="building-models-for-interpretation.html#cb665-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(Cars_M1))</span></code></pre></div>
 <pre><code>##                   2.5 %     97.5 %
 ## (Intercept) 131.4610408 220.284693
 ## Acc060        0.7768669   0.827959</code></pre>
 <p>We are 95% confident that a 1-second increase in acceleration time is associated with an average price decrease between 17% and 22.5%.</p>
 <p><strong>Model Using Just Quarter Mile Time</strong></p>
 <p>Now, let’s fit a different model using only the time it takes to drive a quarter mile as an explanatory variable.</p>
-<div class="sourceCode" id="cb665"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb665-1"><a href="building-models-for-interpretation.html#cb665-1"></a>Cars_M2 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(Price) <span class="op">~</span><span class="st"> </span>QtrMile)</span>
-<span id="cb665-2"><a href="building-models-for-interpretation.html#cb665-2"></a><span class="kw">summary</span>(Cars_M2)</span></code></pre></div>
+<div class="sourceCode" id="cb667"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb667-1"><a href="building-models-for-interpretation.html#cb667-1" aria-hidden="true" tabindex="-1"></a>Cars_M2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Cars2015, <span class="fu">log</span>(Price) <span class="sc">~</span> QtrMile)</span>
+<span id="cb667-2"><a href="building-models-for-interpretation.html#cb667-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Cars_M2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(Price) ~ QtrMile, data = Cars2015)
@@ -890,14 +938,14 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 ## Multiple R-squared:  0.6385, Adjusted R-squared:  0.6351 
 ## F-statistic: 190.7 on 1 and 108 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <p>Confidence Interval for Effect of Quarter Mile Time:</p>
-<div class="sourceCode" id="cb667"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb667-1"><a href="building-models-for-interpretation.html#cb667-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(Cars_M2))</span></code></pre></div>
+<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="building-models-for-interpretation.html#cb669-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(Cars_M2))</span></code></pre></div>
 <pre><code>##                    2.5 %      97.5 %
 ## (Intercept) 1355.8297704 4913.077313
 ## QtrMile        0.7279941    0.788385</code></pre>
 <p>We are 95% confident that a 1-second increase in quarter mile time is associated with a price decrease between 21% and 27%, on average.</p>
 <p><strong>Model Using Both Acceleration and Quarter Mile Time</strong></p>
-<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="building-models-for-interpretation.html#cb669-1"></a>Cars_M3 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(Price) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Acc060)</span>
-<span id="cb669-2"><a href="building-models-for-interpretation.html#cb669-2"></a><span class="kw">summary</span>(Cars_M3)</span></code></pre></div>
+<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb671-1"><a href="building-models-for-interpretation.html#cb671-1" aria-hidden="true" tabindex="-1"></a>Cars_M3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Cars2015, <span class="fu">log</span>(Price) <span class="sc">~</span> QtrMile <span class="sc">+</span> Acc060)</span>
+<span id="cb671-2"><a href="building-models-for-interpretation.html#cb671-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Cars_M3)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(Price) ~ QtrMile + Acc060, data = Cars2015)
@@ -918,7 +966,7 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 ## Multiple R-squared:   0.64,  Adjusted R-squared:  0.6332 
 ## F-statistic:  95.1 on 2 and 107 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <p><strong>Confidence Intervals from 2-variable Model</strong></p>
-<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb671-1"><a href="building-models-for-interpretation.html#cb671-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(Cars_M3))</span></code></pre></div>
+<div class="sourceCode" id="cb673"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb673-1"><a href="building-models-for-interpretation.html#cb673-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(Cars_M3))</span></code></pre></div>
 <pre><code>##                  2.5 %       97.5 %
 ## (Intercept) 43.8095999 19922.799158
 ## QtrMile      0.6168071     1.146686
@@ -930,22 +978,22 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 <p>In fact, if two variables are perfectly correlated, it will be impossible to fit them both in a model, and you will get an error message.</p>
 <p><strong>Impact on Prediction</strong></p>
 <p>Suppose we want to predict the price of a car that can accelerate from 0 to 60 mph in 9.5 seconds, and completes a quarter mile in 17.3 seconds.</p>
-<div class="sourceCode" id="cb673"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb673-1"><a href="building-models-for-interpretation.html#cb673-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M1, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="fl">9.5</span>, <span class="dt">QtrMile=</span><span class="fl">17.3</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb675"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb675-1"><a href="building-models-for-interpretation.html#cb675-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">predict</span>(Cars_M1, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">Acc060=</span><span class="fl">9.5</span>, <span class="at">QtrMile=</span><span class="fl">17.3</span>)))</span></code></pre></div>
 <pre><code>##        1 
 ## 20.92084</code></pre>
-<div class="sourceCode" id="cb675"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb675-1"><a href="building-models-for-interpretation.html#cb675-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M2, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="fl">9.5</span>, <span class="dt">QtrMile=</span><span class="fl">17.3</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb677"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb677-1"><a href="building-models-for-interpretation.html#cb677-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">predict</span>(Cars_M2, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">Acc060=</span><span class="fl">9.5</span>, <span class="at">QtrMile=</span><span class="fl">17.3</span>)))</span></code></pre></div>
 <pre><code>##        1 
 ## 21.18223</code></pre>
-<div class="sourceCode" id="cb677"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb677-1"><a href="building-models-for-interpretation.html#cb677-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M3, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">Acc060=</span><span class="fl">9.5</span>, <span class="dt">QtrMile=</span><span class="fl">17.3</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb679"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb679-1"><a href="building-models-for-interpretation.html#cb679-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">predict</span>(Cars_M3, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">Acc060=</span><span class="fl">9.5</span>, <span class="at">QtrMile=</span><span class="fl">17.3</span>)))</span></code></pre></div>
 <pre><code>##        1 
 ## 21.05489</code></pre>
 <p>The predicted values are similar. Multicollinearity does not hurt predictions, only interpretations.</p>
 </div>
-<div id="adding-weight-to-model" class="section level3 hasAnchor">
+<div id="adding-weight-to-model" class="section level3 hasAnchor" number="6.2.3">
 <h3><span class="header-section-number">6.2.3</span> Adding Weight to Model<a href="building-models-for-interpretation.html#adding-weight-to-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We could use either quarter mile time or acceleration time as an explanatory variable, but we shouldn’t use both. We’ll proceed with quarter mile time.</p>
-<div class="sourceCode" id="cb679"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb679-1"><a href="building-models-for-interpretation.html#cb679-1"></a>Cars_M4 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(Price) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Weight)</span>
-<span id="cb679-2"><a href="building-models-for-interpretation.html#cb679-2"></a><span class="kw">summary</span>(Cars_M4)</span></code></pre></div>
+<div class="sourceCode" id="cb681"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb681-1"><a href="building-models-for-interpretation.html#cb681-1" aria-hidden="true" tabindex="-1"></a>Cars_M4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Cars2015, <span class="fu">log</span>(Price) <span class="sc">~</span> QtrMile <span class="sc">+</span> Weight)</span>
+<span id="cb681-2"><a href="building-models-for-interpretation.html#cb681-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Cars_M4)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(Price) ~ QtrMile + Weight, data = Cars2015)
@@ -967,8 +1015,8 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 ## F-statistic: 178.7 on 2 and 107 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <p><span class="math inline">\(R^2\)</span> went up from 0.64 to 0.76!</p>
 <p>We might consider adding an interaction term between quarter mile time and weight. This would mean that we think the effect of quarter mile time on price of a car is different for heavier cars than for lighter cars. It’s not clear to me why that would be the case.</p>
-<div class="sourceCode" id="cb681"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb681-1"><a href="building-models-for-interpretation.html#cb681-1"></a>Cars_M5 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(Price) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">*</span><span class="st"> </span>Weight)</span>
-<span id="cb681-2"><a href="building-models-for-interpretation.html#cb681-2"></a><span class="kw">summary</span>(Cars_M5)</span></code></pre></div>
+<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb683-1"><a href="building-models-for-interpretation.html#cb683-1" aria-hidden="true" tabindex="-1"></a>Cars_M5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Cars2015, <span class="fu">log</span>(Price) <span class="sc">~</span> QtrMile <span class="sc">*</span> Weight)</span>
+<span id="cb683-2"><a href="building-models-for-interpretation.html#cb683-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Cars_M5)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(Price) ~ QtrMile * Weight, data = Cars2015)
@@ -991,11 +1039,11 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 ## F-statistic: 121.9 on 3 and 106 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <p>p-value on interaction is not that small. <span class="math inline">\(R^2\)</span> didn’t go up much. There doesn’t seem to be much reason to complicate the model by adding an interaction term.</p>
 </div>
-<div id="adding-more-variables" class="section level3 hasAnchor">
+<div id="adding-more-variables" class="section level3 hasAnchor" number="6.2.4">
 <h3><span class="header-section-number">6.2.4</span> Adding More Variables<a href="building-models-for-interpretation.html#adding-more-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ll consider adding highway MPG to the model.</p>
-<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb683-1"><a href="building-models-for-interpretation.html#cb683-1"></a>Cars_M6 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(Price) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Weight <span class="op">+</span><span class="st"> </span>HwyMPG)</span>
-<span id="cb683-2"><a href="building-models-for-interpretation.html#cb683-2"></a><span class="kw">summary</span>(Cars_M6)</span></code></pre></div>
+<div class="sourceCode" id="cb685"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb685-1"><a href="building-models-for-interpretation.html#cb685-1" aria-hidden="true" tabindex="-1"></a>Cars_M6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Cars2015, <span class="fu">log</span>(Price) <span class="sc">~</span> QtrMile <span class="sc">+</span> Weight <span class="sc">+</span> HwyMPG)</span>
+<span id="cb685-2"><a href="building-models-for-interpretation.html#cb685-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Cars_M6)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(Price) ~ QtrMile + Weight + HwyMPG, data = Cars2015)
@@ -1018,13 +1066,13 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 ## F-statistic: 120.5 on 3 and 106 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <p>HwyMPG doesn’t make change <span class="math inline">\(R^2\)</span> much, and has a high correlation with weight. Let’s not include it.</p>
 <p>Next, we’ll consider adding categorical explanatory variables Size, and Drive.</p>
-<div class="sourceCode" id="cb685"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb685-1"><a href="building-models-for-interpretation.html#cb685-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">log</span>(Price), <span class="dt">y=</span>Size)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Price by Size&quot;</span>)</span>
-<span id="cb685-2"><a href="building-models-for-interpretation.html#cb685-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Cars2015, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">log</span>(Price), <span class="dt">y=</span>Drive)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Price by Drive&quot;</span>)</span>
-<span id="cb685-3"><a href="building-models-for-interpretation.html#cb685-3"></a><span class="kw">grid.arrange</span>(P1, P2, <span class="dt">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-510-1.png" width="672" /></p>
+<div class="sourceCode" id="cb687"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb687-1"><a href="building-models-for-interpretation.html#cb687-1" aria-hidden="true" tabindex="-1"></a>P1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>Cars2015, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(Price), <span class="at">y=</span>Size)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Price by Size&quot;</span>)</span>
+<span id="cb687-2"><a href="building-models-for-interpretation.html#cb687-2" aria-hidden="true" tabindex="-1"></a>P2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>Cars2015, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(Price), <span class="at">y=</span>Drive)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Price by Drive&quot;</span>)</span>
+<span id="cb687-3"><a href="building-models-for-interpretation.html#cb687-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(P1, P2, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-511-1.png" width="672" /></p>
 <p>Information about size is already included, through the weight variable. Let’s add drive type to the model.</p>
-<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb686-1"><a href="building-models-for-interpretation.html#cb686-1"></a>Cars_M7 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(Price) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Weight <span class="op">+</span><span class="st"> </span>Drive)</span>
-<span id="cb686-2"><a href="building-models-for-interpretation.html#cb686-2"></a><span class="kw">summary</span>(Cars_M7)</span></code></pre></div>
+<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb688-1"><a href="building-models-for-interpretation.html#cb688-1" aria-hidden="true" tabindex="-1"></a>Cars_M7 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Cars2015, <span class="fu">log</span>(Price) <span class="sc">~</span> QtrMile <span class="sc">+</span> Weight <span class="sc">+</span> Drive)</span>
+<span id="cb688-2"><a href="building-models-for-interpretation.html#cb688-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Cars_M7)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(Price) ~ QtrMile + Weight + Drive, data = Cars2015)
@@ -1048,8 +1096,8 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 ## F-statistic: 104.7 on 4 and 105 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <p>We found evidence of differences in price between front-wheel drive and rear-wheel drive, compared to all wheel drive cars.</p>
 <p>Next, we’ll explore adding size to the model.</p>
-<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb688-1"><a href="building-models-for-interpretation.html#cb688-1"></a>Cars_M8 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Cars2015, <span class="kw">log</span>(Price) <span class="op">~</span><span class="st"> </span>QtrMile <span class="op">+</span><span class="st"> </span>Weight <span class="op">+</span><span class="st"> </span>Drive <span class="op">+</span><span class="st"> </span>Size)</span>
-<span id="cb688-2"><a href="building-models-for-interpretation.html#cb688-2"></a><span class="kw">summary</span>(Cars_M8)</span></code></pre></div>
+<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb690-1"><a href="building-models-for-interpretation.html#cb690-1" aria-hidden="true" tabindex="-1"></a>Cars_M8 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Cars2015, <span class="fu">log</span>(Price) <span class="sc">~</span> QtrMile <span class="sc">+</span> Weight <span class="sc">+</span> Drive <span class="sc">+</span> Size)</span>
+<span id="cb690-2"><a href="building-models-for-interpretation.html#cb690-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Cars_M8)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(Price) ~ QtrMile + Weight + Drive + Size, data = Cars2015)
@@ -1078,32 +1126,32 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 <p>We could keep looking at other variables to add, but at this point, we have a model that gives us a good sense of the factors related to price of a car, capturing 80% of total variability in car price, and is still easy to interpret.</p>
 <p>For our research purposes, this model is good enough.</p>
 </div>
-<div id="check-of-model-assumptions" class="section level3 hasAnchor">
+<div id="check-of-model-assumptions" class="section level3 hasAnchor" number="6.2.5">
 <h3><span class="header-section-number">6.2.5</span> Check of Model Assumptions<a href="building-models-for-interpretation.html#check-of-model-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ll use residuals to check the model assumptions.</p>
 <p><strong>Residual by Predicted Plot, Histogram of Residuals, and Normal Quantile-Quantile Plot</strong></p>
-<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb690-1"><a href="building-models-for-interpretation.html#cb690-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M7<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M7<span class="op">$</span>fitted.values)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
-<span id="cb690-2"><a href="building-models-for-interpretation.html#cb690-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">x=</span>Cars_M7<span class="op">$</span>residuals)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
-<span id="cb690-3"><a href="building-models-for-interpretation.html#cb690-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(Cars_M7<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;QQ Plot&quot;</span>)</span>
-<span id="cb690-4"><a href="building-models-for-interpretation.html#cb690-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-513-1.png" width="864" /></p>
+<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb692-1"><a href="building-models-for-interpretation.html#cb692-1" aria-hidden="true" tabindex="-1"></a>P1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(Cars_M7<span class="sc">$</span>residuals), <span class="fu">aes</span>(<span class="at">y=</span>Cars_M7<span class="sc">$</span>residuals, <span class="at">x=</span>Cars_M7<span class="sc">$</span>fitted.values)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Residual Plot&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Predicted Values&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Residuals&quot;</span>)</span>
+<span id="cb692-2"><a href="building-models-for-interpretation.html#cb692-2" aria-hidden="true" tabindex="-1"></a>P2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(Cars_M7<span class="sc">$</span>residuals), <span class="fu">aes</span>(<span class="at">x=</span>Cars_M7<span class="sc">$</span>residuals)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Histogram of Residuals&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Residual&quot;</span>)</span>
+<span id="cb692-3"><a href="building-models-for-interpretation.html#cb692-3" aria-hidden="true" tabindex="-1"></a>P3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(Cars_M7<span class="sc">$</span>residuals), <span class="fu">aes</span>(<span class="at">sample =</span> <span class="fu">scale</span>(Cars_M7<span class="sc">$</span>residuals))) <span class="sc">+</span> <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;QQ Plot&quot;</span>)</span>
+<span id="cb692-4"><a href="building-models-for-interpretation.html#cb692-4" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(P1, P2, P3, <span class="at">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-514-1.png" width="864" /></p>
 <p>There is slight concern about constant variance, but otherwise, the model assumptions look good.</p>
 <p><strong>Residual by Predictor Plots</strong></p>
-<div class="sourceCode" id="cb691"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb691-1"><a href="building-models-for-interpretation.html#cb691-1"></a>P1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M7<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M7<span class="op">$</span>model<span class="op">$</span>QtrMile)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;QtrMile&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
-<span id="cb691-2"><a href="building-models-for-interpretation.html#cb691-2"></a>P2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M7<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M7<span class="op">$</span>model<span class="op">$</span>Weight)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Weight&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
-<span id="cb691-3"><a href="building-models-for-interpretation.html#cb691-3"></a>P3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Cars_M7<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">y=</span>Cars_M7<span class="op">$</span>residuals, <span class="dt">x=</span>Cars_M7<span class="op">$</span>model<span class="op">$</span>Drive)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Drive&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
-<span id="cb691-4"><a href="building-models-for-interpretation.html#cb691-4"></a><span class="kw">grid.arrange</span>(P1, P2, P3, <span class="dt">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-514-1.png" width="864" /></p>
+<div class="sourceCode" id="cb693"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb693-1"><a href="building-models-for-interpretation.html#cb693-1" aria-hidden="true" tabindex="-1"></a>P1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(Cars_M7<span class="sc">$</span>residuals), <span class="fu">aes</span>(<span class="at">y=</span>Cars_M7<span class="sc">$</span>residuals, <span class="at">x=</span>Cars_M7<span class="sc">$</span>model<span class="sc">$</span>QtrMile)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;QtrMile&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
+<span id="cb693-2"><a href="building-models-for-interpretation.html#cb693-2" aria-hidden="true" tabindex="-1"></a>P2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(Cars_M7<span class="sc">$</span>residuals), <span class="fu">aes</span>(<span class="at">y=</span>Cars_M7<span class="sc">$</span>residuals, <span class="at">x=</span>Cars_M7<span class="sc">$</span>model<span class="sc">$</span>Weight)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Weight&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
+<span id="cb693-3"><a href="building-models-for-interpretation.html#cb693-3" aria-hidden="true" tabindex="-1"></a>P3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(Cars_M7<span class="sc">$</span>residuals), <span class="fu">aes</span>(<span class="at">y=</span>Cars_M7<span class="sc">$</span>residuals, <span class="at">x=</span>Cars_M7<span class="sc">$</span>model<span class="sc">$</span>Drive)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Residual by Predictor Plot&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Drive&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Residuals&quot;</span>) </span>
+<span id="cb693-4"><a href="building-models-for-interpretation.html#cb693-4" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(P1, P2, P3, <span class="at">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-515-1.png" width="864" /></p>
 <p>These plots don’t raise any concerns.</p>
 </div>
-<div id="coefficients-and-exponentiation" class="section level3 hasAnchor">
+<div id="coefficients-and-exponentiation" class="section level3 hasAnchor" number="6.2.6">
 <h3><span class="header-section-number">6.2.6</span> Coefficients and Exponentiation<a href="building-models-for-interpretation.html#coefficients-and-exponentiation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The model coefficients are shown below.</p>
-<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb692-1"><a href="building-models-for-interpretation.html#cb692-1"></a>Cars_M7<span class="op">$</span>coefficients</span></code></pre></div>
+<div class="sourceCode" id="cb694"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb694-1"><a href="building-models-for-interpretation.html#cb694-1" aria-hidden="true" tabindex="-1"></a>Cars_M7<span class="sc">$</span>coefficients</span></code></pre></div>
 <pre><code>##   (Intercept)       QtrMile        Weight      DriveFWD      DriveRWD 
 ##  5.8140678915 -0.1900743859  0.0002049586 -0.2240322171 -0.1388439916</code></pre>
 <p>Since we used a log transformation, we should interpret <span class="math inline">\(e^{b_j}\)</span> rather than <span class="math inline">\(b_j\)</span> itself.</p>
-<div class="sourceCode" id="cb694"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb694-1"><a href="building-models-for-interpretation.html#cb694-1"></a><span class="kw">exp</span>(Cars_M7<span class="op">$</span>coefficients)</span></code></pre></div>
+<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb696-1"><a href="building-models-for-interpretation.html#cb696-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(Cars_M7<span class="sc">$</span>coefficients)</span></code></pre></div>
 <pre><code>## (Intercept)     QtrMile      Weight    DriveFWD    DriveRWD 
 ## 334.9790161   0.8268976   1.0002050   0.7992894   0.8703638</code></pre>
 <p>The price of a car is expected to decrease by 17% for each additional second it takes to drive a quartermile, assuming weight, and drive type are held constant.</p>
@@ -1111,26 +1159,26 @@ In addition to teacher salaries, student-to-teacher ratio might be an indication
 <p>FWD cars are expected to cost 20% less than AWD cars, assuming quarter mile time and weight are held constant.</p>
 <p>RWD cars are expected to cost 13% less than AWD cars, assuming quarter mile time and weight are held constant.</p>
 </div>
-<div id="confidence-and-prediction-intevals" class="section level3 hasAnchor">
+<div id="confidence-and-prediction-intevals" class="section level3 hasAnchor" number="6.2.7">
 <h3><span class="header-section-number">6.2.7</span> Confidence and Prediction Intevals<a href="building-models-for-interpretation.html#confidence-and-prediction-intevals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ll use our model to estimate the average price with the following characteristics, and also to predict the price of a new car with the given characteristics.</p>
-<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb696-1"><a href="building-models-for-interpretation.html#cb696-1"></a>newcar &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">QtrMile =</span> <span class="dv">18</span>, <span class="dt">Weight=</span><span class="dv">2400</span>, <span class="dt">Drive =</span> <span class="st">&quot;AWD&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="building-models-for-interpretation.html#cb698-1" aria-hidden="true" tabindex="-1"></a>newcar <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">QtrMile =</span> <span class="dv">18</span>, <span class="at">Weight=</span><span class="dv">2400</span>, <span class="at">Drive =</span> <span class="st">&quot;AWD&quot;</span>)</span></code></pre></div>
 <p>This is an interval for log(Price).</p>
-<div class="sourceCode" id="cb697"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb697-1"><a href="building-models-for-interpretation.html#cb697-1"></a><span class="kw">predict</span>(Cars_M7, <span class="dt">newdata=</span>newcar, <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb699-1"><a href="building-models-for-interpretation.html#cb699-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(Cars_M7, <span class="at">newdata=</span>newcar, <span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="at">level=</span><span class="fl">0.95</span>)</span></code></pre></div>
 <pre><code>##        fit      lwr      upr
 ## 1 2.884629 2.741423 3.027836</code></pre>
 <p>Exponentiating, we obtain</p>
-<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb699-1"><a href="building-models-for-interpretation.html#cb699-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M7, <span class="dt">newdata=</span>newcar, <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb701"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb701-1"><a href="building-models-for-interpretation.html#cb701-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">predict</span>(Cars_M7, <span class="at">newdata=</span>newcar, <span class="at">interval=</span><span class="st">&quot;confidence&quot;</span>, <span class="at">level=</span><span class="fl">0.95</span>))</span></code></pre></div>
 <pre><code>##        fit      lwr      upr
 ## 1 17.89693 15.50904 20.65249</code></pre>
 <p>We are 95% Confident that the average price of all new 2015 cars that weigh 2400 lbs, drive a quarter mile in 18 seconds on a fast track, and have all wheel drive is between 15.5 thousand and 20.7 thousand dollars.</p>
 <p>Next, we calculate a prediction interval for an individual car with these characteristics.</p>
-<div class="sourceCode" id="cb701"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb701-1"><a href="building-models-for-interpretation.html#cb701-1"></a><span class="kw">exp</span>(<span class="kw">predict</span>(Cars_M7, <span class="dt">newdata=</span>newcar, <span class="dt">interval=</span><span class="st">&quot;prediction&quot;</span>, <span class="dt">level=</span><span class="fl">0.95</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb703"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb703-1"><a href="building-models-for-interpretation.html#cb703-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">predict</span>(Cars_M7, <span class="at">newdata=</span>newcar, <span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>, <span class="at">level=</span><span class="fl">0.95</span>))</span></code></pre></div>
 <pre><code>##        fit      lwr     upr
 ## 1 17.89693 11.57309 27.6763</code></pre>
 <p>We are 95% Confident that the price of an individual new 2015 car that weighs 2400 lbs, drives a quarter mile in 18 seconds on a fast track, and has all wheel drive will be between 11.6 thousand and 27.7 thousand dollars.</p>
 </div>
-<div id="model-building-summary" class="section level3 hasAnchor">
+<div id="model-building-summary" class="section level3 hasAnchor" number="6.2.8">
 <h3><span class="header-section-number">6.2.8</span> Model Building Summary<a href="building-models-for-interpretation.html#model-building-summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Consider the following when building a model for the purpose of interpreting parameters and understanding and drawing conclusions about a population or process.</p>
 <ul>
@@ -1219,7 +1267,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

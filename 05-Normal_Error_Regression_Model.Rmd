@@ -381,7 +381,7 @@ R^2 = \frac{6.047875 - 5.126873}{6.047875} = 0.1523
 * The F-statistic is
 
 \[
-F=\frac{\frac{SSR - SST}{p}}{\frac{SSR}{n-(p+1)}} = \frac{\frac{6.047875 - 5.126873}{1}}{\frac{5.126873}{53-(1+1)}} = 9.162
+F=\frac{\frac{SST - SSR}{p}}{\frac{SSR}{n-(p+1)}} = \frac{\frac{6.047875 - 5.126873}{1}}{\frac{5.126873}{53-(1+1)}} = 9.162
 \]
 
 This F-statistic is associated with 1 and 51 degrees of freedom.   
@@ -590,7 +590,7 @@ R^2 = \frac{6.047875 - 4.045513}{6.047875} = 0.3311
 * The F-statistic is
 
 \[
-F=\frac{\frac{SSR - SST}{p}}{\frac{SSR}{n-(p+1)}} = \frac{\frac{6.047875 - 4.045513}{1}}{\frac{4.045513}{53-(1+1)}} = 25.24
+F=\frac{\frac{SST - SSR}{p}}{\frac{SSR}{n-(p+1)}} = \frac{\frac{6.047875 - 4.045513}{1}}{\frac{4.045513}{53-(1+1)}} = 25.24
 \]
 
 This F-statistic is associated with 1 and 51 degrees of freedom.   
@@ -1570,6 +1570,11 @@ exp(Cars_M_Log$coefficients)
 
 ```{r}
 confint(Cars_M_Log)
+```
+
+
+```{r}
+exp(confint(Cars_M_Log))
 ```
 
 

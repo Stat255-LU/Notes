@@ -160,7 +160,7 @@ simulating-the-regression-effect
 nfl-wins
 impact-of-model-assumption-violations
 building-models-for-interpretation
-model-building
+model-building---sat-scores
 modeling-for-interpretation
 sat-scores-dataset
 research-question
@@ -182,4 +182,18 @@ coefficients-and-exponentiation
 confidence-and-prediction-intevals
 model-building-summary
 predictive-modeling
+modeling-for-prediction
+overview
+illustration-of-predictive-modeling
+predicting-new-data
+evaluating-predictions---rmspe
+training-data-error
+graph-of-rmspe
+best-model
+model-complexity-training-error-and-test-error
+variance-bias-tradeoff
+what-contributes-to-prediction-error
+variance-and-bias
+variance-bias-tradeoff-1
+modeling-for-prediction-1
 classification-and-logistic-regression

@@ -30,7 +30,7 @@ set.seed(07302020)
 ```
 
 
-## Model Building
+## Model Building - SAT Scores
 
 ### Modeling for Interpretation 
 
