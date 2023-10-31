@@ -479,3 +479,991 @@ write.csv(predictions, file = "predictions.csv")
 ```
 
 
+## Ridge Regression
+
+
+### Complexity in Model Coefficients
+
+We've thought about complexity in terms of the number of terms we include in a model, as well as whether we include quadratic terms and higher order terms and interactions. We can also think about model complexity in terms of the coefficients $b_1, \ldots, b_p$. Larger values of $b_1, \ldots, b_p$ are associated with more complex models. Smaller values of $b_1, \ldots, b_p$ are associated with less complex models. When $b_j=0$, this mean variable $j$ is not used in the model.   
+
+
+To illustrate, we fit a regression model to the Ames housing dataset, which includes 71 possible explanatory variables, in addition to price. 
+
+```{r, echo=FALSE}
+library(AmesHousing)
+data("ames_raw")
+ames_raw <- as.data.frame(ames_raw)
+ames_raw <- ames_raw %>% mutate_if(is.character,as.factor)
+Ames_Num <- select_if(ames_raw, is.numeric)
+ames_raw <- ames_raw[complete.cases(Ames_Num),]
+ames_raw <- ames_raw %>% mutate_if(is.character, addNA)
+ames_raw <- ames_raw %>% mutate_if(is.factor, addNA)
+ames_raw$PID <- as.numeric(ames_raw$PID)
+ames_raw <- ames_raw %>% select( `Overall Qual`, `Year Built`, `Mas Vnr Area`, `Central Air`, `Gr Liv Area`, `Lot Frontage`, `1st Flr SF`, `Bedroom AbvGr`, `TotRms AbvGrd`, everything())
+ames_raw <- ames_raw %>% select(-c(Utilities, `Bldg Type`, `Exterior 2nd`, `Bsmt Cond`, `BsmtFin Type 1`, `Low Qual Fin SF`, `Total Bsmt SF`, `BsmtFin Type 2`, `Bsmt Cond`, `Exterior 1st`, `House Style`))
+```
+
+
+```{r}
+set.seed(10302021)
+samp <- sample(1:nrow(ames_raw), 1000)
+Train_Data <- ames_raw[samp,]
+```
+
+The full list of coefficient estimates is shown below.   
+
+
+```{r}
+M_OLS <- lm(data=Train_Data, SalePrice ~ .)
+M_OLS$coefficients
+```
+
+
+Let's focus on the first 10 rows. 
+
+```{r}
+head(coef(M_OLS),10) %>% round(3)
+```
+
+If all coefficients in the model were 0, then we would be using the most simple constant model, and the prediction for the price of each house would be exactly the same as the overall mean. As $b_j's$ get farther from 0, predictions begin move away from the overall mean and depend more and more on the values or categories of the explanatory variable(s) associated with individual houses. This creates a risk, however, of overfitting.
+
+A way to combat this, other than dropping variables from the model, is to shrink some or all of the regression coefficients closer to 0, pushing predictions closer to the overall mean.
+
+A statistical technique for doing this is called **ridge regression.**
+
+### Ridge Regression Penalty
+
+We've seen that in ordinary least-squares regression, $b_0, b_1, \ldots, b_p$ are chosen in a way that to minimizes
+
+\[ \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  = \displaystyle\sum_{i=1}^n (y_i -(b_0 + b_1x_{i1} + b_2{x_i2} + \ldots +b_px_{ip}))^2 \]
+
+When $p$ is large and we want to be careful of overfitting, a common approach is to add a "penalty term" to this function, to incentive choosing values of $b_1, \ldots, b_p$ that are closer to 0, thereby "shrinking" the predictions toward the overall mean house price.      
+
+Specifically, we minimize:
+
+$$
+\begin{aligned}
+& \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum_{j=1}^pb_j^2\\ =  & \displaystyle\sum_{i=1}^n (y_i -(b_0 + b_1x_{i1} + b_2x_{i2} + \ldots + b_px_{ip}))^2 + \lambda\displaystyle\sum_{j=1}^pb_j^2
+\end{aligned}
+$$
+
+where $\lambda$ is a pre-determined positive constant. 
+
+Larger values of $b_j$ typically help the model better fit the training data, thereby making the first term smaller, but also make the second term larger. The idea is the find optimal values of $b_0, b_1, \ldots, b_p$ that are large enough to allow the model to fit the data well, thus keeping the first term (SSR) small, while also keeping the penalty term small as well.   
+
+### Choosing $\lambda$
+
+The value of $\lambda$ is predetermined by the user. The larger the value of $\lambda$, the more heavily large $b_j's$ are penalized. A value of $\lambda=0$ corresponds to ordinary least-squares.  
+
+$$
+\begin{aligned}
+Q=& \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum_{j=1}^pb_j^2\\ =  & \displaystyle\sum_{i=1}^n (y_i -(b_0 + b_1x_{i1} + b_2x_{i2} + \ldots + b_px_{ip}))^2 + \lambda\displaystyle\sum_{j=1}^pb_j^2
+\end{aligned}
+$$
+
+
+* Small values of $\lambda$ lead to more complex models, with larger $|b_j|$'s.     
+* As $\lambda$ increases, $|b_j|$'s shrink toward 0. The model becomes less complex, thus bias increases, but variance decreases.     
+* We can use cross validation to determine the optimal value of $\lambda$
+
+```{r, echo=FALSE, fig.height=4, fig.width=10, cache=FALSE}
+x <- seq(from=1, to=3, by=0.01)
+Var <- x^2/10
+Bias <- 1/x
+Error <- sqrt(Bias^2+Var) 
+plot(x, Error, type="l", ylim=c(0,1), xlab="large lambda                                                                                    small lambda", ylab="", xaxt='n', yaxt='n')
+lines(x=x, y=Var, type="l", col="blue")
+lines(x=x, y=Bias^2, type="l", col="red")
+text("RMSPE", x=2.3, y=0.95)
+text("Variance", x=1.2, y=0.2, col="blue")
+text("Bias^2", x=2.8, y=0.2, col="red")
+```
+
+
+When using ridge regression, it is important to standardize each explanatory variable (i.e. subtract the mean and divide by the standard deviation). This ensures each variable has mean 0 and standard deviation 1. Without standardizing the optimal choice of $b_j$'s would depend on scale, with variables with larger absolute measurements having more influence. We'll standardize the response variable too. Though this is not strictly necessary, it doesn't hurt. We can always transform back if necessary. 
+
+ Standardization is performed using the `scale` command in R. 
+
+
+```{r}
+Train_sc <- Train_Data %>% mutate_if(is.numeric, scale)
+```
+
+
+### Ridge Regression on Housing Dataset
+
+We'll use the `caret` package to perform cross validation in order to find the optimal value of $\lambda$. To use ridge regression, we specify `method = "glmnet"`, and `tuneGrid=expand.grid(alpha=0, lambda=l_vals)`. Note the `alpha` value can be changed to use other types of penalized regression sometimes used in predictive modeling, such as lasso or elastic net.       
+
+```{r}
+control = trainControl("repeatedcv", number = 10, repeats=10)
+l_vals = 10^seq(-3, 3, length = 100)  # test values between 1/1000 and 1000
+
+set.seed(11162020)
+Housing_ridge <- train(SalePrice ~ .,
+                       data = Train_sc, method = "glmnet", trControl=control , 
+                      tuneGrid=expand.grid(alpha=0, lambda=l_vals))
+```
+
+Value of $\lambda$ minimizing RMSPE:
+
+```{r}
+Housing_ridge$bestTune$lambda
+```
+
+
+We examine RMSPE on the withheld data as a function of $\lambda$.  
+
+```{r, echo=FALSE}
+lambda <- Housing_ridge$results$lambda
+RMSPE <- Housing_ridge$results$RMSE
+ggplot(data=data.frame(lambda, RMSPE), aes(x=lambda, y=RMSPE))+geom_line() + xlim(c(0,2)) + ylim(c(0.45, 0.5)) + ggtitle("Ridge Regression Cross Validation Results")
+```
+
+
+Using $\lambda$ = `r Housing_ridge$bestTune$lambda`, obtain the following set of ridge regression coefficients. Notice how the ridge coefficients are typically closer to 0 than the ordinary least squares coefficients, indicating a less complex model.   
+
+```{r}
+M_OLS_sc <- lm(data=Train_sc, SalePrice ~ .)
+OLS_coef <- M_OLS_sc$coefficients
+Ridge_coef <- coef(Housing_ridge$finalModel, Housing_ridge$bestTune$lambda)[,1]
+df <- data.frame(OLS_coef[2:10], Ridge_coef[2:10])
+names(df) <-c("OLS Coeff", "Ridge Coeff")
+df
+```
+
+
+Predictions and residuals for the first six houses in the traning data, using ordinary least squares and ridge regression, are shown below.  
+
+```{r}
+library(glmnet)
+MAT <- model.matrix(SalePrice~., data=Train_sc)
+ridge_mod <- glmnet(x=MAT, y=Train_sc$SalePrice, alpha = 0, lambda=Housing_ridge$bestTune$lambda )
+```
+
+```{r}
+y <- Train_sc$SalePrice
+Pred_OLS <- predict(M_OLS_sc)
+Pred_Ridge <- predict(ridge_mod, newx=MAT)
+OLS_Resid <- y - Pred_OLS
+Ridge_Resid <- y - Pred_Ridge
+Resdf <- data.frame(y, Pred_OLS, Pred_Ridge, OLS_Resid, Ridge_Resid)
+names(Resdf) <- c("y", "OLS Pred", "Ridge Pred", "OLS Resid", "Ridge Resid")
+kable(head(Resdf))
+```
+
+### Ridge vs OLS
+
+In OLS, we choose $b_0, b_1, \ldots, b_p$ are chosen in a way that minimizes
+
+\[ \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  = \displaystyle\sum_{i=1}^n (y_i -(b_0 + b_1x_{i1} + b_2x_{i2} + \ldots + b_px_{ip}))^2 \]
+
+
+OLS: $\displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2$
+
+```{r}
+sum((y-Pred_OLS)^2)
+```
+
+Ridge: $\displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2$
+
+```{r}
+sum((y-Pred_Ridge)^2)
+```
+
+Not surprisingly the OLS model achieves smaller $\displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2$. This has to be true, since the OLS coefficients are chosen to minimize this quantity.   
+
+
+
+In ridge regression, $b_0, b_1, \ldots, b_p$ are chosen in a way that minimizes
+
+$$
+\begin{aligned}
+Q=& \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum_{j=1}^pb_j^2\\ =  & \displaystyle\sum_{i=1}^n (y_i -(b_0 + b_1x_{i1} + b_2x_{i2} + \ldots + b_px_{ip}))^2 + \lambda\displaystyle\sum_{j=1}^pb_j^2
+\end{aligned}
+$$
+
+OLS: $\displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum_{j=1}^pb_j^2$
+
+```{r}
+sum((y-Pred_OLS)^2) + 0.6136*sum(coef(M_OLS_sc)[-1]^2) 
+```
+
+Ridge: $\displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum_{j=1}^pb_j^2$
+
+```{r}
+sum((y-Pred_Ridge)^2) + 0.6136*sum((Ridge_coef)[-1]^2)
+```
+
+We see that the ridge coefficients achieve a lower value of Q than the OLS ones. 
+
+
+### Lasso and Elastic Net
+
+Two other techniques that are similar to ridge regression are lasso and elastic net. Both also aim to avoid overfitting by shrinking regression coefficients toward 0 in a manner similar to ridge regression. 
+
+Lasso regression is very similar to ridge regression. Coefficients $b_0, b_1, \ldots, b_p$ are chosen in a way that to minimizes
+
+$$
+\begin{aligned}
+& \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum_{j=1}^p|b_j|\\ =  & \displaystyle\sum_{i=1}^n (y_i -(b_0 + b_1x_{i1} + b_2x_{i2} + \ldots + b_px_{ip}))^2 + \lambda\displaystyle\sum_{j=1}^p|b_j|
+\end{aligned}
+$$
+Regression with an elastic net uses both ridge and lasso penalty terms and determines the values of $b_0, b_1, \ldots, b_p$ by minimizing 
+
+$$
+\begin{aligned}
+& \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum_{j=1}^p|b_j|\\ =  & \displaystyle\sum_{i=1}^n (y_i -(b_0 + b_1x_{i1} + b_2x_{i2} + \ldots + b_px_{ip}))^2 + \lambda_1\displaystyle\sum_{j=1}^pb_j^2+ \lambda_2\displaystyle\sum_{j=1}^p|b_j|
+\end{aligned}
+$$
+
+## Decision Trees
+
+### Basics of Decision Trees
+
+A decision tree is a flexible alternative to a regression model. It is said to be **nonparametric** because it does not involve parameters like $\beta_0, \beta_1, \ldots \beta_p$. A tree makes no assumption about the nature of the relationship between the response and explanatory variables, and instead allows us to learn this relationship from the data. A tree makes prediction by repeatedly grouping together like observations in the training data. We can make predictions for a new case, by tracing it through the tree, and averaging responses of training cases in the same terminal node.  
+
+**Decision Tree Example:**
+
+We fit a decision tree to the Ames Housing dataset, using the `rpart` function in a package by the same name.  
+
+```{r, fig.height=4.5, fig.width=11}
+library(rpart)
+library(rpart.plot)
+tree <- rpart(SalePrice~., data=Train_Data, cp=0.04)
+rpart.plot(tree, box.palette="RdBu", shadow.col="gray", nn=TRUE, cex=1, extra=1)
+```
+
+We see that the houses are first split based on whether or not their overall quality rating was less than 8. Each of the resulting nodes are then split again, using information from other explanatory variables. Each split partitions the data further, so that houses in the same node can be thought of as being similar to one another.   
+
+* The predicted price of a House with overall quality 7, and was built in 1995 is $200,000.    
+
+* The predicted price of a House overall quality 8 and 1,750 sq. ft. on the first floor is $370,000. 
+
+### Partitioning in A Decision Tree
+
+For a quantitative response variable, data are split into two nodes so that responses in the same node are as similar as possible, while responses in the  different nodes are as different as possible.    
+
+Let L and R represent the left and right nodes from a possible split. Let $n_L$ and $n_R$ represent the number of observations in each node, and $\bar{y}_L$ and $\bar{y}_R$ represent the mean of the training data responses in each node.   
+
+For each possible split, involving an explanatory variable, we calculate: 
+
+
+\[ \displaystyle\sum_{i=1}^{n_L} (y_i -\bar{y}_L)^2 + \displaystyle\sum_{i=1}^{n_R} (y_i -\bar{y}_R)^2
+\]
+
+
+We choose the split that minimizes this quantity.
+
+**Partitioning Example**       
+
+Consider a dataset with two explanatory variables, $x_1$ and $x_2$, and a response variable $y$, whose values are shown numerically in the graph. 
+
+```{r, echo=FALSE, cache=FALSE}
+set.seed(11142020)
+x1 <- c(8,2,8,1,8,6,2,5,1,8,4,10,9,8,6)
+x2 <- c(5,3,1,1,4,3,8,1,10,8,6,5,0,2,1)
+y <- c(253, 64, 258, 21, 257, 203, 246, 114, 331, 256, 213, 406, 326, 273, 155)
+Exdf <- data.frame(x1, x2, y)
+t(Exdf)
+```
+
+```{r, echo=FALSE, cache=FALSE}
+ggplot(data=Exdf, aes(x=x1, y=x2)) + geom_point() + geom_text(aes(label=y),hjust=0, vjust=2)
+```
+
+
+The goal is to split up the data, using information about $x_1$ and $x_2$ in a way that makes the $y$ values grouped together as similar as possible.  
+
+**1. One Possible Split ($x_1 < 5.5$)**
+
+We could split the data into 2 groups depending on whether $x_1 < 5.5$.    
+
+```{r, fig.height=4.5, fig.width=8, echo=FALSE}
+ggplot(data=Exdf, aes(x=x1, y=x2)) + geom_point() + geom_text(aes(label=y),hjust=0, vjust=2) + geom_vline(xintercept = 5.5, color="red", size=4)
+```
+
+We calcuate the mean y-value in each resulting node:
+
+* $\bar{y}_L = (331+246+213+21+64+114)/6 \approx 164.84$    
+* $\bar{y}_R = (203+155+256+253+257+273+258+326+406)/9 \approx 265.22$
+
+To measure measure the amount of deviation in the node, we calculate the sum of the squared difference between each individual value and the overall mean in each node. 
+
+$$
+\begin{aligned}
+& \displaystyle\sum_{i=1}^{n_L} (y_i -\bar{y}_L)^2  \\
+& =(331-164.83)^2+(246-164.33)^2 + \ldots+(114-164.33)^2 \\
+& =69958.83
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\displaystyle\sum_{i=1}^{n_R} (y_i -\bar{y}_R)^2 \\
+& =(203-265.22)^2+(155-265.22)^2 + \ldots+(406-265.22)^2 \\
+& =39947.56
+\end{aligned}
+$$
+
+Adding together these two quantities, we obtain an overall measure of the squared deviations between observations in the same node.  
+
+* 69958.83 + 39947.56 = 109906.4
+
+
+**2.Second Possible Split ($x_1 < 6.5$)**
+
+We could alternatively split the data into 2 groups depending on whether $x_1 < 6.5$.    
+
+```{r, fig.height=4.5, fig.width=8, echo=FALSE}
+ggplot(data=Exdf, aes(x=x1, y=x2)) + geom_point() + geom_text(aes(label=y),hjust=0, vjust=2) + geom_vline(xintercept = 6.5, color="red", size=2)
+```
+
+Using this split, 
+
+* $\bar{y}_L = (331+246+213+21+64+114 + 203+155)/8 \approx 168.375$    
+* $\bar{y}_R = (256+253+257+273+258+326+406)/7 \approx 289.857$
+
+
+$$
+\begin{aligned}
+& \displaystyle\sum_{i=1}^{n_L} (y_i -\bar{y}_L)^2  \\
+& =(331-168.375)^2+(246-168.375)^2 + \ldots+(203-168.375)^2 \\
+& =71411.88
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\displaystyle\sum_{i=1}^{n_R} (y_i -\bar{y}_R)^2 \\
+& =(203-289.857)^2+(155-289.857)^2 + \ldots+(406-289.857)^2 \\
+& =19678.86
+\end{aligned}
+$$
+
+The total squared deviation is:  
+
+* 71411.88 + 19678.86 = 91090.74
+
+The split at $x1 < 6.5$ is better than $x_1<5.5$
+
+**3. Third Possible Split ($x_2 < 5.5$)**
+
+We could also split the data into 2 groups depending on whether $x_2 < 5.5$.    
+
+```{r, fig.height=4.5, fig.width=8, echo=FALSE}
+ggplot(data=Exdf, aes(x=x1, y=x2)) + geom_point()  + geom_hline(yintercept = 5.5, color="red", size=2) + geom_text(aes(label=y),hjust=0, vjust=2)
+```
+
+Using this split, 
+
+* $\bar{y}_L = (331+246+213+256)/4 \approx 261.5$    
+* $\bar{y}_R = (21 + 64 + \ldots + 406)/11 \approx 211.82$
+
+
+$$
+\begin{aligned}
+& \displaystyle\sum_{i=1}^{n_L} (y_i -\bar{y}_L)^2  \\
+& =(331-261.5)^2+(246-261.5)^2 + (213-261.5)^2+(256-261.5)^2 \\
+& =7453
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\displaystyle\sum_{i=1}^{n_R} (y_i -\bar{y}_R)^2 \\
+& =(21-211.82)^2+(64-211.82)^2 + \ldots+(406-211.82)^2 \\
+& =131493.6
+\end{aligned}
+$$
+
+The sum of squared deviations is:
+
+* 7453 + 131493.6 = 138946.6
+
+**Comparison of Splits**
+
+* Of the three split's we've calculated, $\displaystyle\sum_{i=1}^{n_L} (y_i -\bar{y}_L)^2 + \displaystyle\sum_{i=1}^{n_R} (y_i -\bar{y}_R)^2$ is minimized using $x_1 < 6.5$.   
+
+* In fact, if we calculate all possible splits over $x_1$ and $x_2$, $\displaystyle\sum_{i=1}^{n_L} (y_i -\bar{y}_L)^2 + \displaystyle\sum_{i=1}^{n_R} (y_i -\bar{y}_R)^2$ is minimized by splitting on $x_1 < 6.5$    
+
+Thus, we perform the first split in the tree, using $x_1 < 6.5$. 
+
+```{r, fig.height=4.5, fig.width=8, echo=FALSE}
+ggplot(data=Exdf, aes(x=x1, y=x2)) + geom_point()  + geom_vline(xintercept = 6.5, color="red", size=2) + geom_text(aes(label=y),hjust=0, vjust=2)
+```
+
+
+```{r, echo=FALSE, fig.height=4.5, fig.width=11}
+library(rpart)
+library(rpart.plot)
+tree <- rpart(y~., data=Exdf, cp=0.01, minsplit=15)
+rpart.plot(tree, box.palette="RdBu", shadow.col="gray", nn=TRUE, cex=1, extra=1)
+```
+
+### Next Splits
+
+Next, we find the  best splits on the resulting two nodes. It turns out that the left node is best split on $x_2 < 4.5$, and the right node is best split on $x_1 < 8.5$.  
+
+
+```{r, fig.height=4.5, fig.width=8, echo=FALSE}
+ggplot(data=Exdf, aes(x=x1, y=x2)) + geom_point()  + geom_vline(xintercept = 6.5, color="red", size=2) + geom_vline(xintercept = 8.5, color="blue", size=2) + geom_segment(x = 0, y=4.5, xend=6.5, yend=4.5, color="blue", size=2) + geom_text(aes(label=y),hjust=0, vjust=2)
+```
+
+
+```{r, echo=FALSE, fig.height=4.5, fig.width=11}
+library(rpart)
+library(rpart.plot)
+tree <- rpart(y~., data=Exdf, cp=0.01, minsplit=6)
+rpart.plot(tree, box.palette="RdBu", shadow.col="gray", nn=TRUE, cex=1, extra=1)
+```
+
+### Recursive Partitioning
+
+Splitting continues until nodes reach a certain predetermined minimal size, or until change improvement in model fit drops below a predetermined value
+
+
+```{r, echo=FALSE, fig.height=15, fig.width=11}
+library(rpart)
+library(rpart.plot)
+tree <- rpart(SalePrice~., data=Train_Data, cp=0.001)
+rpart.plot(tree, box.palette="RdBu", shadow.col="gray", nn=TRUE, cex=1, extra=1)
+```
+
+
+### Model Complexity in Trees
+
+The more we partition data into smaller nodes, the more complex the model becomes. As we continue to partition, bias decreases, as cases are grouped with those that are more similar to themselves. On the other hand, variance increases, as there are fewer cases in each node to be averaged, putting more weight on each individual observation.
+
+Splitting into too small of nodes can lead to drastic overfitting. In the  extreme case, if we split all the way to nodes of size 1, we would get RMSE of 0 on the training data, but should certainly not expect RMSPE of 0 on the test data. 
+
+The optimal depth of the tree, or minimal size for terminal nodes can be determined using cross-validation. The `rpart` package uses a complexity parameter `cp`, which determines how much a split must improve model fit in order to be made. Smaller values of `cp` are associated with more complex tree models, since they allow splits even when model fit only improves by a little.    
+
+
+
+### Cross-Validation on Housing Data
+
+We'll use `caret` to determine the optimal value of the `cp` parameter. We use `method="rpart"` to grow decision trees.   
+
+
+```{r}
+cp_vals = 10^seq(-8, 1, length = 100) # test values between 1/10^8 and 1
+colnames(Train_sc) <- make.names(colnames(Train_sc))
+
+set.seed(11162020)
+Housing_Tree <- train(data=Train_sc, SalePrice ~ .,  method="rpart", trControl=control, 
+                     tuneGrid=expand.grid(cp=cp_vals))
+```
+
+The optimal value of `cp` is:
+
+```{r}
+Housing_Tree$bestTune
+```
+
+We plot RMSPE on the holdout data as a function of `cp`.  
+
+```{r}
+cp <- Housing_Tree$results$cp
+RMSPE <- Housing_Tree$results$RMSE
+ggplot(data=data.frame(cp, RMSPE), aes(x=cp, y=RMSPE))+geom_line() + xlim(c(0,0.001)) + ylim(c(0.475,0.485))  + 
+  ggtitle("Regression Tree Cross Validation Results")
+```
+
+
+### Comparing OLS, Lasso, Ridge, and Tree
+
+```{r}
+set.seed(11162020)
+Housing_OLS <- train(data=Train_sc, SalePrice ~ .,  method="lm", trControl=control)
+set.seed(11162020)
+Housing_lasso <- train(SalePrice ~., data = Train_sc, method = "glmnet", trControl=control, 
+                      tuneGrid=expand.grid(alpha=1, lambda=l_vals))
+```
+
+RMSPE on the standardized version of the response variable is displayed below for ordinary least squares, ridge regression, lasso regression, and a decistion tree.  
+
+```{r}
+min(Housing_OLS $results$RMSE)
+min(Housing_ridge$results$RMSE)
+min(Housing_lasso$results$RMSE)
+min(Housing_Tree$results$RMSE)
+```
+
+In this situation, the tree outperforms OLS, but does not do as well as lasso or ridge. The best model will vary depending on the nature of the data. We can use cross-validation to determine which model is likely to perform best in prediction.    
+
+
+### Random Forest
+
+A popular extension of a decision tree is a random forest. A random forest consists of many (often ~10,000) trees. Predictions are made by averaging predictions from individual trees.    
+
+* In order to ensure the trees are different from each other:
+    1. each tree is grown from a different bootstrap sample of the training data.    
+    2. when deciding on a split, only a random subset of explanatory variables are considered.    
+    
+Growing deep trees ensures low bias. In a random forest, averaging across many deep trees decreases variance, while maintaining low bias.   
+
+
+## Regression Splines
+
+### Regression Splines
+
+We've seen that we can use polynomial regression to capture nonlinear trends in data.    
+
+* A **regression spline** is a piecewise function of polynomials.     
+
+Here we'll keep thing simple by focusing on a spline with a single explanatory variable. Splines can also be used for multivariate data.   
+
+We'll examine the use of splines on the car price prediction dataset.   
+
+We divide the data into a set of 75 cars, which we'll use to train the model, and 35 cars, on which we'll make and evaluate predictions. 
+
+The 75 cars in the training set are shown below. 
+
+```{r, echo=FALSE}
+library(splines)
+library(Lock5Data)
+data(Cars2015)
+Cars <- Cars2015
+names(Cars)[names(Cars)=="LowPrice"] <- "Price"
+#set.seed(07182019)
+#samp <- sample(1:nrow(Cars))
+#train <- Cars[samp[1:80],]
+#test <- Cars[samp[81:110],]
+set.seed(07182019)
+samp <- sample(1:nrow(Cars))
+train <- Cars[samp[1:75],]
+test <- Cars[samp[76:110],]  
+lims=range(Cars2015$Acc060)
+grid=seq(from=lims[1],to=lims[2], by=0.01)
+```
+
+```{r, echo=FALSE, fig.height=8, fig.width=10}
+plot(x=train$Acc060, y=train$Price, xlab="0-60 mph Acceleration Time in Sec.", ylab="Price in Thousands of Dollars", pch=16) 
+text("Porsche 911", x=4.5, y=80, col="lightblue")
+#text("Chevy Corvette", x=4.7, y=50, col="lightblue")
+text("Chevy Camaro", x=5.2, y=20, col="lightblue")
+```
+
+
+### Two Models with High Bias
+
+```{r, fig.width=12, fig.height=8, echo=FALSE}
+library(splines)
+par(mfrow=c(1,2))
+plot(x=train$Acc060, y=train$Price, xlab="0-60 mph Acceleration Time in Sec.", ylab="Price in Thousands of Dollars", main="Constant Model", pch=16) 
+abline(h=mean(train$Price), col="red")
+plot(x=train$Acc060, y=train$Price, xlab="0-60 mph Acceleration Time in Sec.", ylab="Price in Thousands of Dollars", main="Linear Model", pch=16) 
+abline(lm(Price~Acc060, data=train), col="red")
+```
+
+The constant and linear models have high bias, as they are not complex enough to capture the apparent curvature in the relationship between price and acceleration time.   
+
+A cubic model, on the other hand might better capture the trend.  
+
+```{r, echo=FALSE, fig.height=4.5, fig.width=7}
+par(mfrow=c(1,1))
+cubicfit=lm(Price~poly(Acc060,4),data=train)
+cubicpred <- predict(cubicfit,newdata=list(Acc060=grid))
+plot(train$Acc060,train$Price,col="black", xlab="0-60 mph Acceleration Time in Sec.", ylab="Price in Thousands of Dollars", pch=16)
+lines(grid,cubicpred,lwd=2, col="red")
+```
+
+
+
+### Cubic Splines
+
+It's possible that the behavior of the response variable might differ in different regions of the x-axis. A cubic spline allows us to fit different models in different regions of the x-axis.   
+
+```{r, echo=FALSE, fig.height=8, fig.width=10}
+library(splines)
+df <- 3
+splinefit2 <- lm(Price~ns(Acc060,df=df),data=train)
+spline2pred <- predict(splinefit2,newdata=list(Acc060=grid))
+plot(train$Acc060,train$Price,col="black", xlab="0-60 mph Acceleration Time in Sec.", ylab="Price in Thousands of Dollars", pch=16)
+#lines(grid,cubicpred,lwd=2, col="red")
+knots <- attr(ns(train$Acc060,df=3),"knots")
+lines(grid[grid<knots[1]],spline2pred[grid<knots[1]],lwd=2, col="lightblue")
+lines(grid[grid>=knots[1] & grid < knots[2]],spline2pred[grid>=knots[1] & grid < knots[2]],lwd=2, col="red")
+lines(grid[grid>=knots[2]],spline2pred[grid>=knots[2]],lwd=2, col="green")
+points(knots[1], predict(splinefit2,newdata=list(Acc060=knots[1])), pch=0)
+points(knots[2], predict(splinefit2,newdata=list(Acc060=knots[2])), pch=0)
+abline(v=knots[1])
+abline(v=knots[2])
+```
+
+The region boundaries are called **knots**    
+
+
+**Cubic Spline with 5 Knots**
+
+```{r, echo=FALSE, fig.height=8, fig.width=10}
+df <- 6
+splinefit5 <- lm(Price~ns(Acc060,df=df),data=train)
+spline5pred <- predict(splinefit5,newdata=list(Acc060=grid))
+plot(train$Acc060,train$Price,col="black", xlab="0-60 mph Acceleration Time in Sec.", ylab="Price in Thousands of Dollars", pch=16)
+#lines(grid,spline5pred,lwd=2, col="red")
+knots <- attr(ns(train$Acc060,df=6),"knots")
+lines(grid[grid < knots[1]], spline5pred[grid < knots[1]],lwd=2, col="lightblue")
+lines(grid[grid>=knots[1] & grid <= knots[2]],spline5pred[grid>=knots[1] & grid < knots[2]],lwd=2, col="red")
+lines(grid[grid>=knots[2] & grid < knots[3]],spline5pred[grid>=knots[2] & grid < knots[3]],lwd=2, col="lightblue")
+lines(grid[grid>=knots[3] & grid < knots[4]],spline5pred[grid>=knots[3] & grid < knots[4]],lwd=2, col="orange")
+lines(grid[grid>=knots[4] & grid < knots[5]],spline5pred[grid>=knots[4] & grid < knots[5]],lwd=2, col="purple")
+lines(grid[grid>=knots[5]],spline5pred[grid>=knots[5]],lwd=2, col="green")
+points(knots[1], predict(splinefit5,newdata=list(Acc060=knots[1])), pch=0)
+points(knots[2], predict(splinefit5,newdata=list(Acc060=knots[2])), pch=0)
+points(knots[3], predict(splinefit5,newdata=list(Acc060=knots[3])), pch=0)
+points(knots[4], predict(splinefit5,newdata=list(Acc060=knots[4])), pch=0)
+points(knots[5], predict(splinefit5,newdata=list(Acc060=knots[5])), pch=0)
+```
+
+
+
+**Cubic Spline with 10 Knots**
+
+```{r, echo=FALSE, fig.height=8, fig.width=10}
+df <- 11
+splinefit11 <- lm(Price~ns(Acc060,df=df),data=train)
+spline11pred <- predict(splinefit11,newdata=list(Acc060=grid))
+plot(train$Acc060,train$Price,col="black", xlab="0-60 mph Acceleration Time in Sec.", ylab="Price in Thousands of Dollars", pch=16)
+lines(grid,spline11pred,lwd=2, col="lightblue")
+knots <- attr(ns(train$Acc060,df=11),"knots")
+points(knots[1], predict(splinefit11,newdata=list(Acc060=knots[1])), pch=0)
+points(knots[2], predict(splinefit11,newdata=list(Acc060=knots[2])), pch=0)
+points(knots[3], predict(splinefit11,newdata=list(Acc060=knots[3])), pch=0)
+points(knots[4], predict(splinefit11,newdata=list(Acc060=knots[4])), pch=0)
+points(knots[5], predict(splinefit11,newdata=list(Acc060=knots[5])), pch=0)
+points(knots[6], predict(splinefit11,newdata=list(Acc060=knots[6])), pch=0)
+points(knots[7], predict(splinefit11,newdata=list(Acc060=knots[7])), pch=0)
+points(knots[8], predict(splinefit11,newdata=list(Acc060=knots[8])), pch=0)
+points(knots[9], predict(splinefit11,newdata=list(Acc060=knots[9])), pch=0)
+points(knots[10], predict(splinefit11,newdata=list(Acc060=knots[10])), pch=0)
+```
+
+
+
+**Cubic Spline with 20 Knots**
+
+```{r, echo=FALSE, fig.height=8, fig.width=10}
+df <- 21
+splinefit21 <- lm(Price~ns(Acc060,df=df),data=train)
+spline21pred <- predict(splinefit21,newdata=list(Acc060=grid))
+plot(train$Acc060,train$Price,col="black", xlab="0-60 mph Acceleration Time in Sec.", ylab="Price in Thousands of Dollars", pch=16)
+lines(grid,spline21pred,lwd=2, col="lightblue")
+knots <- attr(ns(train$Acc060,df=21),"knots")
+points(knots[1], predict(splinefit21,newdata=list(Acc060=knots[1])), pch=0)
+points(knots[2], predict(splinefit21,newdata=list(Acc060=knots[2])), pch=0)
+points(knots[3], predict(splinefit21,newdata=list(Acc060=knots[3])), pch=0)
+points(knots[4], predict(splinefit21,newdata=list(Acc060=knots[4])), pch=0)
+points(knots[5], predict(splinefit21,newdata=list(Acc060=knots[5])), pch=0)
+points(knots[6], predict(splinefit21,newdata=list(Acc060=knots[6])), pch=0)
+points(knots[7], predict(splinefit21,newdata=list(Acc060=knots[7])), pch=0)
+points(knots[8], predict(splinefit21,newdata=list(Acc060=knots[8])), pch=0)
+points(knots[9], predict(splinefit21,newdata=list(Acc060=knots[9])), pch=0)
+points(knots[10], predict(splinefit21,newdata=list(Acc060=knots[10])), pch=0)
+points(knots[11], predict(splinefit21,newdata=list(Acc060=knots[11])), pch=0)
+points(knots[12], predict(splinefit21,newdata=list(Acc060=knots[12])), pch=0)
+points(knots[13], predict(splinefit21,newdata=list(Acc060=knots[13])), pch=0)
+points(knots[14], predict(splinefit21,newdata=list(Acc060=knots[14])), pch=0)
+points(knots[15], predict(splinefit21,newdata=list(Acc060=knots[15])), pch=0)
+points(knots[16], predict(splinefit21,newdata=list(Acc060=knots[16])), pch=0)
+points(knots[17], predict(splinefit21,newdata=list(Acc060=knots[17])), pch=0)
+points(knots[18], predict(splinefit21,newdata=list(Acc060=knots[18])), pch=0)
+points(knots[19], predict(splinefit21,newdata=list(Acc060=knots[19])), pch=0)
+points(knots[20], predict(splinefit21,newdata=list(Acc060=knots[20])), pch=0)
+```
+
+Notice that as the number of knots increases, the model becomes more and more complex. We would not expect the relationship between price and acceleration time to look like it does in these more complicated pictures. It is likely that as the number of knots gets big, the model overfits the training data. 
+
+### Predicting Test Data
+
+
+Shown below is a plot of RMSPE when predictions are made on the new test data.   
+
+```{r, echo=FALSE, fig.height=8, fig.width=10}
+par(mar = c(8, 8, 2, 2))
+RMSPE <- rep(NA, 20)
+for (df in 1:20){
+fit <- lm(Price~ns(Acc060,df=df),data=train)
+testpred <- predict(fit, newdata = test)
+RMSPE[df] <- mean((testpred-test$Price)^2)
+}
+plot(x=0:19, y=RMSPE, type="l", xlab="Number of Knots")
+```
+
+We see that RMSPE is minimized using the model with three knots.   
+
+
+### Implementation of Splines
+
+Important Considerations:
+
+* how many knots   
+* where to place knots      
+* degree of polynomial
+
+The best choices for all of these will vary between datasets and can be assessed through cross-validation.   
+
+## Summary and Comparision
+
+In the previous sections, we've applied various predictive modeling techniques to predict house prices in Ames, IA. In each section, we've focused on an individual predictive technique (OLS, ridge/lasso regression, trees, splines), but in practice, we often test out these techniques together to find which is likely to perform best on a set of data. Here, we'll go through the steps to test out and evaluate these techniques on the Ames Housing dataset.
+
+There are no new statistical ideas presented in this section, just a synthesis of the preceding material. We leave out splines, since we did not discuss using splines in a multivariate setting, but we compare OLS, ridge and decision trees. 
+
+We use a subset of variables for illustrative purposes. 
+
+```{r, echo=FALSE}
+select <- dplyr::select
+data("ames_raw")
+ames_raw <- as.data.frame(ames_raw)
+ames_raw <- ames_raw %>% mutate_if(is.character, as.factor)
+ames_raw <- ames_raw %>% select( `Overall Qual`, `Year Built`,  `Central Air`, `Gr Liv Area`, `1st Flr SF`, `Bedroom AbvGr`, `TotRms AbvGrd`, `Lot Area`, `Lot Shape`, `Land Contour`, `Overall Cond`, `Exter Qual`, `Heating QC`, `Paved Drive`, `SalePrice`)
+ames_raw <- data.frame(ames_raw)
+```
+
+
+```{r}
+set.seed(10302021)
+samp <- sample(1:nrow(ames_raw), 1000)
+Houses <- ames_raw[samp,]
+```
+
+
+```{r}
+New_Houses <- ames_raw <- ames_raw[-samp,]
+New_Houses <- New_Houses[1:5, ]
+```
+
+We'll begin by doing some data preparation. 
+
+We standardize all explanatory variables in the training and new data. We do not standardize the response variable, price, so we can interpret predicted values more easily. 
+
+```{r}
+Houses_Combined <- rbind(Houses, New_Houses)
+Houses_sc <- Houses_Combined %>% mutate_if(is.numeric, scale)
+Houses_sc$SalePrice <- as.numeric(Houses_Combined$SalePrice)
+Houses_sc_Train <- Houses_sc[1:1000, ]
+Houses_sc_New <- Houses_sc[1001:1005, ]
+```
+
+The `Houses_sc_Train` dataset contains standardized values for the 1000 houses in the training data. The first six rows are shown below. 
+
+```{r}
+head(Houses_sc_Train)
+```
+
+The `Houses_sc_New` displays standardized values for the new houses that we're trying to predict. 
+
+```{r}
+head(Houses_sc_New)
+```
+
+Since the `glmnet` command requires training data to be entered as a matrix, we create versions of the datasets in matrix form. 
+
+```{r}
+Houses_sc$SalePrice[is.na(Houses$SalePrice)] <- 0 #can't take NA's when fitting model matrix, doesn't matter since only need x-coeffs
+Houses_sc_Combined_MAT <- model.matrix(SalePrice~., data=rbind(Houses_sc))
+Houses_sc_Train_MAT <- Houses_sc_Combined_MAT[1:1000, ]
+Houses_sc_New_MAT <- Houses_sc_Combined_MAT[1001:1005, ]
+```
+
+### Modeling with OLS
+
+We first fit an ordinary least squares regression model to the data. 
+
+```{r}
+Housing_OLS <- lm(data=Houses_sc_Train, SalePrice~ .)
+coef(Housing_OLS)
+```
+
+
+### Ridge Regression with Housing Data
+
+Now, we'll use ridge regression to predict insurance costs. 
+
+We use cross validation to determine the optimal value of lamba. We perform 10 repeats of 10-fold cross-validation. We test 100 lambda-values ranging from $10^-5$ to $10^5$.   
+
+```{r}
+control = trainControl("repeatedcv", number = 10, repeats=10)
+l_vals = 10^seq(-5, 5, length = 100)
+
+set.seed(2022)
+Housing_ridge <- train( SalePrice ~ ., data = Houses_sc_Train, method = "glmnet", trControl=control , tuneGrid=expand.grid(alpha=0, lambda=l_vals))
+```
+
+```{r}
+Housing_ridge$bestTune$lambda
+```
+
+We fit a model to the full training dataset using the optimal value of $lambda$ . 
+
+```{r}
+ridge_mod <- glmnet(x=Houses_sc_Train_MAT, y=Houses_sc_Train$SalePrice, alpha = 0, lambda=Housing_ridge$bestTune$lambda )
+coef(ridge_mod)
+```
+
+The regression coefficients are displayed together with the OLS coefficients in a data.frame. 
+
+```{r}
+Ridge_coef <- as.vector(ridge_mod$beta)[-1] #leave off intercept using [-1]
+OLS_coef <- coef(Housing_OLS)[-1]
+data.frame(OLS_coef, Ridge_coef)
+```
+
+
+### Decision Tree
+
+Now, we'll predict house prices using using a decision tree. 
+
+First, we grow and display a small decision tree, by setting the `cp` parameter equal to 0.05.   
+
+```{r}
+tree <- rpart(SalePrice~., data=Houses_sc_Train, cp=0.05)
+rpart.plot(tree, box.palette="RdBu", shadow.col="gray", nn=TRUE, cex=1, extra=1)
+```
+
+Now we use cross-validation to determine the optimal value of the `cp` parameter. We use 10 repeats of 10-fold cross-validation. We test 1000 cp-values ranging from $10^-5$ to $10^5$. 
+
+```{r}
+cp_vals = 10^seq(-5, 5, length = 100)
+colnames(Houses_sc_Train) <- make.names(colnames(Houses_sc_Train))
+
+set.seed(2022)
+Housing_Tree <- train(data=Houses_sc_Train, SalePrice ~ .,  method="rpart", trControl=control,tuneGrid=expand.grid(cp=cp_vals))
+Housing_Tree$bestTune
+```
+
+We grow a full tree using the optimal `cp` value. 
+
+
+```{r}
+Housing_Best_Tree <- rpart(SalePrice~., data=Houses_sc_Train, cp=Housing_Tree$bestTune)
+```
+
+
+### Comparing Performance
+
+We use cross-validation to compare the performance of the linear model, ridge regression model, and decision tree. 
+
+
+```{r}
+set.seed(2022)
+Housing_OLS <- train(data=Houses_sc_Train, SalePrice ~ .,  method="lm", trControl=control)
+```
+
+```{r}
+min(Housing_OLS$results$RMSE)
+```
+
+```{r}
+min(Housing_ridge$results$RMSE)
+```
+
+
+```{r}
+min(Housing_Tree$results$RMSE)
+```
+
+The tree predictions give slightly lower RMSPE.  
+
+### Predictions on New Data
+
+We now predict the sale price of the five new houses using each technique.
+
+Ordinary Least-Squares model:
+
+```{r}
+OLS_pred <- predict(Housing_OLS, newdata=Houses_sc_New)
+head(OLS_pred)
+```
+
+Ridge regression model:
+
+We use the `Customers_sc_New_MAT` dataset, since the `glmnet` package requires inputs in matrix form.   
+
+```{r}
+ridge_pred <- predict(ridge_mod, newx=Houses_sc_New_MAT)
+head(ridge_pred)
+```
+
+
+Decision tree:
+
+```{r}
+tree_pred <- predict(Housing_Best_Tree, newdata=Houses_sc_New)
+head(tree_pred)
+```
+
+
+
+## Ethical Considerations in Predictive Modeling
+
+### Assumptions in Predictive Models
+
+Like any other statistical technique, predictive inference (sometimes done through machine learning algorithms) depends on the validity of assumptions.   
+
+1. The response variable observed in the data is actually the thing we want to predict   
+2. Training/Test data representative of population of interest    
+
+3. Prediction accuracy is appropriate metric    
+
+
+Below are some examples of real uses of predictive inference in which some of these assumptions were violated, leading to inappropriate and unethical conclusions.   
+
+
+
+
+### Amazon Hiring Algorithm    
+
+In 2014, Amazon began working on an algorithm to predict whether a job applicant would be suitable for hire for software developer positions, based on characteristics of their job application.  
+
+response variable: rating of candidate's strength (1-5) 
+explanatory variables: many variables based on information included on the resume (e.g. highest degree, major, GPA, college/university, prior job experiences, internships, frequency of certain words on resume, etc.)   
+
+The algorithm was trained using data from past applications, rated by humans, over the past 10 years. It could then be used to predict ratings of future job applicants.   
+
+According to [Reuters])(https://www.reuters.com/article/us-amazon-com-jobs-automation-insight/amazon-scraps-secret-ai-recruiting-tool-that-showed-bias-against-women-idUSKCN1MK08G),
+
+"In effect, Amazon’s system taught itself that male candidates were preferable. It penalized resumes that included the word “women’s,” as in “women’s chess club captain.” And it downgraded graduates of two all-women’s colleges, according to people familiar with the matter." 
+
+While the algorithm was intended to predict candidate quality, the response variable on the training data actually reflected biases in past hiring decisions, leading the algorithm to do the same.   
+
+
+### Facial Recognition     
+
+
+Facial recognition technology is used by law enforcement surveillance, airport passenger screening, and employment and housing decisions. It has, however, been banned for use by police in some cities, including San Francisco and Boston, due to concerns about inequity and privacy.   
+
+[Research](https://sitn.hms.harvard.edu/flash/2020/racial-discrimination-in-face-recognition-technology/) has shown that although certain facial recognition algorithms achieve over 90% accuracy overall, accuracy rate is lower among subjects who are female, Black, or 18-30 years old. 
+
+This is likely due, at least in part, to the algorithms being trained primarily on data an images of people who are not members of these groups.  
+
+Although the algorithms might attain strong accuracy overall, it is inappropriate to evaluate them on this basis, without accounting for performance on subgroups in the population.
+
+
+### Comments
+
+The biases and assumptions noted above are not reasons to abandon predictive modeling, but rather flaws to be aware of and work to correct. 
+
+Predictive algorithms, are only as good as the data on which they are trained and the societies in which they are developed, and will reflect inherent biases. Thus, they should be used cautiously and with with human judgment, just like any other statistical technique.   
+
+Beware of statements like:  
+
+"The data say this!" 
+
+"The algorithm is objective."
+
+"The numbers don't lie."   
+
+Any data-driven analysis depends on assumptions, and sound judgment and awareness of context are required when assessing the validaty of conclusions drawn.   
+
+
+### Modeling for Prediction   
+
+* Goal is to make the most accurate predictions possible.      
+* Not concerned with understanding relationships between variables. Not worried model being to complicated to interpret, as long as it yields good predictions.       
+* Aim for a model that best captures the signal in the data, without being thrown off by noise.    
+      - Large number of predictors is ok      
+      - Don't make model so complicated that it overfits the data.    
+* Be sure that model is predicting what you intend it to      
+* Reflective of biases inherent in the data on which it was trained     
+
