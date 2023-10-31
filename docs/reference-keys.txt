@@ -1,6 +1,7 @@
 fig:Bass
 fig:unnamed-chunk-106
 fig:unnamed-chunk-195
+fig:unnamed-chunk-547
 exploratory-data-analysis
 getting-started-in-r
 previewing-the-data
@@ -196,4 +197,7 @@ what-contributes-to-prediction-error
 variance-and-bias
 variance-bias-tradeoff-1
 modeling-for-prediction-1
+cross-validation
+cross-validation-illustration
+cv-in-r
 classification-and-logistic-regression

@@ -23,7 +23,7 @@
 <meta name="author" content="Andrew Sage - Lawrence University" />
 
 
-<meta name="date" content="2023-10-30" />
+<meta name="date" content="2023-10-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -393,6 +393,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#variance-and-bias"><i class="fa fa-check"></i><b>7.2.2</b> Variance and Bias</a></li>
 <li class="chapter" data-level="7.2.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#variance-bias-tradeoff-1"><i class="fa fa-check"></i><b>7.2.3</b> Variance-Bias Tradeoff</a></li>
 <li class="chapter" data-level="7.2.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#modeling-for-prediction-1"><i class="fa fa-check"></i><b>7.2.4</b> Modeling for Prediction</a></li>
+<li class="chapter" data-level="7.2.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cross-validation"><i class="fa fa-check"></i><b>7.2.5</b> Cross-Validation</a></li>
+<li class="chapter" data-level="7.2.6" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cross-validation-illustration"><i class="fa fa-check"></i><b>7.2.6</b> Cross-Validation Illustration</a></li>
+<li class="chapter" data-level="7.2.7" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cv-in-r"><i class="fa fa-check"></i><b>7.2.7</b> CV in R</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="classification-and-logistic-regression.html"><a href="classification-and-logistic-regression.html"><i class="fa fa-check"></i><b>8</b> Classification and Logistic Regression</a></li>
@@ -817,143 +820,103 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
 <li>Measuring error on data used to fit the model (training data) does not accurately predict how well model will be able to predict new data (test data)</li>
 </ul>
-<!--
-
-## Cross-Validation
-
-### Cross-Validation (CV)
-
-We've seen that training error is not an accurate approximation of test error. Instead, we'll approximate test error, by setting aside a set of the training data, and using it as if it were a test set. This process is called **cross-validation**, and the set we put aside is called the **validation set.**
-
-
-1. Partition data into disjoint sets (folds). Approximately 5 folds recommended.     
-2. Build a model using 4 of the 5 folds.  
-3. Use model to predict responses for remaining fold.
-4. Calculate root mean square error $RMSPE=\displaystyle\sqrt{\frac{\sum((\hat{y}_i-y_i)^2)}{n'}}$.    
-5. Repeat for each of 5 folds.    
-6. Average RMSPE values across folds. 
-
-If computational resources permit, it is often beneficial to perform CV multiple times, using different sets of folds. 
-
-
-### Cross-Validation Illustration
-
-<div class="figure">
-<img src="CV2.png" alt="https://www.researchgate.net/figure/A-schematic-illustration-of-K-fold-cross-validation-for-K-5-Original-dataset-shown_fig5_311668395" width="75%" />
-<p class="caption">(\#fig:unnamed-chunk-547)https://www.researchgate.net/figure/A-schematic-illustration-of-K-fold-cross-validation-for-K-5-Original-dataset-shown_fig5_311668395</p>
 </div>
-
-
-### CV in R
-
-The `train` function in the `caret` R package performs cross validation automatically. We'll use it to compare five different models for house prices among a dataset of 1,000 houses sold in Ames, IA between 2006 and 2010.  
-
-We'll consider six different models of (mostly) increasing complexity. 
-
-
-```r
-Train_Data <- read_csv("Ames_Train_Data.csv")  # Load data
-library(caret)   # load caret package
-
-
-# set cross-validation settings - use 10 repeats of 10-fold CV
-control <- trainControl(method="repeatedcv", number=10, repeats=10, savePredictions = "all" )
-
-# define models
-# set same random seed before each model to ensure same partitions are used in CV, making them comparable
-
-set.seed(10302023)   
-model1 <- train(data=Train_Data, 
-                SalePrice ~ `Overall Qual` ,  
-                method="lm", trControl=control)
-
-set.seed(10302023) 
-model2 <- train(data=Train_Data, 
-                SalePrice ~ `Overall Qual` +  `Gr Liv Area` + `Garage Area`,  
-                method="lm", trControl=control)
-
-set.seed(10302023) 
-model3 <- train(data=Train_Data, SalePrice ~ `Overall Qual` + 
-                  `Gr Liv Area` + `Garage Area` + 
-                  `Neighborhood` + `Bldg Type`,  
-                method="lm", trControl=control)
-
-set.seed(10302023) 
-model4 <- train(data=Train_Data, SalePrice ~ `Overall Qual` 
-                + `Gr Liv Area`  + `Garage Area` 
-                + `Neighborhood` + `Bldg Type` + `Year Built`,  
-                method="lm", trControl=control)
-
-set.seed(10302023) 
-model5 <- train(data=Train_Data, SalePrice ~ `Overall Qual` + 
-                  `Gr Liv Area` + `Garage Area` + `Neighborhood` + 
-                  `Bldg Type` + `Year Built` + I(`Overall Qual`^2) + 
-                  I(`Gr Liv Area`^2) + I(`Garage Area`^2) + 
-                  I(`Year Built`^2),  method="lm", trControl=control)
-
-set.seed(10302023) 
-model6 <- train(data=Train_Data, SalePrice ~ .,  method="lm", trControl=control)  # include everything linearly
-
-
-# Calculate RMSPE for each model
-RMSPE1 <- sqrt(mean((model1$pred$obs-model1$pred$pred)^2))
-RMSPE2 <- sqrt(mean((model2$pred$obs-model2$pred$pred)^2))
-RMSPE3 <- sqrt(mean((model3$pred$obs-model3$pred$pred)^2))
-RMSPE4 <- sqrt(mean((model4$pred$obs-model4$pred$pred)^2))
-RMSPE5 <- sqrt(mean((model5$pred$obs-model5$pred$pred)^2))
-RMSPE6 <- sqrt(mean((model6$pred$obs-model6$pred$pred)^2))
-```
-
-
-```r
-RMSPE1
-```
-
-```
-## [1] 51710.58
-```
-
-```r
-RMSPE2
-```
-
-```
-## [1] 44192.34
-```
-
-```r
-RMSPE3
-```
-
-```
-## [1] 38212.96
-```
-
-```r
-RMSPE4
-```
-
-```
-## [1] 38016.67
-```
-
-```r
-RMSPE5
-```
-
-```
-## [1] 38245.46
-```
-
-```r
-RMSPE6
-```
-
-```
-## [1] 40586.14
-```
-
--->
+<div id="cross-validation" class="section level3 hasAnchor" number="7.2.5">
+<h3><span class="header-section-number">7.2.5</span> Cross-Validation<a href="predictive-modeling.html#cross-validation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We’ve seen that training error is not an accurate approximation of test error. Instead, we’ll approximate test error, by setting aside a set of the training data, and using it as if it were a test set. This process is called <strong>cross-validation</strong>, and the set we put aside is called the <strong>validation set.</strong></p>
+<ol style="list-style-type: decimal">
+<li>Partition data into disjoint sets (folds). Approximately 5 folds recommended.<br />
+</li>
+<li>Build a model using 4 of the 5 folds.<br />
+</li>
+<li>Use model to predict responses for remaining fold.</li>
+<li>Calculate root mean square error <span class="math inline">\(RMSPE=\displaystyle\sqrt{\frac{\sum((\hat{y}_i-y_i)^2)}{n&#39;}}\)</span>.<br />
+</li>
+<li>Repeat for each of 5 folds.<br />
+</li>
+<li>Average RMSPE values across folds.</li>
+</ol>
+<p>If computational resources permit, it is often beneficial to perform CV multiple times, using different sets of folds.</p>
+</div>
+<div id="cross-validation-illustration" class="section level3 hasAnchor" number="7.2.6">
+<h3><span class="header-section-number">7.2.6</span> Cross-Validation Illustration<a href="predictive-modeling.html#cross-validation-illustration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-547"></span>
+<img src="CV2.png" alt="https://www.researchgate.net/figure/A-schematic-illustration-of-K-fold-cross-validation-for-K-5-Original-dataset-shown_fig5_311668395" width="75%" />
+<p class="caption">
+Figure 7.1: <a href="https://www.researchgate.net/figure/A-schematic-illustration-of-K-fold-cross-validation-for-K-5-Original-dataset-shown_fig5_311668395" class="uri">https://www.researchgate.net/figure/A-schematic-illustration-of-K-fold-cross-validation-for-K-5-Original-dataset-shown_fig5_311668395</a>
+</p>
+</div>
+</div>
+<div id="cv-in-r" class="section level3 hasAnchor" number="7.2.7">
+<h3><span class="header-section-number">7.2.7</span> CV in R<a href="predictive-modeling.html#cv-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>train</code> function in the <code>caret</code> R package performs cross validation automatically. We’ll use it to compare five different models for house prices among a dataset of 1,000 houses sold in Ames, IA between 2006 and 2010.</p>
+<p>We’ll consider six different models of (mostly) increasing complexity.</p>
+<div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb714-1"><a href="predictive-modeling.html#cb714-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb714-2"><a href="predictive-modeling.html#cb714-2" aria-hidden="true" tabindex="-1"></a>Train_Data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;Ames_Train_Data.csv&quot;</span>)  <span class="co"># Load data</span></span>
+<span id="cb714-3"><a href="predictive-modeling.html#cb714-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)   <span class="co"># load caret package</span></span></code></pre></div>
+<div class="sourceCode" id="cb715"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb715-1"><a href="predictive-modeling.html#cb715-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set cross-validation settings - use 10 repeats of 10-fold CV</span></span>
+<span id="cb715-2"><a href="predictive-modeling.html#cb715-2" aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method=</span><span class="st">&quot;repeatedcv&quot;</span>, <span class="at">number=</span><span class="dv">10</span>, <span class="at">repeats=</span><span class="dv">10</span>, <span class="at">savePredictions =</span> <span class="st">&quot;all&quot;</span> )</span>
+<span id="cb715-3"><a href="predictive-modeling.html#cb715-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb715-4"><a href="predictive-modeling.html#cb715-4" aria-hidden="true" tabindex="-1"></a><span class="co"># define models</span></span>
+<span id="cb715-5"><a href="predictive-modeling.html#cb715-5" aria-hidden="true" tabindex="-1"></a><span class="co"># set same random seed before each model to ensure same partitions are used in CV, making them comparable</span></span>
+<span id="cb715-6"><a href="predictive-modeling.html#cb715-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb715-7"><a href="predictive-modeling.html#cb715-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10302023</span>)   </span>
+<span id="cb715-8"><a href="predictive-modeling.html#cb715-8" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="at">data=</span>Train_Data, </span>
+<span id="cb715-9"><a href="predictive-modeling.html#cb715-9" aria-hidden="true" tabindex="-1"></a>                SalePrice <span class="sc">~</span> <span class="st">`</span><span class="at">Overall Qual</span><span class="st">`</span> ,  </span>
+<span id="cb715-10"><a href="predictive-modeling.html#cb715-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">trControl=</span>control)</span>
+<span id="cb715-11"><a href="predictive-modeling.html#cb715-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb715-12"><a href="predictive-modeling.html#cb715-12" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10302023</span>) </span>
+<span id="cb715-13"><a href="predictive-modeling.html#cb715-13" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="at">data=</span>Train_Data, </span>
+<span id="cb715-14"><a href="predictive-modeling.html#cb715-14" aria-hidden="true" tabindex="-1"></a>                SalePrice <span class="sc">~</span> <span class="st">`</span><span class="at">Overall Qual</span><span class="st">`</span> <span class="sc">+</span>  <span class="st">`</span><span class="at">Gr Liv Area</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Garage Area</span><span class="st">`</span>,  </span>
+<span id="cb715-15"><a href="predictive-modeling.html#cb715-15" aria-hidden="true" tabindex="-1"></a>                <span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">trControl=</span>control)</span>
+<span id="cb715-16"><a href="predictive-modeling.html#cb715-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb715-17"><a href="predictive-modeling.html#cb715-17" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10302023</span>) </span>
+<span id="cb715-18"><a href="predictive-modeling.html#cb715-18" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="at">data=</span>Train_Data, SalePrice <span class="sc">~</span> <span class="st">`</span><span class="at">Overall Qual</span><span class="st">`</span> <span class="sc">+</span> </span>
+<span id="cb715-19"><a href="predictive-modeling.html#cb715-19" aria-hidden="true" tabindex="-1"></a>                  <span class="st">`</span><span class="at">Gr Liv Area</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Garage Area</span><span class="st">`</span> <span class="sc">+</span> </span>
+<span id="cb715-20"><a href="predictive-modeling.html#cb715-20" aria-hidden="true" tabindex="-1"></a>                  <span class="st">`</span><span class="at">Neighborhood</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Bldg Type</span><span class="st">`</span>,  </span>
+<span id="cb715-21"><a href="predictive-modeling.html#cb715-21" aria-hidden="true" tabindex="-1"></a>                <span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">trControl=</span>control)</span>
+<span id="cb715-22"><a href="predictive-modeling.html#cb715-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb715-23"><a href="predictive-modeling.html#cb715-23" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10302023</span>) </span>
+<span id="cb715-24"><a href="predictive-modeling.html#cb715-24" aria-hidden="true" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="at">data=</span>Train_Data, SalePrice <span class="sc">~</span> <span class="st">`</span><span class="at">Overall Qual</span><span class="st">`</span> </span>
+<span id="cb715-25"><a href="predictive-modeling.html#cb715-25" aria-hidden="true" tabindex="-1"></a>                <span class="sc">+</span> <span class="st">`</span><span class="at">Gr Liv Area</span><span class="st">`</span>  <span class="sc">+</span> <span class="st">`</span><span class="at">Garage Area</span><span class="st">`</span> </span>
+<span id="cb715-26"><a href="predictive-modeling.html#cb715-26" aria-hidden="true" tabindex="-1"></a>                <span class="sc">+</span> <span class="st">`</span><span class="at">Neighborhood</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Bldg Type</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Year Built</span><span class="st">`</span>,  </span>
+<span id="cb715-27"><a href="predictive-modeling.html#cb715-27" aria-hidden="true" tabindex="-1"></a>                <span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">trControl=</span>control)</span>
+<span id="cb715-28"><a href="predictive-modeling.html#cb715-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb715-29"><a href="predictive-modeling.html#cb715-29" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10302023</span>) </span>
+<span id="cb715-30"><a href="predictive-modeling.html#cb715-30" aria-hidden="true" tabindex="-1"></a>model5 <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="at">data=</span>Train_Data, SalePrice <span class="sc">~</span> <span class="st">`</span><span class="at">Overall Qual</span><span class="st">`</span> <span class="sc">+</span> </span>
+<span id="cb715-31"><a href="predictive-modeling.html#cb715-31" aria-hidden="true" tabindex="-1"></a>                  <span class="st">`</span><span class="at">Gr Liv Area</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Garage Area</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Neighborhood</span><span class="st">`</span> <span class="sc">+</span> </span>
+<span id="cb715-32"><a href="predictive-modeling.html#cb715-32" aria-hidden="true" tabindex="-1"></a>                  <span class="st">`</span><span class="at">Bldg Type</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Year Built</span><span class="st">`</span> <span class="sc">+</span> <span class="fu">I</span>(<span class="st">`</span><span class="at">Overall Qual</span><span class="st">`</span><span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb715-33"><a href="predictive-modeling.html#cb715-33" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">I</span>(<span class="st">`</span><span class="at">Gr Liv Area</span><span class="st">`</span><span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(<span class="st">`</span><span class="at">Garage Area</span><span class="st">`</span><span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb715-34"><a href="predictive-modeling.html#cb715-34" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">I</span>(<span class="st">`</span><span class="at">Year Built</span><span class="st">`</span><span class="sc">^</span><span class="dv">2</span>),  <span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">trControl=</span>control)</span>
+<span id="cb715-35"><a href="predictive-modeling.html#cb715-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb715-36"><a href="predictive-modeling.html#cb715-36" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10302023</span>) </span>
+<span id="cb715-37"><a href="predictive-modeling.html#cb715-37" aria-hidden="true" tabindex="-1"></a>model6 <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="at">data=</span>Train_Data, SalePrice <span class="sc">~</span> .,  <span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">trControl=</span>control)  <span class="co"># include everything linearly</span></span>
+<span id="cb715-38"><a href="predictive-modeling.html#cb715-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb715-39"><a href="predictive-modeling.html#cb715-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb715-40"><a href="predictive-modeling.html#cb715-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate RMSPE for each model</span></span>
+<span id="cb715-41"><a href="predictive-modeling.html#cb715-41" aria-hidden="true" tabindex="-1"></a>RMSPE1 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((model1<span class="sc">$</span>pred<span class="sc">$</span>obs<span class="sc">-</span>model1<span class="sc">$</span>pred<span class="sc">$</span>pred)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb715-42"><a href="predictive-modeling.html#cb715-42" aria-hidden="true" tabindex="-1"></a>RMSPE2 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((model2<span class="sc">$</span>pred<span class="sc">$</span>obs<span class="sc">-</span>model2<span class="sc">$</span>pred<span class="sc">$</span>pred)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb715-43"><a href="predictive-modeling.html#cb715-43" aria-hidden="true" tabindex="-1"></a>RMSPE3 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((model3<span class="sc">$</span>pred<span class="sc">$</span>obs<span class="sc">-</span>model3<span class="sc">$</span>pred<span class="sc">$</span>pred)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb715-44"><a href="predictive-modeling.html#cb715-44" aria-hidden="true" tabindex="-1"></a>RMSPE4 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((model4<span class="sc">$</span>pred<span class="sc">$</span>obs<span class="sc">-</span>model4<span class="sc">$</span>pred<span class="sc">$</span>pred)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb715-45"><a href="predictive-modeling.html#cb715-45" aria-hidden="true" tabindex="-1"></a>RMSPE5 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((model5<span class="sc">$</span>pred<span class="sc">$</span>obs<span class="sc">-</span>model5<span class="sc">$</span>pred<span class="sc">$</span>pred)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb715-46"><a href="predictive-modeling.html#cb715-46" aria-hidden="true" tabindex="-1"></a>RMSPE6 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((model6<span class="sc">$</span>pred<span class="sc">$</span>obs<span class="sc">-</span>model6<span class="sc">$</span>pred<span class="sc">$</span>pred)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb716"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb716-1"><a href="predictive-modeling.html#cb716-1" aria-hidden="true" tabindex="-1"></a>RMSPE1</span></code></pre></div>
+<pre><code>## [1] 51710.58</code></pre>
+<div class="sourceCode" id="cb718"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb718-1"><a href="predictive-modeling.html#cb718-1" aria-hidden="true" tabindex="-1"></a>RMSPE2</span></code></pre></div>
+<pre><code>## [1] 44192.34</code></pre>
+<div class="sourceCode" id="cb720"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb720-1"><a href="predictive-modeling.html#cb720-1" aria-hidden="true" tabindex="-1"></a>RMSPE3</span></code></pre></div>
+<pre><code>## [1] 38212.96</code></pre>
+<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb722-1"><a href="predictive-modeling.html#cb722-1" aria-hidden="true" tabindex="-1"></a>RMSPE4</span></code></pre></div>
+<pre><code>## [1] 38016.67</code></pre>
+<div class="sourceCode" id="cb724"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb724-1"><a href="predictive-modeling.html#cb724-1" aria-hidden="true" tabindex="-1"></a>RMSPE5</span></code></pre></div>
+<pre><code>## [1] 38245.46</code></pre>
+<div class="sourceCode" id="cb726"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb726-1"><a href="predictive-modeling.html#cb726-1" aria-hidden="true" tabindex="-1"></a>RMSPE6</span></code></pre></div>
+<pre><code>## [1] 40586.14</code></pre>
+<p>We see that in this case, model M4 performed the best on the hold-out data. We should use Model 4 to make predictions on new data over the other models seen here. It is likely that there are better models out there than model 4, likely with complexity somewhere between that of model 4 and models 5 and 6. Perhaps you can find one.</p>
+<p>Once we have our preferred model, we can read in our test data and make predictions, and create a csv file containing the predictions, using the code below.</p>
+<div class="sourceCode" id="cb728"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb728-1"><a href="predictive-modeling.html#cb728-1" aria-hidden="true" tabindex="-1"></a>TestData <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;Ames_Test_Data.csv&quot;</span>)</span>
+<span id="cb728-2"><a href="predictive-modeling.html#cb728-2" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(model1, <span class="at">newdata=</span>TestData)  <span class="co"># substitute your best model</span></span>
+<span id="cb728-3"><a href="predictive-modeling.html#cb728-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(predictions, <span class="at">file =</span> <span class="st">&quot;predictions.csv&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>

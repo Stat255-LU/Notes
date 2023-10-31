@@ -19,7 +19,7 @@
 
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=TRUE)
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=FALSE)
 library(ggformula)
 library(moderndive)
 library(gridExtra)
@@ -374,11 +374,8 @@ Our goal is the find the "sweetspot" where expected RMSPE is minimized.
 * Measuring error on data used to fit the model (training data) does not accurately predict how well model will be able to predict new data (test data)
 
 
-<!--
 
-## Cross-Validation
-
-### Cross-Validation (CV)
+### Cross-Validation
 
 We've seen that training error is not an accurate approximation of test error. Instead, we'll approximate test error, by setting aside a set of the training data, and using it as if it were a test set. This process is called **cross-validation**, and the set we put aside is called the **validation set.**
 
@@ -407,9 +404,12 @@ The `train` function in the `caret` R package performs cross validation automati
 We'll consider six different models of (mostly) increasing complexity. 
 
 ```{r}
+library(tidyverse)
 Train_Data <- read_csv("Ames_Train_Data.csv")  # Load data
 library(caret)   # load caret package
+```
 
+```{r}
 
 # set cross-validation settings - use 10 repeats of 10-fold CV
 control <- trainControl(method="repeatedcv", number=10, repeats=10, savePredictions = "all" )
@@ -468,4 +468,14 @@ RMSPE5
 RMSPE6
 ```
 
--->
+We see that in this case, model M4 performed the best on the hold-out data. We should use Model 4 to make predictions on new data over the other models seen here. It is likely that there are better models out there than model 4, likely with complexity somewhere between that of model 4 and models 5 and 6. Perhaps you can find one.
+
+Once we have our preferred model, we can read in our test data and make predictions, and create a csv file containing the predictions, using the code below.   
+
+```{r, eval=FALSE}
+TestData <- read_csv("Ames_Test_Data.csv")
+predictions <- predict(model1, newdata=TestData)  # substitute your best model
+write.csv(predictions, file = "predictions.csv")
+```
+
+
