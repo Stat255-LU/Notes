@@ -1,1 +1,627 @@
-# Classification and Logistic Regression
+# Logistic Regression and Classification
+
+**Learning Outcomes:**     
+
+1. Define and distinguish between probability, odds, and odds ratio. 
+2. Identify situations where it is appropriate to use logistic regression.    
+3. Estimate probabilities, odds, and odds ratios using logistic regression.    
+4. Interpret coefficients in a logistic regression model. 
+
+5. Explain how probability estimates are obtained from decision trees and random forests.   
+
+6. Construct and interpret a confusion matrix, given probability estimates and true results. 
+7. Define specificity and sensitivity, and calculate them for given data.   
+8. Explain the information contained in a receiver operating characteristic (ROC) curve.   
+9. Construct receiver operating curves for small sets of data.   
+10. Compare classifiers using misclassification rate, and AUC.  
+
+
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 7, cache=TRUE)
+library(ggformula)
+library(moderndive)
+library(gridExtra)
+library(skimr)
+library(Bolstad)
+library(GGally)
+library(Lock5Data)
+library(knitr)
+library(caret)
+library(MASS)
+library(tidyverse)
+options(scipen=999)
+set.seed(07302020)
+```
+
+
+## Logistic Regression
+
+### Modeling Binary Response
+
+So far, we have modeled only quantitative response variables. The normal error regression model makes the assumption that the response variable is normally distributed, given the value(s) of the explanatory variables.    
+
+Now, we'll look at how to model a categorical response variable. We'll consider only situations where the response is binary (i.e. has 2 categories). Problems with categorical response variables are sometimes called **classification** problems, while problems with numeric response variables are sometimes called **regression** problems.   
+
+
+
+### Credit Card Dataset
+
+We'll consider a dataset pertaining to 10,000 credit cards. The goal is to predict whether or not the user will default on the payment, using information on the credit card balance, user's annual income, and whether or not the user is a student. Data come from [Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/data.html) by James, Witten, Hastie, Tibshirani.
+
+
+```{r}
+library(ISLR)
+data(Default)
+summary(Default)
+```    
+
+**Default and Balance**
+
+The plot displays each person's credit card balance on the x-axis, and whether or not they defaulted (a 0 or 1) on the y-axis.   
+
+```{r, fig.height=4, fig.width=10, message=FALSE, warning=FALSE}
+ggplot(data=Default, aes(y=default, x=balance)) + geom_point(alpha=0.2) 
+```
+We see that defaults are rare when the balance is less than \$1,000, and more common for balances above \$2,000. 
+
+We'll first try fitting a linear regression model to the data to try to estimate the probability of a person defaulting on a loan, using the size of their balance as the explanatory variable.     
+
+```{r}
+#convert default from yes/no to 0/1
+Default$default <- as.numeric(Default$default=="Yes") 
+```
+
+```{r, fig.height=3, fig.width=8, message=FALSE, warning=FALSE}
+ggplot(data=Default, aes(y=default, x= balance)) + geom_point(alpha=0.2)  + stat_smooth(method="lm", se=FALSE)
+```
+
+There are a lot of problems with this model!
+
+It allows the estimated probability of of default to be negative. It also assumes a linear trend that doesn't seem to fit the data very well. 
+
+A sigmoidal curve, like the one below, seems like a better model for default probabilities. This curve stays between 0 and 1, and its curved nature seems like a better fit for the data.   
+
+```{r, fig.height=3, fig.width=8, message=FALSE, warning=FALSE}
+ggplot(data=Default, aes(y=default, x= balance)) + geom_point(alpha=0.2) + 
+  stat_smooth(method="glm", se=FALSE, method.args = list(family=binomial)) 
+```
+
+
+### Logistic Regression Model
+
+A logistic regression model uses a sigmoidal curve like the one we saw to model default probabilities, using balance as an explanatory variable. 
+
+The model makes use of the function 
+
+\[
+f(x) = \frac{e^x}{1+x^x},
+\]
+
+whose graph is shown below. This function is called an **inverse logit** function.   
+
+```{r, fig.height=3, fig.width=8, echo=FALSE}
+x <- seq(from=-5, 5, by=0.01)
+y <- exp(x)/ (1+exp(x))
+df <- data.frame(x, y)
+gf_line(data=df, y~x) + xlab("x") + ylab("y")
+```
+
+
+
+Starting with our linear model $E(Y_i) = \beta_0+\beta_1x_{i1}$, we need to transform $\beta_0+\beta_1x_{i1}$ into (0,1). 
+
+* Let $\pi_i = \frac{e^{\beta_0+\beta_1x_{i1} }}{1+e^{\beta_0+\beta_1x_{i1}}}$. 
+
+* Then $0 \leq \pi_i \leq 1$, and $\pi_i$ represents an estimate of $P(Y_i=1)$.    
+
+* This function maps the values of $\beta_0+\beta_1x_{i1}$ into the interval (0,1). 
+
+
+```{r, fig.height=3, fig.width=8, echo=FALSE}
+x <- seq(from=-5, 5, by=0.01)
+y <- exp(x)/ (1+exp(x))
+df <- data.frame(x, y)
+gf_line(data=df, y~x) + xlab(expression(beta[0]+beta[1]*x[i])) + ylab(expression(pi[i]))
+```
+
+
+
+The **logistic regression model** assumes that:    
+    * $Y_i \in \{0,1\}$     
+    * $E(Y_i) = P(Y_i=1) = \pi_i=\frac{e^{\beta_0+\beta_1x_{i1} + \ldots \beta_px_{ip}}}{1+e^{\beta_0+\beta_1x_{i1} + \ldots \beta_px_{ip}}}$
+
+i.e. $\beta_0+\beta_1x_{i1} + \ldots \beta_px_{ip}= \text{log}\left(\frac{\pi_i}{1-\pi_i}\right).$ (This is called the logit function and can be written $\text{logit}(\pi_i)$.   
+
+Instead of assuming that the expected response is a linear function of the explanatory variables, we are assuming that it is a function of a linear function of the explanatory variables.   
+
+
+### Logistic Regression Model for Default
+
+```{r, fig.height=3, fig.width=8, message=FALSE, warning=FALSE}
+ggplot(data=Default, aes(y=default, x= balance)) + geom_point(alpha=0.2) + 
+  stat_smooth(method="glm", se=FALSE, method.args = list(family=binomial)) 
+```
+
+To fit the logistic regression model in R, we use the function `glm`, instead of `lm`. The function is specified the same way as before, and we add `family = binomial(link = "logit")`.
+
+```{r}
+CCDefault_M <- glm(data=Default, default ~ balance, family = binomial(link = "logit"))
+summary(CCDefault_M)
+```
+
+
+The regression equation is: 
+
+\[
+P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.65+0.0055\times\text{balance}}}{1+e^{-10.65+0.0055\times\text{balance}}}
+\]
+
+**Predictions**
+
+* For a \$1,000 balance, the estimated default probability is $\frac{e^{-10.65+0.0055(1000) }}{1+e^{-10.65+0.0055(1000)}} \approx 0.006$
+
+* For a \$1,500 balance, the estimated default probability is $\frac{e^{-10.65+0.0055(1500) }}{1+e^{-10.65+0.0055(1500)}} \approx 0.08$
+
+* For a \$2,000 balance, the estimated default probability is $\frac{e^{-10.65+0.0055(2000) }}{1+e^{-10.65+0.0055(2000)}} \approx 0.59$
+
+We confirm these, using the `predict` command in R.  
+
+```{r}
+predict(CCDefault_M, newdata=data.frame((balance=1000)), type="response")
+```
+
+```{r}
+predict(CCDefault_M, newdata=data.frame((balance=1500)), type="response")
+```
+
+```{r}
+predict(CCDefault_M, newdata=data.frame((balance=2000)), type="response")
+```
+
+### Where do the b's come from?      
+
+* Recall that for a quantitative response variable, the values of $b_1, b_2, \ldots, b_p$ are chosen in a way that minimizes $\displaystyle\sum_{i=1}^n \left(y_i-(\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip})^2\right)$. 
+
+* Least squares does not work well in this generalized setting. Instead, the b's are calculated using a more advanced technique, known as **maximum likelihood estimation**. 
+
+
+### Odds and Odds Ratio  
+
+For an event with probability $p$, the **odds** of the event occurring are $\frac{p}{1-p}$. 
+
+Examples: 
+1. The odds of a fair coin landing heads are $\frac{0.5}{1-0.5}=1$, sometimes written 1:1.   
+
+2. The odds of a fair 6-sided die landing on a 1 are $\frac{1/6}{1-1/6}=\frac{1}{5}$, sometimes written 1:5.   
+
+
+In the credit card example, the odds of default are:
+
+* For a \$1,000 balance - odds of default are  $\frac{0.005752145}{1-0.005752145} \approx 1:173.$    
+
+* For a  \$1,500 balance - odds of default are $\frac{0.08294762 }{1-0.08294762 } \approx 1:11.$
+
+* For a  \$2,000 balance - odds of default are $\frac{0.5857694}{1-0.5857694} \approx 1.414:1.$
+
+
+The quantity $\frac{\frac{\pi_i}{1-\pi_i}}{\frac{\pi_j}{1-\pi_j}}$ is called the **odds ratio** and represents the odds ratio of a default for user $i$, compared to user $j$.
+
+Example: 
+
+The default odds ratio for a \$1,000 payment, compared to a $2,000 payment is
+
+The odds ratio is $\frac{\frac{1}{173}}{\frac{1.414}{1}}\approx 1:244.$
+
+The odds of a default are about 244 times larger for a \$2,000 payment than a \$1,000 payment. 
+
+### Interpretation of $\beta_1$
+
+Consider the odds ratio for a case $j$ with explanatory variable $x + 1$, compared to case $i$ with explanatory variable $x$. 
+
+That is $\text{log}\left(\frac{\pi_i}{1-\pi_i}\right) = \beta_0+\beta_1x$, and
+$\text{log}\left(\frac{\pi_j}{1-\pi_j}\right) = \beta_0+\beta_1(x+1)$.  
+
+$\text{log}\left(\frac{\frac{\pi_j}{1-\pi_j}}{\frac{\pi_i}{1-\pi_i}}\right)=\text{log}\left(\frac{\pi_j}{1-\pi_j}\right)-\text{log}\left(\frac{\pi_i}{1-\pi_i}\right)=\beta_0+\beta_1(x+1)-(\beta_0+\beta_1(x))=\beta_1.$
+
+For every 1-unit increase in $x$ we expect the log odds of "success" to multiply by a factor of $\beta_1$. 
+
+For every 1-unit increase in $x$ we expect the odds of "success" to multiply by a factor of $e^{\beta_1}$. 
+
+**Interpretation in Credit Card Example**
+
+$b_1=0.0055$
+
+For each 1-dollar increase in balance on the credit card., the odds of default are estimated to multiply by $e^{0.0055}\approx1.0055$. 
+
+That is, for each additional dollar on the card balance, the odds of default are estimated to increase by 0.55%  
+
+For each increase of $d$ dollars in credit card balance, odds of default are estimated to multiply by a factor of $e^{0.0055d}$.
+
+For every \$1,000 increase in balance, the odds of default are expected to multiply by a factor of $e^{0.0055\times 1000}\approx 244$. 
+
+Thus, the odds of default for a balance of \$2,000 are estimated to be $e^{0.0055\times 1000}\approx 244$ times as great as the odds of default for a \$1,000 balance. This matches our result when we actually calculated out the probabilities and odds.   
+
+### Hypothesis Tests in Logistic Regression
+
+The p-value on the "balance" line of the regression output is associated with the null hypothesis $\beta_1=0$, that is that there is no relationship between balance and the odds of defaulting on the payment.   
+
+The fact that the p-value is so small tells us that there is strong evidence of a relationship between balance and odds of default.  
+
+
+### Confidence Intervals for $\beta_1$
+
+```{r}
+confint(M, level = 0.95)
+```
+
+We are 95% confident that for each 1 dollar increase in credit card balance, the odds of default are expected to multiply by a factor between $e^{0.00508}\approx 1.0051$ and $e^{0.00594}\approx 1.0060$.
+
+This is a profile-likelihood interval, which you can read more about [here](https://rpubs.com/FJRubio/PLCIN). 
+
+
+## Multiple Logistic Regression
+
+### Logistic Regression Models with Multiple Explanatory Variables
+
+We can also perform logistic regression in situations where there are multiple explanatory variables. We'll estimate probability of default, using both balance and whether or not the person is a student (a categorical variable) as explanatory variables.   
+
+
+
+```{r}
+CCDefault_M2 <- glm(data=Default, default ~ balance + student, family = binomial(link = "logit"))
+summary(CCDefault_M2)
+```
+
+The following graph gives an illustration of the model. 
+
+```{r}
+ggplot(data=Default, aes(y=default, x= balance, color=student)) + geom_point(alpha=0.2) + stat_smooth(method="glm", se=FALSE, method.args = list(family=binomial)) 
+```
+
+
+
+### Multiple Logistic Regression Interpretations
+
+The regression equation is:
+
+\[
+P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.75+0.005738\times\text{balance}-0.7149\times\text{I}_{\text{student}}}}{1+e^{-10.75+0.005738\times\text{balance}-0.7149\times\text{I}_{\text{student}}}}
+\]
+
+
+* For each 1 dollar increase in balance, the odds of default are estimated to multiply by a factor $e^{0.005738}\approx 1.00575$, assuming whether or not the person is a student is held constant. Thus, the estimated odds of default increase by about 0.5%, for each 1-dollar increase in balance..
+
+* For every \$100 increase in balance, the odds of default are estimated to multiply by $e^{0.005738\times100}\approx 1.775$, assuming whether or not the person is a student is held constant. Thus, the estimated odds of default increase by about 77.5%.  
+
+* The odds of default for students are estimated to be $e^{-0.7149} \approx 0.49$ as high for students as non-students, assuming balance amount is held constant. 
+
+### Hypothesis Tests in Multiple Logistic Regression Model
+
+* There is strong evidence of a relationship between balance and odds of default, after accounting for whether or not the person is a student.   
+
+* There is evidence that students are less likely to default than nonstudents, provided the balance on the card is the same.   
+
+
+### Multiple Logistic Regression Model with Interaction
+
+The previous model assumes the effect of balance on default probability is the same for students as for nonstudents. If we suspect that the effect of having a larger balance might be different for students than for nonstudents, then we could use a model with interaction between the balance and student variables. 
+
+```{r}
+CCDefault_M_Int <- glm(data=Default, default ~ balance * student, family = binomial(link = "logit"))
+summary(CCDefault_M_Int)
+```
+
+
+### Interpretations for Logistic Model with Interaction     
+
+* The regression equation is:
+
+\[
+P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.87+0.0058\times\text{balance}-0.35\times\text{I}_{\text{student}}-0.0002\times\text{balance}\times{\text{I}_{\text{student}}}}}{1+e^{-10.87+0.0058\times\text{balance}-0.35\times\text{I}_{\text{student}}-0.0002\times\text{balance}\times{\text{I}_{\text{student}}}}}
+\]
+
+
+**Equation for Students**
+
+\[
+P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.52+0.0056\times\text{balance}}}{1+e^{-10.52+0.0056\times\text{balance}}}
+\]
+
+Assuming a person is a student, for every \$100 increase in balance, the odds of default are expected to multiply by a factor of $e^{0.0056\times 100}=1.75$, a 75\% increase.  
+
+**Equation for Non-Students**
+
+\[
+P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.87+0.0058\times\text{balance}}}{1+e^{-10.87+0.0058\times\text{balance}}}
+\]
+
+Assuming a person is a student, for every \$100 increase in balance, the odds of default are expected to multiply by a factor of $e^{0.0058\times 100}=1.786$, a 78.6\% increase.  
+
+* Since estimate of the interaction effect is so small and the p-value on this estimate is large, it is plausible that there is no interaction at all. Thus, the simpler non-interaction model is preferable. 
+
+
+### Logistic Regression Key Points     
+
+* $Y$ is a binary response variable.    
+
+* $\pi_i$ is a function of explanatory variables $x_{i1}, \ldots x_{ip}$.    
+
+* $E(Y_i) = \pi_i = \frac{e^{\beta_0+\beta_1x_i + \ldots\beta_px_{ip}}}{1+e^{\beta_0+\beta_1x_i + \ldots\beta_px_{ip}}}$ 
+
+* $\beta_0+\beta_1x_i + \ldots\beta_px_{ip} = \text{log}\left(\frac{\pi_i}{1-\pi_i}\right)$ 
+
+* For quantitative $x_j$, when all other explanatory variables are held constant, the odds of "success" multiply be a factor of $e^{\beta_j}$ for each 1 unit increase in $x_j$    
+
+* For categorical $x_j$, when all other explanatory variables are held constant, the odds of "success" are $e^\{beta_j}$ times higher for category $j$ than for the "baseline category."    
+
+* For models with interaction, we can only interpret $\beta_j$ when the values of all other explanatory variables are given (since the effect of $x_j$ depends on the other variables.)
+
+## Assessing a Classifier's Performance    
+
+### Measuring Prediction Accuracy
+
+We've seen $\text{RMSPE} = \sqrt{\displaystyle\sum_{i=1}^{n}{(\hat{y}_i-y_i)^2}}$ used as a measure of predictive accuracy in a regression problem.  
+
+Why might this not be the best measure of prediction accuracy in a classification problem (i.e. one with a binary response)?  
+
+
+### Classification Accuracy
+
+A common way to measure the accuracy of a classifier is to calculate the percentage of cases for which it correctly predicts the class, or category of the response variable.  
+
+Let's calculate classification accuracy for the logistic regression model. 
+
+We'll use cross-validation, by randomly witholding 1,000 of the 10,000 of the cases, on which we'll make predictions.   
+
+```{r}
+set.seed(08172022)
+samp <- sample(1:nrow(Default), 1000)
+Default_Test <- Default[samp, ]
+Default_Train <- Default[-samp, ]
+```
+
+We fit the model with interaction to the training data:
+
+```{r}
+LR_Default_M_Int <- glm(data=Default_Train, default ~ balance * student, family = binomial(link = "logit"))
+summary(LR_Default_M_Int)
+```
+
+### First 50 Cases
+
+Let's look at the predicted probability of default for the first 50 test cases, along with whether or not the person actually defaulted.   
+
+
+```{r}
+LR_Prob <- predict(LR_Default_M_Int, newdata=Default_Test, type="response")
+LR_Predict_Default <- factor(ifelse(LR_Prob > 0.5, "Yes", "No"))
+Actual_Default <- factor(ifelse(Default_Test$default==1, "Yes", "No"))
+LR_Res_df <- data.frame(LR_Prob, LR_Predict_Default, Actual_Default)
+kable(head(LR_Res_df, 50)%>% arrange(desc(LR_Prob)))
+```
+
+What percentage of these 50 cases did the logistic regression model classify correctly?  
+
+
+### Confusion Matrix
+
+A **confusion matrix** is a two-by-two table displaying the number of cases predicted in each category as columns, and the number of cases actually in each category as rows  
+
+
+
+| | Actually Negative | Actually Positive |
+|--------- | ---------------- | ------------------- |
+Predicted Negative | True Negative | False Negative |
+Predicted Positive | False Positive | True Positive |
+
+
+Create a confusion matrix for the first 50 cases.  
+
+
+### Full Test Data Confusion Matrix
+
+Now, let's look at the confusion matrix for all 1,000 test cases.  
+
+
+```{r}
+LR_Predict_Default <- factor(LR_Predict_Default) 
+confusionMatrix( data =LR_Predict_Default, reference=factor(Actual_Default) , positive="Yes")
+```
+
+### Decision Tree Classifier
+
+For comparison, let's use a decision tree to predict whether a person will default.  
+
+In a binary classification problem, we can treat a default as $y=1$ and non-default as $y=0$, and grow the tree as we would in regression.  
+
+The mean response in a node $\bar{Y}$ can be interpreted as the probability of default.  
+
+The first few splits of the tree are shown.  
+
+```{r}
+library(rpart)
+library(rpart.plot)
+tree <- rpart(data=Default_Train, default~balance + student, cp=0.005)
+rpart.plot(tree, box.palette="RdBu", shadow.col="gray", nn=TRUE, cex=1, extra=1)
+```
+
+```{r}
+tree <- rpart(data=Default_Train, default~balance + student)
+```
+
+```{r}
+Tree_Prob <- predict(tree, newdata = Default_Test)
+Tree_Pred_Default <- factor(ifelse(Tree_Prob > 0.5, "Yes", "No"))
+LR_Res_df <- data.frame(LR_Prob, LR_Predict_Default, Tree_Prob, Tree_Pred_Default, Actual_Default)
+kable(head(LR_Res_df, 50)%>% arrange(desc(LR_Prob)))
+```
+
+### Tree Confusion Matrix
+
+```{r}
+# data is predicted class
+# reference is actual class
+confusionMatrix( data = Tree_Pred_Default , reference= Actual_Default, "Yes")
+```
+
+**Question:** Which classifier, the logistic regression model or decision tree, appears to do better at predicting default?   
+
+
+**Question:** Why might a prediction accuracy rate of over 97% on these data not be as impressive as it sounds?   
+
+ 
+### More on Accuracy Rate
+
+Although a ~97% accuracy rate seems impressive recall the percentage of defaults in the dataset. 
+
+```{r}
+mean(Default$default)
+```
+
+Thus, if we simply predicted that everyone would not default, we would achieve 96.67% accuracy, without providing any useful information.  
+
+Classification accuracy rate can be misleading, especially in cases of unbalanced data, where one class is far more prevelant than the other.  
+
+
+### Sensitivity and Specificity
+
+The **sensitivity** of a classifier is the proportion of all positive cases that the model correctly identifies as positive. (i.e. probability model says "positive" given actually is positive.)  
+
+\[
+\text{Sensitivity} = \frac{\text{True Positive}}{\text{True Positive} + \text{False Negative}} = \frac{\text{Predicted Positives}}{\text{Actual Positives}}
+\]
+
+
+**LR Sensitivity**  
+
+\[
+\frac{15}{15+20} \approx 0.4286
+\]
+
+
+**Tree Sensitivity**  
+
+
+\[
+\frac{11}{11+24} \approx 0.3143
+\]
+
+
+The **specificity** of a classifier is the proportion of all negative cases that the model correctly identifies as negative (i.e probabiltiy model says "negative" given truly is negative.)  
+
+\[
+\text{Specificity} = \frac{\text{True Negative}}{\text{True Negative} + \text{False Positive}}= \frac{\text{Predicted Negatives}}{\text{Actual Negatives}}
+\]
+
+
+
+**LR Specificity**  
+
+\[
+\frac{957}{957+8} \approx 0.9917
+\]
+
+
+**Tree Specificity**  
+
+
+\[
+\frac{960}{960+5} \approx 0.9948
+\]
+
+In a given situation, we should think about the cost of a false negative vs a false positive when determining whether to place more weight on sensitivity or specificity. For example, "is it worse to tell a patient they tested positive for a disease when they really don't have it, or to not tell them they tested positive when they really do have it?"    
+
+
+
+
+## Receiver Operating Characteristic Curve
+
+### ROC Curve
+
+A receiver operating characteristic curve tells us how well a predictor is able to separate positive cases from negative cases.   
+
+The blog (Toward Data Science) [https://towardsdatascience.com/applications-of-different-parts-of-an-roc-curve-b534b1aafb68] writes 
+
+"Receiver Operating Characteristic (ROC) curve is one of the most common graphical tools to diagnose the ability of a binary classifier, independent of the inherent classification algorithm. The ROC analysis has been used in many fields including medicine, radiology, biometrics, natural hazards forecasting, meteorology, model performance assessment, and other areas for many decades and is increasingly used in machine learning and data mining research [1]. If you are a Data Scientist, you might be using it on a daily basis."
+
+
+The ROC curve plots the true positive (or hit) rate against the false positive rate (false alarm) rate, as the cutoff for a positive classification varies.   
+
+
+
+```{r echo=FALSE, out.width = '75%', caption="Image from Wikipedia"}
+knitr::include_graphics("Roc_Curve.png")
+```
+
+The higher the curve, the better the predictor is able to separate positive cases from negative ones.   
+
+Predictions made totally at random would be expected to yield a diagonal ROC curve.   
+
+
+### LR and Tree ROC Curves
+
+```{r}
+library(pROC)
+library(verification)
+roc.plot(x=Default_Test$default, pred = LR_Prob)
+```
+
+```{r}
+auc(response=Default_Test$default, predictor = LR_Prob)
+```
+
+
+```{r}
+roc.plot(x=Default_Test$default, pred = Tree_Prob)
+```
+
+```{r}
+auc(response=Default_Test$default, predictor = Tree_Prob)
+```
+
+
+
+```{r}
+RandProb <- runif(1000, 0, 1)
+```
+
+```{r}
+roc.plot(x=Default_Test$default, pred = RandProb)
+```
+
+
+```{r}
+auc(response=Default_Test$default, predictor = RandProb)
+```
+
+
+Even though a model that assigns predictions randomly, with 97% predicted as negatives will have a high accuracy rate, it will yield a poor ROC curve indicating an inability to separate positive cases from negative ones. 
+
+### Constructing ROC Curve
+
+
+1. Order the probabilities from highest to lowest.   
+2. Assume only the case with the highest probability is predicted as a positive.   
+3. Calculate the true positive rate (hit rate) $\frac{\text{# True Positives}}{\text{# Actual Positives}}$ and false positive (false alarm) $\frac{\text{# False Positives}}{\text{# Actual Negatives}}$rate. 
+4. Plot the point $\left( \frac{\text{# False Positives}}{\text{# Actual Negatives}}, \frac{\text{# True Positives}}{\text{# Actual Positives}} \right)$ in the coordinate plane.   
+5. Now assume the cases with the two highest probabilities are predicted as positives, and repeat steps 3-4.   
+6. Continue, by classifiying one more case as positive in each step.   
+
+### Construct ROC Example
+
+Let's practice constructing an ROC curve for a small set of probability estimates. 
+
+```{r}
+prob <- c(0.9, 0.8, 0.7, 0.65, 0.45, 0.3, 0.2, 0.15, 0.1, 0.05)
+Actual <- c("+", "-", "+", "+", "-", "-", "-", "-", "+", "-")
+Hit_Rate <- c("1/4", "1/4", "2/4", "", "", "", "", "", "", "")
+FA_Rate <- c("0/6", "1/6", "1/6", "", "", "", "", "", "", "")
+kable(data.frame(prob, Actual, Hit_Rate, FA_Rate))
+```
+
+Finish filling in the table and sketch a graph of the resulting ROC curve.  
+
+**Question:** If the probability estimate of 0.45 were instead 0.5 or 0.55, would this change the ROC curve? Why or why not?  
+
+
