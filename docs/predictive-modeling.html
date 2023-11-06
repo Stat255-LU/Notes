@@ -999,10 +999,23 @@ Figure 7.1: <a href="https://www.researchgate.net/figure/A-schematic-illustratio
 <div class="sourceCode" id="cb726"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb726-1"><a href="predictive-modeling.html#cb726-1" aria-hidden="true" tabindex="-1"></a>RMSPE6</span></code></pre></div>
 <pre><code>## [1] 40586.14</code></pre>
 <p>We see that in this case, model M4 performed the best on the hold-out data. We should use Model 4 to make predictions on new data over the other models seen here. It is likely that there are better models out there than model 4, likely with complexity somewhere between that of model 4 and models 5 and 6. Perhaps you can find one.</p>
-<p>Once we have our preferred model, we can read in our test data and make predictions, and create a csv file containing the predictions, using the code below.</p>
+<p>Once we have our preferred model, we can read in our test data and make predictions, and display the first 10 predicted values.</p>
 <div class="sourceCode" id="cb728"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb728-1"><a href="predictive-modeling.html#cb728-1" aria-hidden="true" tabindex="-1"></a>TestData <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;Ames_Test_Data.csv&quot;</span>)</span>
-<span id="cb728-2"><a href="predictive-modeling.html#cb728-2" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(model1, <span class="at">newdata=</span>TestData)  <span class="co"># substitute your best model</span></span>
-<span id="cb728-3"><a href="predictive-modeling.html#cb728-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(predictions, <span class="at">file =</span> <span class="st">&quot;predictions.csv&quot;</span>)</span></code></pre></div>
+<span id="cb728-2"><a href="predictive-modeling.html#cb728-2" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(model4, <span class="at">newdata=</span>TestData)  <span class="co"># substitute your best model</span></span>
+<span id="cb728-3"><a href="predictive-modeling.html#cb728-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">data.frame</span>(predictions), <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##    predictions
+## 1    156767.46
+## 2    252017.22
+## 3    222084.65
+## 4    247418.75
+## 5    116156.38
+## 6    161242.97
+## 7    114106.22
+## 8     46470.89
+## 9    344009.51
+## 10   190402.70</code></pre>
+<p>We create a csv file containing the predictions, using the code below.</p>
+<div class="sourceCode" id="cb730"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb730-1"><a href="predictive-modeling.html#cb730-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(predictions, <span class="at">file =</span> <span class="st">&quot;predictions.csv&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="ridge-regression" class="section level2 hasAnchor" number="7.3">
@@ -1011,12 +1024,12 @@ Figure 7.1: <a href="https://www.researchgate.net/figure/A-schematic-illustratio
 <h3><span class="header-section-number">7.3.1</span> Complexity in Model Coefficients<a href="predictive-modeling.html#complexity-in-model-coefficients" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ve thought about complexity in terms of the number of terms we include in a model, as well as whether we include quadratic terms and higher order terms and interactions. We can also think about model complexity in terms of the coefficients <span class="math inline">\(b_1, \ldots, b_p\)</span>. Larger values of <span class="math inline">\(b_1, \ldots, b_p\)</span> are associated with more complex models. Smaller values of <span class="math inline">\(b_1, \ldots, b_p\)</span> are associated with less complex models. When <span class="math inline">\(b_j=0\)</span>, this mean variable <span class="math inline">\(j\)</span> is not used in the model.</p>
 <p>To illustrate, we fit a regression model to the Ames housing dataset, which includes 71 possible explanatory variables, in addition to price.</p>
-<div class="sourceCode" id="cb729"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb729-1"><a href="predictive-modeling.html#cb729-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10302021</span>)</span>
-<span id="cb729-2"><a href="predictive-modeling.html#cb729-2" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(ames_raw), <span class="dv">1000</span>)</span>
-<span id="cb729-3"><a href="predictive-modeling.html#cb729-3" aria-hidden="true" tabindex="-1"></a>Train_Data <span class="ot">&lt;-</span> ames_raw[samp,]</span></code></pre></div>
+<div class="sourceCode" id="cb731"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb731-1"><a href="predictive-modeling.html#cb731-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10302021</span>)</span>
+<span id="cb731-2"><a href="predictive-modeling.html#cb731-2" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(ames_raw), <span class="dv">1000</span>)</span>
+<span id="cb731-3"><a href="predictive-modeling.html#cb731-3" aria-hidden="true" tabindex="-1"></a>Train_Data <span class="ot">&lt;-</span> ames_raw[samp,]</span></code></pre></div>
 <p>The full list of coefficient estimates is shown below.</p>
-<div class="sourceCode" id="cb730"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb730-1"><a href="predictive-modeling.html#cb730-1" aria-hidden="true" tabindex="-1"></a>M_OLS <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Train_Data, SalePrice <span class="sc">~</span> .)</span>
-<span id="cb730-2"><a href="predictive-modeling.html#cb730-2" aria-hidden="true" tabindex="-1"></a>M_OLS<span class="sc">$</span>coefficients</span></code></pre></div>
+<div class="sourceCode" id="cb732"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb732-1"><a href="predictive-modeling.html#cb732-1" aria-hidden="true" tabindex="-1"></a>M_OLS <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Train_Data, SalePrice <span class="sc">~</span> .)</span>
+<span id="cb732-2"><a href="predictive-modeling.html#cb732-2" aria-hidden="true" tabindex="-1"></a>M_OLS<span class="sc">$</span>coefficients</span></code></pre></div>
 <pre><code>##             (Intercept)          `Overall Qual`            `Year Built` 
 ##       -14136063.8944779            6975.9249580             494.5819845 
 ##          `Mas Vnr Area`          `Central Air`Y           `Gr Liv Area` 
@@ -1156,7 +1169,7 @@ Figure 7.1: <a href="https://www.researchgate.net/figure/A-schematic-illustratio
 ##  `Sale Condition`Normal `Sale Condition`Partial 
 ##            1592.2625631           -4641.7581345</code></pre>
 <p>Let’s focus on the first 10 rows.</p>
-<div class="sourceCode" id="cb732"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb732-1"><a href="predictive-modeling.html#cb732-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">coef</span>(M_OLS),<span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb734"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb734-1"><a href="predictive-modeling.html#cb734-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">coef</span>(M_OLS),<span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##     (Intercept)  `Overall Qual`    `Year Built`  `Mas Vnr Area`  `Central Air`Y 
 ##   -14136063.894        6975.925         494.582          33.382       -3745.363 
 ##   `Gr Liv Area`  `Lot Frontage`    `1st Flr SF` `Bedroom AbvGr` `TotRms AbvGrd` 
@@ -1194,33 +1207,33 @@ Q=&amp; \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum
 </li>
 <li>We can use cross validation to determine the optimal value of <span class="math inline">\(\lambda\)</span></li>
 </ul>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-556-1.png" width="960" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-557-1.png" width="960" /></p>
 <p>When using ridge regression, it is important to standardize each explanatory variable (i.e. subtract the mean and divide by the standard deviation). This ensures each variable has mean 0 and standard deviation 1. Without standardizing the optimal choice of <span class="math inline">\(b_j\)</span>’s would depend on scale, with variables with larger absolute measurements having more influence. We’ll standardize the response variable too. Though this is not strictly necessary, it doesn’t hurt. We can always transform back if necessary.</p>
 <p>Standardization is performed using the <code>scale</code> command in R.</p>
-<div class="sourceCode" id="cb734"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb734-1"><a href="predictive-modeling.html#cb734-1" aria-hidden="true" tabindex="-1"></a>Train_sc <span class="ot">&lt;-</span> Train_Data <span class="sc">%&gt;%</span> <span class="fu">mutate_if</span>(is.numeric, scale)</span></code></pre></div>
+<div class="sourceCode" id="cb736"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb736-1"><a href="predictive-modeling.html#cb736-1" aria-hidden="true" tabindex="-1"></a>Train_sc <span class="ot">&lt;-</span> Train_Data <span class="sc">%&gt;%</span> <span class="fu">mutate_if</span>(is.numeric, scale)</span></code></pre></div>
 </div>
 <div id="ridge-regression-on-housing-dataset" class="section level3 hasAnchor" number="7.3.4">
 <h3><span class="header-section-number">7.3.4</span> Ridge Regression on Housing Dataset<a href="predictive-modeling.html#ridge-regression-on-housing-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ll use the <code>caret</code> package to perform cross validation in order to find the optimal value of <span class="math inline">\(\lambda\)</span>. To use ridge regression, we specify <code>method = "glmnet"</code>, and <code>tuneGrid=expand.grid(alpha=0, lambda=l_vals)</code>. Note the <code>alpha</code> value can be changed to use other types of penalized regression sometimes used in predictive modeling, such as lasso or elastic net.</p>
-<div class="sourceCode" id="cb735"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb735-1"><a href="predictive-modeling.html#cb735-1" aria-hidden="true" tabindex="-1"></a>control <span class="ot">=</span> <span class="fu">trainControl</span>(<span class="st">&quot;repeatedcv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>, <span class="at">repeats=</span><span class="dv">10</span>)</span>
-<span id="cb735-2"><a href="predictive-modeling.html#cb735-2" aria-hidden="true" tabindex="-1"></a>l_vals <span class="ot">=</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="at">length =</span> <span class="dv">100</span>)  <span class="co"># test values between 1/1000 and 1000</span></span>
-<span id="cb735-3"><a href="predictive-modeling.html#cb735-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb735-4"><a href="predictive-modeling.html#cb735-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11162020</span>)</span>
-<span id="cb735-5"><a href="predictive-modeling.html#cb735-5" aria-hidden="true" tabindex="-1"></a>Housing_ridge <span class="ot">&lt;-</span> <span class="fu">train</span>(SalePrice <span class="sc">~</span> .,</span>
-<span id="cb735-6"><a href="predictive-modeling.html#cb735-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> Train_sc, <span class="at">method =</span> <span class="st">&quot;glmnet&quot;</span>, <span class="at">trControl=</span>control , </span>
-<span id="cb735-7"><a href="predictive-modeling.html#cb735-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">tuneGrid=</span><span class="fu">expand.grid</span>(<span class="at">alpha=</span><span class="dv">0</span>, <span class="at">lambda=</span>l_vals))</span></code></pre></div>
+<div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb737-1"><a href="predictive-modeling.html#cb737-1" aria-hidden="true" tabindex="-1"></a>control <span class="ot">=</span> <span class="fu">trainControl</span>(<span class="st">&quot;repeatedcv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>, <span class="at">repeats=</span><span class="dv">10</span>)</span>
+<span id="cb737-2"><a href="predictive-modeling.html#cb737-2" aria-hidden="true" tabindex="-1"></a>l_vals <span class="ot">=</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="at">length =</span> <span class="dv">100</span>)  <span class="co"># test values between 1/1000 and 1000</span></span>
+<span id="cb737-3"><a href="predictive-modeling.html#cb737-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb737-4"><a href="predictive-modeling.html#cb737-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11162020</span>)</span>
+<span id="cb737-5"><a href="predictive-modeling.html#cb737-5" aria-hidden="true" tabindex="-1"></a>Housing_ridge <span class="ot">&lt;-</span> <span class="fu">train</span>(SalePrice <span class="sc">~</span> .,</span>
+<span id="cb737-6"><a href="predictive-modeling.html#cb737-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> Train_sc, <span class="at">method =</span> <span class="st">&quot;glmnet&quot;</span>, <span class="at">trControl=</span>control , </span>
+<span id="cb737-7"><a href="predictive-modeling.html#cb737-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">tuneGrid=</span><span class="fu">expand.grid</span>(<span class="at">alpha=</span><span class="dv">0</span>, <span class="at">lambda=</span>l_vals))</span></code></pre></div>
 <p>Value of <span class="math inline">\(\lambda\)</span> minimizing RMSPE:</p>
-<div class="sourceCode" id="cb736"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb736-1"><a href="predictive-modeling.html#cb736-1" aria-hidden="true" tabindex="-1"></a>Housing_ridge<span class="sc">$</span>bestTune<span class="sc">$</span>lambda</span></code></pre></div>
+<div class="sourceCode" id="cb738"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb738-1"><a href="predictive-modeling.html#cb738-1" aria-hidden="true" tabindex="-1"></a>Housing_ridge<span class="sc">$</span>bestTune<span class="sc">$</span>lambda</span></code></pre></div>
 <pre><code>## [1] 0.6135907</code></pre>
 <p>We examine RMSPE on the withheld data as a function of <span class="math inline">\(\lambda\)</span>.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-560-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-561-1.png" width="672" /></p>
 <p>Using <span class="math inline">\(\lambda\)</span> = 0.6135907, obtain the following set of ridge regression coefficients. Notice how the ridge coefficients are typically closer to 0 than the ordinary least squares coefficients, indicating a less complex model.</p>
-<div class="sourceCode" id="cb738"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb738-1"><a href="predictive-modeling.html#cb738-1" aria-hidden="true" tabindex="-1"></a>M_OLS_sc <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Train_sc, SalePrice <span class="sc">~</span> .)</span>
-<span id="cb738-2"><a href="predictive-modeling.html#cb738-2" aria-hidden="true" tabindex="-1"></a>OLS_coef <span class="ot">&lt;-</span> M_OLS_sc<span class="sc">$</span>coefficients</span>
-<span id="cb738-3"><a href="predictive-modeling.html#cb738-3" aria-hidden="true" tabindex="-1"></a>Ridge_coef <span class="ot">&lt;-</span> <span class="fu">coef</span>(Housing_ridge<span class="sc">$</span>finalModel, Housing_ridge<span class="sc">$</span>bestTune<span class="sc">$</span>lambda)[,<span class="dv">1</span>]</span>
-<span id="cb738-4"><a href="predictive-modeling.html#cb738-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(OLS_coef[<span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>], Ridge_coef[<span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>])</span>
-<span id="cb738-5"><a href="predictive-modeling.html#cb738-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df) <span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;OLS Coeff&quot;</span>, <span class="st">&quot;Ridge Coeff&quot;</span>)</span>
-<span id="cb738-6"><a href="predictive-modeling.html#cb738-6" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
+<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb740-1"><a href="predictive-modeling.html#cb740-1" aria-hidden="true" tabindex="-1"></a>M_OLS_sc <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Train_sc, SalePrice <span class="sc">~</span> .)</span>
+<span id="cb740-2"><a href="predictive-modeling.html#cb740-2" aria-hidden="true" tabindex="-1"></a>OLS_coef <span class="ot">&lt;-</span> M_OLS_sc<span class="sc">$</span>coefficients</span>
+<span id="cb740-3"><a href="predictive-modeling.html#cb740-3" aria-hidden="true" tabindex="-1"></a>Ridge_coef <span class="ot">&lt;-</span> <span class="fu">coef</span>(Housing_ridge<span class="sc">$</span>finalModel, Housing_ridge<span class="sc">$</span>bestTune<span class="sc">$</span>lambda)[,<span class="dv">1</span>]</span>
+<span id="cb740-4"><a href="predictive-modeling.html#cb740-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(OLS_coef[<span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>], Ridge_coef[<span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>])</span>
+<span id="cb740-5"><a href="predictive-modeling.html#cb740-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df) <span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;OLS Coeff&quot;</span>, <span class="st">&quot;Ridge Coeff&quot;</span>)</span>
+<span id="cb740-6"><a href="predictive-modeling.html#cb740-6" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
 <pre><code>##                    OLS Coeff Ridge Coeff
 ## `Overall Qual`   0.121728754  0.10435284
 ## `Year Built`     0.187102422  0.03451303
@@ -1232,17 +1245,17 @@ Q=&amp; \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum
 ## `Bedroom AbvGr` -0.022457937  0.07194208
 ## `TotRms AbvGrd`  0.017574153  0.01342224</code></pre>
 <p>Predictions and residuals for the first six houses in the traning data, using ordinary least squares and ridge regression, are shown below.</p>
-<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb740-1"><a href="predictive-modeling.html#cb740-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
-<span id="cb740-2"><a href="predictive-modeling.html#cb740-2" aria-hidden="true" tabindex="-1"></a>MAT <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(SalePrice<span class="sc">~</span>., <span class="at">data=</span>Train_sc)</span>
-<span id="cb740-3"><a href="predictive-modeling.html#cb740-3" aria-hidden="true" tabindex="-1"></a>ridge_mod <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(<span class="at">x=</span>MAT, <span class="at">y=</span>Train_sc<span class="sc">$</span>SalePrice, <span class="at">alpha =</span> <span class="dv">0</span>, <span class="at">lambda=</span>Housing_ridge<span class="sc">$</span>bestTune<span class="sc">$</span>lambda )</span></code></pre></div>
-<div class="sourceCode" id="cb741"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb741-1"><a href="predictive-modeling.html#cb741-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> Train_sc<span class="sc">$</span>SalePrice</span>
-<span id="cb741-2"><a href="predictive-modeling.html#cb741-2" aria-hidden="true" tabindex="-1"></a>Pred_OLS <span class="ot">&lt;-</span> <span class="fu">predict</span>(M_OLS_sc)</span>
-<span id="cb741-3"><a href="predictive-modeling.html#cb741-3" aria-hidden="true" tabindex="-1"></a>Pred_Ridge <span class="ot">&lt;-</span> <span class="fu">predict</span>(ridge_mod, <span class="at">newx=</span>MAT)</span>
-<span id="cb741-4"><a href="predictive-modeling.html#cb741-4" aria-hidden="true" tabindex="-1"></a>OLS_Resid <span class="ot">&lt;-</span> y <span class="sc">-</span> Pred_OLS</span>
-<span id="cb741-5"><a href="predictive-modeling.html#cb741-5" aria-hidden="true" tabindex="-1"></a>Ridge_Resid <span class="ot">&lt;-</span> y <span class="sc">-</span> Pred_Ridge</span>
-<span id="cb741-6"><a href="predictive-modeling.html#cb741-6" aria-hidden="true" tabindex="-1"></a>Resdf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, Pred_OLS, Pred_Ridge, OLS_Resid, Ridge_Resid)</span>
-<span id="cb741-7"><a href="predictive-modeling.html#cb741-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Resdf) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;y&quot;</span>, <span class="st">&quot;OLS Pred&quot;</span>, <span class="st">&quot;Ridge Pred&quot;</span>, <span class="st">&quot;OLS Resid&quot;</span>, <span class="st">&quot;Ridge Resid&quot;</span>)</span>
-<span id="cb741-8"><a href="predictive-modeling.html#cb741-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(Resdf))</span></code></pre></div>
+<div class="sourceCode" id="cb742"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb742-1"><a href="predictive-modeling.html#cb742-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
+<span id="cb742-2"><a href="predictive-modeling.html#cb742-2" aria-hidden="true" tabindex="-1"></a>MAT <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(SalePrice<span class="sc">~</span>., <span class="at">data=</span>Train_sc)</span>
+<span id="cb742-3"><a href="predictive-modeling.html#cb742-3" aria-hidden="true" tabindex="-1"></a>ridge_mod <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(<span class="at">x=</span>MAT, <span class="at">y=</span>Train_sc<span class="sc">$</span>SalePrice, <span class="at">alpha =</span> <span class="dv">0</span>, <span class="at">lambda=</span>Housing_ridge<span class="sc">$</span>bestTune<span class="sc">$</span>lambda )</span></code></pre></div>
+<div class="sourceCode" id="cb743"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb743-1"><a href="predictive-modeling.html#cb743-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> Train_sc<span class="sc">$</span>SalePrice</span>
+<span id="cb743-2"><a href="predictive-modeling.html#cb743-2" aria-hidden="true" tabindex="-1"></a>Pred_OLS <span class="ot">&lt;-</span> <span class="fu">predict</span>(M_OLS_sc)</span>
+<span id="cb743-3"><a href="predictive-modeling.html#cb743-3" aria-hidden="true" tabindex="-1"></a>Pred_Ridge <span class="ot">&lt;-</span> <span class="fu">predict</span>(ridge_mod, <span class="at">newx=</span>MAT)</span>
+<span id="cb743-4"><a href="predictive-modeling.html#cb743-4" aria-hidden="true" tabindex="-1"></a>OLS_Resid <span class="ot">&lt;-</span> y <span class="sc">-</span> Pred_OLS</span>
+<span id="cb743-5"><a href="predictive-modeling.html#cb743-5" aria-hidden="true" tabindex="-1"></a>Ridge_Resid <span class="ot">&lt;-</span> y <span class="sc">-</span> Pred_Ridge</span>
+<span id="cb743-6"><a href="predictive-modeling.html#cb743-6" aria-hidden="true" tabindex="-1"></a>Resdf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, Pred_OLS, Pred_Ridge, OLS_Resid, Ridge_Resid)</span>
+<span id="cb743-7"><a href="predictive-modeling.html#cb743-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Resdf) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;y&quot;</span>, <span class="st">&quot;OLS Pred&quot;</span>, <span class="st">&quot;Ridge Pred&quot;</span>, <span class="st">&quot;OLS Resid&quot;</span>, <span class="st">&quot;Ridge Resid&quot;</span>)</span>
+<span id="cb743-8"><a href="predictive-modeling.html#cb743-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(Resdf))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1311,10 +1324,10 @@ Q=&amp; \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum
 <p>In OLS, we choose <span class="math inline">\(b_0, b_1, \ldots, b_p\)</span> are chosen in a way that minimizes</p>
 <p><span class="math display">\[ \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  = \displaystyle\sum_{i=1}^n (y_i -(b_0 + b_1x_{i1} + b_2x_{i2} + \ldots + b_px_{ip}))^2 \]</span></p>
 <p>OLS: <span class="math inline">\(\displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2\)</span></p>
-<div class="sourceCode" id="cb742"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb742-1"><a href="predictive-modeling.html#cb742-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((y<span class="sc">-</span>Pred_OLS)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb744"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb744-1"><a href="predictive-modeling.html#cb744-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((y<span class="sc">-</span>Pred_OLS)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 56.94383</code></pre>
 <p>Ridge: <span class="math inline">\(\displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2\)</span></p>
-<div class="sourceCode" id="cb744"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb744-1"><a href="predictive-modeling.html#cb744-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((y<span class="sc">-</span>Pred_Ridge)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb746"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb746-1"><a href="predictive-modeling.html#cb746-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((y<span class="sc">-</span>Pred_Ridge)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 127.1331</code></pre>
 <p>Not surprisingly the OLS model achieves smaller <span class="math inline">\(\displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2\)</span>. This has to be true, since the OLS coefficients are chosen to minimize this quantity.</p>
 <p>In ridge regression, <span class="math inline">\(b_0, b_1, \ldots, b_p\)</span> are chosen in a way that minimizes</p>
@@ -1324,10 +1337,10 @@ Q=&amp; \displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2  + \lambda\displaystyle\sum
 \end{aligned}
 \]</span></p>
 <p>OLS: <span class="math inline">\(\displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2 + \lambda\displaystyle\sum_{j=1}^pb_j^2\)</span></p>
-<div class="sourceCode" id="cb746"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb746-1"><a href="predictive-modeling.html#cb746-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((y<span class="sc">-</span>Pred_OLS)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fl">0.6136</span><span class="sc">*</span><span class="fu">sum</span>(<span class="fu">coef</span>(M_OLS_sc)[<span class="sc">-</span><span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb748"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb748-1"><a href="predictive-modeling.html#cb748-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((y<span class="sc">-</span>Pred_OLS)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fl">0.6136</span><span class="sc">*</span><span class="fu">sum</span>(<span class="fu">coef</span>(M_OLS_sc)[<span class="sc">-</span><span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span>) </span></code></pre></div>
 <pre><code>## [1] 373.1205</code></pre>
 <p>Ridge: <span class="math inline">\(\displaystyle\sum_{i=1}^n (y_i -\hat{y}_i)^2 + \lambda\displaystyle\sum_{j=1}^pb_j^2\)</span></p>
-<div class="sourceCode" id="cb748"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb748-1"><a href="predictive-modeling.html#cb748-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((y<span class="sc">-</span>Pred_Ridge)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fl">0.6136</span><span class="sc">*</span><span class="fu">sum</span>((Ridge_coef)[<span class="sc">-</span><span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb750"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb750-1"><a href="predictive-modeling.html#cb750-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((y<span class="sc">-</span>Pred_Ridge)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fl">0.6136</span><span class="sc">*</span><span class="fu">sum</span>((Ridge_coef)[<span class="sc">-</span><span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 130.3375</code></pre>
 <p>We see that the ridge coefficients achieve a lower value of Q than the OLS ones.</p>
 </div>
@@ -1355,11 +1368,11 @@ Regression with an elastic net uses both ridge and lasso penalty terms and deter
 <p>A decision tree is a flexible alternative to a regression model. It is said to be <strong>nonparametric</strong> because it does not involve parameters like <span class="math inline">\(\beta_0, \beta_1, \ldots \beta_p\)</span>. A tree makes no assumption about the nature of the relationship between the response and explanatory variables, and instead allows us to learn this relationship from the data. A tree makes prediction by repeatedly grouping together like observations in the training data. We can make predictions for a new case, by tracing it through the tree, and averaging responses of training cases in the same terminal node.</p>
 <p><strong>Decision Tree Example:</strong></p>
 <p>We fit a decision tree to the Ames Housing dataset, using the <code>rpart</code> function in a package by the same name.</p>
-<div class="sourceCode" id="cb750"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb750-1"><a href="predictive-modeling.html#cb750-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
-<span id="cb750-2"><a href="predictive-modeling.html#cb750-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
-<span id="cb750-3"><a href="predictive-modeling.html#cb750-3" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(SalePrice<span class="sc">~</span>., <span class="at">data=</span>Train_Data, <span class="at">cp=</span><span class="fl">0.04</span>)</span>
-<span id="cb750-4"><a href="predictive-modeling.html#cb750-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree, <span class="at">box.palette=</span><span class="st">&quot;RdBu&quot;</span>, <span class="at">shadow.col=</span><span class="st">&quot;gray&quot;</span>, <span class="at">nn=</span><span class="cn">TRUE</span>, <span class="at">cex=</span><span class="dv">1</span>, <span class="at">extra=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-568-1.png" width="1056" /></p>
+<div class="sourceCode" id="cb752"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb752-1"><a href="predictive-modeling.html#cb752-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
+<span id="cb752-2"><a href="predictive-modeling.html#cb752-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
+<span id="cb752-3"><a href="predictive-modeling.html#cb752-3" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(SalePrice<span class="sc">~</span>., <span class="at">data=</span>Train_Data, <span class="at">cp=</span><span class="fl">0.04</span>)</span>
+<span id="cb752-4"><a href="predictive-modeling.html#cb752-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree, <span class="at">box.palette=</span><span class="st">&quot;RdBu&quot;</span>, <span class="at">shadow.col=</span><span class="st">&quot;gray&quot;</span>, <span class="at">nn=</span><span class="cn">TRUE</span>, <span class="at">cex=</span><span class="dv">1</span>, <span class="at">extra=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-569-1.png" width="1056" /></p>
 <p>We see that the houses are first split based on whether or not their overall quality rating was less than 8. Each of the resulting nodes are then split again, using information from other explanatory variables. Each split partitions the data further, so that houses in the same node can be thought of as being similar to one another.</p>
 <ul>
 <li><p>The predicted price of a House with overall quality 7, and was built in 1995 is $200,000.</p></li>
@@ -1384,11 +1397,11 @@ Regression with an elastic net uses both ridge and lasso penalty terms and deter
 ## x1     6
 ## x2     1
 ## y    155</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-570-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-571-1.png" width="672" /></p>
 <p>The goal is to split up the data, using information about <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> in a way that makes the <span class="math inline">\(y\)</span> values grouped together as similar as possible.</p>
 <p><strong>1. One Possible Split (<span class="math inline">\(x_1 &lt; 5.5\)</span>)</strong></p>
 <p>We could split the data into 2 groups depending on whether <span class="math inline">\(x_1 &lt; 5.5\)</span>.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-571-1.png" width="768" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-572-1.png" width="768" /></p>
 <p>We calcuate the mean y-value in each resulting node:</p>
 <ul>
 <li><span class="math inline">\(\bar{y}_L = (331+246+213+21+64+114)/6 \approx 164.84\)</span><br />
@@ -1416,7 +1429,7 @@ Regression with an elastic net uses both ridge and lasso penalty terms and deter
 </ul>
 <p><strong>2.Second Possible Split (<span class="math inline">\(x_1 &lt; 6.5\)</span>)</strong></p>
 <p>We could alternatively split the data into 2 groups depending on whether <span class="math inline">\(x_1 &lt; 6.5\)</span>.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-572-1.png" width="768" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-573-1.png" width="768" /></p>
 <p>Using this split,</p>
 <ul>
 <li><span class="math inline">\(\bar{y}_L = (331+246+213+21+64+114 + 203+155)/8 \approx 168.375\)</span><br />
@@ -1444,7 +1457,7 @@ Regression with an elastic net uses both ridge and lasso penalty terms and deter
 <p>The split at <span class="math inline">\(x1 &lt; 6.5\)</span> is better than <span class="math inline">\(x_1&lt;5.5\)</span></p>
 <p><strong>3. Third Possible Split (<span class="math inline">\(x_2 &lt; 5.5\)</span>)</strong></p>
 <p>We could also split the data into 2 groups depending on whether <span class="math inline">\(x_2 &lt; 5.5\)</span>.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-573-1.png" width="768" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-574-1.png" width="768" /></p>
 <p>Using this split,</p>
 <ul>
 <li><span class="math inline">\(\bar{y}_L = (331+246+213+256)/4 \approx 261.5\)</span><br />
@@ -1475,19 +1488,19 @@ Regression with an elastic net uses both ridge and lasso penalty terms and deter
 <li><p>In fact, if we calculate all possible splits over <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>, <span class="math inline">\(\displaystyle\sum_{i=1}^{n_L} (y_i -\bar{y}_L)^2 + \displaystyle\sum_{i=1}^{n_R} (y_i -\bar{y}_R)^2\)</span> is minimized by splitting on <span class="math inline">\(x_1 &lt; 6.5\)</span></p></li>
 </ul>
 <p>Thus, we perform the first split in the tree, using <span class="math inline">\(x_1 &lt; 6.5\)</span>.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-574-1.png" width="768" /></p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-575-1.png" width="1056" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-575-1.png" width="768" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-576-1.png" width="1056" /></p>
 </div>
 <div id="next-splits" class="section level3 hasAnchor" number="7.4.3">
 <h3><span class="header-section-number">7.4.3</span> Next Splits<a href="predictive-modeling.html#next-splits" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next, we find the best splits on the resulting two nodes. It turns out that the left node is best split on <span class="math inline">\(x_2 &lt; 4.5\)</span>, and the right node is best split on <span class="math inline">\(x_1 &lt; 8.5\)</span>.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-576-1.png" width="768" /></p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-577-1.png" width="1056" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-577-1.png" width="768" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-578-1.png" width="1056" /></p>
 </div>
 <div id="recursive-partitioning" class="section level3 hasAnchor" number="7.4.4">
 <h3><span class="header-section-number">7.4.4</span> Recursive Partitioning<a href="predictive-modeling.html#recursive-partitioning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Splitting continues until nodes reach a certain predetermined minimal size, or until change improvement in model fit drops below a predetermined value</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-578-1.png" width="1056" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-579-1.png" width="1056" /></p>
 </div>
 <div id="model-complexity-in-trees" class="section level3 hasAnchor" number="7.4.5">
 <h3><span class="header-section-number">7.4.5</span> Model Complexity in Trees<a href="predictive-modeling.html#model-complexity-in-trees" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1498,38 +1511,38 @@ Regression with an elastic net uses both ridge and lasso penalty terms and deter
 <div id="cross-validation-on-housing-data" class="section level3 hasAnchor" number="7.4.6">
 <h3><span class="header-section-number">7.4.6</span> Cross-Validation on Housing Data<a href="predictive-modeling.html#cross-validation-on-housing-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ll use <code>caret</code> to determine the optimal value of the <code>cp</code> parameter. We use <code>method="rpart"</code> to grow decision trees.</p>
-<div class="sourceCode" id="cb752"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb752-1"><a href="predictive-modeling.html#cb752-1" aria-hidden="true" tabindex="-1"></a>cp_vals <span class="ot">=</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">1</span>, <span class="at">length =</span> <span class="dv">100</span>) <span class="co"># test values between 1/10^8 and 1</span></span>
-<span id="cb752-2"><a href="predictive-modeling.html#cb752-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Train_sc) <span class="ot">&lt;-</span> <span class="fu">make.names</span>(<span class="fu">colnames</span>(Train_sc))</span>
-<span id="cb752-3"><a href="predictive-modeling.html#cb752-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb752-4"><a href="predictive-modeling.html#cb752-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11162020</span>)</span>
-<span id="cb752-5"><a href="predictive-modeling.html#cb752-5" aria-hidden="true" tabindex="-1"></a>Housing_Tree <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="at">data=</span>Train_sc, SalePrice <span class="sc">~</span> .,  <span class="at">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="at">trControl=</span>control, </span>
-<span id="cb752-6"><a href="predictive-modeling.html#cb752-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">tuneGrid=</span><span class="fu">expand.grid</span>(<span class="at">cp=</span>cp_vals))</span></code></pre></div>
+<div class="sourceCode" id="cb754"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb754-1"><a href="predictive-modeling.html#cb754-1" aria-hidden="true" tabindex="-1"></a>cp_vals <span class="ot">=</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">1</span>, <span class="at">length =</span> <span class="dv">100</span>) <span class="co"># test values between 1/10^8 and 1</span></span>
+<span id="cb754-2"><a href="predictive-modeling.html#cb754-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Train_sc) <span class="ot">&lt;-</span> <span class="fu">make.names</span>(<span class="fu">colnames</span>(Train_sc))</span>
+<span id="cb754-3"><a href="predictive-modeling.html#cb754-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb754-4"><a href="predictive-modeling.html#cb754-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11162020</span>)</span>
+<span id="cb754-5"><a href="predictive-modeling.html#cb754-5" aria-hidden="true" tabindex="-1"></a>Housing_Tree <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="at">data=</span>Train_sc, SalePrice <span class="sc">~</span> .,  <span class="at">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="at">trControl=</span>control, </span>
+<span id="cb754-6"><a href="predictive-modeling.html#cb754-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">tuneGrid=</span><span class="fu">expand.grid</span>(<span class="at">cp=</span>cp_vals))</span></code></pre></div>
 <p>The optimal value of <code>cp</code> is:</p>
-<div class="sourceCode" id="cb753"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb753-1"><a href="predictive-modeling.html#cb753-1" aria-hidden="true" tabindex="-1"></a>Housing_Tree<span class="sc">$</span>bestTune</span></code></pre></div>
+<div class="sourceCode" id="cb755"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb755-1"><a href="predictive-modeling.html#cb755-1" aria-hidden="true" tabindex="-1"></a>Housing_Tree<span class="sc">$</span>bestTune</span></code></pre></div>
 <pre><code>##              cp
 ## 52 0.0004328761</code></pre>
 <p>We plot RMSPE on the holdout data as a function of <code>cp</code>.</p>
-<div class="sourceCode" id="cb755"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb755-1"><a href="predictive-modeling.html#cb755-1" aria-hidden="true" tabindex="-1"></a>cp <span class="ot">&lt;-</span> Housing_Tree<span class="sc">$</span>results<span class="sc">$</span>cp</span>
-<span id="cb755-2"><a href="predictive-modeling.html#cb755-2" aria-hidden="true" tabindex="-1"></a>RMSPE <span class="ot">&lt;-</span> Housing_Tree<span class="sc">$</span>results<span class="sc">$</span>RMSE</span>
-<span id="cb755-3"><a href="predictive-modeling.html#cb755-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(cp, RMSPE), <span class="fu">aes</span>(<span class="at">x=</span>cp, <span class="at">y=</span>RMSPE))<span class="sc">+</span><span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.001</span>)) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="fl">0.475</span>,<span class="fl">0.485</span>))  <span class="sc">+</span> </span>
-<span id="cb755-4"><a href="predictive-modeling.html#cb755-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Regression Tree Cross Validation Results&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-581-1.png" width="672" /></p>
+<div class="sourceCode" id="cb757"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb757-1"><a href="predictive-modeling.html#cb757-1" aria-hidden="true" tabindex="-1"></a>cp <span class="ot">&lt;-</span> Housing_Tree<span class="sc">$</span>results<span class="sc">$</span>cp</span>
+<span id="cb757-2"><a href="predictive-modeling.html#cb757-2" aria-hidden="true" tabindex="-1"></a>RMSPE <span class="ot">&lt;-</span> Housing_Tree<span class="sc">$</span>results<span class="sc">$</span>RMSE</span>
+<span id="cb757-3"><a href="predictive-modeling.html#cb757-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">data.frame</span>(cp, RMSPE), <span class="fu">aes</span>(<span class="at">x=</span>cp, <span class="at">y=</span>RMSPE))<span class="sc">+</span><span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.001</span>)) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="fl">0.475</span>,<span class="fl">0.485</span>))  <span class="sc">+</span> </span>
+<span id="cb757-4"><a href="predictive-modeling.html#cb757-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Regression Tree Cross Validation Results&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-582-1.png" width="672" /></p>
 </div>
 <div id="comparing-ols-lasso-ridge-and-tree" class="section level3 hasAnchor" number="7.4.7">
 <h3><span class="header-section-number">7.4.7</span> Comparing OLS, Lasso, Ridge, and Tree<a href="predictive-modeling.html#comparing-ols-lasso-ridge-and-tree" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb756"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb756-1"><a href="predictive-modeling.html#cb756-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11162020</span>)</span>
-<span id="cb756-2"><a href="predictive-modeling.html#cb756-2" aria-hidden="true" tabindex="-1"></a>Housing_OLS <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="at">data=</span>Train_sc, SalePrice <span class="sc">~</span> .,  <span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">trControl=</span>control)</span>
-<span id="cb756-3"><a href="predictive-modeling.html#cb756-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11162020</span>)</span>
-<span id="cb756-4"><a href="predictive-modeling.html#cb756-4" aria-hidden="true" tabindex="-1"></a>Housing_lasso <span class="ot">&lt;-</span> <span class="fu">train</span>(SalePrice <span class="sc">~</span>., <span class="at">data =</span> Train_sc, <span class="at">method =</span> <span class="st">&quot;glmnet&quot;</span>, <span class="at">trControl=</span>control, </span>
-<span id="cb756-5"><a href="predictive-modeling.html#cb756-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">tuneGrid=</span><span class="fu">expand.grid</span>(<span class="at">alpha=</span><span class="dv">1</span>, <span class="at">lambda=</span>l_vals))</span></code></pre></div>
+<div class="sourceCode" id="cb758"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb758-1"><a href="predictive-modeling.html#cb758-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11162020</span>)</span>
+<span id="cb758-2"><a href="predictive-modeling.html#cb758-2" aria-hidden="true" tabindex="-1"></a>Housing_OLS <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="at">data=</span>Train_sc, SalePrice <span class="sc">~</span> .,  <span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">trControl=</span>control)</span>
+<span id="cb758-3"><a href="predictive-modeling.html#cb758-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11162020</span>)</span>
+<span id="cb758-4"><a href="predictive-modeling.html#cb758-4" aria-hidden="true" tabindex="-1"></a>Housing_lasso <span class="ot">&lt;-</span> <span class="fu">train</span>(SalePrice <span class="sc">~</span>., <span class="at">data =</span> Train_sc, <span class="at">method =</span> <span class="st">&quot;glmnet&quot;</span>, <span class="at">trControl=</span>control, </span>
+<span id="cb758-5"><a href="predictive-modeling.html#cb758-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">tuneGrid=</span><span class="fu">expand.grid</span>(<span class="at">alpha=</span><span class="dv">1</span>, <span class="at">lambda=</span>l_vals))</span></code></pre></div>
 <p>RMSPE on the standardized version of the response variable is displayed below for ordinary least squares, ridge regression, lasso regression, and a decistion tree.</p>
-<div class="sourceCode" id="cb757"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb757-1"><a href="predictive-modeling.html#cb757-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(Housing_OLS <span class="sc">$</span>results<span class="sc">$</span>RMSE)</span></code></pre></div>
+<div class="sourceCode" id="cb759"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb759-1"><a href="predictive-modeling.html#cb759-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(Housing_OLS <span class="sc">$</span>results<span class="sc">$</span>RMSE)</span></code></pre></div>
 <pre><code>## [1] 0.5634392</code></pre>
-<div class="sourceCode" id="cb759"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb759-1"><a href="predictive-modeling.html#cb759-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(Housing_ridge<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span></code></pre></div>
+<div class="sourceCode" id="cb761"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb761-1"><a href="predictive-modeling.html#cb761-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(Housing_ridge<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span></code></pre></div>
 <pre><code>## [1] 0.4570054</code></pre>
-<div class="sourceCode" id="cb761"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb761-1"><a href="predictive-modeling.html#cb761-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(Housing_lasso<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span></code></pre></div>
+<div class="sourceCode" id="cb763"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb763-1"><a href="predictive-modeling.html#cb763-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(Housing_lasso<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span></code></pre></div>
 <pre><code>## [1] 0.4730672</code></pre>
-<div class="sourceCode" id="cb763"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb763-1"><a href="predictive-modeling.html#cb763-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(Housing_Tree<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span></code></pre></div>
+<div class="sourceCode" id="cb765"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb765-1"><a href="predictive-modeling.html#cb765-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(Housing_Tree<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span></code></pre></div>
 <pre><code>## [1] 0.477414</code></pre>
 <p>In this situation, the tree outperforms OLS, but does not do as well as lasso or ridge. The best model will vary depending on the nature of the data. We can use cross-validation to determine which model is likely to perform best in prediction.</p>
 </div>
@@ -1559,32 +1572,32 @@ Regression with an elastic net uses both ridge and lasso penalty terms and deter
 <p>We’ll examine the use of splines on the car price prediction dataset.</p>
 <p>We divide the data into a set of 75 cars, which we’ll use to train the model, and 35 cars, on which we’ll make and evaluate predictions.</p>
 <p>The 75 cars in the training set are shown below.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-585-1.png" width="960" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-586-1.png" width="960" /></p>
 </div>
 <div id="two-models-with-high-bias" class="section level3 hasAnchor" number="7.5.2">
 <h3><span class="header-section-number">7.5.2</span> Two Models with High Bias<a href="predictive-modeling.html#two-models-with-high-bias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-586-1.png" width="1152" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-587-1.png" width="1152" /></p>
 <p>The constant and linear models have high bias, as they are not complex enough to capture the apparent curvature in the relationship between price and acceleration time.</p>
 <p>A cubic model, on the other hand might better capture the trend.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-587-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-588-1.png" width="672" /></p>
 </div>
 <div id="cubic-splines" class="section level3 hasAnchor" number="7.5.3">
 <h3><span class="header-section-number">7.5.3</span> Cubic Splines<a href="predictive-modeling.html#cubic-splines" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>It’s possible that the behavior of the response variable might differ in different regions of the x-axis. A cubic spline allows us to fit different models in different regions of the x-axis.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-588-1.png" width="960" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-589-1.png" width="960" /></p>
 <p>The region boundaries are called <strong>knots</strong></p>
 <p><strong>Cubic Spline with 5 Knots</strong></p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-589-1.png" width="960" /></p>
-<p><strong>Cubic Spline with 10 Knots</strong></p>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-590-1.png" width="960" /></p>
-<p><strong>Cubic Spline with 20 Knots</strong></p>
+<p><strong>Cubic Spline with 10 Knots</strong></p>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-591-1.png" width="960" /></p>
+<p><strong>Cubic Spline with 20 Knots</strong></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-592-1.png" width="960" /></p>
 <p>Notice that as the number of knots increases, the model becomes more and more complex. We would not expect the relationship between price and acceleration time to look like it does in these more complicated pictures. It is likely that as the number of knots gets big, the model overfits the training data.</p>
 </div>
 <div id="predicting-test-data" class="section level3 hasAnchor" number="7.5.4">
 <h3><span class="header-section-number">7.5.4</span> Predicting Test Data<a href="predictive-modeling.html#predicting-test-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Shown below is a plot of RMSPE when predictions are made on the new test data.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-592-1.png" width="960" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-593-1.png" width="960" /></p>
 <p>We see that RMSPE is minimized using the model with three knots.</p>
 </div>
 <div id="implementation-of-splines" class="section level3 hasAnchor" number="7.5.5">
@@ -1605,20 +1618,20 @@ Regression with an elastic net uses both ridge and lasso penalty terms and deter
 <p>In the previous sections, we’ve applied various predictive modeling techniques to predict house prices in Ames, IA. In each section, we’ve focused on an individual predictive technique (OLS, ridge/lasso regression, trees, splines), but in practice, we often test out these techniques together to find which is likely to perform best on a set of data. Here, we’ll go through the steps to test out and evaluate these techniques on the Ames Housing dataset.</p>
 <p>There are no new statistical ideas presented in this section, just a synthesis of the preceding material. We leave out splines, since we did not discuss using splines in a multivariate setting, but we compare OLS, ridge and decision trees.</p>
 <p>We use a subset of variables for illustrative purposes.</p>
-<div class="sourceCode" id="cb765"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb765-1"><a href="predictive-modeling.html#cb765-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10302021</span>)</span>
-<span id="cb765-2"><a href="predictive-modeling.html#cb765-2" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(ames_raw), <span class="dv">1000</span>)</span>
-<span id="cb765-3"><a href="predictive-modeling.html#cb765-3" aria-hidden="true" tabindex="-1"></a>Houses <span class="ot">&lt;-</span> ames_raw[samp,]</span></code></pre></div>
-<div class="sourceCode" id="cb766"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb766-1"><a href="predictive-modeling.html#cb766-1" aria-hidden="true" tabindex="-1"></a>New_Houses <span class="ot">&lt;-</span> ames_raw <span class="ot">&lt;-</span> ames_raw[<span class="sc">-</span>samp,]</span>
-<span id="cb766-2"><a href="predictive-modeling.html#cb766-2" aria-hidden="true" tabindex="-1"></a>New_Houses <span class="ot">&lt;-</span> New_Houses[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb767"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb767-1"><a href="predictive-modeling.html#cb767-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10302021</span>)</span>
+<span id="cb767-2"><a href="predictive-modeling.html#cb767-2" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(ames_raw), <span class="dv">1000</span>)</span>
+<span id="cb767-3"><a href="predictive-modeling.html#cb767-3" aria-hidden="true" tabindex="-1"></a>Houses <span class="ot">&lt;-</span> ames_raw[samp,]</span></code></pre></div>
+<div class="sourceCode" id="cb768"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb768-1"><a href="predictive-modeling.html#cb768-1" aria-hidden="true" tabindex="-1"></a>New_Houses <span class="ot">&lt;-</span> ames_raw <span class="ot">&lt;-</span> ames_raw[<span class="sc">-</span>samp,]</span>
+<span id="cb768-2"><a href="predictive-modeling.html#cb768-2" aria-hidden="true" tabindex="-1"></a>New_Houses <span class="ot">&lt;-</span> New_Houses[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span></code></pre></div>
 <p>We’ll begin by doing some data preparation.</p>
 <p>We standardize all explanatory variables in the training and new data. We do not standardize the response variable, price, so we can interpret predicted values more easily.</p>
-<div class="sourceCode" id="cb767"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb767-1"><a href="predictive-modeling.html#cb767-1" aria-hidden="true" tabindex="-1"></a>Houses_Combined <span class="ot">&lt;-</span> <span class="fu">rbind</span>(Houses, New_Houses)</span>
-<span id="cb767-2"><a href="predictive-modeling.html#cb767-2" aria-hidden="true" tabindex="-1"></a>Houses_sc <span class="ot">&lt;-</span> Houses_Combined <span class="sc">%&gt;%</span> <span class="fu">mutate_if</span>(is.numeric, scale)</span>
-<span id="cb767-3"><a href="predictive-modeling.html#cb767-3" aria-hidden="true" tabindex="-1"></a>Houses_sc<span class="sc">$</span>SalePrice <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Houses_Combined<span class="sc">$</span>SalePrice)</span>
-<span id="cb767-4"><a href="predictive-modeling.html#cb767-4" aria-hidden="true" tabindex="-1"></a>Houses_sc_Train <span class="ot">&lt;-</span> Houses_sc[<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, ]</span>
-<span id="cb767-5"><a href="predictive-modeling.html#cb767-5" aria-hidden="true" tabindex="-1"></a>Houses_sc_New <span class="ot">&lt;-</span> Houses_sc[<span class="dv">1001</span><span class="sc">:</span><span class="dv">1005</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb769"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb769-1"><a href="predictive-modeling.html#cb769-1" aria-hidden="true" tabindex="-1"></a>Houses_Combined <span class="ot">&lt;-</span> <span class="fu">rbind</span>(Houses, New_Houses)</span>
+<span id="cb769-2"><a href="predictive-modeling.html#cb769-2" aria-hidden="true" tabindex="-1"></a>Houses_sc <span class="ot">&lt;-</span> Houses_Combined <span class="sc">%&gt;%</span> <span class="fu">mutate_if</span>(is.numeric, scale)</span>
+<span id="cb769-3"><a href="predictive-modeling.html#cb769-3" aria-hidden="true" tabindex="-1"></a>Houses_sc<span class="sc">$</span>SalePrice <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Houses_Combined<span class="sc">$</span>SalePrice)</span>
+<span id="cb769-4"><a href="predictive-modeling.html#cb769-4" aria-hidden="true" tabindex="-1"></a>Houses_sc_Train <span class="ot">&lt;-</span> Houses_sc[<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, ]</span>
+<span id="cb769-5"><a href="predictive-modeling.html#cb769-5" aria-hidden="true" tabindex="-1"></a>Houses_sc_New <span class="ot">&lt;-</span> Houses_sc[<span class="dv">1001</span><span class="sc">:</span><span class="dv">1005</span>, ]</span></code></pre></div>
 <p>The <code>Houses_sc_Train</code> dataset contains standardized values for the 1000 houses in the training data. The first six rows are shown below.</p>
-<div class="sourceCode" id="cb768"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb768-1"><a href="predictive-modeling.html#cb768-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Houses_sc_Train)</span></code></pre></div>
+<div class="sourceCode" id="cb770"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb770-1"><a href="predictive-modeling.html#cb770-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Houses_sc_Train)</span></code></pre></div>
 <pre><code>##      Overall.Qual  Year.Built Central.Air  Gr.Liv.Area X1st.Flr.SF
 ## 2771  -0.07619084  0.79212207           Y -0.003620472  -0.9340706
 ## 2909  -0.77229808  0.18658251           Y -0.392399656  -1.3891530
@@ -1641,7 +1654,7 @@ Regression with an elastic net uses both ridge and lasso penalty terms and deter
 ## 669    -1.3639788         Fa         Gd           Y    163000
 ## 1427   -0.4680319         Ex         Ex           Y    395039</code></pre>
 <p>The <code>Houses_sc_New</code> displays standardized values for the new houses that we’re trying to predict.</p>
-<div class="sourceCode" id="cb770"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb770-1"><a href="predictive-modeling.html#cb770-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Houses_sc_New)</span></code></pre></div>
+<div class="sourceCode" id="cb772"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb772-1"><a href="predictive-modeling.html#cb772-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Houses_sc_New)</span></code></pre></div>
 <pre><code>##   Overall.Qual Year.Built Central.Air Gr.Liv.Area X1st.Flr.SF Bedroom.AbvGr
 ## 2  -0.77229808 -0.3516749           Y  -1.2058453  -0.6772922    -1.0608118
 ## 4   0.61991640 -0.1161873           Y   1.2145543   2.4091326     0.1632018
@@ -1661,15 +1674,15 @@ Regression with an elastic net uses both ridge and lasso penalty terms and deter
 ## 7         Ex           Y    213500
 ## 8         Ex           Y    191500</code></pre>
 <p>Since the <code>glmnet</code> command requires training data to be entered as a matrix, we create versions of the datasets in matrix form.</p>
-<div class="sourceCode" id="cb772"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb772-1"><a href="predictive-modeling.html#cb772-1" aria-hidden="true" tabindex="-1"></a>Houses_sc<span class="sc">$</span>SalePrice[<span class="fu">is.na</span>(Houses<span class="sc">$</span>SalePrice)] <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#can&#39;t take NA&#39;s when fitting model matrix, doesn&#39;t matter since only need x-coeffs</span></span>
-<span id="cb772-2"><a href="predictive-modeling.html#cb772-2" aria-hidden="true" tabindex="-1"></a>Houses_sc_Combined_MAT <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(SalePrice<span class="sc">~</span>., <span class="at">data=</span><span class="fu">rbind</span>(Houses_sc))</span>
-<span id="cb772-3"><a href="predictive-modeling.html#cb772-3" aria-hidden="true" tabindex="-1"></a>Houses_sc_Train_MAT <span class="ot">&lt;-</span> Houses_sc_Combined_MAT[<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, ]</span>
-<span id="cb772-4"><a href="predictive-modeling.html#cb772-4" aria-hidden="true" tabindex="-1"></a>Houses_sc_New_MAT <span class="ot">&lt;-</span> Houses_sc_Combined_MAT[<span class="dv">1001</span><span class="sc">:</span><span class="dv">1005</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb774"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb774-1"><a href="predictive-modeling.html#cb774-1" aria-hidden="true" tabindex="-1"></a>Houses_sc<span class="sc">$</span>SalePrice[<span class="fu">is.na</span>(Houses<span class="sc">$</span>SalePrice)] <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#can&#39;t take NA&#39;s when fitting model matrix, doesn&#39;t matter since only need x-coeffs</span></span>
+<span id="cb774-2"><a href="predictive-modeling.html#cb774-2" aria-hidden="true" tabindex="-1"></a>Houses_sc_Combined_MAT <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(SalePrice<span class="sc">~</span>., <span class="at">data=</span><span class="fu">rbind</span>(Houses_sc))</span>
+<span id="cb774-3"><a href="predictive-modeling.html#cb774-3" aria-hidden="true" tabindex="-1"></a>Houses_sc_Train_MAT <span class="ot">&lt;-</span> Houses_sc_Combined_MAT[<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, ]</span>
+<span id="cb774-4"><a href="predictive-modeling.html#cb774-4" aria-hidden="true" tabindex="-1"></a>Houses_sc_New_MAT <span class="ot">&lt;-</span> Houses_sc_Combined_MAT[<span class="dv">1001</span><span class="sc">:</span><span class="dv">1005</span>, ]</span></code></pre></div>
 <div id="modeling-with-ols" class="section level3 hasAnchor" number="7.6.1">
 <h3><span class="header-section-number">7.6.1</span> Modeling with OLS<a href="predictive-modeling.html#modeling-with-ols" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We first fit an ordinary least squares regression model to the data.</p>
-<div class="sourceCode" id="cb773"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb773-1"><a href="predictive-modeling.html#cb773-1" aria-hidden="true" tabindex="-1"></a>Housing_OLS <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Houses_sc_Train, SalePrice<span class="sc">~</span> .)</span>
-<span id="cb773-2"><a href="predictive-modeling.html#cb773-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(Housing_OLS)</span></code></pre></div>
+<div class="sourceCode" id="cb775"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb775-1"><a href="predictive-modeling.html#cb775-1" aria-hidden="true" tabindex="-1"></a>Housing_OLS <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Houses_sc_Train, SalePrice<span class="sc">~</span> .)</span>
+<span id="cb775-2"><a href="predictive-modeling.html#cb775-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(Housing_OLS)</span></code></pre></div>
 <pre><code>##     (Intercept)    Overall.Qual      Year.Built    Central.AirY     Gr.Liv.Area 
 ##     238908.0614      23368.4152      14036.2549      -4497.1153      29640.4606 
 ##     X1st.Flr.SF   Bedroom.AbvGr   TotRms.AbvGrd        Lot.Area    Lot.ShapeIR2 
@@ -1685,16 +1698,16 @@ Regression with an elastic net uses both ridge and lasso penalty terms and deter
 <h3><span class="header-section-number">7.6.2</span> Ridge Regression with Housing Data<a href="predictive-modeling.html#ridge-regression-with-housing-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now, we’ll use ridge regression to predict insurance costs.</p>
 <p>We use cross validation to determine the optimal value of lamba. We perform 10 repeats of 10-fold cross-validation. We test 100 lambda-values ranging from <span class="math inline">\(10^-5\)</span> to <span class="math inline">\(10^5\)</span>.</p>
-<div class="sourceCode" id="cb775"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb775-1"><a href="predictive-modeling.html#cb775-1" aria-hidden="true" tabindex="-1"></a>control <span class="ot">=</span> <span class="fu">trainControl</span>(<span class="st">&quot;repeatedcv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>, <span class="at">repeats=</span><span class="dv">10</span>)</span>
-<span id="cb775-2"><a href="predictive-modeling.html#cb775-2" aria-hidden="true" tabindex="-1"></a>l_vals <span class="ot">=</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
-<span id="cb775-3"><a href="predictive-modeling.html#cb775-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb775-4"><a href="predictive-modeling.html#cb775-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2022</span>)</span>
-<span id="cb775-5"><a href="predictive-modeling.html#cb775-5" aria-hidden="true" tabindex="-1"></a>Housing_ridge <span class="ot">&lt;-</span> <span class="fu">train</span>( SalePrice <span class="sc">~</span> ., <span class="at">data =</span> Houses_sc_Train, <span class="at">method =</span> <span class="st">&quot;glmnet&quot;</span>, <span class="at">trControl=</span>control , <span class="at">tuneGrid=</span><span class="fu">expand.grid</span>(<span class="at">alpha=</span><span class="dv">0</span>, <span class="at">lambda=</span>l_vals))</span></code></pre></div>
-<div class="sourceCode" id="cb776"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb776-1"><a href="predictive-modeling.html#cb776-1" aria-hidden="true" tabindex="-1"></a>Housing_ridge<span class="sc">$</span>bestTune<span class="sc">$</span>lambda</span></code></pre></div>
+<div class="sourceCode" id="cb777"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb777-1"><a href="predictive-modeling.html#cb777-1" aria-hidden="true" tabindex="-1"></a>control <span class="ot">=</span> <span class="fu">trainControl</span>(<span class="st">&quot;repeatedcv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>, <span class="at">repeats=</span><span class="dv">10</span>)</span>
+<span id="cb777-2"><a href="predictive-modeling.html#cb777-2" aria-hidden="true" tabindex="-1"></a>l_vals <span class="ot">=</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb777-3"><a href="predictive-modeling.html#cb777-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb777-4"><a href="predictive-modeling.html#cb777-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2022</span>)</span>
+<span id="cb777-5"><a href="predictive-modeling.html#cb777-5" aria-hidden="true" tabindex="-1"></a>Housing_ridge <span class="ot">&lt;-</span> <span class="fu">train</span>( SalePrice <span class="sc">~</span> ., <span class="at">data =</span> Houses_sc_Train, <span class="at">method =</span> <span class="st">&quot;glmnet&quot;</span>, <span class="at">trControl=</span>control , <span class="at">tuneGrid=</span><span class="fu">expand.grid</span>(<span class="at">alpha=</span><span class="dv">0</span>, <span class="at">lambda=</span>l_vals))</span></code></pre></div>
+<div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb778-1"><a href="predictive-modeling.html#cb778-1" aria-hidden="true" tabindex="-1"></a>Housing_ridge<span class="sc">$</span>bestTune<span class="sc">$</span>lambda</span></code></pre></div>
 <pre><code>## [1] 6135.907</code></pre>
 <p>We fit a model to the full training dataset using the optimal value of <span class="math inline">\(lambda\)</span> .</p>
-<div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb778-1"><a href="predictive-modeling.html#cb778-1" aria-hidden="true" tabindex="-1"></a>ridge_mod <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(<span class="at">x=</span>Houses_sc_Train_MAT, <span class="at">y=</span>Houses_sc_Train<span class="sc">$</span>SalePrice, <span class="at">alpha =</span> <span class="dv">0</span>, <span class="at">lambda=</span>Housing_ridge<span class="sc">$</span>bestTune<span class="sc">$</span>lambda )</span>
-<span id="cb778-2"><a href="predictive-modeling.html#cb778-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(ridge_mod)</span></code></pre></div>
+<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="predictive-modeling.html#cb780-1" aria-hidden="true" tabindex="-1"></a>ridge_mod <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(<span class="at">x=</span>Houses_sc_Train_MAT, <span class="at">y=</span>Houses_sc_Train<span class="sc">$</span>SalePrice, <span class="at">alpha =</span> <span class="dv">0</span>, <span class="at">lambda=</span>Housing_ridge<span class="sc">$</span>bestTune<span class="sc">$</span>lambda )</span>
+<span id="cb780-2"><a href="predictive-modeling.html#cb780-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(ridge_mod)</span></code></pre></div>
 <pre><code>## 26 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                          s0
 ## (Intercept)     206079.5442
@@ -1724,9 +1737,9 @@ Regression with an elastic net uses both ridge and lasso penalty terms and deter
 ## Paved.DriveP      -613.3798
 ## Paved.DriveY      1324.2704</code></pre>
 <p>The regression coefficients are displayed together with the OLS coefficients in a data.frame.</p>
-<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="predictive-modeling.html#cb780-1" aria-hidden="true" tabindex="-1"></a>Ridge_coef <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(ridge_mod<span class="sc">$</span>beta)[<span class="sc">-</span><span class="dv">1</span>] <span class="co">#leave off intercept using [-1]</span></span>
-<span id="cb780-2"><a href="predictive-modeling.html#cb780-2" aria-hidden="true" tabindex="-1"></a>OLS_coef <span class="ot">&lt;-</span> <span class="fu">coef</span>(Housing_OLS)[<span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb780-3"><a href="predictive-modeling.html#cb780-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(OLS_coef, Ridge_coef)</span></code></pre></div>
+<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb782-1"><a href="predictive-modeling.html#cb782-1" aria-hidden="true" tabindex="-1"></a>Ridge_coef <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(ridge_mod<span class="sc">$</span>beta)[<span class="sc">-</span><span class="dv">1</span>] <span class="co">#leave off intercept using [-1]</span></span>
+<span id="cb782-2"><a href="predictive-modeling.html#cb782-2" aria-hidden="true" tabindex="-1"></a>OLS_coef <span class="ot">&lt;-</span> <span class="fu">coef</span>(Housing_OLS)[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb782-3"><a href="predictive-modeling.html#cb782-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(OLS_coef, Ridge_coef)</span></code></pre></div>
 <pre><code>##                    OLS_coef  Ridge_coef
 ## Overall.Qual     23368.4152  24716.6502
 ## Year.Built       14036.2549  12909.8224
@@ -1757,31 +1770,31 @@ Regression with an elastic net uses both ridge and lasso penalty terms and deter
 <h3><span class="header-section-number">7.6.3</span> Decision Tree<a href="predictive-modeling.html#decision-tree" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now, we’ll predict house prices using using a decision tree.</p>
 <p>First, we grow and display a small decision tree, by setting the <code>cp</code> parameter equal to 0.05.</p>
-<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb782-1"><a href="predictive-modeling.html#cb782-1" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(SalePrice<span class="sc">~</span>., <span class="at">data=</span>Houses_sc_Train, <span class="at">cp=</span><span class="fl">0.05</span>)</span>
-<span id="cb782-2"><a href="predictive-modeling.html#cb782-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree, <span class="at">box.palette=</span><span class="st">&quot;RdBu&quot;</span>, <span class="at">shadow.col=</span><span class="st">&quot;gray&quot;</span>, <span class="at">nn=</span><span class="cn">TRUE</span>, <span class="at">cex=</span><span class="dv">1</span>, <span class="at">extra=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-605-1.png" width="672" /></p>
+<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb784-1"><a href="predictive-modeling.html#cb784-1" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(SalePrice<span class="sc">~</span>., <span class="at">data=</span>Houses_sc_Train, <span class="at">cp=</span><span class="fl">0.05</span>)</span>
+<span id="cb784-2"><a href="predictive-modeling.html#cb784-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree, <span class="at">box.palette=</span><span class="st">&quot;RdBu&quot;</span>, <span class="at">shadow.col=</span><span class="st">&quot;gray&quot;</span>, <span class="at">nn=</span><span class="cn">TRUE</span>, <span class="at">cex=</span><span class="dv">1</span>, <span class="at">extra=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-606-1.png" width="672" /></p>
 <p>Now we use cross-validation to determine the optimal value of the <code>cp</code> parameter. We use 10 repeats of 10-fold cross-validation. We test 1000 cp-values ranging from <span class="math inline">\(10^-5\)</span> to <span class="math inline">\(10^5\)</span>.</p>
-<div class="sourceCode" id="cb783"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb783-1"><a href="predictive-modeling.html#cb783-1" aria-hidden="true" tabindex="-1"></a>cp_vals <span class="ot">=</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
-<span id="cb783-2"><a href="predictive-modeling.html#cb783-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Houses_sc_Train) <span class="ot">&lt;-</span> <span class="fu">make.names</span>(<span class="fu">colnames</span>(Houses_sc_Train))</span>
-<span id="cb783-3"><a href="predictive-modeling.html#cb783-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb783-4"><a href="predictive-modeling.html#cb783-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2022</span>)</span>
-<span id="cb783-5"><a href="predictive-modeling.html#cb783-5" aria-hidden="true" tabindex="-1"></a>Housing_Tree <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="at">data=</span>Houses_sc_Train, SalePrice <span class="sc">~</span> .,  <span class="at">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="at">trControl=</span>control,<span class="at">tuneGrid=</span><span class="fu">expand.grid</span>(<span class="at">cp=</span>cp_vals))</span>
-<span id="cb783-6"><a href="predictive-modeling.html#cb783-6" aria-hidden="true" tabindex="-1"></a>Housing_Tree<span class="sc">$</span>bestTune</span></code></pre></div>
+<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb785-1"><a href="predictive-modeling.html#cb785-1" aria-hidden="true" tabindex="-1"></a>cp_vals <span class="ot">=</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb785-2"><a href="predictive-modeling.html#cb785-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Houses_sc_Train) <span class="ot">&lt;-</span> <span class="fu">make.names</span>(<span class="fu">colnames</span>(Houses_sc_Train))</span>
+<span id="cb785-3"><a href="predictive-modeling.html#cb785-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb785-4"><a href="predictive-modeling.html#cb785-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2022</span>)</span>
+<span id="cb785-5"><a href="predictive-modeling.html#cb785-5" aria-hidden="true" tabindex="-1"></a>Housing_Tree <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="at">data=</span>Houses_sc_Train, SalePrice <span class="sc">~</span> .,  <span class="at">method=</span><span class="st">&quot;rpart&quot;</span>, <span class="at">trControl=</span>control,<span class="at">tuneGrid=</span><span class="fu">expand.grid</span>(<span class="at">cp=</span>cp_vals))</span>
+<span id="cb785-6"><a href="predictive-modeling.html#cb785-6" aria-hidden="true" tabindex="-1"></a>Housing_Tree<span class="sc">$</span>bestTune</span></code></pre></div>
 <pre><code>##              cp
 ## 4 0.00002009233</code></pre>
 <p>We grow a full tree using the optimal <code>cp</code> value.</p>
-<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb785-1"><a href="predictive-modeling.html#cb785-1" aria-hidden="true" tabindex="-1"></a>Housing_Best_Tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(SalePrice<span class="sc">~</span>., <span class="at">data=</span>Houses_sc_Train, <span class="at">cp=</span>Housing_Tree<span class="sc">$</span>bestTune)</span></code></pre></div>
+<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb787-1"><a href="predictive-modeling.html#cb787-1" aria-hidden="true" tabindex="-1"></a>Housing_Best_Tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(SalePrice<span class="sc">~</span>., <span class="at">data=</span>Houses_sc_Train, <span class="at">cp=</span>Housing_Tree<span class="sc">$</span>bestTune)</span></code></pre></div>
 </div>
 <div id="comparing-performance" class="section level3 hasAnchor" number="7.6.4">
 <h3><span class="header-section-number">7.6.4</span> Comparing Performance<a href="predictive-modeling.html#comparing-performance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We use cross-validation to compare the performance of the linear model, ridge regression model, and decision tree.</p>
-<div class="sourceCode" id="cb786"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb786-1"><a href="predictive-modeling.html#cb786-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2022</span>)</span>
-<span id="cb786-2"><a href="predictive-modeling.html#cb786-2" aria-hidden="true" tabindex="-1"></a>Housing_OLS <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="at">data=</span>Houses_sc_Train, SalePrice <span class="sc">~</span> .,  <span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">trControl=</span>control)</span></code></pre></div>
-<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb787-1"><a href="predictive-modeling.html#cb787-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(Housing_OLS<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span></code></pre></div>
+<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb788-1"><a href="predictive-modeling.html#cb788-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2022</span>)</span>
+<span id="cb788-2"><a href="predictive-modeling.html#cb788-2" aria-hidden="true" tabindex="-1"></a>Housing_OLS <span class="ot">&lt;-</span> <span class="fu">train</span>(<span class="at">data=</span>Houses_sc_Train, SalePrice <span class="sc">~</span> .,  <span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">trControl=</span>control)</span></code></pre></div>
+<div class="sourceCode" id="cb789"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb789-1"><a href="predictive-modeling.html#cb789-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(Housing_OLS<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span></code></pre></div>
 <pre><code>## [1] 35313.3</code></pre>
-<div class="sourceCode" id="cb789"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb789-1"><a href="predictive-modeling.html#cb789-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(Housing_ridge<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span></code></pre></div>
+<div class="sourceCode" id="cb791"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb791-1"><a href="predictive-modeling.html#cb791-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(Housing_ridge<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span></code></pre></div>
 <pre><code>## [1] 35747.22</code></pre>
-<div class="sourceCode" id="cb791"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb791-1"><a href="predictive-modeling.html#cb791-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(Housing_Tree<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span></code></pre></div>
+<div class="sourceCode" id="cb793"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb793-1"><a href="predictive-modeling.html#cb793-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(Housing_Tree<span class="sc">$</span>results<span class="sc">$</span>RMSE)</span></code></pre></div>
 <pre><code>## [1] 33675.46</code></pre>
 <p>The tree predictions give slightly lower RMSPE.</p>
 </div>
@@ -1789,14 +1802,14 @@ Regression with an elastic net uses both ridge and lasso penalty terms and deter
 <h3><span class="header-section-number">7.6.5</span> Predictions on New Data<a href="predictive-modeling.html#predictions-on-new-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We now predict the sale price of the five new houses using each technique.</p>
 <p>Ordinary Least-Squares model:</p>
-<div class="sourceCode" id="cb793"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb793-1"><a href="predictive-modeling.html#cb793-1" aria-hidden="true" tabindex="-1"></a>OLS_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(Housing_OLS, <span class="at">newdata=</span>Houses_sc_New)</span>
-<span id="cb793-2"><a href="predictive-modeling.html#cb793-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(OLS_pred)</span></code></pre></div>
+<div class="sourceCode" id="cb795"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb795-1"><a href="predictive-modeling.html#cb795-1" aria-hidden="true" tabindex="-1"></a>OLS_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(Housing_OLS, <span class="at">newdata=</span>Houses_sc_New)</span>
+<span id="cb795-2"><a href="predictive-modeling.html#cb795-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(OLS_pred)</span></code></pre></div>
 <pre><code>##        2        4        6        7        8 
 ## 114709.4 253695.8 195078.1 222117.6 242493.9</code></pre>
 <p>Ridge regression model:</p>
 <p>We use the <code>Customers_sc_New_MAT</code> dataset, since the <code>glmnet</code> package requires inputs in matrix form.</p>
-<div class="sourceCode" id="cb795"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb795-1"><a href="predictive-modeling.html#cb795-1" aria-hidden="true" tabindex="-1"></a>ridge_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(ridge_mod, <span class="at">newx=</span>Houses_sc_New_MAT)</span>
-<span id="cb795-2"><a href="predictive-modeling.html#cb795-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ridge_pred)</span></code></pre></div>
+<div class="sourceCode" id="cb797"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb797-1"><a href="predictive-modeling.html#cb797-1" aria-hidden="true" tabindex="-1"></a>ridge_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(ridge_mod, <span class="at">newx=</span>Houses_sc_New_MAT)</span>
+<span id="cb797-2"><a href="predictive-modeling.html#cb797-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ridge_pred)</span></code></pre></div>
 <pre><code>##         s0
 ## 2 114950.4
 ## 4 259359.8
@@ -1804,8 +1817,8 @@ Regression with an elastic net uses both ridge and lasso penalty terms and deter
 ## 7 226841.6
 ## 8 249064.8</code></pre>
 <p>Decision tree:</p>
-<div class="sourceCode" id="cb797"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb797-1"><a href="predictive-modeling.html#cb797-1" aria-hidden="true" tabindex="-1"></a>tree_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(Housing_Best_Tree, <span class="at">newdata=</span>Houses_sc_New)</span>
-<span id="cb797-2"><a href="predictive-modeling.html#cb797-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tree_pred)</span></code></pre></div>
+<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb799-1"><a href="predictive-modeling.html#cb799-1" aria-hidden="true" tabindex="-1"></a>tree_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(Housing_Best_Tree, <span class="at">newdata=</span>Houses_sc_New)</span>
+<span id="cb799-2"><a href="predictive-modeling.html#cb799-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tree_pred)</span></code></pre></div>
 <pre><code>##        2        4        6        7        8 
 ## 132926.5 287045.1 183978.6 207079.4 207079.4</code></pre>
 </div>

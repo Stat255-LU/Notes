@@ -470,11 +470,17 @@ RMSPE6
 
 We see that in this case, model M4 performed the best on the hold-out data. We should use Model 4 to make predictions on new data over the other models seen here. It is likely that there are better models out there than model 4, likely with complexity somewhere between that of model 4 and models 5 and 6. Perhaps you can find one.
 
-Once we have our preferred model, we can read in our test data and make predictions, and create a csv file containing the predictions, using the code below.   
+Once we have our preferred model, we can read in our test data and make predictions, and display the first 10 predicted values. 
 
-```{r, eval=FALSE}
+```{r}
 TestData <- read_csv("Ames_Test_Data.csv")
-predictions <- predict(model1, newdata=TestData)  # substitute your best model
+predictions <- predict(model4, newdata=TestData)  # substitute your best model
+head(data.frame(predictions), 10)
+```
+
+We create a csv file containing the predictions, using the code below.   
+
+```{r}
 write.csv(predictions, file = "predictions.csv")
 ```
 
