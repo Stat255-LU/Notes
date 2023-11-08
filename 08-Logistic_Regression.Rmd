@@ -252,7 +252,7 @@ The fact that the p-value is so small tells us that there is strong evidence of 
 ### Confidence Intervals for $\beta_1$
 
 ```{r}
-confint(M, level = 0.95)
+confint(CCDefault_M, level = 0.95)
 ```
 
 We are 95% confident that for each 1 dollar increase in credit card balance, the odds of default are expected to multiply by a factor between $e^{0.00508}\approx 1.0051$ and $e^{0.00594}\approx 1.0060$.
@@ -353,7 +353,7 @@ Assuming a person is a student, for every \$100 increase in balance, the odds of
 
 * For quantitative $x_j$, when all other explanatory variables are held constant, the odds of "success" multiply be a factor of $e^{\beta_j}$ for each 1 unit increase in $x_j$    
 
-* For categorical $x_j$, when all other explanatory variables are held constant, the odds of "success" are $e^\{beta_j}$ times higher for category $j$ than for the "baseline category."    
+* For categorical $x_j$, when all other explanatory variables are held constant, the odds of "success" are $e^{\beta_j}$ times higher for category $j$ than for the "baseline category."    
 
 * For models with interaction, we can only interpret $\beta_j$ when the values of all other explanatory variables are given (since the effect of $x_j$ depends on the other variables.)
 
@@ -361,18 +361,13 @@ Assuming a person is a student, for every \$100 increase in balance, the odds of
 
 ### Measuring Prediction Accuracy
 
-We've seen $\text{RMSPE} = \sqrt{\displaystyle\sum_{i=1}^{n}{(\hat{y}_i-y_i)^2}}$ used as a measure of predictive accuracy in a regression problem.  
+Just as we've done for models with quantitative variables, we'll want to compare and assess the performance of models for predicting categorical responses. This might involve comparing llogistic regression models with different explanatory variables, or comparing a regression model to another technique such as a decision tree. 
 
-Why might this not be the best measure of prediction accuracy in a classification problem (i.e. one with a binary response)?  
+Just as we did before, we'll divide the data so that we can evaluate predictions on a subset of the data that was not used to fit the model.  
 
 
-### Classification Accuracy
+We'll divide the credit card dataset into a set of 9,000 observations, on which we'll fit our models and assess predictions on the remaining 1,000. 
 
-A common way to measure the accuracy of a classifier is to calculate the percentage of cases for which it correctly predicts the class, or category of the response variable.  
-
-Let's calculate classification accuracy for the logistic regression model. 
-
-We'll use cross-validation, by randomly witholding 1,000 of the 10,000 of the cases, on which we'll make predictions.   
 
 ```{r}
 set.seed(08172022)
@@ -388,46 +383,20 @@ LR_Default_M_Int <- glm(data=Default_Train, default ~ balance * student, family 
 summary(LR_Default_M_Int)
 ```
 
-### First 50 Cases
+We then use the model to estimate the probability of a person defaulting on their credit card payment. 
 
-Let's look at the predicted probability of default for the first 50 test cases, along with whether or not the person actually defaulted.   
-
+Information about 10 different credit card users, as well as the logistic regression estimate of their probability of default are shown below. The table also shows whether or not the user really defaulted on their payment. 
 
 ```{r}
-LR_Prob <- predict(LR_Default_M_Int, newdata=Default_Test, type="response")
-LR_Predict_Default <- factor(ifelse(LR_Prob > 0.5, "Yes", "No"))
+LR_Prob <- predict(LR_Default_M_Int, newdata=Default_Test, type="response") %>% round(2)
 Actual_Default <- factor(ifelse(Default_Test$default==1, "Yes", "No"))
-LR_Res_df <- data.frame(LR_Prob, LR_Predict_Default, Actual_Default)
-kable(head(LR_Res_df, 50)%>% arrange(desc(LR_Prob)))
+student <- Default_Test$student
+balance <- Default_Test$balance
+LR_Res_df <- data.frame(student, balance, LR_Prob, Actual_Default)
+kable(head(LR_Res_df, 50)%>% arrange(desc(LR_Prob)) %>% head(10))
 ```
 
-What percentage of these 50 cases did the logistic regression model classify correctly?  
 
-
-### Confusion Matrix
-
-A **confusion matrix** is a two-by-two table displaying the number of cases predicted in each category as columns, and the number of cases actually in each category as rows  
-
-
-
-| | Actually Negative | Actually Positive |
-|--------- | ---------------- | ------------------- |
-Predicted Negative | True Negative | False Negative |
-Predicted Positive | False Positive | True Positive |
-
-
-Create a confusion matrix for the first 50 cases.  
-
-
-### Full Test Data Confusion Matrix
-
-Now, let's look at the confusion matrix for all 1,000 test cases.  
-
-
-```{r}
-LR_Predict_Default <- factor(LR_Predict_Default) 
-confusionMatrix( data =LR_Predict_Default, reference=factor(Actual_Default) , positive="Yes")
-```
 
 ### Decision Tree Classifier
 
@@ -435,53 +404,113 @@ For comparison, let's use a decision tree to predict whether a person will defau
 
 In a binary classification problem, we can treat a default as $y=1$ and non-default as $y=0$, and grow the tree as we would in regression.  
 
-The mean response in a node $\bar{Y}$ can be interpreted as the probability of default.  
+The mean response in a node $\bar{Y}$, which is equivalent to the proportion of people in the node who defaulted, can be interpreted as the probability of default.  
 
 The first few splits of the tree are shown.  
 
 ```{r}
 library(rpart)
 library(rpart.plot)
+# grow shorter tree for illustration
 tree <- rpart(data=Default_Train, default~balance + student, cp=0.005)
 rpart.plot(tree, box.palette="RdBu", shadow.col="gray", nn=TRUE, cex=1, extra=1)
 ```
 
 ```{r}
+# grow full tree
 tree <- rpart(data=Default_Train, default~balance + student)
 ```
 
 ```{r}
-Tree_Prob <- predict(tree, newdata = Default_Test)
-Tree_Pred_Default <- factor(ifelse(Tree_Prob > 0.5, "Yes", "No"))
-LR_Res_df <- data.frame(LR_Prob, LR_Predict_Default, Tree_Prob, Tree_Pred_Default, Actual_Default)
-kable(head(LR_Res_df, 50)%>% arrange(desc(LR_Prob)))
+Tree_Prob <- predict(tree, newdata = Default_Test) %>% round(2)
 ```
 
-### Tree Confusion Matrix
+We add the decision tree probabilities to the table seen previously. 
+
+
+```{r}
+LR_Res_df <- data.frame(student, balance, LR_Prob, Tree_Prob, Actual_Default)
+kable(head(LR_Res_df, 50)%>% arrange(desc(LR_Prob)) %>% head(10))
+```
+
+We see that the tree estimates that the first person has a 0.77 probability of defaulting on the payment, compared to an estimate of 0.54, given by the logistic regression model. On the other hand, the tree estimates only a 0.16 probability of the second person defaulting, compared to 0.26 for the logistic regression model.
+
+### Assessing Classifier Accuracy
+
+We've seen $\text{RMSPE} = \sqrt{\displaystyle\sum_{i=1}^{n}{(\hat{y}_i-y_i)^2}}$ used as a measure of predictive accuracy in a regression problem.  
+
+Since our outcome is not numeric, this is not a good measure of predictive accuracy in a classification problem. We'll examine some alternatives we can use instead.  
+
+
+**Classification Accuracy**
+
+One simple approach is calculate the proportion of credit card users classified correctly. If a person has model estimates a predicted probability of default greater than 0.5, the person is predicted to default, while if the probability estimate is less than 0.5, the person is predicted to not default. 
+
+The table shows the prediction for each of the 10 users, using both logistic regression and the decision tree. 
+
+```{r}
+LR_Pred <- factor(ifelse(LR_Prob > 0.5, "Yes", "No"))
+Tree_Pred <- factor(ifelse(Tree_Prob > 0.5, "Yes", "No"))
+LR_Res_df <- data.frame(student, balance, LR_Prob, Tree_Prob, LR_Pred,Tree_Pred, Actual_Default)
+kable(head(LR_Res_df, 50)%>% arrange(desc(LR_Prob)) %>% head(10))
+```
+
+Notice that although the probabilities differ, the logistic regression model and classification tree give the same predictions for these ten cases. Both correctly predict 8 out of the 10 cases, but mistakenly predict the first person to default, when they didn't, and mistakenly predict that the sixth person would not default when they did. 
+
+We'll check the classification accuracy for the model and the tree. 
+
+```{r}
+sum(LR_Pred == Actual_Default)/1000
+```
+
+```{r}
+sum(Tree_Pred == Actual_Default)/1000
+```
+
+We see that the two techniques are each right approximately 97% of the time. 
+
+This may not really be as good as it sounds. Can you think of a very simple classification strategy that would achieve a similarly impressive predictive accuracy on these data?
+
+### Confusion Matrix
+
+In addition to assessing overall accuracy, it is sometimes helpful to assess how well models are able to predict outcomes in each class. For example, how accurately can a model detect people who do actually default on their payments? 
+
+
+A **confusion matrix** is a two-by-two table displaying the number of cases predicted in each category as columns, and the number of cases actually in each category as rows  
+
+| | Actually Negative | Actually Positive |
+|--------- | ---------------- | ------------------- |
+Predicted Negative | # True Negative | # False Negative |
+Predicted Positive | # False Positive | # True Positive |
+
+
+The `confusionMatrix` matrix command in R returns the confusion matrix for all 1,000 test cases.  
+
+Let's look at the confusion matrix for all 1,000 test cases. The `data` argument is the predicted outcome, and the `reference` argument is the true outcome. The `positive` argument is the category that we'll classify as a positive.  
+
+**Logistic Regression Confusion Matrix**
+
+```{r}
+confusionMatrix(data=LR_Pred, reference=factor(Actual_Default) , positive="Yes")
+```
+
+Out of 965 people who did not default, the logistic regression model correctly predicted 957 of them. 
+
+Out of 35 people that did default, the model correctly predicted 15 of them.  
+
+**Tree Confusion Matrix**
 
 ```{r}
 # data is predicted class
 # reference is actual class
-confusionMatrix( data = Tree_Pred_Default , reference= Actual_Default, "Yes")
+confusionMatrix( data = Tree_Pred , reference= Actual_Default, "Yes")
 ```
 
-**Question:** Which classifier, the logistic regression model or decision tree, appears to do better at predicting default?   
+Out of 965 people who did not default, the logistic regression model correctly predicted 960 of them. 
 
+Out of 35 people that did default, the model correctly predicted 11 of them.  
 
-**Question:** Why might a prediction accuracy rate of over 97% on these data not be as impressive as it sounds?   
-
- 
-### More on Accuracy Rate
-
-Although a ~97% accuracy rate seems impressive recall the percentage of defaults in the dataset. 
-
-```{r}
-mean(Default$default)
-```
-
-Thus, if we simply predicted that everyone would not default, we would achieve 96.67% accuracy, without providing any useful information.  
-
-Classification accuracy rate can be misleading, especially in cases of unbalanced data, where one class is far more prevelant than the other.  
+Notice that the tree was less likely to predict a person to default in general, returning only 16 positive predictions, compared to 23 for the logistic regression model. 
 
 
 ### Sensitivity and Specificity
@@ -489,7 +518,7 @@ Classification accuracy rate can be misleading, especially in cases of unbalance
 The **sensitivity** of a classifier is the proportion of all positive cases that the model correctly identifies as positive. (i.e. probability model says "positive" given actually is positive.)  
 
 \[
-\text{Sensitivity} = \frac{\text{True Positive}}{\text{True Positive} + \text{False Negative}} = \frac{\text{Predicted Positives}}{\text{Actual Positives}}
+\text{Sensitivity} = \frac{\text{True Positive}}{\text{True Positive} + \text{False Negative}} = \frac{\text{Correctly Predicted Positives}}{\text{Total Number of Actual Positives}}
 \]
 
 
@@ -511,7 +540,7 @@ The **sensitivity** of a classifier is the proportion of all positive cases that
 The **specificity** of a classifier is the proportion of all negative cases that the model correctly identifies as negative (i.e probabiltiy model says "negative" given truly is negative.)  
 
 \[
-\text{Specificity} = \frac{\text{True Negative}}{\text{True Negative} + \text{False Positive}}= \frac{\text{Predicted Negatives}}{\text{Actual Negatives}}
+\text{Specificity} = \frac{\text{True Negative}}{\text{True Negative} + \text{False Positive}}= \frac{\text{Correctly Predicted Negatives}}{\text{Total Number of Actual Negatives}}
 \]
 
 
@@ -537,9 +566,38 @@ In a given situation, we should think about the cost of a false negative vs a fa
 
 ## Receiver Operating Characteristic Curve
 
+### Separating +'s and -'s
+
+The prediction accuracy, sensitivity, and specificity measures, seen in the previous section are based only on the predicted outcome, without considering the probability estimates themselves. These techniques treat a 0.49 estimated probability of default the same as a 0.01 estimated probability. 
+
+We would hope to see more defaults among people with high estimated default probabilities than low ones. To assess this, we can list the people in order from highest to lowest probability estimates and see where the true defaults lie. 
+
+For example, consider the following fictional probability estimates produced by two different classifiers (models) for eight credit card users:
+
+**Classifier 1**
+
+
+```{r, echo=FALSE}
+Case_Number <- c(7, 4, 5, 1, 3, 8, 2, 6)
+Classifier1_Probability_Estimate <- c(0.9, 0.75, 0.6, 0.4, 0.3, 0.15, 0.05,0.01 )
+True_Outcome <- c("Yes", "Yes", "No", "Yes", "No", "No", "No", "No" )
+data.frame(Classifier1_Probability_Estimate, True_Outcome)
+```
+
+**Classifier 2**
+
+```{r, echo=FALSE}
+Case_Number <- c(7, 2, 5, 4, 3, 8, 1, 6)
+Classifier2_Probability_Estimate <- c(0.8, 0.7, 0.55, 0.4, 0.35, 0.15, 0.10,0.02 )
+True_Outcome <- c("Yes", "No", "No", "Yes", "No", "No", "Yes", "No" )
+data.frame(Classifier2_Probability_Estimate, True_Outcome)
+```
+
+Classifier 1 is better able to separate the "Yes's" from "No's" as the three true "Yes's" are among the four highest probabilities. Classifier 2 is less able to separate the true "Yes's" from true "No's."
+
 ### ROC Curve
 
-A receiver operating characteristic curve tells us how well a predictor is able to separate positive cases from negative cases.   
+A receiver operating characteristic (ROC) curve tells us how well a predictor is able to separate positive cases from negative cases.   
 
 The blog (Toward Data Science) [https://towardsdatascience.com/applications-of-different-parts-of-an-roc-curve-b534b1aafb68] writes 
 
@@ -549,14 +607,54 @@ The blog (Toward Data Science) [https://towardsdatascience.com/applications-of-d
 The ROC curve plots the true positive (or hit) rate against the false positive rate (false alarm) rate, as the cutoff for a positive classification varies.   
 
 
-
 ```{r echo=FALSE, out.width = '75%', caption="Image from Wikipedia"}
 knitr::include_graphics("Roc_Curve.png")
 ```
 
+
 The higher the curve, the better the predictor is able to separate positive cases from negative ones.   
 
 Predictions made totally at random would be expected to yield a diagonal ROC curve.   
+
+
+
+### Constructing ROC Curve
+
+
+1. Order the probabilities from highest to lowest.   
+2. Assume only the case with the highest probability is predicted as a positive.   
+3. Calculate the true positive rate (hit rate) $\frac{\text{# True Positives}}{\text{# Actual Positives}}$ and false positive (false alarm) $\frac{\text{# False Positives}}{\text{# Actual Negatives}}$rate. 
+4. Plot the point $\left( \frac{\text{# False Positives}}{\text{# Actual Negatives}}, \frac{\text{# True Positives}}{\text{# Actual Positives}} \right)$ in the coordinate plane.   
+5. Now assume the cases with the two highest probabilities are predicted as positives, and repeat steps 3-4.   
+6. Continue, by classifiying one more case as positive in each step.   
+
+### Construct ROC Example
+
+Let's practice constructing an ROC curve for a small set of probability estimates. 
+
+```{r}
+prob <- c(0.9, 0.8, 0.7, 0.65, 0.45, 0.3, 0.2, 0.15, 0.1, 0.05)
+Actual <- c("+", "-", "+", "+", "-", "-", "-", "-", "+", "-")
+Hit_Rate <- c("1/4", "1/4", "2/4", "", "", "", "", "", "", "")
+FA_Rate <- c("0/6", "1/6", "1/6", "", "", "", "", "", "", "")
+kable(data.frame(prob, Actual, Hit_Rate, FA_Rate))
+```
+
+Finish filling in the table and sketch a graph of the resulting ROC curve.  
+
+**Question:** If the probability estimate of 0.45 were instead 0.5 or 0.55, would this change the ROC curve? Why or why not?  
+
+### AUC
+
+The area under the ROC curve, (AUC) provides a measure of the model's predictive strength. 
+
+While there is no standard for what constitutes a ``good" AUC, higher is better, and ``AUC" is useful for comparing models. 
+
+A model that can perfectly separate successes from failures will have an AUC of 1. 
+
+A model that assigns probabilities at random is expected to have an AUC of 0.5. 
+
+
 
 
 ### LR and Tree ROC Curves
@@ -597,31 +695,5 @@ auc(response=Default_Test$default, predictor = RandProb)
 
 
 Even though a model that assigns predictions randomly, with 97% predicted as negatives will have a high accuracy rate, it will yield a poor ROC curve indicating an inability to separate positive cases from negative ones. 
-
-### Constructing ROC Curve
-
-
-1. Order the probabilities from highest to lowest.   
-2. Assume only the case with the highest probability is predicted as a positive.   
-3. Calculate the true positive rate (hit rate) $\frac{\text{# True Positives}}{\text{# Actual Positives}}$ and false positive (false alarm) $\frac{\text{# False Positives}}{\text{# Actual Negatives}}$rate. 
-4. Plot the point $\left( \frac{\text{# False Positives}}{\text{# Actual Negatives}}, \frac{\text{# True Positives}}{\text{# Actual Positives}} \right)$ in the coordinate plane.   
-5. Now assume the cases with the two highest probabilities are predicted as positives, and repeat steps 3-4.   
-6. Continue, by classifiying one more case as positive in each step.   
-
-### Construct ROC Example
-
-Let's practice constructing an ROC curve for a small set of probability estimates. 
-
-```{r}
-prob <- c(0.9, 0.8, 0.7, 0.65, 0.45, 0.3, 0.2, 0.15, 0.1, 0.05)
-Actual <- c("+", "-", "+", "+", "-", "-", "-", "-", "+", "-")
-Hit_Rate <- c("1/4", "1/4", "2/4", "", "", "", "", "", "", "")
-FA_Rate <- c("0/6", "1/6", "1/6", "", "", "", "", "", "", "")
-kable(data.frame(prob, Actual, Hit_Rate, FA_Rate))
-```
-
-Finish filling in the table and sketch a graph of the resulting ROC curve.  
-
-**Question:** If the probability estimate of 0.45 were instead 0.5 or 0.55, would this change the ROC curve? Why or why not?  
 
 

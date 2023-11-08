@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Logistic Regression and Classification | Stat 255: Statistics for Data Science Notes</title>
   <meta name="description" content="Chapter 8 Logistic Regression and Classification | Stat 255: Statistics for Data Science Notes" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Logistic Regression and Classification | Stat 255: Statistics for Data Science Notes" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Andrew Sage - Lawrence University" />
 
 
-<meta name="date" content="2023-11-05" />
+<meta name="date" content="2023-11-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -49,24 +49,25 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -86,13 +87,13 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -137,15 +138,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Exploratory Data Analysis</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#getting-started-in-r"><i class="fa fa-check"></i><b>1.1</b> Getting Started in R</a>
-<ul>
+<li class="chapter" data-level="1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>1</b> Exploratory Data Analysis</a><ul>
+<li class="chapter" data-level="1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#getting-started-in-r"><i class="fa fa-check"></i><b>1.1</b> Getting Started in R</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#previewing-the-data"><i class="fa fa-check"></i><b>1.1.1</b> Previewing the Data</a></li>
 <li class="chapter" data-level="1.1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#modifying-the-data"><i class="fa fa-check"></i><b>1.1.2</b> Modifying the Data</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-visualization"><i class="fa fa-check"></i><b>1.2</b> Data Visualization</a>
-<ul>
+<li class="chapter" data-level="1.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#data-visualization"><i class="fa fa-check"></i><b>1.2</b> Data Visualization</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#histogram"><i class="fa fa-check"></i><b>1.2.1</b> Histogram</a></li>
 <li class="chapter" data-level="1.2.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#density-plot"><i class="fa fa-check"></i><b>1.2.2</b> Density Plot</a></li>
 <li class="chapter" data-level="1.2.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#boxplot"><i class="fa fa-check"></i><b>1.2.3</b> Boxplot</a></li>
@@ -156,24 +154,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2.8" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#correlation-plot"><i class="fa fa-check"></i><b>1.2.8</b> Correlation Plot</a></li>
 <li class="chapter" data-level="1.2.9" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#scatterplot-matrix"><i class="fa fa-check"></i><b>1.2.9</b> Scatterplot Matrix</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#summary-tables"><i class="fa fa-check"></i><b>1.3</b> Summary Tables</a>
-<ul>
+<li class="chapter" data-level="1.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#summary-tables"><i class="fa fa-check"></i><b>1.3</b> Summary Tables</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#calculating-summary-statistics"><i class="fa fa-check"></i><b>1.3.1</b> Calculating Summary Statistics</a></li>
 <li class="chapter" data-level="1.3.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#grouped-summaries"><i class="fa fa-check"></i><b>1.3.2</b> Grouped Summaries</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html"><i class="fa fa-check"></i><b>2</b> Introduction to Statistical Models</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#fitting-models-to-data"><i class="fa fa-check"></i><b>2.1</b> Fitting Models to Data</a>
-<ul>
+<li class="chapter" data-level="2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html"><i class="fa fa-check"></i><b>2</b> Introduction to Statistical Models</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#fitting-models-to-data"><i class="fa fa-check"></i><b>2.1</b> Fitting Models to Data</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#terminology"><i class="fa fa-check"></i><b>2.1.1</b> Terminology</a></li>
 <li class="chapter" data-level="2.1.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-quantitative-explanatory-variable"><i class="fa fa-check"></i><b>2.1.2</b> Model with Quantitative Explanatory Variable</a></li>
 <li class="chapter" data-level="2.1.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-categorical-variable"><i class="fa fa-check"></i><b>2.1.3</b> Model with Categorical Variable</a></li>
 <li class="chapter" data-level="2.1.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-multiple-explanatory-variables"><i class="fa fa-check"></i><b>2.1.4</b> Model with Multiple Explanatory Variables</a></li>
 <li class="chapter" data-level="2.1.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-with-no-explanatory-variable"><i class="fa fa-check"></i><b>2.1.5</b> Model with No Explanatory Variable</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variability-explained-by-a-model"><i class="fa fa-check"></i><b>2.2</b> Variability Explained by a Model</a>
-<ul>
+<li class="chapter" data-level="2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#variability-explained-by-a-model"><i class="fa fa-check"></i><b>2.2</b> Variability Explained by a Model</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#quantifying-variability"><i class="fa fa-check"></i><b>2.2.1</b> Quantifying Variability</a></li>
 <li class="chapter" data-level="2.2.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#total-variability"><i class="fa fa-check"></i><b>2.2.2</b> Total Variability</a></li>
 <li class="chapter" data-level="2.2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#residuals"><i class="fa fa-check"></i><b>2.2.3</b> Residuals</a></li>
@@ -185,8 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.9" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#r2-visually"><i class="fa fa-check"></i><b>2.2.9</b> <span class="math inline">\(R^2\)</span> Visually</a></li>
 <li class="chapter" data-level="2.2.10" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#model-comparison-summary"><i class="fa fa-check"></i><b>2.2.10</b> Model Comparison Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#models-with-interaction"><i class="fa fa-check"></i><b>2.3</b> Models with Interaction</a>
-<ul>
+<li class="chapter" data-level="2.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#models-with-interaction"><i class="fa fa-check"></i><b>2.3</b> Models with Interaction</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#definition-of-interaction"><i class="fa fa-check"></i><b>2.3.1</b> Definition of Interaction</a></li>
 <li class="chapter" data-level="2.3.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-term"><i class="fa fa-check"></i><b>2.3.2</b> Interaction Term</a></li>
 <li class="chapter" data-level="2.3.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-models-in-r"><i class="fa fa-check"></i><b>2.3.3</b> Interaction Models in R</a></li>
@@ -194,15 +187,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#considerations-for-using-interactions"><i class="fa fa-check"></i><b>2.3.5</b> Considerations for Using Interactions</a></li>
 <li class="chapter" data-level="2.3.6" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#interaction-vs-correlation"><i class="fa fa-check"></i><b>2.3.6</b> Interaction vs Correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#least-squares-estimation-lse"><i class="fa fa-check"></i><b>2.4</b> Least Squares Estimation (LSE)</a>
-<ul>
+<li class="chapter" data-level="2.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#least-squares-estimation-lse"><i class="fa fa-check"></i><b>2.4</b> Least Squares Estimation (LSE)</a><ul>
 <li class="chapter" data-level="2.4.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#estimating-regression-coefficients"><i class="fa fa-check"></i><b>2.4.1</b> Estimating Regression Coefficients</a></li>
 <li class="chapter" data-level="2.4.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#mathematics-of-lse-for-slr"><i class="fa fa-check"></i><b>2.4.2</b> Mathematics of LSE for SLR</a></li>
 <li class="chapter" data-level="2.4.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#lse-for-categorical-variable"><i class="fa fa-check"></i><b>2.4.3</b> LSE for Categorical Variable</a></li>
 <li class="chapter" data-level="2.4.4" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#lse-more-generally"><i class="fa fa-check"></i><b>2.4.4</b> LSE More Generally</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>2.5</b> ANalysis Of VAriance</a>
-<ul>
+<li class="chapter" data-level="2.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>2.5</b> ANalysis Of VAriance</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#submodels"><i class="fa fa-check"></i><b>2.5.1</b> Submodels</a></li>
 <li class="chapter" data-level="2.5.2" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#f-statistics"><i class="fa fa-check"></i><b>2.5.2</b> F-Statistics</a></li>
 <li class="chapter" data-level="2.5.3" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#comparing-3-or-more-categories"><i class="fa fa-check"></i><b>2.5.3</b> Comparing 3 or More Categories</a></li>
@@ -210,10 +201,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5.5" data-path="introduction-to-statistical-models.html"><a href="introduction-to-statistical-models.html#alternative-f-statistic-formula"><i class="fa fa-check"></i><b>2.5.5</b> Alternative F-Statistic Formula</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html"><i class="fa fa-check"></i><b>3</b> Hypothesis Testing via Permutation</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#test-for-difference-in-means"><i class="fa fa-check"></i><b>3.1</b> Test for Difference in Means</a>
-<ul>
+<li class="chapter" data-level="3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html"><i class="fa fa-check"></i><b>3</b> Hypothesis Testing via Permutation</a><ul>
+<li class="chapter" data-level="3.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#test-for-difference-in-means"><i class="fa fa-check"></i><b>3.1</b> Test for Difference in Means</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#mercury-levels-in-florida-lakes"><i class="fa fa-check"></i><b>3.1.1</b> Mercury Levels in Florida Lakes</a></li>
 <li class="chapter" data-level="3.1.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#model-for-mercury-level"><i class="fa fa-check"></i><b>3.1.2</b> Model for Mercury Level</a></li>
 <li class="chapter" data-level="3.1.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#hypotheses-and-key-question"><i class="fa fa-check"></i><b>3.1.3</b> Hypotheses and Key Question</a></li>
@@ -222,8 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.6" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#r-code-for-permutation-test"><i class="fa fa-check"></i><b>3.1.6</b> R Code for Permutation Test</a></li>
 <li class="chapter" data-level="3.1.7" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#p-values"><i class="fa fa-check"></i><b>3.1.7</b> p-values</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#general-permutation-tests"><i class="fa fa-check"></i><b>3.2</b> General Permutation Tests</a>
-<ul>
+<li class="chapter" data-level="3.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#general-permutation-tests"><i class="fa fa-check"></i><b>3.2</b> General Permutation Tests</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#other-test-statistics"><i class="fa fa-check"></i><b>3.2.1</b> Other Test Statistics</a></li>
 <li class="chapter" data-level="3.2.2" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#general-permutation-test-procedure"><i class="fa fa-check"></i><b>3.2.2</b> General Permutation Test Procedure</a></li>
 <li class="chapter" data-level="3.2.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#difference-in-standard-deviation"><i class="fa fa-check"></i><b>3.2.3</b> Difference in Standard Deviation</a></li>
@@ -232,15 +220,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="hypothesis-testing-via-permutation.html"><a href="hypothesis-testing-via-permutation.html#responsible-hypothesis-testing"><i class="fa fa-check"></i><b>3.3</b> Responsible Hypothesis Testing</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html"><i class="fa fa-check"></i><b>4</b> Bootstrap Interval Estimation</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#sampling-distributions"><i class="fa fa-check"></i><b>4.1</b> Sampling Distributions</a>
-<ul>
+<li class="chapter" data-level="4" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html"><i class="fa fa-check"></i><b>4</b> Bootstrap Interval Estimation</a><ul>
+<li class="chapter" data-level="4.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#sampling-distributions"><i class="fa fa-check"></i><b>4.1</b> Sampling Distributions</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#sampling-from-a-population"><i class="fa fa-check"></i><b>4.1.1</b> Sampling From a Population</a></li>
 <li class="chapter" data-level="4.1.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#confidence-intervals"><i class="fa fa-check"></i><b>4.1.2</b> Confidence Intervals</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrapping"><i class="fa fa-check"></i><b>4.2</b> Bootstrapping</a>
-<ul>
+<li class="chapter" data-level="4.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrapping"><i class="fa fa-check"></i><b>4.2</b> Bootstrapping</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#mercury-levels-in-florida-lakes-1"><i class="fa fa-check"></i><b>4.2.1</b> Mercury Levels in Florida Lakes</a></li>
 <li class="chapter" data-level="4.2.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-sampling"><i class="fa fa-check"></i><b>4.2.2</b> Bootstrap Sampling</a></li>
 <li class="chapter" data-level="4.2.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-samples-of-lakes"><i class="fa fa-check"></i><b>4.2.3</b> Bootstrap Samples of Lakes</a></li>
@@ -248,8 +233,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.5" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-se-confidence-interval"><i class="fa fa-check"></i><b>4.2.5</b> Bootstrap SE Confidence Interval</a></li>
 <li class="chapter" data-level="4.2.6" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-distribution-vs-sampling-distribution"><i class="fa fa-check"></i><b>4.2.6</b> Bootstrap Distribution vs Sampling Distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-confidence-interval-example"><i class="fa fa-check"></i><b>4.3</b> Bootstrap Confidence Interval Example</a>
-<ul>
+<li class="chapter" data-level="4.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrap-confidence-interval-example"><i class="fa fa-check"></i><b>4.3</b> Bootstrap Confidence Interval Example</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrapping-other-statistics"><i class="fa fa-check"></i><b>4.3.1</b> Bootstrapping Other Statistics</a></li>
 <li class="chapter" data-level="4.3.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#ci-for-mean"><i class="fa fa-check"></i><b>4.3.2</b> CI for Mean</a></li>
 <li class="chapter" data-level="4.3.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#ci-for-standard-deviation"><i class="fa fa-check"></i><b>4.3.3</b> CI for Standard Deviation</a></li>
@@ -260,8 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.8" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#more-cis-in-regression"><i class="fa fa-check"></i><b>4.3.8</b> More CI’s in Regression</a></li>
 <li class="chapter" data-level="4.3.9" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#bootstrapping-cautions"><i class="fa fa-check"></i><b>4.3.9</b> Bootstrapping Cautions</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#estimating-standard-error"><i class="fa fa-check"></i><b>4.4</b> Estimating Standard Error</a>
-<ul>
+<li class="chapter" data-level="4.4" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#estimating-standard-error"><i class="fa fa-check"></i><b>4.4</b> Estimating Standard Error</a><ul>
 <li class="chapter" data-level="4.4.1" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#standard-error-vs-standard-deviation"><i class="fa fa-check"></i><b>4.4.1</b> Standard Error vs Standard Deviation</a></li>
 <li class="chapter" data-level="4.4.2" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#sample-size-and-standard-error"><i class="fa fa-check"></i><b>4.4.2</b> Sample Size and Standard Error</a></li>
 <li class="chapter" data-level="4.4.3" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#standard-error-formulas"><i class="fa fa-check"></i><b>4.4.3</b> Standard Error Formulas</a></li>
@@ -272,10 +255,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.8" data-path="bootstrap-interval-estimation.html"><a href="bootstrap-interval-estimation.html#ci-method-comparison"><i class="fa fa-check"></i><b>4.4.8</b> CI Method Comparison</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html"><i class="fa fa-check"></i><b>5</b> Normal Error Regression Model</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#the-normal-error-regression-model"><i class="fa fa-check"></i><b>5.1</b> The Normal Error Regression Model</a>
-<ul>
+<li class="chapter" data-level="5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html"><i class="fa fa-check"></i><b>5</b> Normal Error Regression Model</a><ul>
+<li class="chapter" data-level="5.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#the-normal-error-regression-model"><i class="fa fa-check"></i><b>5.1</b> The Normal Error Regression Model</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#example-ice-cream-dispenser"><i class="fa fa-check"></i><b>5.1.1</b> Example: Ice Cream dispenser</a></li>
 <li class="chapter" data-level="5.1.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#signal-and-noise"><i class="fa fa-check"></i><b>5.1.2</b> Signal and Noise</a></li>
 <li class="chapter" data-level="5.1.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#normal-distribution"><i class="fa fa-check"></i><b>5.1.3</b> Normal Distribution</a></li>
@@ -285,8 +266,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#implications-of-normal-error-regression-model"><i class="fa fa-check"></i><b>5.1.7</b> Implications of Normal Error Regression Model</a></li>
 <li class="chapter" data-level="5.1.8" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#philosophical-question"><i class="fa fa-check"></i><b>5.1.8</b> Philosophical Question</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#inference-in-normal-error-regression-model"><i class="fa fa-check"></i><b>5.2</b> Inference in Normal Error Regression Model</a>
-<ul>
+<li class="chapter" data-level="5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#inference-in-normal-error-regression-model"><i class="fa fa-check"></i><b>5.2</b> Inference in Normal Error Regression Model</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#lm-summary-output"><i class="fa fa-check"></i><b>5.2.1</b> <code>lm</code> <code>summary</code> Output</a></li>
 <li class="chapter" data-level="5.2.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#t-distribution"><i class="fa fa-check"></i><b>5.2.2</b> t-distribution</a></li>
 <li class="chapter" data-level="5.2.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#difference-in-means-example-1"><i class="fa fa-check"></i><b>5.2.3</b> Difference in Means Example</a></li>
@@ -295,14 +275,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#mr-with-interaction-example"><i class="fa fa-check"></i><b>5.2.6</b> MR with Interaction Example</a></li>
 <li class="chapter" data-level="5.2.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#limitations"><i class="fa fa-check"></i><b>5.2.7</b> Limitations</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#f-distributions"><i class="fa fa-check"></i><b>5.3</b> F-Distributions</a>
-<ul>
+<li class="chapter" data-level="5.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#f-distributions"><i class="fa fa-check"></i><b>5.3</b> F-Distributions</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#f-distribution"><i class="fa fa-check"></i><b>5.3.1</b> F-Distribution</a></li>
 <li class="chapter" data-level="5.3.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#house-condition-example"><i class="fa fa-check"></i><b>5.3.2</b> House Condition Example</a></li>
 <li class="chapter" data-level="5.3.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#interaction-example"><i class="fa fa-check"></i><b>5.3.3</b> Interaction Example</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#regression-model-assumptions"><i class="fa fa-check"></i><b>5.4</b> Regression Model Assumptions</a>
-<ul>
+<li class="chapter" data-level="5.4" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#regression-model-assumptions"><i class="fa fa-check"></i><b>5.4</b> Regression Model Assumptions</a><ul>
 <li class="chapter" data-level="5.4.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#regression-assumptions"><i class="fa fa-check"></i><b>5.4.1</b> Regression Assumptions</a></li>
 <li class="chapter" data-level="5.4.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#checking-model-assumptions"><i class="fa fa-check"></i><b>5.4.2</b> Checking Model Assumptions</a></li>
 <li class="chapter" data-level="5.4.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#summary-of-checks-for-model-assumptions"><i class="fa fa-check"></i><b>5.4.3</b> Summary of Checks for Model Assumptions</a></li>
@@ -310,8 +288,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4.5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#example-ph-model"><i class="fa fa-check"></i><b>5.4.5</b> Example: pH Model</a></li>
 <li class="chapter" data-level="5.4.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#example-house-prices"><i class="fa fa-check"></i><b>5.4.6</b> Example: House Prices</a></li>
 </ul></li>
-<li class="chapter" data-level="5.5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#intervals-for-expected-response"><i class="fa fa-check"></i><b>5.5</b> Intervals for Expected Response</a>
-<ul>
+<li class="chapter" data-level="5.5" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#intervals-for-expected-response"><i class="fa fa-check"></i><b>5.5</b> Intervals for Expected Response</a><ul>
 <li class="chapter" data-level="5.5.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#parameter-values-and-expected-responses"><i class="fa fa-check"></i><b>5.5.1</b> Parameter Values and Expected Responses</a></li>
 <li class="chapter" data-level="5.5.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#estimation-and-prediction"><i class="fa fa-check"></i><b>5.5.2</b> Estimation and Prediction</a></li>
 <li class="chapter" data-level="5.5.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#estimation-and-prediction-in-slr"><i class="fa fa-check"></i><b>5.5.3</b> Estimation and Prediction in SLR</a></li>
@@ -320,8 +297,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#car-price-and-acceleration-time"><i class="fa fa-check"></i><b>5.5.6</b> Car Price and Acceleration Time</a></li>
 <li class="chapter" data-level="5.5.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#florida-lakes-est.-and-pred."><i class="fa fa-check"></i><b>5.5.7</b> Florida Lakes Est. and Pred.</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#transformations"><i class="fa fa-check"></i><b>5.6</b> Transformations</a>
-<ul>
+<li class="chapter" data-level="5.6" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#transformations"><i class="fa fa-check"></i><b>5.6</b> Transformations</a><ul>
 <li class="chapter" data-level="5.6.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#cars-assumptions-check"><i class="fa fa-check"></i><b>5.6.1</b> Cars Assumptions Check</a></li>
 <li class="chapter" data-level="5.6.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#log-transformation"><i class="fa fa-check"></i><b>5.6.2</b> Log Transformation</a></li>
 <li class="chapter" data-level="5.6.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#log-transform-for-car-prices"><i class="fa fa-check"></i><b>5.6.3</b> Log Transform for Car Prices</a></li>
@@ -335,8 +311,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6.11" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#log-model-visualization"><i class="fa fa-check"></i><b>5.6.11</b> Log Model Visualization</a></li>
 <li class="chapter" data-level="5.6.12" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#comments-on-transformations"><i class="fa fa-check"></i><b>5.6.12</b> Comments on Transformations</a></li>
 </ul></li>
-<li class="chapter" data-level="5.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#case-studies"><i class="fa fa-check"></i><b>5.7</b> Case Studies</a>
-<ul>
+<li class="chapter" data-level="5.7" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#case-studies"><i class="fa fa-check"></i><b>5.7</b> Case Studies</a><ul>
 <li class="chapter" data-level="5.7.1" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#flights-from-ny-to-chi"><i class="fa fa-check"></i><b>5.7.1</b> Flights from NY to CHI</a></li>
 <li class="chapter" data-level="5.7.2" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#smoking-during-pregnancy"><i class="fa fa-check"></i><b>5.7.2</b> Smoking During Pregnancy</a></li>
 <li class="chapter" data-level="5.7.3" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#smoking-during-pregnancy-cont"><i class="fa fa-check"></i><b>5.7.3</b> Smoking During Pregnancy (cont)</a></li>
@@ -346,10 +321,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.8" data-path="normal-error-regression-model.html"><a href="normal-error-regression-model.html#impact-of-model-assumption-violations"><i class="fa fa-check"></i><b>5.8</b> Impact of Model Assumption Violations</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html"><i class="fa fa-check"></i><b>6</b> Building Models for Interpretation</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-building---sat-scores"><i class="fa fa-check"></i><b>6.1</b> Model Building - SAT Scores</a>
-<ul>
+<li class="chapter" data-level="6" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html"><i class="fa fa-check"></i><b>6</b> Building Models for Interpretation</a><ul>
+<li class="chapter" data-level="6.1" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-building---sat-scores"><i class="fa fa-check"></i><b>6.1</b> Model Building - SAT Scores</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#modeling-for-interpretation"><i class="fa fa-check"></i><b>6.1.1</b> Modeling for Interpretation</a></li>
 <li class="chapter" data-level="6.1.2" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#sat-scores-dataset"><i class="fa fa-check"></i><b>6.1.2</b> SAT Scores Dataset</a></li>
 <li class="chapter" data-level="6.1.3" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#research-question"><i class="fa fa-check"></i><b>6.1.3</b> Research Question</a></li>
@@ -362,8 +335,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.10" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#account-for-region"><i class="fa fa-check"></i><b>6.1.10</b> Account for Region?</a></li>
 <li class="chapter" data-level="6.1.11" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#predictions-and-intervals"><i class="fa fa-check"></i><b>6.1.11</b> Predictions and Intervals</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#modeling-car-price"><i class="fa fa-check"></i><b>6.2</b> Modeling Car Price</a>
-<ul>
+<li class="chapter" data-level="6.2" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#modeling-car-price"><i class="fa fa-check"></i><b>6.2</b> Modeling Car Price</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-for-price-of-2015-cars"><i class="fa fa-check"></i><b>6.2.1</b> Model for Price of 2015 Cars</a></li>
 <li class="chapter" data-level="6.2.2" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#acc.-and-qrt.-mile-time"><i class="fa fa-check"></i><b>6.2.2</b> Acc. and Qrt. Mile Time</a></li>
 <li class="chapter" data-level="6.2.3" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#adding-weight-to-model"><i class="fa fa-check"></i><b>6.2.3</b> Adding Weight to Model</a></li>
@@ -374,10 +346,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2.8" data-path="building-models-for-interpretation.html"><a href="building-models-for-interpretation.html#model-building-summary"><i class="fa fa-check"></i><b>6.2.8</b> Model Building Summary</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="predictive-modeling.html"><a href="predictive-modeling.html"><i class="fa fa-check"></i><b>7</b> Predictive Modeling</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#modeling-for-prediction"><i class="fa fa-check"></i><b>7.1</b> Modeling for Prediction</a>
-<ul>
+<li class="chapter" data-level="7" data-path="predictive-modeling.html"><a href="predictive-modeling.html"><i class="fa fa-check"></i><b>7</b> Predictive Modeling</a><ul>
+<li class="chapter" data-level="7.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#modeling-for-prediction"><i class="fa fa-check"></i><b>7.1</b> Modeling for Prediction</a><ul>
 <li class="chapter" data-level="7.1.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#overview"><i class="fa fa-check"></i><b>7.1.1</b> Overview</a></li>
 <li class="chapter" data-level="7.1.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#illustration-of-predictive-modeling"><i class="fa fa-check"></i><b>7.1.2</b> Illustration of Predictive Modeling</a></li>
 <li class="chapter" data-level="7.1.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#predicting-new-data"><i class="fa fa-check"></i><b>7.1.3</b> Predicting New Data</a></li>
@@ -387,8 +357,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1.7" data-path="predictive-modeling.html"><a href="predictive-modeling.html#best-model"><i class="fa fa-check"></i><b>7.1.7</b> Best Model</a></li>
 <li class="chapter" data-level="7.1.8" data-path="predictive-modeling.html"><a href="predictive-modeling.html#model-complexity-training-error-and-test-error"><i class="fa fa-check"></i><b>7.1.8</b> Model Complexity, Training Error, and Test Error</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#variance-bias-tradeoff"><i class="fa fa-check"></i><b>7.2</b> Variance-Bias Tradeoff</a>
-<ul>
+<li class="chapter" data-level="7.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#variance-bias-tradeoff"><i class="fa fa-check"></i><b>7.2</b> Variance-Bias Tradeoff</a><ul>
 <li class="chapter" data-level="7.2.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#what-contributes-to-prediction-error"><i class="fa fa-check"></i><b>7.2.1</b> What Contributes to Prediction Error?</a></li>
 <li class="chapter" data-level="7.2.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#variance-and-bias"><i class="fa fa-check"></i><b>7.2.2</b> Variance and Bias</a></li>
 <li class="chapter" data-level="7.2.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#variance-bias-tradeoff-1"><i class="fa fa-check"></i><b>7.2.3</b> Variance-Bias Tradeoff</a></li>
@@ -397,8 +366,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.6" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cross-validation-illustration"><i class="fa fa-check"></i><b>7.2.6</b> Cross-Validation Illustration</a></li>
 <li class="chapter" data-level="7.2.7" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cv-in-r"><i class="fa fa-check"></i><b>7.2.7</b> CV in R</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression"><i class="fa fa-check"></i><b>7.3</b> Ridge Regression</a>
-<ul>
+<li class="chapter" data-level="7.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression"><i class="fa fa-check"></i><b>7.3</b> Ridge Regression</a><ul>
 <li class="chapter" data-level="7.3.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#complexity-in-model-coefficients"><i class="fa fa-check"></i><b>7.3.1</b> Complexity in Model Coefficients</a></li>
 <li class="chapter" data-level="7.3.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression-penalty"><i class="fa fa-check"></i><b>7.3.2</b> Ridge Regression Penalty</a></li>
 <li class="chapter" data-level="7.3.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#choosing-lambda"><i class="fa fa-check"></i><b>7.3.3</b> Choosing <span class="math inline">\(\lambda\)</span></a></li>
@@ -406,8 +374,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-vs-ols"><i class="fa fa-check"></i><b>7.3.5</b> Ridge vs OLS</a></li>
 <li class="chapter" data-level="7.3.6" data-path="predictive-modeling.html"><a href="predictive-modeling.html#lasso-and-elastic-net"><i class="fa fa-check"></i><b>7.3.6</b> Lasso and Elastic Net</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#decision-trees"><i class="fa fa-check"></i><b>7.4</b> Decision Trees</a>
-<ul>
+<li class="chapter" data-level="7.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#decision-trees"><i class="fa fa-check"></i><b>7.4</b> Decision Trees</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#basics-of-decision-trees"><i class="fa fa-check"></i><b>7.4.1</b> Basics of Decision Trees</a></li>
 <li class="chapter" data-level="7.4.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#partitioning-in-a-decision-tree"><i class="fa fa-check"></i><b>7.4.2</b> Partitioning in A Decision Tree</a></li>
 <li class="chapter" data-level="7.4.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#next-splits"><i class="fa fa-check"></i><b>7.4.3</b> Next Splits</a></li>
@@ -417,24 +384,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4.7" data-path="predictive-modeling.html"><a href="predictive-modeling.html#comparing-ols-lasso-ridge-and-tree"><i class="fa fa-check"></i><b>7.4.7</b> Comparing OLS, Lasso, Ridge, and Tree</a></li>
 <li class="chapter" data-level="7.4.8" data-path="predictive-modeling.html"><a href="predictive-modeling.html#random-forest"><i class="fa fa-check"></i><b>7.4.8</b> Random Forest</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#regression-splines"><i class="fa fa-check"></i><b>7.5</b> Regression Splines</a>
-<ul>
+<li class="chapter" data-level="7.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#regression-splines"><i class="fa fa-check"></i><b>7.5</b> Regression Splines</a><ul>
 <li class="chapter" data-level="7.5.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#regression-splines-1"><i class="fa fa-check"></i><b>7.5.1</b> Regression Splines</a></li>
 <li class="chapter" data-level="7.5.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#two-models-with-high-bias"><i class="fa fa-check"></i><b>7.5.2</b> Two Models with High Bias</a></li>
 <li class="chapter" data-level="7.5.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#cubic-splines"><i class="fa fa-check"></i><b>7.5.3</b> Cubic Splines</a></li>
 <li class="chapter" data-level="7.5.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#predicting-test-data"><i class="fa fa-check"></i><b>7.5.4</b> Predicting Test Data</a></li>
 <li class="chapter" data-level="7.5.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#implementation-of-splines"><i class="fa fa-check"></i><b>7.5.5</b> Implementation of Splines</a></li>
 </ul></li>
-<li class="chapter" data-level="7.6" data-path="predictive-modeling.html"><a href="predictive-modeling.html#summary-and-comparision"><i class="fa fa-check"></i><b>7.6</b> Summary and Comparision</a>
-<ul>
+<li class="chapter" data-level="7.6" data-path="predictive-modeling.html"><a href="predictive-modeling.html#summary-and-comparision"><i class="fa fa-check"></i><b>7.6</b> Summary and Comparision</a><ul>
 <li class="chapter" data-level="7.6.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#modeling-with-ols"><i class="fa fa-check"></i><b>7.6.1</b> Modeling with OLS</a></li>
 <li class="chapter" data-level="7.6.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ridge-regression-with-housing-data"><i class="fa fa-check"></i><b>7.6.2</b> Ridge Regression with Housing Data</a></li>
 <li class="chapter" data-level="7.6.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#decision-tree"><i class="fa fa-check"></i><b>7.6.3</b> Decision Tree</a></li>
 <li class="chapter" data-level="7.6.4" data-path="predictive-modeling.html"><a href="predictive-modeling.html#comparing-performance"><i class="fa fa-check"></i><b>7.6.4</b> Comparing Performance</a></li>
 <li class="chapter" data-level="7.6.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#predictions-on-new-data"><i class="fa fa-check"></i><b>7.6.5</b> Predictions on New Data</a></li>
 </ul></li>
-<li class="chapter" data-level="7.7" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ethical-considerations-in-predictive-modeling"><i class="fa fa-check"></i><b>7.7</b> Ethical Considerations in Predictive Modeling</a>
-<ul>
+<li class="chapter" data-level="7.7" data-path="predictive-modeling.html"><a href="predictive-modeling.html#ethical-considerations-in-predictive-modeling"><i class="fa fa-check"></i><b>7.7</b> Ethical Considerations in Predictive Modeling</a><ul>
 <li class="chapter" data-level="7.7.1" data-path="predictive-modeling.html"><a href="predictive-modeling.html#assumptions-in-predictive-models"><i class="fa fa-check"></i><b>7.7.1</b> Assumptions in Predictive Models</a></li>
 <li class="chapter" data-level="7.7.2" data-path="predictive-modeling.html"><a href="predictive-modeling.html#amazon-hiring-algorithm"><i class="fa fa-check"></i><b>7.7.2</b> Amazon Hiring Algorithm</a></li>
 <li class="chapter" data-level="7.7.3" data-path="predictive-modeling.html"><a href="predictive-modeling.html#facial-recognition"><i class="fa fa-check"></i><b>7.7.3</b> Facial Recognition</a></li>
@@ -442,10 +406,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7.5" data-path="predictive-modeling.html"><a href="predictive-modeling.html#modeling-for-prediction-2"><i class="fa fa-check"></i><b>7.7.5</b> Modeling for Prediction</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression and Classification</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#logistic-regression"><i class="fa fa-check"></i><b>8.1</b> Logistic Regression</a>
-<ul>
+<li class="chapter" data-level="8" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html"><i class="fa fa-check"></i><b>8</b> Logistic Regression and Classification</a><ul>
+<li class="chapter" data-level="8.1" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#logistic-regression"><i class="fa fa-check"></i><b>8.1</b> Logistic Regression</a><ul>
 <li class="chapter" data-level="8.1.1" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#modeling-binary-response"><i class="fa fa-check"></i><b>8.1.1</b> Modeling Binary Response</a></li>
 <li class="chapter" data-level="8.1.2" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#credit-card-dataset"><i class="fa fa-check"></i><b>8.1.2</b> Credit Card Dataset</a></li>
 <li class="chapter" data-level="8.1.3" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#logistic-regression-model"><i class="fa fa-check"></i><b>8.1.3</b> Logistic Regression Model</a></li>
@@ -456,8 +418,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1.8" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#hypothesis-tests-in-logistic-regression"><i class="fa fa-check"></i><b>8.1.8</b> Hypothesis Tests in Logistic Regression</a></li>
 <li class="chapter" data-level="8.1.9" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#confidence-intervals-for-beta_1"><i class="fa fa-check"></i><b>8.1.9</b> Confidence Intervals for <span class="math inline">\(\beta_1\)</span></a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>8.2</b> Multiple Logistic Regression</a>
-<ul>
+<li class="chapter" data-level="8.2" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>8.2</b> Multiple Logistic Regression</a><ul>
 <li class="chapter" data-level="8.2.1" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#logistic-regression-models-with-multiple-explanatory-variables"><i class="fa fa-check"></i><b>8.2.1</b> Logistic Regression Models with Multiple Explanatory Variables</a></li>
 <li class="chapter" data-level="8.2.2" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#multiple-logistic-regression-interpretations"><i class="fa fa-check"></i><b>8.2.2</b> Multiple Logistic Regression Interpretations</a></li>
 <li class="chapter" data-level="8.2.3" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#hypothesis-tests-in-multiple-logistic-regression-model"><i class="fa fa-check"></i><b>8.2.3</b> Hypothesis Tests in Multiple Logistic Regression Model</a></li>
@@ -465,24 +426,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.5" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#interpretations-for-logistic-model-with-interaction"><i class="fa fa-check"></i><b>8.2.5</b> Interpretations for Logistic Model with Interaction</a></li>
 <li class="chapter" data-level="8.2.6" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#logistic-regression-key-points"><i class="fa fa-check"></i><b>8.2.6</b> Logistic Regression Key Points</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#assessing-a-classifiers-performance"><i class="fa fa-check"></i><b>8.3</b> Assessing a Classifier’s Performance</a>
-<ul>
+<li class="chapter" data-level="8.3" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#assessing-a-classifiers-performance"><i class="fa fa-check"></i><b>8.3</b> Assessing a Classifier’s Performance</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#measuring-prediction-accuracy"><i class="fa fa-check"></i><b>8.3.1</b> Measuring Prediction Accuracy</a></li>
-<li class="chapter" data-level="8.3.2" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#classification-accuracy"><i class="fa fa-check"></i><b>8.3.2</b> Classification Accuracy</a></li>
-<li class="chapter" data-level="8.3.3" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#first-50-cases"><i class="fa fa-check"></i><b>8.3.3</b> First 50 Cases</a></li>
+<li class="chapter" data-level="8.3.2" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#decision-tree-classifier"><i class="fa fa-check"></i><b>8.3.2</b> Decision Tree Classifier</a></li>
+<li class="chapter" data-level="8.3.3" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#assessing-classifier-accuracy"><i class="fa fa-check"></i><b>8.3.3</b> Assessing Classifier Accuracy</a></li>
 <li class="chapter" data-level="8.3.4" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#confusion-matrix"><i class="fa fa-check"></i><b>8.3.4</b> Confusion Matrix</a></li>
-<li class="chapter" data-level="8.3.5" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#full-test-data-confusion-matrix"><i class="fa fa-check"></i><b>8.3.5</b> Full Test Data Confusion Matrix</a></li>
-<li class="chapter" data-level="8.3.6" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#decision-tree-classifier"><i class="fa fa-check"></i><b>8.3.6</b> Decision Tree Classifier</a></li>
-<li class="chapter" data-level="8.3.7" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#tree-confusion-matrix"><i class="fa fa-check"></i><b>8.3.7</b> Tree Confusion Matrix</a></li>
-<li class="chapter" data-level="8.3.8" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#more-on-accuracy-rate"><i class="fa fa-check"></i><b>8.3.8</b> More on Accuracy Rate</a></li>
-<li class="chapter" data-level="8.3.9" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#sensitivity-and-specificity"><i class="fa fa-check"></i><b>8.3.9</b> Sensitivity and Specificity</a></li>
+<li class="chapter" data-level="8.3.5" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#sensitivity-and-specificity"><i class="fa fa-check"></i><b>8.3.5</b> Sensitivity and Specificity</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#receiver-operating-characteristic-curve"><i class="fa fa-check"></i><b>8.4</b> Receiver Operating Characteristic Curve</a>
-<ul>
-<li class="chapter" data-level="8.4.1" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#roc-curve"><i class="fa fa-check"></i><b>8.4.1</b> ROC Curve</a></li>
-<li class="chapter" data-level="8.4.2" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#lr-and-tree-roc-curves"><i class="fa fa-check"></i><b>8.4.2</b> LR and Tree ROC Curves</a></li>
+<li class="chapter" data-level="8.4" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#receiver-operating-characteristic-curve"><i class="fa fa-check"></i><b>8.4</b> Receiver Operating Characteristic Curve</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#separating-s-and--s"><i class="fa fa-check"></i><b>8.4.1</b> Separating +’s and -’s</a></li>
+<li class="chapter" data-level="8.4.2" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#roc-curve"><i class="fa fa-check"></i><b>8.4.2</b> ROC Curve</a></li>
 <li class="chapter" data-level="8.4.3" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#constructing-roc-curve"><i class="fa fa-check"></i><b>8.4.3</b> Constructing ROC Curve</a></li>
 <li class="chapter" data-level="8.4.4" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#construct-roc-example"><i class="fa fa-check"></i><b>8.4.4</b> Construct ROC Example</a></li>
+<li class="chapter" data-level="8.4.5" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#auc"><i class="fa fa-check"></i><b>8.4.5</b> AUC</a></li>
+<li class="chapter" data-level="8.4.6" data-path="logistic-regression-and-classification.html"><a href="logistic-regression-and-classification.html#lr-and-tree-roc-curves"><i class="fa fa-check"></i><b>8.4.6</b> LR and Tree ROC Curves</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -504,7 +461,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="logistic-regression-and-classification" class="section level1 hasAnchor" number="8">
+<div id="logistic-regression-and-classification" class="section level1 hasAnchor">
 <h1><span class="header-section-number">Chapter 8</span> Logistic Regression and Classification<a href="logistic-regression-and-classification.html#logistic-regression-and-classification" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><strong>Learning Outcomes:</strong></p>
 <ol style="list-style-type: decimal">
@@ -524,19 +481,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </p></li>
 <li><p>Compare classifiers using misclassification rate, and AUC.</p></li>
 </ol>
-<div id="logistic-regression" class="section level2 hasAnchor" number="8.1">
+<div id="logistic-regression" class="section level2 hasAnchor">
 <h2><span class="header-section-number">8.1</span> Logistic Regression<a href="logistic-regression-and-classification.html#logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="modeling-binary-response" class="section level3 hasAnchor" number="8.1.1">
+<div id="modeling-binary-response" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.1.1</span> Modeling Binary Response<a href="logistic-regression-and-classification.html#modeling-binary-response" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>So far, we have modeled only quantitative response variables. The normal error regression model makes the assumption that the response variable is normally distributed, given the value(s) of the explanatory variables.</p>
 <p>Now, we’ll look at how to model a categorical response variable. We’ll consider only situations where the response is binary (i.e. has 2 categories). Problems with categorical response variables are sometimes called <strong>classification</strong> problems, while problems with numeric response variables are sometimes called <strong>regression</strong> problems.</p>
 </div>
-<div id="credit-card-dataset" class="section level3 hasAnchor" number="8.1.2">
+<div id="credit-card-dataset" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.1.2</span> Credit Card Dataset<a href="logistic-regression-and-classification.html#credit-card-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ll consider a dataset pertaining to 10,000 credit cards. The goal is to predict whether or not the user will default on the payment, using information on the credit card balance, user’s annual income, and whether or not the user is a student. Data come from <a href="http://www-bcf.usc.edu/~gareth/ISL/data.html">Introduction to Statistical Learning</a> by James, Witten, Hastie, Tibshirani.</p>
-<div class="sourceCode" id="cb801"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb801-1"><a href="logistic-regression-and-classification.html#cb801-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR)</span>
-<span id="cb801-2"><a href="logistic-regression-and-classification.html#cb801-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Default)</span>
-<span id="cb801-3"><a href="logistic-regression-and-classification.html#cb801-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Default)</span></code></pre></div>
+<div class="sourceCode" id="cb801"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb801-1"><a href="logistic-regression-and-classification.html#cb801-1"></a><span class="kw">library</span>(ISLR)</span>
+<span id="cb801-2"><a href="logistic-regression-and-classification.html#cb801-2"></a><span class="kw">data</span>(Default)</span>
+<span id="cb801-3"><a href="logistic-regression-and-classification.html#cb801-3"></a><span class="kw">summary</span>(Default)</span></code></pre></div>
 <pre><code>##  default    student       balance           income     
 ##  No :9667   No :7056   Min.   :   0.0   Min.   :  772  
 ##  Yes: 333   Yes:2944   1st Qu.: 481.7   1st Qu.:21340  
@@ -546,22 +503,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##                        Max.   :2654.3   Max.   :73554</code></pre>
 <p><strong>Default and Balance</strong></p>
 <p>The plot displays each person’s credit card balance on the x-axis, and whether or not they defaulted (a 0 or 1) on the y-axis.</p>
-<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb803-1"><a href="logistic-regression-and-classification.html#cb803-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Default, <span class="fu">aes</span>(<span class="at">y=</span>default, <span class="at">x=</span>balance)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.2</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb803-1"><a href="logistic-regression-and-classification.html#cb803-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Default, <span class="kw">aes</span>(<span class="dt">y=</span>default, <span class="dt">x=</span>balance)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>) </span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-618-1.png" width="960" />
 We see that defaults are rare when the balance is less than $1,000, and more common for balances above $2,000.</p>
 <p>We’ll first try fitting a linear regression model to the data to try to estimate the probability of a person defaulting on a loan, using the size of their balance as the explanatory variable.</p>
-<div class="sourceCode" id="cb804"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb804-1"><a href="logistic-regression-and-classification.html#cb804-1" aria-hidden="true" tabindex="-1"></a><span class="co">#convert default from yes/no to 0/1</span></span>
-<span id="cb804-2"><a href="logistic-regression-and-classification.html#cb804-2" aria-hidden="true" tabindex="-1"></a>Default<span class="sc">$</span>default <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Default<span class="sc">$</span>default<span class="sc">==</span><span class="st">&quot;Yes&quot;</span>) </span></code></pre></div>
-<div class="sourceCode" id="cb805"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb805-1"><a href="logistic-regression-and-classification.html#cb805-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Default, <span class="fu">aes</span>(<span class="at">y=</span>default, <span class="at">x=</span> balance)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.2</span>)  <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb804"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb804-1"><a href="logistic-regression-and-classification.html#cb804-1"></a><span class="co">#convert default from yes/no to 0/1</span></span>
+<span id="cb804-2"><a href="logistic-regression-and-classification.html#cb804-2"></a>Default<span class="op">$</span>default &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(Default<span class="op">$</span>default<span class="op">==</span><span class="st">&quot;Yes&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb805"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb805-1"><a href="logistic-regression-and-classification.html#cb805-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Default, <span class="kw">aes</span>(<span class="dt">y=</span>default, <span class="dt">x=</span> balance)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-620-1.png" width="768" /></p>
 <p>There are a lot of problems with this model!</p>
 <p>It allows the estimated probability of of default to be negative. It also assumes a linear trend that doesn’t seem to fit the data very well.</p>
 <p>A sigmoidal curve, like the one below, seems like a better model for default probabilities. This curve stays between 0 and 1, and its curved nature seems like a better fit for the data.</p>
-<div class="sourceCode" id="cb806"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb806-1"><a href="logistic-regression-and-classification.html#cb806-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Default, <span class="fu">aes</span>(<span class="at">y=</span>default, <span class="at">x=</span> balance)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.2</span>) <span class="sc">+</span> </span>
-<span id="cb806-2"><a href="logistic-regression-and-classification.html#cb806-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;glm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>, <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family=</span>binomial)) </span></code></pre></div>
+<div class="sourceCode" id="cb806"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb806-1"><a href="logistic-regression-and-classification.html#cb806-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Default, <span class="kw">aes</span>(<span class="dt">y=</span>default, <span class="dt">x=</span> balance)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb806-2"><a href="logistic-regression-and-classification.html#cb806-2"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;glm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">method.args =</span> <span class="kw">list</span>(<span class="dt">family=</span>binomial)) </span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-621-1.png" width="768" /></p>
 </div>
-<div id="logistic-regression-model" class="section level3 hasAnchor" number="8.1.3">
+<div id="logistic-regression-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.1.3</span> Logistic Regression Model<a href="logistic-regression-and-classification.html#logistic-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A logistic regression model uses a sigmoidal curve like the one we saw to model default probabilities, using balance as an explanatory variable.</p>
 <p>The model makes use of the function</p>
@@ -583,14 +540,14 @@ f(x) = \frac{e^x}{1+x^x},
 <p>i.e. <span class="math inline">\(\beta_0+\beta_1x_{i1} + \ldots \beta_px_{ip}= \text{log}\left(\frac{\pi_i}{1-\pi_i}\right).\)</span> (This is called the logit function and can be written <span class="math inline">\(\text{logit}(\pi_i)\)</span>.</p>
 <p>Instead of assuming that the expected response is a linear function of the explanatory variables, we are assuming that it is a function of a linear function of the explanatory variables.</p>
 </div>
-<div id="logistic-regression-model-for-default" class="section level3 hasAnchor" number="8.1.4">
+<div id="logistic-regression-model-for-default" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.1.4</span> Logistic Regression Model for Default<a href="logistic-regression-and-classification.html#logistic-regression-model-for-default" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb807"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb807-1"><a href="logistic-regression-and-classification.html#cb807-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Default, <span class="fu">aes</span>(<span class="at">y=</span>default, <span class="at">x=</span> balance)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.2</span>) <span class="sc">+</span> </span>
-<span id="cb807-2"><a href="logistic-regression-and-classification.html#cb807-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;glm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>, <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family=</span>binomial)) </span></code></pre></div>
+<div class="sourceCode" id="cb807"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb807-1"><a href="logistic-regression-and-classification.html#cb807-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Default, <span class="kw">aes</span>(<span class="dt">y=</span>default, <span class="dt">x=</span> balance)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb807-2"><a href="logistic-regression-and-classification.html#cb807-2"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;glm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">method.args =</span> <span class="kw">list</span>(<span class="dt">family=</span>binomial)) </span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-624-1.png" width="768" /></p>
 <p>To fit the logistic regression model in R, we use the function <code>glm</code>, instead of <code>lm</code>. The function is specified the same way as before, and we add <code>family = binomial(link = "logit")</code>.</p>
-<div class="sourceCode" id="cb808"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb808-1"><a href="logistic-regression-and-classification.html#cb808-1" aria-hidden="true" tabindex="-1"></a>CCDefault_M <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data=</span>Default, default <span class="sc">~</span> balance, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb808-2"><a href="logistic-regression-and-classification.html#cb808-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(CCDefault_M)</span></code></pre></div>
+<div class="sourceCode" id="cb808"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb808-1"><a href="logistic-regression-and-classification.html#cb808-1"></a>CCDefault_M &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="dt">data=</span>Default, default <span class="op">~</span><span class="st"> </span>balance, <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb808-2"><a href="logistic-regression-and-classification.html#cb808-2"></a><span class="kw">summary</span>(CCDefault_M)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = default ~ balance, family = binomial(link = &quot;logit&quot;), 
@@ -625,24 +582,24 @@ P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.65+0.0055\times\text{balance}}}{
 <li><p>For a $2,000 balance, the estimated default probability is <span class="math inline">\(\frac{e^{-10.65+0.0055(2000) }}{1+e^{-10.65+0.0055(2000)}} \approx 0.59\)</span></p></li>
 </ul>
 <p>We confirm these, using the <code>predict</code> command in R.</p>
-<div class="sourceCode" id="cb810"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb810-1"><a href="logistic-regression-and-classification.html#cb810-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(CCDefault_M, <span class="at">newdata=</span><span class="fu">data.frame</span>((<span class="at">balance=</span><span class="dv">1000</span>)), <span class="at">type=</span><span class="st">&quot;response&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb810"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb810-1"><a href="logistic-regression-and-classification.html#cb810-1"></a><span class="kw">predict</span>(CCDefault_M, <span class="dt">newdata=</span><span class="kw">data.frame</span>((<span class="dt">balance=</span><span class="dv">1000</span>)), <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span></code></pre></div>
 <pre><code>##           1 
 ## 0.005752145</code></pre>
-<div class="sourceCode" id="cb812"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb812-1"><a href="logistic-regression-and-classification.html#cb812-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(CCDefault_M, <span class="at">newdata=</span><span class="fu">data.frame</span>((<span class="at">balance=</span><span class="dv">1500</span>)), <span class="at">type=</span><span class="st">&quot;response&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb812"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb812-1"><a href="logistic-regression-and-classification.html#cb812-1"></a><span class="kw">predict</span>(CCDefault_M, <span class="dt">newdata=</span><span class="kw">data.frame</span>((<span class="dt">balance=</span><span class="dv">1500</span>)), <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span></code></pre></div>
 <pre><code>##          1 
 ## 0.08294762</code></pre>
-<div class="sourceCode" id="cb814"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb814-1"><a href="logistic-regression-and-classification.html#cb814-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(CCDefault_M, <span class="at">newdata=</span><span class="fu">data.frame</span>((<span class="at">balance=</span><span class="dv">2000</span>)), <span class="at">type=</span><span class="st">&quot;response&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb814"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb814-1"><a href="logistic-regression-and-classification.html#cb814-1"></a><span class="kw">predict</span>(CCDefault_M, <span class="dt">newdata=</span><span class="kw">data.frame</span>((<span class="dt">balance=</span><span class="dv">2000</span>)), <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span></code></pre></div>
 <pre><code>##         1 
 ## 0.5857694</code></pre>
 </div>
-<div id="where-do-the-bs-come-from" class="section level3 hasAnchor" number="8.1.5">
+<div id="where-do-the-bs-come-from" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.1.5</span> Where do the b’s come from?<a href="logistic-regression-and-classification.html#where-do-the-bs-come-from" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><p>Recall that for a quantitative response variable, the values of <span class="math inline">\(b_1, b_2, \ldots, b_p\)</span> are chosen in a way that minimizes <span class="math inline">\(\displaystyle\sum_{i=1}^n \left(y_i-(\beta_0+\beta_1x_{i1}+\ldots+\beta_px_{ip})^2\right)\)</span>.</p></li>
 <li><p>Least squares does not work well in this generalized setting. Instead, the b’s are calculated using a more advanced technique, known as <strong>maximum likelihood estimation</strong>.</p></li>
 </ul>
 </div>
-<div id="odds-and-odds-ratio" class="section level3 hasAnchor" number="8.1.6">
+<div id="odds-and-odds-ratio" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.1.6</span> Odds and Odds Ratio<a href="logistic-regression-and-classification.html#odds-and-odds-ratio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For an event with probability <span class="math inline">\(p\)</span>, the <strong>odds</strong> of the event occurring are <span class="math inline">\(\frac{p}{1-p}\)</span>.</p>
 <p>Examples:
@@ -662,7 +619,7 @@ P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.65+0.0055\times\text{balance}}}{
 <p>The odds ratio is <span class="math inline">\(\frac{\frac{1}{173}}{\frac{1.414}{1}}\approx 1:244.\)</span></p>
 <p>The odds of a default are about 244 times larger for a $2,000 payment than a $1,000 payment.</p>
 </div>
-<div id="interpretation-of-beta_1" class="section level3 hasAnchor" number="8.1.7">
+<div id="interpretation-of-beta_1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.1.7</span> Interpretation of <span class="math inline">\(\beta_1\)</span><a href="logistic-regression-and-classification.html#interpretation-of-beta_1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Consider the odds ratio for a case <span class="math inline">\(j\)</span> with explanatory variable <span class="math inline">\(x + 1\)</span>, compared to case <span class="math inline">\(i\)</span> with explanatory variable <span class="math inline">\(x\)</span>.</p>
 <p>That is <span class="math inline">\(\text{log}\left(\frac{\pi_i}{1-\pi_i}\right) = \beta_0+\beta_1x\)</span>, and
@@ -678,28 +635,28 @@ P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.65+0.0055\times\text{balance}}}{
 <p>For every $1,000 increase in balance, the odds of default are expected to multiply by a factor of <span class="math inline">\(e^{0.0055\times 1000}\approx 244\)</span>.</p>
 <p>Thus, the odds of default for a balance of $2,000 are estimated to be <span class="math inline">\(e^{0.0055\times 1000}\approx 244\)</span> times as great as the odds of default for a $1,000 balance. This matches our result when we actually calculated out the probabilities and odds.</p>
 </div>
-<div id="hypothesis-tests-in-logistic-regression" class="section level3 hasAnchor" number="8.1.8">
+<div id="hypothesis-tests-in-logistic-regression" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.1.8</span> Hypothesis Tests in Logistic Regression<a href="logistic-regression-and-classification.html#hypothesis-tests-in-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The p-value on the “balance” line of the regression output is associated with the null hypothesis <span class="math inline">\(\beta_1=0\)</span>, that is that there is no relationship between balance and the odds of defaulting on the payment.</p>
 <p>The fact that the p-value is so small tells us that there is strong evidence of a relationship between balance and odds of default.</p>
 </div>
-<div id="confidence-intervals-for-beta_1" class="section level3 hasAnchor" number="8.1.9">
+<div id="confidence-intervals-for-beta_1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.1.9</span> Confidence Intervals for <span class="math inline">\(\beta_1\)</span><a href="logistic-regression-and-classification.html#confidence-intervals-for-beta_1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb816"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb816-1"><a href="logistic-regression-and-classification.html#cb816-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(M, <span class="at">level =</span> <span class="fl">0.95</span>)</span></code></pre></div>
-<pre><code>##                  2.5 %      97.5 %
-## (Intercept)  1.1223897  1.93944769
-## pH          -0.2131573 -0.09144445</code></pre>
+<div class="sourceCode" id="cb816"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb816-1"><a href="logistic-regression-and-classification.html#cb816-1"></a><span class="kw">confint</span>(CCDefault_M, <span class="dt">level =</span> <span class="fl">0.95</span>)</span></code></pre></div>
+<pre><code>##                     2.5 %       97.5 %
+## (Intercept) -11.383288936 -9.966565064
+## balance       0.005078926  0.005943365</code></pre>
 <p>We are 95% confident that for each 1 dollar increase in credit card balance, the odds of default are expected to multiply by a factor between <span class="math inline">\(e^{0.00508}\approx 1.0051\)</span> and <span class="math inline">\(e^{0.00594}\approx 1.0060\)</span>.</p>
 <p>This is a profile-likelihood interval, which you can read more about <a href="https://rpubs.com/FJRubio/PLCIN">here</a>.</p>
 </div>
 </div>
-<div id="multiple-logistic-regression" class="section level2 hasAnchor" number="8.2">
+<div id="multiple-logistic-regression" class="section level2 hasAnchor">
 <h2><span class="header-section-number">8.2</span> Multiple Logistic Regression<a href="logistic-regression-and-classification.html#multiple-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="logistic-regression-models-with-multiple-explanatory-variables" class="section level3 hasAnchor" number="8.2.1">
+<div id="logistic-regression-models-with-multiple-explanatory-variables" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.2.1</span> Logistic Regression Models with Multiple Explanatory Variables<a href="logistic-regression-and-classification.html#logistic-regression-models-with-multiple-explanatory-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can also perform logistic regression in situations where there are multiple explanatory variables. We’ll estimate probability of default, using both balance and whether or not the person is a student (a categorical variable) as explanatory variables.</p>
-<div class="sourceCode" id="cb818"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb818-1"><a href="logistic-regression-and-classification.html#cb818-1" aria-hidden="true" tabindex="-1"></a>CCDefault_M2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data=</span>Default, default <span class="sc">~</span> balance <span class="sc">+</span> student, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb818-2"><a href="logistic-regression-and-classification.html#cb818-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(CCDefault_M2)</span></code></pre></div>
+<div class="sourceCode" id="cb818"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb818-1"><a href="logistic-regression-and-classification.html#cb818-1"></a>CCDefault_M2 &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="dt">data=</span>Default, default <span class="op">~</span><span class="st"> </span>balance <span class="op">+</span><span class="st"> </span>student, <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb818-2"><a href="logistic-regression-and-classification.html#cb818-2"></a><span class="kw">summary</span>(CCDefault_M2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = default ~ balance + student, family = binomial(link = &quot;logit&quot;), 
@@ -725,10 +682,10 @@ P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.65+0.0055\times\text{balance}}}{
 ## 
 ## Number of Fisher Scoring iterations: 8</code></pre>
 <p>The following graph gives an illustration of the model.</p>
-<div class="sourceCode" id="cb820"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb820-1"><a href="logistic-regression-and-classification.html#cb820-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Default, <span class="fu">aes</span>(<span class="at">y=</span>default, <span class="at">x=</span> balance, <span class="at">color=</span>student)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.2</span>) <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;glm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>, <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family=</span>binomial)) </span></code></pre></div>
+<div class="sourceCode" id="cb820"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb820-1"><a href="logistic-regression-and-classification.html#cb820-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span>Default, <span class="kw">aes</span>(<span class="dt">y=</span>default, <span class="dt">x=</span> balance, <span class="dt">color=</span>student)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;glm&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">method.args =</span> <span class="kw">list</span>(<span class="dt">family=</span>binomial)) </span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-631-1.png" width="672" /></p>
 </div>
-<div id="multiple-logistic-regression-interpretations" class="section level3 hasAnchor" number="8.2.2">
+<div id="multiple-logistic-regression-interpretations" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.2.2</span> Multiple Logistic Regression Interpretations<a href="logistic-regression-and-classification.html#multiple-logistic-regression-interpretations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The regression equation is:</p>
 <p><span class="math display">\[
@@ -740,18 +697,18 @@ P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.75+0.005738\times\text{balance}-
 <li><p>The odds of default for students are estimated to be <span class="math inline">\(e^{-0.7149} \approx 0.49\)</span> as high for students as non-students, assuming balance amount is held constant.</p></li>
 </ul>
 </div>
-<div id="hypothesis-tests-in-multiple-logistic-regression-model" class="section level3 hasAnchor" number="8.2.3">
+<div id="hypothesis-tests-in-multiple-logistic-regression-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.2.3</span> Hypothesis Tests in Multiple Logistic Regression Model<a href="logistic-regression-and-classification.html#hypothesis-tests-in-multiple-logistic-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><p>There is strong evidence of a relationship between balance and odds of default, after accounting for whether or not the person is a student.</p></li>
 <li><p>There is evidence that students are less likely to default than nonstudents, provided the balance on the card is the same.</p></li>
 </ul>
 </div>
-<div id="multiple-logistic-regression-model-with-interaction" class="section level3 hasAnchor" number="8.2.4">
+<div id="multiple-logistic-regression-model-with-interaction" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.2.4</span> Multiple Logistic Regression Model with Interaction<a href="logistic-regression-and-classification.html#multiple-logistic-regression-model-with-interaction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The previous model assumes the effect of balance on default probability is the same for students as for nonstudents. If we suspect that the effect of having a larger balance might be different for students than for nonstudents, then we could use a model with interaction between the balance and student variables.</p>
-<div class="sourceCode" id="cb821"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb821-1"><a href="logistic-regression-and-classification.html#cb821-1" aria-hidden="true" tabindex="-1"></a>CCDefault_M_Int <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data=</span>Default, default <span class="sc">~</span> balance <span class="sc">*</span> student, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb821-2"><a href="logistic-regression-and-classification.html#cb821-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(CCDefault_M_Int)</span></code></pre></div>
+<div class="sourceCode" id="cb821"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb821-1"><a href="logistic-regression-and-classification.html#cb821-1"></a>CCDefault_M_Int &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="dt">data=</span>Default, default <span class="op">~</span><span class="st"> </span>balance <span class="op">*</span><span class="st"> </span>student, <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb821-2"><a href="logistic-regression-and-classification.html#cb821-2"></a><span class="kw">summary</span>(CCDefault_M_Int)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = default ~ balance * student, family = binomial(link = &quot;logit&quot;), 
@@ -778,7 +735,7 @@ P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.75+0.005738\times\text{balance}-
 ## 
 ## Number of Fisher Scoring iterations: 8</code></pre>
 </div>
-<div id="interpretations-for-logistic-model-with-interaction" class="section level3 hasAnchor" number="8.2.5">
+<div id="interpretations-for-logistic-model-with-interaction" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.2.5</span> Interpretations for Logistic Model with Interaction<a href="logistic-regression-and-classification.html#interpretations-for-logistic-model-with-interaction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>The regression equation is:</li>
@@ -800,7 +757,7 @@ P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.87+0.0058\times\text{balance}}}{
 <li>Since estimate of the interaction effect is so small and the p-value on this estimate is large, it is plausible that there is no interaction at all. Thus, the simpler non-interaction model is preferable.</li>
 </ul>
 </div>
-<div id="logistic-regression-key-points" class="section level3 hasAnchor" number="8.2.6">
+<div id="logistic-regression-key-points" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.2.6</span> Logistic Regression Key Points<a href="logistic-regression-and-classification.html#logistic-regression-key-points" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><p><span class="math inline">\(Y\)</span> is a binary response variable.</p></li>
@@ -808,30 +765,25 @@ P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.87+0.0058\times\text{balance}}}{
 <li><p><span class="math inline">\(E(Y_i) = \pi_i = \frac{e^{\beta_0+\beta_1x_i + \ldots\beta_px_{ip}}}{1+e^{\beta_0+\beta_1x_i + \ldots\beta_px_{ip}}}\)</span></p></li>
 <li><p><span class="math inline">\(\beta_0+\beta_1x_i + \ldots\beta_px_{ip} = \text{log}\left(\frac{\pi_i}{1-\pi_i}\right)\)</span></p></li>
 <li><p>For quantitative <span class="math inline">\(x_j\)</span>, when all other explanatory variables are held constant, the odds of “success” multiply be a factor of <span class="math inline">\(e^{\beta_j}\)</span> for each 1 unit increase in <span class="math inline">\(x_j\)</span></p></li>
-<li><p>For categorical <span class="math inline">\(x_j\)</span>, when all other explanatory variables are held constant, the odds of “success” are <span class="math inline">\(e^\{beta_j}\)</span> times higher for category <span class="math inline">\(j\)</span> than for the “baseline category.”</p></li>
+<li><p>For categorical <span class="math inline">\(x_j\)</span>, when all other explanatory variables are held constant, the odds of “success” are <span class="math inline">\(e^{\beta_j}\)</span> times higher for category <span class="math inline">\(j\)</span> than for the “baseline category.”</p></li>
 <li><p>For models with interaction, we can only interpret <span class="math inline">\(\beta_j\)</span> when the values of all other explanatory variables are given (since the effect of <span class="math inline">\(x_j\)</span> depends on the other variables.)</p></li>
 </ul>
 </div>
 </div>
-<div id="assessing-a-classifiers-performance" class="section level2 hasAnchor" number="8.3">
+<div id="assessing-a-classifiers-performance" class="section level2 hasAnchor">
 <h2><span class="header-section-number">8.3</span> Assessing a Classifier’s Performance<a href="logistic-regression-and-classification.html#assessing-a-classifiers-performance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="measuring-prediction-accuracy" class="section level3 hasAnchor" number="8.3.1">
+<div id="measuring-prediction-accuracy" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.3.1</span> Measuring Prediction Accuracy<a href="logistic-regression-and-classification.html#measuring-prediction-accuracy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We’ve seen <span class="math inline">\(\text{RMSPE} = \sqrt{\displaystyle\sum_{i=1}^{n}{(\hat{y}_i-y_i)^2}}\)</span> used as a measure of predictive accuracy in a regression problem.</p>
-<p>Why might this not be the best measure of prediction accuracy in a classification problem (i.e. one with a binary response)?</p>
-</div>
-<div id="classification-accuracy" class="section level3 hasAnchor" number="8.3.2">
-<h3><span class="header-section-number">8.3.2</span> Classification Accuracy<a href="logistic-regression-and-classification.html#classification-accuracy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A common way to measure the accuracy of a classifier is to calculate the percentage of cases for which it correctly predicts the class, or category of the response variable.</p>
-<p>Let’s calculate classification accuracy for the logistic regression model.</p>
-<p>We’ll use cross-validation, by randomly witholding 1,000 of the 10,000 of the cases, on which we’ll make predictions.</p>
-<div class="sourceCode" id="cb823"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb823-1"><a href="logistic-regression-and-classification.html#cb823-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">08172022</span>)</span>
-<span id="cb823-2"><a href="logistic-regression-and-classification.html#cb823-2" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Default), <span class="dv">1000</span>)</span>
-<span id="cb823-3"><a href="logistic-regression-and-classification.html#cb823-3" aria-hidden="true" tabindex="-1"></a>Default_Test <span class="ot">&lt;-</span> Default[samp, ]</span>
-<span id="cb823-4"><a href="logistic-regression-and-classification.html#cb823-4" aria-hidden="true" tabindex="-1"></a>Default_Train <span class="ot">&lt;-</span> Default[<span class="sc">-</span>samp, ]</span></code></pre></div>
+<p>Just as we’ve done for models with quantitative variables, we’ll want to compare and assess the performance of models for predicting categorical responses. This might involve comparing llogistic regression models with different explanatory variables, or comparing a regression model to another technique such as a decision tree.</p>
+<p>Just as we did before, we’ll divide the data so that we can evaluate predictions on a subset of the data that was not used to fit the model.</p>
+<p>We’ll divide the credit card dataset into a set of 9,000 observations, on which we’ll fit our models and assess predictions on the remaining 1,000.</p>
+<div class="sourceCode" id="cb823"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb823-1"><a href="logistic-regression-and-classification.html#cb823-1"></a><span class="kw">set.seed</span>(<span class="dv">08172022</span>)</span>
+<span id="cb823-2"><a href="logistic-regression-and-classification.html#cb823-2"></a>samp &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Default), <span class="dv">1000</span>)</span>
+<span id="cb823-3"><a href="logistic-regression-and-classification.html#cb823-3"></a>Default_Test &lt;-<span class="st"> </span>Default[samp, ]</span>
+<span id="cb823-4"><a href="logistic-regression-and-classification.html#cb823-4"></a>Default_Train &lt;-<span class="st"> </span>Default[<span class="op">-</span>samp, ]</span></code></pre></div>
 <p>We fit the model with interaction to the training data:</p>
-<div class="sourceCode" id="cb824"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb824-1"><a href="logistic-regression-and-classification.html#cb824-1" aria-hidden="true" tabindex="-1"></a>LR_Default_M_Int <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data=</span>Default_Train, default <span class="sc">~</span> balance <span class="sc">*</span> student, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb824-2"><a href="logistic-regression-and-classification.html#cb824-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(LR_Default_M_Int)</span></code></pre></div>
+<div class="sourceCode" id="cb824"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb824-1"><a href="logistic-regression-and-classification.html#cb824-1"></a>LR_Default_M_Int &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="dt">data=</span>Default_Train, default <span class="op">~</span><span class="st"> </span>balance <span class="op">*</span><span class="st"> </span>student, <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb824-2"><a href="logistic-regression-and-classification.html#cb824-2"></a><span class="kw">summary</span>(LR_Default_M_Int)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = default ~ balance * student, family = binomial(link = &quot;logit&quot;), 
@@ -857,331 +809,351 @@ P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.87+0.0058\times\text{balance}}}{
 ## AIC: 1393.5
 ## 
 ## Number of Fisher Scoring iterations: 8</code></pre>
-</div>
-<div id="first-50-cases" class="section level3 hasAnchor" number="8.3.3">
-<h3><span class="header-section-number">8.3.3</span> First 50 Cases<a href="logistic-regression-and-classification.html#first-50-cases" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Let’s look at the predicted probability of default for the first 50 test cases, along with whether or not the person actually defaulted.</p>
-<div class="sourceCode" id="cb826"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb826-1"><a href="logistic-regression-and-classification.html#cb826-1" aria-hidden="true" tabindex="-1"></a>LR_Prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(LR_Default_M_Int, <span class="at">newdata=</span>Default_Test, <span class="at">type=</span><span class="st">&quot;response&quot;</span>)</span>
-<span id="cb826-2"><a href="logistic-regression-and-classification.html#cb826-2" aria-hidden="true" tabindex="-1"></a>LR_Predict_Default <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(LR_Prob <span class="sc">&gt;</span> <span class="fl">0.5</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
-<span id="cb826-3"><a href="logistic-regression-and-classification.html#cb826-3" aria-hidden="true" tabindex="-1"></a>Actual_Default <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(Default_Test<span class="sc">$</span>default<span class="sc">==</span><span class="dv">1</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
-<span id="cb826-4"><a href="logistic-regression-and-classification.html#cb826-4" aria-hidden="true" tabindex="-1"></a>LR_Res_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(LR_Prob, LR_Predict_Default, Actual_Default)</span>
-<span id="cb826-5"><a href="logistic-regression-and-classification.html#cb826-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(LR_Res_df, <span class="dv">50</span>)<span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(LR_Prob)))</span></code></pre></div>
+<p>We then use the model to estimate the probability of a person defaulting on their credit card payment.</p>
+<p>Information about 10 different credit card users, as well as the logistic regression estimate of their probability of default are shown below. The table also shows whether or not the user really defaulted on their payment.</p>
+<div class="sourceCode" id="cb826"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb826-1"><a href="logistic-regression-and-classification.html#cb826-1"></a>LR_Prob &lt;-<span class="st"> </span><span class="kw">predict</span>(LR_Default_M_Int, <span class="dt">newdata=</span>Default_Test, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>)</span>
+<span id="cb826-2"><a href="logistic-regression-and-classification.html#cb826-2"></a>Actual_Default &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(Default_Test<span class="op">$</span>default<span class="op">==</span><span class="dv">1</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
+<span id="cb826-3"><a href="logistic-regression-and-classification.html#cb826-3"></a>student &lt;-<span class="st"> </span>Default_Test<span class="op">$</span>student</span>
+<span id="cb826-4"><a href="logistic-regression-and-classification.html#cb826-4"></a>balance &lt;-<span class="st"> </span>Default_Test<span class="op">$</span>balance</span>
+<span id="cb826-5"><a href="logistic-regression-and-classification.html#cb826-5"></a>LR_Res_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(student, balance, LR_Prob, Actual_Default)</span>
+<span id="cb826-6"><a href="logistic-regression-and-classification.html#cb826-6"></a><span class="kw">kable</span>(<span class="kw">head</span>(LR_Res_df, <span class="dv">50</span>)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(LR_Prob)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">10</span>))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
 <th align="left"></th>
+<th align="left">student</th>
+<th align="right">balance</th>
 <th align="right">LR_Prob</th>
-<th align="left">LR_Predict_Default</th>
 <th align="left">Actual_Default</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left">2465</td>
-<td align="right">0.5400853</td>
+<td align="left">Yes</td>
+<td align="right">2026.864</td>
+<td align="right">0.54</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">1228</td>
+<td align="left">No</td>
+<td align="right">1682.201</td>
+<td align="right">0.26</td>
+<td align="left">No</td>
+</tr>
+<tr class="odd">
+<td align="left">6656</td>
+<td align="left">No</td>
+<td align="right">1551.028</td>
+<td align="right">0.14</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">1185</td>
+<td align="left">No</td>
+<td align="right">1541.813</td>
+<td align="right">0.13</td>
+<td align="left">No</td>
+</tr>
+<tr class="odd">
+<td align="left">9963</td>
+<td align="left">Yes</td>
+<td align="right">1635.175</td>
+<td align="right">0.12</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">6635</td>
+<td align="left">No</td>
+<td align="right">1434.128</td>
+<td align="right">0.07</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="left">9691</td>
+<td align="left">No</td>
+<td align="right">1391.318</td>
+<td align="right">0.06</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">5921</td>
+<td align="left">Yes</td>
+<td align="right">1513.542</td>
+<td align="right">0.06</td>
+<td align="left">No</td>
+</tr>
+<tr class="odd">
+<td align="left">9755</td>
+<td align="left">No</td>
+<td align="right">1233.619</td>
+<td align="right">0.02</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">7569</td>
+<td align="left">Yes</td>
+<td align="right">1294.286</td>
+<td align="right">0.02</td>
+<td align="left">No</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="decision-tree-classifier" class="section level3 hasAnchor">
+<h3><span class="header-section-number">8.3.2</span> Decision Tree Classifier<a href="logistic-regression-and-classification.html#decision-tree-classifier" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For comparison, let’s use a decision tree to predict whether a person will default.</p>
+<p>In a binary classification problem, we can treat a default as <span class="math inline">\(y=1\)</span> and non-default as <span class="math inline">\(y=0\)</span>, and grow the tree as we would in regression.</p>
+<p>The mean response in a node <span class="math inline">\(\bar{Y}\)</span>, which is equivalent to the proportion of people in the node who defaulted, can be interpreted as the probability of default.</p>
+<p>The first few splits of the tree are shown.</p>
+<div class="sourceCode" id="cb827"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb827-1"><a href="logistic-regression-and-classification.html#cb827-1"></a><span class="kw">library</span>(rpart)</span>
+<span id="cb827-2"><a href="logistic-regression-and-classification.html#cb827-2"></a><span class="kw">library</span>(rpart.plot)</span>
+<span id="cb827-3"><a href="logistic-regression-and-classification.html#cb827-3"></a><span class="co"># grow shorter tree for illustration</span></span>
+<span id="cb827-4"><a href="logistic-regression-and-classification.html#cb827-4"></a>tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(<span class="dt">data=</span>Default_Train, default<span class="op">~</span>balance <span class="op">+</span><span class="st"> </span>student, <span class="dt">cp=</span><span class="fl">0.005</span>)</span>
+<span id="cb827-5"><a href="logistic-regression-and-classification.html#cb827-5"></a><span class="kw">rpart.plot</span>(tree, <span class="dt">box.palette=</span><span class="st">&quot;RdBu&quot;</span>, <span class="dt">shadow.col=</span><span class="st">&quot;gray&quot;</span>, <span class="dt">nn=</span><span class="ot">TRUE</span>, <span class="dt">cex=</span><span class="dv">1</span>, <span class="dt">extra=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-636-1.png" width="672" /></p>
+<div class="sourceCode" id="cb828"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb828-1"><a href="logistic-regression-and-classification.html#cb828-1"></a><span class="co"># grow full tree</span></span>
+<span id="cb828-2"><a href="logistic-regression-and-classification.html#cb828-2"></a>tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(<span class="dt">data=</span>Default_Train, default<span class="op">~</span>balance <span class="op">+</span><span class="st"> </span>student)</span></code></pre></div>
+<div class="sourceCode" id="cb829"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb829-1"><a href="logistic-regression-and-classification.html#cb829-1"></a>Tree_Prob &lt;-<span class="st"> </span><span class="kw">predict</span>(tree, <span class="dt">newdata =</span> Default_Test) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>)</span></code></pre></div>
+<p>We add the decision tree probabilities to the table seen previously.</p>
+<div class="sourceCode" id="cb830"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb830-1"><a href="logistic-regression-and-classification.html#cb830-1"></a>LR_Res_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(student, balance, LR_Prob, Tree_Prob, Actual_Default)</span>
+<span id="cb830-2"><a href="logistic-regression-and-classification.html#cb830-2"></a><span class="kw">kable</span>(<span class="kw">head</span>(LR_Res_df, <span class="dv">50</span>)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(LR_Prob)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">10</span>))</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">student</th>
+<th align="right">balance</th>
+<th align="right">LR_Prob</th>
+<th align="right">Tree_Prob</th>
+<th align="left">Actual_Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2465</td>
+<td align="left">Yes</td>
+<td align="right">2026.864</td>
+<td align="right">0.54</td>
+<td align="right">0.77</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">1228</td>
+<td align="left">No</td>
+<td align="right">1682.201</td>
+<td align="right">0.26</td>
+<td align="right">0.16</td>
+<td align="left">No</td>
+</tr>
+<tr class="odd">
+<td align="left">6656</td>
+<td align="left">No</td>
+<td align="right">1551.028</td>
+<td align="right">0.14</td>
+<td align="right">0.16</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">1185</td>
+<td align="left">No</td>
+<td align="right">1541.813</td>
+<td align="right">0.13</td>
+<td align="right">0.16</td>
+<td align="left">No</td>
+</tr>
+<tr class="odd">
+<td align="left">9963</td>
+<td align="left">Yes</td>
+<td align="right">1635.175</td>
+<td align="right">0.12</td>
+<td align="right">0.16</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">6635</td>
+<td align="left">No</td>
+<td align="right">1434.128</td>
+<td align="right">0.07</td>
+<td align="right">0.01</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="left">9691</td>
+<td align="left">No</td>
+<td align="right">1391.318</td>
+<td align="right">0.06</td>
+<td align="right">0.01</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">5921</td>
+<td align="left">Yes</td>
+<td align="right">1513.542</td>
+<td align="right">0.06</td>
+<td align="right">0.16</td>
+<td align="left">No</td>
+</tr>
+<tr class="odd">
+<td align="left">9755</td>
+<td align="left">No</td>
+<td align="right">1233.619</td>
+<td align="right">0.02</td>
+<td align="right">0.01</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">7569</td>
+<td align="left">Yes</td>
+<td align="right">1294.286</td>
+<td align="right">0.02</td>
+<td align="right">0.01</td>
+<td align="left">No</td>
+</tr>
+</tbody>
+</table>
+<p>We see that the tree estimates that the first person has a 0.77 probability of defaulting on the payment, compared to an estimate of 0.54, given by the logistic regression model. On the other hand, the tree estimates only a 0.16 probability of the second person defaulting, compared to 0.26 for the logistic regression model.</p>
+</div>
+<div id="assessing-classifier-accuracy" class="section level3 hasAnchor">
+<h3><span class="header-section-number">8.3.3</span> Assessing Classifier Accuracy<a href="logistic-regression-and-classification.html#assessing-classifier-accuracy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We’ve seen <span class="math inline">\(\text{RMSPE} = \sqrt{\displaystyle\sum_{i=1}^{n}{(\hat{y}_i-y_i)^2}}\)</span> used as a measure of predictive accuracy in a regression problem.</p>
+<p>Since our outcome is not numeric, this is not a good measure of predictive accuracy in a classification problem. We’ll examine some alternatives we can use instead.</p>
+<p><strong>Classification Accuracy</strong></p>
+<p>One simple approach is calculate the proportion of credit card users classified correctly. If a person has model estimates a predicted probability of default greater than 0.5, the person is predicted to default, while if the probability estimate is less than 0.5, the person is predicted to not default.</p>
+<p>The table shows the prediction for each of the 10 users, using both logistic regression and the decision tree.</p>
+<div class="sourceCode" id="cb831"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb831-1"><a href="logistic-regression-and-classification.html#cb831-1"></a>LR_Pred &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(LR_Prob <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
+<span id="cb831-2"><a href="logistic-regression-and-classification.html#cb831-2"></a>Tree_Pred &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(Tree_Prob <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
+<span id="cb831-3"><a href="logistic-regression-and-classification.html#cb831-3"></a>LR_Res_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(student, balance, LR_Prob, Tree_Prob, LR_Pred,Tree_Pred, Actual_Default)</span>
+<span id="cb831-4"><a href="logistic-regression-and-classification.html#cb831-4"></a><span class="kw">kable</span>(<span class="kw">head</span>(LR_Res_df, <span class="dv">50</span>)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(LR_Prob)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">10</span>))</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">student</th>
+<th align="right">balance</th>
+<th align="right">LR_Prob</th>
+<th align="right">Tree_Prob</th>
+<th align="left">LR_Pred</th>
+<th align="left">Tree_Pred</th>
+<th align="left">Actual_Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2465</td>
+<td align="left">Yes</td>
+<td align="right">2026.864</td>
+<td align="right">0.54</td>
+<td align="right">0.77</td>
+<td align="left">Yes</td>
 <td align="left">Yes</td>
 <td align="left">No</td>
 </tr>
 <tr class="even">
 <td align="left">1228</td>
-<td align="right">0.2570897</td>
+<td align="left">No</td>
+<td align="right">1682.201</td>
+<td align="right">0.26</td>
+<td align="right">0.16</td>
+<td align="left">No</td>
 <td align="left">No</td>
 <td align="left">No</td>
 </tr>
 <tr class="odd">
 <td align="left">6656</td>
-<td align="right">0.1350159</td>
+<td align="left">No</td>
+<td align="right">1551.028</td>
+<td align="right">0.14</td>
+<td align="right">0.16</td>
+<td align="left">No</td>
 <td align="left">No</td>
 <td align="left">No</td>
 </tr>
 <tr class="even">
 <td align="left">1185</td>
-<td align="right">0.1286163</td>
+<td align="left">No</td>
+<td align="right">1541.813</td>
+<td align="right">0.13</td>
+<td align="right">0.16</td>
+<td align="left">No</td>
 <td align="left">No</td>
 <td align="left">No</td>
 </tr>
 <tr class="odd">
 <td align="left">9963</td>
-<td align="right">0.1160190</td>
+<td align="left">Yes</td>
+<td align="right">1635.175</td>
+<td align="right">0.12</td>
+<td align="right">0.16</td>
+<td align="left">No</td>
 <td align="left">No</td>
 <td align="left">No</td>
 </tr>
 <tr class="even">
 <td align="left">6635</td>
-<td align="right">0.0713025</td>
+<td align="left">No</td>
+<td align="right">1434.128</td>
+<td align="right">0.07</td>
+<td align="right">0.01</td>
+<td align="left">No</td>
 <td align="left">No</td>
 <td align="left">Yes</td>
 </tr>
 <tr class="odd">
-<td align="left">5921</td>
-<td align="right">0.0623171</td>
+<td align="left">9691</td>
+<td align="left">No</td>
+<td align="right">1391.318</td>
+<td align="right">0.06</td>
+<td align="right">0.01</td>
+<td align="left">No</td>
 <td align="left">No</td>
 <td align="left">No</td>
 </tr>
 <tr class="even">
-<td align="left">9691</td>
-<td align="right">0.0558990</td>
+<td align="left">5921</td>
+<td align="left">Yes</td>
+<td align="right">1513.542</td>
+<td align="right">0.06</td>
+<td align="right">0.16</td>
+<td align="left">No</td>
 <td align="left">No</td>
 <td align="left">No</td>
 </tr>
 <tr class="odd">
 <td align="left">9755</td>
-<td align="right">0.0222295</td>
+<td align="left">No</td>
+<td align="right">1233.619</td>
+<td align="right">0.02</td>
+<td align="right">0.01</td>
+<td align="left">No</td>
 <td align="left">No</td>
 <td align="left">No</td>
 </tr>
 <tr class="even">
 <td align="left">7569</td>
-<td align="right">0.0191176</td>
+<td align="left">Yes</td>
+<td align="right">1294.286</td>
+<td align="right">0.02</td>
+<td align="right">0.01</td>
 <td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">9435</td>
-<td align="right">0.0129212</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">1290</td>
-<td align="right">0.0129187</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">7023</td>
-<td align="right">0.0112015</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">2222</td>
-<td align="right">0.0102643</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">6591</td>
-<td align="right">0.0097522</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">3674</td>
-<td align="right">0.0082435</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">6764</td>
-<td align="right">0.0059578</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">7848</td>
-<td align="right">0.0058386</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">7491</td>
-<td align="right">0.0055477</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">9386</td>
-<td align="right">0.0053516</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">3022</td>
-<td align="right">0.0038748</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">8081</td>
-<td align="right">0.0033171</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">4598</td>
-<td align="right">0.0030966</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">8204</td>
-<td align="right">0.0025254</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">4023</td>
-<td align="right">0.0024937</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">2962</td>
-<td align="right">0.0020771</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">1792</td>
-<td align="right">0.0020008</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">9722</td>
-<td align="right">0.0019758</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">6579</td>
-<td align="right">0.0014153</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">5295</td>
-<td align="right">0.0009563</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">576</td>
-<td align="right">0.0008414</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">27</td>
-<td align="right">0.0006303</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">6702</td>
-<td align="right">0.0006275</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">2047</td>
-<td align="right">0.0005230</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">742</td>
-<td align="right">0.0004324</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">1253</td>
-<td align="right">0.0003789</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">2226</td>
-<td align="right">0.0003423</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">5409</td>
-<td align="right">0.0002650</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">4282</td>
-<td align="right">0.0002322</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">6298</td>
-<td align="right">0.0002287</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">2547</td>
-<td align="right">0.0002225</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">5206</td>
-<td align="right">0.0002186</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">2213</td>
-<td align="right">0.0001745</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">1215</td>
-<td align="right">0.0001467</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">8807</td>
-<td align="right">0.0001466</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">9790</td>
-<td align="right">0.0001379</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">6578</td>
-<td align="right">0.0000895</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">9977</td>
-<td align="right">0.0000479</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">9808</td>
-<td align="right">0.0000192</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">63</td>
-<td align="right">0.0000127</td>
 <td align="left">No</td>
 <td align="left">No</td>
 </tr>
 </tbody>
 </table>
-<p>What percentage of these 50 cases did the logistic regression model classify correctly?</p>
+<p>Notice that although the probabilities differ, the logistic regression model and classification tree give the same predictions for these ten cases. Both correctly predict 8 out of the 10 cases, but mistakenly predict the first person to default, when they didn’t, and mistakenly predict that the sixth person would not default when they did.</p>
+<p>We’ll check the classification accuracy for the model and the tree.</p>
+<div class="sourceCode" id="cb832"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb832-1"><a href="logistic-regression-and-classification.html#cb832-1"></a><span class="kw">sum</span>(LR_Pred <span class="op">==</span><span class="st"> </span>Actual_Default)<span class="op">/</span><span class="dv">1000</span></span></code></pre></div>
+<pre><code>## [1] 0.972</code></pre>
+<div class="sourceCode" id="cb834"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb834-1"><a href="logistic-regression-and-classification.html#cb834-1"></a><span class="kw">sum</span>(Tree_Pred <span class="op">==</span><span class="st"> </span>Actual_Default)<span class="op">/</span><span class="dv">1000</span></span></code></pre></div>
+<pre><code>## [1] 0.971</code></pre>
+<p>We see that the two techniques are each right approximately 97% of the time.</p>
+<p>This may not really be as good as it sounds. Can you think of a very simple classification strategy that would achieve a similarly impressive predictive accuracy on these data?</p>
 </div>
-<div id="confusion-matrix" class="section level3 hasAnchor" number="8.3.4">
+<div id="confusion-matrix" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.3.4</span> Confusion Matrix<a href="logistic-regression-and-classification.html#confusion-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In addition to assessing overall accuracy, it is sometimes helpful to assess how well models are able to predict outcomes in each class. For example, how accurately can a model detect people who do actually default on their payments?</p>
 <p>A <strong>confusion matrix</strong> is a two-by-two table displaying the number of cases predicted in each category as columns, and the number of cases actually in each category as rows</p>
 <table>
 <thead>
@@ -1194,23 +1166,20 @@ P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.87+0.0058\times\text{balance}}}{
 <tbody>
 <tr class="odd">
 <td>Predicted Negative</td>
-<td>True Negative</td>
-<td>False Negative</td>
+<td># True Negative</td>
+<td># False Negative</td>
 </tr>
 <tr class="even">
 <td>Predicted Positive</td>
-<td>False Positive</td>
-<td>True Positive</td>
+<td># False Positive</td>
+<td># True Positive</td>
 </tr>
 </tbody>
 </table>
-<p>Create a confusion matrix for the first 50 cases.</p>
-</div>
-<div id="full-test-data-confusion-matrix" class="section level3 hasAnchor" number="8.3.5">
-<h3><span class="header-section-number">8.3.5</span> Full Test Data Confusion Matrix<a href="logistic-regression-and-classification.html#full-test-data-confusion-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Now, let’s look at the confusion matrix for all 1,000 test cases.</p>
-<div class="sourceCode" id="cb827"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb827-1"><a href="logistic-regression-and-classification.html#cb827-1" aria-hidden="true" tabindex="-1"></a>LR_Predict_Default <span class="ot">&lt;-</span> <span class="fu">factor</span>(LR_Predict_Default) </span>
-<span id="cb827-2"><a href="logistic-regression-and-classification.html#cb827-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>( <span class="at">data =</span>LR_Predict_Default, <span class="at">reference=</span><span class="fu">factor</span>(Actual_Default) , <span class="at">positive=</span><span class="st">&quot;Yes&quot;</span>)</span></code></pre></div>
+<p>The <code>confusionMatrix</code> matrix command in R returns the confusion matrix for all 1,000 test cases.</p>
+<p>Let’s look at the confusion matrix for all 1,000 test cases. The <code>data</code> argument is the predicted outcome, and the <code>reference</code> argument is the true outcome. The <code>positive</code> argument is the category that we’ll classify as a positive.</p>
+<p><strong>Logistic Regression Confusion Matrix</strong></p>
+<div class="sourceCode" id="cb836"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb836-1"><a href="logistic-regression-and-classification.html#cb836-1"></a><span class="kw">confusionMatrix</span>(<span class="dt">data=</span>LR_Pred, <span class="dt">reference=</span><span class="kw">factor</span>(Actual_Default) , <span class="dt">positive=</span><span class="st">&quot;Yes&quot;</span>)</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -1238,451 +1207,12 @@ P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.87+0.0058\times\text{balance}}}{
 ##                                           
 ##        &#39;Positive&#39; Class : Yes             
 ## </code></pre>
-</div>
-<div id="decision-tree-classifier" class="section level3 hasAnchor" number="8.3.6">
-<h3><span class="header-section-number">8.3.6</span> Decision Tree Classifier<a href="logistic-regression-and-classification.html#decision-tree-classifier" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>For comparison, let’s use a decision tree to predict whether a person will default.</p>
-<p>In a binary classification problem, we can treat a default as <span class="math inline">\(y=1\)</span> and non-default as <span class="math inline">\(y=0\)</span>, and grow the tree as we would in regression.</p>
-<p>The mean response in a node <span class="math inline">\(\bar{Y}\)</span> can be interpreted as the probability of default.</p>
-<p>The first few splits of the tree are shown.</p>
-<div class="sourceCode" id="cb829"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb829-1"><a href="logistic-regression-and-classification.html#cb829-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
-<span id="cb829-2"><a href="logistic-regression-and-classification.html#cb829-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
-<span id="cb829-3"><a href="logistic-regression-and-classification.html#cb829-3" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(<span class="at">data=</span>Default_Train, default<span class="sc">~</span>balance <span class="sc">+</span> student, <span class="at">cp=</span><span class="fl">0.005</span>)</span>
-<span id="cb829-4"><a href="logistic-regression-and-classification.html#cb829-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree, <span class="at">box.palette=</span><span class="st">&quot;RdBu&quot;</span>, <span class="at">shadow.col=</span><span class="st">&quot;gray&quot;</span>, <span class="at">nn=</span><span class="cn">TRUE</span>, <span class="at">cex=</span><span class="dv">1</span>, <span class="at">extra=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-637-1.png" width="672" /></p>
-<div class="sourceCode" id="cb830"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb830-1"><a href="logistic-regression-and-classification.html#cb830-1" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(<span class="at">data=</span>Default_Train, default<span class="sc">~</span>balance <span class="sc">+</span> student)</span></code></pre></div>
-<div class="sourceCode" id="cb831"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb831-1"><a href="logistic-regression-and-classification.html#cb831-1" aria-hidden="true" tabindex="-1"></a>Tree_Prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree, <span class="at">newdata =</span> Default_Test)</span>
-<span id="cb831-2"><a href="logistic-regression-and-classification.html#cb831-2" aria-hidden="true" tabindex="-1"></a>Tree_Pred_Default <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(Tree_Prob <span class="sc">&gt;</span> <span class="fl">0.5</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
-<span id="cb831-3"><a href="logistic-regression-and-classification.html#cb831-3" aria-hidden="true" tabindex="-1"></a>LR_Res_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(LR_Prob, LR_Predict_Default, Tree_Prob, Tree_Pred_Default, Actual_Default)</span>
-<span id="cb831-4"><a href="logistic-regression-and-classification.html#cb831-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(LR_Res_df, <span class="dv">50</span>)<span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(LR_Prob)))</span></code></pre></div>
-<table>
-<colgroup>
-<col width="6%" />
-<col width="12%" />
-<col width="24%" />
-<col width="12%" />
-<col width="23%" />
-<col width="19%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left"></th>
-<th align="right">LR_Prob</th>
-<th align="left">LR_Predict_Default</th>
-<th align="right">Tree_Prob</th>
-<th align="left">Tree_Pred_Default</th>
-<th align="left">Actual_Default</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">2465</td>
-<td align="right">0.5400853</td>
-<td align="left">Yes</td>
-<td align="right">0.7745098</td>
-<td align="left">Yes</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">1228</td>
-<td align="right">0.2570897</td>
-<td align="left">No</td>
-<td align="right">0.1585557</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">6656</td>
-<td align="right">0.1350159</td>
-<td align="left">No</td>
-<td align="right">0.1585557</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">1185</td>
-<td align="right">0.1286163</td>
-<td align="left">No</td>
-<td align="right">0.1585557</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">9963</td>
-<td align="right">0.1160190</td>
-<td align="left">No</td>
-<td align="right">0.1585557</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">6635</td>
-<td align="right">0.0713025</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">Yes</td>
-</tr>
-<tr class="odd">
-<td align="left">5921</td>
-<td align="right">0.0623171</td>
-<td align="left">No</td>
-<td align="right">0.1585557</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">9691</td>
-<td align="right">0.0558990</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">9755</td>
-<td align="right">0.0222295</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">7569</td>
-<td align="right">0.0191176</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">9435</td>
-<td align="right">0.0129212</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">1290</td>
-<td align="right">0.0129187</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">7023</td>
-<td align="right">0.0112015</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">2222</td>
-<td align="right">0.0102643</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">6591</td>
-<td align="right">0.0097522</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">3674</td>
-<td align="right">0.0082435</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">6764</td>
-<td align="right">0.0059578</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">7848</td>
-<td align="right">0.0058386</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">7491</td>
-<td align="right">0.0055477</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">9386</td>
-<td align="right">0.0053516</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">3022</td>
-<td align="right">0.0038748</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">8081</td>
-<td align="right">0.0033171</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">4598</td>
-<td align="right">0.0030966</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">8204</td>
-<td align="right">0.0025254</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">4023</td>
-<td align="right">0.0024937</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">2962</td>
-<td align="right">0.0020771</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">1792</td>
-<td align="right">0.0020008</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">9722</td>
-<td align="right">0.0019758</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">6579</td>
-<td align="right">0.0014153</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">5295</td>
-<td align="right">0.0009563</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">576</td>
-<td align="right">0.0008414</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">27</td>
-<td align="right">0.0006303</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">6702</td>
-<td align="right">0.0006275</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">2047</td>
-<td align="right">0.0005230</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">742</td>
-<td align="right">0.0004324</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">1253</td>
-<td align="right">0.0003789</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">2226</td>
-<td align="right">0.0003423</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">5409</td>
-<td align="right">0.0002650</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">4282</td>
-<td align="right">0.0002322</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">6298</td>
-<td align="right">0.0002287</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">2547</td>
-<td align="right">0.0002225</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">5206</td>
-<td align="right">0.0002186</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">2213</td>
-<td align="right">0.0001745</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">1215</td>
-<td align="right">0.0001467</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">8807</td>
-<td align="right">0.0001466</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">9790</td>
-<td align="right">0.0001379</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">6578</td>
-<td align="right">0.0000895</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">9977</td>
-<td align="right">0.0000479</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">9808</td>
-<td align="right">0.0000192</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">63</td>
-<td align="right">0.0000127</td>
-<td align="left">No</td>
-<td align="right">0.0065351</td>
-<td align="left">No</td>
-<td align="left">No</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="tree-confusion-matrix" class="section level3 hasAnchor" number="8.3.7">
-<h3><span class="header-section-number">8.3.7</span> Tree Confusion Matrix<a href="logistic-regression-and-classification.html#tree-confusion-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb832"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb832-1"><a href="logistic-regression-and-classification.html#cb832-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data is predicted class</span></span>
-<span id="cb832-2"><a href="logistic-regression-and-classification.html#cb832-2" aria-hidden="true" tabindex="-1"></a><span class="co"># reference is actual class</span></span>
-<span id="cb832-3"><a href="logistic-regression-and-classification.html#cb832-3" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>( <span class="at">data =</span> Tree_Pred_Default , <span class="at">reference=</span> Actual_Default, <span class="st">&quot;Yes&quot;</span>)</span></code></pre></div>
+<p>Out of 965 people who did not default, the logistic regression model correctly predicted 957 of them.</p>
+<p>Out of 35 people that did default, the model correctly predicted 15 of them.</p>
+<p><strong>Tree Confusion Matrix</strong></p>
+<div class="sourceCode" id="cb838"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb838-1"><a href="logistic-regression-and-classification.html#cb838-1"></a><span class="co"># data is predicted class</span></span>
+<span id="cb838-2"><a href="logistic-regression-and-classification.html#cb838-2"></a><span class="co"># reference is actual class</span></span>
+<span id="cb838-3"><a href="logistic-regression-and-classification.html#cb838-3"></a><span class="kw">confusionMatrix</span>( <span class="dt">data =</span> Tree_Pred , <span class="dt">reference=</span> Actual_Default, <span class="st">&quot;Yes&quot;</span>)</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -1710,22 +1240,15 @@ P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.87+0.0058\times\text{balance}}}{
 ##                                           
 ##        &#39;Positive&#39; Class : Yes             
 ## </code></pre>
-<p><strong>Question:</strong> Which classifier, the logistic regression model or decision tree, appears to do better at predicting default?</p>
-<p><strong>Question:</strong> Why might a prediction accuracy rate of over 97% on these data not be as impressive as it sounds?</p>
+<p>Out of 965 people who did not default, the logistic regression model correctly predicted 960 of them.</p>
+<p>Out of 35 people that did default, the model correctly predicted 11 of them.</p>
+<p>Notice that the tree was less likely to predict a person to default in general, returning only 16 positive predictions, compared to 23 for the logistic regression model.</p>
 </div>
-<div id="more-on-accuracy-rate" class="section level3 hasAnchor" number="8.3.8">
-<h3><span class="header-section-number">8.3.8</span> More on Accuracy Rate<a href="logistic-regression-and-classification.html#more-on-accuracy-rate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Although a ~97% accuracy rate seems impressive recall the percentage of defaults in the dataset.</p>
-<div class="sourceCode" id="cb834"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb834-1"><a href="logistic-regression-and-classification.html#cb834-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Default<span class="sc">$</span>default)</span></code></pre></div>
-<pre><code>## [1] 0.0333</code></pre>
-<p>Thus, if we simply predicted that everyone would not default, we would achieve 96.67% accuracy, without providing any useful information.</p>
-<p>Classification accuracy rate can be misleading, especially in cases of unbalanced data, where one class is far more prevelant than the other.</p>
-</div>
-<div id="sensitivity-and-specificity" class="section level3 hasAnchor" number="8.3.9">
-<h3><span class="header-section-number">8.3.9</span> Sensitivity and Specificity<a href="logistic-regression-and-classification.html#sensitivity-and-specificity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="sensitivity-and-specificity" class="section level3 hasAnchor">
+<h3><span class="header-section-number">8.3.5</span> Sensitivity and Specificity<a href="logistic-regression-and-classification.html#sensitivity-and-specificity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <strong>sensitivity</strong> of a classifier is the proportion of all positive cases that the model correctly identifies as positive. (i.e. probability model says “positive” given actually is positive.)</p>
 <p><span class="math display">\[
-\text{Sensitivity} = \frac{\text{True Positive}}{\text{True Positive} + \text{False Negative}} = \frac{\text{Predicted Positives}}{\text{Actual Positives}}
+\text{Sensitivity} = \frac{\text{True Positive}}{\text{True Positive} + \text{False Negative}} = \frac{\text{Correctly Predicted Positives}}{\text{Total Number of Actual Positives}}
 \]</span></p>
 <p><strong>LR Sensitivity</strong></p>
 <p><span class="math display">\[
@@ -1737,7 +1260,7 @@ P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.87+0.0058\times\text{balance}}}{
 \]</span></p>
 <p>The <strong>specificity</strong> of a classifier is the proportion of all negative cases that the model correctly identifies as negative (i.e probabiltiy model says “negative” given truly is negative.)</p>
 <p><span class="math display">\[
-\text{Specificity} = \frac{\text{True Negative}}{\text{True Negative} + \text{False Positive}}= \frac{\text{Predicted Negatives}}{\text{Actual Negatives}}
+\text{Specificity} = \frac{\text{True Negative}}{\text{True Negative} + \text{False Positive}}= \frac{\text{Correctly Predicted Negatives}}{\text{Total Number of Actual Negatives}}
 \]</span></p>
 <p><strong>LR Specificity</strong></p>
 <p><span class="math display">\[
@@ -1750,11 +1273,38 @@ P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.87+0.0058\times\text{balance}}}{
 <p>In a given situation, we should think about the cost of a false negative vs a false positive when determining whether to place more weight on sensitivity or specificity. For example, “is it worse to tell a patient they tested positive for a disease when they really don’t have it, or to not tell them they tested positive when they really do have it?”</p>
 </div>
 </div>
-<div id="receiver-operating-characteristic-curve" class="section level2 hasAnchor" number="8.4">
+<div id="receiver-operating-characteristic-curve" class="section level2 hasAnchor">
 <h2><span class="header-section-number">8.4</span> Receiver Operating Characteristic Curve<a href="logistic-regression-and-classification.html#receiver-operating-characteristic-curve" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="roc-curve" class="section level3 hasAnchor" number="8.4.1">
-<h3><span class="header-section-number">8.4.1</span> ROC Curve<a href="logistic-regression-and-classification.html#roc-curve" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A receiver operating characteristic curve tells us how well a predictor is able to separate positive cases from negative cases.</p>
+<div id="separating-s-and--s" class="section level3 hasAnchor">
+<h3><span class="header-section-number">8.4.1</span> Separating +’s and -’s<a href="logistic-regression-and-classification.html#separating-s-and--s" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The prediction accuracy, sensitivity, and specificity measures, seen in the previous section are based only on the predicted outcome, without considering the probability estimates themselves. These techniques treat a 0.49 estimated probability of default the same as a 0.01 estimated probability.</p>
+<p>We would hope to see more defaults among people with high estimated default probabilities than low ones. To assess this, we can list the people in order from highest to lowest probability estimates and see where the true defaults lie.</p>
+<p>For example, consider the following fictional probability estimates produced by two different classifiers (models) for eight credit card users:</p>
+<p><strong>Classifier 1</strong></p>
+<pre><code>##   Classifier1_Probability_Estimate True_Outcome
+## 1                             0.90          Yes
+## 2                             0.75          Yes
+## 3                             0.60           No
+## 4                             0.40          Yes
+## 5                             0.30           No
+## 6                             0.15           No
+## 7                             0.05           No
+## 8                             0.01           No</code></pre>
+<p><strong>Classifier 2</strong></p>
+<pre><code>##   Classifier2_Probability_Estimate True_Outcome
+## 1                             0.80          Yes
+## 2                             0.70           No
+## 3                             0.55           No
+## 4                             0.40          Yes
+## 5                             0.35           No
+## 6                             0.15           No
+## 7                             0.10          Yes
+## 8                             0.02           No</code></pre>
+<p>Classifier 1 is better able to separate the “Yes’s” from “No’s” as the three true “Yes’s” are among the four highest probabilities. Classifier 2 is less able to separate the true “Yes’s” from true “No’s.”</p>
+</div>
+<div id="roc-curve" class="section level3 hasAnchor">
+<h3><span class="header-section-number">8.4.2</span> ROC Curve<a href="logistic-regression-and-classification.html#roc-curve" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A receiver operating characteristic (ROC) curve tells us how well a predictor is able to separate positive cases from negative cases.</p>
 <p>The blog (Toward Data Science) [<a href="https://towardsdatascience.com/applications-of-different-parts-of-an-roc-curve-b534b1aafb68" class="uri">https://towardsdatascience.com/applications-of-different-parts-of-an-roc-curve-b534b1aafb68</a>] writes</p>
 <p>“Receiver Operating Characteristic (ROC) curve is one of the most common graphical tools to diagnose the ability of a binary classifier, independent of the inherent classification algorithm. The ROC analysis has been used in many fields including medicine, radiology, biometrics, natural hazards forecasting, meteorology, model performance assessment, and other areas for many decades and is increasingly used in machine learning and data mining research [1]. If you are a Data Scientist, you might be using it on a daily basis.”</p>
 <p>The ROC curve plots the true positive (or hit) rate against the false positive rate (false alarm) rate, as the cutoff for a positive classification varies.</p>
@@ -1762,26 +1312,7 @@ P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.87+0.0058\times\text{balance}}}{
 <p>The higher the curve, the better the predictor is able to separate positive cases from negative ones.</p>
 <p>Predictions made totally at random would be expected to yield a diagonal ROC curve.</p>
 </div>
-<div id="lr-and-tree-roc-curves" class="section level3 hasAnchor" number="8.4.2">
-<h3><span class="header-section-number">8.4.2</span> LR and Tree ROC Curves<a href="logistic-regression-and-classification.html#lr-and-tree-roc-curves" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb836"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb836-1"><a href="logistic-regression-and-classification.html#cb836-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
-<span id="cb836-2"><a href="logistic-regression-and-classification.html#cb836-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(verification)</span>
-<span id="cb836-3"><a href="logistic-regression-and-classification.html#cb836-3" aria-hidden="true" tabindex="-1"></a><span class="fu">roc.plot</span>(<span class="at">x=</span>Default_Test<span class="sc">$</span>default, <span class="at">pred =</span> LR_Prob)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-643-1.png" width="672" /></p>
-<div class="sourceCode" id="cb837"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb837-1"><a href="logistic-regression-and-classification.html#cb837-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auc</span>(<span class="at">response=</span>Default_Test<span class="sc">$</span>default, <span class="at">predictor =</span> LR_Prob)</span></code></pre></div>
-<pre><code>## Area under the curve: 0.918</code></pre>
-<div class="sourceCode" id="cb839"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb839-1"><a href="logistic-regression-and-classification.html#cb839-1" aria-hidden="true" tabindex="-1"></a><span class="fu">roc.plot</span>(<span class="at">x=</span>Default_Test<span class="sc">$</span>default, <span class="at">pred =</span> Tree_Prob)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-645-1.png" width="672" /></p>
-<div class="sourceCode" id="cb840"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb840-1"><a href="logistic-regression-and-classification.html#cb840-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auc</span>(<span class="at">response=</span>Default_Test<span class="sc">$</span>default, <span class="at">predictor =</span> Tree_Prob)</span></code></pre></div>
-<pre><code>## Area under the curve: 0.8176</code></pre>
-<div class="sourceCode" id="cb842"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb842-1"><a href="logistic-regression-and-classification.html#cb842-1" aria-hidden="true" tabindex="-1"></a>RandProb <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb843"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb843-1"><a href="logistic-regression-and-classification.html#cb843-1" aria-hidden="true" tabindex="-1"></a><span class="fu">roc.plot</span>(<span class="at">x=</span>Default_Test<span class="sc">$</span>default, <span class="at">pred =</span> RandProb)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-648-1.png" width="672" /></p>
-<div class="sourceCode" id="cb844"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb844-1"><a href="logistic-regression-and-classification.html#cb844-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auc</span>(<span class="at">response=</span>Default_Test<span class="sc">$</span>default, <span class="at">predictor =</span> RandProb)</span></code></pre></div>
-<pre><code>## Area under the curve: 0.563</code></pre>
-<p>Even though a model that assigns predictions randomly, with 97% predicted as negatives will have a high accuracy rate, it will yield a poor ROC curve indicating an inability to separate positive cases from negative ones.</p>
-</div>
-<div id="constructing-roc-curve" class="section level3 hasAnchor" number="8.4.3">
+<div id="constructing-roc-curve" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.4.3</span> Constructing ROC Curve<a href="logistic-regression-and-classification.html#constructing-roc-curve" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol style="list-style-type: decimal">
 <li>Order the probabilities from highest to lowest.<br />
@@ -1796,14 +1327,14 @@ P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.87+0.0058\times\text{balance}}}{
 <li>Continue, by classifiying one more case as positive in each step.</li>
 </ol>
 </div>
-<div id="construct-roc-example" class="section level3 hasAnchor" number="8.4.4">
+<div id="construct-roc-example" class="section level3 hasAnchor">
 <h3><span class="header-section-number">8.4.4</span> Construct ROC Example<a href="logistic-regression-and-classification.html#construct-roc-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s practice constructing an ROC curve for a small set of probability estimates.</p>
-<div class="sourceCode" id="cb846"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb846-1"><a href="logistic-regression-and-classification.html#cb846-1" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.9</span>, <span class="fl">0.8</span>, <span class="fl">0.7</span>, <span class="fl">0.65</span>, <span class="fl">0.45</span>, <span class="fl">0.3</span>, <span class="fl">0.2</span>, <span class="fl">0.15</span>, <span class="fl">0.1</span>, <span class="fl">0.05</span>)</span>
-<span id="cb846-2"><a href="logistic-regression-and-classification.html#cb846-2" aria-hidden="true" tabindex="-1"></a>Actual <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;+&quot;</span>, <span class="st">&quot;-&quot;</span>, <span class="st">&quot;+&quot;</span>, <span class="st">&quot;+&quot;</span>, <span class="st">&quot;-&quot;</span>, <span class="st">&quot;-&quot;</span>, <span class="st">&quot;-&quot;</span>, <span class="st">&quot;-&quot;</span>, <span class="st">&quot;+&quot;</span>, <span class="st">&quot;-&quot;</span>)</span>
-<span id="cb846-3"><a href="logistic-regression-and-classification.html#cb846-3" aria-hidden="true" tabindex="-1"></a>Hit_Rate <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;1/4&quot;</span>, <span class="st">&quot;1/4&quot;</span>, <span class="st">&quot;2/4&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
-<span id="cb846-4"><a href="logistic-regression-and-classification.html#cb846-4" aria-hidden="true" tabindex="-1"></a>FA_Rate <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;0/6&quot;</span>, <span class="st">&quot;1/6&quot;</span>, <span class="st">&quot;1/6&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
-<span id="cb846-5"><a href="logistic-regression-and-classification.html#cb846-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">data.frame</span>(prob, Actual, Hit_Rate, FA_Rate))</span></code></pre></div>
+<div class="sourceCode" id="cb842"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb842-1"><a href="logistic-regression-and-classification.html#cb842-1"></a>prob &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.9</span>, <span class="fl">0.8</span>, <span class="fl">0.7</span>, <span class="fl">0.65</span>, <span class="fl">0.45</span>, <span class="fl">0.3</span>, <span class="fl">0.2</span>, <span class="fl">0.15</span>, <span class="fl">0.1</span>, <span class="fl">0.05</span>)</span>
+<span id="cb842-2"><a href="logistic-regression-and-classification.html#cb842-2"></a>Actual &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;+&quot;</span>, <span class="st">&quot;-&quot;</span>, <span class="st">&quot;+&quot;</span>, <span class="st">&quot;+&quot;</span>, <span class="st">&quot;-&quot;</span>, <span class="st">&quot;-&quot;</span>, <span class="st">&quot;-&quot;</span>, <span class="st">&quot;-&quot;</span>, <span class="st">&quot;+&quot;</span>, <span class="st">&quot;-&quot;</span>)</span>
+<span id="cb842-3"><a href="logistic-regression-and-classification.html#cb842-3"></a>Hit_Rate &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;1/4&quot;</span>, <span class="st">&quot;1/4&quot;</span>, <span class="st">&quot;2/4&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb842-4"><a href="logistic-regression-and-classification.html#cb842-4"></a>FA_Rate &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;0/6&quot;</span>, <span class="st">&quot;1/6&quot;</span>, <span class="st">&quot;1/6&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb842-5"><a href="logistic-regression-and-classification.html#cb842-5"></a><span class="kw">kable</span>(<span class="kw">data.frame</span>(prob, Actual, Hit_Rate, FA_Rate))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1878,6 +1409,32 @@ P(\text{Default}) = \hat{\pi}_i =  \frac{e^{-10.87+0.0058\times\text{balance}}}{
 </table>
 <p>Finish filling in the table and sketch a graph of the resulting ROC curve.</p>
 <p><strong>Question:</strong> If the probability estimate of 0.45 were instead 0.5 or 0.55, would this change the ROC curve? Why or why not?</p>
+</div>
+<div id="auc" class="section level3 hasAnchor">
+<h3><span class="header-section-number">8.4.5</span> AUC<a href="logistic-regression-and-classification.html#auc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The area under the ROC curve, (AUC) provides a measure of the model’s predictive strength.</p>
+<p>While there is no standard for what constitutes a <code>good" AUC, higher is better, and</code>AUC" is useful for comparing models.</p>
+<p>A model that can perfectly separate successes from failures will have an AUC of 1.</p>
+<p>A model that assigns probabilities at random is expected to have an AUC of 0.5.</p>
+</div>
+<div id="lr-and-tree-roc-curves" class="section level3 hasAnchor">
+<h3><span class="header-section-number">8.4.6</span> LR and Tree ROC Curves<a href="logistic-regression-and-classification.html#lr-and-tree-roc-curves" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb843"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb843-1"><a href="logistic-regression-and-classification.html#cb843-1"></a><span class="kw">library</span>(pROC)</span>
+<span id="cb843-2"><a href="logistic-regression-and-classification.html#cb843-2"></a><span class="kw">library</span>(verification)</span>
+<span id="cb843-3"><a href="logistic-regression-and-classification.html#cb843-3"></a><span class="kw">roc.plot</span>(<span class="dt">x=</span>Default_Test<span class="op">$</span>default, <span class="dt">pred =</span> LR_Prob)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-649-1.png" width="672" /></p>
+<div class="sourceCode" id="cb844"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb844-1"><a href="logistic-regression-and-classification.html#cb844-1"></a><span class="kw">auc</span>(<span class="dt">response=</span>Default_Test<span class="op">$</span>default, <span class="dt">predictor =</span> LR_Prob)</span></code></pre></div>
+<pre><code>## Area under the curve: 0.8953</code></pre>
+<div class="sourceCode" id="cb846"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb846-1"><a href="logistic-regression-and-classification.html#cb846-1"></a><span class="kw">roc.plot</span>(<span class="dt">x=</span>Default_Test<span class="op">$</span>default, <span class="dt">pred =</span> Tree_Prob)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-651-1.png" width="672" /></p>
+<div class="sourceCode" id="cb847"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb847-1"><a href="logistic-regression-and-classification.html#cb847-1"></a><span class="kw">auc</span>(<span class="dt">response=</span>Default_Test<span class="op">$</span>default, <span class="dt">predictor =</span> Tree_Prob)</span></code></pre></div>
+<pre><code>## Area under the curve: 0.8176</code></pre>
+<div class="sourceCode" id="cb849"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb849-1"><a href="logistic-regression-and-classification.html#cb849-1"></a>RandProb &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb850"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb850-1"><a href="logistic-regression-and-classification.html#cb850-1"></a><span class="kw">roc.plot</span>(<span class="dt">x=</span>Default_Test<span class="op">$</span>default, <span class="dt">pred =</span> RandProb)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-654-1.png" width="672" /></p>
+<div class="sourceCode" id="cb851"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb851-1"><a href="logistic-regression-and-classification.html#cb851-1"></a><span class="kw">auc</span>(<span class="dt">response=</span>Default_Test<span class="op">$</span>default, <span class="dt">predictor =</span> RandProb)</span></code></pre></div>
+<pre><code>## Area under the curve: 0.563</code></pre>
+<p>Even though a model that assigns predictions randomly, with 97% predicted as negatives will have a high accuracy rate, it will yield a poor ROC curve indicating an inability to separate positive cases from negative ones.</p>
 
 </div>
 </div>
@@ -1948,7 +1505,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
