@@ -23,7 +23,7 @@
 <meta name="author" content="Andrew Sage - Lawrence University" />
 
 
-<meta name="date" content="2023-11-07" />
+<meta name="date" content="2023-11-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -988,7 +988,7 @@ Figure 7.1: <a href="https://www.researchgate.net/figure/A-schematic-illustratio
 <div class="sourceCode" id="cb732"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb732-1"><a href="predictive-modeling.html#cb732-1"></a>M_OLS &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Train_Data, SalePrice <span class="op">~</span><span class="st"> </span>.)</span>
 <span id="cb732-2"><a href="predictive-modeling.html#cb732-2"></a>M_OLS<span class="op">$</span>coefficients</span></code></pre></div>
 <pre><code>##             (Intercept)          `Overall Qual`            `Year Built` 
-##       -14136063.8944779            6975.9249580             494.5819845 
+##       -14136063.8944930            6975.9249580             494.5819845 
 ##          `Mas Vnr Area`          `Central Air`Y           `Gr Liv Area` 
 ##              33.3816934           -3745.3629147              37.2290416 
 ##          `Lot Frontage`            `1st Flr SF`         `Bedroom AbvGr` 
@@ -1112,7 +1112,7 @@ Figure 7.1: <a href="https://www.researchgate.net/figure/A-schematic-illustratio
 ##               FenceMnWw                 FenceNA      `Misc Feature`Gar2 
 ##            -880.4035636            1297.2148680          545161.5427966 
 ##      `Misc Feature`Othr      `Misc Feature`Shed        `Misc Feature`NA 
-##          569599.2024080          551469.2569906          547892.2454607 
+##          569599.2024080          551469.2569906          547892.2454606 
 ##              `Misc Val`               `Mo Sold`               `Yr Sold` 
 ##               1.6361319            -262.1972861            5937.2902795 
 ##          `Sale Type`Con        `Sale Type`ConLD        `Sale Type`ConLI 
@@ -1498,9 +1498,9 @@ Regression with an elastic net uses both ridge and lasso penalty terms and deter
 <div class="sourceCode" id="cb761"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb761-1"><a href="predictive-modeling.html#cb761-1"></a><span class="kw">min</span>(Housing_ridge<span class="op">$</span>results<span class="op">$</span>RMSE)</span></code></pre></div>
 <pre><code>## [1] 0.4570054</code></pre>
 <div class="sourceCode" id="cb763"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb763-1"><a href="predictive-modeling.html#cb763-1"></a><span class="kw">min</span>(Housing_lasso<span class="op">$</span>results<span class="op">$</span>RMSE)</span></code></pre></div>
-<pre><code>## [1] 0.4730672</code></pre>
+<pre><code>## [1] 0.4730849</code></pre>
 <div class="sourceCode" id="cb765"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb765-1"><a href="predictive-modeling.html#cb765-1"></a><span class="kw">min</span>(Housing_Tree<span class="op">$</span>results<span class="op">$</span>RMSE)</span></code></pre></div>
-<pre><code>## [1] 0.477414</code></pre>
+<pre><code>## [1] 0.4783224</code></pre>
 <p>In this situation, the tree outperforms OLS, but does not do as well as lasso or ridge. The best model will vary depending on the nature of the data. We can use cross-validation to determine which model is likely to perform best in prediction.</p>
 </div>
 <div id="random-forest" class="section level3 hasAnchor">
@@ -1752,7 +1752,7 @@ Regression with an elastic net uses both ridge and lasso penalty terms and deter
 <div class="sourceCode" id="cb791"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb791-1"><a href="predictive-modeling.html#cb791-1"></a><span class="kw">min</span>(Housing_ridge<span class="op">$</span>results<span class="op">$</span>RMSE)</span></code></pre></div>
 <pre><code>## [1] 35747.22</code></pre>
 <div class="sourceCode" id="cb793"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb793-1"><a href="predictive-modeling.html#cb793-1"></a><span class="kw">min</span>(Housing_Tree<span class="op">$</span>results<span class="op">$</span>RMSE)</span></code></pre></div>
-<pre><code>## [1] 33675.46</code></pre>
+<pre><code>## [1] 33675.53</code></pre>
 <p>The tree predictions give slightly lower RMSPE.</p>
 </div>
 <div id="predictions-on-new-data" class="section level3 hasAnchor">
